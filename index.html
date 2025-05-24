@@ -1,85 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jairo Lemuel Barrientos - Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jairo Lemuel Barrientos – Portafolio</title>
+
+  <!-- Fuente Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ------------------ RESET & GLOBAL ------------------ */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family:'Orbitron',sans-serif;
+      background: #0d0d0d;
+      color:#e0e0e0;
+      overflow-x:hidden;
+      position:relative;
+      min-height:100vh;
+    }
+
+    /* ------------------ PARTÍCULAS DE FONDO ------------------ */
+    #particles-js {
+      position:fixed; top:0; left:0;
+      width:100%; height:100%;
+      z-index:-1;
+    }
+
+    /* ------------------ WELCOME OVERLAY ------------------ */
+    #welcomeOverlay {
+      position:fixed; inset:0;
+      background:#0d0d0d;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      pointer-events:none; z-index:999;
+      animation:fadeOutOverlay 2s 3.5s forwards;
+    }
+    #welcomeOverlay::before {
+      content:'';
+      position:absolute; inset:0;
+      background:repeating-linear-gradient(to bottom, rgba(0,255,255,0.05),rgba(0,255,255,0.05) 2px,transparent 2px,transparent 4px);
+      animation:scanlines 10s linear infinite;
+    }
+    .holo-text {
+      font-size:3rem;
+      background:linear-gradient(90deg,#00f6ff,#ffffff,#00f6ff,#39a0ed);
+      background-size:300%;
+      -webkit-background-clip:text; color:transparent;
+      animation:holoGlow 6s linear infinite;
+      text-shadow:0 0 10px rgba(0,255,255,0.5);
+      display:inline-block;
+    }
+    @keyframes holoGlow {
+      0%{background-position:0% 50%}
+      100%{background-position:300% 50%}
+    }
+    @keyframes scanlines {
+      0%{transform:translateY(0)} 100%{transform:translateY(-8px)}
+    }
+    @keyframes fadeOutOverlay {
+      to{opacity:0;visibility:hidden}
+    }
+
+    /* ------------------ HEADER HOLOGRAMA ------------------ */
+    header {
+      text-align:center;
+      padding:80px 20px;
+      background:radial-gradient(circle,rgba(0,255,255,0.1),#0d0d0d);
+      position:relative; z-index:1;
+    }
+    header h1 {
+      font-size:2.5rem;
+      text-shadow:0 0 10px cyan,0 0 20px cyan;
+      animation:headerHolo 2s ease-in-out infinite alternate;
+    }
+    @keyframes headerHolo {
+      from{text-shadow:0 0 10px cyan,0 0 20px cyan;transform:scale(1)}
+      to{text-shadow:0 0 20px magenta,0 0 40px cyan;transform:scale(1.03)}
+    }
+    header p { margin-top:10px; color:#86b3ff; }
+
+    /* ------------------ SECCIONES & TITLE ------------------ */
+    section {
+      max-width:1000px;
+      margin:60px auto;
+      padding:0 20px;
+      opacity:0; transform:translateY(50px);
+      transition:opacity 1s ease,transform 1s ease;
+    }
+    section.visible {
+      opacity:1; transform:translateY(0);
+    }
+    section h2 {
+      font-size:2rem;
+      margin-bottom:20px;
+      color:#39a0ed;
+      border-bottom:2px solid #1e2a44;
+      padding-bottom:5px;
+      text-shadow:0 0 5px rgba(57,160,237,0.3);
+    }
+
+    /* ------------------ PALETA POR PROYECTO ------------------ */
+    .proyecto {
+      margin-bottom:40px;
+      padding:25px;
+      border-radius:8px;
+      transition:transform .3s ease,box-shadow .3s ease,opacity .6s ease;
+      opacity:0; transform:translateY(40px);
+      will-change:transform,opacity,box-shadow;
+    }
+    .proyecto.visible { opacity:1; transform:translateY(0); }
+    .proyecto:nth-child(1){ --c1:#00bcd4;--c2:#004d40; }
+    .proyecto:nth-child(2){ --c1:#ff80ab;--c2:#ad1457; }
+    .proyecto:nth-child(3){ --c1:#8bc34a;--c2:#33691e; }
+    .proyecto {
+      background:linear-gradient(135deg,var(--c1),var(--c2));
+      color:#fff;
+      box-shadow:0 0 20px var(--c1);
+      border:1px solid var(--c2);
+    }
+    .proyecto:hover {
+      transform:scale(1.05);
+      box-shadow:0 0 25px var(--c1),0 0 50px rgba(0,255,255,0.2);
+      animation:pulseGlow 1.5s infinite;
+    }
+    @keyframes pulseGlow {
+      0%,100%{box-shadow:0 0 25px var(--c1)}
+      50%{box-shadow:0 0 35px var(--c1),0 0 60px rgba(0,255,255,0.3)}
+    }
+    .proyecto h3 { margin-bottom:10px; font-size:1.5rem; }
+    .proyecto ul { margin:15px 0 10px 20px; }
+    .proyecto ul li { margin-bottom:8px; }
+
+    /* ------------------ CONTACTO & FOOTER ------------------ */
+    #contacto p,a { font-size:1rem; color:#a8caff; }
+    a:hover{ text-shadow:0 0 10px cyan; }
+    footer {
+      text-align:center; padding:20px; background:#111; color:#647b9c;
+      border-top:1px solid #1e2a44;
+    }
+  </style>
 </head>
 <body>
-  <!-- Pantalla de bienvenida -->
+
+  <!-- Partículas -->
+  <canvas id="particles-js"></canvas>
+
+  <!-- Welcome Overlay -->
   <div id="welcomeOverlay">
-    <canvas id="particleCanvas"></canvas>
-    <div class="holo-text">Welcome to my portfolio 💼</div>
+    <div class="holo-text">Welcome to My Portfolio 💼</div>
   </div>
 
+  <!-- Sonido suave al cargar -->
+  <audio autoplay>
+    <source src="https://cdn.pixabay.com/audio/2023/03/14/audio_98d937e2e1.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- HEADER -->
   <header>
     <h1>👋 Hola, soy Jairo Lemuel Barrientos</h1>
+    <p>Bienvenido a mi portafolio</p>
     <p>Descubre más sobre mi trabajo y mi trayectoria creativa.</p>
   </header>
 
+  <!-- SOBRE MÍ -->
   <section id="perfil">
     <h2>Sobre mí</h2>
     <p>
-      Desarrollador full-stack especializado en arquitecturas escalables y soluciones robustas de backend para aplicaciones web modernas.
-      Aplico técnicas avanzadas de IA para impulsar la innovación y la eficiencia tecnológica.
-      Versátil, creativo y centrado en el diseño y la experiencia de usuario.
+      Desarrollador full‑stack especializado en arquitecturas escalables y soluciones robustas de backend.
+      Aplico IA avanzada para innovación y eficiencia. Versátil, creativo y enfocado en UX/UI.
     </p>
   </section>
 
+  <!-- PROYECTOS -->
   <section id="about">
     <h2>Proyectos</h2>
 
-    <div class="proyecto fondo-finanzas">
+    <div class="proyecto">
       <h3>Calculadora financiera</h3>
-      <p>Una aplicación web para simular el interés compuesto y visualizar el crecimiento financiero.</p>
+      <p>Web app para simular interés compuesto y visualizar crecimiento.</p>
       <ul>
-        <li>✔ Entradas financieras interactivas</li>
+        <li>✔ Entradas interactivas</li>
         <li>✔ Cálculo en tiempo real</li>
-        <li>✔ Gráfico de visualización del crecimiento</li>
-        <li>✔ Creado con HTML, CSS y JS</li>
+        <li>✔ Chart.js para gráficos</li>
+        <li>✔ HTML, CSS, JS</li>
       </ul>
-      <p><em>Diseño de interfaz de usuario financiera en JavaScript</em></p>
+      <p><em>UI/UX Financial JavaScript</em></p>
     </div>
 
-    <div class="proyecto fondo-cosmetica">
-      <h3>Producto para el cuidado de la piel</h3>
-      <p>Una página de destino moderna diseñada para campañas publicitarias de productos para el cuidado de la piel.</p>
+    <div class="proyecto">
+      <h3>Producto cuidado de la piel</h3>
+      <p>Landing page para campañas de skincare.</p>
       <ul>
-        <li>✔ Paleta de colores suaves</li>
-        <li>✔ Optimizado para dispositivos móviles</li>
-        <li>✔ Transiciones suaves</li>
-        <li>✔ Diseño orientado a la marca</li>
+        <li>✔ Colores suaves</li>
+        <li>✔ Mobile-first</li>
+        <li>✔ Animaciones CSS</li>
+        <li>✔ Enfoque de marca</li>
       </ul>
-      <p><em>Diseño Marketing CSS</em></p>
+      <p><em>Marketing & CSS Design</em></p>
     </div>
 
-    <div class="proyecto fondo-turismo">
-      <h3>Agencia de viajes y turismo</h3>
-      <p>Un sitio dinámico que muestra paquetes de viajes y fomenta la exploración.</p>
+    <div class="proyecto">
+      <h3>Agencia viajes y turismo</h3>
+      <p>Sitio dinámico con paquetes y exploración.</p>
       <ul>
         <li>✔ Interfaz inmersiva</li>
         <li>✔ Destinos destacados</li>
-        <li>✔ Diseño responsivo</li>
-        <li>✔ Flujo de usuario optimizado</li>
+        <li>✔ Responsivo</li>
+        <li>✔ UX optimizado</li>
       </ul>
-      <p><em>Turismo de viajes responsivo</em></p>
+      <p><em>Responsive Travel Design</em></p>
     </div>
   </section>
 
+  <!-- CONTACTO -->
   <section id="contacto">
     <h2>Contacto</h2>
-    <p>📧 Correo electrónico: <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
-    <p>📞 Teléfono: +54 3437 457636</p>
+    <p>📧 <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
+    <p>📞 +54 3437 457636</p>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Jairo Lemuel Barrientos - Todos los derechos reservados</p>
+    <p>&copy; 2025 Jairo Lemuel Barrientos – Todos los derechos reservados</p>
   </footer>
 
-  <!-- Scripts: primero bienvenida, luego main -->
-  <script src="welcome.js"></script>
-  <script src="script.js"></script>
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    // Inicializar partículas
+    particlesJS("particles-js", {
+      particles: {
+        number:{value:80}, color:{value:"#00ffff"}, shape:{type:"circle"},
+        opacity:{value:0.3}, size:{value:3},
+        line_linked:{enable:true,distance:150,color:"#00ffff",opacity:0.2,width:1},
+        move:{enable:true,speed:2}
+      },
+      interactivity:{
+        detect_on:"canvas",
+        events:{onhover:{enable:true,mode:"repulse"},onclick:{enable:true,mode:"push"}},
+        modes:{repulse:{distance:100},push:{particles_nb:4}}
+      },
+      retina_detect:true
+    });
+
+    // Animaciones de scroll
+    const obs = new IntersectionObserver((es) => {
+      es.forEach(e => e.isIntersecting && e.target.classList.add("visible"));
+    },{threshold:0.1});
+    document.querySelectorAll("section, .proyecto").forEach(el => obs.observe(el));
+  </script>
+
 </body>
 </html>
