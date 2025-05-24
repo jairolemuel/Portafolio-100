@@ -137,3 +137,13 @@ footer {
     background-position: 0% 50%;
   }
 }
+.proyecto.visible {
+  background: linear-gradient(
+    135deg,
+    var(--holo-color-1, #3da9fc),
+    var(--holo-color-2, #1e3a5f)
+  );
+  color: #ffffff;
+  box-shadow: 0 0 15px var(--holo-color-1, #3da9fc);
+  border: 1px solid var(--holo-color-2, #1e3a5f);
+}
