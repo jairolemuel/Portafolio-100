@@ -96,3 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
   display: inline-block;
   will-change: transform, opacity, filter;
 }
+// Wrap each character in spans for pixel dispersion
+document.addEventListener('DOMContentLoaded', () => {
+  const holoText = document.querySelector('.holo-text');
+  const text = holoText.textContent;
+  holoText.textContent = ''; // Vaciar texto original
+
+  // Reemplazar cada letra con un span individual
+  text.split('').forEach(char => {
+    const span = document.createElement('span');
+    span.textContent = char;
+    span.classList.add('pixel-char');
+    holoText.appendChild(span);
+  });
+});
