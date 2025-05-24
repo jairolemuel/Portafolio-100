@@ -42,3 +42,24 @@ document.querySelectorAll('.proyecto').forEach((project, index) => {
   project.dataset.delay = index * 150;
   observer.observe(project);
 });
+@keyframes pixelDisperse {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-10px) scale(1.05);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(1.1);
+    filter: blur(4px);
+  }
+}
+
+.holo-text.disperse {
+  animation: pixelDisperse 2s forwards;
+}
