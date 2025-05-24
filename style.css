@@ -22,8 +22,21 @@ header {
 }
 
 header h1 {
-  font-size: 2.5rem;
-  color: #00ffff; /* Neón tecno */
+  font-size: 3rem;
+  background: linear-gradient(
+    90deg,
+    #00f6ff,
+    #ffffff,
+    #00f6ff,
+    #39a0ed
+  );
+  background-size: 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: holoGlow 6s linear infinite;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 header p {
@@ -32,7 +45,7 @@ header p {
 }
 
 h2 {
-  color: #39a0ed; /* Azul más claro */
+  color: #39a0ed;
   margin-bottom: 10px;
   font-size: 1.8rem;
   border-bottom: 2px solid #1e2a44;
@@ -53,19 +66,17 @@ section {
   margin-top: 15px;
   border-radius: 6px;
   transition: transform 0.3s, box-shadow 0.3s;
-
-  /* Animación con JS */
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.6s ease-out;
 }
 
+/* Se vuelve visible con JS */
 .proyecto.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Colores diferentes para cada proyecto */
+/* Fondo con distintos tonos */
 .proyecto:nth-child(1) {
   background-color: #1e3a5f;
 }
@@ -104,7 +115,7 @@ footer {
   padding-top: 10px;
 }
 
-/* Keyframes */
+/* Keyframes para animaciones */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -113,4 +124,16 @@ footer {
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes holoGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
