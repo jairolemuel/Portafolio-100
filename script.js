@@ -1,3 +1,11 @@
+// ---- Bienvenida con glitch ----
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.getElementById('welcomeOverlay').classList.add('glitch-out');
+  }, 3000); // Tiempo de espera para desaparecer
+});
+
+// ---- Animaciones por scroll (Observer) ----
 const observer = new IntersectionObserver((entries, observer) => {
   entries.forEach((entry, index) => {
     const el = entry.target;
@@ -15,13 +23,12 @@ const observer = new IntersectionObserver((entries, observer) => {
         el.style.setProperty('--holo-color-2', '#faaa1d'); // Amarillo oscuro
       }
 
-      // Delay animación
+      // Animación con delay
       const delay = el.dataset.delay || index * 100;
       setTimeout(() => {
         el.classList.add('visible', 'animate__fadeInUp');
       }, delay);
     } else {
-      // Si querés que se desactive al salir:
       el.classList.remove('visible', 'animate__fadeInUp');
     }
   });
