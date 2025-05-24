@@ -268,3 +268,39 @@ footer {
   z-index: 1;
   pointer-events: none;
 }
+/* --- Corrección y refuerzo del efecto de dispersión pixelada --- */
+.holo-text.disperse {
+  animation: pixelDisperse 2s ease-in-out forwards;
+  will-change: transform, filter, opacity;
+  transform-origin: center;
+  display: inline-block;
+}
+
+/* --- Mejora del keyframe si no se ve bien --- */
+@keyframes pixelDisperse {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  25% {
+    opacity: 0.9;
+    transform: translateY(-5px) scale(1.03);
+    filter: blur(1px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-10px) scale(1.06);
+    filter: blur(3px);
+  }
+  75% {
+    opacity: 0.3;
+    transform: translateY(-15px) scale(1.08);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-25px) scale(1.1);
+    filter: blur(6px);
+  }
+}
