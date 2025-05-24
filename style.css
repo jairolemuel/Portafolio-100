@@ -270,7 +270,6 @@ footer {
 }
 /* --- Corrección y refuerzo del efecto de dispersión pixelada --- */
 .holo-text.disperse {
-  .holo-text.disperse {
   animation: pixelDisperse 1.2s ease-in-out forwards;
   will-change: transform, filter, opacity;
   transform-origin: center;
