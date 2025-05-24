@@ -92,3 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     welcomeOverlay.style.display = 'none';
   }, 1300);
 });
+.pixel-char {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
