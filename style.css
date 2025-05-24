@@ -160,36 +160,88 @@ footer {
 }
 
 /* ------------------------ */
-/* A N I M A C I O N E S   */
+/* W E L C O M E  A N I M A T I O N */
 /* ------------------------ */
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+#welcomeOverlay {
+  position: fixed;
+  inset: 0;
+  background: #0b0f1a;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+#welcomeOverlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 255, 0.05),
+    rgba(0, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 2;
 }
 
-@keyframes holoGlow {
+.holo-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #00f6ff, #ffffff, #00f6ff, #39a0ed);
+  background-size: 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: holoGlow 6s linear infinite;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  margin-bottom: 20px;
+  z-index: 3;
+}
+
+@keyframes glitchFadeOut {
   0% {
-    background-position: 0% 50%;
+    opacity: 1;
+    clip-path: inset(0% 0% 0% 0%);
+    transform: none;
+    filter: none;
   }
-  50% {
-    background-position: 100% 50%;
+  30% {
+    clip-path: inset(10% 0% 15% 0%);
+    transform: skew(0.5deg, -0.5deg);
+    filter: brightness(1.3);
+  }
+  60% {
+    clip-path: inset(40% 0% 30% 0%);
+    transform: translate(2px, -1px);
+    filter: blur(0.5px);
+  }
+  80% {
+    clip-path: inset(70% 0% 10% 0%);
+    opacity: 0.3;
+    transform: translate(-2px, 2px);
   }
   100% {
-    background-position: 0% 50%;
+    clip-path: inset(100% 0% 0% 0%);
+    opacity: 0;
+    transform: translateY(-20px);
+    filter: blur(2px);
+    visibility: hidden;
   }
 }
 
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
+.glitch-out {
+  animation: glitchFadeOut 3.5s ease-in-out forwards;
 }
 
 /* ------------------------ */
