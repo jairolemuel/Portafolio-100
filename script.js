@@ -58,3 +58,37 @@ document.querySelectorAll('.proyecto').forEach((project, index) => {
   project.dataset.delay = index * 150; // Delay progresivo en ms
   observer.observe(project);
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const welcomeOverlay = document.getElementById('welcomeOverlay');
+  const holoText = document.querySelector('.holo-text');
+
+  // Split text into spans for pixelated effect
+  const originalText = holoText.textContent;
+  holoText.innerHTML = '';
+  for (let char of originalText) {
+    const span = document.createElement('span');
+    span.textContent = char;
+    span.classList.add('pixel-char');
+    holoText.appendChild(span);
+  }
+
+  // Start dispersing animation
+  setTimeout(() => {
+    const chars = document.querySelectorAll('.pixel-char');
+    chars.forEach((char, i) => {
+      const x = (Math.random() - 0.5) * 100; // horizontal scatter
+      const y = (Math.random() - 0.5) * 100; // vertical scatter
+      const blur = Math.random() * 4 + 2;
+
+      char.style.transition = `all 0.6s ease-out`;
+      char.style.transform = `translate(${x}px, ${y}px) scale(1.2)`;
+      char.style.opacity = '0';
+      char.style.filter = `blur(${blur}px)`;
+    });
+  }, 500);
+
+  // Remove overlay after animation ends
+  setTimeout(() => {
+    welcomeOverlay.style.display = 'none';
+  }, 1300);
+});
