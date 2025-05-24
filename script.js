@@ -63,3 +63,17 @@ document.querySelectorAll('.proyecto').forEach((project, index) => {
 .holo-text.disperse {
   animation: pixelDisperse 2s forwards;
 }
+document.addEventListener('DOMContentLoaded', () => {
+  const welcomeOverlay = document.getElementById('welcomeOverlay');
+  const holoText = document.querySelector('.holo-text');
+
+  // Añadir clase para iniciar la animación
+  setTimeout(() => {
+    holoText.classList.add('disperse');
+  }, 500); // Espera 0.5s antes de iniciar la animación
+
+  // Remover el overlay después de la animación
+  setTimeout(() => {
+    welcomeOverlay.style.display = 'none';
+  }, 2500); // Duración total de la animación + retraso
+});
