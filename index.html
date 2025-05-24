@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jairo Lemuel Barrientos - Portafolio</title>
+  <title>Jairo Lemuel Barrientos - Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Pantalla de bienvenida -->
+  <div id="welcomeOverlay">
+    <h1 class="holo-text">💼 Welcome to my portfolio</h1>
+    <canvas id="particleCanvas"></canvas>
+  </div>
+
   <header>
-    <div class="holo-bienvenida">
-  <canvas id="holoCanvas"></canvas>
-  <p>💼 Bienvenido a mi portafolio</p>
     <h1>👋 Hola, soy Jairo Lemuel Barrientos</h1>
     <p>Descubre más sobre mi trabajo y mi trayectoria creativa.</p>
   </header>
@@ -75,5 +79,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="welcome.js"></script>
 </body>
 </html>
