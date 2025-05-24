@@ -3,25 +3,35 @@ const observer = new IntersectionObserver((entries, observer) => {
     const el = entry.target;
 
     if (entry.isIntersecting) {
-      // Delay personalizado usando data-delay o por orden
-      const delay = el.dataset.delay || index * 100;
+      // Colores personalizados por clase
+      if (el.classList.contains('fondo-finanzas')) {
+        el.style.setProperty('--holo-color-1', '#00cfff'); // Azul celeste
+        el.style.setProperty('--holo-color-2', '#0044aa'); // Azul oscuro
+      } else if (el.classList.contains('fondo-cosmetica')) {
+        el.style.setProperty('--holo-color-1', '#ffb6c1'); // Rosado claro
+        el.style.setProperty('--holo-color-2', '#ff69b4'); // Rosa fuerte
+      } else if (el.classList.contains('fondo-turismo')) {
+        el.style.setProperty('--holo-color-1', '#fddb3a'); // Amarillo claro
+        el.style.setProperty('--holo-color-2', '#faaa1d'); // Amarillo oscuro
+      }
 
+      // Delay animación
+      const delay = el.dataset.delay || index * 100;
       setTimeout(() => {
         el.classList.add('visible', 'animate__fadeInUp');
       }, delay);
     } else {
-      // Si querés que desaparezcan al salir del viewport:
+      // Si querés que se desactive al salir:
       el.classList.remove('visible', 'animate__fadeInUp');
     }
   });
 }, {
-  threshold: 0.1, // Cuánta parte del elemento tiene que estar visible
-  rootMargin: "0px 0px -50px 0px" // Hace que se active un poco antes
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px"
 });
 
 // Aplicar a todos los proyectos
 document.querySelectorAll('.proyecto').forEach((project, index) => {
-  // Se puede definir delay individual si querés
   project.dataset.delay = index * 150;
   observer.observe(project);
 });
