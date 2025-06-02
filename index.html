@@ -104,12 +104,84 @@
    <!-- Tipografía Orbitron -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-<section id="proyectos" style="font-family: 'Orbitron', sans-serif; padding: 60px 20px; background: #0a0f1c; color: white; position: relative; overflow: hidden;">
+<!-- Script de partículas -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
+<div id="particles-js" style="position:absolute; width:100%; height:100%; z-index:-1;"></div>
+<script>
+  tsParticles.load("particles-js", {
+    fullScreen: { enable: false },
+    particles: {
+      number: { value: 60 },
+      color: { value: "#00f7ff" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: 3 },
+      move: { enable: true, speed: 1 }
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "repulse" }
+      },
+      modes: {
+        repulse: { distance: 100 }
+      }
+    },
+    background: { color: "#0a0f1c" }
+  });
+</script>
 
+<!-- Estilo para animaciones scroll y hover -->
+<style>
+  .proyecto {
+    margin-bottom: 40px;
+    padding: 25px;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+    will-change: transform, opacity, box-shadow;
+  }
+
+  .proyecto.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .proyecto:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px var(--c1), 0 0 60px rgba(255, 255, 255, 0.3);
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 25px var(--c1);
+    }
+    50% {
+      box-shadow: 0 0 35px var(--c1), 0 0 60px rgba(255, 255, 255, 0.3);
+    }
+  }
+</style>
+
+<!-- Script para hacer aparecer los proyectos con scroll -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const proyectos = document.querySelectorAll(".proyecto");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.3 });
+    proyectos.forEach(proyecto => observer.observe(proyecto));
+  });
+</script>
+
+<!-- Sección Proyectos -->
+<section id="proyectos" style="position: relative; padding: 60px 20px; background: #0a0f1c; font-family: 'Orbitron', sans-serif; color: white; z-index: 0; overflow: hidden;">
   <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 40px; text-shadow: 0 0 10px #00f7ff;">Mis Proyectos</h2>
 
   <!-- Proyecto Finanzas -->
-  <div style="margin-bottom: 40px; padding: 25px; border-radius: 12px; background: linear-gradient(135deg, #00f7ff, #003c66); color: #e0f7ff; box-shadow: 0 0 25px #00f7ff; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 35px #00f7ff, 0 0 60px rgba(255,255,255,0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 25px #00f7ff'">
+  <div class="proyecto" style="--c1:#00f7ff; background: linear-gradient(135deg, #00f7ff, #003c66); color: #e0f7ff;">
     <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #00f7ff;">Gestor Financiero</h3>
     <p><em>Plataforma para visualizar y clasificar ingresos y egresos</em></p>
     <ul style="margin: 15px 0 10px 20px;">
@@ -120,7 +192,7 @@
   </div>
 
   <!-- Proyecto Cosmética -->
-  <div style="margin-bottom: 40px; padding: 25px; border-radius: 12px; background: linear-gradient(135deg, #009dff, #1a237e); color: #e0f7ff; box-shadow: 0 0 25px #009dff; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 35px #009dff, 0 0 60px rgba(255,255,255,0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 25px #009dff'">
+  <div class="proyecto" style="--c1:#009dff; background: linear-gradient(135deg, #009dff, #1a237e); color: #e0f7ff;">
     <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #009dff;">E-commerce Cosmética</h3>
     <p><em>Tienda online enfocada en cosmética vegana y cruelty-free</em></p>
     <ul style="margin: 15px 0 10px 20px;">
@@ -131,7 +203,7 @@
   </div>
 
   <!-- Proyecto Turismo -->
-  <div style="margin-bottom: 40px; padding: 25px; border-radius: 12px; background: linear-gradient(135deg, #00bcd4, #005f73); color: #e0f7ff; box-shadow: 0 0 25px #00bcd4; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 35px #00bcd4, 0 0 60px rgba(255,255,255,0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 25px #00bcd4'">
+  <div class="proyecto" style="--c1:#00bcd4; background: linear-gradient(135deg, #00bcd4, #005f73); color: #e0f7ff;">
     <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #00bcd4;">Agencia de Turismo</h3>
     <p><em>Landing page de alto impacto para una agencia de viajes de lujo</em></p>
     <ul style="margin: 15px 0 10px 20px;">
@@ -141,19 +213,19 @@
     </ul>
   </div>
 
-  <!-- Habilidades duras -->
+  <!-- Habilidades técnicas -->
   <div style="margin-top: 50px; text-align: center;">
     <h4 style="color: #a2dfff; margin-bottom: 20px;">Habilidades técnicas aplicadas:</h4>
     <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">HTML5</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">CSS3</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">JavaScript</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">Diseño Responsive</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">UI/UX</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">Animaciones CSS</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">HTML5</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">CSS3</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">JavaScript</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">Diseño Responsive</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">UI/UX</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">Animaciones CSS</span>
     </div>
   </div>
-
+</section>
 </section>
 
     /* ==== CONTACTO & FOOTER ==== */
