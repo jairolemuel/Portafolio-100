@@ -1,309 +1,215 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jairo Lemuel Barrientos – Portafolio</title>
-
-  <!-- Fuente Orbitron -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jairo's Futuristic Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
   <style>
-    /* ==== RESET & GLOBAL ==== */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
     body {
-      font-family:'Orbitron',sans-serif;
-      background:#0d0d0d;
-      color:#e0e0e0;
-      overflow-x:hidden;
-      position:relative;
-      min-height:100vh;
+      background: #0e0e1a;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    /* ==== PARTÍCULAS DE FONDO ==== */
-    #particles-js {
-      position:fixed; top:0; left:0;
-      width:100%; height:100%; z-index:-1;
-    }
-
-    /* ==== WELCOME OVERLAY ==== */
-    #welcomeOverlay {
-      position:fixed; inset:0;
-      background:#0d0d0d; display:flex;
-      align-items:center; justify-content:center;
-      flex-direction:column; pointer-events:none;
-      z-index:999; animation:fadeOutOverlay 2s 3.5s forwards;
-    }
-    #welcomeOverlay::before {
-      content:'';
-      position:absolute; inset:0;
-      background:repeating-linear-gradient(
-        to bottom,
-        rgba(0,255,255,0.05),
-        rgba(0,255,255,0.05) 2px,
-        transparent 2px,
-        transparent 4px
-      );
-      animation:scanlines 10s linear infinite;
-    }
-    .holo-text {
-      font-size:3rem;
-      background:linear-gradient(90deg,#00f6ff,#ffffff,#00f6ff,#39a0ed);
-      background-size:300%;
-      -webkit-background-clip:text; color:transparent;
-      animation:holoGlow 6s linear infinite;
-      text-shadow:0 0 10px rgba(0,255,255,0.5);
-      display:inline-block;
-    }
-    @keyframes holoGlow {
-      0%{background-position:0% 50%}
-      100%{background-position:300% 50%}
-    }
-    @keyframes scanlines {
-      0%{transform:translateY(0)}100%{transform:translateY(-8px)}
-    }
-    @keyframes fadeOutOverlay {
-      to{opacity:0;visibility:hidden}
-    }
-
-    /* ==== HEADER HOLOGRAMA ==== */
     header {
-      text-align:center;
-      padding:80px 20px;
-      background:radial-gradient(circle,rgba(0,255,255,0.1),#0d0d0d);
-      position:relative; z-index:1;
+      text-align: center;
+      padding: 100px 20px 40px;
+      position: relative;
     }
+
     header h1 {
-      font-size:2.5rem;
-      text-shadow:0 0 10px cyan,0 0 20px cyan;
-      animation:headerHolo 2s ease-in-out infinite alternate;
+      font-size: 3em;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      animation: glitch 2s infinite;
     }
-    @keyframes headerHolo {
-      from{text-shadow:0 0 10px cyan,0 0 20px cyan;transform:scale(1)}
-      to{text-shadow:0 0 20px magenta,0 0 40px cyan;transform:scale(1.03)}
+
+    @keyframes glitch {
+      0% { text-shadow: 0 0 10px #0ff; }
+      50% { text-shadow: 2px 2px 5px #0ff, -2px -2px 5px #f0f; }
+      100% { text-shadow: 0 0 10px #0ff; }
     }
-    header p { margin-top:10px; color:#86b3ff; }
 
-    <!-- Partículas -->
-  <canvas id="particles-js"></canvas>
-
-  <!-- Welcome overlay -->
-  <div id="welcomeOverlay">
-    <div class="holo-text">Welcome to My Portfolio 💼</div>
-  </div>
-
-  <!-- Sonido digital suave -->
-  <audio autoplay>
-    <source src="https://cdn.pixabay.com/audio/2023/03/14/audio_98d937e2e1.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- HEADER -->
-  <header>
-    <h1>👋 Hola, soy Jairo Lemuel Barrientos</h1>
-    <p>Bienvenido a mi portafolio</p>
-    <p>Descubre más sobre mi trabajo y mi trayectoria creativa.</p>
-  </header>
-
-  
-
-    /* ==== SECCIONES ==== */
     section {
-      max-width:1000px; margin:60px auto; padding:0 20px;
-      opacity:0; transform:translateY(50px);
-      transition:opacity 1s ease,transform 1s ease;
-    }
-    section.visible {
-      opacity:1; transform:translateY(0);
-    }
-    section h2 {
-      font-size:2rem; margin-bottom:20px;
-      color:#39a0ed; border-bottom:2px solid #1e2a44;
-      padding-bottom:5px; text-shadow:0 0 5px rgba(57,160,237,0.3);
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
     }
 
-   <!-- Tipografía Orbitron -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-
-<!-- Script de partículas -->
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
-<div id="particles-js" style="position:absolute; width:100%; height:100%; z-index:-1;"></div>
-<script>
-  tsParticles.load("particles-js", {
-    fullScreen: { enable: false },
-    particles: {
-      number: { value: 60 },
-      color: { value: "#00f7ff" },
-      shape: { type: "circle" },
-      opacity: { value: 0.5 },
-      size: { value: 3 },
-      move: { enable: true, speed: 1 }
-    },
-    interactivity: {
-      events: {
-        onHover: { enable: true, mode: "repulse" }
-      },
-      modes: {
-        repulse: { distance: 100 }
-      }
-    },
-    background: { color: "#0a0f1c" }
-  });
-</script>
-
-<!-- Estilo para animaciones scroll y hover -->
-<style>
-  .proyecto {
-    margin-bottom: 40px;
-    padding: 25px;
-    border-radius: 12px;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
-    will-change: transform, opacity, box-shadow;
-  }
-
-  .proyecto.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .proyecto:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 35px var(--c1), 0 0 60px rgba(255, 255, 255, 0.3);
-    animation: pulse 1.5s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 0 25px var(--c1);
+    .intro {
+      text-align: center;
+      font-size: 1.5em;
+      margin-bottom: 50px;
+      color: #aaffff;
     }
-    50% {
-      box-shadow: 0 0 35px var(--c1), 0 0 60px rgba(255, 255, 255, 0.3);
+
+    .projects, .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 80px;
     }
-  }
-</style>
 
-<!-- Script para hacer aparecer los proyectos con scroll -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const proyectos = document.querySelectorAll(".proyecto");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    }, { threshold: 0.3 });
-    proyectos.forEach(proyecto => observer.observe(proyecto));
-  });
-</script>
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(10px);
+      border: 1px solid #0ff;
+      box-shadow: 0 0 10px #0ff44c33;
+    }
 
-<!-- Sección Proyectos -->
-<section id="proyectos" style="position: relative; padding: 60px 20px; background: #0a0f1c; font-family: 'Orbitron', sans-serif; color: white; z-index: 0; overflow: hidden;">
-  <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 40px; text-shadow: 0 0 10px #00f7ff;">Mis Proyectos</h2>
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #0ff;
+    }
 
-  <!-- Proyecto Finanzas -->
-  <div class="proyecto" style="--c1:#00f7ff; background: linear-gradient(135deg, #00f7ff, #003c66); color: #e0f7ff;">
-    <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #00f7ff;">Gestor Financiero</h3>
-    <p><em>Plataforma para visualizar y clasificar ingresos y egresos</em></p>
-    <ul style="margin: 15px 0 10px 20px;">
-      <li>Diseño UI/UX responsive</li>
-      <li>Dashboard con gráficas interactivas</li>
-      <li>Login seguro con autenticación</li>
-    </ul>
-  </div>
+    .card img {
+      width: 100%;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
 
-  <!-- Proyecto Cosmética -->
-  <div class="proyecto" style="--c1:#009dff; background: linear-gradient(135deg, #009dff, #1a237e); color: #e0f7ff;">
-    <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #009dff;">E-commerce Cosmética</h3>
-    <p><em>Tienda online enfocada en cosmética vegana y cruelty-free</em></p>
-    <ul style="margin: 15px 0 10px 20px;">
-      <li>Catálogo animado con scroll</li>
-      <li>Filtros dinámicos y buscador inteligente</li>
-      <li>Carrito con animación de transición</li>
-    </ul>
-  </div>
+    .card h3 {
+      margin: 10px 0 5px;
+      color: #0ff;
+    }
 
-  <!-- Proyecto Turismo -->
-  <div class="proyecto" style="--c1:#00bcd4; background: linear-gradient(135deg, #00bcd4, #005f73); color: #e0f7ff;">
-    <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #00bcd4;">Agencia de Turismo</h3>
-    <p><em>Landing page de alto impacto para una agencia de viajes de lujo</em></p>
-    <ul style="margin: 15px 0 10px 20px;">
-      <li>Scroll parallax y partículas de fondo</li>
-      <li>Galería animada de destinos</li>
-      <li>Formulario de reserva integrado</li>
-    </ul>
-  </div>
+    .skills svg {
+      width: 60px;
+      height: 60px;
+      fill: #0ff;
+      margin-bottom: 10px;
+      animation: float 2s ease-in-out infinite alternate;
+    }
 
-  <!-- Habilidades técnicas -->
-  <div style="margin-top: 50px; text-align: center;">
-    <h4 style="color: #a2dfff; margin-bottom: 20px;">Habilidades técnicas aplicadas:</h4>
-    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">HTML5</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">CSS3</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">JavaScript</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">Diseño Responsive</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">UI/UX</span>
-      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px;">Animaciones CSS</span>
-    </div>
-  </div>
-</section>
-</section>
+    @keyframes float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
 
-    /* ==== CONTACTO & FOOTER ==== */
-    #contacto p,a { font-size:1rem; color:#a8caff; }
-    a:hover{ text-shadow:0 0 10px cyan; }
-    footer {
-      text-align:center; padding:20px;
-      background:#111; color:#647b9c;
-      border-top:1px solid #1e2a44;
+    .contact {
+      text-align: center;
+      font-size: 1.2em;
+      padding: 40px 20px;
+      background: #111122;
+      border-top: 2px solid #0ff;
+    }
+
+    .contact a {
+      color: #0ff;
+      text-decoration: none;
+    }
+
+    /* Particles */
+    #particles-js {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    [data-animate].visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
+  <div id="particles-js"></div>
 
-  
-  <!-- CONTACTO -->
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <p>📧 <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
-    <p>📞 +54 3437 457636</p>
+  <header>
+    <h1>Welcome to my portfolio</h1>
+  </header>
+
+  <section class="intro" data-animate>
+    <p>Hi, I'm Jairo. A creative soul with a futuristic vision.</p>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 Jairo Lemuel Barrientos – Todos los derechos reservados</p>
-  </footer>
+  <section>
+    <h2 style="color:#0ff; text-align:center; margin-bottom:20px;">My Projects</h2>
+    <div class="projects" data-animate>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x150?text=Project+1" alt="Project 1">
+        <h3>Project One</h3>
+        <p>A futuristic landing page with advanced visual effects.</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x150?text=Project+2" alt="Project 2">
+        <h3>Project Two</h3>
+        <p>Interactive UI for a gaming website with neon animations.</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x150?text=Project+3" alt="Project 3">
+        <h3>Project Three</h3>
+        <p>Responsive portfolio with glitch and parallax effects.</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- SCRIPTS -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <section>
+    <h2 style="color:#0ff; text-align:center; margin-bottom:20px;">Hard Skills</h2>
+    <div class="skills" data-animate>
+      <div class="card" style="text-align:center;">
+        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg>
+        <h3>HTML</h3>
+      </div>
+      <div class="card" style="text-align:center;">
+        <svg viewBox="0 0 64 64"><rect x="10" y="10" width="44" height="44"/></svg>
+        <h3>CSS</h3>
+      </div>
+      <div class="card" style="text-align:center;">
+        <svg viewBox="0 0 64 64"><polygon points="32,10 54,54 10,54"/></svg>
+        <h3>JavaScript</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" data-animate>
+    <p>📧 Contact me: <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script>
-    // Inicializar partículas
-    particlesJS("particles-js", {
+    particlesJS('particles-js', {
       particles: {
-        number:{value:80},
-        color:{value:"#00ffff"},
-        shape:{type:"circle"},
-        opacity:{value:0.3},
-        size:{value:3},
-        line_linked:{enable:true,distance:150,color:"#00ffff",opacity:0.2,width:1},
-        move:{enable:true,speed:2}
-      },
-      interactivity:{
-        detect_on:"canvas",
-        events:{onhover:{enable:true,mode:"repulse"},onclick:{enable:true,mode:"push"}},
-        modes:{repulse:{distance:100},push:{particles_nb:4}}
-      },
-      retina_detect:true
+        number: { value: 80 },
+        size: { value: 3 },
+        color: { value: '#0ff' },
+        line_linked: {
+          enable: true,
+          color: '#0ff'
+        }
+      }
     });
 
-    // Scroll‑reveal de secciones y proyectos
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add("visible");
+    // Scroll animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
       });
-    }, { threshold: 0.1 });
-    document.querySelectorAll("section, .proyecto").forEach(el => observer.observe(el));
+    });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
