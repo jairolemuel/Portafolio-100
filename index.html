@@ -101,43 +101,60 @@
       padding-bottom:5px; text-shadow:0 0 5px rgba(57,160,237,0.3);
     }
 
-    /* ==== PROYECTOS (colores + anims) ==== */
-    .proyecto {
-      margin-bottom:40px; padding:25px; border-radius:8px;
-      transition:transform .3s ease,box-shadow .3s ease,opacity .6s ease;
-      opacity:0; transform:translateY(40px);
-      will-change:transform,opacity,box-shadow;
-    }
-    .proyecto.visible {
-      opacity:1; transform:translateY(0);
-    }
-    /* Finanzas: azul formal */
-    .proyecto.finanzas {
-      background:linear-gradient(135deg,#00bcd4,#007c91);
-      --c1:#00bcd4;--c2:#007c91;
-    }
-    /* Cosmética: rosado suave */
-    .proyecto.cosmetica {
-      background:linear-gradient(135deg,#ff80ab,#c2185b);
-      --c1:#ff80ab;--c2:#c2185b;
-    }
-    /* Turismo: amarillo dorado */
-    .proyecto.turismo {
-      background:linear-gradient(135deg,#fff176,#f9a825);
-      --c1:#fff176;--c2:#f9a825;
-    }
-    .proyecto h3 { margin-bottom:10px; font-size:1.5rem; }
-    .proyecto ul { margin:15px 0 10px 20px; }
-    .proyecto ul li { margin-bottom:8px; }
-    .proyecto p em { font-style:italic; color:rgba(255,255,255,0.8); }
-    .proyecto:hover {
-      transform:scale(1.05);
-      box-shadow:0 0 25px var(--c1),0 0 50px rgba(255,255,255,0.2);
-      animation:pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0%,100%{box-shadow:0 0 25px var(--c1)}50%{box-shadow:0 0 35px var(--c1),0 0 60px rgba(255,255,255,0.3)}
-    }
+   <!-- Tipografía Orbitron -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<section id="proyectos" style="font-family: 'Orbitron', sans-serif; padding: 60px 20px; background: #0a0f1c; color: white; position: relative; overflow: hidden;">
+
+  <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 40px; text-shadow: 0 0 10px #00f7ff;">Mis Proyectos</h2>
+
+  <!-- Proyecto Finanzas -->
+  <div style="margin-bottom: 40px; padding: 25px; border-radius: 12px; background: linear-gradient(135deg, #00f7ff, #003c66); color: #e0f7ff; box-shadow: 0 0 25px #00f7ff; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 35px #00f7ff, 0 0 60px rgba(255,255,255,0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 25px #00f7ff'">
+    <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #00f7ff;">Gestor Financiero</h3>
+    <p><em>Plataforma para visualizar y clasificar ingresos y egresos</em></p>
+    <ul style="margin: 15px 0 10px 20px;">
+      <li>Diseño UI/UX responsive</li>
+      <li>Dashboard con gráficas interactivas</li>
+      <li>Login seguro con autenticación</li>
+    </ul>
+  </div>
+
+  <!-- Proyecto Cosmética -->
+  <div style="margin-bottom: 40px; padding: 25px; border-radius: 12px; background: linear-gradient(135deg, #009dff, #1a237e); color: #e0f7ff; box-shadow: 0 0 25px #009dff; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 35px #009dff, 0 0 60px rgba(255,255,255,0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 25px #009dff'">
+    <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #009dff;">E-commerce Cosmética</h3>
+    <p><em>Tienda online enfocada en cosmética vegana y cruelty-free</em></p>
+    <ul style="margin: 15px 0 10px 20px;">
+      <li>Catálogo animado con scroll</li>
+      <li>Filtros dinámicos y buscador inteligente</li>
+      <li>Carrito con animación de transición</li>
+    </ul>
+  </div>
+
+  <!-- Proyecto Turismo -->
+  <div style="margin-bottom: 40px; padding: 25px; border-radius: 12px; background: linear-gradient(135deg, #00bcd4, #005f73); color: #e0f7ff; box-shadow: 0 0 25px #00bcd4; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 35px #00bcd4, 0 0 60px rgba(255,255,255,0.2)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 25px #00bcd4'">
+    <h3 style="margin-bottom: 10px; font-size: 1.6rem; text-shadow: 0 0 8px #00bcd4;">Agencia de Turismo</h3>
+    <p><em>Landing page de alto impacto para una agencia de viajes de lujo</em></p>
+    <ul style="margin: 15px 0 10px 20px;">
+      <li>Scroll parallax y partículas de fondo</li>
+      <li>Galería animada de destinos</li>
+      <li>Formulario de reserva integrado</li>
+    </ul>
+  </div>
+
+  <!-- Habilidades duras -->
+  <div style="margin-top: 50px; text-align: center;">
+    <h4 style="color: #a2dfff; margin-bottom: 20px;">Habilidades técnicas aplicadas:</h4>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">HTML5</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">CSS3</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">JavaScript</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">Diseño Responsive</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">UI/UX</span>
+      <span style="background: #00f7ff20; border: 1px solid #00f7ff; padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;">Animaciones CSS</span>
+    </div>
+  </div>
+
+</section>
 
     /* ==== CONTACTO & FOOTER ==== */
     #contacto p,a { font-size:1rem; color:#a8caff; }
