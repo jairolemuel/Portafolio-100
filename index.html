@@ -161,26 +161,164 @@
         <p>Responsive portfolio with glitch and parallax effects.</p>
       </div>
     </div>
-  </section>
+<!-- SECCIÓN DE HABILIDADES CON EFECTOS FUTURISTAS -->
+<section id="skills" style="position: relative; padding: 80px 20px; background: #0a0a0a; overflow: hidden; font-family: 'Orbitron', sans-serif;">
+  <canvas id="particles-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;"></canvas>
 
-  <section>
-    <h2 style="color:#0ff; text-align:center; margin-bottom:20px;">Hard Skills</h2>
-    <div class="skills" data-animate>
-      <div class="card" style="text-align:center;">
-        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/></svg>
-        <h3>HTML</h3>
-      </div>
-      <div class="card" style="text-align:center;">
-        <svg viewBox="0 0 64 64"><rect x="10" y="10" width="44" height="44"/></svg>
-        <h3>CSS</h3>
-      </div>
-      <div class="card" style="text-align:center;">
-        <svg viewBox="0 0 64 64"><polygon points="32,10 54,54 10,54"/></svg>
-        <h3>JavaScript</h3>
-      </div>
-    </div>
-  </section>
+  <h2 style="text-align: center; font-size: 2.8rem; color: #0ff; text-shadow: 0 0 10px #0ff;" class="glitch">Habilidades</h2>
 
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 40px; position: relative; z-index: 1;">
+    <!-- Habilidades Técnicas -->
+    <span class="skill-tag"><i class="devicon-c-plain"></i> C</span>
+    <span class="skill-tag"><i class="devicon-cplusplus-plain"></i> C++</span>
+    <span class="skill-tag"><i class="devicon-csharp-plain"></i> C#</span>
+    <span class="skill-tag"><i class="devicon-java-plain"></i> Java</span>
+    <span class="skill-tag"><i class="devicon-javascript-plain"></i> JavaScript</span>
+    <span class="skill-tag"><i class="devicon-php-plain"></i> PHP</span>
+    <span class="skill-tag"><i class="devicon-typescript-plain"></i> TypeScript</span>
+    <span class="skill-tag"><i class="devicon-html5-plain"></i> HTML</span>
+    <span class="skill-tag"><i class="devicon-css3-plain"></i> CSS</span>
+    <span class="skill-tag"><i class="devicon-sass-original"></i> SASS</span>
+    <span class="skill-tag"><i class="devicon-tailwindcss-plain"></i> Tailwind</span>
+    <span class="skill-tag"><i class="devicon-react-original"></i> React</span>
+    <span class="skill-tag"><i class="devicon-astro-plain"></i> Astro</span>
+    <span class="skill-tag"><i class="devicon-nodejs-plain"></i> Node.js</span>
+    <span class="skill-tag"><i class="devicon-nestjs-plain"></i> NestJS</span>
+    <span class="skill-tag"><i class="devicon-mysql-plain"></i> MySQL</span>
+    <span class="skill-tag"><i class="devicon-sqlite-plain"></i> SQLite</span>
+    <span class="skill-tag"><i class="devicon-mongodb-plain"></i> MongoDB</span>
+    <span class="skill-tag"><i class="devicon-unity-original"></i> Unity</span>
+    <span class="skill-tag"><i class="devicon-git-plain"></i> Git</span>
+    <span class="skill-tag"><i class="devicon-github-original"></i> GitHub</span>
+    <span class="skill-tag"><i class="devicon-docker-plain"></i> Docker</span>
+    <span class="skill-tag"><i class="devicon-vscode-plain"></i> VSCode</span>
+    <span class="skill-tag"><i class="devicon-linux-plain"></i> Linux</span>
+    <span class="skill-tag"><i class="devicon-windows8-original"></i> Windows</span>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 40px; position: relative; z-index: 1;">
+    <!-- Habilidades Blandas -->
+    <span class="soft-skill">Procedimientos de Prueba</span>
+    <span class="soft-skill">Conocimiento de Depuración</span>
+    <span class="soft-skill">Estructuras de Datos y Algoritmos</span>
+    <span class="soft-skill">Resolución de Problemas</span>
+    <span class="soft-skill">Comunicación</span>
+    <span class="soft-skill">Aprendizaje Continuo</span>
+    <span class="soft-skill">Gestión del Tiempo y Organización</span>
+    <span class="soft-skill">Adaptabilidad</span>
+    <span class="soft-skill">Creatividad e Innovación</span>
+    <span class="soft-skill">Trabajo en Equipo</span>
+    <span class="soft-skill">Liderazgo</span>
+    <span class="soft-skill">Inteligencia Emocional</span>
+  </div>
+
+  <style>
+    .skill-tag {
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid #0ff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #0ff;
+      box-shadow: 0 0 8px rgba(0,255,255,0.2);
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+    }
+
+    .skill-tag:hover {
+      background: rgba(0, 255, 255, 0.25);
+      box-shadow: 0 0 12px #0ff, inset 0 0 4px #0ff;
+      transform: scale(1.1);
+    }
+
+    .soft-skill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #555;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #ccc;
+      text-shadow: 0 0 4px #00ffff55;
+      transition: all 0.3s ease;
+    }
+
+    .soft-skill:hover {
+      background: rgba(0, 255, 255, 0.15);
+      box-shadow: 0 0 8px #0ff;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .glitch {
+      animation: glitch 1.5s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+      50% { text-shadow: -2px 0 red, 2px 0 cyan; }
+      100% { text-shadow: 2px 0 red, -2px 0 cyan; }
+    }
+  </style>
+
+  <script>
+    // Partículas básicas de fondo
+    const canvas = document.getElementById('particles-bg');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = document.getElementById('skills').offsetHeight;
+    }
+
+    function createParticles() {
+      particlesArray = [];
+      const count = 60;
+      for (let i = 0; i < count; i++) {
+        particlesArray.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          speedX: Math.random() * 0.5 - 0.25,
+          speedY: Math.random() * 0.5 - 0.25
+        });
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particlesArray) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = '#0ff';
+        ctx.shadowColor = '#0ff';
+        ctx.shadowBlur = 6;
+        ctx.fill();
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) {
+          p.x = Math.random() * canvas.width;
+          p.y = Math.random() * canvas.height;
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createParticles();
+    });
+
+    resizeCanvas();
+    createParticles();
+    animateParticles();
+  </script>
+</section>
+
+  
   <section class="contact" data-animate>
     <p>📧 Contact me: <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
   </section>
