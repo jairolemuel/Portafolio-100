@@ -1,584 +1,199 @@
+{\rtf1\ansi\deff0
+{\fonttbl{\f0 Courier;}}
+\fs20
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jairo's Futuristic Portfolio</title>
+  <!-- Fonts and Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
-    }
+    /* ==== Reset & Base ==== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
+    body { background: #0e0e1a; color: #fff; overflow-x: hidden; padding-top: 70px; }
+    a { text-decoration: none; color: inherit; }
 
-    body {
-      background: #0e0e1a;
-      color: #fff;
-      overflow-x: hidden;
-      padding-top: 70px;
-    }
-
-    /* ==== Navbar flotante === */
+    /* ==== Navbar ==== */
     .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-      padding: 10px 20px;
-      display: flex;
-      justify-content: flex-end;
+      position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px); padding: 10px 20px; display: flex; justify-content: flex-end;
       z-index: 999;
     }
-
-    .menu-button {
-      font-size: 1.5rem;
-      color: #0ff;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .menu-button:hover {
-      transform: scale(1.1);
-    }
-
+    .menu-button { font-size:1.5rem; color:#0ff; cursor:pointer; transition:transform .2s; }
+    .menu-button:hover { transform:scale(1.1); }
     .menu-dropdown {
-      position: absolute;
-      top: 50px;
-      right: 20px;
-      background: rgba(0, 255, 255, 0.05);
-      border: 1px solid #0ff;
-      padding: 10px 15px;
-      border-radius: 10px;
-      backdrop-filter: blur(8px);
-      display: none;
-      flex-direction: column;
-      gap: 10px;
+      position:absolute; top:50px; right:20px; background:rgba(0,255,255,0.05);
+      border:1px solid #0ff; border-radius:10px; backdrop-filter:blur(8px);
+      padding:10px 15px; display:none; flex-direction:column; gap:10px;
+      transform-origin:top right; transition:transform .3s ease, opacity .3s ease;
     }
+    .menu-dropdown.show { display:flex; transform:scale(1); opacity:1; }
+    .menu-dropdown.hide { transform:scale(0.8); opacity:0; }
+    .menu-dropdown a:hover { color:#fff; }
 
-    .menu-dropdown a {
-      color: #0ff;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
-    }
-
-    .menu-dropdown a:hover {
-      color: #fff;
-    }
-
-    /* ==== Encabezado con holograma ==== */
-    header {
-      text-align: center;
-      padding: 80px 20px 40px;
-    }
-
+    /* ==== Header ==== */
+    header { text-align:center; padding:80px 20px 40px; position:relative; }
     header h1 {
-      font-size: 3em;
-      color: transparent;
-      background: linear-gradient(120deg, rgba(0,255,255,0.85), rgba(255,255,255,0.65), rgba(0,255,255,0.85)) 0% 50% / 200% auto no-repeat;
-      background-clip: text;
-      -webkit-background-clip: text;
-      text-shadow: 0 0 12px #0ff, 0 0 24px #0ff;
-      animation: holoShimmer 3s linear infinite, holoGlow 4s ease-in-out infinite;
+      font-size:3em; color:transparent; background:linear-gradient(120deg,
+      rgba(0,255,255,0.85), rgba(255,255,255,0.65), rgba(0,255,255,0.85)) 0% 50%/150% auto no-repeat;
+      background-clip:text; -webkit-background-clip:text;
+      animation:holoShimmer 4s linear infinite, holoGlow 5s ease-in-out infinite;
+      text-shadow:0 0 8px #0ff, 0 0 16px #0ff;
     }
-
-    @keyframes holoShimmer {
-      0%   { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
-    }
-
+    @keyframes holoShimmer { 0%{background-position:0 50%} 100%{background-position:150% 50%} }
     @keyframes holoGlow {
-      0%,100% { text-shadow: 0 0 12px #0ff, 0 0 24px #0ff; }
-      50%     { text-shadow: 0 0 30px #0ff, 0 0 60px #0ff; }
+      0%,100%{text-shadow:0 0 8px #0ff,0 0 16px #0ff;}
+      50%{text-shadow:0 0 20px #0ff,0 0 40px #0ff;}
     }
 
     /* ==== Intro ==== */
     .intro {
-      text-align: center;
-      font-size: 1.3em;
-      margin-bottom: 60px;
-      color: #aaffff;
-      max-width: 800px;
-      margin-inline: auto;
-      padding-inline: 20px;
+      text-align:center; font-size:1.3em; margin:0 auto 60px;
+      max-width:800px; color:#aaffff; padding:0 20px;
     }
 
-    /* ==== Botón flotante de Contacto ==== */
+    /* ==== Contact Float ==== */
     .contact-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: rgba(0,255,255,0.2);
-      color: #0ff;
-      border: 2px solid #0ff;
-      border-radius: 50px;
-      padding: 12px 20px;
-      font-size: 1rem;
-      box-shadow: 0 0 15px #0ff;
-      cursor: pointer;
-      z-index: 999;
-      transition: all 0.3s ease;
+      position:fixed; bottom:30px; right:30px; background:rgba(0,255,255,0.2);
+      color:#0ff; border:2px solid #0ff; border-radius:50px; padding:12px 20px;
+      font-size:1rem; box-shadow:0 0 15px #0ff; cursor:pointer; z-index:999;
+      transition:transform .3s, background .3s, color .3s;
     }
-
-    .contact-float:hover {
-      background: #0ff;
-      color: #0e0e1a;
-      transform: scale(1.05);
-    }
-
+    .contact-float:hover { background:#0ff; color:#0e0e1a; transform:scale(1.05); }
     .contact-panel {
-      position: fixed;
-      bottom: 80px;
-      right: 30px;
-      background: rgba(0,255,255,0.05);
-      border: 1px solid #0ff;
-      padding: 10px 15px;
-      border-radius: 10px;
-      backdrop-filter: blur(8px);
-      display: none;
-      flex-direction: row;
-      gap: 15px;
-      z-index: 998;
+      position:fixed; bottom:80px; right:30px; background:rgba(0,255,255,0.05);
+      border:1px solid #0ff; border-radius:10px; backdrop-filter:blur(8px);
+      display:flex; gap:15px; padding:10px; z-index:998;
+      transform:scale(0); transform-origin:bottom right; opacity:0;
+      transition:transform .3s ease, opacity .3s ease;
     }
+    .contact-panel.show { transform:scale(1); opacity:1; }
+    .contact-panel a { font-size:1.5rem; color:#0ff; transition:transform .2s, color .2s; }
+    .contact-panel a:hover { transform:scale(1.2); color:#fff; }
 
-    .contact-panel a {
-      color: #0ff;
-      font-size: 1.5rem;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .contact-panel a:hover {
-      transform: scale(1.2);
-      color: #fff;
-    }
-
-    /* ==== Sección: Proyectos ==== */
-    section.projects {
-      padding: 60px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
+    /* ==== Projects ==== */
+    .projects { padding:60px 20px; max-width:1200px; margin:auto; }
     .projects h2 {
-      font-size: 2em;
-      text-align: center;
-      margin-bottom: 40px;
-      color: #0ff;
+      font-size:2em; text-align:center; margin-bottom:40px; color:#0ff;
+      text-shadow:0 0 10px #0ff;
     }
-
     .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px;
     }
-
-    .card {
-      background: rgba(255,255,255,0.05);
-      padding: 20px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      border: 1px solid #0ff;
-      box-shadow: 0 0 10px #0ff44c33;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card h3 {
-      color: #0ff;
-      margin: 10px 0;
-    }
-
-    .card p {
-      color: #ccc;
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-    }
-
-    .project-link {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 6px 12px;
-      border: 1px solid #0ff;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      color: #0ff;
-      text-decoration: none;
-    }
-
-    .project-link:hover {
-      background: #0ff;
-      color: #0e0e1a;
-    }
-  </style>
-</head>
-<body>
-  <div class="navbar">
-    <div class="menu-button" onclick="toggleMenu()">&#8942;</div>
-    <div class="menu-dropdown" id="dropdownMenu">
-      <a href="#">🔹 Contacto Personalizado</a>
-      <a href="#">🔹 Sobre Mí</a>
-    </div>
-  </div>
-
-  <header>
-    <h1>Welcome to my Portfolio</h1>
-  </header>
-
-  <div class="intro">
-    Hi, I'm Jairo Lemuel Barrientos. I design with creativity and code with passion. Scroll down to see my work!
-  </div>
-
-  <section class="projects">
-    <h2>My Projects</h2>
-    <div class="project-grid">
-      <!-- Las tarjetas se insertarán aquí -->
-      : 0 auto;
-    }
-
-    .projects h2 {
-      text-align: center;
-      font-size: 2.5em;
-      margin-bottom: 40px;
-      color: #0ff;
-      text-shadow: 0 0 10px #0ff;
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      padding: 0 20px;
-    }
-
     .project-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid #0ff;
-      border-radius: 15px;
-      padding: 20px;
-      backdrop-filter: blur(8px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      background:rgba(255,255,255,0.05); border:1px solid #0ff;
+      border-radius:15px; padding:20px; backdrop-filter:blur(8px);
+      transition:transform .3s, box-shadow .3s; box-shadow:0 0 15px rgba(0,255,255,0.2);
+      opacity:0; transform:translateY(30px);
     }
+    .project-card.visible { opacity:1; transform:translateY(0); }
+    .project-card h3 { color:#aaffff; margin-bottom:10px; font-size:1.4em; }
+    .project-card p { color:#d0fafa; font-size:0.95em; margin-bottom:10px; }
+    .project-card a { color:#0ff; font-size:0.9em; text-decoration:underline; }
+    .project-card a:hover { color:#fff; }
 
-    .project-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+    /* ==== Skills ==== */
+    #skills { position:relative; padding:80px 20px; background:#0a0a0a; overflow:hidden; }
+    .skill-tag {
+      background:rgba(0,255,255,0.1); border:1px solid #0ff; padding:10px 16px;
+      border-radius:8px; font-size:14px; display:inline-flex; align-items:center; gap:6px;
+      color:#0ff; backdrop-filter:blur(4px); transition:all .3s;
     }
-
-    .project-card h3 {
-      font-size: 1.4em;
-      color: #aaffff;
-      margin-bottom: 10px;
+    .skill-tag:hover { background:rgba(0,255,255,0.25); box-shadow:0 0 12px #0ff; transform:scale(1.1); }
+    .soft-skill {
+      background:rgba(255,255,255,0.05); border:1px solid #555; padding:10px 16px;
+      border-radius:8px; font-size:13px; color:#ccc; transition:all .3s;
     }
-
-    .project-card p {
-      font-size: 0.95em;
-      color: #d0fafa;
-    }
-
-    .project-card a {
-      display: inline-block;
-      margin-top: 10px;
-      font-size: 0.9em;
-      color: #0ff;
-      text-decoration: underline;
-    }
-
-    .project-card a:hover {
-      color: white;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.2em;
-      }
-
-      .intro {
-        font-size: 1.1em;
-      }
-
-      .project-grid {
-        grid-template-columns: 1fr;
-      }
+    .soft-skill:hover { background:rgba(0,255,255,0.15); box-shadow:0 0 8px #0ff; color:#fff; transform:scale(1.05); }
+    .glitch { animation:glitch 1.5s infinite; }
+    @keyframes glitch {
+      0%{text-shadow:2px 0 red,-2px 0 cyan;} 50%{text-shadow:-2px 0 red,2px 0 cyan;} 100%{text-shadow:2px 0 red,-2px 0 cyan;}
     }
   </style>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const contactBtn = document.getElementById("contactBtn");
-      const panel = document.getElementById("contactPanel");
-      const menuBtn = document.getElementById("menuBtn");
-      const menuDropdown = document.getElementById("menuDropdown");
-
-      contactBtn.addEventListener("click", () => {
-        panel.style.display = panel.style.display === "flex" ? "none" : "flex";
-      });
-
-      menuBtn.addEventListener("click", () => {
-        menuDropdown.style.display = menuDropdown.style.display === "flex" ? "none" : "flex";
-      });
-    });
-  </script>
 </head>
-
 <body>
   <!-- Navbar -->
   <div class="navbar">
-    <div class="menu-button" id="menuBtn"><i class="fas fa-ellipsis-v"></i></div>
+    <div class="menu-button" onclick="toggleMenu()">&#8942;</div>
     <div class="menu-dropdown" id="menuDropdown">
-      <a href="#contact">Contacto personalizado</a>
-      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#contact">ð¹ Contacto Personalizado</a>
+      <a href="#about">ð¹ Sobre MÃ­</a>
     </div>
   </div>
-
   <!-- Header -->
-  <header>
-    <h1>Hola, bienvenido a mi portafolio</h1>
-  </header>
-
-  <div class="intro">
-    Soy Jairo Lemuel Barrientos, desarrollador creativo, apasionado por el diseño visual, los negocios y la tecnología.
-    Este es un espacio donde podés explorar mis proyectos y contactarme de manera directa y personalizada.
-  </div>
-
-  <!-- Botón flotante de contacto -->
-  <div class="contact-float" id="contactBtn">¡Contáctame!</div>
+  <header><h1>Welcome to my Portfolio</h1></header>
+  <!-- Intro -->
+  <div class="intro">Hi, I'm Jairo Lemuel Barrientos. I design with creativity and code with passion. Scroll down to see my work!</div>
+  <!-- Contact Float -->
+  <div class="contact-float" id="contactBtn">Â¡ContÃ¡ctame!</div>
   <div class="contact-panel" id="contactPanel">
     <a href="https://wa.me/543437457636" target="_blank"><i class="fab fa-whatsapp"></i></a>
     <a href="mailto:barrientosjairolemuel@gmail.com"><i class="fas fa-envelope"></i></a>
     <a href="https://linkedin.com/in/jairobarrientos" target="_blank"><i class="fab fa-linkedin-in"></i></a>
   </div>
-
-  <!-- Sección de Proyectos -->
+  <!-- Projects Section -->
   <section class="projects" id="projects">
     <h2>Proyectos Destacados</h2>
     <div class="project-grid">
-
-      <!-- Proyecto 1 -->
-      <div class="project-card">
-        <h3>Calculadora Financiera</h3>
-        <p>Aplicación web profesional para realizar cálculos financieros en tiempo real, ideal para inversiones y negocios.</p>
-        <a href="#" target="_blank">Ver proyecto</a>
-      </div>
-
-      <!-- Proyecto 2 -->
-      <div class="project-card">
-        <h3>Sitio de Turismo</h3>
-        <p>Diseño vibrante y alegre para promocionar destinos turísticos, adaptable a dispositivos móviles.</p>
-        <a href="#" target="_blank">Ver proyecto</a>
-      </div>
-
-      <!-- Proyecto 3 -->
-      <div class="project-card">
-        <h3>Landing Page de Belleza</h3>
-        <p>Landing page femenina y estética para productos de belleza, con animaciones suaves y tipografía elegante.</p>
-        <a href="#" target="_blank">Ver proyecto</a>
-      </div>
-
+      <div class="project-card" data-animate><h3>Calculadora Financiera</h3><p>App web para cÃ¡lculos financieros en tiempo real.</p><a href="#" target="_blank">Ver proyecto</a></div>
+      <div class="project-card" data-animate><h3>Sitio de Turismo</h3><p>DiseÃ±o vibrante para destinos turÃ­sticos.</p><a href="#" target="_blank">Ver proyecto</a></div>
+      <div class="project-card" data-animate><h3>Landing Page de Belleza</h3><p>Landing page estÃ©tica con animaciones suaves.</p><a href="#" target="_blank">Ver proyecto</a></div>
     </div>
   </section>
-</body>
-</html>
-<!-- SECCIÓN DE HABILIDADES CON EFECTO FUTURISTA + ÍCONOS -->
-<section id="skills" style="position: relative; padding: 80px 20px; background: #0a0a0a; overflow: hidden; font-family: 'Orbitron', sans-serif;">
-  <canvas id="particles-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;"></canvas>
-
-  <h2 style="text-align: center; font-size: 2.8rem; color: #0ff; text-shadow: 0 0 10px #0ff;" class="glitch">Habilidades</h2>
-
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 40px; position: relative; z-index: 1;">
-    <!-- Habilidades Técnicas con íconos -->
-    <span class="skill-tag"><i class="devicon-c-plain colored"></i> C</span>
-    <span class="skill-tag"><i class="devicon-cplusplus-plain colored"></i> C++</span>
-    <span class="skill-tag"><i class="devicon-csharp-plain colored"></i> C#</span>
-    <span class="skill-tag"><i class="devicon-java-plain colored"></i> Java</span>
-    <span class="skill-tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
-    <span class="skill-tag"><i class="devicon-php-plain colored"></i> PHP</span>
-    <span class="skill-tag"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
-    <span class="skill-tag"><i class="devicon-html5-plain colored"></i> HTML</span>
-    <span class="skill-tag"><i class="devicon-css3-plain colored"></i> CSS</span>
-    <span class="skill-tag"><i class="devicon-sass-original colored"></i> SASS</span>
-    <span class="skill-tag"><i class="devicon-tailwindcss-plain colored"></i> Tailwind</span>
-    <span class="skill-tag"><i class="devicon-react-original colored"></i> React</span>
-    <span class="skill-tag"><i class="devicon-astro-plain colored"></i> Astro</span>
-    <span class="skill-tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
-    <span class="skill-tag"><i class="devicon-nestjs-plain colored"></i> NestJS</span>
-    <span class="skill-tag"><i class="devicon-mysql-plain colored"></i> MySQL</span>
-    <span class="skill-tag"><i class="devicon-sqlite-plain colored"></i> SQLite</span>
-    <span class="skill-tag"><i class="devicon-mongodb-plain colored"></i> MongoDB</span>
-    <span class="skill-tag"><i class="devicon-unity-original colored"></i> Unity</span>
-    <span class="skill-tag"><i class="devicon-git-plain colored"></i> Git</span>
-    <span class="skill-tag"><i class="devicon-github-original colored"></i> GitHub</span>
-    <span class="skill-tag"><i class="devicon-docker-plain colored"></i> Docker</span>
-    <span class="skill-tag"><i class="devicon-vscode-plain colored"></i> VSCode</span>
-    <span class="skill-tag"><i class="devicon-linux-plain colored"></i> Linux</span>
-    <span class="skill-tag"><i class="devicon-windows8-original colored"></i> Windows</span>
-  </div>
-
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 40px; position: relative; z-index: 1;">
-    <!-- Habilidades Blandas -->
-    <span class="soft-skill">Procedimientos de Prueba</span>
-    <span class="soft-skill">Conocimiento de Depuración</span>
-    <span class="soft-skill">Estructuras de Datos y Algoritmos</span>
-    <span class="soft-skill">Resolución de Problemas</span>
-    <span class="soft-skill">Comunicación</span>
-    <span class="soft-skill">Aprendizaje Continuo</span>
-    <span class="soft-skill">Gestión del Tiempo y Organización</span>
-    <span class="soft-skill">Adaptabilidad</span>
-    <span class="soft-skill">Creatividad e Innovación</span>
-    <span class="soft-skill">Trabajo en Equipo</span>
-    <span class="soft-skill">Liderazgo</span>
-    <span class="soft-skill">Inteligencia Emocional</span>
-  </div>
-
-  <style>
-    .skill-tag {
-      background: rgba(0, 255, 255, 0.1);
-      border: 1px solid #0ff;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #0ff;
-      box-shadow: 0 0 8px rgba(0,255,255,0.2);
-      backdrop-filter: blur(4px);
-      transition: all 0.3s ease;
-    }
-
-    .skill-tag i {
-      font-size: 18px;
-    }
-
-    .skill-tag:hover {
-      background: rgba(0, 255, 255, 0.25);
-      box-shadow: 0 0 12px #0ff, inset 0 0 4px #0ff;
-      transform: scale(1.1);
-    }
-
-    .soft-skill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid #555;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #ccc;
-      text-shadow: 0 0 4px #00ffff55;
-      transition: all 0.3s ease;
-    }
-
-    .soft-skill:hover {
-      background: rgba(0, 255, 255, 0.15);
-      box-shadow: 0 0 8px #0ff;
-      color: white;
-      transform: scale(1.05);
-    }
-
-    .glitch {
-      animation: glitch 1.5s infinite;
-    }
-
-    @keyframes glitch {
-      0% { text-shadow: 2px 0 red, -2px 0 cyan; }
-      50% { text-shadow: -2px 0 red, 2px 0 cyan; }
-      100% { text-shadow: 2px 0 red, -2px 0 cyan; }
-    }
-  </style>
-
+  <!-- Skills Section -->
+  <section id="skills">
+    <canvas id="particles-bg"></canvas>
+    <h2 class="glitch">Habilidades</h2>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;">
+      <!-- Hard Skills -->
+      <span class="skill-tag"><i class="devicon-c-plain colored"></i> C</span>
+      <span class="skill-tag"><i class="devicon-java-plain colored"></i> Java</span>
+      <span class="skill-tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+      <span class="skill-tag"><i class="devicon-react-original colored"></i> React</span>
+      <span class="skill-tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+      <span class="skill-tag"><i class="devicon-mongodb-plain colored"></i> MongoDB</span>
+      <!-- ...add rest as needed -->
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;">
+      <!-- Soft Skills -->
+      <span class="soft-skill">ResoluciÃ³n de Problemas</span>
+      <span class="soft-skill">ComunicaciÃ³n</span>
+      <span class="soft-skill">Trabajo en Equipo</span>
+      <span class="soft-skill">Creatividad</span>
+      <!-- ...add rest as needed -->
+    </div>
+  </section>
+  <!-- Contact Footer -->
+  <section class="contact" data-animate><p>ð§ Contact me: <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p></section>
+  <!-- Scripts -->
   <script>
+    // Toggle menu
+    function toggleMenu() {
+      const menu = document.getElementById('menuDropdown');
+      menu.classList.toggle('show');
+    }
+    // Toggle contact panel
+    document.getElementById('contactBtn').addEventListener('click', () => {
+      document.getElementById('contactPanel').classList.toggle('show');
+    });
+    // Intersection Observer for animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    },{threshold:0.1});
+    document.querySelectorAll('[data-animate]').forEach(el=>observer.observe(el));
+    // Particles background
     const canvas = document.getElementById('particles-bg');
     const ctx = canvas.getContext('2d');
-    let particlesArray = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = document.getElementById('skills').offsetHeight;
-    }
-
-    function createParticles() {
-      particlesArray = [];
-      const count = 60;
-      for (let i = 0; i < count; i++) {
-        particlesArray.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 1,
-          speedX: Math.random() * 0.5 - 0.25,
-          speedY: Math.random() * 0.5 - 0.25
-        });
-      }
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let p of particlesArray) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = '#0ff';
-        ctx.shadowColor = '#0ff';
-        ctx.shadowBlur = 6;
-        ctx.fill();
-        p.x += p.speedX;
-        p.y += p.speedY;
-        if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) {
-          p.x = Math.random() * canvas.width;
-          p.y = Math.random() * canvas.height;
-        }
-      }
-      requestAnimationFrame(animateParticles);
-    }
-
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      createParticles();
-    });
-
-    resizeCanvas();
-    createParticles();
-    animateParticles();
-  </script>
-</section>
-
-  
-  <section class="contact" data-animate>
-    <p>📧 Contact me: <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
-  </section>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <script>
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 80 },
-        size: { value: 3 },
-        color: { value: '#0ff' },
-        line_linked: {
-          enable: true,
-          color: '#0ff'
-        }
-      }
-    });
-
-    // Scroll animation
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('skills').offsetHeight; }
+    function create() { particles=[]; for(let i=0;i<60;i++){ particles.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, size:Math.random()*2+1, vx:Math.random()*0.5-0.25, vy:Math.random()*0.5-0.25 }); } }
+    function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fillStyle='#0ff'; ctx.shadowColor='#0ff'; ctx.shadowBlur=6; ctx.fill(); p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>canvas.width||p.y<0||p.y>canvas.height){ p.x=Math.random()*canvas.width; p.y=Math.random()*canvas.height;} }); requestAnimationFrame(animate); }
+    window.addEventListener('resize',()=>{ resize(); create(); });
+    resize(); create(); animate();
   </script>
 </body>
 </html>
