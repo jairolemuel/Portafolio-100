@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jairo's Futuristic Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- ============================= -->
-  <!-- Sección: Estilos Generales    -->
-  <!-- ============================= -->
   <style>
-    /* ───── Reset y tipografía ───── */
     * {
       margin: 0;
       padding: 0;
@@ -22,59 +19,163 @@
       background: #0e0e1a;
       color: #fff;
       overflow-x: hidden;
-      padding-top: 50px; /* espacio para la barra fija */
+      padding-top: 70px;
     }
 
-    /* ───── Header ───── */
+    /* ==== Navbar flotante === */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+      z-index: 999;
+    }
+
+    .menu-button {
+      font-size: 1.5rem;
+      color: #0ff;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .menu-button:hover {
+      transform: scale(1.1);
+    }
+
+    .menu-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      background: rgba(0, 255, 255, 0.05);
+      border: 1px solid #0ff;
+      padding: 10px 15px;
+      border-radius: 10px;
+      backdrop-filter: blur(8px);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu-dropdown a {
+      color: #0ff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .menu-dropdown a:hover {
+      color: #fff;
+    }
+
+    /* ==== Encabezado con holograma ==== */
     header {
       text-align: center;
-      padding: 100px 20px 40px;
-      position: relative;
+      padding: 80px 20px 40px;
     }
-    /* Holograma doble: shimmer + glow */
+
     header h1 {
       font-size: 3em;
       color: transparent;
-      background: linear-gradient(
-        120deg,
-        rgba(0,255,255,0.85),
-        rgba(255,255,255,0.65),
-        rgba(0,255,255,0.85)
-      ) 0% 50% / 200% auto no-repeat;
+      background: linear-gradient(120deg, rgba(0,255,255,0.85), rgba(255,255,255,0.65), rgba(0,255,255,0.85)) 0% 50% / 200% auto no-repeat;
       background-clip: text;
       -webkit-background-clip: text;
       text-shadow: 0 0 12px #0ff, 0 0 24px #0ff;
       animation: holoShimmer 3s linear infinite, holoGlow 4s ease-in-out infinite;
     }
+
     @keyframes holoShimmer {
-      0%   { background-position:   0% 50%; }
+      0%   { background-position: 0% 50%; }
       100% { background-position: 200% 50%; }
     }
+
     @keyframes holoGlow {
       0%,100% { text-shadow: 0 0 12px #0ff, 0 0 24px #0ff; }
       50%     { text-shadow: 0 0 30px #0ff, 0 0 60px #0ff; }
     }
 
-    /* ───── Secciones Generales ───── */
-    section {
+    /* ==== Intro ==== */
+    .intro {
+      text-align: center;
+      font-size: 1.3em;
+      margin-bottom: 60px;
+      color: #aaffff;
+      max-width: 800px;
+      margin-inline: auto;
+      padding-inline: 20px;
+    }
+
+    /* ==== Botón flotante de Contacto ==== */
+    .contact-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(0,255,255,0.2);
+      color: #0ff;
+      border: 2px solid #0ff;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      box-shadow: 0 0 15px #0ff;
+      cursor: pointer;
+      z-index: 999;
+      transition: all 0.3s ease;
+    }
+
+    .contact-float:hover {
+      background: #0ff;
+      color: #0e0e1a;
+      transform: scale(1.05);
+    }
+
+    .contact-panel {
+      position: fixed;
+      bottom: 80px;
+      right: 30px;
+      background: rgba(0,255,255,0.05);
+      border: 1px solid #0ff;
+      padding: 10px 15px;
+      border-radius: 10px;
+      backdrop-filter: blur(8px);
+      display: none;
+      flex-direction: row;
+      gap: 15px;
+      z-index: 998;
+    }
+
+    .contact-panel a {
+      color: #0ff;
+      font-size: 1.5rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .contact-panel a:hover {
+      transform: scale(1.2);
+      color: #fff;
+    }
+
+    /* ==== Sección: Proyectos ==== */
+    section.projects {
       padding: 60px 20px;
       max-width: 1200px;
       margin: auto;
     }
-    .intro {
+
+    .projects h2 {
+      font-size: 2em;
       text-align: center;
-      font-size: 1.5em;
-      margin-bottom: 50px;
-      color: #aaffff;
+      margin-bottom: 40px;
+      color: #0ff;
     }
 
-    /* ───── Sección: Proyectos ───── */
-    .projects {
+    .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
-      margin-bottom: 80px;
     }
+
     .card {
       background: rgba(255,255,255,0.05);
       padding: 20px;
@@ -83,36 +184,26 @@
       border: 1px solid #0ff;
       box-shadow: 0 0 10px #0ff44c33;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-    }
-    .card[data-animate] {
       opacity: 0;
       transform: translateY(30px);
-      transition: all 0.8s ease-out;
     }
+
     .card.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .card img {
-      width: 100%;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      transition: box-shadow 0.3s ease;
-    }
-    .card img:hover {
-      box-shadow: 0 0 15px #0ff;
-    }
+
     .card h3 {
-      margin: 10px 0 8px;
       color: #0ff;
-      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      margin: 10px 0;
     }
+
     .card p {
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
       color: #ccc;
-      margin-bottom: 12px;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
     }
+
     .project-link {
       display: inline-block;
       margin-top: 8px;
@@ -122,227 +213,180 @@
       font-size: 0.9rem;
       color: #0ff;
       text-decoration: none;
-      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
+
     .project-link:hover {
       background: #0ff;
       color: #0e0e1a;
-      box-shadow: 0 0 8px #0ff;
-    }
-
-    /* ───── Top contact bar ───── */
-    #top-contact-bar {
-      background: rgba(14,14,26,0.85);
-      color: #0ff;
-      padding: 12px 24px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      z-index: 1001;
-      box-shadow: 0 0 20px #0ff55aa;
-      backdrop-filter: blur(10px);
-      animation: slideDownFade 1s ease forwards;
-    }
-    #top-contact-bar a {
-      display: inline-flex; align-items: center; gap: 8px;
-      color: #0ff; text-decoration: none;
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
-    #top-contact-bar a:hover {
-      transform: scale(1.05);
-      color: #aaffff;
-      filter: drop-shadow(0 0 6px #0ff);
-    }
-
-    /* ───── Panel desplegable de contacto ───── */
-    #contact-trigger {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: rgba(14,14,26,0.9);
-      border: 2px solid #0ff;
-      border-radius: 30px;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      box-shadow: 0 0 15px #0ff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 1002;
-    }
-    #contact-trigger:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px #0ff;
-    }
-    #contact-trigger .arrow {
-      display: inline-block;
-      font-size: 1.2em;
-      transition: transform 0.3s ease;
-    }
-
-    #contact-panel {
-      position: fixed;
-      top: 50%;
-      right: -260px;
-      transform: translateY(-50%);
-      width: 250px;
-      background: rgba(14,14,26,0.9);
-      backdrop-filter: blur(10px);
-      border: 2px solid #0ff;
-      border-radius: 12px 0 0 12px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      box-shadow: 0 0 20px #0ff55aa;
-      transition: right 0.5s ease;
-      z-index: 1001;
-    }
-    #contact-panel.open {
-      right: 0;
-    }
-    #contact-panel a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #0ff;
-      text-decoration: none;
-      padding: 6px;
-      border-radius: 6px;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-    #contact-panel a:hover {
-      background: rgba(0,255,255,0.1);
-      transform: translateX(4px);
-    }
-
-    /* ───── Animaciones comunes ───── */
-    @keyframes slideDownFade {
-      from { transform: translateY(-30px); opacity: 0; }
-      to   { transform: translateY(0);     opacity: 1; }
-    }
-
-    @keyframes floatUpDown {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-6px); }
-    }
-
-    /* ───── Particles fondo ───── */
-    #particles-js {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-    }
-
-    /* ───── Responsividad ───── */
-    @media (max-width: 600px) {
-      .projects { gap: 20px; }
-      .card { padding: 15px; }
-      #contact-panel { width: 200px; }
-      #contact-trigger { padding: 8px 12px; }
     }
   </style>
 </head>
+<body>
+  <div class="navbar">
+    <div class="menu-button" onclick="toggleMenu()">&#8942;</div>
+    <div class="menu-dropdown" id="dropdownMenu">
+      <a href="#">🔹 Contacto Personalizado</a>
+      <a href="#">🔹 Sobre Mí</a>
+    </div>
+  </div>
+
+  <header>
+    <h1>Welcome to my Portfolio</h1>
+  </header>
+
+  <div class="intro">
+    Hi, I'm Jairo Lemuel Barrientos. I design with creativity and code with passion. Scroll down to see my work!
+  </div>
+
+  <section class="projects">
+    <h2>My Projects</h2>
+    <div class="project-grid">
+      <!-- Las tarjetas se insertarán aquí -->
+      : 0 auto;
+    }
+
+    .projects h2 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #0ff;
+      border-radius: 15px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+    }
+
+    .project-card h3 {
+      font-size: 1.4em;
+      color: #aaffff;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      font-size: 0.95em;
+      color: #d0fafa;
+    }
+
+    .project-card a {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #0ff;
+      text-decoration: underline;
+    }
+
+    .project-card a:hover {
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2em;
+      }
+
+      .intro {
+        font-size: 1.1em;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const contactBtn = document.getElementById("contactBtn");
+      const panel = document.getElementById("contactPanel");
+      const menuBtn = document.getElementById("menuBtn");
+      const menuDropdown = document.getElementById("menuDropdown");
+
+      contactBtn.addEventListener("click", () => {
+        panel.style.display = panel.style.display === "flex" ? "none" : "flex";
+      });
+
+      menuBtn.addEventListener("click", () => {
+        menuDropdown.style.display = menuDropdown.style.display === "flex" ? "none" : "flex";
+      });
+    });
+  </script>
+</head>
 
 <body>
-  <!-- Top Contact Bar -->
-  <div id="top-contact-bar">
-    <a href="https://wa.me/5437457636" target="_blank" title="WhatsApp">
-      <img src="https://img.icons8.com/ios-filled/20/0ff/whatsapp.png" alt=""> +54 3745 7636
-    </a>
-    <a href="mailto:barrientosjairolemuel@gmail.com" title="Email">
-      <img src="https://img.icons8.com/ios-filled/20/0ff/gmail.png" alt=""> Email
-    </a>
-    <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" title="LinkedIn">
-      <img src="https://img.icons8.com/ios-filled/20/0ff/linkedin.png" alt=""> LinkedIn
-    </a>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="menu-button" id="menuBtn"><i class="fas fa-ellipsis-v"></i></div>
+    <div class="menu-dropdown" id="menuDropdown">
+      <a href="#contact">Contacto personalizado</a>
+      <a href="#sobre-mi">Sobre mí</a>
+    </div>
   </div>
-
-  <!-- Panel oculto de contacto -->
-  <div id="contact-panel">
-    <a href="https://wa.me/5437457636" target="_blank">
-      <img src="https://img.icons8.com/ios-filled/20/0ff/whatsapp.png" alt=""> WhatsApp
-    </a>
-    <a href="mailto:barrientosjairolemuel@gmail.com">
-      <img src="https://img.icons8.com/ios-filled/20/0ff/gmail.png" alt=""> Email
-    </a>
-    <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank">
-      <img src="https://img.icons8.com/ios-filled/20/0ff/linkedin.png" alt=""> LinkedIn
-    </a>
-  </div>
-
-  <!-- Botón flotante de contacto -->
-  <div id="contact-trigger">
-    <span>Contáctame</span>
-    <span class="arrow">→</span>
-  </div>
-
-  <!-- Partículas de fondo -->
-  <div id="particles-js"></div>
 
   <!-- Header -->
   <header>
-    <h1>Welcome to my portfolio</h1>
+    <h1>Hola, bienvenido a mi portafolio</h1>
   </header>
 
-  <!-- Introducción -->
-  <section class="intro" data-animate>
-    <p>Hi, I'm Jairo. A creative soul with a futuristic vision.</p>
-  </section>
+  <div class="intro">
+    Soy Jairo Lemuel Barrientos, desarrollador creativo, apasionado por el diseño visual, los negocios y la tecnología.
+    Este es un espacio donde podés explorar mis proyectos y contactarme de manera directa y personalizada.
+  </div>
 
-  <!-- Proyectos -->
-  <section>
-    <h2 style="color:#0ff; text-align:center; margin-bottom:20px;">My Projects</h2>
-    <div class="projects">
-      <div class="card" data-animate>
-        <img src="https://via.placeholder.com/300x150?text=Project+1" alt="Project 1">
-        <h3>Project One</h3>
-        <p>A futuristic landing page with advanced visual effects.</p>
-        <a href="https://github.com/jairolemuel/project-one" class="project-link" target="_blank">Ver más</a>
+  <!-- Botón flotante de contacto -->
+  <div class="contact-float" id="contactBtn">¡Contáctame!</div>
+  <div class="contact-panel" id="contactPanel">
+    <a href="https://wa.me/543437457636" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="mailto:barrientosjairolemuel@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a href="https://linkedin.com/in/jairobarrientos" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+
+  <!-- Sección de Proyectos -->
+  <section class="projects" id="projects">
+    <h2>Proyectos Destacados</h2>
+    <div class="project-grid">
+
+      <!-- Proyecto 1 -->
+      <div class="project-card">
+        <h3>Calculadora Financiera</h3>
+        <p>Aplicación web profesional para realizar cálculos financieros en tiempo real, ideal para inversiones y negocios.</p>
+        <a href="#" target="_blank">Ver proyecto</a>
       </div>
-      <div class="card" data-animate>
-        <img src="https://via.placeholder.com/300x150?text=Project+2" alt="Project 2">
-        <h3>Project Two</h3>
-        <p>Interactive UI for a gaming website with neon animations.</p>
-        <a href="https://github.com/jairolemuel/project-two" class="project-link" target="_blank">Ver más</a>
+
+      <!-- Proyecto 2 -->
+      <div class="project-card">
+        <h3>Sitio de Turismo</h3>
+        <p>Diseño vibrante y alegre para promocionar destinos turísticos, adaptable a dispositivos móviles.</p>
+        <a href="#" target="_blank">Ver proyecto</a>
       </div>
-      <div class="card" data-animate>
-        <img src="https://via.placeholder.com/300x150?text=Project+3" alt="Project 3">
-        <h3>Project Three</h3>
-        <p>Responsive portfolio with glitch and parallax effects.</p>
-        <a href="https://github.com/jairolemuel/project-three" class="project-link" target="_blank">Ver más</a>
+
+      <!-- Proyecto 3 -->
+      <div class="project-card">
+        <h3>Landing Page de Belleza</h3>
+        <p>Landing page femenina y estética para productos de belleza, con animaciones suaves y tipografía elegante.</p>
+        <a href="#" target="_blank">Ver proyecto</a>
       </div>
+
     </div>
   </section>
-
-  <!-- Animaciones al hacer scroll -->
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      });
-    });
-    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
-  </script>
-
-  <!-- Panel toggle -->
-  <script>
-    const trigger = document.getElementById('contact-trigger');
-    const panel = document.getElementById('contact-panel');
-    trigger.addEventListener('click', () => panel.classList.toggle('open'));
-  </script>
-
-  <!-- Partículas -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <script>
-    particlesJS('particles-js', {
-      particles: { number:{value:80}, size:{value:3}, color:{value:'#0ff'}, line_linked:{enable:true, color:'#0ff'} }
-    });
-  </script>
 </body>
 </html>
 <!-- SECCIÓN DE HABILIDADES CON EFECTO FUTURISTA + ÍCONOS -->
