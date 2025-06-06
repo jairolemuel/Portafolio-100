@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jairo's Futuristic Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- ============================= -->
+  <!-- Sección: Estilos Generales    -->
+  <!-- ============================= -->
   <style>
+    /* ───── Reset y tipografía ───── */
     * {
       margin: 0;
       padding: 0;
@@ -17,27 +22,52 @@
       background: #0e0e1a;
       color: #fff;
       overflow-x: hidden;
+      /* Espacio superior para que el contenido no quede bajo la barra fija */
+      padding-top: 50px;
     }
 
+    /* ───── Header ───── */
     header {
       text-align: center;
       padding: 100px 20px 40px;
       position: relative;
     }
 
+    /* ─––– Holographic + Fade-Out para el h1 ─––– */
     header h1 {
       font-size: 3em;
-      color: #0ff;
+      color: transparent;
+      background: linear-gradient(
+        120deg,
+        rgba(0, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.6),
+        rgba(0, 255, 255, 0.8)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
       text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-      animation: glitch 2s infinite;
+      animation: holoFade 1s ease-in-out forwards;
     }
 
-    @keyframes glitch {
-      0% { text-shadow: 0 0 10px #0ff; }
-      50% { text-shadow: 2px 2px 5px #0ff, -2px -2px 5px #f0f; }
-      100% { text-shadow: 0 0 10px #0ff; }
+    @keyframes holoFade {
+      0% {
+        opacity: 0;
+        text-shadow: 0 0 5px #0ff, 0 0 15px #0ff;
+        background-position: 0% 50%;
+      }
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+        background-position: 100% 50%;
+      }
+      100% {
+        opacity: 0;
+        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+        background-position: 200% 50%;
+      }
     }
 
+    /* ───── Secciones Generales ───── */
     section {
       padding: 60px 20px;
       max-width: 1200px;
@@ -51,7 +81,8 @@
       color: #aaffff;
     }
 
-    .projects, .skills {
+    /* ───── Sección: Proyectos ───── */
+    .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
@@ -62,55 +93,86 @@
       background: rgba(255, 255, 255, 0.05);
       padding: 20px;
       border-radius: 10px;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       backdrop-filter: blur(10px);
       border: 1px solid #0ff;
       box-shadow: 0 0 10px #0ff44c33;
+      position: relative;
     }
 
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #0ff;
+    .card[data-animate] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .card img {
       width: 100%;
       border-radius: 5px;
       margin-bottom: 10px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card img:hover {
+      box-shadow: 0 0 15px #0ff;
     }
 
     .card h3 {
-      margin: 10px 0 5px;
+      margin: 10px 0 8px;
       color: #0ff;
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     }
 
-    .skills svg {
-      width: 60px;
-      height: 60px;
-      fill: #0ff;
-      margin-bottom: 10px;
-      animation: float 2s ease-in-out infinite alternate;
+    .card p {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: #ccc;
+      margin-bottom: 12px;
     }
 
-    @keyframes float {
-      from { transform: translateY(0); }
-      to { transform: translateY(-10px); }
-    }
-
-    .contact {
-      text-align: center;
-      font-size: 1.2em;
-      padding: 40px 20px;
-      background: #111122;
-      border-top: 2px solid #0ff;
-    }
-
-    .contact a {
+    .project-link {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 12px;
+      border: 1px solid #0ff;
+      border-radius: 6px;
+      font-size: 0.9rem;
       color: #0ff;
       text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    /* Particles */
+    .project-link:hover {
+      background: #0ff;
+      color: #0e0e1a;
+      box-shadow: 0 0 8px #0ff;
+    }
+
+    /* ───── Media Queries para responsividad ───── */
+    @media (max-width: 600px) {
+      .projects {
+        gap: 20px;
+      }
+      .card {
+        padding: 15px;
+      }
+    }
+
+    /* ───── Animaciones de Aparecer ───── */
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    /* ───── Particles (fondo) ───── */
     #particles-js {
       position: absolute;
       top: 0; left: 0;
@@ -119,48 +181,172 @@
       z-index: -1;
     }
 
-    [data-animate] {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease-out;
+    /* ───── Sección: Barra Superior de Contacto ───── */
+    #top-contact-bar {
+      background: rgba(14, 14, 26, 0.85); /* fondo semitranslúcido */
+      color: #0ff;
+      font-size: 1em;
+      padding: 12px 24px;
+      text-align: center;
+      border-bottom: 1px solid #0ff88cc;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap;
+      position: fixed;      /* Fija la barra siempre visible arriba */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1001;
+      box-shadow: 0 0 20px #0ff55aa;
+      animation: slideDownFade 1s ease forwards;
+      backdrop-filter: blur(10px);
     }
 
-    [data-animate].visible {
-      opacity: 1;
-      transform: translateY(0);
+    #top-contact-bar a {
+      color: #0ff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.4s ease, transform 0.3s ease;
+      animation: floatUpDown 3s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    #top-contact-bar a:hover {
+      color: #aaffff;
+      transform: scale(1.1) translateY(-4px);
+      filter: drop-shadow(0 0 6px #0ff);
+    }
+
+    #top-contact-bar a img {
+      width: 22px;
+      height: 22px;
+      filter: drop-shadow(0 0 3px #0ff);
+      transition: filter 0.4s ease;
+    }
+
+    #top-contact-bar a:hover img {
+      filter: drop-shadow(0 0 8px #0ff);
+    }
+
+    #top-contact-bar span {
+      color: #0ff88aa;
+      font-weight: bold;
+    }
+
+    @keyframes slideDownFade {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
   </style>
 </head>
+
 <body>
+  <!-- ============================= -->
+  <!-- Sección: Barra Superior de Contacto -->
+  <!-- ============================= -->
+  <div id="top-contact-bar" role="navigation" aria-label="Contact links">
+    <a href="https://wa.me/5437457636" target="_blank" rel="noopener noreferrer" title="Enviar WhatsApp">
+      <img src="https://img.icons8.com/ios-filled/50/0ff/whatsapp.png" alt="WhatsApp icon"> +54 3745 7636
+    </a>
+    <span>·</span>
+    <a href="mailto:barrientosjairolemuel@gmail.com" title="Enviar email">
+      <img src="https://img.icons8.com/ios-filled/50/0ff/gmail.png" alt="Gmail icon"> barrientosjairolemuel@gmail.com
+    </a>
+    <span>·</span>
+    <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" title="Visitar LinkedIn">
+      <img src="https://img.icons8.com/ios-filled/50/0ff/linkedin.png" alt="LinkedIn icon"> LinkedIn
+    </a>
+  </div>
+
+  <!-- ============================= -->
+  <!-- Sección: Partículas de Fondo   -->
+  <!-- ============================= -->
   <div id="particles-js"></div>
 
+  <!-- ============================= -->
+  <!-- Sección: Header                -->
+  <!-- ============================= -->
   <header>
+    <!-- Este h1 usará la animación holográfica y desaparecerá tras 1s -->
     <h1>Welcome to my portfolio</h1>
   </header>
 
+  <!-- ============================= -->
+  <!-- Sección: Introducción           -->
+  <!-- ============================= -->
   <section class="intro" data-animate>
     <p>Hi, I'm Jairo. A creative soul with a futuristic vision.</p>
   </section>
 
+  <!-- ============================= -->
+  <!-- Sección: Proyectos              -->
+  <!-- ============================= -->
   <section>
     <h2 style="color:#0ff; text-align:center; margin-bottom:20px;">My Projects</h2>
-    <div class="projects" data-animate>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x150?text=Project+1" alt="Project 1">
+    <div class="projects">
+      <div class="card" data-animate>
+        <img src="https://via.placeholder.com/300x150?text=Project+1" alt="Project 1">
         <h3>Project One</h3>
         <p>A futuristic landing page with advanced visual effects.</p>
+        <a href="https://github.com/jairolemuel/project-one" class="project-link" target="_blank">Ver más</a>
       </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x150?text=Project+2" alt="Project 2">
+      <div class="card" data-animate>
+        <img src="https://via.placeholder.com/300x150?text=Project+2" alt="Project 2">
         <h3>Project Two</h3>
         <p>Interactive UI for a gaming website with neon animations.</p>
+        <a href="https://github.com/jairolemuel/project-two" class="project-link" target="_blank">Ver más</a>
       </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x150?text=Project+3" alt="Project 3">
+      <div class="card" data-animate>
+        <img src="https://via.placeholder.com/300x150?text=Project+3" alt="Project 3">
         <h3>Project Three</h3>
         <p>Responsive portfolio with glitch and parallax effects.</p>
+        <a href="https://github.com/jairolemuel/project-three" class="project-link" target="_blank">Ver más</a>
       </div>
     </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- Scripts para animaciones (scroll) -->
+  <!-- ============================= -->
+  <script>
+    // IntersectionObserver para revelar elementos con data-animate
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script>
+    // Configuración básica de partículas en el fondo
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80 },
+        size: { value: 3 },
+        color: { value: '#0ff' },
+        line_linked: {
+          enable: true,
+          color: '#0ff'
+        }
+      }
+    });
+  </script>
+</body>
+</html>
 <!-- SECCIÓN DE HABILIDADES CON EFECTO FUTURISTA + ÍCONOS -->
 <section id="skills" style="position: relative; padding: 80px 20px; background: #0a0a0a; overflow: hidden; font-family: 'Orbitron', sans-serif;">
   <canvas id="particles-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;"></canvas>
