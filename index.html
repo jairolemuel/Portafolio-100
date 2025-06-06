@@ -2,81 +2,118 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jairo's Futuristic Portfolio</title>
   <!-- Fuentes e iconos -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
 
   <style>
     /* ==== Reset & Base ==== */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron', sans-serif; }
     html { scroll-behavior: smooth; }
-    body { background: #0e0e1a; color: #fff; overflow-x: hidden; padding-top: 70px; }
+    body { 
+      background: #0e0e1a; 
+      color: #fff; 
+      overflow-x: hidden; 
+      padding-top: 70px; 
+    }
     a { text-decoration: none; color: inherit; }
 
     /* ==== Navbar ==== */
     .navbar {
-      position: fixed; top: 0; width: 100%;
+      position: fixed; top:0; width:100%;
       background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
-      padding: 10px 20px; display: flex; justify-content: flex-end;
-      z-index: 999;
+      padding:10px 20px; display:flex; justify-content:flex-end;
+      z-index:999;
     }
-    .menu-button { font-size:1.5rem; color:#0ff; cursor:pointer; transition:transform .2s; }
-    .menu-button:hover { transform:scale(1.1); }
+    .menu-button {
+      font-size:1.5rem; color:#0ff; cursor:pointer;
+      transition: transform .2s;
+    }
+    .menu-button:hover { transform: scale(1.1); }
     .menu-dropdown {
       position:absolute; top:50px; right:20px;
-      background:rgba(0,255,255,0.05); border:1px solid #0ff; border-radius:10px;
-      backdrop-filter:blur(8px); padding:10px 15px;
-      display:none; flex-direction:column; gap:10px;
-      transform-origin:top right; transition:transform .3s ease, opacity .3s ease;
+      background: rgba(0,255,255,0.05); border:1px solid #0ff;
+      border-radius:10px; backdrop-filter: blur(8px);
+      padding:10px 15px; display:none; flex-direction:column; gap:10px;
+      transform-origin: top right;
+      transition: transform .3s ease, opacity .3s ease;
     }
-    .menu-dropdown.show { display:flex; transform:scale(1); opacity:1; }
-    .menu-dropdown.hide { transform:scale(0.8); opacity:0; }
+    .menu-dropdown.show {
+      display:flex; transform: scale(1); opacity:1;
+    }
+    .menu-dropdown.hide {
+      transform: scale(0.8); opacity:0;
+    }
     .menu-dropdown a:hover { color:#fff; }
 
     /* ==== Header ==== */
-    header { text-align:center; padding:80px 20px 40px; }
+    header {
+      text-align:center; padding:80px 20px 40px;
+    }
     header h1 {
       font-size:3em; color:transparent;
-      background:linear-gradient(120deg, rgba(0,255,255,0.85), rgba(255,255,255,0.65), rgba(0,255,255,0.85)) 0% 50%/150% auto no-repeat;
+      background: linear-gradient(120deg, rgba(0,255,255,0.85), rgba(255,255,255,0.65), rgba(0,255,255,0.85)) 0% 50%/150% auto no-repeat;
       -webkit-background-clip:text; background-clip:text;
-      text-shadow:0 0 8px #0ff,0 0 16px #0ff;
-      animation:holoShimmer 4s linear infinite, holoGlow 5s ease-in-out infinite;
+      text-shadow:0 0 8px #0ff, 0 0 16px #0ff;
+      animation: holoShimmer 4s linear infinite, holoGlow 5s ease-in-out infinite;
     }
-    @keyframes holoShimmer { 0%{background-position:0 50%} 100%{background-position:150% 50%} }
-    @keyframes holoGlow { 0%,100%{text-shadow:0 0 8px #0ff,0 0 16px #0ff;} 50%{text-shadow:0 0 20px #0ff,0 0 40px #0ff;} }
+    @keyframes holoShimmer {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 150% 50%; }
+    }
+    @keyframes holoGlow {
+      0%,100% { text-shadow:0 0 8px #0ff, 0 0 16px #0ff; }
+      50%     { text-shadow:0 0 20px #0ff, 0 0 40px #0ff; }
+    }
 
     /* ==== Intro ==== */
     .intro {
-      text-align:center; font-size:1.3em; margin:0 auto 60px;
-      max-width:800px; color:#aaffff; padding:0 20px;
+      text-align:center;
+      font-size:1.3em;
+      margin:0 auto 60px;
+      max-width:800px;
+      color:#aaffff;
+      padding:0 20px;
     }
 
-    /* ==== Botón flotante de contacto ==== */
+    /* ==== Contact Float ==== */
     .contact-float {
       position:fixed; bottom:30px; right:30px;
-      background:rgba(0,255,255,0.2); color:#0ff; border:2px solid #0ff;
-      border-radius:50px; padding:12px 20px; font-size:1rem;
-      box-shadow:0 0 15px #0ff; cursor:pointer; z-index:999;
-      transition:transform .3s, background .3s, color .3s;
+      background:rgba(0,255,255,0.2); color:#0ff;
+      border:2px solid #0ff; border-radius:50px;
+      padding:12px 20px; font-size:1rem;
+      box-shadow:0 0 15px #0ff; cursor:pointer;
+      z-index:999;
+      transition: transform .3s, background .3s, color .3s;
     }
-    .contact-float:hover { background:#0ff; color:#0e0e1a; transform:scale(1.05); }
+    .contact-float:hover {
+      background:#0ff; color:#0e0e1a; transform:scale(1.05);
+    }
     .contact-panel {
       position:fixed; bottom:80px; right:30px;
-      background:rgba(0,255,255,0.05); border:1px solid #0ff; border-radius:10px;
-      backdrop-filter:blur(8px); display:flex; gap:15px; padding:10px; z-index:998;
-      transform:scale(0); transform-origin:bottom right; opacity:0;
-      transition:transform .3s ease, opacity .3s ease;
+      background:rgba(0,255,255,0.05); border:1px solid #0ff;
+      border-radius:10px; backdrop-filter: blur(8px);
+      display:flex; gap:15px; padding:10px; z-index:998;
+      transform:scale(0); transform-origin: bottom right;
+      opacity:0; transition: transform .3s ease, opacity .3s ease;
     }
-    .contact-panel.show { transform:scale(1); opacity:1; }
-    .contact-panel a { font-size:1.5rem; color:#0ff; transition:transform .2s, color .2s; }
-    .contact-panel a:hover { transform:scale(1.2); color:#fff; }
+    .contact-panel.show {
+      transform:scale(1); opacity:1;
+    }
+    .contact-panel a {
+      font-size:1.5rem; color:#0ff;
+      transition: transform .2s, color .2s;
+    }
+    .contact-panel a:hover {
+      transform:scale(1.2); color:#fff;
+    }
 
     /* ==== Proyectos ==== */
     section.projects {
-      padding: 60px 20px 20px; /* menos espacio abajo */
+      padding:60px 20px 20px; /* menos espacio abajo */
       max-width:1200px; margin:auto;
     }
     .projects h2 {
@@ -84,51 +121,97 @@
       color:#0ff; text-shadow:0 0 10px #0ff;
     }
     .project-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
       gap:30px; padding:0 20px;
     }
     .project-card {
-      background:rgba(255,255,255,0.05); border:1px solid #0ff; border-radius:15px;
-      padding:20px; backdrop-filter:blur(8px); box-shadow:0 0 15px rgba(0,255,255,0.2);
-      transition:transform .3s, box-shadow .3s; opacity:0; transform:translateY(30px);
+      background:rgba(255,255,255,0.05); border:1px solid #0ff;
+      border-radius:15px; padding:20px; backdrop-filter: blur(8px);
+      box-shadow:0 0 15px rgba(0,255,255,0.2);
+      transition: transform .3s, box-shadow .3s;
+      opacity:0; transform:translateY(30px);
     }
-    .project-card.visible { opacity:1; transform:translateY(0); }
-    .project-card h3 { color:#aaffff; margin-bottom:10px; font-size:1.4em; }
-    .project-card p { color:#d0fafa; font-size:0.95em; margin-bottom:10px; }
-    .project-card a { color:#0ff; font-size:0.9em; text-decoration:underline; }
+    .project-card.visible {
+      opacity:1; transform:translateY(0);
+    }
+    .project-card h3 {
+      color:#aaffff; margin-bottom:10px; font-size:1.4em;
+    }
+    .project-card p {
+      color:#d0fafa; font-size:0.95em; margin-bottom:10px;
+    }
+    .project-card a {
+      color:#0ff; font-size:0.9em; text-decoration:underline;
+    }
     .project-card a:hover { color:#fff; }
 
-    /* ==== Transición degradé ==== */
+    /* ==== Degradé y espacio entre secciones ==== */
     .transition-gradient {
-      height: 80px;
+      height:80px;
       background: linear-gradient(180deg, transparent, rgba(0,255,255,0.2), transparent);
-      margin-top: -20px; /* solapa un poco para suavizar */
+      margin-top:-20px;
     }
 
-    /* ==== Skills ==== */
+    /* ==== Skills (inicialmente ocultas) ==== */
     #skills {
-      position:relative; padding:40px 20px; /* menos espacio arriba */
-      background:#0a0a0a; overflow:hidden; min-height:400px;
+      position:relative;
+      padding:40px 20px; /* menos espacio arriba */
+      background:#0a0a0a;
+      overflow:hidden;
+      min-height:400px;
     }
     #skills canvas { visibility:hidden; }
     #skills.ready canvas { visibility:visible; }
-    .glitch { animation:glitch 1.5s infinite; }
-    @keyframes glitch { 0%{text-shadow:2px 0 red,-2px 0 cyan;} 50%{text-shadow:-2px 0 red,2px 0 cyan;} 100%{text-shadow:2px 0 red,-2px 0 cyan;} }
+
+    .glitch {
+      animation:glitch 1.5s infinite;
+    }
+    @keyframes glitch {
+      0% { text-shadow:2px 0 red, -2px 0 cyan; }
+      50% { text-shadow:-2px 0 red, 2px 0 cyan; }
+      100% { text-shadow:2px 0 red, -2px 0 cyan; }
+    }
+
+    /* ==== Animación de aparición ==== */
+    .skill-tag,
+    .soft-skill {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .skill-tag.visible,
+    .soft-skill.visible {
+      opacity:1;
+      transform: translateY(0);
+    }
 
     .skill-tag {
-      background:rgba(0,255,255,0.1); border:1px solid #0ff; padding:10px 16px;
-      border-radius:8px; font-size:14px; display:inline-flex; align-items:center;
-      gap:6px; color:#0ff; backdrop-filter:blur(4px); transition:all .3s;
+      background:rgba(0,255,255,0.1); border:1px solid #0ff;
+      padding:10px 16px; border-radius:8px; font-size:14px;
+      display:inline-flex; align-items:center; gap:6px;
+      color:#0ff; backdrop-filter:blur(4px);
     }
-    .skill-tag:hover { background:rgba(0,255,255,0.25); box-shadow:0 0 12px #0ff; transform:scale(1.1); }
+    .skill-tag:hover {
+      background:rgba(0,255,255,0.25);
+      box-shadow:0 0 12px #0ff, inset 0 0 4px #0ff;
+      transform:scale(1.1);
+    }
+
     .soft-skill {
-      background:rgba(255,255,255,0.05); border:1px solid #555; padding:10px 16px;
-      border-radius:8px; font-size:13px; color:#ccc; transition:all .3s;
+      background:rgba(255,255,255,0.05); border:1px solid #555;
+      padding:10px 16px; border-radius:8px; font-size:13px;
+      color:#ccc;
     }
-    .soft-skill:hover { background:rgba(0,255,255,0.15); box-shadow:0 0 8px #0ff; color:#fff; transform:scale(1.05); }
+    .soft-skill:hover {
+      background:rgba(0,255,255,0.15);
+      box-shadow:0 0 8px #0ff;
+      color:#fff;
+      transform:scale(1.05);
+    }
 
     /* ==== Responsive ==== */
-    @media (max-width: 600px) {
+    @media (max-width:600px){
       header h1 { font-size:2.2em; }
       .intro { font-size:1.1em; }
       .project-grid { grid-template-columns:1fr; }
@@ -150,7 +233,7 @@
 
   <!-- Intro -->
   <div class="intro">
-    Hi, I'm Jairo Lemuel Barrientos. I design with creativity and code with passion. Scroll down to see my work!
+    Hi, I’m Jairo Lemuel Barrientos. I design with creativity and code with passion. Scroll down to see my work!
   </div>
 
   <!-- Botón flotante de contacto -->
@@ -183,7 +266,7 @@
     </div>
   </section>
 
-  <!-- Transición degradé -->
+  <!-- Degradé entre Proyectos y Habilidades -->
   <div class="transition-gradient"></div>
 
   <!-- Sección de Habilidades -->
@@ -192,36 +275,36 @@
     <h2 class="glitch">Habilidades</h2>
     <!-- Hard Skills -->
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;">
-      <span class="skill-tag"><i class="devicon-c-plain"></i> C</span>
-      <span class="skill-tag"><i class="devicon-cplusplus-plain"></i> C++</span>
-      <span class="skill-tag"><i class="devicon-csharp-plain"></i> C#</span>
-      <span class="skill-tag"><i class="devicon-java-plain"></i> Java</span>
-      <span class="skill-tag"><i class="devicon-javascript-plain"></i> JavaScript</span>
-      <span class="skill-tag"><i class="devicon-php-plain"></i> PHP</span>
-      <span class="skill-tag"><i class="devicon-typescript-plain"></i> TypeScript</span>
-      <span class="skill-tag"><i class="devicon-html5-plain"></i> HTML</span>
-      <span class="skill-tag"><i class="devicon-css3-plain"></i> CSS</span>
-      <span class="skill-tag"><i class="devicon-sass-original"></i> SASS</span>
-      <span class="skill-tag"><i class="devicon-tailwindcss-plain"></i> Tailwind</span>
-      <span class="skill-tag"><i class="devicon-react-original"></i> React</span>
-      <span class="skill-tag"><i class="devicon-nodejs-plain"></i> Node.js</span>
-      <span class="skill-tag"><i class="devicon-mysql-plain"></i> MySQL</span>
-      <span class="skill-tag"><i class="devicon-mongodb-plain"></i> MongoDB</span>
-      <span class="skill-tag"><i class="devicon-docker-plain"></i> Docker</span>
-      <!-- añade más si lo deseas -->
+      <span class="skill-tag" data-animate><i class="devicon-c-plain"></i> C</span>
+      <span class="skill-tag" data-animate><i class="devicon-cplusplus-plain"></i> C++</span>
+      <span class="skill-tag" data-animate><i class="devicon-csharp-plain"></i> C#</span>
+      <span class="skill-tag" data-animate><i class="devicon-java-plain"></i> Java</span>
+      <span class="skill-tag" data-animate><i class="devicon-javascript-plain"></i> JavaScript</span>
+      <span class="skill-tag" data-animate><i class="devicon-php-plain"></i> PHP</span>
+      <span class="skill-tag" data-animate><i class="devicon-typescript-plain"></i> TypeScript</span>
+      <span class="skill-tag" data-animate><i class="devicon-html5-plain"></i> HTML</span>
+      <span class="skill-tag" data-animate><i class="devicon-css3-plain"></i> CSS</span>
+      <span class="skill-tag" data-animate><i class="devicon-sass-original"></i> SASS</span>
+      <span class="skill-tag" data-animate><i class="devicon-tailwindcss-plain"></i> Tailwind</span>
+      <span class="skill-tag" data-animate><i class="devicon-react-original"></i> React</span>
+      <span class="skill-tag" data-animate><i class="devicon-nodejs-plain"></i> Node.js</span>
+      <span class="skill-tag" data-animate><i class="devicon-mongodb-plain"></i> MongoDB</span>
+      <span class="skill-tag" data-animate><i class="devicon-docker-plain"></i> Docker</span>
     </div>
     <!-- Soft Skills -->
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;">
-      <span class="soft-skill">Procedimientos de Prueba</span>
-      <span class="soft-skill">Conocimiento de Depuración</span>
-      <span class="soft-skill">Algoritmos y Estructuras</span>
-      <span class="soft-skill">Resolución de Problemas</span>
-      <span class="soft-skill">Comunicación</span>
-      <span class="soft-skill">Trabajo en Equipo</span>
-      <span class="soft-skill">Liderazgo</span>
-      <span class="soft-skill">Adaptabilidad</span>
-      <span class="soft-skill">Creatividad</span>
-      <!-- añade más si lo deseas -->
+      <span class="soft-skill" data-animate>Procedimientos de Prueba</span>
+      <span class="soft-skill" data-animate>Conocimiento de Depuración</span>
+      <span class="soft-skill" data-animate>Estructuras de Datos y Algoritmos</span>
+      <span class="soft-skill" data-animate>Resolución de Problemas</span>
+      <span class="soft-skill" data-animate>Comunicación</span>
+      <span class="soft-skill" data-animate>Aprendizaje Continuo</span>
+      <span class="soft-skill" data-animate>Gestión del Tiempo y Organización</span>
+      <span class="soft-skill" data-animate>Adaptabilidad</span>
+      <span class="soft-skill" data-animate>Creatividad e Innovación</span>
+      <span class="soft-skill" data-animate>Trabajo en Equipo</span>
+      <span class="soft-skill" data-animate>Liderazgo</span>
+      <span class="soft-skill" data-animate>Inteligencia Emocional</span>
     </div>
   </section>
 
@@ -236,23 +319,35 @@
     function toggleMenu() {
       document.getElementById('menuDropdown').classList.toggle('show');
     }
+
     // Toggle panel de contacto
-    document.getElementById('contactBtn').addEventListener('click', () => {
-      document.getElementById('contactPanel').classList.toggle('show');
-    });
+    document.getElementById('contactBtn')
+      .addEventListener('click', () => {
+        document.getElementById('contactPanel').classList.toggle('show');
+      });
+
     // Intersection Observer para animaciones
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
     }, { threshold: 0.1 });
-    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('[data-animate]')
+      .forEach(el => observer.observe(el));
+
     // Partículas de fondo
     const canvas = document.getElementById('particles-bg');
     const ctx = canvas.getContext('2d');
     let particles = [];
+
     function resize() {
       canvas.width = window.innerWidth;
       canvas.height = document.getElementById('skills').offsetHeight;
     }
+
     function createParticles() {
       particles = [];
       for (let i = 0; i < 60; i++) {
@@ -264,9 +359,9 @@
           vy: Math.random() * 0.5 - 0.25
         });
       }
-      // ahora que el canvas está listo, mostramos
       document.getElementById('skills').classList.add('ready');
     }
+
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
@@ -284,8 +379,16 @@
       });
       requestAnimationFrame(animateParticles);
     }
-    window.addEventListener('resize', () => { resize(); createParticles(); });
-    resize(); createParticles(); animateParticles();
+
+    window.addEventListener('resize', () => {
+      resize();
+      createParticles();
+    });
+
+    // Inicialización
+    resize();
+    createParticles();
+    animateParticles();
   </script>
 </body>
 </html>
