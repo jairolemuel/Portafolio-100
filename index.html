@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,9 +14,10 @@
     :root {
       --bg-color: #0e0e1a;
       --text-color: #f5f5f5;
-      --accent-color: #00e5ff; /* color para elementos secundarios */
+      --accent-color: #00e5ff;
       --button-bg: rgba(255,255,255,0.05);
       --button-border: var(--accent-color);
+      --overlay-opacity: 0.6;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
@@ -25,11 +26,11 @@
       background: var(--bg-color);
       color: var(--text-color);
       overflow-x: hidden;
-      padding-top: 70px; /* espacio para navbar fijo */
+      padding-top: 70px;
     }
     a { text-decoration: none; color: inherit; }
 
-    /* ==== Navbar ==== */
+    /* Navbar */
     .navbar {
       position: fixed; top:0; width:100%;
       background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
@@ -55,37 +56,38 @@
     .menu-dropdown.hide {
       transform: scale(0.8); opacity:0;
     }
+    .menu-dropdown a {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent-color);
+      transition: color .2s;
+    }
     .menu-dropdown a:hover { color:#fff; }
 
-    /* ==== Header con slideshow ==== */
+    /* Header estático */
     header#header {
       position: relative;
       width: 100%; height: 100vh;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
-      background: var(--bg-color);
-      margin-top: -70px; /* compensa padding-top del body */
-    }
-    .bg-container {
-      position: absolute; inset: 0;
-    }
-    .bg-slide {
-      position: absolute; inset: 0;
+      margin-top: -70px;
+      background-image: url('images/obelisco.jpg');
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+      background-attachment: fixed;
     }
+    /* Overlay variable */
     .bg-overlay {
       position: absolute; inset: 0;
-      background: rgba(14,14,26,0.6);
+      background: rgba(14,14,26, var(--overlay-opacity) );
       backdrop-filter: grayscale(30%) blur(2px);
       pointer-events: none;
+      transition: background 0.2s ease-out;
     }
     .header-content {
       position: relative; z-index: 2;
-      text-align: center; padding: 0 20px;
+      text-align: center; padding: 20px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 8px;
     }
     [data-animate] {
       opacity: 0;
@@ -104,7 +106,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       animation: textGradient 4s linear infinite;
-      text-shadow: 0 0 4px rgba(0,0,0,0.3);
+      text-shadow: 0 0 4px rgba(0,0,0,0.5);
     }
     @keyframes textGradient {
       0%   { background-position: 0% center; }
@@ -124,7 +126,25 @@
       header h2 { font-size:1.2rem; }
     }
 
-    /* ==== Botón de contacto refinado ==== */
+    /* Sección Sobre Mí */
+    section#about {
+      padding: 80px 20px;
+      max-width:800px; margin:auto;
+      text-align:center;
+    }
+    section#about h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent-color);
+      margin-bottom:20px;
+      text-shadow:0 0 8px var(--accent-color);
+    }
+    section#about p {
+      font-size:1.1rem;
+      line-height:1.6;
+      color:#ddd;
+    }
+
+    /* Botón flotante */
     .contact-float {
       position: fixed; bottom:30px; right:30px;
       background: var(--button-bg);
@@ -171,7 +191,7 @@
       50%     { transform: translateY(-4px) scale(1.02); }
     }
 
-    /* ==== Sección Intro ==== */
+    /* Intro */
     .intro {
       text-align:center;
       font-size:1.3em;
@@ -181,7 +201,7 @@
       padding:0 20px;
     }
 
-    /* ==== Sección Proyectos ==== */
+    /* Proyectos */
     section.projects {
       padding:60px 20px 20px;
       max-width:1200px; margin:auto;
@@ -234,21 +254,29 @@
       opacity: 1;
     }
 
-    /* ==== Degradé entre secciones ==== */
+    /* Degradé entre secciones */
     .transition-gradient {
       height:80px;
       background: linear-gradient(180deg, transparent, rgba(0,255,255,0.2), transparent);
       margin-top:-20px;
     }
 
-    /* ==== Sección Habilidades ==== */
+    /* Habilidades con nieve */
     section#skills {
       position: relative;
       padding:40px 20px;
       background:#0a0a0a;
       overflow:hidden;
     }
+    /* Canvas para nieve */
+    #snow-canvas {
+      position:absolute; top:0; left:0;
+      width:100%; height:100%;
+      pointer-events:none;
+      z-index: 2;
+    }
     section#skills h2 {
+      position: relative; z-index: 3;
       text-align:center;
       color: var(--accent-color);
       margin-bottom:30px;
@@ -257,6 +285,7 @@
       text-shadow:0 0 8px var(--accent-color);
     }
     .skills-container {
+      position: relative; z-index: 3;
       display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
       margin-top:20px;
     }
@@ -280,6 +309,7 @@
       font-size:1.2em;
     }
     .soft-container {
+      position: relative; z-index: 3;
       display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
       margin-top:30px;
     }
@@ -304,7 +334,7 @@
       100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
-    /* ==== Footer ==== */
+    /* Footer */
     footer {
       text-align:center;
       padding:30px 20px;
@@ -328,16 +358,11 @@
       <a href="#about">🔹 Sobre Mí</a>
       <a href="#projects">🔹 Proyectos</a>
       <a href="#skills">🔹 Habilidades</a>
-      <a href="#contact-section">🔹 Contacto</a>
     </div>
   </div>
 
-  <!-- Header con slideshow -->
+  <!-- Header estático -->
   <header id="header">
-    <div class="bg-container">
-      <div class="bg-slide"></div>
-      <div class="bg-slide"></div>
-    </div>
     <div class="bg-overlay"></div>
     <div class="header-content">
       <h1 id="h1-header" data-animate>Welcome to my Portfolio</h1>
@@ -345,12 +370,22 @@
     </div>
   </header>
 
+  <!-- Sobre Mí -->
+  <section id="about" data-animate>
+    <h2>Sobre Mí</h2>
+    <p>
+      Soy Jairo Lemuel Barrientos, desarrollador web con pasión por la creatividad y la elegancia en el diseño.
+      Combino estética refinada con funcionalidad y código limpio. Me especializo en crear experiencias únicas
+      que destaquen la identidad local con toques internacionales.
+    </p>
+  </section>
+
   <!-- Intro -->
   <div class="intro" data-animate>
-    Hi, I’m Jairo Lemuel Barrientos. I design with creativity and code with passion. Scroll down to see my work!
+    Hi, I’m Jairo Lemuel Barrientos. Scroll down to see my work and skills!
   </div>
 
-  <!-- Sección Proyectos -->
+  <!-- Proyectos -->
   <section class="projects" id="projects">
     <h2 data-animate>Proyectos Destacados</h2>
     <div class="project-grid">
@@ -372,11 +407,11 @@
     </div>
   </section>
 
-  <!-- Degradé entre Proyectos y Habilidades -->
   <div class="transition-gradient"></div>
 
-  <!-- Sección Habilidades -->
+  <!-- Habilidades con nieve -->
   <section id="skills">
+    <canvas id="snow-canvas"></canvas>
     <h2 data-animate>Habilidades</h2>
     <div class="skills-container">
       <span class="skill-tag" data-animate><i class="devicon-c-plain"></i> C</span>
@@ -413,13 +448,13 @@
     </div>
   </section>
 
-  <!-- Footer de Contacto -->
+  <!-- Footer -->
   <footer id="contact-section">
     <p>📧 Contact me: <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
     <p>© 2025 Jairo Lemuel Barrientos</p>
   </footer>
 
-  <!-- Botón flotante de contacto -->
+  <!-- Botón flotante -->
   <div id="contactBtn" class="contact-float">Contáctame</div>
   <div id="contactPanel" class="contact-panel">
     <a href="https://wa.me/543437457636" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -427,59 +462,28 @@
     <a href="https://linkedin.com/in/jairobarrientos" target="_blank"><i class="fab fa-linkedin-in"></i></a>
   </div>
 
-  <!-- Scripts al final -->
   <script>
-    // Toggle menú desplegable
+    // Toggle menú desplegable (sin contacto en el menú)
     function toggleMenu() {
       document.getElementById('menuDropdown').classList.toggle('show');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Slideshow de fondos argentinos: ajusta rutas según ubicación real de las imágenes
-      const bgImages = [
-        'images/obelisco.jpg',
-        'images/salta.jpg',
-        'images/perito-moreno.jpg'
-        // añade más rutas si dispones de otras imágenes
-      ];
       const header = document.getElementById('header');
-      const slides = header.querySelectorAll('.bg-slide');
-      let current = 0;
-      const total = bgImages.length;
+      const overlay = document.querySelector('.bg-overlay');
+      const headerHeight = header.offsetHeight;
 
-      // Pre-carga de imágenes
-      bgImages.forEach(src => {
-        const img = new Image();
-        img.src = src;
-      });
-      // Inicial: primera capa visible
-      if (slides.length >= 2 && total > 0) {
-        slides[0].style.backgroundImage = `url('${bgImages[0]}')`;
-        slides[0].style.opacity = '1';
-      }
-
-      function nextBackground() {
-        if (slides.length < 2) return;
-        const nextIndex = (current + 1) % total;
-        const currSlide = slides[current % 2];
-        const nextSlide = slides[(current + 1) % 2];
-        nextSlide.style.backgroundImage = `url('${bgImages[nextIndex]}')`;
-        nextSlide.style.opacity = '1';
-        setTimeout(() => {
-          currSlide.style.opacity = '0';
-        }, 100);
-        current = nextIndex;
-      }
-
-      const intervalTime = 8000;
-      let intervalId = setInterval(nextBackground, intervalTime);
-      // Pausar en hover sobre header
-      header.addEventListener('mouseenter', () => clearInterval(intervalId));
-      header.addEventListener('mouseleave', () => {
-        intervalId = setInterval(nextBackground, intervalTime);
+      // Ajustar overlay en scroll: revelar gradualmente la imagen
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const ratio = Math.min(scrollY / headerHeight, 1);
+        const min = 0.2;
+        const max = 0.6;
+        const newOpacity = max - (max - min) * ratio;
+        overlay.style.background = `rgba(14,14,26, ${newOpacity})`;
       });
 
-      // Animar texto del header al cargar
+      // Animar texto header al cargar
       window.addEventListener('load', () => {
         const h1 = document.getElementById('h1-header');
         const h2 = document.getElementById('h2-header');
@@ -495,9 +499,89 @@
           }
         });
       }, { threshold: 0.1 });
-
       document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
       document.querySelectorAll('.skill-tag, .soft-skill').forEach(el => observer.observe(el));
+
+      // Nieve en sección de habilidades
+      const skillsSection = document.getElementById('skills');
+      const canvas = document.getElementById('snow-canvas');
+      const ctx = canvas.getContext('2d');
+      let flakes = [];
+      let snowAnimationId = null;
+
+      function resizeCanvas() {
+        canvas.width = skillsSection.clientWidth;
+        canvas.height = skillsSection.clientHeight;
+      }
+      function createFlakes(count) {
+        flakes = [];
+        for (let i = 0; i < count; i++) {
+          flakes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 3 + 1,
+            d: Math.random() * count
+          });
+        }
+      }
+      function drawFlakes() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(255,255,255,0.8)';
+        ctx.beginPath();
+        for (let i = 0; i < flakes.length; i++) {
+          const f = flakes[i];
+          ctx.moveTo(f.x, f.y);
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        }
+        ctx.fill();
+        updateFlakes();
+      }
+      let angle = 0;
+      function updateFlakes() {
+        angle += 0.01;
+        for (let i = 0; i < flakes.length; i++) {
+          const f = flakes[i];
+          f.y += Math.cos(angle + f.d) + 1 + f.r / 2;
+          f.x += Math.sin(angle) * 2;
+          if (f.x > canvas.width + 5 || f.x < -5 || f.y > canvas.height) {
+            flakes[i] = {
+              x: Math.random() * canvas.width,
+              y: -10,
+              r: f.r,
+              d: f.d
+            };
+          }
+        }
+      }
+      function animateSnow() {
+        drawFlakes();
+        snowAnimationId = requestAnimationFrame(animateSnow);
+      }
+      // Observer para iniciar/parar nieve
+      const snowObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.target.id === 'skills') {
+            if (entry.isIntersecting) {
+              resizeCanvas();
+              createFlakes(Math.floor(canvas.width / 10));
+              if (!snowAnimationId) animateSnow();
+            } else {
+              if (snowAnimationId) {
+                cancelAnimationFrame(snowAnimationId);
+                snowAnimationId = null;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+              }
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      snowObserver.observe(skillsSection);
+      window.addEventListener('resize', () => {
+        if (skillsSection.getBoundingClientRect().top < window.innerHeight) {
+          resizeCanvas();
+          createFlakes(Math.floor(canvas.width / 10));
+        }
+      });
     });
 
     // Toggle panel de contacto
