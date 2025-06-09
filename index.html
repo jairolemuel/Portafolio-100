@@ -32,53 +32,67 @@
 
     /* Navbar */
     .navbar {
-      position: fixed; top:0; width:100%;
-      background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
-      padding:10px 20px; display:flex; justify-content:flex-end;
-      z-index:999;
+      position: fixed;
+      top: 0; width: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      padding: 10px 20px;
+      display: flex; justify-content: flex-end;
+      z-index: 999;
     }
     .menu-button {
-      font-size:1.5rem; color: var(--accent-color); cursor:pointer;
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      cursor: pointer;
       transition: transform .2s;
     }
     .menu-button:hover { transform: scale(1.1); }
     .menu-dropdown {
-      position:absolute; top:50px; right:20px;
-      background: rgba(255,255,255,0.05); border:1px solid var(--accent-color);
-      border-radius:10px; backdrop-filter: blur(8px);
-      padding:10px 15px; display:none; flex-direction:column; gap:10px;
+      position: absolute; top:50px; right:20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--accent-color);
+      border-radius: 10px;
+      backdrop-filter: blur(8px);
+      padding: 10px 15px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
       transform-origin: top right;
       transition: transform .3s ease, opacity .3s ease;
     }
     .menu-dropdown.show {
-      display:flex; transform: scale(1); opacity:1;
+      display: flex; transform: scale(1); opacity: 1;
     }
     .menu-dropdown.hide {
-      transform: scale(0.8); opacity:0;
+      transform: scale(0.8); opacity: 0;
     }
     .menu-dropdown a {
       font-family: 'Playfair Display', serif;
       color: var(--accent-color);
-      transition: color .2s;
+      font-weight: bold;
+      transition: color .2s, transform .3s;
     }
-    .menu-dropdown a:hover { color:#fff; }
+    .menu-dropdown a:hover {
+      color:#fff; transform: translateX(5px);
+    }
 
-    /* Header estático */
+    /* Header con imagen degradada */
     header#header {
       position: relative;
       width: 100%; height: 100vh;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
       margin-top: -70px;
-      background-image: url('images/obelisco.jpg');
+      background:
+        linear-gradient(rgba(14,14,26,0.7), rgba(14,14,26,0.7)),
+        url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
-    /* Overlay variable */
     .bg-overlay {
       position: absolute; inset: 0;
-      background: rgba(14,14,26, var(--overlay-opacity) );
+      background: rgba(14,14,26, var(--overlay-opacity));
       backdrop-filter: grayscale(30%) blur(2px);
       pointer-events: none;
       transition: background 0.2s ease-out;
@@ -90,15 +104,12 @@
       border-radius: 8px;
     }
     [data-animate] {
-      opacity: 0;
-      transform: translateY(20px);
+      opacity: 0; transform: translateY(20px);
       transition: opacity 1s ease-out, transform 1s ease-out;
     }
     [data-animate].visible {
-      opacity: 1;
-      transform: translateY(0);
+      opacity: 1; transform: translateY(0);
     }
-    /* Texto con degradado animado */
     header h1, header h2 {
       color: transparent;
       background: linear-gradient(90deg, #00ffff, #3a7bd5, #00ffff);
@@ -109,13 +120,12 @@
       text-shadow: 0 0 4px rgba(0,0,0,0.5);
     }
     @keyframes textGradient {
-      0%   { background-position: 0% center; }
+      0% { background-position: 0% center; }
       100% { background-position: -200% center; }
     }
     header h1 {
       font-family: 'Parisienne', cursive;
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: 3rem; margin-bottom: 10px;
     }
     header h2 {
       font-family: 'Playfair Display', serif;
@@ -126,11 +136,10 @@
       header h2 { font-size:1.2rem; }
     }
 
-    /* Sección Sobre Mí */
+    /* Sobre Mí */
     section#about {
       padding: 80px 20px;
-      max-width:800px; margin:auto;
-      text-align:center;
+      max-width:800px; margin:auto; text-align:center;
     }
     section#about h2 {
       font-family: 'Playfair Display', serif;
@@ -139,92 +148,41 @@
       text-shadow:0 0 8px var(--accent-color);
     }
     section#about p {
-      font-size:1.1rem;
-      line-height:1.6;
-      color:#ddd;
-    }
-
-    /* Botón flotante */
-    .contact-float {
-      position: fixed; bottom:30px; right:30px;
-      background: var(--button-bg);
-      color: var(--accent-color);
-      border:2px solid var(--button-border);
-      border-radius:50px;
-      padding:12px 20px; font-size:1rem;
-      box-shadow:0 0 10px rgba(0,0,0,0.4);
-      cursor:pointer; transition: background 0.3s, color 0.3s, transform 0.3s;
-      backdrop-filter: blur(6px); z-index:999;
-      animation: floatBtn 4s ease-in-out infinite;
-    }
-    .contact-float:hover {
-      background: var(--accent-color);
-      color: var(--bg-color);
-      transform: scale(1.05);
-      box-shadow:0 0 15px rgba(0,229,255,0.6);
-      animation-play-state: paused;
-    }
-    .contact-panel {
-      position: fixed; bottom:80px; right:30px;
-      background: rgba(255,255,255,0.05);
-      border:1px solid var(--accent-color);
-      border-radius:10px; backdrop-filter: blur(8px);
-      display:flex; gap:15px; padding:10px;
-      transform: scale(0); transform-origin: bottom right;
-      opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease;
-      z-index:998;
-    }
-    .contact-panel.show {
-      transform: scale(1); opacity:1;
-    }
-    .contact-panel a {
-      font-size:1.5rem;
-      color: var(--accent-color);
-      transition: color 0.2s, transform 0.2s;
-    }
-    .contact-panel a:hover {
-      color: var(--text-color);
-      transform: scale(1.2);
-    }
-    @keyframes floatBtn {
-      0%,100% { transform: translateY(0) scale(1); }
-      50%     { transform: translateY(-4px) scale(1.02); }
+      font-size:1.1rem; line-height:1.6; color:#ddd;
     }
 
     /* Intro */
     .intro {
-      text-align:center;
-      font-size:1.3em;
-      margin:80px auto 60px;
-      max-width:800px;
-      color:#aaffff;
+      text-align:center; font-size:1.3em;
+      margin:60px auto; max-width:800px; color:#aaffff;
       padding:0 20px;
     }
 
     /* Proyectos */
-    section.projects {
-      padding:60px 20px 20px;
-      max-width:1200px; margin:auto;
+    section#projects {
+      padding:60px 20px; max-width:1200px; margin:auto;
     }
-    .projects h2 {
+    section#projects h2 {
       font-size:2em; text-align:center; margin-bottom:40px;
       color:var(--accent-color); text-shadow:0 0 10px var(--accent-color);
     }
     .project-grid {
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:30px; padding:0 20px;
+      gap:20px; padding:0 20px;
     }
     .project-card {
-      background:rgba(255,255,255,0.05); border:1px solid var(--accent-color);
-      border-radius:15px; padding:20px; backdrop-filter: blur(8px);
+      background:rgba(255,255,255,0.05);
+      border:1px solid var(--accent-color);
+      border-radius:15px; padding:20px;
+      backdrop-filter: blur(8px);
       box-shadow:0 0 15px rgba(0,255,255,0.2);
       transition: transform .3s, box-shadow .3s;
-      opacity:0; transform:translateY(30px);
-      position: relative; overflow: hidden;
+      opacity:0; transform: translateY(30px);
+      position: relative; overflow:hidden;
     }
     .project-card.visible {
-      opacity:1; transform:translateY(0);
+      opacity:1; transform: translateY(0);
     }
     .project-card h3 {
       color:#aaffff; margin-bottom:10px; font-size:1.4em;
@@ -233,114 +191,133 @@
       color:#d0fafa; font-size:0.95em; margin-bottom:10px;
     }
     .project-card a {
-      color:var(--accent-color); font-size:0.9em; text-decoration:underline;
+      color:var(--accent-color); text-decoration:underline;
     }
-    .project-card a:hover { color:#fff; }
+    .project-card:hover a { color:#fff; }
     .project-card::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
+      content:''; position:absolute; top:-50%; left:-50%;
+      width:200%; height:200%;
       background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      transform: rotate(45deg);
+      opacity:0; transition: opacity .5s ease; transform:rotate(45deg);
     }
     .project-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 0 15px rgba(0,229,255,0.4);
+      box-shadow:0 0 15px rgba(0,229,255,0.4);
     }
-    .project-card:hover::before {
-      opacity: 1;
-    }
+    .project-card:hover::before { opacity:1; }
 
-    /* Degradé entre secciones */
+    /* Transición entre secciones */
     .transition-gradient {
       height:80px;
-      background: linear-gradient(180deg, transparent, rgba(0,255,255,0.2), transparent);
+      background:linear-gradient(180deg, transparent, rgba(0,255,255,0.2), transparent);
       margin-top:-20px;
     }
 
     /* Habilidades con nieve */
     section#skills {
-      position: relative;
-      padding:40px 20px;
-      background:#0a0a0a;
-      overflow:hidden;
+      position: relative; padding:40px 20px;
+      background:#0a0a0a; overflow:hidden;
     }
-    /* Canvas para nieve */
     #snow-canvas {
       position:absolute; top:0; left:0;
       width:100%; height:100%;
-      pointer-events:none;
-      z-index: 2;
+      pointer-events:none; z-index:2;
     }
     section#skills h2 {
-      position: relative; z-index: 3;
-      text-align:center;
-      color: var(--accent-color);
-      margin-bottom:30px;
-      font-family: 'Playfair Display', serif;
-      font-size:2em;
+      position: relative; z-index:3; text-align:center;
+      color:var(--accent-color); margin-bottom:30px;
+      font-family:'Playfair Display', serif; font-size:2em;
       text-shadow:0 0 8px var(--accent-color);
     }
     .skills-container {
-      position: relative; z-index: 3;
-      display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
-      margin-top:20px;
+      position: relative; z-index:3;
+      display:flex; flex-wrap:wrap; justify-content:center;
+      gap:12px; margin-top:20px;
     }
     .skill-tag {
-      background:rgba(255,255,255,0.05); border:1px solid var(--accent-color);
+      background:rgba(255,255,255,0.05);
+      border:1px solid var(--accent-color);
       padding:10px 16px; border-radius:8px; font-size:14px;
       display:inline-flex; align-items:center; gap:6px;
       color:var(--accent-color); backdrop-filter:blur(4px);
-      opacity:0; transform: translateY(20px);
+      opacity:0; transform:translateY(20px);
       transition: opacity .6s ease, transform .6s ease;
     }
-    .skill-tag.visible {
-      animation: popIn 0.4s ease-out;
-    }
+    .skill-tag.visible { animation: popIn .4s ease-out; }
     .skill-tag:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 8px rgba(0,229,255,0.4);
-      background: rgba(255,255,255,0.1);
+      box-shadow:0 0 8px rgba(0,229,255,0.4);
+      background:rgba(255,255,255,0.1);
     }
-    .skill-tag i {
-      font-size:1.2em;
-    }
+    .skill-tag i { font-size:1.2em; }
     .soft-container {
-      position: relative; z-index: 3;
-      display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
-      margin-top:30px;
+      position: relative; z-index:3;
+      display:flex; flex-wrap:wrap; justify-content:center;
+      gap:12px; margin-top:30px;
     }
     .soft-skill {
-      background:rgba(255,255,255,0.05); border:1px solid #555;
-      padding:10px 16px; border-radius:8px; font-size:13px;
-      color:#ccc; backdrop-filter:blur(4px);
-      opacity:0; transform: translateY(20px);
+      background:rgba(255,255,255,0.05);
+      border:1px solid #555; padding:10px 16px; border-radius:8px;
+      font-size:13px; color:#ccc; backdrop-filter:blur(4px);
+      opacity:0; transform:translateY(20px);
       transition: opacity .6s ease, transform .6s ease;
     }
-    .soft-skill.visible {
-      animation: popIn 0.4s ease-out;
-    }
+    .soft-skill.visible { animation: popIn .4s ease-out; }
     .soft-skill:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 8px rgba(0,229,255,0.4);
-      background: rgba(255,255,255,0.1);
+      box-shadow:0 0 8px rgba(0,229,255,0.4);
+      background:rgba(255,255,255,0.1);
     }
     @keyframes popIn {
-      0%   { transform: translateY(20px) scale(0.95); opacity: 0; }
-      70%  { transform: translateY(-2px) scale(1.02); opacity: 1; }
-      100% { transform: translateY(0) scale(1); opacity: 1; }
+      0% { transform:translateY(20px) scale(0.95); opacity:0; }
+      70% { transform:translateY(-2px) scale(1.02); opacity:1; }
+      100% { transform:translateY(0) scale(1); opacity:1; }
     }
 
     /* Footer */
     footer {
-      text-align:center;
-      padding:30px 20px;
-      background:rgba(0,0,0,0.6);
-      color:#aaa;
-      margin-top:40px;
+      text-align:center; padding:30px 20px;
+      background:rgba(0,0,0,0.6); color:#aaa; margin-top:40px;
+    }
+
+    /* Botón flotante de contacto */
+    .contact-float {
+      position:fixed; bottom:30px; right:30px;
+      background:var(--button-bg); color:var(--accent-color);
+      border:2px solid var(--button-border); border-radius:50px;
+      padding:12px 20px; font-size:1rem;
+      box-shadow:0 0 10px rgba(0,0,0,0.4);
+      cursor:pointer; transition:background .3s, color .3s, transform .3s;
+      backdrop-filter:blur(6px); z-index:999;
+      animation: floatBtn 4s ease-in-out infinite;
+    }
+    .contact-float:hover {
+      background: var(--accent-color); color: var(--bg-color);
+      transform: scale(1.05); box-shadow:0 0 15px rgba(0,229,255,0.6);
+      animation-play-state: paused;
+    }
+    .contact-panel {
+      position:fixed; bottom:80px; right:30px;
+      background:rgba(255,255,255,0.05); border:1px solid var(--accent-color);
+      border-radius:10px; backdrop-filter:blur(8px);
+      display:flex; gap:15px; padding:10px;
+      transform: scale(0); transform-origin: bottom right;
+      opacity:0; transition: transform .3s ease, opacity .3s ease;
+      z-index:998;
+    }
+    .contact-panel.show {
+      transform: scale(1); opacity:1;
+    }
+    .contact-panel a {
+      font-size:1.5rem; color:var(--accent-color);
+      transition: color .2s, transform .2s;
+    }
+    .contact-panel a:hover {
+      color:var(--text-color); transform: scale(1.2);
+    }
+    @keyframes floatBtn {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%     { transform: translateY(-4px) scale(1.02); }
     }
   </style>
 </head>
@@ -349,19 +326,15 @@
   <div class="navbar">
     <div class="menu-button" onclick="toggleMenu()">
       <svg width="24" height="24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
+        <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </div>
     <div class="menu-dropdown" id="menuDropdown">
-      <a href="#about">🔹 Sobre Mí</a>
-      <a href="#projects">🔹 Proyectos</a>
-      <a href="#skills">🔹 Habilidades</a>
+      <a href="#about">Sobre Mí</a>
     </div>
   </div>
 
-  <!-- Header estático -->
+  <!-- Header -->
   <header id="header">
     <div class="bg-overlay"></div>
     <div class="header-content">
@@ -386,8 +359,8 @@
   </div>
 
   <!-- Proyectos -->
-  <section class="projects" id="projects">
-    <h2 data-animate>Proyectos Destacados</h2>
+  <section id="projects" data-animate>
+    <h2>Proyectos Destacados</h2>
     <div class="project-grid">
       <div class="project-card" data-animate>
         <h3>Calculadora Financiera</h3>
@@ -414,37 +387,24 @@
     <canvas id="snow-canvas"></canvas>
     <h2 data-animate>Habilidades</h2>
     <div class="skills-container">
-      <span class="skill-tag" data-animate><i class="devicon-c-plain"></i> C</span>
-      <span class="skill-tag" data-animate><i class="devicon-cplusplus-plain"></i> C++</span>
-      <span class="skill-tag" data-animate><i class="devicon-csharp-plain"></i> C#</span>
-      <span class="skill-tag" data-animate><i class="devicon-java-plain"></i> Java</span>
-      <span class="skill-tag" data-animate><i class="devicon-javascript-plain"></i> JavaScript</span>
-      <span class="skill-tag" data-animate><i class="devicon-php-plain"></i> PHP</span>
-      <span class="skill-tag" data-animate><i class="devicon-typescript-plain"></i> TypeScript</span>
       <span class="skill-tag" data-animate><i class="devicon-html5-plain"></i> HTML5</span>
       <span class="skill-tag" data-animate><i class="devicon-css3-plain"></i> CSS3</span>
-      <span class="skill-tag" data-animate><i class="devicon-sass-original"></i> SASS</span>
-      <span class="skill-tag" data-animate><i class="devicon-tailwindcss-plain"></i> Tailwind</span>
+      <span class="skill-tag" data-animate><i class="devicon-javascript-plain"></i> JavaScript</span>
       <span class="skill-tag" data-animate><i class="devicon-react-original"></i> React</span>
       <span class="skill-tag" data-animate><i class="devicon-nodejs-plain"></i> Node.js</span>
-      <span class="skill-tag" data-animate><i class="devicon-mongodb-plain"></i> MongoDB</span>
-      <span class="skill-tag" data-animate><i class="devicon-docker-plain"></i> Docker</span>
+      <span class="skill-tag" data-animate><i class="devicon-python-plain"></i> Python</span>
       <span class="skill-tag" data-animate><i class="devicon-git-plain"></i> Git</span>
-      <span class="skill-tag" data-animate><i class="devicon-github-original"></i> GitHub</span>
+      <span class="skill-tag" data-animate><i class="devicon-docker-plain"></i> Docker</span>
     </div>
     <div class="soft-container">
-      <span class="soft-skill" data-animate>Procedimientos de Prueba</span>
-      <span class="soft-skill" data-animate>Conocimiento de Depuración</span>
-      <span class="soft-skill" data-animate>Estructuras de Datos y Algoritmos</span>
-      <span class="soft-skill" data-animate>Resolución de Problemas</span>
-      <span class="soft-skill" data-animate>Comunicación</span>
-      <span class="soft-skill" data-animate>Aprendizaje Continuo</span>
-      <span class="soft-skill" data-animate>Gestión del Tiempo y Organización</span>
-      <span class="soft-skill" data-animate>Adaptabilidad</span>
-      <span class="soft-skill" data-animate>Creatividad e Innovación</span>
-      <span class="soft-skill" data-animate>Trabajo en Equipo</span>
-      <span class="soft-skill" data-animate>Liderazgo</span>
-      <span class="soft-skill" data-animate>Inteligencia Emocional</span>
+      <span class="soft-skill" data-animate>Problem Solving</span>
+      <span class="soft-skill" data-animate>Communication</span>
+      <span class="soft-skill" data-animate>Teamwork</span>
+      <span class="soft-skill" data-animate>Adaptability</span>
+      <span class="soft-skill" data-animate>Creativity</span>
+      <span class="soft-skill" data-animate>Time Management</span>
+      <span class="soft-skill" data-animate>Continuous Learning</span>
+      <span class="soft-skill" data-animate>Leadership</span>
     </div>
   </section>
 
@@ -454,7 +414,7 @@
     <p>© 2025 Jairo Lemuel Barrientos</p>
   </footer>
 
-  <!-- Botón flotante -->
+  <!-- Botón flotante de contacto -->
   <div id="contactBtn" class="contact-float">Contáctame</div>
   <div id="contactPanel" class="contact-panel">
     <a href="https://wa.me/543437457636" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -463,123 +423,86 @@
   </div>
 
   <script>
-    // Toggle menú desplegable (sin contacto en el menú)
+    // Toggle menú desplegable
     function toggleMenu() {
       document.getElementById('menuDropdown').classList.toggle('show');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Header overlay scroll effect
       const header = document.getElementById('header');
       const overlay = document.querySelector('.bg-overlay');
       const headerHeight = header.offsetHeight;
-
-      // Ajustar overlay en scroll: revelar gradualmente la imagen
       window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const ratio = Math.min(scrollY / headerHeight, 1);
-        const min = 0.2;
-        const max = 0.6;
-        const newOpacity = max - (max - min) * ratio;
-        overlay.style.background = `rgba(14,14,26, ${newOpacity})`;
+        const ratio = Math.min(window.scrollY / headerHeight, 1);
+        const min = 0.2, max = 0.6;
+        overlay.style.background = `rgba(14,14,26, ${max - (max-min)*ratio})`;
       });
 
-      // Animar texto header al cargar
+      // Animate header text on load
       window.addEventListener('load', () => {
-        const h1 = document.getElementById('h1-header');
-        const h2 = document.getElementById('h2-header');
-        if (h1) setTimeout(() => h1.classList.add('visible'), 200);
-        if (h2) setTimeout(() => h2.classList.add('visible'), 600);
+        ['h1-header','h2-header'].forEach((id,i) => {
+          const el = document.getElementById(id);
+          if (el) setTimeout(() => el.classList.add('visible'), 200 + 400*i);
+        });
       });
 
-      // IntersectionObserver para animaciones de aparición
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
+      // IntersectionObserver para secciones y skills
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
       }, { threshold: 0.1 });
-      document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
-      document.querySelectorAll('.skill-tag, .soft-skill').forEach(el => observer.observe(el));
+      document.querySelectorAll('[data-animate]').forEach(el => obs.observe(el));
+      document.querySelectorAll('.skill-tag, .soft-skill').forEach(el => obs.observe(el));
 
       // Nieve en sección de habilidades
-      const skillsSection = document.getElementById('skills');
+      const skillsSec = document.getElementById('skills');
       const canvas = document.getElementById('snow-canvas');
       const ctx = canvas.getContext('2d');
-      let flakes = [];
-      let snowAnimationId = null;
-
-      function resizeCanvas() {
-        canvas.width = skillsSection.clientWidth;
-        canvas.height = skillsSection.clientHeight;
+      let flakes = [], animId=null, angle=0;
+      function resize() {
+        canvas.width = skillsSec.clientWidth;
+        canvas.height = skillsSec.clientHeight;
       }
-      function createFlakes(count) {
-        flakes = [];
-        for (let i = 0; i < count; i++) {
-          flakes.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 3 + 1,
-            d: Math.random() * count
-          });
-        }
+      function createFlakes(n) {
+        flakes = Array.from({length:n}, () => ({
+          x: Math.random()*canvas.width,
+          y: Math.random()*canvas.height,
+          r: Math.random()*3+1,
+          d: Math.random()*n
+        }));
       }
-      function drawFlakes() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle='rgba(255,255,255,0.8)';
         ctx.beginPath();
-        for (let i = 0; i < flakes.length; i++) {
-          const f = flakes[i];
-          ctx.moveTo(f.x, f.y);
-          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-        }
-        ctx.fill();
-        updateFlakes();
+        flakes.forEach(f => { ctx.moveTo(f.x,f.y); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); });
+        ctx.fill(); update();
       }
-      let angle = 0;
-      function updateFlakes() {
+      function update() {
         angle += 0.01;
-        for (let i = 0; i < flakes.length; i++) {
-          const f = flakes[i];
-          f.y += Math.cos(angle + f.d) + 1 + f.r / 2;
-          f.x += Math.sin(angle) * 2;
-          if (f.x > canvas.width + 5 || f.x < -5 || f.y > canvas.height) {
-            flakes[i] = {
-              x: Math.random() * canvas.width,
-              y: -10,
-              r: f.r,
-              d: f.d
-            };
-          }
-        }
+        flakes = flakes.map(f => {
+          let y = f.y + Math.cos(angle+f.d)+1+f.r/2;
+          let x = f.x + Math.sin(angle)*2;
+          if (x>canvas.width+5||x<-5||y>canvas.height) { x = Math.random()*canvas.width; y = -10; }
+          return {...f, x, y};
+        });
       }
-      function animateSnow() {
-        drawFlakes();
-        snowAnimationId = requestAnimationFrame(animateSnow);
-      }
-      // Observer para iniciar/parar nieve
-      const snowObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.target.id === 'skills') {
-            if (entry.isIntersecting) {
-              resizeCanvas();
-              createFlakes(Math.floor(canvas.width / 10));
-              if (!snowAnimationId) animateSnow();
-            } else {
-              if (snowAnimationId) {
-                cancelAnimationFrame(snowAnimationId);
-                snowAnimationId = null;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-              }
-            }
+      function anim() { draw(); animId = requestAnimationFrame(anim); }
+      const snowObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            resize(); createFlakes(Math.floor(canvas.width/10));
+            if (!animId) anim();
+          } else if (animId) {
+            cancelAnimationFrame(animId); animId = null;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
           }
         });
       }, { threshold: 0.1 });
-      snowObserver.observe(skillsSection);
+      snowObs.observe(skillsSec);
       window.addEventListener('resize', () => {
-        if (skillsSection.getBoundingClientRect().top < window.innerHeight) {
-          resizeCanvas();
-          createFlakes(Math.floor(canvas.width / 10));
+        if (skillsSec.getBoundingClientRect().top < window.innerHeight) {
+          resize(); createFlakes(Math.floor(canvas.width/10));
         }
       });
     });
