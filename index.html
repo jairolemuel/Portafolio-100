@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,7 +14,7 @@
     :root {
       --bg-color: #0e0e1a;
       --text-color: #f5f5f5;
-      --accent-color: #f7e4e1;
+      --accent-color: #00e5ff; /* color para elementos secundarios */
       --button-bg: rgba(255,255,255,0.05);
       --button-border: var(--accent-color);
     }
@@ -76,7 +76,6 @@
       background-repeat: no-repeat;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
-      /* background-attachment: fixed; opcional para parallax desktop */
     }
     .bg-overlay {
       position: absolute; inset: 0;
@@ -97,20 +96,28 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Texto con degradado animado */
+    header h1, header h2 {
+      color: transparent;
+      background: linear-gradient(90deg, #00ffff, #3a7bd5, #00ffff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: textGradient 4s linear infinite;
+      text-shadow: 0 0 4px rgba(0,0,0,0.3);
+    }
+    @keyframes textGradient {
+      0%   { background-position: 0% center; }
+      100% { background-position: -200% center; }
+    }
     header h1 {
       font-family: 'Parisienne', cursive;
       font-size: 3rem;
-      color: var(--accent-color);
-      text-shadow: 0 0 4px rgba(0,0,0,0.3);
       margin-bottom: 10px;
     }
     header h2 {
       font-family: 'Playfair Display', serif;
       font-size: 1.8rem;
-      color: var(--text-color);
-      letter-spacing: 1px;
-      font-weight: 700;
-      text-shadow: 0 0 6px rgba(0,0,0,0.4);
     }
     @media (max-width:600px){
       header h1 { font-size:2.2rem; }
@@ -128,12 +135,14 @@
       box-shadow:0 0 10px rgba(0,0,0,0.4);
       cursor:pointer; transition: background 0.3s, color 0.3s, transform 0.3s;
       backdrop-filter: blur(6px); z-index:999;
+      animation: floatBtn 4s ease-in-out infinite;
     }
     .contact-float:hover {
       background: var(--accent-color);
       color: var(--bg-color);
       transform: scale(1.05);
-      box-shadow:0 0 15px rgba(247,228,225,0.6);
+      box-shadow:0 0 15px rgba(0,229,255,0.6);
+      animation-play-state: paused;
     }
     .contact-panel {
       position: fixed; bottom:80px; right:30px;
@@ -156,6 +165,10 @@
     .contact-panel a:hover {
       color: var(--text-color);
       transform: scale(1.2);
+    }
+    @keyframes floatBtn {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%     { transform: translateY(-4px) scale(1.02); }
     }
 
     /* ==== Sección Intro ==== */
@@ -203,21 +216,19 @@
       color:var(--accent-color); font-size:0.9em; text-decoration:underline;
     }
     .project-card a:hover { color:#fff; }
-
-    /* Brillo sutil en hover de project-card */
     .project-card::before {
       content: '';
       position: absolute;
       top: -50%; left: -50%;
       width: 200%; height: 200%;
-      background: radial-gradient(circle at center, rgba(247,228,225,0.2), transparent 60%);
+      background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
       opacity: 0;
       transition: opacity 0.5s ease;
       transform: rotate(45deg);
     }
     .project-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 0 15px rgba(247,228,225,0.4);
+      box-shadow: 0 0 15px rgba(0,229,255,0.4);
     }
     .project-card:hover::before {
       opacity: 1;
@@ -236,7 +247,6 @@
       padding:40px 20px;
       background:#0a0a0a;
       overflow:hidden;
-      /* si quieres canvas de partículas aquí, asegúrate de incluir <canvas> en el HTML */
     }
     section#skills h2 {
       text-align:center;
@@ -246,7 +256,6 @@
       font-size:2em;
       text-shadow:0 0 8px var(--accent-color);
     }
-    /* Contenedor de hard skills */
     .skills-container {
       display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
       margin-top:20px;
@@ -260,12 +269,16 @@
       transition: opacity .6s ease, transform .6s ease;
     }
     .skill-tag.visible {
-      opacity:1; transform: translateY(0);
+      animation: popIn 0.4s ease-out;
+    }
+    .skill-tag:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 8px rgba(0,229,255,0.4);
+      background: rgba(255,255,255,0.1);
     }
     .skill-tag i {
       font-size:1.2em;
     }
-    /* Contenedor de soft skills */
     .soft-container {
       display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
       margin-top:30px;
@@ -278,7 +291,17 @@
       transition: opacity .6s ease, transform .6s ease;
     }
     .soft-skill.visible {
-      opacity:1; transform: translateY(0);
+      animation: popIn 0.4s ease-out;
+    }
+    .soft-skill:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 8px rgba(0,229,255,0.4);
+      background: rgba(255,255,255,0.1);
+    }
+    @keyframes popIn {
+      0%   { transform: translateY(20px) scale(0.95); opacity: 0; }
+      70%  { transform: translateY(-2px) scale(1.02); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
     /* ==== Footer ==== */
@@ -346,7 +369,6 @@
         <p>Landing page estética con animaciones suaves.</p>
         <a href="#" target="_blank">Ver proyecto</a>
       </div>
-      <!-- Agrega más cards según necesites -->
     </div>
   </section>
 
@@ -356,7 +378,6 @@
   <!-- Sección Habilidades -->
   <section id="skills">
     <h2 data-animate>Habilidades</h2>
-    <!-- Hard Skills -->
     <div class="skills-container">
       <span class="skill-tag" data-animate><i class="devicon-c-plain"></i> C</span>
       <span class="skill-tag" data-animate><i class="devicon-cplusplus-plain"></i> C++</span>
@@ -375,9 +396,7 @@
       <span class="skill-tag" data-animate><i class="devicon-docker-plain"></i> Docker</span>
       <span class="skill-tag" data-animate><i class="devicon-git-plain"></i> Git</span>
       <span class="skill-tag" data-animate><i class="devicon-github-original"></i> GitHub</span>
-      <!-- Añade más si es necesario -->
     </div>
-    <!-- Soft Skills -->
     <div class="soft-container">
       <span class="soft-skill" data-animate>Procedimientos de Prueba</span>
       <span class="soft-skill" data-animate>Conocimiento de Depuración</span>
@@ -391,7 +410,6 @@
       <span class="soft-skill" data-animate>Trabajo en Equipo</span>
       <span class="soft-skill" data-animate>Liderazgo</span>
       <span class="soft-skill" data-animate>Inteligencia Emocional</span>
-      <!-- Añade más si lo deseas -->
     </div>
   </section>
 
@@ -401,6 +419,14 @@
     <p>© 2025 Jairo Lemuel Barrientos</p>
   </footer>
 
+  <!-- Botón flotante de contacto -->
+  <div id="contactBtn" class="contact-float">Contáctame</div>
+  <div id="contactPanel" class="contact-panel">
+    <a href="https://wa.me/543437457636" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="mailto:barrientosjairolemuel@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a href="https://linkedin.com/in/jairobarrientos" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+
   <!-- Scripts al final -->
   <script>
     // Toggle menú desplegable
@@ -408,29 +434,32 @@
       document.getElementById('menuDropdown').classList.toggle('show');
     }
 
-    // Header slideshow de fondos
     document.addEventListener('DOMContentLoaded', () => {
+      // Slideshow de fondos argentinos: ajusta rutas según ubicación real de las imágenes
       const bgImages = [
         'images/obelisco.jpg',
         'images/salta.jpg',
         'images/perito-moreno.jpg'
-        // añade más rutas de tus imágenes optimizadas
+        // añade más rutas si dispones de otras imágenes
       ];
       const header = document.getElementById('header');
       const slides = header.querySelectorAll('.bg-slide');
       let current = 0;
       const total = bgImages.length;
 
-      // Pre-carga
+      // Pre-carga de imágenes
       bgImages.forEach(src => {
         const img = new Image();
         img.src = src;
       });
-      // Inicial: primera capa
-      slides[0].style.backgroundImage = `url('${bgImages[0]}')`;
-      slides[0].style.opacity = '1';
+      // Inicial: primera capa visible
+      if (slides.length >= 2 && total > 0) {
+        slides[0].style.backgroundImage = `url('${bgImages[0]}')`;
+        slides[0].style.opacity = '1';
+      }
 
       function nextBackground() {
+        if (slides.length < 2) return;
         const nextIndex = (current + 1) % total;
         const currSlide = slides[current % 2];
         const nextSlide = slides[(current + 1) % 2];
@@ -444,6 +473,7 @@
 
       const intervalTime = 8000;
       let intervalId = setInterval(nextBackground, intervalTime);
+      // Pausar en hover sobre header
       header.addEventListener('mouseenter', () => clearInterval(intervalId));
       header.addEventListener('mouseleave', () => {
         intervalId = setInterval(nextBackground, intervalTime);
@@ -453,23 +483,22 @@
       window.addEventListener('load', () => {
         const h1 = document.getElementById('h1-header');
         const h2 = document.getElementById('h2-header');
-        setTimeout(() => h1.classList.add('visible'), 200);
-        setTimeout(() => h2.classList.add('visible'), 600);
+        if (h1) setTimeout(() => h1.classList.add('visible'), 200);
+        if (h2) setTimeout(() => h2.classList.add('visible'), 600);
       });
+
+      // IntersectionObserver para animaciones de aparición
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+      document.querySelectorAll('.skill-tag, .soft-skill').forEach(el => observer.observe(el));
     });
-
-    // Animaciones de aparición para secciones con data-animate e intereses
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
-    // Además observar skill-tag y soft-skill
-    document.querySelectorAll('.skill-tag, .soft-skill').forEach(el => observer.observe(el));
 
     // Toggle panel de contacto
     document.getElementById('contactBtn').addEventListener('click', () => {
