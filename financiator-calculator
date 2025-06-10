@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Financiator Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tipografía moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Reset y básicos */
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:'Montserrat',sans-serif; background:#1b263b; color:#e0e1dd; display:flex; flex-direction:column; min-height:100vh; }
+    header { padding:20px; text-align:center; }
+    h1 { font-weight:600; margin-bottom:0; }
+    nav { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:10px; }
+    nav .tab { padding:10px 15px; cursor:pointer; border-bottom:2px solid transparent; transition:0.3s; }
+    nav .tab:hover { border-bottom-color:#007BFF; }
+    nav .tab.active { border-bottom-color:#007BFF; color:#007BFF; }
+    .content { flex:1; padding:0 20px; max-width:960px; margin:0 auto 20px; }
+    .calculator { display:none; background:rgba(255,255,255,0.08); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:transform 0.3s,box-shadow 0.3s; padding:20px; margin-bottom:20px; }
+    .calculator.active { display:block; transform:none; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+    .calculator:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.4); }
+    .input-group { background:rgba(255,255,255,0.05); padding:12px; border-radius:8px; margin-bottom:12px; transition:background 0.3s; }
+    .input-group:hover { background:rgba(255,255,255,0.12); }
+    label { display:block; margin-bottom:5px; color:#c1c1c1; font-size:0.9rem; }
+    input, select, textarea { width:100%; padding:10px; font-size:1rem; border-radius:6px; border:1px solid #ccc; transition:border-color 0.3s; }
+    input:focus, select:focus, textarea:focus { border-color:#007BFF; outline:none; }
+    button { width:100%; padding:12px; font-size:1rem; border:none; border-radius:8px; background:#007BFF; color:white; cursor:pointer; box-shadow:0 4px 8px rgba(0,0,0,0.2); transition:transform 0.2s, box-shadow 0.2s; }
+    button:hover { transform:translateY(-3px); box-shadow:0 6px 14px rgba(0,0,0,0.3); }
+    button:active { transform:translateY(-1px) scale(0.98); box-shadow:0 3px 6px rgba(0,0,0,0.2); }
+    .result { margin-top:10px; font-weight:600; color:#fff; }
+    table { width:100%; border-collapse:collapse; margin-top:10px; }
+    th, td { padding:8px; border:1px solid rgba(255,255,255,0.2); text-align:center; }
+    footer { text-align:center; padding:10px; font-size:0.85rem; color:#a0a0a0; }
+    /* Fondo animado */
+    .bg-anim { position:fixed; top:0; left:0; right:0; bottom:0; z-index:-1; overflow:hidden; }
+    .bg-anim div { position:absolute; width:300px; height:300px; background:rgba(255,255,255,0.03); border-radius:50%; animation:float 30s linear infinite; }
+    .bg-anim div:nth-child(1){ top:70%; left:-10%; animation-duration:25s; }
+    .bg-anim div:nth-child(2){ top:20%; left:80%; animation-duration:30s; }
+    .bg-anim div:nth-child(3){ top:-20%; left:40%; animation-duration:20s; }
+    @keyframes float { 0%{transform:translateY(0) rotate(0);} 100%{transform:translateY(-120px) rotate(360deg);} }
+  </style>
+</head>
+<body>
+  <div class="bg-anim"><div></div><div></div><div></div></div>
+  <header>
+    <h1>Financiator Calculator</h1>
+  </header>
+  <nav>
+    <div class="tab active" data-target="compound">Interés Compuesto</div>
+    <div class="tab" data-target="loan">Préstamo</div>
+    <div class="tab" data-target="custom">Expresión</div>
+    <div class="tab" data-target="roi">ROI</div>
+    <div class="tab" data-target="amort">Amortización</div>
+    <div class="tab" data-target="stats">Estadísticas</div>
+    <div class="tab" data-target="crypto">Crypto (API)</div>
+    <div class="tab" data-target="fx">Divisas</div>
+    <div class="tab" data-target="wasm">WASM Demo</div>
+    <div class="tab" data-target="monet">Monetización</div>
+  </nav>
+  <div class="content">
+    <!-- Interés Compuesto -->
+    <section class="calculator active" id="compound">
+      <h2>Interés Compuesto</h2>
+      <div class="input-group"><label>Capital</label><input type="number" id="cc-principal" placeholder="Capital inicial"></div>
+      <div class="input-group"><label>Tasa anual (%)</label><input type="number" id="cc-rate" placeholder="Ej. 5"></div>
+      <div class="input-group"><label>Años</label><input type="number" id="cc-years" placeholder="Ej. 10"></div>
+      <button onclick="calcCompound()">Calcular</button>
+      <div class="result" id="cc-result"></div>
+    </section>
+
+    <!-- Préstamo -->
+    <section class="calculator" id="loan">
+      <h2>Pago de Préstamo Mensual</h2>
+      <div class="input-group"><label>Monto del préstamo</label><input type="number" id="loan-amount" placeholder="Ej. 10000"></div>
+      <div class="input-group"><label>Tasa anual (%)</label><input type="number" id="loan-rate" placeholder="Ej. 6"></div>
+      <div class="input-group"><label>Plazo (años)</label><input type="number" id="loan-years" placeholder="Ej. 5"></div>
+      <button onclick="calcLoan()">Calcular</button>
+      <div class="result" id="loan-result"></div>
+    </section>
+
+    <!-- Expresión personalizada -->
+    <section class="calculator" id="custom">
+      <h2>Evaluar Expresión Matemática</h2>
+      <div class="input-group"><label>Ej: (100+50)*1.2</label><input type="text" id="custom-expression" placeholder="Escribe tu fórmula"></div>
+      <button onclick="calcCustom()">Evaluar</button>
+      <div class="result" id="custom-result"></div>
+    </section>
+
+    <!-- ROI -->
+    <section class="calculator" id="roi">
+      <h2>Retorno de Inversión (ROI)</h2>
+      <div class="input-group"><label>Inversión Inicial</label><input type="number" id="roi-invest" placeholder="Ej. 1000"></div>
+      <div class="input-group"><label>Ganancia Neta</label><input type="number" id="roi-gain" placeholder="Ej. 200"></div>
+      <button onclick="calcROI()">Calcular ROI</button>
+      <div class="result" id="roi-result"></div>
+    </section>
+
+    <!-- Amortización -->
+    <section class="calculator" id="amort">
+      <h2>Plan de Amortización</h2>
+      <div class="input-group"><label>Monto del préstamo</label><input type="number" id="am-amount" placeholder="Ej. 5000"></div>
+      <div class="input-group"><label>Tasa anual (%)</label><input type="number" id="am-rate" placeholder="Ej. 5"></div>
+      <div class="input-group"><label>Plazo (años)</label><input type="number" id="am-years" placeholder="Ej. 3"></div>
+      <button onclick="genAmort()">Generar Tabla</button>
+      <div id="amort-table"></div>
+    </section>
+
+    <!-- Estadísticas & Gráfico -->
+    <section class="calculator" id="stats">
+      <h2>Estadísticas & Gráfico</h2>
+      <div class="input-group">
+        <label>Categorías (separadas por comas)</label>
+        <textarea id="stats-labels" rows="2" placeholder="Ej: Ahorro, Inversión, Gastos"></textarea>
+      </div>
+      <div class="input-group">
+        <label>Valores (separados por comas)</label>
+        <textarea id="stats-values" rows="2" placeholder="Ej: 200, 500, 300"></textarea>
+      </div>
+      <button onclick="drawStats()">Generar</button>
+      <canvas id="stats-chart" style="max-width:100%; margin-top:15px;"></canvas>
+    </section>
+
+    <!-- Crypto (API CoinGecko) -->
+    <section class="calculator" id="crypto">
+      <h2>Precios Crypto & Distribución</h2>
+      <button onclick="fetchCrypto()">Cargar Datos Crypto</button>
+      <div class="result" id="crypto-result"></div>
+      <canvas id="crypto-chart" style="max-width:100%; margin-top:15px;"></canvas>
+    </section>
+
+    <!-- Conversor de Divisas -->
+    <section class="calculator" id="fx">
+      <h2>Conversor de Divisas</h2>
+      <div class="input-group"><label>Monto</label><input type="number" id="fx-amount" value="1"></div>
+      <div class="input-group"><label>De</label>
+        <select id="fx-from">
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="ARS">ARS</option>
+          <option value="GBP">GBP</option>
+        </select>
+      </div>
+      <div class="input-group"><label>A</label>
+        <select id="fx-to">
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+          <option value="ARS">ARS</option>
+          <option value="GBP">GBP</option>
+        </select>
+      </div>
+      <button onclick="convertFX()">Convertir</button>
+      <div class="result" id="fx-result"></div>
+    </section>
+
+    <!-- WASM demo -->
+    <section class="calculator" id="wasm">
+      <h2>Demo en WebAssembly</h2>
+      <div class="input-group"><label>Base</label><input type="number" id="wasm-base" value="2"></div>
+      <div class="input-group"><label>Exponente</label><input type="number" id="wasm-exp" value="10"></div>
+      <button onclick="calcWasm()">Calcular con WASM</button>
+      <div class="result" id="wasm-result"></div>
+    </section>
+
+    <!-- Plan de Monetización -->
+    <section class="calculator" id="monet">
+      <h2>Plan de Monetización</h2>
+      <p>Ideas de monetización para tu proyecto:</p>
+      <ul>
+        <li>🛒 Afiliados financieros (Broker, plataformas de trading).</li>
+        <li>📦 Suscripciones premium (análisis avanzado, reportes mensuales).</li>
+        <li>📈 Venta de templates o paquetería de informes descargables.</li>
+        <li>📊 Publicidad o patrocinio (banners de marcas fintech).</li>
+        <li>🤝 Consultorías one‑on‑one vía Zoom o e‑mail.</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>&copy; 2025 Financiator Calculator – Integrado en portafolio</footer>
+
+  <script>
+    // Navegación pestañas
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.onclick = () => {
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        document.querySelectorAll('.calculator').forEach(s=>s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+      };
+    });
+
+    // 1. Interés Compuesto
+    function calcCompound(){
+      const P=+document.getElementById('cc-principal').value;
+      const r=+document.getElementById('cc-rate').value/100;
+      const t=+document.getElementById('cc-years').value;
+      const A=P*Math.pow(1+r,t);
+      document.getElementById('cc-result').textContent=`Total: $${A.toFixed(2)}`;
+    }
+
+    // 2. Préstamo
+    function calcLoan(){
+      const L=+document.getElementById('loan-amount').value;
+      const r=+document.getElementById('loan-rate').value/100/12;
+      const n=+document.getElementById('loan-years').value*12;
+      const M=(L*r)/(1-Math.pow(1+r,-n));
+      document.getElementById('loan-result').textContent=`Pago mensual: $${M.toFixed(2)}`;
+    }
+
+    // 3. Expresión personalizada
+    function calcCustom(){
+      try{
+        const expr=document.getElementById('custom-expression').value;
+        const res=Function('"use strict";return('+expr+')')();
+        document.getElementById('custom-result').textContent=`Resultado: ${res}`;
+      } catch {
+        document.getElementById('custom-result').textContent='Error en expresión';
+      }
+    }
+
+    // 4. ROI
+    function calcROI(){
+      const inv=+document.getElementById('roi-invest').value;
+      const gain=+document.getElementById('roi-gain').value;
+      const roi=((gain/inv)*100).toFixed(2);
+      document.getElementById('roi-result').textContent=`ROI: ${roi}%`;
+    }
+
+    // 5. Amortización
+    function genAmort(){
+      const A=+document.getElementById('am-amount').value;
+      const annual=+document.getElementById('am-rate').value;
+      const years=+document.getElementById('am-years').value;
+      const r=annual/100/12;
+      const n=years*12;
+      const M=(A*r)/(1-Math.pow(1+r,-n));
+      let html='<table><tr><th>Cuota</th><th>Interés</th><th>Principal</th><th>Saldo</th></tr>';
+      let balance=A;
+      for(let i=1;i<=n;i++){
+        const interest=balance*r;
+        const principal=M-interest;
+        balance=balance-principal;
+        html+=`<tr><td>${M.toFixed(2)}</td><td>${interest.toFixed(2)}</td><td>${principal.toFixed(2)}</td><td>${balance.toFixed(2)}</td></tr>`;
+      }
+      html+='</table>';
+      document.getElementById('amort-table').innerHTML=html;
+    }
+
+    // 6. Estadísticas & Chart.js
+    let statsChart;
+    function drawStats(){
+      const labels=document.getElementById('stats-labels').value.split(',').map(s=>s.trim());
+      const values=document.getElementById('stats-values').value.split(',').map(v=>+v);
+      const total=values.reduce((a,b)=>a+b,0);
+      // Mostrar porcentajes
+      const resEl = document.createElement('div');
+      resEl.className='result';
+      resEl.textContent='Porcentajes: '+values.map(v=>((v/total)*100).toFixed(1)+'%').join(' | ');
+      const sec=document.getElementById('stats');
+      sec.querySelector('.result')?.remove();
+      sec.appendChild(resEl);
+      // Gráfico
+      const ctx=document.getElementById('stats-chart').getContext('2d');
+      statsChart?.destroy();
+      statsChart=new Chart(ctx,{ type:'pie', data:{ labels, datasets:[{ data:values }] }, options:{ responsive:true } });
+    }
+
+    // 7. Crypto API & Chart.js
+    let cryptoChart;
+    async function fetchCrypto(){
+      const resEl=document.getElementById('crypto-result');
+      resEl.textContent='Cargando precios...';
+      try {
+        const resp=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin&vs_currencies=usd');
+        const data=await resp.json();
+        const labels=['Bitcoin','Ethereum','Dogecoin'];
+        const prices=[data.bitcoin.usd,data.ethereum.usd,data.dogecoin.usd];
+        resEl.textContent=labels.map((l,i)=>`${l}: $${prices[i]}`).join(' | ');
+        const ctx=document.getElementById('crypto-chart').getContext('2d');
+        cryptoChart?.destroy();
+        cryptoChart=new Chart(ctx,{ type:'pie', data:{ labels, datasets:[{ data:prices }] }, options:{ responsive:true } });
+      } catch {
+        resEl.textContent='Error al cargar datos API';
+      }
+    }
+
+    // 8. Conversor de Divisas (exchangerate.host)
+    async function convertFX(){
+      const amount=+document.getElementById('fx-amount').value;
+      const from=document.getElementById('fx-from').value;
+      const to=document.getElementById('fx-to').value;
+      const resEl=document.getElementById('fx-result');
+      resEl.textContent='Convirtiendo...';
+      try {
+        const resp=await fetch(`https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`);
+        const json=await resp.json();
+        resEl.textContent=`${amount} ${from} = ${json.result.toFixed(2)} ${to}`;
+      } catch {
+        resEl.textContent='Error en la conversión';
+      }
+    }
+
+    // 9. WASM demo placeholder (reemplaza base64 con tu módulo real)
+    const wasmCode = Uint8Array.from(atob('AGFzbQEAAA...'), c=>c.charCodeAt(0));
+    let wasmInstance;
+    WebAssembly.instantiate(wasmCode).then(wm=>{ wasmInstance=wm.instance; });
+    function calcWasm(){
+      const resEl=document.getElementById('wasm-result');
+      if(!wasmInstance){ resEl.textContent='Cargando WASM...'; return; }
+      const b=+document.getElementById('wasm-base').value;
+      const e=+document.getElementById('wasm-exp').value;
+      const r=wasmInstance.exports.pow(b,e);
+      resEl.textContent=`${b}^${e} = ${r}`;
+    }
+  </script>
+</body>
+</html>
