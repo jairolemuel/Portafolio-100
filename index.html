@@ -360,39 +360,87 @@
     </p>
   </div>
 </section>
-<!-- Proyectos -->
-<section id="projects" data-animate>
-  <h2>Proyectos Destacados</h2>
-  <div class="projects-container">
+<!-- ─── Añadir esto dentro de tu <style> ────────────────────────────── -->
+/* ==== Proyectos Destacados ==== */
+section#projects {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+section#projects h2 {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--accent-color);
+}
 
-    <!-- Proyectos -->
-<section id="projects" data-animate>
-  <h2>Proyectos Destacados</h2>
-  <div class="projects-container">
-    
-    <!-- Tarjeta: Calculadora Financiera -->
-    <div class="project-card" data-animate>
-      <h3>Calculadora Financiera</h3>
-      <p>Una herramienta interactiva para cálculos de porcentajes y estadísticas.</p>
-      <a href="financiator/index.html" target="_blank" class="button">Ver más</a>
-    </div>
+/* Grid y tarjetas */
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
 
-    <!-- Tarjeta: Sitio de Turismo -->
-    <div class="project-card" data-animate>
-      <h3>Sitio de Turismo</h3>
-      <p>Diseño vibrante para destinos turísticos.</p>
-      <a href="#" target="_blank" class="button">Ver proyecto</a>
-    </div>
-
-    <!-- Tarjeta: Landing Page de Belleza -->
-    <div class="project-card" data-animate>
-      <h3>Landing Page de Belleza</h3>
-      <p>Landing page estética con animaciones suaves.</p>
-      <a href="#" target="_blank" class="button">Ver proyecto</a>
-    </div>
-
-  </div>
-</section>
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--accent-color);
+  border-radius: 15px;
+  padding: 24px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+  overflow: hidden;
+}
+.project-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-card h3 {
+  color: #aaffff;
+  margin-bottom: 12px;
+  font-size: 1.5em;
+}
+.project-card p {
+  color: #d0fafa;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+.project-card a.button {
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  padding: 8px 16px;
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--accent-color);
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+.project-card a.button:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: translateY(-2px);
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
+  opacity: 0;
+  transform: rotate(45deg);
+  transition: opacity 0.5s ease;
+}
+.project-card:hover {
+  box-shadow: 0 0 20px rgba(0,229,255,0.4);
+}
+.project-card:hover::before {
+  opacity: 1;
+}
 
   <div class="transition-gradient"></div>
 
