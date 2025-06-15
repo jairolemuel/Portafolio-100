@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio de Jairo</title>
-  <!-- Fuentes elegantes -->
+  <title>Jairo’s Portfolio</title>
+  <!-- Elegant fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Parisienne&display=swap" rel="stylesheet"/>
-  <!-- Font Awesome para iconos sociales -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <!-- Devicon para íconos de tecnologías -->
+  <!-- Devicon -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
   <style>
     :root {
@@ -31,180 +31,223 @@
     a { text-decoration: none; color: inherit; }
 
     /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0; width: 100%;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      padding: 10px 20px;
-      display: flex; justify-content: flex-end;
-      z-index: 999;
+    .navbar { /* unchanged… */ }
+    .menu-button { /* unchanged… */ }
+    .menu-dropdown { /* unchanged… */ }
+
+    /* Header */
+    header#header { /* unchanged… */ }
+    .bg-overlay { /* unchanged… */ }
+    .header-content { /* unchanged… */ }
+    [data-animate] { /* unchanged… */ }
+    [data-animate].visible { /* unchanged… */ }
+    header h1, header h2 { /* unchanged… */ }
+    @keyframes textGradient { /* unchanged… */ }
+    header h1 { /* unchanged… */ }
+    header h2 { /* unchanged… */ }
+
+    /* About */
+    section#about { /* unchanged… */ }
+
+    /* ==== Projects ==== */
+    section#projects {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
     }
-    .menu-button {
-      font-size: 1.5rem;
+    section#projects h2 {
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 40px;
       color: var(--accent-color);
-      cursor: pointer;
-      transition: transform .2s;
+      text-shadow: 0 0 10px var(--accent-color);
     }
-    .menu-button:hover { transform: scale(1.1); }
-    .menu-dropdown {
-      position: absolute; top:50px; right:20px;
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .project-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--accent-color);
+      border-radius: 15px;
+      padding: 24px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 15px rgba(0,229,255,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-card h3 {
+      color: #aaffff;
+      margin-bottom: 12px;
+      font-size: 1.5em;
+    }
+    .project-card p {
+      color: #d0fafa;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .project-card a.button {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      padding: 8px 16px;
+      border: 2px solid var(--accent-color);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--accent-color);
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+    }
+    .project-card a.button:hover {
+      background: var(--accent-color);
+      color: var(--bg-color);
+      transform: translateY(-2px);
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
+      opacity: 0;
+      transform: rotate(45deg);
+      transition: opacity 0.5s ease;
+    }
+    .project-card:hover {
+      box-shadow: 0 0 20px rgba(0,229,255,0.4);
+    }
+    .project-card:hover::before {
+      opacity: 1;
+    }
+    /* ==== End Projects ==== */
+
+    /* Floating Contact Button */
+    .contact-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--button-bg);
+      color: var(--accent-color);
+      border: 2px solid var(--button-border);
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      animation: floatBtn 4s ease-in-out infinite;
+    }
+    .contact-float:hover {
+      background: var(--accent-color);
+      color: var(--bg-color);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,229,255,0.6);
+      animation-play-state: paused;
+    }
+    .contact-panel {
+      position: fixed;
+      bottom: 80px;
+      right: 30px;
       background: rgba(255,255,255,0.05);
       border: 1px solid var(--accent-color);
       border-radius: 10px;
       backdrop-filter: blur(8px);
-      padding: 10px 15px;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      transform-origin: top right;
-      transition: transform .3s ease, opacity .3s ease;
+      display: flex;
+      gap: 15px;
+      padding: 10px;
+      transform: scale(0);
+      transform-origin: bottom right;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      z-index: 998;
     }
-    .menu-dropdown.show {
-      display: flex; transform: scale(1); opacity: 1;
+    .contact-panel.show {
+      transform: scale(1);
+      opacity: 1;
     }
-    .menu-dropdown.hide {
-      transform: scale(0.8); opacity: 0;
-    }
-    .menu-dropdown a {
-      font-family: 'Playfair Display', serif;
+    .contact-panel a {
+      font-size: 1.5rem;
       color: var(--accent-color);
-      font-weight: bold;
-      transition: color .2s, transform .3s;
+      transition: color 0.2s, transform 0.2s;
     }
-    .menu-dropdown a:hover {
-      color:#fff; transform: translateX(5px);
+    .contact-panel a:hover {
+      color: var(--bg-color);
+      transform: scale(1.2);
     }
-
-    /* Header con imagen degradada */
-    header#header {
-      position: relative;
-      width: 100%; height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-      margin-top: -70px;
-      background:
-        linear-gradient(rgba(14,14,26,0.7), rgba(14,14,26,0.7)),
-        url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
-    .bg-overlay {
-      position: absolute; inset: 0;
-      background: rgba(14,14,26, var(--overlay-opacity));
-      backdrop-filter: grayscale(30%) blur(2px);
-      pointer-events: none;
-      transition: background 0.2s ease-out;
-    }
-    .header-content {
-      position: relative; z-index: 2;
-      text-align: center; padding: 20px;
-      background: rgba(0,0,0,0.4);
-      border-radius: 8px;
-    }
-    [data-animate] {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 1s ease-out, transform 1s ease-out;
-    }
-    [data-animate].visible {
-      opacity: 1; transform: translateY(0);
-    }
-    header h1, header h2 {
-      color: transparent;
-      background: linear-gradient(90deg, #00ffff, #3a7bd5, #00ffff);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: textGradient 4s linear infinite;
-      text-shadow: 0 0 4px rgba(0,0,0,0.5);
-    }
-    @keyframes textGradient {
-      0% { background-position: 0% center; }
-      100% { background-position: -200% center; }
-    }
-    header h1 {
-      font-family: 'Parisienne', cursive;
-      font-size: 3rem; margin-bottom: 10px;
-    }
-    header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-    }
-    @media (max-width:600px){
-      header h1 { font-size:2.2rem; }
-      header h2 { font-size:1.2rem; }
+    @keyframes floatBtn {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%    { transform: translateY(-4px) scale(1.02); }
     }
 
-    /* Sobre Mí */
-    section#about {
-      padding: 80px 20px;
-      max-width:800px; margin:auto; text-align:center;
-    }
-    section#about h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--accent-color);
-      margin-bottom:20px;
-      text-shadow:0 0 8px var(--accent-color);
-    }
-    section#about p {
-      font-size:1.1rem; line-height:1.6; color:#ddd;
-    }
+    /* …rest of your CSS (skills, footer, etc.)… */
 
-    /* Intro */
-    .intro {
-      text-align:center; font-size:1.3em;
-      margin:60px auto; max-width:800px; color:#aaffff;
-      padding:0 20px;
-    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">…</div>
 
-    /* Proyectos */
-    section#projects {
-      padding:60px 20px; max-width:1200px; margin:auto;
+  <!-- Header -->
+  <header id="header">…</header>
+
+  <!-- About Me -->
+  <section id="about">…</section>
+
+  <!-- Projects -->
+  <section id="projects" data-animate>
+    <h2>Featured Projects</h2>
+    <div class="projects-container">
+      <!-- 1) Financial Calculator -->
+      <div class="project-card" data-animate>
+        <h3>Financial Calculator</h3>
+        <p>An interactive tool for percentage and statistical calculations.</p>
+        <a href="financiator/index.html" target="_blank" class="button">View more</a>
+      </div>
+      <!-- 2) Tourism Site -->
+      <div class="project-card" data-animate>
+        <h3>Tourism Website</h3>
+        <p>Vibrant design for tourist destinations.</p>
+        <a href="turismo/index.html" target="_blank" class="button">View project</a>
+      </div>
+      <!-- 3) Beauty Landing Page -->
+      <div class="project-card" data-animate>
+        <h3>Beauty Landing Page</h3>
+        <p>Aesthetic landing page with smooth animations.</p>
+        <a href="belleza/index.html" target="_blank" class="button">View project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Contact Button -->
+  <button class="contact-float" onclick="toggleContact()">Contact</button>
+  <div class="contact-panel" id="contactPanel">
+    <a href="mailto:barrientosjairolemuel@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a href="https://wa.me/5437457636"><i class="fab fa-whatsapp"></i></a>
+    <!-- Replace the URL below with your actual LinkedIn profile -->
+    <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank"><i class="fab fa-linkedin"></i></a>
+  </div>
+
+  <!-- Rest of your body (skills, footer, scripts…) -->
+  <script>
+    function toggleContact() {
+      const panel = document.getElementById('contactPanel');
+      panel.classList.toggle('show');
     }
-    section#projects h2 {
-      font-size:2em; text-align:center; margin-bottom:40px;
-      color:var(--accent-color); text-shadow:0 0 10px var(--accent-color);
-    }
-    .project-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:20px; padding:0 20px;
-    }
-    .project-card {
-      background:rgba(255,255,255,0.05);
-      border:1px solid var(--accent-color);
-      border-radius:15px; padding:20px;
-      backdrop-filter: blur(8px);
-      box-shadow:0 0 15px rgba(0,255,255,0.2);
-      transition: transform .3s, box-shadow .3s;
-      opacity:0; transform: translateY(30px);
-      position: relative; overflow:hidden;
-    }
-    .project-card.visible {
-      opacity:1; transform: translateY(0);
-    }
-    .project-card h3 {
-      color:#aaffff; margin-bottom:10px; font-size:1.4em;
-    }
-    .project-card p {
-      color:#d0fafa; font-size:0.95em; margin-bottom:10px;
-    }
-    .project-card a {
-      color:var(--accent-color); text-decoration:underline;
-    }
-    .project-card:hover a { color:#fff; }
-    .project-card::before {
-      content:''; position:absolute; top:-50%; left:-50%;
-      width:200%; height:200%;
-      background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
-      opacity:0; transition: opacity .5s ease; transform:rotate(45deg);
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow:0 0 15px rgba(0,229,255,0.4);
-    }
-    .project-card:hover::before { opacity:1; }
+    // Your scroll-animation script remains unchanged
+  </script>
+</body>
+</html>
 
     /* Transición entre secciones */
     .transition-gradient {
