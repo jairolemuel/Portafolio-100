@@ -1,253 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta & Performance -->
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jairo’s Portfolio</title>
-  <!-- Elegant fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Parisienne&display=swap" rel="stylesheet"/>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <!-- Devicon -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
+  <meta name="description" content="Jairo Lemuel Barrientos | Web Developer & Designer"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <!-- Preload Fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" as="style"/>
+  <!-- Styles -->
   <style>
-    :root {
-      --bg-color: #0e0e1a;
-      --text-color: #f5f5f5;
-      --accent-color: #00e5ff;
-      --button-bg: rgba(255,255,255,0.05);
-      --button-border: var(--accent-color);
-      --overlay-opacity: 0.6;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Playfair Display', serif;
-      background: var(--bg-color);
-      color: var(--text-color);
-      overflow-x: hidden;
-      padding-top: 70px;
-    }
-    a { text-decoration: none; color: inherit; }
+    /**
+     * Built with:
+     *   • HTML5
+     *   • CSS3 (Custom Properties, Flexbox, Grid)
+     *   • JavaScript (ES6+)
+     *   • Canvas API for icon animations
+     *   • Accessible, Responsive, Performance-minded
+     */
 
-    /* Navbar */
-    .navbar { /* unchanged… */ }
-    .menu-button { /* unchanged… */ }
-    .menu-dropdown { /* unchanged… */ }
+    :root {
+      /* Color Palette */
+      --bg-primary: #0e0e1a;
+      --bg-secondary: #141425;
+      --text-light: #f5f5f5;
+      --accent: #00e5ff;
+      --button-bg: rgba(255,255,255,0.1);
+      --button-blur: blur(6px);
+      /* Typography */
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    /* Global Resets */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-light);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
 
     /* Header */
-    header#header { /* unchanged… */ }
-    .bg-overlay { /* unchanged… */ }
-    .header-content { /* unchanged… */ }
-    [data-animate] { /* unchanged… */ }
-    [data-animate].visible { /* unchanged… */ }
-    header h1, header h2 { /* unchanged… */ }
-    @keyframes textGradient { /* unchanged… */ }
-    header h1 { /* unchanged… */ }
-    header h2 { /* unchanged… */ }
-
-    /* About */
-    section#about { /* unchanged… */ }
-
-    /* ==== Projects ==== */
-    section#projects {
-      padding: 60px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    section#projects h2 {
-      font-size: 2em;
-      text-align: center;
-      margin-bottom: 40px;
-      color: var(--accent-color);
-      text-shadow: 0 0 10px var(--accent-color);
-    }
-    .projects-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    .project-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--accent-color);
-      border-radius: 15px;
-      padding: 24px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 0 15px rgba(0,229,255,0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
-      opacity: 0;
-      transform: translateY(30px);
+    header {
       position: relative;
-      overflow: hidden;
+      width: 100%; height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg') center/cover fixed;
     }
-    .project-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .project-card h3 {
-      color: #aaffff;
-      margin-bottom: 12px;
-      font-size: 1.5em;
-    }
-    .project-card p {
-      color: #d0fafa;
-      font-size: 1rem;
-      margin-bottom: 16px;
-    }
-    .project-card a.button {
-      display: inline-block;
-      font-family: 'Playfair Display', serif;
-      font-weight: bold;
-      padding: 8px 16px;
-      border: 2px solid var(--accent-color);
-      border-radius: 8px;
-      text-decoration: none;
-      color: var(--accent-color);
-      transition: background 0.3s, color 0.3s, transform 0.3s;
-    }
-    .project-card a.button:hover {
-      background: var(--accent-color);
-      color: var(--bg-color);
-      transform: translateY(-2px);
-    }
-    .project-card::before {
+    header::before {
       content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
-      opacity: 0;
-      transform: rotate(45deg);
-      transition: opacity 0.5s ease;
+      position: absolute; inset: 0;
+      background: rgba(14,14,26,0.75);
+      backdrop-filter: grayscale(20%) blur(3px);
     }
-    .project-card:hover {
-      box-shadow: 0 0 20px rgba(0,229,255,0.4);
+    .header-content {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
     }
-    .project-card:hover::before {
-      opacity: 1;
+    .header-content h1 {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      background: linear-gradient(90deg, var(--accent), #3a7bd5, var(--accent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-size: 200% auto;
+      animation: gradientMove 6s linear infinite;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
     }
-    /* ==== End Projects ==== */
-
-    /* Floating Contact Button */
-    .contact-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: var(--button-bg);
-      color: var(--accent-color);
-      border: 2px solid var(--button-border);
-      border-radius: 50px;
-      padding: 12px 20px;
-      font-size: 1rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      cursor: pointer;
-      transition: background 0.3s, color 0.3s, transform 0.3s;
-      backdrop-filter: blur(6px);
-      z-index: 999;
-      animation: floatBtn 4s ease-in-out infinite;
-    }
-    .contact-float:hover {
-      background: var(--accent-color);
-      color: var(--bg-color);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0,229,255,0.6);
-      animation-play-state: paused;
-    }
-    .contact-panel {
-      position: fixed;
-      bottom: 80px;
-      right: 30px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--accent-color);
-      border-radius: 10px;
-      backdrop-filter: blur(8px);
-      display: flex;
-      gap: 15px;
-      padding: 10px;
-      transform: scale(0);
-      transform-origin: bottom right;
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      z-index: 998;
-    }
-    .contact-panel.show {
-      transform: scale(1);
-      opacity: 1;
-    }
-    .contact-panel a {
+    .header-content h2 {
       font-size: 1.5rem;
-      color: var(--accent-color);
-      transition: color 0.2s, transform 0.2s;
+      color: var(--text-light);
+      opacity: 0.85;
+      font-weight: 600;
     }
-    .contact-panel a:hover {
-      color: var(--bg-color);
-      transform: scale(1.2);
-    }
-    @keyframes floatBtn {
-      0%,100% { transform: translateY(0) scale(1); }
-      50%    { transform: translateY(-4px) scale(1.02); }
+    @keyframes gradientMove {
+      0% { background-position: 0% center; }
+      100% { background-position: -200% center; }
     }
 
-    /* …rest of your CSS (skills, footer, etc.)… */
+    /* Navbar (Hamburger) */
+    .navbar {
+      position: fixed; top: 0; width: 100%;
+      padding: 1rem 2rem;
+      display: flex; justify-content: flex-end;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+    .menu-btn {
+      background: var(--button-bg);
+      backdrop-filter: var(--button-blur);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--accent);
+      transition: transform 0.2s ease;
+    }
+    .menu-btn:hover {
+      transform: scale(1.05);
+    }
 
+    /* Dropdown (initially hidden) */
+    .menu-dropdown {
+      position: absolute; top: 100%; right: 2rem;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .menu-dropdown.show {
+      display: flex;
+    }
+    .menu-dropdown a {
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--text-light);
+      transition: color 0.2s;
+    }
+    .menu-dropdown a:hover {
+      color: var(--accent);
+    }
+
+    /* Utility Classes for Part 2 */
+    .section { padding: 6rem 1rem; }
+    .section h2 {
+      font-family: var(--font-heading);
+      font-size: 2.25rem;
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .section h2::after {
+      content: '';
+      position: absolute; bottom: -0.5rem; left: 50%;
+      transform: translateX(-50%);
+      width: 4rem; height: 0.25rem;
+      background: var(--accent);
+      border-radius: 2px;
+    }
   </style>
+
+  <!-- Fontsheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
+  <title>Jairo L. Barrientos | Portfolio</title>
 </head>
+
 <body>
-  <!-- Navbar -->
-  <div class="navbar">…</div>
+  <!-- Navbar (Hamburger) -->
+  <nav class="navbar" role="navigation" aria-label="Main menu">
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu-list" onclick="toggleMenu()">
+      Menu
+    </button>
+    <div class="menu-dropdown" id="menu-list">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
   <!-- Header -->
-  <header id="header">…</header>
-
-  <!-- About Me -->
-  <section id="about">…</section>
-
-  <!-- Projects -->
-  <section id="projects" data-animate>
-    <h2>Featured Projects</h2>
-    <div class="projects-container">
-      <!-- 1) Financial Calculator -->
-      <div class="project-card" data-animate>
-        <h3>Financial Calculator</h3>
-        <p>An interactive tool for percentage and statistical calculations.</p>
-        <a href="financiator/index.html" target="_blank" class="button">View more</a>
-      </div>
-      <!-- 2) Tourism Site -->
-      <div class="project-card" data-animate>
-        <h3>Tourism Website</h3>
-        <p>Vibrant design for tourist destinations.</p>
-        <a href="turismo/index.html" target="_blank" class="button">View project</a>
-      </div>
-      <!-- 3) Beauty Landing Page -->
-      <div class="project-card" data-animate>
-        <h3>Beauty Landing Page</h3>
-        <p>Aesthetic landing page with smooth animations.</p>
-        <a href="belleza/index.html" target="_blank" class="button">View project</a>
-      </div>
+  <header role="banner">
+    <div class="header-content" role="heading">
+      <h1>Welcome to My Portfolio</h1>
+      <h2>I’m Jairo Lemuel Barrientos</h2>
     </div>
-  </section>
-
-  <!-- Floating Contact Button -->
-  <button class="contact-float" onclick="toggleContact()">Contact</button>
-  <div class="contact-panel" id="contactPanel">
-    <a href="mailto:barrientosjairolemuel@gmail.com"><i class="fas fa-envelope"></i></a>
-    <a href="https://wa.me/5437457636"><i class="fab fa-whatsapp"></i></a>
-    <!-- Replace the URL below with your actual LinkedIn profile -->
-    <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank"><i class="fab fa-linkedin"></i></a>
-  </div>
-
-  <!-- Rest of your body (skills, footer, scripts…) -->
-  <script>
-    function toggleContact() {
-      const panel = document.getElementById('contactPanel');
-      panel.classList.toggle('show');
-    }
-    // Your scroll-animation script remains unchanged
-  </script>
-</body>
-</html>
+  </header>
 
     /* Transición entre secciones */
     .transition-gradient {
@@ -484,6 +425,170 @@ section#projects h2 {
 .project-card:hover::before {
   opacity: 1;
 }
+  <section class="section" id="about">
+  <h2>About Me</h2>
+  <p>
+    I’m <strong>Jairo Lemuel Barrientos</strong>, a web developer who blends minimalist design with rich user experiences. Skilled in HTML5, CSS3 (Grid, Flexbox, Custom Properties), JavaScript (ES6+), and the Canvas API for lightweight animations. Passionate about crafting polished, responsive interfaces for beauty, finance, and tourism projects.
+  </p>
+</section>
+
+<section class="section" id="projects">
+  <h2>Projects</h2>
+  <div class="projects-container">
+    <div class="project-card">
+      <canvas class="proj-icon" data-type="beauty" width="60" height="60"></canvas>
+      <h3>Beauty Landing Page</h3>
+      <p>Feminine aesthetic with cursive headings, soft pink palette, and gentle scroll-triggered fades.</p>
+      <a href="https://tuproyectobelleza.vercel.app" class="project-link" target="_blank">View Project</a>
+    </div>
+    <div class="project-card">
+      <canvas class="proj-icon" data-type="finance" width="60" height="60"></canvas>
+      <h3>Financial Calculator</h3>
+      <p>Professional, sober interface for dynamic financial computations and optional charting.</p>
+      <a href="./financiator/index.html" class="project-link" target="_blank">View Project</a>
+    </div>
+    <div class="project-card">
+      <canvas class="proj-icon" data-type="tourism" width="60" height="60"></canvas>
+      <h3>Tourism Portal</h3>
+      <p>Vibrant, image-driven design with interactive galleries, smooth transitions, and mobile-first layout.</p>
+      <a href="https://portaldeturismo.vercel.app" class="project-link" target="_blank">View Project</a>
+    </div>
+  </div>
+</section>
+
+<div class="contact-wrapper">
+  <div id="contact-menu" class="contact-menu">
+    <canvas class="contact-icon" data-type="linkedin" width="50" height="50"></canvas>
+    <canvas class="contact-icon" data-type="whatsapp" width="50" height="50"></canvas>
+    <canvas class="contact-icon" data-type="email" width="50" height="50"></canvas>
+  </div>
+  <button id="contact-btn" class="contact-btn" title="Contact Me">
+    <i class="fas fa-address-book" style="color: var(--accent);"></i>
+  </button>
+</div>
+
+<footer id="contact" class="section">
+  <h2>Contact</h2>
+  <p><a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank">LinkedIn</a></p>
+  <p><a href="https://wa.me/549457636" target="_blank">WhatsApp: +54 9 457636</a></p>
+  <p><a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
+  <p style="margin-top:1rem;font-size:0.85rem;opacity:0.6;">© 2025 Jairo L. Barrientos</p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('menu-list').classList.toggle('show');
+  }
+
+  const contactBtn = document.getElementById('contact-btn');
+  const contactMenu = document.getElementById('contact-menu');
+  contactBtn.addEventListener('click', () => {
+    contactMenu.classList.toggle('show');
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.section, .project-card').forEach(el => {
+    observer.observe(el);
+  });
+
+  function animateIcon(canvas, type) {
+    const ctx = canvas.getContext('2d');
+    let t = 0;
+    function draw() {
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0,0,w,h);
+      ctx.save();
+      ctx.translate(w/2, h/2);
+      ctx.rotate(t);
+      ctx.beginPath();
+      ctx.arc(0,0, w/2 - 5, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(0,229,255,0.7)';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.restore();
+      ctx.save();
+      if (type === 'beauty') {
+        ctx.fillStyle = 'pink';
+        ctx.fillRect(w/2-10, h/2-5, 20, 30);
+        ctx.beginPath();
+        ctx.moveTo(w/2-10, h/2-5);
+        ctx.lineTo(w/2, h/2-25);
+        ctx.lineTo(w/2+10, h/2-5);
+        ctx.fill();
+      } else if (type === 'finance') {
+        ctx.fillStyle = '#fff';
+        [ -10, 0, 10 ].forEach((dx,i) => {
+          const hgt = 10 + i*10 + 5*Math.sin(t*2 + i);
+          ctx.fillRect(w/2+dx, h/2 + 15 - hgt, 5, hgt);
+        });
+      } else if (type === 'tourism') {
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(w/2, h/2+15);
+        ctx.lineTo(w/2, h/2+5);
+        ctx.stroke();
+        for (let i=0; i<5; i++) {
+          ctx.beginPath();
+          ctx.moveTo(w/2, h/2+5);
+          ctx.quadraticCurveTo(
+            w/2 + 20*Math.cos(t + i),
+            h/2 - 10,
+            w/2 + 30*Math.cos(t + i),
+            h/2 - 20
+          );
+          ctx.stroke();
+        }
+      } else if (type === 'linkedin') {
+        const r = 5 + 3*Math.sin(t*3);
+        ctx.fillStyle = '#0077B5';
+        ctx.fillRect(w/2-10, h/2-10, 20, 20);
+        ctx.fillStyle = '#fff';
+        ctx.font = '14px sans-serif';
+        ctx.fillText('in', w/2-9, h/2+5);
+      } else if (type === 'whatsapp') {
+        ctx.fillStyle = '#25D366';
+        ctx.beginPath();
+        ctx.arc(w/2, h/2,20,0,Math.PI*2);
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.font = '20px sans-serif';
+        ctx.fillText('✔', w/2-6, h/2+7);
+      } else if (type === 'email') {
+        ctx.fillStyle = '#D44638';
+        ctx.fillRect(w/2-20, h/2-10,40,20);
+        ctx.strokeStyle = '#fff';
+        ctx.beginPath();
+        ctx.moveTo(w/2-20, h/2-10);
+        ctx.lineTo(w/2, h/2+10);
+        ctx.lineTo(w/2+20, h/2-10);
+        ctx.stroke();
+      }
+      ctx.restore();
+      t += 0.02;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  function initCanvases(selector, attr) {
+    document.querySelectorAll(selector).forEach(c => {
+      animateIcon(c, c.getAttribute(attr));
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    initCanvases('.proj-icon','data-type');
+    initCanvases('.contact-icon','data-type');
+  });
+</script>
+</body>
+</html>
 
   <div class="transition-gradient"></div>
 
