@@ -222,67 +222,172 @@
   </header>
   
     <!-- ── ESTILOS EXTRA PARA PROYECTOS ───────────────────────────────────────── -->
-  <style>
-    .proj-extra {
-      display: block;
-      margin: 12px auto;
-      background: rgba(0,0,0,0.1);
-      border-radius: 8px;
-    }
-  </style>
+  <section id="projects" class="section" style="background: linear-gradient(#1a1a1a, #2a2a2a); color: white; padding: 3rem 1rem; font-family: 'Segoe UI', sans-serif;">
+  <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">Proyectos Destacados</h2>
+  <div class="projects-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
 
-  <!-- ── SECCIÓN PROYECTOS REORDENADA & DETALLADA ──────────────────────────── -->
-  <section id="projects" class="section">
-    <h2>Proyectos Destacados</h2>
-    <div class="projects-container">
-
-      <!-- 1) Calculadora Financiera -->
-      <div class="project-card" data-link="./financiator/index.html">
-        <canvas class="proj-icon" data-type="finance" width="60" height="60"></canvas>
-        <h3>Calculadora Financiera</h3>
-        <p>Interfaz profesional para cálculos dinámicos y gráfica opcional.</p>
-        <canvas class="proj-extra" data-extra="finance-survey" width="300" height="100"></canvas>
-        <div class="project-details">
-          <p>• JavaScript ES6+, manejo de eventos</p>
-          <p>• Chart.js para visualización de datos</p>
-          <p>• Validaciones en tiempo real</p>
-          <p><a href="https://github.com/tuusuario/calculadora-financiera" target="_blank">GitHub</a></p>
-          <button class="close-details">Cerrar</button>
-        </div>
+    <!-- Proyecto 1 -->
+    <div class="project-card" style="width: 320px; background: #262626; padding: 1rem; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.6); cursor: pointer;">
+      <canvas class="proj-icon" data-type="finance" width="60" height="60"></canvas>
+      <h3 style="margin: 0.5rem 0;">Calculadora Financiera</h3>
+      <p>Interfaz profesional para cálculos dinámicos y gráfica opcional.</p>
+      <canvas class="proj-extra" data-extra="finance-survey" width="300" height="100" style="margin: 1rem 0;"></canvas>
+      <div class="project-details" style="font-size: 0.9rem;">
+        <p>• JavaScript ES6+, manejo de eventos</p>
+        <p>• Chart.js para visualización de datos</p>
+        <p>• Validaciones en tiempo real</p>
+        <p><a href="https://github.com/tuusuario/calculadora-financiera" target="_blank" style="color: #00e5ff;">GitHub</a></p>
+        <button class="close-details" style="margin-top: 0.5rem;">Cerrar</button>
       </div>
-
-      <!-- 2) Beauty Landing Page: lápiz labial animado -->
-      <div class="project-card" data-link="https://tuproyectobelleza.vercel.app">
-        <canvas class="proj-icon" data-type="beauty" width="60" height="60"></canvas>
-        <h3>Beauty Landing Page</h3>
-        <p>Estética femenina con tipografías cursivas y transiciones.</p>
-        <canvas class="proj-extra" data-extra="beauty-lipstick" width="200" height="100"></canvas>
-        <div class="project-details">
-          <p>• HTML5, CSS3 (Flexbox, Grid)</p>
-          <p>• Canvas API para iconos animados</p>
-          <p>• Scroll-triggered fade-in</p>
-          <p><a href="https://github.com/tuusuario/beauty-landing" target="_blank">GitHub</a></p>
-          <button class="close-details">Cerrar</button>
-        </div>
-      </div>
-
-      <!-- 3) Portal de Turismo (avión volando mejorado) -->
-      <div class="project-card" data-link="https://portaldeturismo.vercel.app">
-        <canvas class="proj-icon" data-type="tourism" width="60" height="60"></canvas>
-        <h3>Portal de Turismo</h3>
-        <p>Diseño vibrante, galerías interactivas y experiencia mobile-first.</p>
-        <canvas class="proj-extra" data-extra="tourism-plane" width="300" height="100"></canvas>
-        <div class="project-details">
-          <p>• React + React Router</p>
-          <p>• Animaciones con Framer Motion</p>
-          <p>• API de imágenes y mapas</p>
-          <p><a href="https://github.com/tuusuario/portal-turismo" target="_blank">GitHub</a></p>
-          <button class="close-details">Cerrar</button>
-        </div>
-      </div>
-
     </div>
-  </section>
+
+    <!-- Proyecto 2 -->
+    <div class="project-card" style="width: 320px; background: #262626; padding: 1rem; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.6); cursor: pointer;">
+      <canvas class="proj-icon" data-type="beauty" width="60" height="60"></canvas>
+      <h3 style="margin: 0.5rem 0;">Beauty Landing Page</h3>
+      <p>Estética femenina con tipografías cursivas y transiciones.</p>
+      <canvas class="proj-extra" data-extra="beauty-lipstick" width="200" height="100" style="margin: 1rem 0;"></canvas>
+      <div class="project-details" style="font-size: 0.9rem;">
+        <p>• HTML5, CSS3 (Flexbox, Grid)</p>
+        <p>• Canvas API para iconos animados</p>
+        <p>• Scroll-triggered fade-in</p>
+        <p><a href="https://github.com/tuusuario/beauty-landing" target="_blank" style="color: #ff69b4;">GitHub</a></p>
+        <button class="close-details" style="margin-top: 0.5rem;">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- Proyecto 3 -->
+    <div class="project-card" style="width: 320px; background: #262626; padding: 1rem; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.6); cursor: pointer;">
+      <canvas class="proj-icon" data-type="tourism" width="60" height="60"></canvas>
+      <h3 style="margin: 0.5rem 0;">Portal de Turismo</h3>
+      <p>Diseño vibrante, galerías interactivas y experiencia mobile-first.</p>
+      <canvas class="proj-extra" data-extra="tourism-plane" width="300" height="100" style="margin: 1rem 0;"></canvas>
+      <div class="project-details" style="font-size: 0.9rem;">
+        <p>• React + React Router</p>
+        <p>• Animaciones con Framer Motion</p>
+        <p>• API de imágenes y mapas</p>
+        <p><a href="https://github.com/tuusuario/portal-turismo" target="_blank" style="color: #00e5ff;">GitHub</a></p>
+        <button class="close-details" style="margin-top: 0.5rem;">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animaciones embebidas -->
+  <script>
+    function animateIcon(canvas, type) {
+      const ctx = canvas.getContext('2d');
+      let t = 0;
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (type === "beauty") {
+          const cx = canvas.width / 2, cy = canvas.height / 2;
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate(Math.sin(t) * 0.2);
+          ctx.translate(-cx, -cy);
+          ctx.fillStyle = "#aa0044";
+          ctx.fillRect(cx - 6, cy - 15, 12, 30);
+          ctx.fillStyle = "#333";
+          ctx.fillRect(cx - 6, cy - 30, 12, 15);
+          ctx.fillStyle = "#ff0033";
+          ctx.beginPath();
+          ctx.arc(cx, cy - 30, 6, 0, Math.PI, true);
+          ctx.fill();
+          ctx.restore();
+        } else if (type === "tourism") {
+          const x = canvas.width / 2, y = canvas.height / 2;
+          ctx.fillStyle = "#ffffff";
+          ctx.beginPath();
+          ctx.moveTo(x - 15, y);
+          ctx.lineTo(x + 20, y - 5);
+          ctx.lineTo(x + 20, y + 5);
+          ctx.closePath();
+          ctx.fill();
+          ctx.fillRect(x, y - 2, 10, 4);
+        }
+        t += 0.05;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    function animateExtra(canvas, extra) {
+      const ctx = canvas.getContext('2d');
+      let t = 0;
+      let trail = [];
+
+      function drawLipstick() {
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "#aa0044";
+        ctx.fillRect(90, 40, 20, 40);
+        ctx.fillStyle = "#333";
+        ctx.fillRect(90, 20, 20, 20);
+        ctx.fillStyle = "#ff3366";
+        ctx.beginPath();
+        ctx.arc(100, 20, 10, 0, Math.PI, true);
+        ctx.fill();
+        ctx.fillStyle = "rgba(255,255,255,0.3)";
+        ctx.beginPath();
+        ctx.arc(95 + Math.sin(t * 2) * 2, 25, 3, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+
+      function drawPlaneWithTrail() {
+        const w = canvas.width, h = canvas.height;
+        const y = h / 2;
+        const x = (t * 100) % (w + 60) - 60;
+        trail.push({ x: x, y: y });
+        if (trail.length > 50) trail.shift();
+        ctx.clearRect(0, 0, w, h);
+        ctx.beginPath();
+        for (let i = 0; i < trail.length - 1; i++) {
+          const p1 = trail[i], p2 = trail[i + 1];
+          ctx.strokeStyle = `rgba(255,255,255,${i / trail.length})`;
+          ctx.lineWidth = 2;
+          ctx.moveTo(p1.x + 30, p1.y);
+          ctx.lineTo(p2.x + 30, p2.y);
+        }
+        ctx.stroke();
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + 40, y - 5);
+        ctx.lineTo(x + 40, y + 5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillRect(x + 10, y - 2, 15, 4);
+      }
+
+      function loop() {
+        if (extra === "beauty-lipstick") drawLipstick();
+        else if (extra === "tourism-plane") drawPlaneWithTrail();
+        t += 0.03;
+        requestAnimationFrame(loop);
+      }
+      loop();
+    }
+
+    function initIcons(selector = 'canvas[data-type]') {
+      document.querySelectorAll(selector).forEach(canvas => {
+        animateIcon(canvas, canvas.dataset.type);
+      });
+    }
+
+    function initExtras() {
+      document.querySelectorAll('canvas[data-extra]').forEach(canvas => {
+        animateExtra(canvas, canvas.dataset.extra);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initIcons();
+      initExtras();
+    });
+  </script>
+</section>
+
+  
 
   <script>
     // abre el link al hacer clic en la tarjeta
