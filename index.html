@@ -226,44 +226,43 @@
   <div class="projects-container">
 
     <!-- 1) FinancePro -->
-    <div class="project-card" onclick="window.location.href='./financiator/index.html'">
+    <a class="project-card" href="./financiator/index.html" aria-label="FinancePro - Calculadora financiera">
       <div class="project-icon">
-        <svg width="80" height="80" viewBox="0 0 100 100">
-          <rect x="15" y="20" width="70" height="50" rx="8" fill="#00e5ff"/>
-          <line x1="25" y1="40" x2="75" y2="40" stroke="#fff" stroke-width="3"/>
-          <circle cx="40" cy="55" r="5" fill="#fff"/>
-          <circle cx="60" cy="55" r="5" fill="#fff"/>
+        <svg width="80" height="80" viewBox="0 0 100 100" class="chart-bars">
+          <rect x="20" y="60" width="10" height="30" fill="#00e5ff" />
+          <rect x="40" y="50" width="10" height="40" fill="#00e5ff" />
+          <rect x="60" y="40" width="10" height="50" fill="#00e5ff" />
         </svg>
       </div>
       <h3>FinancePro</h3>
       <p>Calculadora financiera interactiva para simulaciones precisas.</p>
-    </div>
+    </a>
 
     <!-- 2) BeautySpark -->
-    <div class="project-card" onclick="window.location.href='https://tuproyectobelleza.vercel.app'">
+    <a class="project-card" href="https://tuproyectobelleza.vercel.app" aria-label="BeautySpark - Landing de cosmética">
       <div class="project-icon">
-        <svg width="80" height="80" viewBox="0 0 100 100">
-          <rect x="45" y="25" width="10" height="45" rx="5" fill="crimson"/>
+        <svg width="80" height="80" viewBox="0 0 100 100" class="sparkle">
+          <rect x="45" y="25" width="10" height="45" rx="5" fill="crimson" />
           <circle cx="50" cy="20" r="6" fill="pink" />
           <path d="M45 75 Q50 85 55 75" stroke="pink" stroke-width="2" fill="none"/>
         </svg>
       </div>
       <h3>BeautySpark</h3>
       <p>Landing page moderna con diseño cosmético atractivo.</p>
-    </div>
+    </a>
 
     <!-- 3) Portal de Destinos Turísticos -->
-    <div class="project-card" onclick="window.location.href='https://portaldeturismo.vercel.app'">
+    <a class="project-card" href="https://portaldeturismo.vercel.app" aria-label="Portal de destinos turísticos">
       <div class="project-icon">
-        <svg width="80" height="80" viewBox="0 0 100 100">
+        <svg width="80" height="80" viewBox="0 0 100 100" class="airplane">
           <path d="M10 50 L40 40 L10 30 Z" fill="white" />
-          <path d="M40 40 L90 50" stroke="#00e5ff" stroke-width="3"/>
+          <line x1="40" y1="40" x2="90" y2="50" stroke="#00e5ff" stroke-width="3"/>
           <circle cx="10" cy="50" r="2" fill="#00e5ff"/>
         </svg>
       </div>
       <h3>Portal de Destinos Turísticos</h3>
       <p>Explora lugares únicos con diseño vibrante y dinámico.</p>
-    </div>
+    </a>
 
   </div>
 </section>
@@ -294,14 +293,17 @@
   }
 
   .project-card {
+    display: block;
     width: 280px;
     padding: 2rem;
     background: linear-gradient(145deg, #1c1c1c, #0e0e0e);
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 229, 255, 0.1);
     cursor: pointer;
-    transform: translateY(50px);
     opacity: 0;
+    transform: translateY(50px) rotateY(5deg) scale(0.95);
+    text-decoration: none;
+    color: inherit;
     transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
   }
 
@@ -313,7 +315,6 @@
 
   .project-icon {
     margin-bottom: 1.5rem;
-    animation: float 2s ease-in-out infinite;
   }
 
   .project-card h3 {
@@ -328,10 +329,42 @@
     color: #ddd;
   }
 
-  @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-    100% { transform: translateY(0); }
+  /* FinancePro - animación de barras */
+  .chart-bars rect {
+    transform-origin: bottom;
+    transform: scaleY(0);
+    animation: growBars 1s ease-out forwards;
+  }
+  @keyframes growBars {
+    to { transform: scaleY(1); }
+  }
+
+  /* BeautySpark - brillo pulsante */
+  .sparkle circle, .sparkle path {
+    animation: pulse 2s infinite ease-in-out;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  /* Avión moviéndose de derecha a izquierda */
+  .airplane {
+    animation: fly 4s ease-in-out infinite alternate;
+  }
+  @keyframes fly {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-20px); }
+  }
+
+  @media (max-width: 600px) {
+    .section-projects h2 {
+      font-size: 2rem;
+    }
+    .project-card {
+      width: 90%;
+      padding: 1.5rem;
+    }
   }
 </style>
 
@@ -344,6 +377,8 @@
     gsap.to(card, {
       opacity: 1,
       y: 0,
+      rotationY: 0,
+      scale: 1,
       duration: 1,
       delay: i * 0.2,
       ease: "power3.out",
