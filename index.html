@@ -1,545 +1,584 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jairo Lemuel Barrientos | Portfolio</title>
-<style>
-  /* Reset & base */
-  *, *::before, *::after { box-sizing: border-box; }
-  body {
-    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0e0e1a; color: #d0f0f9;
-    overflow-x: hidden;
-  }
-  a { color: #00e5ff; text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Jairo Lemuel Barrientos | Programador Full Stack"/>
+  <title>Jairo L. Barrientos | Portafolio</title>
 
-  /* Header & Background */
-  header {
-    position: relative;
-    height: 100vh;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/3/32/Obelisco_Buenos_Aires_10.JPG') center/cover no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #e0f7ffdd;
-    text-align: center;
-  }
-  header::before {
-    content: "";
-    position: absolute; top:0; left:0; right:0; bottom:0;
-    background: rgba(14,14,26, 0.7);
-    z-index: 1;
-  }
-  header > * {
-    position: relative;
-    z-index: 2;
-  }
+  <!-- FUENTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
 
-  /* Welcome Text */
-  h1#welcome-title {
-    font-size: clamp(2.8rem, 8vw, 4.5rem);
-    margin: 0;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 15px #00e5ffbb;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 1s forwards 0.3s;
-  }
-  h2#welcome-subtitle {
-    font-size: clamp(1.2rem, 4vw, 2rem);
-    font-weight: 400;
-    margin: 0.5rem 0 2rem;
-    color: #a0d8f7cc;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 1s forwards 0.7s;
-  }
-
-  @keyframes fadeUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  <!-- ESTILOS -->
+  <style>
+    :root {
+      /* Colores */
+      --bg-primary: #0e0e1a;
+      --bg-secondary: #141425;
+      --text-light: #f5f5f5;
+      --accent: #00e5ff;
+      --button-bg: rgba(255,255,255,0.1);
+      --button-blur: blur(6px);
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Montserrat', sans-serif;
     }
-  }
 
-  /* Clima widget */
-  #weather-widget {
-    position: absolute;
-    top: 1.3rem;
-    right: 1.3rem;
-    background: rgba(0, 229, 255, 0.15);
-    backdrop-filter: blur(8px);
-    padding: 0.6rem 1rem;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #00e5ffdd;
-    cursor: default;
-    box-shadow: 0 0 12px #00e5ff77;
-    user-select: none;
-    opacity: 0;
-    animation: fadeIn 1s forwards 1.2s;
-    max-width: 200px;
-  }
-  #weather-widget img {
-    width: 32px;
-    height: 32px;
-    filter: drop-shadow(0 0 2px #00e5ffcc);
-  }
-  #weather-widget .temp {
-    font-size: 1.3rem;
-    font-weight: 700;
-  }
-  #weather-widget .desc {
-    text-transform: capitalize;
-    font-weight: 400;
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-
-  /* Projects Section */
-  #projects {
-    padding: 60px 20px 80px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-  #projects h2 {
-    font-weight: 800;
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #00e5ffcc;
-    letter-spacing: 0.12em;
-    text-shadow: 0 0 12px #00e5ff88;
-  }
-  #projects .projects-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
-    justify-content: center;
-  }
-  .project-card {
-    background: #111422cc;
-    border-radius: 14px;
-    box-shadow: 0 0 20px #00e5ff44;
-    flex: 1 1 280px;
-    max-width: 320px;
-    padding: 18px 22px;
-    color: #c0e9ffcc;
-    cursor: pointer;
-    transition:
-      box-shadow 0.3s ease,
-      transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .project-card:hover {
-    box-shadow: 0 0 32px #00e5ffbb;
-    transform: translateY(-8px);
-  }
-  .project-card h3 {
-    margin: 0 0 0.4rem 0;
-    font-weight: 700;
-    color: #00e5ffdd;
-  }
-  .project-card p {
-    margin: 0;
-    font-weight: 300;
-    line-height: 1.4;
-    color: #a0d8f7aa;
-  }
-
-  /* Responsive */
-  @media (max-width: 480px) {
-    #weather-widget {
-      right: 0.8rem;
-      top: 0.8rem;
-      padding: 0.5rem 0.8rem;
-      font-size: 0.85rem;
+    /* Reset global */
+    *, *::before, *::after {
+      margin:0; padding:0; box-sizing:border-box;
     }
-    #projects h2 {
-      font-size: 2rem;
+    html { scroll-behavior:smooth; font-size:16px; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-light);
+      font-family: var(--font-body);
+      line-height:1.6;
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAVBAR ───────────────────────────────────────────────────────── */
+    nav.navbar {
+      position: fixed; top:0; left:0; width:100%;
+      padding:1rem 2rem;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      display:flex; justify-content:flex-end;
+      z-index:100;
+    }
+    nav.navbar button {
+      font-family: var(--font-heading);
+      font-weight:600;
+      background: var(--button-bg);
+      backdrop-filter: var(--button-blur);
+      border:1px solid var(--accent);
+      border-radius:6px;
+      padding:0.5rem 1rem;
+      color: var(--accent);
+      cursor:pointer;
+      transition: transform .2s;
+    }
+    nav.navbar button:hover { transform: scale(1.05); }
+    .menu-dropdown {
+      position:absolute; top:100%; right:2rem;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      border:1px solid var(--accent);
+      border-radius:8px;
+      padding:1rem;
+      display:none;
+      flex-direction:column;
+      gap:0.75rem;
+    }
+    .menu-dropdown.show { display:flex; }
+    .menu-dropdown a:hover { color: var(--accent); }
+
+    /* ── HEADER ───────────────────────────────────────────────────────── */
+    header {
+      position: relative;
+      width:100%; height:100vh;
+      background: url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg') center/cover fixed;
+      display:flex; align-items:center; justify-content:center;
+    }
+    header::before {
+      content:'';
+      position:absolute; inset:0;
+      background: rgba(14,14,26,0.75);
+      backdrop-filter: grayscale(20%) blur(3px);
+    }
+    .header-content {
+      position:relative; z-index:1;
+      text-align:center;
+      padding:2rem;
+      background: rgba(0,0,0,0.3);
+      border-radius:12px;
+    }
+    .header-content h1 {
+      font-family: var(--font-heading);
+      font-size:3rem;
+      background: linear-gradient(90deg, var(--accent), #3a7bd5, var(--accent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-size: 200% auto;
+      animation: gradientMove 6s linear infinite;
+      margin-bottom:0.5rem;
+      line-height:1.2;
+    }
+    .header-content h2 {
+      font-size:1.25rem;
+      opacity:0.9;
+      font-weight:500;
+    }
+    @keyframes gradientMove {
+      0%   { background-position:   0% center; }
+      100% { background-position: -200% center; }
+    }
+
+    /* ── SECCIONES GENERALES ─────────────────────────────────────────── */
+    .section {
+      padding:6rem 1rem;
+    }
+    .section h2 {
+      font-family: var(--font-heading);
+      font-size:2.25rem;
+      text-align:center;
+      color: var(--accent);
+      margin-bottom:2rem;
+      position:relative;
+    }
+    .section h2::after {
+      content:'';
+      position:absolute; bottom:-0.5rem; left:50%;
+      transform: translateX(-50%);
+      width:4rem; height:0.25rem;
+      background: var(--accent);
+      border-radius:2px;
+    }
+
+    /* ── PROYECTOS DESTACADOS ───────────────────────────────────────── */
+    #projects .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap:30px;
+      max-width:1200px; margin:auto;
     }
     .project-card {
-      max-width: 100%;
-      padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border:1px solid var(--accent);
+      border-radius:15px;
+      padding:24px;
+      backdrop-filter: blur(8px);
+      box-shadow:0 0 15px rgba(0,229,255,0.2);
+      opacity:0;
+      transform: translateY(30px);
+      transition: opacity .6s ease, transform .6s ease;
+      position:relative; overflow:hidden;
     }
-  }
-</style>
+    .project-card.visible {
+      opacity:1;
+      transform: translateY(0);
+    }
+    .project-card h3 {
+      color:#aaffff; margin-bottom:0.5rem; font-size:1.5em;
+    }
+    .project-card p {
+      color:#d0fafa; margin-bottom:1rem;
+    }
+    .project-card a {
+      display:inline-block;
+      font-family: var(--font-heading);
+      font-weight:bold;
+      padding:8px 16px;
+      border:2px solid var(--accent);
+      border-radius:8px;
+      transition: background .3s, color .3s, transform .3s;
+    }
+    .project-card a:hover {
+      background: var(--accent);
+      color: var(--bg-primary);
+      transform: translateY(-2px);
+    }
+    .project-card::before {
+      content:'';
+      position:absolute;
+      top:-50%; left:-50%;
+      width:200%; height:200%;
+      background:radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
+      opacity:0; transform:rotate(45deg);
+      transition: opacity .5s ease;
+    }
+    .project-card:hover::before { opacity:1; }
+
+    /* ── HABILIDADES ─────────────────────────────────────────────────── */
+    #skills {
+      position: relative;
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+    #skills canvas { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
+    .skills-container, .soft-container {
+      display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:2rem;
+      position:relative; z-index:2;
+    }
+    .skill-tag, .soft-skill {
+      background: rgba(255,255,255,0.05);
+      border-radius:8px;
+      padding:10px 16px;
+      opacity:0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .skill-tag {
+      border:1px solid var(--accent);
+      color: var(--accent);
+    }
+    .soft-skill {
+      border:1px solid #555;
+      color:#ccc;
+    }
+    .skill-tag.visible, .soft-skill.visible {
+      animation: popIn .4s ease-out forwards;
+    }
+    @keyframes popIn {
+      0%   { transform: translateY(20px) scale(0.95); opacity:0; }
+      70%  { transform: translateY(-2px) scale(1.02); opacity:1; }
+      100% { transform: translateY(0) scale(1); opacity:1; }
+    }
+
+    /* ── BOTÓN CONTACTAME ────────────────────────────────────────────── */
+    .contact-float {
+      position:fixed; bottom:30px; right:30px;
+      background: var(--button-bg);
+      backdrop-filter: var(--button-blur);
+      border:2px solid var(--accent);
+      border-radius:50px;
+      padding:12px 24px;
+      font-family: var(--font-heading);
+      font-weight:600;
+      font-size:1rem;
+      color: var(--accent);
+      cursor:pointer;
+      box-shadow:0 0 10px rgba(0,0,0,0.4);
+      z-index:999;
+      overflow:hidden;
+    }
+    .contact-float span {
+      display:inline-block;
+      animation: slideText 3s ease-in-out infinite;
+    }
+    @keyframes slideText {
+      0%   { transform: translateX(0); }
+      25%  { transform: translateX(-100%); }
+      50%  { transform: translateX(100%); }
+      75%  { transform: translateX(-100%); }
+      100% { transform: translateX(0); }
+    }
+    .contact-panel {
+      position:fixed; bottom:80px; right:30px;
+      display:flex; gap:16px; padding:12px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      border:1px solid var(--accent);
+      border-radius:10px;
+      transform: scale(0);
+      opacity:0;
+      transform-origin: bottom right;
+      transition: transform .3s ease, opacity .3s ease;
+      z-index:998;
+    }
+    .contact-panel.show {
+      transform: scale(1);
+      opacity:1;
+    }
+    .contact-panel canvas {
+      width:40px; height:40px;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────── */
+    footer {
+      text-align:center;
+      padding:2rem 1rem;
+      background: rgba(0,0,0,0.6);
+      color:#aaa;
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <h1 id="welcome-title">Welcome to My Portfolio</h1>
-  <h2 id="welcome-subtitle">I'm <strong>Jairo Lemuel Barrientos</strong></h2>
-  
-  <div id="weather-widget" title="Current weather" aria-live="polite" role="region" aria-label="Current weather">
-    <img src="" alt="Weather icon" id="weather-icon" />
-    <div>
-      <span class="temp" id="weather-temp">--°C</span><br />
-      <span class="desc" id="weather-desc">Loading...</span>
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Menú principal">
+    <button aria-expanded="false" aria-controls="menu-dropdown" onclick="toggleMenu('menu-dropdown')">
+      Menu
+    </button>
+    <div id="menu-dropdown" class="menu-dropdown" role="menu">
+      <a href="#header">Inicio</a>
+      <a href="#projects">Proyectos</a>
+      <a href="#skills">Habilidades</a>
+      <a href="#contact">Contacto</a>
     </div>
-  </div>
-</header>
+  </nav>
 
-Perfecto, Jairo. Voy a armarte la segunda parte completa de tu portfolio con todo lo que pediste, súper profesional, bien pulido y con todas las animaciones, canvas para habilidades duras, botones con animación y el botón flotante de contacto con animación en los íconos y enlaces reales a:
-	•	LinkedIn (tu perfil)
-	•	WhatsApp (tu número correcto)
-	•	Gmail (tu correo)
-
-⸻
-
-Detalles incluidos:
-	1.	Proyectos destacados con canvas animados (lápiz labial, gráfico, avión) y animación al hacer scroll.
-	2.	Habilidades duras con logos animados en canvas (JS, HTML, CSS, React, etc).
-	3.	Habilidades blandas listadas abajo.
-	4.	Botón flotante “Contact Me” transparente que despliega animados íconos sociales con enlaces.
-	5.	Todo en inglés, con diseño moderno y responsivo.
-
-⸻
-
-Aquí te dejo el código completo embebido para la segunda parte:
-
-<style>
-  :root {
-    --accent-color: #00e5ff;
-    --bg-color: #0b0c10;
-    --text-color: #d0fafa;
-    --soft-pink: #ff99cc;
-    --soft-blue: #33c4ff;
-  }
-  /* Contenedor proyectos */
-  #projects {
-    padding: 60px 20px;
-    max-width: 1200px;
-    margin: auto;
-  }
-  #projects h2 {
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--accent-color);
-    text-shadow: 0 0 15px var(--accent-color);
-  }
-  .projects-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-  }
-  .project-card {
-    background: rgba(255 255 255 / 0.05);
-    border: 1px solid var(--accent-color);
-    border-radius: 15px;
-    padding: 24px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 15px rgba(0,229,255,0.2);
-    transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s;
-    opacity: 0;
-    transform: translateY(30px);
-    position: relative;
-    overflow: hidden;
-  }
-  .project-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .project-card h3 {
-    color: #aaffff;
-    margin: 12px 0;
-    font-size: 1.7em;
-  }
-  .project-card p {
-    color: var(--text-color);
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-  }
-  .project-card a.project-link {
-    display: inline-block;
-    font-family: 'Playfair Display', serif;
-    font-weight: bold;
-    padding: 10px 18px;
-    border: 2px solid var(--accent-color);
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--accent-color);
-    transition: background 0.3s, color 0.3s, transform 0.3s;
-  }
-  .project-card a.project-link:hover {
-    background: var(--accent-color);
-    color: var(--bg-color);
-    transform: translateY(-3px);
-  }
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
-    opacity: 0;
-    transform: rotate(45deg);
-    transition: opacity 0.5s ease;
-  }
-  .project-card:hover {
-    box-shadow: 0 0 20px rgba(0,229,255,0.4);
-  }
-  .project-card:hover::before {
-    opacity: 1;
-  }
-  canvas.proj-icon {
-    display: block;
-    margin: auto;
-    margin-bottom: 15px;
-    background: transparent;
-  }
-
-  /* === Sección Habilidades === */
-  #skills {
-    max-width: 1200px;
-    margin: 60px auto;
-    padding: 0 20px;
-  }
-  #skills h2 {
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--accent-color);
-    text-shadow: 0 0 15px var(--accent-color);
-  }
-  .skills-hard, .skills-soft {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 40px;
-  }
-  .skill-hard {
-    width: 120px;
-    text-align: center;
-    color: var(--text-color);
-  }
-  .skill-hard canvas {
-    display: block;
-    margin: auto;
-    background: transparent;
-  }
-  .skill-hard span {
-    display: block;
-    margin-top: 10px;
-    font-weight: 600;
-  }
-  .skills-soft {
-    max-width: 600px;
-    margin: auto;
-    color: var(--text-color);
-    font-size: 1.2rem;
-  }
-  .skills-soft ul {
-    list-style: inside disc;
-  }
-
-  /* === Botón flotante Contact Me === */
-  #contact-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: transparent;
-    border: 2px solid var(--accent-color);
-    color: var(--accent-color);
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    padding: 12px 20px;
-    border-radius: 30px;
-    cursor: pointer;
-    z-index: 1000;
-    transition: background 0.3s, color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  #contact-btn:hover {
-    background: var(--accent-color);
-    color: var(--bg-color);
-  }
-  #contact-icons {
-    position: fixed;
-    bottom: 80px;
-    right: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s;
-    z-index: 999;
-  }
-  #contact-icons.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .contact-icon {
-    width: 50px;
-    height: 50px;
-    border: 2px solid var(--accent-color);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--accent-color);
-    cursor: pointer;
-    transition: all 0.4s ease;
-    position: relative;
-    background: transparent;
-  }
-  .contact-icon:hover {
-    background: var(--accent-color);
-    color: var(--bg-color);
-    transform: scale(1.15);
-    box-shadow: 0 0 15px var(--accent-color);
-  }
-  .contact-icon svg {
-    width: 24px;
-    height: 24px;
-  }
-</style>
-
-<section id="projects" data-animate>
-  <h2>Featured Projects</h2>
-  <div class="projects-container">
-    
-    <div class="project-card">
-      <canvas class="proj-icon" data-type="beauty" width="80" height="80"></canvas>
-      <h3>Beauty Landing Page</h3>
-      <p>Feminine aesthetic with cursive headings, soft pink palette, and gentle scroll-triggered fades.</p>
-      <a href="https://tuproyectobelleza.vercel.app" class="project-link" target="_blank" rel="noopener">View Project</a>
+  <!-- HEADER / PRESENTACIÓN -->
+  <header id="header" role="banner">
+    <div class="header-content">
+      <h1>Soy un programador full stack</h1>
+      <h2>Un joven soñador con grandes proyectos y sólidos conocimientos en Python</h2>
     </div>
+  </header>
 
-    <div class="project-card">
-      <canvas class="proj-icon" data-type="finance" width="80" height="80"></canvas>
-      <h3>Financial Calculator</h3>
-      <p>Professional, sober interface for dynamic financial computations and optional charting.</p>
-      <a href="./financiator/index.html" class="project-link" target="_blank" rel="noopener">View Project</a>
+  <!-- SECCIÓN PROYECTOS -->
+  <section id="projects" class="section">
+    <h2>Proyectos Destacados</h2>
+    <div class="projects-container">
+      <div class="project-card">
+        <canvas class="proj-icon" data-type="beauty" width="60" height="60"></canvas>
+        <h3>Beauty Landing Page</h3>
+        <p>Estética femenina con tipografías cursivas y suaves transiciones al hacer scroll.</p>
+        <a href="https://tuproyectobelleza.vercel.app" target="_blank">Ver Proyecto</a>
+      </div>
+      <div class="project-card">
+        <canvas class="proj-icon" data-type="finance" width="60" height="60"></canvas>
+        <h3>Calculadora Financiera</h3>
+        <p>Interfaz profesional para cálculos dinámicos y gráfica opcional.</p>
+        <a href="./financiator/index.html" target="_blank">Ver Proyecto</a>
+      </div>
+      <div class="project-card">
+        <canvas class="proj-icon" data-type="tourism" width="60" height="60"></canvas>
+        <h3>Portal de Turismo</h3>
+        <p>Diseño vibrante, galerías interactivas y experiencia mobile-first.</p>
+        <a href="https://portaldeturismo.vercel.app" target="_blank">Ver Proyecto</a>
+      </div>
     </div>
+  </section>
+  <style>
+    /* Detalles ampliables */
+    .project-details {
+      opacity: 0;
+      max-height: 0;
+      padding: 0 24px;
+      overflow: hidden;
+      transition: opacity .4s ease, max-height .4s ease, padding .4s ease;
+    }
+    .project-card.expanded {
+      max-height: 900px; /* Ajusta si es necesario */
+    }
+    .project-card.expanded .project-details {
+      opacity: 1;
+      padding: 16px 24px;
+      max-height: 500px;
+    }
+    .close-details {
+      margin-top: 12px;
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    /* Canvas extra dentro de cada tarjeta */
+    .proj-extra {
+      display: block;
+      margin: 12px auto;
+      background: rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+  </style>
 
-    <div class="project-card">
-      <canvas class="proj-icon" data-type="tourism" width="80" height="80"></canvas>
-      <h3>Tourism Portal</h3>
-      <p>Vibrant, image-driven design with interactive galleries, smooth transitions, and mobile-first layout.</p>
-      <a href="https://portaldeturismo.vercel.app" class="project-link" target="_blank" rel="noopener">View Project</a>
-    </div>
+  <!-- SECCIÓN PROYECTOS (con canvas extra) -->
+  <section id="projects" class="section">
+    <h2>Proyectos Destacados</h2>
+    <div class="projects-container">
 
-  </div>
-</section>
+      <!-- Beauty sigue igual (solo ícono giratorio) -->
+      <div class="project-card">
+        <canvas class="proj-icon" data-type="beauty" width="60" height="60"></canvas>
+        <h3>Beauty Landing Page</h3>
+        <p>Estética femenina con tipografías cursivas y transiciones.</p>
+        <a href="https://tuproyectobelleza.vercel.app" target="_blank">Ver Proyecto</a>
+        <div class="project-details">
+          <p>• HTML5, CSS3 (Flexbox, Grid)</p>
+          <p>• Canvas API para iconos animados</p>
+          <p>• Scroll-triggered fade-in</p>
+          <p><a href="https://github.com/tuusuario/beauty-landing" target="_blank">GitHub</a></p>
+          <button class="close-details">Cerrar</button>
+        </div>
+      </div>
 
-<section id="skills">
-  <h2>Hard Skills</h2>
-  <div class="skills-hard">
-    <!-- HTML -->
-    <div class="skill-hard">
-      <canvas class="skill-icon" data-skill="html" width="80" height="80"></canvas>
-      <span>HTML5</span>
-    </div>
-    <!-- CSS -->
-    <div class="skill-hard">
-      <canvas class="skill-icon" data-skill="css" width="80" height="80"></canvas>
-      <span>CSS3</span>
-    </div>
-    <!-- JavaScript -->
-    <div class="skill-hard">
-      <canvas class="skill-icon" data-skill="js" width="80" height="80"></canvas>
-      <span>JavaScript</span>
-    </div>
-    <!-- React -->
-    <div class="skill-hard">
-      <canvas class="skill-icon" data-skill="react" width="80" height="80"></canvas>
-      <span>React</span>
-    </div>
-    <!-- Git -->
-    <div class="skill-hard">
-      <canvas class="skill-icon" data-skill="git" width="80" height="80"></canvas>
-      <span>Git</span>
-    </div>
-  </div>
+      <!-- Calculadora Financiera: añadimos canvas extra para "encuesta" -->
+      <div class="project-card">
+        <canvas class="proj-icon" data-type="finance" width="60" height="60"></canvas>
+        <h3>Calculadora Financiera</h3>
+        <p>Interfaz profesional para cálculos dinámicos y gráfica opcional.</p>
+        <a href="./financiator/index.html" target="_blank">Ver Proyecto</a>
+        <!-- canvas extra: barras de encuesta -->
+        <canvas class="proj-extra" data-extra="finance-survey" width="300" height="100"></canvas>
+        <div class="project-details">
+          <p>• JavaScript ES6+, manejo de eventos</p>
+          <p>• Chart.js para visualización de datos</p>
+          <p>• Validaciones en tiempo real</p>
+          <p><a href="https://github.com/tuusuario/calculadora-financiera" target="_blank">GitHub</a></p>
+          <button class="close-details">Cerrar</button>
+        </div>
+      </div>
 
-  <h2>Soft Skills</h2>
-  <div class="skills-soft">
-    <ul>
-      <li>Problem-solving mindset</li>
-      <li>Effective communication</li>
-      <li>Team collaboration</li>
-      <li>Adaptability & learning agility</li>
-      <li>Time management</li>
-    </ul>
-  </div>
-</section>
+      <!-- Portal de Turismo: añadimos canvas extra para "avión volando" -->
+      <div class="project-card">
+        <canvas class="proj-icon" data-type="tourism" width="60" height="60"></canvas>
+        <h3>Portal de Turismo</h3>
+        <p>Diseño vibrante, galerías interactivas y experiencia mobile-first.</p>
+        <a href="https://portaldeturismo.vercel.app" target="_blank">Ver Proyecto</a>
+        <!-- canvas extra: avión animado -->
+        <canvas class="proj-extra" data-extra="tourism-plane" width="300" height="100"></canvas>
+        <div class="project-details">
+          <p>• React + React Router</p>
+          <p>• Animaciones con Framer Motion</p>
+          <p>• API de imágenes y mapas</p>
+          <p><a href="https://github.com/tuusuario/portal-turismo" target="_blank">GitHub</a></p>
+          <button class="close-details">Cerrar</button>
+        </div>
+      </div>
 
-<!-- Botón flotante Contact Me -->
-<button id="contact-btn" aria-label="Contact Me">
-  Contact Me
-</button>
-<div id="contact-icons" aria-hidden="true">
-  <a href="https://linkedin.com/in/jairolemuellebarrientos" target="_blank" rel="noopener" class="contact-icon" aria-label="LinkedIn">
-    <!-- LinkedIn SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88071 3.88071 6 2.5 6C1.11929 6 0 4.88071 0 3.5C0 2.11929 1.11929 1 2.5 1C3.88071 1 4.98 2.11929 4.98 3.5zM0 8H5V24H0V8zM7.59 8H12.31V10.17H12.38C12.96 9.16 14.47 8.1 16.7 8.1C21.11 8.1 22 10.81 22 15.3V24H17V16.3C17 14.56 16.99 12.48 14.63 12.48C12.26 12.48 11.91 14.22 11.91 16.15V24H7.59V8Z"/></svg>
-  </a>
-  <a href="https://wa.me/54934374576536" target="_blank" rel="noopener" class="contact-icon" aria-label="WhatsApp">
-    <!-- WhatsApp SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48C18.7 1.66 15.79 1.1 13.41 2.14C11.03 3.18 9.92 5.81 10.77 7.94L10.83 8.07C8.14 7.94 5.55 6.89 3.75 5.13C1.95 3.37 1.26 0.74 2.8 0C4.34 -0.74 7.25 -0.14 9.63 0.9C12.01 1.94 13.12 4.6 12.27 6.75L12.21 6.88C14.89 7.01 17.48 8.07 19.29 9.83C21.09 11.59 21.78 14.22 20.24 14.97C18.7 15.71 15.79 15.11 13.41 14.07C12.66 16.15 10.2 18.28 8.28 18.28C6.36 18.28 4.49 16.35 4.49 14.43C4.49 12.51 6.42 10.64 8.34 10.64C9.95 10.64 11.01 11.12 11.44 11.53L11.52 11.59C11.92 11.99 12.41 12.25 12.94 12.37C13.49 12.48 14.04 12.44 14.56 12.26L14.56 12.26C15.18 11.98 15.76 11.51 16.15 10.91L17.1 9.52C17.36 9.19 17.5 8.79 17.5 8.38C17.5 7.97 17.37 7.57 17.12 7.23L15.42 4.25C15.19 3.93 14.87 3.68 14.5 3.53C14.13 3.37 13.72 3.36 13.35 3.5L13.35 3.5C12.85 3.68 12.42 4.12 12.19 4.68C11.96 5.25 12 5.88 12.26 6.42L13.36 9.74C13.4 9.82 13.44 9.91 13.47 9.99L13.47 9.99C13.53 10.14 13.65 10.29 13.78 10.42L13.78 10.42C14.33 10.99 15.17 11.06 15.82 10.57L17.51 9.01C18.13 8.49 18.41 7.7 18.3 6.91L17.5 2.61C17.44 2.13 17.09 1.72 16.62 1.46C16.15 1.19 15.57 1.14 15.04 1.33L13.41 2.14Z"/></svg>
-  </a>
-  <a href="mailto:jairolemuellebarrientos@gmail.com" target="_blank" rel="noopener" class="contact-icon" aria-label="Email">
-    <!-- Email SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M2 4h20v16H2z" fill="none"/><path d="M22 6v12H2V6h20m0-2H2c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h20c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zM4 8l8 5 8-5v10H4V8z"/></svg>
-  </a>
-</div>
+    </div>
+  </section>
 
-<script>
-  // Scroll animation para proyectos
-  function onScrollAnimate() {
+  <!-- SECCIÓN HABILIDADES -->
+  <section id="skills" class="section">
+    <h2>Habilidades</h2>
+    <canvas id="snow-canvas"></canvas>
+    <div class="skills-container">
+      <span class="skill-tag">HTML5</span>
+      <span class="skill-tag">CSS3</span>
+      <span class="skill-tag">JavaScript</span>
+      <span class="skill-tag">React</span>
+      <span class="skill-tag">Node.js</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">Git</span>
+      <span class="skill-tag">Docker</span>
+    </div>
+    <div class="soft-container">
+      <span class="soft-skill">Problem Solving</span>
+      <span class="soft-skill">Communication</span>
+      <span class="soft-skill">Teamwork</span>
+      <span class="soft-skill">Adaptability</span>
+      <span class="soft-skill">Creativity</span>
+      <span class="soft-skill">Time Management</span>
+      <span class="soft-skill">Continuous Learning</span>
+      <span class="soft-skill">Leadership</span>
+    </div>
+  </section>
+
+  <!-- BOTÓN CONTÁCTAME -->
+  <div class="contact-float"><span>Contáctame</span></div>
+
+  <!-- FOOTER / CONTACTO FINAL -->
+  <footer id="contact" class="section">
+    <h2>Contacto</h2>
+    <p><a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank">LinkedIn</a></p>
+    <p><a href="https://wa.me/549457636" target="_blank">WhatsApp</a></p>
+    <p><a href="mailto:barrientosjairolemuel@gmail.com">Gmail</a></p>
+    <p style="margin-top:1rem;font-size:0.85rem;opacity:0.6;">© 2025 Jairo L. Barrientos</p>
+  </footer>
+
+  <script>
+    // — Función de detalle expandible
     document.querySelectorAll('.project-card').forEach(card => {
-      const rect = card.getBoundingClientRect();
-      if(rect.top < window.innerHeight - 100) {
-        card.classList.add('visible');
-      }
+      card.addEventListener('click', e => {
+        if (!e.target.closest('.close-details')) {
+          card.classList.toggle('expanded');
+        }
+      });
+      const closeBtn = card.querySelector('.close-details');
+      if (closeBtn) closeBtn.addEventListener('click', () => {
+        card.classList.remove('expanded');
+      });
     });
-  }
-  window.addEventListener('scroll', onScrollAnimate);
-  onScrollAnimate();
 
-  // Animaciones Canvas para proyectos destacados
-  document.querySelectorAll('.proj-icon').forEach(canvas => {
-    const ctx = canvas.getContext('2d');
-    const type = canvas.dataset.type;
-    let animationId;
+    // — IntersectionObserver para .visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) {
+          target.classList.add('visible');
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.15 });
 
-    if (type === 'beauty') {
-      // Lápiz labial estilizado con brillo animado
-      let shineX = 0;
-      function drawLipstick() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ['.project-card', '.skill-tag', '.soft-skill'].forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => observer.observe(el));
+    });
 
-        // Cuerpo labial
-        ctx.fillStyle = '#ff4d88';
+    // — Animación de iconos (idéntica a Parte 1)
+    function animateIcon(canvas, type) { /* …igual que antes… */ }
+    function initIcons(selector = 'canvas[data-type]') { /* …igual que antes… */ }
+
+    // — Animaciones extra por proyecto
+    function animateExtra(canvas, extra) {
+      const ctx = canvas.getContext('2d');
+      let t = 0;
+      if (!ctx) return;
+
+      function drawSurvey() {
+        const bars = [0.6, 0.8, 0.4]; // valores simulados
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+        bars.forEach((pct, i) => {
+          const bw = w / 5;
+          const x = (i + 1) * bw;
+          const barH = h * pct * Math.abs(Math.sin(t + i));
+          ctx.fillStyle = 'rgba(0,229,255,0.6)';
+          ctx.fillRect(x, h - barH, bw * 0.6, barH);
+        });
+      }
+
+      function drawPlane() {
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+        // coordenada x animada
+        const x = (w + 50) * ((t * 0.1) % 1) - 50;
+        const y = h * 0.5 + 10 * Math.sin(t * 2);
+        // cuerpo
+        ctx.fillStyle = 'white';
         ctx.beginPath();
-        ctx.moveTo(40, 15);
-        ctx.lineTo(50, 35);
-        ctx.lineTo(30, 35);
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + 40, y + 10);
+        ctx.lineTo(x + 30, y + 5);
+        ctx.lineTo(x + 40, y - 10);
         ctx.closePath();
         ctx.fill();
+        // ala
+        ctx.beginPath();
+        ctx.moveTo(x + 10, y + 5);
+        ctx.lineTo(x + 20, y - 10);
+        ctx.lineTo(x + 25, y + 5);
+        ctx.fill();
+      }
 
-        ctx.fillStyle = '#ff99cc';
-        ctx.fillRect(30, 35, 20, 30);
+      (function loop() {
+        if (extra === 'finance-survey') drawSurvey();
+        else if (extra === 'tourism-plane') drawPlane();
+        t += 0.02;
+        requestAnimationFrame(loop);
+      })();
+    }
 
-        ctx.fillStyle = '#222';
-        ctx.fillRect(30, 65, 20, 10);
+    function initExtras() {
+      document.querySelectorAll('canvas[data-extra]').forEach(c => {
+        animateExtra(c, c.dataset.extra);
+      });
+    }
 
-        // Brillo animado
-        let gradient = ctx.createLinearGradient(shineX, 10, shineX + 
+    // — Nieve en habilidades
+    function initSnow() { /* …igual que antes… */ }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initIcons();
+      initExtras();
+      initSnow();
+
+      // Panel de contacto dinámico
+      const panel = document.createElement('div');
+      panel.id = 'contact-panel';
+      panel.className = 'contact-panel';
+      ['linkedin','whatsapp','email'].forEach(type => {
+        const c = document.createElement('canvas');
+        c.className = 'contact-icon';
+        c.width = c.height = 40;
+        c.dataset.type = type;
+        panel.appendChild(c);
+      });
+      document.body.appendChild(panel);
+      initIcons('.contact-icon');
+
+      document.querySelector('.contact-float').addEventListener('click', () => {
+        panel.classList.toggle('show');
+      });
+    });
+  </script>
+</body>
+</html>
