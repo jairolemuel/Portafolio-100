@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Jairo Lemuel Barrientos | Programador Full Stack"/>
   <title>Jairo L. Barrientos | Portafolio</title>
-  <!-- Incluir Lottie Web con defer -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js" defer></script>
-  <!-- Incluir GSAP si lo vas a usar -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-</head>
-<body>
 
   <!-- FUENTES -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
 
-  <!-- ESTILOS -->
+  <!-- Lottie Web y GSAP con defer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+  <!-- Tu script de inicialización de Proyectos -->
+  <script src="js/projects.js" defer></script>
+
+  <!-- ESTILOS GLOBALES -->
   <style>
     :root {
       /* Colores */
@@ -31,7 +32,6 @@
       --font-heading: 'Playfair Display', serif;
       --font-body: 'Montserrat', sans-serif;
     }
-
     /* Reset global */
     *, *::before, *::after {
       margin:0; padding:0; box-sizing:border-box;
@@ -47,7 +47,7 @@
     }
     a { color: inherit; text-decoration: none; }
 
-    /* ── NAVBAR ───────────────────────────────────────────────────────── */
+    /* ── NAVBAR (ejemplo) ───────────────────────────────────────────────── */
     nav.navbar {
       position: fixed; top:0; left:0; width:100%;
       padding:1rem 2rem;
