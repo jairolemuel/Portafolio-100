@@ -376,158 +376,179 @@
       animateExtra(c, c.dataset.extra);
     });
   </script>
-  <!-- SECCIÓN HABILIDADES -->
-  <section id="skills" class="section">
-    <h2>Habilidades</h2>
-    <canvas id="snow-canvas"></canvas>
-    <div class="skills-container">
-      <span class="skill-tag">HTML5</span>
-      <span class="skill-tag">CSS3</span>
-      <span class="skill-tag">JavaScript</span>
-      <span class="skill-tag">React</span>
-      <span class="skill-tag">Node.js</span>
-      <span class="skill-tag">Python</span>
-      <span class="skill-tag">Git</span>
-      <span class="skill-tag">Docker</span>
-    </div>
-    <div class="soft-container">
-      <span class="soft-skill">Problem Solving</span>
-      <span class="soft-skill">Communication</span>
-      <span class="soft-skill">Teamwork</span>
-      <span class="soft-skill">Adaptability</span>
-      <span class="soft-skill">Creativity</span>
-      <span class="soft-skill">Time Management</span>
-      <span class="soft-skill">Continuous Learning</span>
-      <span class="soft-skill">Leadership</span>
-    </div>
-  </section>
+<section id="skills" class="habilidades-section">
+  <canvas id="web-bg-canvas"></canvas>
 
-  <!-- BOTÓN CONTÁCTAME -->
-  <div class="contact-float"><span>Contáctame</span></div>
+  <div class="skills-wrapper">
+    <h2 class="titulo-seccion">Habilidades</h2>
 
-  <!-- FOOTER / CONTACTO FINAL -->
-  <footer id="contact" class="section">
-    <h2>Contacto</h2>
-    <p><a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank">LinkedIn</a></p>
-    <p><a href="https://wa.me/549457636" target="_blank">WhatsApp</a></p>
-    <p><a href="mailto:barrientosjairolemuel@gmail.com">Gmail</a></p>
-    <p style="margin-top:1rem;font-size:0.85rem;opacity:0.6;">© 2025 Jairo L. Barrientos</p>
-  </footer>
+    <div class="habilidades-duras">
+      <h3>Habilidades Duras</h3>
+      <div class="skills-container">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Django</span>
+        <span class="skill-tag">Express</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">Next.js</span>
+      </div>
+    </div>
+
+    <div class="habilidades-blandas">
+      <h3>Habilidades Blandas</h3>
+      <div class="soft-container">
+        <span class="soft-skill">Trabajo en equipo</span>
+        <span class="soft-skill">Proactividad</span>
+        <span class="soft-skill">Comunicación</span>
+        <span class="soft-skill">Adaptabilidad</span>
+        <span class="soft-skill">Entusiasmo</span>
+        <span class="soft-skill">Liderazgo</span>
+        <span class="soft-skill">Resolución de problemas</span>
+        <span class="soft-skill">Aprendizaje continuo</span>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .habilidades-section {
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 2rem;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+    }
+
+    #web-bg-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .skills-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .titulo-seccion {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .habilidades-duras, .habilidades-blandas {
+      margin-bottom: 3rem;
+    }
+
+    .skills-container, .soft-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .skill-tag, .soft-skill {
+      padding: 0.7rem 1.3rem;
+      border-radius: 25px;
+      font-weight: 500;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(3px);
+      transition: transform 0.3s, background 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .skill-tag.visible, .soft-skill.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease;
+    }
+
+    .skill-tag:hover, .soft-skill:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 
   <script>
-    // — Función de detalle expandible
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.addEventListener('click', e => {
-        if (!e.target.closest('.close-details')) {
-          card.classList.toggle('expanded');
-        }
-      });
-      const closeBtn = card.querySelector('.close-details');
-      if (closeBtn) closeBtn.addEventListener('click', () => {
-        card.classList.remove('expanded');
-      });
-    });
+    // Canvas telaraña animada
+    const canvas = document.getElementById('web-bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let points = [];
 
-    // — IntersectionObserver para .visible
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(({ target, isIntersecting }) => {
-        if (isIntersecting) {
-          target.classList.add('visible');
-          observer.unobserve(target);
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      points = [];
+      for (let i = 0; i < 100; i++) {
+        points.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5
+        });
+      }
+    }
+
+    function animateWeb() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of points) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      }
+      for (let i = 0; i < points.length; i++) {
+        for (let j = i + 1; j < points.length; j++) {
+          const dx = points[i].x - points[j].x;
+          const dy = points[i].y - points[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.strokeStyle = `rgba(255,255,255,${1 - dist / 100})`;
+            ctx.beginPath();
+            ctx.moveTo(points[i].x, points[i].y);
+            ctx.lineTo(points[j].x, points[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateWeb);
+    }
+
+    // IntersectionObserver para animaciones de entrada
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15 });
 
-    ['.project-card', '.skill-tag', '.soft-skill'].forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => observer.observe(el));
-    });
-
-    // — Animación de iconos (idéntica a Parte 1)
-    function animateIcon(canvas, type) { /* …igual que antes… */ }
-    function initIcons(selector = 'canvas[data-type]') { /* …igual que antes… */ }
-
-    // — Animaciones extra por proyecto
-    function animateExtra(canvas, extra) {
-      const ctx = canvas.getContext('2d');
-      let t = 0;
-      if (!ctx) return;
-
-      function drawSurvey() {
-        const bars = [0.6, 0.8, 0.4]; // valores simulados
-        const w = canvas.width, h = canvas.height;
-        ctx.clearRect(0, 0, w, h);
-        bars.forEach((pct, i) => {
-          const bw = w / 5;
-          const x = (i + 1) * bw;
-          const barH = h * pct * Math.abs(Math.sin(t + i));
-          ctx.fillStyle = 'rgba(0,229,255,0.6)';
-          ctx.fillRect(x, h - barH, bw * 0.6, barH);
-        });
-      }
-
-      function drawPlane() {
-        const w = canvas.width, h = canvas.height;
-        ctx.clearRect(0, 0, w, h);
-        // coordenada x animada
-        const x = (w + 50) * ((t * 0.1) % 1) - 50;
-        const y = h * 0.5 + 10 * Math.sin(t * 2);
-        // cuerpo
-        ctx.fillStyle = 'white';
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + 40, y + 10);
-        ctx.lineTo(x + 30, y + 5);
-        ctx.lineTo(x + 40, y - 10);
-        ctx.closePath();
-        ctx.fill();
-        // ala
-        ctx.beginPath();
-        ctx.moveTo(x + 10, y + 5);
-        ctx.lineTo(x + 20, y - 10);
-        ctx.lineTo(x + 25, y + 5);
-        ctx.fill();
-      }
-
-      (function loop() {
-        if (extra === 'finance-survey') drawSurvey();
-        else if (extra === 'tourism-plane') drawPlane();
-        t += 0.02;
-        requestAnimationFrame(loop);
-      })();
-    }
-
-    function initExtras() {
-      document.querySelectorAll('canvas[data-extra]').forEach(c => {
-        animateExtra(c, c.dataset.extra);
-      });
-    }
-
-    // — Nieve en habilidades
-    function initSnow() { /* …igual que antes… */ }
-
     document.addEventListener('DOMContentLoaded', () => {
-      initIcons();
-      initExtras();
-      initSnow();
-
-      // Panel de contacto dinámico
-      const panel = document.createElement('div');
-      panel.id = 'contact-panel';
-      panel.className = 'contact-panel';
-      ['linkedin','whatsapp','email'].forEach(type => {
-        const c = document.createElement('canvas');
-        c.className = 'contact-icon';
-        c.width = c.height = 40;
-        c.dataset.type = type;
-        panel.appendChild(c);
-      });
-      document.body.appendChild(panel);
-      initIcons('.contact-icon');
-
-      document.querySelector('.contact-float').addEventListener('click', () => {
-        panel.classList.toggle('show');
-      });
+      resizeCanvas();
+      animateWeb();
+      window.addEventListener('resize', resizeCanvas);
+      document.querySelectorAll('.skill-tag, .soft-skill').forEach(el => observer.observe(el));
     });
   </script>
-</body>
-</html>
+</section>
