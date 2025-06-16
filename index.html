@@ -139,59 +139,161 @@
       border-radius:2px;
     }
 
-    /* ── PROYECTOS DESTACADOS ───────────────────────────────────────── */
-    #projects .projects-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-      gap:30px;
-      max-width:1200px; margin:auto;
+   <!-- ── ESTILOS EXTRA PARA PROYECTOS ───────────────────────────────────────── -->
+  <style>
+    .proj-extra {
+      display: block;
+      margin: 12px auto;
+      background: rgba(0,0,0,0.1);
+      border-radius: 8px;
     }
-    .project-card {
-      background: rgba(255,255,255,0.05);
-      border:1px solid var(--accent);
-      border-radius:15px;
-      padding:24px;
-      backdrop-filter: blur(8px);
-      box-shadow:0 0 15px rgba(0,229,255,0.2);
-      opacity:0;
-      transform: translateY(30px);
-      transition: opacity .6s ease, transform .6s ease;
-      position:relative; overflow:hidden;
+  </style>
+
+  <!-- ── SECCIÓN PROYECTOS REORDENADA & DETALLADA ──────────────────────────── -->
+  <section id="projects" class="section">
+    <h2>Proyectos Destacados</h2>
+    <div class="projects-container">
+
+      <!-- 1) Calculadora Financiera -->
+      <div class="project-card" data-link="./financiator/index.html">
+        <canvas class="proj-icon" data-type="finance" width="60" height="60"></canvas>
+        <h3>Calculadora Financiera</h3>
+        <p>Interfaz profesional para cálculos dinámicos y gráfica opcional.</p>
+        <canvas class="proj-extra" data-extra="finance-survey" width="300" height="100"></canvas>
+        <div class="project-details">
+          <p>• JavaScript ES6+, manejo de eventos</p>
+          <p>• Chart.js para visualización de datos</p>
+          <p>• Validaciones en tiempo real</p>
+          <p><a href="https://github.com/tuusuario/calculadora-financiera" target="_blank">GitHub</a></p>
+          <button class="close-details">Cerrar</button>
+        </div>
+      </div>
+
+      <!-- 2) Beauty Landing Page: lápiz labial animado -->
+      <div class="project-card" data-link="https://tuproyectobelleza.vercel.app">
+        <canvas class="proj-icon" data-type="beauty" width="60" height="60"></canvas>
+        <h3>Beauty Landing Page</h3>
+        <p>Estética femenina con tipografías cursivas y transiciones.</p>
+        <canvas class="proj-extra" data-extra="beauty-lipstick" width="200" height="100"></canvas>
+        <div class="project-details">
+          <p>• HTML5, CSS3 (Flexbox, Grid)</p>
+          <p>• Canvas API para iconos animados</p>
+          <p>• Scroll-triggered fade-in</p>
+          <p><a href="https://github.com/tuusuario/beauty-landing" target="_blank">GitHub</a></p>
+          <button class="close-details">Cerrar</button>
+        </div>
+      </div>
+
+      <!-- 3) Portal de Turismo (avión volando mejorado) -->
+      <div class="project-card" data-link="https://portaldeturismo.vercel.app">
+        <canvas class="proj-icon" data-type="tourism" width="60" height="60"></canvas>
+        <h3>Portal de Turismo</h3>
+        <p>Diseño vibrante, galerías interactivas y experiencia mobile-first.</p>
+        <canvas class="proj-extra" data-extra="tourism-plane" width="300" height="100"></canvas>
+        <div class="project-details">
+          <p>• React + React Router</p>
+          <p>• Animaciones con Framer Motion</p>
+          <p>• API de imágenes y mapas</p>
+          <p><a href="https://github.com/tuusuario/portal-turismo" target="_blank">GitHub</a></p>
+          <button class="close-details">Cerrar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    // abre el link al hacer clic en la tarjeta
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', e => {
+        if (e.target.closest('.close-details')) return;
+        const url = card.dataset.link;
+        if (url) window.open(url, '_blank');
+      });
+    });
+
+    // animaciones extra para cada proyecto
+    function animateExtra(canvas, extra) {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      let t = 0;
+
+      function drawFinance() {
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0,0,w,h);
+        [0.5,0.7,0.4].forEach((pct,i) => {
+          const bw = w/5, x = (i+1)*bw, barH = h*pct*Math.abs(Math.sin(t+i));
+          ctx.fillStyle = 'rgba(0,229,255,0.6)';
+          ctx.fillRect(x, h-barH, bw*0.6, barH);
+        });
+      }
+
+      function drawLipstick() {
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0,0,w,h);
+
+        // cuerpo del lápiz labial
+        const lipLength = 80, lipWidth = 20;
+        const x0 = w/2 - lipLength/2, y0 = h/2 - lipWidth/2;
+        // base metalizada
+        ctx.fillStyle = 'rgba(200,200,200,0.8)';
+        ctx.fillRect(x0, y0 + lipWidth, lipLength, 8);
+        // tubo
+        ctx.fillStyle = 'rgba(50,50,50,0.9)';
+        ctx.fillRect(x0, y0, lipLength, lipWidth);
+        // barra de color oscilante
+        const rise = 10 + 5 * Math.sin(t*2);
+        ctx.fillStyle = 'crimson';
+        ctx.fillRect(x0 + lipLength/4, y0 - rise, lipLength/2, rise);
+        // destello de brillo
+        if (Math.sin(t*5) > 0.9) {
+          ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(x0 + lipLength*0.75, y0 - rise + 5);
+          ctx.lineTo(x0 + lipLength*0.75 + 10, y0 - rise + 15);
+          ctx.moveTo(x0 + lipLength*0.85, y0 - rise + 2);
+          ctx.lineTo(x0 + lipLength*0.85 - 8, y0 - rise + 12);
+          ctx.stroke();
+        }
+      }
+
+      function drawPlane() {
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0,0,w,h);
+        const speed = 0.3;
+        const x = ((t * speed) % (w + 80)) - 40;
+        const y = h/2 + 10 * Math.sin(t * 2);
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x+40, y+10);
+        ctx.lineTo(x+30, y+5);
+        ctx.lineTo(x+40, y-10);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x+10,y+5);
+        ctx.lineTo(x+20,y-10);
+        ctx.lineTo(x+25,y+5);
+        ctx.fill();
+      }
+
+      (function loop() {
+        if (extra === 'finance-survey') drawFinance();
+        else if (extra === 'beauty-lipstick') drawLipstick();
+        else if (extra === 'tourism-plane') drawPlane();
+        t += 0.02;
+        requestAnimationFrame(loop);
+      })();
     }
-    .project-card.visible {
-      opacity:1;
-      transform: translateY(0);
-    }
-    .project-card h3 {
-      color:#aaffff; margin-bottom:0.5rem; font-size:1.5em;
-    }
-    .project-card p {
-      color:#d0fafa; margin-bottom:1rem;
-    }
-    .project-card a {
-      display:inline-block;
-      font-family: var(--font-heading);
-      font-weight:bold;
-      padding:8px 16px;
-      border:2px solid var(--accent);
-      border-radius:8px;
-      transition: background .3s, color .3s, transform .3s;
-    }
-    .project-card a:hover {
-      background: var(--accent);
-      color: var(--bg-primary);
-      transform: translateY(-2px);
-    }
-    .project-card::before {
-      content:'';
-      position:absolute;
-      top:-50%; left:-50%;
-      width:200%; height:200%;
-      background:radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
-      opacity:0; transform:rotate(45deg);
-      transition: opacity .5s ease;
-    }
-    .project-card:hover::before { opacity:1; }
+
+    // inicializa todas las animaciones extra
+    document.querySelectorAll('canvas[data-extra]').forEach(c => {
+      animateExtra(c, c.dataset.extra);
+    });
+  </script>
 
     /* ── HABILIDADES ─────────────────────────────────────────────────── */
     #skills {
