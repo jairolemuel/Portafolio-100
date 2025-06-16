@@ -225,63 +225,44 @@
   <h2>Proyectos Destacados</h2>
   <div class="projects-container">
 
-    <!-- FinancePro -->
-    <div class="project-card" id="card-finance" onclick="location.href='./financiator/index.html'">
-      <svg id="svg-finance" viewBox="0 0 120 80" class="svg-icon">
-        <defs>
-          <linearGradient id="grad-fin1" x1="0%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stop-color="#004c3f"/>
-            <stop offset="100%" stop-color="#00ffcc"/>
-          </linearGradient>
-        </defs>
-        <rect x="10" y="60" width="15" height="20" fill="url(#grad-fin1)" rx="2"/>
-        <rect x="40" y="50" width="15" height="30" fill="url(#grad-fin1)" rx="2"/>
-        <rect x="70" y="70" width="15" height="10" fill="url(#grad-fin1)" rx="2"/>
-      </svg>
+    <!-- 1) FinancePro -->
+    <div class="project-card" onclick="window.location.href='./financiator/index.html'">
+      <div class="project-icon">
+        <svg width="80" height="80" viewBox="0 0 100 100">
+          <rect x="15" y="20" width="70" height="50" rx="8" fill="#00e5ff"/>
+          <line x1="25" y1="40" x2="75" y2="40" stroke="#fff" stroke-width="3"/>
+          <circle cx="40" cy="55" r="5" fill="#fff"/>
+          <circle cx="60" cy="55" r="5" fill="#fff"/>
+        </svg>
+      </div>
       <h3>FinancePro</h3>
-      <p class="subtitle">Calculadora financiera con gráficas interactivas.</p>
+      <p>Calculadora financiera interactiva para simulaciones precisas.</p>
     </div>
 
-    <!-- BeautyGlow -->
-    <div class="project-card" id="card-beauty" onclick="location.href='https://tuproyectobelleza.vercel.app'">
-      <svg id="svg-beauty" viewBox="0 0 100 100" class="svg-icon">
-        <defs>
-          <radialGradient id="grad-beauty" cx="50%" cy="30%" r="50%">
-            <stop offset="0%" stop-color="#ff66aa"/>
-            <stop offset="100%" stop-color="#cc005f"/>
-          </radialGradient>
-        </defs>
-        <rect x="40" y="30" width="20" height="50" rx="4" ry="4" fill="url(#grad-beauty)" filter="url(#glow)"/>
-        <polygon points="40,30 60,30 50,10" fill="#ff99c3" filter="url(#glow)"/>
-        <circle cx="55" cy="40" r="5" fill="white" opacity="0.3"/>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-          <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </svg>
-      <h3>BeautyGlow</h3>
-      <p class="subtitle">Landing de belleza con animaciones elegantes.</p>
+    <!-- 2) BeautySpark -->
+    <div class="project-card" onclick="window.location.href='https://tuproyectobelleza.vercel.app'">
+      <div class="project-icon">
+        <svg width="80" height="80" viewBox="0 0 100 100">
+          <rect x="45" y="25" width="10" height="45" rx="5" fill="crimson"/>
+          <circle cx="50" cy="20" r="6" fill="pink" />
+          <path d="M45 75 Q50 85 55 75" stroke="pink" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
+      <h3>BeautySpark</h3>
+      <p>Landing page moderna con diseño cosmético atractivo.</p>
     </div>
 
-    <!-- TravelSphere -->
-    <div class="project-card" id="card-travel" onclick="location.href='https://portaldeturismo.vercel.app'">
-      <svg id="svg-travel" viewBox="0 0 200 80" class="svg-icon">
-        <!-- isla -->
-        <ellipse cx="100" cy="60" rx="50" ry="10" fill="#336633" filter="url(#shadow)"/>
-        <!-- palmera -->
-        <line x1="120" y1="60" x2="120" y2="35" stroke="#8B4513" stroke-width="3"/>
-        <circle cx="120" cy="30" r="10" fill="#228B22"/>
-        <!-- avión -->
-        <polygon id="plane" points="0,20 15,15 15,25" fill="#ffffff" filter="url(#shadow)"/>
-        <filter id="shadow">
-          <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#000"/>
-        </filter>
-      </svg>
-      <h3>TravelSphere</h3>
-      <p class="subtitle">Portal de destinos turísticos inmersivo.</p>
+    <!-- 3) Portal de Destinos Turísticos -->
+    <div class="project-card" onclick="window.location.href='https://portaldeturismo.vercel.app'">
+      <div class="project-icon">
+        <svg width="80" height="80" viewBox="0 0 100 100">
+          <path d="M10 50 L40 40 L10 30 Z" fill="white" />
+          <path d="M40 40 L90 50" stroke="#00e5ff" stroke-width="3"/>
+          <circle cx="10" cy="50" r="2" fill="#00e5ff"/>
+        </svg>
+      </div>
+      <h3>Portal de Destinos Turísticos</h3>
+      <p>Explora lugares únicos con diseño vibrante y dinámico.</p>
     </div>
 
   </div>
@@ -289,103 +270,89 @@
 
 <style>
   .section-projects {
-    padding: 80px 20px;
-    background: #1a1027;
-    color: #fafafa;
-  }
-  .section-projects h2 {
+    background: linear-gradient(to bottom, #050505, #0f0f0f);
+    color: white;
+    padding: 100px 20px;
     text-align: center;
+    overflow-x: hidden;
+  }
+
+  .section-projects h2 {
     font-size: 3rem;
     margin-bottom: 3rem;
     background: linear-gradient(90deg, #00e5ff, #ff00c3);
     -webkit-background-clip: text;
     color: transparent;
-    text-shadow: 0 0 10px rgba(0,229,255,0.6);
+    text-shadow: 0 0 10px rgba(0,229,255,0.4);
   }
+
   .projects-container {
     display: flex;
-    gap: 2rem;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
   }
+
   .project-card {
-    background: linear-gradient(135deg, #2e1f3a, #402c52);
+    width: 280px;
+    padding: 2rem;
+    background: linear-gradient(145deg, #1c1c1c, #0e0e0e);
     border-radius: 20px;
-    width: 300px;
-    padding: 2rem 1rem 1rem;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    box-shadow: 0 10px 20px rgba(0, 229, 255, 0.1);
     cursor: pointer;
+    transform: translateY(50px);
     opacity: 0;
-    transform: translateY(50px) rotateX(15deg);
-    transition: transform .6s ease, opacity .6s ease, box-shadow .3s;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
   }
-  .project-card.visible {
-    opacity: 1;
-    transform: translateY(0) rotateX(0);
-  }
+
   .project-card:hover {
-    box-shadow: 0 15px 45px rgba(0,229,255,0.8);
-    transform: translateY(-8px) rotateX(0);
+    background: linear-gradient(145deg, #202020, #1a1a1a);
+    box-shadow: 0 0 25px rgba(255, 0, 195, 0.3), 0 0 15px rgba(0, 229, 255, 0.2);
+    transform: scale(1.03);
   }
-  .svg-icon {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
+
+  .project-icon {
+    margin-bottom: 1.5rem;
+    animation: float 2s ease-in-out infinite;
   }
+
   .project-card h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    color: #00e5ff;
   }
-  .subtitle {
+
+  .project-card p {
     font-size: 1rem;
-    color: #ccc;
-    margin-bottom: 1rem;
+    opacity: 0.85;
+    color: #ddd;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
   }
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script>
-  gsap.registerPlugin(MotionPathPlugin);
+  gsap.registerPlugin(ScrollTrigger);
 
-  // ScrollReveal con GSAP
-  gsap.utils.toArray('.project-card').forEach((card, i) => {
-    gsap.fromTo(card, {opacity:0, y:50, rotationX:15}, {
-      opacity:1, y:0, rotationX:0, 
-      delay: 0.3 + i*0.2, duration:1, ease:'power3.out',
-      scrollTrigger: { trigger: card, start: 'top 80%' }
+  gsap.utils.toArray(".project-card").forEach((card, i) => {
+    gsap.to(card, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      delay: i * 0.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      }
     });
-  });
-
-  // FinancePro: rebote barras
-  gsap.fromTo("#svg-finance rect", {
-    scaleY: 0, transformOrigin: "bottom center"
-  },{
-    scaleY:1, stagger:0.2, duration:1.2, ease:"bounce.out", repeat:-1, yoyo:true
-  });
-
-  // BeautyGlow: rotación + destello
-  gsap.to("#svg-beauty", {
-    rotate:360, transformOrigin:"50% 50%", duration:5, repeat:-1, ease:"linear",
-    scrollTrigger:{ trigger:"#card-beauty", start:"top 80%" }
-  });
-  gsap.to("#svg-beauty circle", {
-    opacity:0.8, duration:0.8, repeat:-1, yoyo:true, ease:"sine.inOut",
-    scrollTrigger:{ trigger:"#card-beauty", start:"top 80%" }
-  });
-
-  // TravelSphere: avión recorre curva
-  gsap.to("#plane", {
-    duration:8, repeat:-1, ease:"power1.inOut",
-    motionPath:{
-      path:[
-        {x:0,y:20},{x:50,y:10},{x:100,y:20},{x:150,y:10},{x:200,y:20}
-      ],
-      autoRotate:true
-    },
-    scrollTrigger:{ trigger:"#card-travel", start:"top 80%" }
   });
 </script>
 <section id="skills" class="section-skills">
