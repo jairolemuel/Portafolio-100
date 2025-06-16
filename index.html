@@ -329,10 +329,12 @@
     </article>
   </div>
 
+  <!-- Scripts externos -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
+  <!-- Script principal -->
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       gsap.registerPlugin(ScrollTrigger);
@@ -354,70 +356,73 @@
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      // Cargar JSON externo
-      const res = await fetch('./animations.json');
-      const animations = await res.json();
+      try {
+        const res = await fetch('./animations.json');
+        const animations = await res.json();
 
-      const animFinance = lottie.loadAnimation({
-        container: document.getElementById('lottie-finance'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations['finance-chart']
-      });
+        const animFinance = lottie.loadAnimation({
+          container: document.getElementById('lottie-finance'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animations.financeChart
+        });
 
-      const animBeauty = lottie.loadAnimation({
-        container: document.getElementById('lottie-beauty'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations['beauty-perfume']
-      });
+        const animBeauty = lottie.loadAnimation({
+          container: document.getElementById('lottie-beauty'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animations.beautyPerfume
+        });
 
-      const animTravel = lottie.loadAnimation({
-        container: document.getElementById('lottie-travel'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations['travel-beach']
-      });
+        const animTravel = lottie.loadAnimation({
+          container: document.getElementById('lottie-travel'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animations.travelBeach
+        });
 
-      // Hover animations
-      document.getElementById('lottie-finance').addEventListener('mouseenter', () => animFinance.setSpeed(1.5));
-      document.getElementById('lottie-finance').addEventListener('mouseleave', () => animFinance.setSpeed(1));
-      document.getElementById('lottie-beauty').addEventListener('mouseenter', () => animBeauty.setSpeed(0.5));
-      document.getElementById('lottie-beauty').addEventListener('mouseleave', () => animBeauty.setSpeed(1));
-      document.getElementById('lottie-travel').addEventListener('mouseenter', () => animTravel.pause());
-      document.getElementById('lottie-travel').addEventListener('mouseleave', () => animTravel.play());
+        // Hover speeds
+        document.getElementById('lottie-finance').addEventListener('mouseenter', () => animFinance.setSpeed(1.5));
+        document.getElementById('lottie-finance').addEventListener('mouseleave', () => animFinance.setSpeed(1));
+        document.getElementById('lottie-beauty').addEventListener('mouseenter', () => animBeauty.setSpeed(0.5));
+        document.getElementById('lottie-beauty').addEventListener('mouseleave', () => animBeauty.setSpeed(1));
+        document.getElementById('lottie-travel').addEventListener('mouseenter', () => animTravel.pause());
+        document.getElementById('lottie-travel').addEventListener('mouseleave', () => animTravel.play());
 
-      // ScrollTrigger para pausar fuera del viewport
-      ScrollTrigger.create({
-        trigger: '#lottie-finance',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animFinance.play(),
-        onLeave: () => animFinance.pause(),
-        onEnterBack: () => animFinance.play(),
-        onLeaveBack: () => animFinance.pause()
-      });
-      ScrollTrigger.create({
-        trigger: '#lottie-beauty',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animBeauty.play(),
-        onLeave: () => animBeauty.pause(),
-        onEnterBack: () => animBeauty.play(),
-        onLeaveBack: () => animBeauty.pause()
-      });
-      ScrollTrigger.create({
-        trigger: '#lottie-travel',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animTravel.play(),
-        onLeave: () => animTravel.pause(),
-        onEnterBack: () => animTravel.play(),
-        onLeaveBack: () => animTravel.pause()
-      });
+        // Scroll control
+        ScrollTrigger.create({
+          trigger: '#lottie-finance',
+          start: 'top bottom',
+          end: 'bottom top',
+          onEnter: () => animFinance.play(),
+          onLeave: () => animFinance.pause(),
+          onEnterBack: () => animFinance.play(),
+          onLeaveBack: () => animFinance.pause()
+        });
+        ScrollTrigger.create({
+          trigger: '#lottie-beauty',
+          start: 'top bottom',
+          end: 'bottom top',
+          onEnter: () => animBeauty.play(),
+          onLeave: () => animBeauty.pause(),
+          onEnterBack: () => animBeauty.play(),
+          onLeaveBack: () => animBeauty.pause()
+        });
+        ScrollTrigger.create({
+          trigger: '#lottie-travel',
+          start: 'top bottom',
+          end: 'bottom top',
+          onEnter: () => animTravel.play(),
+          onLeave: () => animTravel.pause(),
+          onEnterBack: () => animTravel.play(),
+          onLeaveBack: () => animTravel.pause()
+        });
+      } catch (err) {
+        console.error('Error cargando las animaciones:', err);
+      }
     });
   </script>
 </section>
