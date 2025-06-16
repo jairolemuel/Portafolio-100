@@ -1,726 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta & Performance -->
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Jairo Lemuel Barrientos | Web Developer & Designer"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <!-- Preload Fonts -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" as="style"/>
-  <!-- Styles -->
-  <style>
-    /**
-     * Built with:
-     *   • HTML5
-     *   • CSS3 (Custom Properties, Flexbox, Grid)
-     *   • JavaScript (ES6+)
-     *   • Canvas API for icon animations
-     *   • Accessible, Responsive, Performance-minded
-     */
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jairo Lemuel Barrientos | Portfolio</title>
+<style>
+  /* Reset & base */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0e0e1a; color: #d0f0f9;
+    overflow-x: hidden;
+  }
+  a { color: #00e5ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
 
-    :root {
-      /* Color Palette */
-      --bg-primary: #0e0e1a;
-      --bg-secondary: #141425;
-      --text-light: #f5f5f5;
-      --accent: #00e5ff;
-      --button-bg: rgba(255,255,255,0.1);
-      --button-blur: blur(6px);
-      /* Typography */
-      --font-heading: 'Playfair Display', serif;
-      --font-body: 'Montserrat', sans-serif;
-    }
-
-    /* Global Resets */
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-    body {
-      background-color: var(--bg-primary);
-      color: var(--text-light);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-
-    /* Header */
-    header {
-      position: relative;
-      width: 100%; height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      background: url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg') center/cover fixed;
-    }
-    header::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: rgba(14,14,26,0.75);
-      backdrop-filter: grayscale(20%) blur(3px);
-    }
-    .header-content {
-      position: relative; z-index: 1;
-      text-align: center;
-      padding: 2rem;
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px;
-    }
-    .header-content h1 {
-      font-family: var(--font-heading);
-      font-size: 3rem;
-      background: linear-gradient(90deg, var(--accent), #3a7bd5, var(--accent));
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      background-size: 200% auto;
-      animation: gradientMove 6s linear infinite;
-      margin-bottom: 0.5rem;
-      line-height: 1.2;
-    }
-    .header-content h2 {
-      font-size: 1.5rem;
-      color: var(--text-light);
-      opacity: 0.85;
-      font-weight: 600;
-    }
-    @keyframes gradientMove {
-      0% { background-position: 0% center; }
-      100% { background-position: -200% center; }
-    }
-
-    /* Navbar (Hamburger) */
-    .navbar {
-      position: fixed; top: 0; width: 100%;
-      padding: 1rem 2rem;
-      display: flex; justify-content: flex-end;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(8px);
-      z-index: 10;
-    }
-    .menu-btn {
-      background: var(--button-bg);
-      backdrop-filter: var(--button-blur);
-      border: 1px solid var(--accent);
-      border-radius: 6px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-family: var(--font-heading);
-      font-weight: 600;
-      color: var(--accent);
-      transition: transform 0.2s ease;
-    }
-    .menu-btn:hover {
-      transform: scale(1.05);
-    }
-
-    /* Dropdown (initially hidden) */
-    .menu-dropdown {
-      position: absolute; top: 100%; right: 2rem;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--accent);
-      border-radius: 8px;
-      padding: 1rem;
-      display: none;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .menu-dropdown.show {
-      display: flex;
-    }
-    .menu-dropdown a {
-      font-family: var(--font-body);
-      font-weight: 500;
-      color: var(--text-light);
-      transition: color 0.2s;
-    }
-    .menu-dropdown a:hover {
-      color: var(--accent);
-    }
-
-    /* Utility Classes for Part 2 */
-    .section { padding: 6rem 1rem; }
-    .section h2 {
-      font-family: var(--font-heading);
-      font-size: 2.25rem;
-      text-align: center;
-      color: var(--accent);
-      margin-bottom: 2rem;
-      position: relative;
-    }
-    .section h2::after {
-      content: '';
-      position: absolute; bottom: -0.5rem; left: 50%;
-      transform: translateX(-50%);
-      width: 4rem; height: 0.25rem;
-      background: var(--accent);
-      border-radius: 2px;
-    }
-  </style>
-
-  <!-- Fontsheet -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
-  <title>Jairo L. Barrientos | Portfolio</title>
-</head>
-
-<body>
-  <!-- Navbar (Hamburger) -->
-  <nav class="navbar" role="navigation" aria-label="Main menu">
-    <button class="menu-btn" aria-expanded="false" aria-controls="menu-list" onclick="toggleMenu()">
-      Menu
-    </button>
-    <div class="menu-dropdown" id="menu-list">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Header -->
-  <header role="banner">
-    <div class="header-content" role="heading">
-      <h1>Welcome to My Portfolio</h1>
-      <h2>I’m Jairo Lemuel Barrientos</h2>
-    </div>
-  </header>
-
-    /* Transición entre secciones */
-    .transition-gradient {
-      height:80px;
-      background:linear-gradient(180deg, transparent, rgba(0,255,255,0.2), transparent);
-      margin-top:-20px;
-    }
-
-    /* Habilidades con nieve */
-    section#skills {
-      position: relative; padding:40px 20px;
-      background:#0a0a0a; overflow:hidden;
-    }
-    #snow-canvas {
-      position:absolute; top:0; left:0;
-      width:100%; height:100%;
-      pointer-events:none; z-index:2;
-    }
-    section#skills h2 {
-      position: relative; z-index:3; text-align:center;
-      color:var(--accent-color); margin-bottom:30px;
-      font-family:'Playfair Display', serif; font-size:2em;
-      text-shadow:0 0 8px var(--accent-color);
-    }
-    .skills-container {
-      position: relative; z-index:3;
-      display:flex; flex-wrap:wrap; justify-content:center;
-      gap:12px; margin-top:20px;
-    }
-    .skill-tag {
-      background:rgba(255,255,255,0.05);
-      border:1px solid var(--accent-color);
-      padding:10px 16px; border-radius:8px; font-size:14px;
-      display:inline-flex; align-items:center; gap:6px;
-      color:var(--accent-color); backdrop-filter:blur(4px);
-      opacity:0; transform:translateY(20px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .skill-tag.visible { animation: popIn .4s ease-out; }
-    .skill-tag:hover {
-      transform: scale(1.05);
-      box-shadow:0 0 8px rgba(0,229,255,0.4);
-      background:rgba(255,255,255,0.1);
-    }
-    .skill-tag i { font-size:1.2em; }
-    .soft-container {
-      position: relative; z-index:3;
-      display:flex; flex-wrap:wrap; justify-content:center;
-      gap:12px; margin-top:30px;
-    }
-    .soft-skill {
-      background:rgba(255,255,255,0.05);
-      border:1px solid #555; padding:10px 16px; border-radius:8px;
-      font-size:13px; color:#ccc; backdrop-filter:blur(4px);
-      opacity:0; transform:translateY(20px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .soft-skill.visible { animation: popIn .4s ease-out; }
-    .soft-skill:hover {
-      transform: scale(1.05);
-      box-shadow:0 0 8px rgba(0,229,255,0.4);
-      background:rgba(255,255,255,0.1);
-    }
-    @keyframes popIn {
-      0% { transform:translateY(20px) scale(0.95); opacity:0; }
-      70% { transform:translateY(-2px) scale(1.02); opacity:1; }
-      100% { transform:translateY(0) scale(1); opacity:1; }
-    }
-
-    /* Footer */
-    footer {
-      text-align:center; padding:30px 20px;
-      background:rgba(0,0,0,0.6); color:#aaa; margin-top:40px;
-    }
-
-    /* Botón flotante de contacto */
-    .contact-float {
-      position:fixed; bottom:30px; right:30px;
-      background:var(--button-bg); color:var(--accent-color);
-      border:2px solid var(--button-border); border-radius:50px;
-      padding:12px 20px; font-size:1rem;
-      box-shadow:0 0 10px rgba(0,0,0,0.4);
-      cursor:pointer; transition:background .3s, color .3s, transform .3s;
-      backdrop-filter:blur(6px); z-index:999;
-      animation: floatBtn 4s ease-in-out infinite;
-    }
-    .contact-float:hover {
-      background: var(--accent-color); color: var(--bg-color);
-      transform: scale(1.05); box-shadow:0 0 15px rgba(0,229,255,0.6);
-      animation-play-state: paused;
-    }
-    .contact-panel {
-      position:fixed; bottom:80px; right:30px;
-      background:rgba(255,255,255,0.05); border:1px solid var(--accent-color);
-      border-radius:10px; backdrop-filter:blur(8px);
-      display:flex; gap:15px; padding:10px;
-      transform: scale(0); transform-origin: bottom right;
-      opacity:0; transition: transform .3s ease, opacity .3s ease;
-      z-index:998;
-    }
-    .contact-panel.show {
-      transform: scale(1); opacity:1;
-    }
-    .contact-panel a {
-      font-size:1.5rem; color:var(--accent-color);
-      transition: color .2s, transform .2s;
-    }
-    .contact-panel a:hover {
-      color:var(--text-color); transform: scale(1.2);
-    }
-    @keyframes floatBtn {
-      0%,100% { transform: translateY(0) scale(1); }
-      50%     { transform: translateY(-4px) scale(1.02); }
-    }
-  </style>
-</head>
-<body>
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="menu-button" onclick="toggleMenu()">
-      <svg width="24" height="24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
-      </svg>
-    </div>
-    <div class="menu-dropdown" id="menuDropdown">
-      <a href="#about">Sobre Mí</a>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header id="header">
-    <div class="bg-overlay"></div>
-    <div class="header-content">
-      <h1 id="h1-header" data-animate>Welcome to my Portfolio</h1>
-      <h2 id="h2-header" data-animate>Hi, I am Jairo</h2>
-    </div>
-  </header>
-
-  <section id="about">
-  <div style="
-    background: rgba(0, 0, 0, 0.4);
-    padding: 40px 20px;
-    border-radius: 12px;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
-    max-width: 800px;
-    margin: auto;
+  /* Header & Background */
+  header {
+    position: relative;
+    height: 100vh;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/3/32/Obelisco_Buenos_Aires_10.JPG') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #e0f7ffdd;
     text-align: center;
-  ">
-    <h2>About Me</h2>
-    <p style="font-size: 1.1rem; line-height: 1.6; color: #ddd;">
-      I'm a Full Stack Developer with a focus on backend and strong Python skills. A young creative with big dreams.
-    </p>
+  }
+  header::before {
+    content: "";
+    position: absolute; top:0; left:0; right:0; bottom:0;
+    background: rgba(14,14,26, 0.7);
+    z-index: 1;
+  }
+  header > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Welcome Text */
+  h1#welcome-title {
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 15px #00e5ffbb;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s forwards 0.3s;
+  }
+  h2#welcome-subtitle {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: 400;
+    margin: 0.5rem 0 2rem;
+    color: #a0d8f7cc;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s forwards 0.7s;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Clima widget */
+  #weather-widget {
+    position: absolute;
+    top: 1.3rem;
+    right: 1.3rem;
+    background: rgba(0, 229, 255, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 0.6rem 1rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #00e5ffdd;
+    cursor: default;
+    box-shadow: 0 0 12px #00e5ff77;
+    user-select: none;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1.2s;
+    max-width: 200px;
+  }
+  #weather-widget img {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 0 2px #00e5ffcc);
+  }
+  #weather-widget .temp {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  #weather-widget .desc {
+    text-transform: capitalize;
+    font-weight: 400;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* Projects Section */
+  #projects {
+    padding: 60px 20px 80px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  #projects h2 {
+    font-weight: 800;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #00e5ffcc;
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 12px #00e5ff88;
+  }
+  #projects .projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: center;
+  }
+  .project-card {
+    background: #111422cc;
+    border-radius: 14px;
+    box-shadow: 0 0 20px #00e5ff44;
+    flex: 1 1 280px;
+    max-width: 320px;
+    padding: 18px 22px;
+    color: #c0e9ffcc;
+    cursor: pointer;
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .project-card:hover {
+    box-shadow: 0 0 32px #00e5ffbb;
+    transform: translateY(-8px);
+  }
+  .project-card h3 {
+    margin: 0 0 0.4rem 0;
+    font-weight: 700;
+    color: #00e5ffdd;
+  }
+  .project-card p {
+    margin: 0;
+    font-weight: 300;
+    line-height: 1.4;
+    color: #a0d8f7aa;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    #weather-widget {
+      right: 0.8rem;
+      top: 0.8rem;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.85rem;
+    }
+    #projects h2 {
+      font-size: 2rem;
+    }
+    .project-card {
+      max-width: 100%;
+      padding: 14px 16px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="welcome-title">Welcome to My Portfolio</h1>
+  <h2 id="welcome-subtitle">I'm <strong>Jairo Lemuel Barrientos</strong></h2>
+  
+  <div id="weather-widget" title="Current weather" aria-live="polite" role="region" aria-label="Current weather">
+    <img src="" alt="Weather icon" id="weather-icon" />
+    <div>
+      <span class="temp" id="weather-temp">--°C</span><br />
+      <span class="desc" id="weather-desc">Loading...</span>
+    </div>
   </div>
-</section>
-<!-- ─── Añadir esto dentro de tu <style> ────────────────────────────── -->
-/* ==== Proyectos Destacados ==== */
-section#projects {
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-section#projects h2 {
-  font-size: 2em;
-  text-align: center;
-  margin-bottom: 40px;
-  color: var(--accent-color);
-  text-shadow: 0 0 10px var(--accent-color);
-}
+</header>
 
-/* Grid y tarjetas */
-.projects-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.project-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--accent-color);
-  border-radius: 15px;
-  padding: 24px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
-  opacity: 0;
-  transform: translateY(30px);
-  position: relative;
-  overflow: hidden;
-}
-.project-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.project-card h3 {
-  color: #aaffff;
-  margin-bottom: 12px;
-  font-size: 1.5em;
-}
-.project-card p {
-  color: #d0fafa;
-  font-size: 1rem;
-  margin-bottom: 16px;
-}
-.project-card a.button {
-  display: inline-block;
-  font-family: 'Playfair Display', serif;
-  font-weight: bold;
-  padding: 8px 16px;
-  border: 2px solid var(--accent-color);
-  border-radius: 8px;
-  text-decoration: none;
-  color: var(--accent-color);
-  transition: background 0.3s, color 0.3s, transform 0.3s;
-}
-.project-card a.button:hover {
-  background: var(--accent-color);
-  color: var(--bg-color);
-  transform: translateY(-2px);
-}
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
-  opacity: 0;
-  transform: rotate(45deg);
-  transition: opacity 0.5s ease;
-}
-.project-card:hover {
-  box-shadow: 0 0 20px rgba(0,229,255,0.4);
-}
-.project-card:hover::before {
-  opacity: 1;
-}
-  <section class="section" id="about">
-  <h2>About Me</h2>
-  <p>
-    I’m <strong>Jairo Lemuel Barrientos</strong>, a web developer who blends minimalist design with rich user experiences. Skilled in HTML5, CSS3 (Grid, Flexbox, Custom Properties), JavaScript (ES6+), and the Canvas API for lightweight animations. Passionate about crafting polished, responsive interfaces for beauty, finance, and tourism projects.
-  </p>
-</section>
-
-<section class="section" id="projects">
-  <h2>Projects</h2>
+<section id="projects" aria-label="Featured Projects">
+  <h2>Proyectos Destacados</h2>
   <div class="projects-container">
-    <div class="project-card">
-      <canvas class="proj-icon" data-type="beauty" width="60" height="60"></canvas>
-      <h3>Beauty Landing Page</h3>
-      <p>Feminine aesthetic with cursive headings, soft pink palette, and gentle scroll-triggered fades.</p>
-      <a href="https://tuproyectobelleza.vercel.app" class="project-link" target="_blank">View Project</a>
-    </div>
-    <div class="project-card">
-      <canvas class="proj-icon" data-type="finance" width="60" height="60"></canvas>
-      <h3>Financial Calculator</h3>
-      <p>Professional, sober interface for dynamic financial computations and optional charting.</p>
-      <a href="./financiator/index.html" class="project-link" target="_blank">View Project</a>
-    </div>
-    <div class="project-card">
-      <canvas class="proj-icon" data-type="tourism" width="60" height="60"></canvas>
-      <h3>Tourism Portal</h3>
-      <p>Vibrant, image-driven design with interactive galleries, smooth transitions, and mobile-first layout.</p>
-      <a href="https://portaldeturismo.vercel.app" class="project-link" target="_blank">View Project</a>
-    </div>
+    <!-- Aquí vas a agregar cada tarjeta de proyecto -->
+    <!-- Ejemplo vacío, para que después puedas añadir -->
   </div>
 </section>
-
-<div class="contact-wrapper">
-  <div id="contact-menu" class="contact-menu">
-    <canvas class="contact-icon" data-type="linkedin" width="50" height="50"></canvas>
-    <canvas class="contact-icon" data-type="whatsapp" width="50" height="50"></canvas>
-    <canvas class="contact-icon" data-type="email" width="50" height="50"></canvas>
-  </div>
-  <button id="contact-btn" class="contact-btn" title="Contact Me">
-    <i class="fas fa-address-book" style="color: var(--accent);"></i>
-  </button>
-</div>
-
-<footer id="contact" class="section">
-  <h2>Contact</h2>
-  <p><a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank">LinkedIn</a></p>
-  <p><a href="https://wa.me/549457636" target="_blank">WhatsApp: +54 9 457636</a></p>
-  <p><a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
-  <p style="margin-top:1rem;font-size:0.85rem;opacity:0.6;">© 2025 Jairo L. Barrientos</p>
-</footer>
 
 <script>
-  function toggleMenu() {
-    document.getElementById('menu-list').classList.toggle('show');
-  }
+  // Función para obtener y mostrar clima según ubicación automática
+  async function fetchWeather(lat, lon) {
+    try {
+      // API pública gratuita (OpenWeatherMap)
+      const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // <-- Cambia acá por tu API key
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=es&appid=${apiKey}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Weather fetch failed');
+      const data = await res.json();
 
-  const contactBtn = document.getElementById('contact-btn');
-  const contactMenu = document.getElementById('contact-menu');
-  contactBtn.addEventListener('click', () => {
-    contactMenu.classList.toggle('show');
-  });
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.section, .project-card').forEach(el => {
-    observer.observe(el);
-  });
-
-  function animateIcon(canvas, type) {
-    const ctx = canvas.getContext('2d');
-    let t = 0;
-    function draw() {
-      const w = canvas.width, h = canvas.height;
-      ctx.clearRect(0,0,w,h);
-      ctx.save();
-      ctx.translate(w/2, h/2);
-      ctx.rotate(t);
-      ctx.beginPath();
-      ctx.arc(0,0, w/2 - 5, 0, Math.PI*2);
-      ctx.strokeStyle = 'rgba(0,229,255,0.7)';
-      ctx.lineWidth = 3;
-      ctx.stroke();
-      ctx.restore();
-      ctx.save();
-      if (type === 'beauty') {
-        ctx.fillStyle = 'pink';
-        ctx.fillRect(w/2-10, h/2-5, 20, 30);
-        ctx.beginPath();
-        ctx.moveTo(w/2-10, h/2-5);
-        ctx.lineTo(w/2, h/2-25);
-        ctx.lineTo(w/2+10, h/2-5);
-        ctx.fill();
-      } else if (type === 'finance') {
-        ctx.fillStyle = '#fff';
-        [ -10, 0, 10 ].forEach((dx,i) => {
-          const hgt = 10 + i*10 + 5*Math.sin(t*2 + i);
-          ctx.fillRect(w/2+dx, h/2 + 15 - hgt, 5, hgt);
-        });
-      } else if (type === 'tourism') {
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(w/2, h/2+15);
-        ctx.lineTo(w/2, h/2+5);
-        ctx.stroke();
-        for (let i=0; i<5; i++) {
-          ctx.beginPath();
-          ctx.moveTo(w/2, h/2+5);
-          ctx.quadraticCurveTo(
-            w/2 + 20*Math.cos(t + i),
-            h/2 - 10,
-            w/2 + 30*Math.cos(t + i),
-            h/2 - 20
-          );
-          ctx.stroke();
-        }
-      } else if (type === 'linkedin') {
-        const r = 5 + 3*Math.sin(t*3);
-        ctx.fillStyle = '#0077B5';
-        ctx.fillRect(w/2-10, h/2-10, 20, 20);
-        ctx.fillStyle = '#fff';
-        ctx.font = '14px sans-serif';
-        ctx.fillText('in', w/2-9, h/2+5);
-      } else if (type === 'whatsapp') {
-        ctx.fillStyle = '#25D366';
-        ctx.beginPath();
-        ctx.arc(w/2, h/2,20,0,Math.PI*2);
-        ctx.fill();
-        ctx.fillStyle = '#fff';
-        ctx.font = '20px sans-serif';
-        ctx.fillText('✔', w/2-6, h/2+7);
-      } else if (type === 'email') {
-        ctx.fillStyle = '#D44638';
-        ctx.fillRect(w/2-20, h/2-10,40,20);
-        ctx.strokeStyle = '#fff';
-        ctx.beginPath();
-        ctx.moveTo(w/2-20, h/2-10);
-        ctx.lineTo(w/2, h/2+10);
-        ctx.lineTo(w/2+20, h/2-10);
-        ctx.stroke();
-      }
-      ctx.restore();
-      t += 0.02;
-      requestAnimationFrame(draw);
+      // Actualizar UI
+      document.getElementById('weather-temp').textContent = `${Math.round(data.main.temp)}°C`;
+      document.getElementById('weather-desc').textContent = data.weather[0].description;
+      document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      document.getElementById('weather-icon').alt = data.weather[0].description;
+    } catch(e) {
+      document.getElementById('weather-desc').textContent = 'No disponible';
+      document.getElementById('weather-temp').textContent = '--°C';
+      document.getElementById('weather-icon').src = '';
+      document.getElementById('weather-icon').alt = 'No weather icon';
     }
-    draw();
   }
 
-  function initCanvases(selector, attr) {
-    document.querySelectorAll(selector).forEach(c => {
-      animateIcon(c, c.getAttribute(attr));
-    });
+  function initWeather() {
+    if (!navigator.geolocation) {
+      document.getElementById('weather-desc').textContent = 'Geolocalización no soportada';
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
+      err => {
+        console.warn(err);
+        document.getElementById('weather-desc').textContent = 'Permiso denegado o error';
+      },
+      { timeout: 8000 }
+    );
   }
 
-  window.addEventListener('DOMContentLoaded', () => {
-    initCanvases('.proj-icon','data-type');
-    initCanvases('.contact-icon','data-type');
+  window.addEventListener('load', () => {
+    initWeather();
   });
 </script>
+
 </body>
 </html>
-
-  <div class="transition-gradient"></div>
-
-  <!-- Habilidades con nieve -->
-  <section id="skills">
-    <canvas id="snow-canvas"></canvas>
-    <h2 data-animate>Habilidades</h2>
-    <div class="skills-container">
-      <span class="skill-tag" data-animate><i class="devicon-html5-plain"></i> HTML5</span>
-      <span class="skill-tag" data-animate><i class="devicon-css3-plain"></i> CSS3</span>
-      <span class="skill-tag" data-animate><i class="devicon-javascript-plain"></i> JavaScript</span>
-      <span class="skill-tag" data-animate><i class="devicon-react-original"></i> React</span>
-      <span class="skill-tag" data-animate><i class="devicon-nodejs-plain"></i> Node.js</span>
-      <span class="skill-tag" data-animate><i class="devicon-python-plain"></i> Python</span>
-      <span class="skill-tag" data-animate><i class="devicon-git-plain"></i> Git</span>
-      <span class="skill-tag" data-animate><i class="devicon-docker-plain"></i> Docker</span>
+<!-- ======= Sección Proyectos ======= -->
+<section id="projects" data-animate>
+  <h2>Proyectos Destacados</h2>
+  <div class="projects-container">
+    <div class="project-card" tabindex="0" role="button" onclick="window.open('financiator/index.html', '_blank')" onkeypress="if(event.key==='Enter'){window.open('financiator/index.html', '_blank')}">
+      <h3>Calculadora Financiera</h3>
+      <p>Herramienta interactiva para cálculos de porcentajes y estadísticas.</p>
     </div>
-    <div class="soft-container">
-      <span class="soft-skill" data-animate>Problem Solving</span>
-      <span class="soft-skill" data-animate>Communication</span>
-      <span class="soft-skill" data-animate>Teamwork</span>
-      <span class="soft-skill" data-animate>Adaptability</span>
-      <span class="soft-skill" data-animate>Creativity</span>
-      <span class="soft-skill" data-animate>Time Management</span>
-      <span class="soft-skill" data-animate>Continuous Learning</span>
-      <span class="soft-skill" data-animate>Leadership</span>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact-section">
-    <p>📧 Contact me: <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
-    <p>© 2025 Jairo Lemuel Barrientos</p>
-  </footer>
-
-  <!-- Botón flotante de contacto -->
-  <div id="contactBtn" class="contact-float">Contáctame</div>
-  <div id="contactPanel" class="contact-panel">
-    <a href="https://wa.me/543437457636" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="mailto:barrientosjairolemuel@gmail.com"><i class="fas fa-envelope"></i></a>
-    <a href="https://linkedin.com/in/jairobarrientos" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <!-- Aquí puedes agregar más tarjetas de proyectos -->
   </div>
+</section>
 
-  <script>
-    // Toggle menú desplegable
-    function toggleMenu() {
-      document.getElementById('menuDropdown').classList.toggle('show');
+<!-- Botón flotante de contacto -->
+<div id="floating-contact">
+  <button id="contact-toggle" aria-label="Mostrar contacto" aria-expanded="false">✉️</button>
+  <div id="contact-info" aria-hidden="true" role="region" aria-live="polite">
+    <p><strong>Contacto</strong></p>
+    <p>Email: <a href="mailto:jairo@example.com">jairo@example.com</a></p>
+    <p>Tel: <a href="tel:+541112345678">+54 11 1234 5678</a></p>
+    <p><a href="https://linkedin.com/in/jairolemuel" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+  </div>
+</div>
+
+<style>
+  /* ======= Estilos segunda parte ======= */
+
+  /* Sección Proyectos */
+  #projects {
+    padding: 60px 20px 80px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  #projects h2 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #00e5ff;
+    text-align: center;
+    text-shadow: 0 0 8px #00e5ffaa;
+  }
+  .projects-container {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .project-card {
+    background: #14142d;
+    border-radius: 15px;
+    padding: 20px 25px;
+    box-shadow: 0 0 8px #00e5ff55;
+    cursor: pointer;
+    transition: 
+      box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: #d0f0f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    user-select: none;
+    outline-offset: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, #00e5ff33, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    transform: scale(0.8);
+  }
+  .project-card:hover::before,
+  .project-card:focus::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .project-card:hover,
+  .project-card:focus {
+    box-shadow: 0 0 20px #00e5ffcc, 0 0 40px #00e5ff88 inset;
+    transform: translateY(-8px);
+    z-index: 10;
+  }
+  .project-card:active {
+    transform: translateY(-4px) scale(0.98);
+    box-shadow: 0 0 14px #00c2eaff inset;
+  }
+  .project-card h3 {
+    margin: 0 0 0.6rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #00d4ff;
+    text-shadow: 0 0 6px #00d4ffbb;
+  }
+  .project-card p {
+    margin: 0;
+    color: #a0d8f7cc;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  /* Botón flotante de contacto */
+  #floating-contact {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #contact-toggle {
+    background: linear-gradient(135deg, #00e5ff, #00a9cc);
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    color: #0e0e1a;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 0 16px #00e5ffbb;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #contact-toggle:hover,
+  #contact-toggle:focus {
+    background: linear-gradient(135deg, #00a9cc, #008fa0);
+    outline: none;
+    box-shadow: 0 0 24px #00c2eaee;
+  }
+  #contact-info {
+    background: rgba(0, 229, 255, 0.18);
+    backdrop-filter: blur(8px);
+    color: #00e5ffcc;
+    padding: 18px 22px;
+    border-radius: 18px;
+    width: 240px;
+    margin-top: 14px;
+    box-shadow: 0 0 24px #00e5ffcc;
+    display: none;
+    user-select: text;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: center;
+  }
+  #contact-info p {
+    margin: 0.4rem 0;
+  }
+  #contact-info a {
+    color: #00e5ffdd;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  #contact-info a:hover,
+  #contact-info a:focus {
+    color: #00b6d6;
+    outline: none;
+  }
+
+  /* Animación de aparición para las tarjetas de proyectos */
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  [data-animate].active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // ======= JS segunda parte =======
+
+  // Mostrar/Ocultar información contacto con accesibilidad
+  const contactToggle = document.getElementById('contact-toggle');
+  const contactInfo = document.getElementById('contact-info');
+
+  contactToggle.addEventListener('click', () => {
+    const isVisible = contactInfo.style.display === 'block';
+    contactInfo.style.display = isVisible ? 'none' : 'block';
+    contactToggle.setAttribute('aria-expanded', !isVisible);
+    contactInfo.setAttribute('aria-hidden', isVisible);
+  });
+
+  // Animación simple al hacer scroll para la sección proyectos
+  function handleScrollAnimation() {
+    const elements = document.querySelectorAll('[data-animate]');
+    const triggerBottom = window.innerHeight * 0.85;
+
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < triggerBottom) {
+        el.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', handleScrollAnimation);
+  window.addEventListener('load', handleScrollAnimation);
+</script>
+<section id="skills" data-animate>
+  <h2>Habilidades</h2>
+  <div class="skills-container" role="list" aria-label="Lista de habilidades profesionales y personales">
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Trabajo en equipo colaborativo</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Comunicación efectiva</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Resolución de problemas</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Visión proactiva y analítica</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Adaptabilidad y flexibilidad</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Gestión eficiente del tiempo</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Pensamiento crítico</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Creatividad e innovación</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Atención al detalle</p>
+    </div>
+    <div class="skill" role="listitem" tabindex="0">
+      <p>Aprendizaje continuo</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ===== Estilos para la sección Habilidades (soft + hard) ===== */
+
+  #skills {
+    padding: 60px 20px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #0f1624 0%, #1a2138 100%);
+    border-radius: 20px;
+    box-shadow: 0 0 40px #00e5ff44 inset;
+  }
+
+  #skills h2 {
+    font-weight: 800;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #00e5ff;
+    text-shadow: 0 0 10px #00e5ffcc;
+  }
+
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    justify-items: center;
+  }
+
+  .skill {
+    background: #14142d;
+    border-radius: 15px;
+    padding: 22px 18px;
+    width: 240px;
+    box-shadow: 0 0 16px #00e5ff44;
+    text-align: center;
+    cursor: default;
+    color: #a0d8f7cc;
+    font-size: 1.1rem;
+    font-weight: 600;
+    user-select: none;
+    outline-offset: 4px;
+    transition:
+      box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .skill:focus,
+  .skill:hover {
+    box-shadow: 0 0 24px #00e5ffcc, 0 0 40px #00e5ffaa inset;
+    transform: translateY(-8px);
+    color: #00e5ff;
+    z-index: 10;
+  }
+
+  .skill:active {
+    transform: translateY(-4px) scale(0.98);
+    box-shadow: 0 0 18px #00c2eaff inset;
+  }
+
+  /* Animación para la sección */
+  #skills[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  #skills.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Animación de aparición al hacer scroll para sección habilidades
+
+  window.addEventListener('scroll', () => {
+    const skillsSection = document.getElementById('skills');
+    if (!skillsSection.classList.contains('active')) {
+      const rect = skillsSection.getBoundingClientRect();
+      const triggerPoint = window.innerHeight * 0.85;
+      if (rect.top < triggerPoint) {
+        skillsSection.classList.add('active');
+      }
     }
+  });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // Header overlay scroll effect
-      const header = document.getElementById('header');
-      const overlay = document.querySelector('.bg-overlay');
-      const headerHeight = header.offsetHeight;
-      window.addEventListener('scroll', () => {
-        const ratio = Math.min(window.scrollY / headerHeight, 1);
-        const min = 0.2, max = 0.6;
-        overlay.style.background = `rgba(14,14,26, ${max - (max-min)*ratio})`;
-      });
-
-      // Animate header text on load
-      window.addEventListener('load', () => {
-        ['h1-header','h2-header'].forEach((id,i) => {
-          const el = document.getElementById(id);
-          if (el) setTimeout(() => el.classList.add('visible'), 200 + 400*i);
-        });
-      });
-
-      // IntersectionObserver para secciones y skills
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('[data-animate]').forEach(el => obs.observe(el));
-      document.querySelectorAll('.skill-tag, .soft-skill').forEach(el => obs.observe(el));
-
-      // Nieve en sección de habilidades
-      const skillsSec = document.getElementById('skills');
-      const canvas = document.getElementById('snow-canvas');
-      const ctx = canvas.getContext('2d');
-      let flakes = [], animId=null, angle=0;
-      function resize() {
-        canvas.width = skillsSec.clientWidth;
-        canvas.height = skillsSec.clientHeight;
-      }
-      function createFlakes(n) {
-        flakes = Array.from({length:n}, () => ({
-          x: Math.random()*canvas.width,
-          y: Math.random()*canvas.height,
-          r: Math.random()*3+1,
-          d: Math.random()*n
-        }));
-      }
-      function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle='rgba(255,255,255,0.8)';
-        ctx.beginPath();
-        flakes.forEach(f => { ctx.moveTo(f.x,f.y); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); });
-        ctx.fill(); update();
-      }
-      function update() {
-        angle += 0.01;
-        flakes = flakes.map(f => {
-          let y = f.y + Math.cos(angle+f.d)+1+f.r/2;
-          let x = f.x + Math.sin(angle)*2;
-          if (x>canvas.width+5||x<-5||y>canvas.height) { x = Math.random()*canvas.width; y = -10; }
-          return {...f, x, y};
-        });
-      }
-      function anim() { draw(); animId = requestAnimationFrame(anim); }
-      const snowObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            resize(); createFlakes(Math.floor(canvas.width/10));
-            if (!animId) anim();
-          } else if (animId) {
-            cancelAnimationFrame(animId); animId = null;
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-          }
-        });
-      }, { threshold: 0.1 });
-      snowObs.observe(skillsSec);
-      window.addEventListener('resize', () => {
-        if (skillsSec.getBoundingClientRect().top < window.innerHeight) {
-          resize(); createFlakes(Math.floor(canvas.width/10));
-        }
-      });
-    });
-
-    // Toggle panel de contacto
-    document.getElementById('contactBtn').addEventListener('click', () => {
-      document.getElementById('contactPanel').classList.toggle('show');
-    });
-  </script>
-</body>
-</html>
+  window.addEventListener('load', () => {
+    const skillsSection = document.getElementById('skills');
+    const rect = skillsSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      skillsSection.classList.add('active');
+    }
+  });
+</script>
