@@ -246,338 +246,230 @@
 
 </body>
 </html>
-<!-- ======= Sección Proyectos ======= -->
+<!-- ======= Sección Proyectos Destacados con íconos SVG animados ======= -->
 <section id="projects" data-animate>
   <h2>Proyectos Destacados</h2>
   <div class="projects-container">
-    <div class="project-card" tabindex="0" role="button" onclick="window.open('financiator/index.html', '_blank')" onkeypress="if(event.key==='Enter'){window.open('financiator/index.html', '_blank')}">
+
+    <!-- Proyecto 1: Calculadora Financiera -->
+    <div class="project-card" tabindex="0" onclick="window.open('financiator/index.html', '_blank')" onkeypress="if(event.key==='Enter'){window.open('financiator/index.html', '_blank')}">
+      <div class="project-icon">
+        <!-- Icono SVG: Gráfico de estadísticas -->
+        <svg viewBox="0 0 64 64" width="64" height="64">
+          <rect x="10" y="30" width="8" height="24" fill="#00e5ff">
+            <animate attributeName="height" values="0;24" dur="1s" begin="0.3s" fill="freeze" />
+          </rect>
+          <rect x="26" y="20" width="8" height="34" fill="#00bcd4">
+            <animate attributeName="height" values="0;34" dur="1s" begin="0.6s" fill="freeze" />
+          </rect>
+          <rect x="42" y="10" width="8" height="44" fill="#0097a7">
+            <animate attributeName="height" values="0;44" dur="1s" begin="0.9s" fill="freeze" />
+          </rect>
+        </svg>
+      </div>
       <h3>Calculadora Financiera</h3>
       <p>Herramienta interactiva para cálculos de porcentajes y estadísticas.</p>
     </div>
-    <!-- Aquí puedes agregar más tarjetas de proyectos -->
+
+    <!-- Proyecto 2: Estética / Turismo -->
+    <div class="project-card" tabindex="0">
+      <div class="project-icon">
+        <!-- Icono SVG: Lápiz labial -->
+        <svg viewBox="0 0 64 64" width="64" height="64">
+          <path d="M32 4 L36 20 L28 20 Z" fill="#e91e63">
+            <animateTransform attributeName="transform" type="translate" values="0 -10; 0 0" dur="1s" begin="0.3s" fill="freeze" />
+          </path>
+          <rect x="26" y="20" width="12" height="28" fill="#880e4f" rx="2">
+            <animate attributeName="y" values="30;20" dur="0.8s" begin="0.5s" fill="freeze" />
+          </rect>
+        </svg>
+      </div>
+      <h3>Guía de Estilo y Turismo</h3>
+      <p>Proyecto interactivo orientado al mundo de la estética y viajes.</p>
+    </div>
+
+    <!-- Proyecto 3: App del Clima -->
+    <div class="project-card" tabindex="0">
+      <div class="project-icon">
+        <!-- Icono SVG: Nube y sol -->
+        <svg viewBox="0 0 64 64" width="64" height="64">
+          <circle cx="20" cy="20" r="10" fill="#ffca28">
+            <animateTransform attributeName="transform" type="rotate" values="0 20 20;360 20 20" dur="6s" repeatCount="indefinite" />
+          </circle>
+          <ellipse cx="34" cy="34" rx="14" ry="10" fill="#90caf9">
+            <animate attributeName="opacity" values="0;1" dur="1s" begin="0.5s" fill="freeze" />
+          </ellipse>
+        </svg>
+      </div>
+      <h3>App del Clima</h3>
+      <p>Consulta automática del clima según tu ubicación con animaciones.</p>
+    </div>
+
   </div>
 </section>
 
-<!-- Botón flotante de contacto -->
+<!-- ======= Sección Habilidades ======= -->
+<section id="skills" data-animate>
+  <h2>Habilidades</h2>
+  <div class="skills-container">
+    <div class="skill">Trabajo en equipo colaborativo</div>
+    <div class="skill">Comunicación efectiva</div>
+    <div class="skill">Resolución de problemas</div>
+    <div class="skill">Visión proactiva y analítica</div>
+    <div class="skill">Adaptabilidad y flexibilidad</div>
+    <div class="skill">Gestión eficiente del tiempo</div>
+    <div class="skill">Pensamiento crítico</div>
+    <div class="skill">Creatividad e innovación</div>
+    <div class="skill">Atención al detalle</div>
+    <div class="skill">Aprendizaje continuo</div>
+  </div>
+</section>
+
+<!-- ======= Botón flotante de contacto ======= -->
 <div id="floating-contact">
-  <button id="contact-toggle" aria-label="Mostrar contacto" aria-expanded="false">✉️</button>
-  <div id="contact-info" aria-hidden="true" role="region" aria-live="polite">
+  <button id="contact-toggle" aria-label="Mostrar contacto">✉️</button>
+  <div id="contact-info" aria-hidden="true">
     <p><strong>Contacto</strong></p>
     <p>Email: <a href="mailto:jairo@example.com">jairo@example.com</a></p>
-    <p>Tel: <a href="tel:+541112345678">+54 11 1234 5678</a></p>
-    <p><a href="https://linkedin.com/in/jairolemuel" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+    <p>WhatsApp: <a href="https://wa.me/5493437457636" target="_blank">+54 9 3437 457636</a></p>
+    <p><a href="https://linkedin.com/in/jairolemuel" target="_blank">LinkedIn</a></p>
   </div>
 </div>
 
+<!-- ========== ESTILOS embebidos (solo de esta sección) ========== -->
 <style>
-  /* ======= Estilos segunda parte ======= */
-
-  /* Sección Proyectos */
-  #projects {
-    padding: 60px 20px 80px;
+  #projects, #skills {
+    padding: 60px 20px;
     max-width: 960px;
-    margin: 0 auto;
+    margin: auto;
   }
-  #projects h2 {
-    font-weight: 800;
+
+  #projects h2, #skills h2 {
     font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: #00e5ff;
     text-align: center;
-    text-shadow: 0 0 8px #00e5ffaa;
+    color: #00e5ff;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px #00e5ff88;
   }
+
   .projects-container {
     display: grid;
-    gap: 25px;
+    gap: 30px;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
+
   .project-card {
     background: #14142d;
     border-radius: 15px;
-    padding: 20px 25px;
-    box-shadow: 0 0 8px #00e5ff55;
+    padding: 20px;
+    box-shadow: 0 0 15px #00e5ff44;
+    color: #cdefff;
     cursor: pointer;
-    transition: 
-      box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    color: #d0f0f9;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    user-select: none;
-    outline-offset: 4px;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, #00e5ff33, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    transform: scale(0.8);
-  }
-  .project-card:hover::before,
-  .project-card:focus::before {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .project-card:hover,
-  .project-card:focus {
-    box-shadow: 0 0 20px #00e5ffcc, 0 0 40px #00e5ff88 inset;
-    transform: translateY(-8px);
-    z-index: 10;
-  }
-  .project-card:active {
-    transform: translateY(-4px) scale(0.98);
-    box-shadow: 0 0 14px #00c2eaff inset;
-  }
-  .project-card h3 {
-    margin: 0 0 0.6rem;
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: #00d4ff;
-    text-shadow: 0 0 6px #00d4ffbb;
-  }
-  .project-card p {
-    margin: 0;
-    color: #a0d8f7cc;
-    font-size: 1rem;
-    line-height: 1.3;
+    text-align: center;
+    transition: all 0.3s ease;
   }
 
-  /* Botón flotante de contacto */
+  .project-card:hover {
+    box-shadow: 0 0 30px #00e5ffaa;
+    transform: translateY(-6px);
+  }
+
+  .project-icon {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .skill {
+    background: #1c1c3c;
+    color: #a0d8f7;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00e5ff44;
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .skill:hover {
+    background: #00e5ff22;
+    color: #00e5ff;
+    box-shadow: 0 0 20px #00e5ff88;
+    transform: translateY(-6px);
+  }
+
   #floating-contact {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9999;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
   }
+
   #contact-toggle {
-    background: linear-gradient(135deg, #00e5ff, #00a9cc);
+    background: #00e5ff;
+    color: #0f1624;
     border: none;
     border-radius: 50%;
     width: 56px;
     height: 56px;
-    color: #0e0e1a;
     font-size: 28px;
     cursor: pointer;
-    box-shadow: 0 0 16px #00e5ffbb;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #contact-toggle:hover,
-  #contact-toggle:focus {
-    background: linear-gradient(135deg, #00a9cc, #008fa0);
-    outline: none;
-    box-shadow: 0 0 24px #00c2eaee;
-  }
-  #contact-info {
-    background: rgba(0, 229, 255, 0.18);
-    backdrop-filter: blur(8px);
-    color: #00e5ffcc;
-    padding: 18px 22px;
-    border-radius: 18px;
-    width: 240px;
-    margin-top: 14px;
-    box-shadow: 0 0 24px #00e5ffcc;
-    display: none;
-    user-select: text;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    text-align: center;
-  }
-  #contact-info p {
-    margin: 0.4rem 0;
-  }
-  #contact-info a {
-    color: #00e5ffdd;
-    text-decoration: underline;
-    transition: color 0.3s ease;
-  }
-  #contact-info a:hover,
-  #contact-info a:focus {
-    color: #00b6d6;
-    outline: none;
+    box-shadow: 0 0 15px #00e5ff;
   }
 
-  /* Animación de aparición para las tarjetas de proyectos */
+  #contact-info {
+    display: none;
+    margin-top: 12px;
+    background: #0e1a2b;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #00e5ff55;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  #contact-info a {
+    color: #00e5ff;
+    text-decoration: underline;
+  }
+
   [data-animate] {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: all 0.8s ease;
   }
+
   [data-animate].active {
     opacity: 1;
     transform: translateY(0);
   }
 </style>
 
+<!-- ========== JS embebido: Scroll Reveal + Contacto toggle ========== -->
 <script>
-  // ======= JS segunda parte =======
-
-  // Mostrar/Ocultar información contacto con accesibilidad
-  const contactToggle = document.getElementById('contact-toggle');
-  const contactInfo = document.getElementById('contact-info');
-
-  contactToggle.addEventListener('click', () => {
-    const isVisible = contactInfo.style.display === 'block';
-    contactInfo.style.display = isVisible ? 'none' : 'block';
-    contactToggle.setAttribute('aria-expanded', !isVisible);
-    contactInfo.setAttribute('aria-hidden', isVisible);
+  // Contacto toggle
+  document.getElementById('contact-toggle').addEventListener('click', () => {
+    const info = document.getElementById('contact-info');
+    info.style.display = info.style.display === 'block' ? 'none' : 'block';
   });
 
-  // Animación simple al hacer scroll para la sección proyectos
-  function handleScrollAnimation() {
+  // Scroll reveal animation
+  function animateScroll() {
     const elements = document.querySelectorAll('[data-animate]');
-    const triggerBottom = window.innerHeight * 0.85;
-
+    const trigger = window.innerHeight * 0.85;
     elements.forEach(el => {
       const rect = el.getBoundingClientRect();
-      if (rect.top < triggerBottom) {
-        el.classList.add('active');
-      }
+      if (rect.top < trigger) el.classList.add('active');
     });
   }
 
-  window.addEventListener('scroll', handleScrollAnimation);
-  window.addEventListener('load', handleScrollAnimation);
-</script>
-<section id="skills" data-animate>
-  <h2>Habilidades</h2>
-  <div class="skills-container" role="list" aria-label="Lista de habilidades profesionales y personales">
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Trabajo en equipo colaborativo</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Comunicación efectiva</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Resolución de problemas</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Visión proactiva y analítica</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Adaptabilidad y flexibilidad</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Gestión eficiente del tiempo</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Pensamiento crítico</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Creatividad e innovación</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Atención al detalle</p>
-    </div>
-    <div class="skill" role="listitem" tabindex="0">
-      <p>Aprendizaje continuo</p>
-    </div>
-  </div>
-</section>
-
-<style>
-  /* ===== Estilos para la sección Habilidades (soft + hard) ===== */
-
-  #skills {
-    padding: 60px 20px 80px;
-    max-width: 900px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, #0f1624 0%, #1a2138 100%);
-    border-radius: 20px;
-    box-shadow: 0 0 40px #00e5ff44 inset;
-  }
-
-  #skills h2 {
-    font-weight: 800;
-    font-size: 2.8rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    color: #00e5ff;
-    text-shadow: 0 0 10px #00e5ffcc;
-  }
-
-  .skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 25px;
-    justify-items: center;
-  }
-
-  .skill {
-    background: #14142d;
-    border-radius: 15px;
-    padding: 22px 18px;
-    width: 240px;
-    box-shadow: 0 0 16px #00e5ff44;
-    text-align: center;
-    cursor: default;
-    color: #a0d8f7cc;
-    font-size: 1.1rem;
-    font-weight: 600;
-    user-select: none;
-    outline-offset: 4px;
-    transition:
-      box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .skill:focus,
-  .skill:hover {
-    box-shadow: 0 0 24px #00e5ffcc, 0 0 40px #00e5ffaa inset;
-    transform: translateY(-8px);
-    color: #00e5ff;
-    z-index: 10;
-  }
-
-  .skill:active {
-    transform: translateY(-4px) scale(0.98);
-    box-shadow: 0 0 18px #00c2eaff inset;
-  }
-
-  /* Animación para la sección */
-  #skills[data-animate] {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  #skills.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
-
-<script>
-  // Animación de aparición al hacer scroll para sección habilidades
-
-  window.addEventListener('scroll', () => {
-    const skillsSection = document.getElementById('skills');
-    if (!skillsSection.classList.contains('active')) {
-      const rect = skillsSection.getBoundingClientRect();
-      const triggerPoint = window.innerHeight * 0.85;
-      if (rect.top < triggerPoint) {
-        skillsSection.classList.add('active');
-      }
-    }
-  });
-
-  window.addEventListener('load', () => {
-    const skillsSection = document.getElementById('skills');
-    const rect = skillsSection.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.85) {
-      skillsSection.classList.add('active');
-    }
-  });
+  window.addEventListener('scroll', animateScroll);
+  window.addEventListener('load', animateScroll);
 </script>
