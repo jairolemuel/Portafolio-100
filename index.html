@@ -221,41 +221,177 @@
     </div>
   </header>
 
-<!-- ===== SECCIÓN PROYECTOS DESTACADOS ===== -->
 <section id="projects" class="section-projects">
   <h2>Proyectos Destacados</h2>
   <div class="projects-container">
 
-    <!-- 1) Calculadora Financiera -->
-    <div class="project-card" onclick="location.href='./financiator/index.html'">
-      <div class="canvas-container"><canvas id="financeCanvas"></canvas></div>
-      <h3>Calculadora Financiera</h3>
-      <p>Cálculos dinámicos y gráficos profesionales.</p>
+    <!-- FinancePro -->
+    <div class="project-card" id="card-finance" onclick="location.href='./financiator/index.html'">
+      <svg id="svg-finance" viewBox="0 0 120 80" class="svg-icon">
+        <defs>
+          <linearGradient id="grad-fin1" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#004c3f"/>
+            <stop offset="100%" stop-color="#00ffcc"/>
+          </linearGradient>
+        </defs>
+        <rect x="10" y="60" width="15" height="20" fill="url(#grad-fin1)" rx="2"/>
+        <rect x="40" y="50" width="15" height="30" fill="url(#grad-fin1)" rx="2"/>
+        <rect x="70" y="70" width="15" height="10" fill="url(#grad-fin1)" rx="2"/>
+      </svg>
+      <h3>FinancePro</h3>
+      <p class="subtitle">Calculadora financiera con gráficas interactivas.</p>
     </div>
 
-    <!-- 2) Página de Belleza -->
-    <div class="project-card" onclick="location.href='https://tuproyectobelleza.vercel.app'">
-      <div class="canvas-container"><canvas id="beautyCanvas"></canvas></div>
-      <h3>Página de Belleza</h3>
-      <p>Lápiz labial 3D giratorio con iluminación realista.</p>
+    <!-- BeautyGlow -->
+    <div class="project-card" id="card-beauty" onclick="location.href='https://tuproyectobelleza.vercel.app'">
+      <svg id="svg-beauty" viewBox="0 0 100 100" class="svg-icon">
+        <defs>
+          <radialGradient id="grad-beauty" cx="50%" cy="30%" r="50%">
+            <stop offset="0%" stop-color="#ff66aa"/>
+            <stop offset="100%" stop-color="#cc005f"/>
+          </radialGradient>
+        </defs>
+        <rect x="40" y="30" width="20" height="50" rx="4" ry="4" fill="url(#grad-beauty)" filter="url(#glow)"/>
+        <polygon points="40,30 60,30 50,10" fill="#ff99c3" filter="url(#glow)"/>
+        <circle cx="55" cy="40" r="5" fill="white" opacity="0.3"/>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </svg>
+      <h3>BeautyGlow</h3>
+      <p class="subtitle">Landing de belleza con animaciones elegantes.</p>
     </div>
 
-    <!-- 3) Portal de Destinos Turísticos -->
-    <div class="project-card" onclick="location.href='https://portaldeturismo.vercel.app'">
-      <div class="canvas-container"><canvas id="tourismCanvas"></canvas></div>
-      <h3>Portal de Destinos Turísticos</h3>
-      <p>Isla 3D con palmeras y avión volando.</p>
+    <!-- TravelSphere -->
+    <div class="project-card" id="card-travel" onclick="location.href='https://portaldeturismo.vercel.app'">
+      <svg id="svg-travel" viewBox="0 0 200 80" class="svg-icon">
+        <!-- isla -->
+        <ellipse cx="100" cy="60" rx="50" ry="10" fill="#336633" filter="url(#shadow)"/>
+        <!-- palmera -->
+        <line x1="120" y1="60" x2="120" y2="35" stroke="#8B4513" stroke-width="3"/>
+        <circle cx="120" cy="30" r="10" fill="#228B22"/>
+        <!-- avión -->
+        <polygon id="plane" points="0,20 15,15 15,25" fill="#ffffff" filter="url(#shadow)"/>
+        <filter id="shadow">
+          <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#000"/>
+        </filter>
+      </svg>
+      <h3>TravelSphere</h3>
+      <p class="subtitle">Portal de destinos turísticos inmersivo.</p>
     </div>
 
   </div>
 </section>
 
-<!-- ===== SECCIÓN HABILIDADES ===== -->
+<style>
+  .section-projects {
+    padding: 80px 20px;
+    background: #1a1027;
+    color: #fafafa;
+  }
+  .section-projects h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    background: linear-gradient(90deg, #00e5ff, #ff00c3);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(0,229,255,0.6);
+  }
+  .projects-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .project-card {
+    background: linear-gradient(135deg, #2e1f3a, #402c52);
+    border-radius: 20px;
+    width: 300px;
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(50px) rotateX(15deg);
+    transition: transform .6s ease, opacity .6s ease, box-shadow .3s;
+  }
+  .project-card.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+  .project-card:hover {
+    box-shadow: 0 15px 45px rgba(0,229,255,0.8);
+    transform: translateY(-8px) rotateX(0);
+  }
+  .svg-icon {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  .project-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+  }
+  .subtitle {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+<script>
+  gsap.registerPlugin(MotionPathPlugin);
+
+  // ScrollReveal con GSAP
+  gsap.utils.toArray('.project-card').forEach((card, i) => {
+    gsap.fromTo(card, {opacity:0, y:50, rotationX:15}, {
+      opacity:1, y:0, rotationX:0, 
+      delay: 0.3 + i*0.2, duration:1, ease:'power3.out',
+      scrollTrigger: { trigger: card, start: 'top 80%' }
+    });
+  });
+
+  // FinancePro: rebote barras
+  gsap.fromTo("#svg-finance rect", {
+    scaleY: 0, transformOrigin: "bottom center"
+  },{
+    scaleY:1, stagger:0.2, duration:1.2, ease:"bounce.out", repeat:-1, yoyo:true
+  });
+
+  // BeautyGlow: rotación + destello
+  gsap.to("#svg-beauty", {
+    rotate:360, transformOrigin:"50% 50%", duration:5, repeat:-1, ease:"linear",
+    scrollTrigger:{ trigger:"#card-beauty", start:"top 80%" }
+  });
+  gsap.to("#svg-beauty circle", {
+    opacity:0.8, duration:0.8, repeat:-1, yoyo:true, ease:"sine.inOut",
+    scrollTrigger:{ trigger:"#card-beauty", start:"top 80%" }
+  });
+
+  // TravelSphere: avión recorre curva
+  gsap.to("#plane", {
+    duration:8, repeat:-1, ease:"power1.inOut",
+    motionPath:{
+      path:[
+        {x:0,y:20},{x:50,y:10},{x:100,y:20},{x:150,y:10},{x:200,y:20}
+      ],
+      autoRotate:true
+    },
+    scrollTrigger:{ trigger:"#card-travel", start:"top 80%" }
+  });
+</script>
 <section id="skills" class="section-skills">
-  <canvas id="web-bg-canvas"></canvas>
+  <div id="tsparticles"></div>
   <div class="skills-wrapper">
     <h2>Habilidades</h2>
-
     <div class="habilidades-duras">
       <h3>Habilidades Duras</h3>
       <div class="skills-container">
@@ -265,11 +401,8 @@
         <span class="skill-tag">React</span>
         <span class="skill-tag">Node.js</span>
         <span class="skill-tag">Python</span>
-        <span class="skill-tag">TypeScript</span>
-        <span class="skill-tag">Next.js</span>
       </div>
     </div>
-
     <div class="habilidades-blandas">
       <h3>Habilidades Blandas</h3>
       <div class="soft-container">
@@ -279,237 +412,73 @@
         <span class="soft-skill">Adaptabilidad</span>
         <span class="soft-skill">Liderazgo</span>
         <span class="soft-skill">Resolución de problemas</span>
-        <span class="soft-skill">Aprendizaje continuo</span>
       </div>
     </div>
   </div>
 </section>
 
-<style>
-  /* — Proyectos Destacados — */
-  .section-projects {
-    padding: 60px 20px;
-    background: linear-gradient(to bottom, #111, #1a1a1a);
-    color: #fff;
-  }
-  .section-projects h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: cyan;
-    margin-bottom: 40px;
-    text-shadow: 0 0 10px cyan;
-  }
-  .projects-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-  }
-  .project-card {
-    background: #1c1c1c;
-    border-radius: 12px;
-    padding: 1.5rem;
-    width: 320px;
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: transform 0.5s, opacity 0.5s, box-shadow 0.3s;
-  }
-  .project-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .project-card:hover {
-    box-shadow: 0 12px 30px rgba(0,255,255,0.3);
-  }
-  .canvas-container {
-    width: 100%;
-    height: 200px;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-  }
-  .canvas-container canvas {
-    width: 100% !important;
-    height: 100% !important;
-    display: block;
-  }
-  .project-card h3 {
-    font-size: 1.4rem;
-    margin: 0.5rem 0;
-    text-align: center;
-  }
-  .project-card p {
-    font-size: 0.95rem;
-    text-align: center;
-    color: #ccc;
-  }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-  /* — Habilidades — */
+<style>
   .section-skills {
     position: relative;
-    overflow: hidden;
-    padding: 60px 20px;
-    background: linear-gradient(to bottom, #0f2027, #203a43);
+    padding: 80px 20px;
+    background: #0a0a0a;
     color: #fff;
-    text-align: center;
+    overflow: hidden;
   }
-  #web-bg-canvas {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
+  #tsparticles {
+    position: absolute; top:0; left:0; width:100%; height:100%; z-index:0;
   }
   .skills-wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: auto;
+    position: relative; z-index:1;
+    max-width:900px; margin:auto; text-align:center;
   }
   .skills-wrapper h2 {
-    font-size: 2.8rem;
-    margin-bottom: 2rem;
-    animation: fadeInUp 1s ease both;
-  }
-  .habilidades-duras, .habilidades-blandas {
-    margin-bottom: 3rem;
+    font-size:3rem; margin-bottom:2rem;
+    background: linear-gradient(90deg,#00e5ff,#ff00c3);
+    -webkit-background-clip: text; color: transparent;
+    text-shadow: 0 0 10px rgba(0,229,255,0.7);
   }
   .skills-container, .soft-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;
   }
   .skill-tag, .soft-skill {
-    padding: 0.7rem 1.3rem;
-    border-radius: 25px;
     background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(3px);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
+    padding:0.8rem 1.4rem; border-radius:30px;
+    font-size:1rem; color:#fff; backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    opacity:0; transform: translateY(30px);
+    transition: all .6s ease;
   }
   .skill-tag.visible, .soft-skill.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
+    opacity:1; transform: translateY(0);
   }
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 <script>
-  // — Scroll-reveal para tarjetas y skills —
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
+  // tsParticles fondo
+  tsParticles.load("tsparticles", {
+    fullScreen: { enable:false },
+    particles: {
+      number:{ value:80 },
+      color:{ value:"#00e5ff" },
+      shape:{ type:"circle" },
+      links:{ enable:true, distance:120, color:"#ffffff", opacity:0.2 },
+      move:{ speed:1 }
+    },
+    interactivity:{
+      events: { onhover:{ enable:true, mode:"grab" } }
+    }
+  });
+
+  // ScrollReveal con GSAP
+  gsap.utils.toArray('.skill-tag, .soft-skill').forEach((el, i) => {
+    gsap.fromTo(el, {opacity:0, y:30}, {
+      opacity:1, y:0, duration:0.8, ease:'power2.out', delay: i*0.1,
+      scrollTrigger:{ trigger: el, start:'top 85%' }
     });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('.project-card, .skill-tag, .soft-skill')
-    .forEach(el => observer.observe(el));
-
-  // — Inicializa escena Three.js —
-  function initThree(canvasId, type) {
-    const canvas = document.getElementById(canvasId);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth/canvas.clientHeight, 0.1, 1000);
-    camera.position.z = 4;
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-
-    const light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(5, 5, 5);
-    scene.add(light);
-
-    let mesh;
-    if (type === 'finance') {
-      const geo = new THREE.CylinderGeometry(0.4, 0.4, 1, 32);
-      mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0x00ffcc }));
-    }
-    if (type === 'beauty') {
-      const geo = new THREE.CapsuleGeometry(0.3, 1.5, 4, 8);
-      mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0xff007f, metalness: 0.6 }));
-    }
-    if (type === 'tourism') {
-      // Isla
-      const island = new THREE.Mesh(
-        new THREE.CylinderGeometry(1.5,1.5,0.2,32),
-        new THREE.MeshStandardMaterial({ color: 0x336633 })
-      );
-      island.rotation.x = -Math.PI/2;
-      scene.add(island);
-      // Avión
-      mesh = new THREE.Mesh(
-        new THREE.BoxGeometry(0.5, 0.1, 0.2),
-        new THREE.MeshStandardMaterial({ color: 0xffffff })
-      );
-      mesh.position.set(-1.5, 0.5, 0);
-    }
-    scene.add(mesh);
-
-    function animate() {
-      requestAnimationFrame(animate);
-      if (type === 'tourism') {
-        mesh.position.x += 0.02;
-        if (mesh.position.x > 1.5) mesh.position.x = -1.5;
-      } else {
-        mesh.rotation.y += 0.01;
-        mesh.rotation.x += 0.005;
-      }
-      renderer.render(scene, camera);
-    }
-    animate();
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    initThree('financeCanvas','finance');
-    initThree('beautyCanvas','beauty');
-    initThree('tourismCanvas','tourism');
-
-    // — Fondo de telaraña mejorado —
-    const bg = document.getElementById('web-bg-canvas');
-    const ctx = bg.getContext('2d');
-    let nodes = [];
-    function resize() {
-      bg.width = innerWidth; bg.height = innerHeight;
-      nodes = Array.from({length:120}, () => ({
-        x: Math.random()*bg.width,
-        y: Math.random()*bg.height,
-        vx: (Math.random()-0.5)*1,
-        vy: (Math.random()-0.5)*1
-      }));
-    }
-    function draw() {
-      ctx.clearRect(0,0,bg.width,bg.height);
-      nodes.forEach(p => {
-        p.x+=p.vx; p.y+=p.vy;
-        if(p.x<0||p.x>bg.width) p.vx*=-1;
-        if(p.y<0||p.y>bg.height) p.vy*=-1;
-      });
-      for(let i=0;i<nodes.length;i++){
-        for(let j=i+1;j<nodes.length;j++){
-          const a=nodes[i], b=nodes[j];
-          const dx=b.x-a.x, dy=b.y-a.y, d=Math.hypot(dx,dy);
-          if(d<150){
-            ctx.strokeStyle = `rgba(255,255,255,${1-d/150})`;
-            ctx.lineWidth = 1-d/150;
-            ctx.beginPath();
-            ctx.moveTo(a.x,a.y);
-            ctx.quadraticCurveTo(
-              (a.x+b.x)/2+20, (a.y+b.y)/2-20,
-              b.x,b.y
-            );
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-    resize(); draw();
-    window.addEventListener('resize', resize);
   });
 </script>
