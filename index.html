@@ -192,284 +192,354 @@
   </div>
 </header>
 
-<section id="projects" aria-label="Featured Projects">
-  <h2>Proyectos Destacados</h2>
-  <div class="projects-container">
-    <!-- Aquí vas a agregar cada tarjeta de proyecto -->
-    <!-- Ejemplo vacío, para que después puedas añadir -->
-  </div>
-</section>
+Perfecto, Jairo. Voy a armarte la segunda parte completa de tu portfolio con todo lo que pediste, súper profesional, bien pulido y con todas las animaciones, canvas para habilidades duras, botones con animación y el botón flotante de contacto con animación en los íconos y enlaces reales a:
+	•	LinkedIn (tu perfil)
+	•	WhatsApp (tu número correcto)
+	•	Gmail (tu correo)
 
-<script>
-  // Función para obtener y mostrar clima según ubicación automática
-  async function fetchWeather(lat, lon) {
-    try {
-      // API pública gratuita (OpenWeatherMap)
-      const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // <-- Cambia acá por tu API key
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=es&appid=${apiKey}`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('Weather fetch failed');
-      const data = await res.json();
+⸻
 
-      // Actualizar UI
-      document.getElementById('weather-temp').textContent = `${Math.round(data.main.temp)}°C`;
-      document.getElementById('weather-desc').textContent = data.weather[0].description;
-      document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-      document.getElementById('weather-icon').alt = data.weather[0].description;
-    } catch(e) {
-      document.getElementById('weather-desc').textContent = 'No disponible';
-      document.getElementById('weather-temp').textContent = '--°C';
-      document.getElementById('weather-icon').src = '';
-      document.getElementById('weather-icon').alt = 'No weather icon';
-    }
-  }
+Detalles incluidos:
+	1.	Proyectos destacados con canvas animados (lápiz labial, gráfico, avión) y animación al hacer scroll.
+	2.	Habilidades duras con logos animados en canvas (JS, HTML, CSS, React, etc).
+	3.	Habilidades blandas listadas abajo.
+	4.	Botón flotante “Contact Me” transparente que despliega animados íconos sociales con enlaces.
+	5.	Todo en inglés, con diseño moderno y responsivo.
 
-  function initWeather() {
-    if (!navigator.geolocation) {
-      document.getElementById('weather-desc').textContent = 'Geolocalización no soportada';
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
-      err => {
-        console.warn(err);
-        document.getElementById('weather-desc').textContent = 'Permiso denegado o error';
-      },
-      { timeout: 8000 }
-    );
-  }
+⸻
 
-  window.addEventListener('load', () => {
-    initWeather();
-  });
-</script>
+Aquí te dejo el código completo embebido para la segunda parte:
 
-</body>
-</html>
-<!-- ======= Sección Proyectos Destacados con íconos SVG animados ======= -->
-<section id="projects" data-animate>
-  <h2>Proyectos Destacados</h2>
-  <div class="projects-container">
-
-    <!-- Proyecto 1: Calculadora Financiera -->
-    <div class="project-card" tabindex="0" onclick="window.open('financiator/index.html', '_blank')" onkeypress="if(event.key==='Enter'){window.open('financiator/index.html', '_blank')}">
-      <div class="project-icon">
-        <!-- Icono SVG: Gráfico de estadísticas -->
-        <svg viewBox="0 0 64 64" width="64" height="64">
-          <rect x="10" y="30" width="8" height="24" fill="#00e5ff">
-            <animate attributeName="height" values="0;24" dur="1s" begin="0.3s" fill="freeze" />
-          </rect>
-          <rect x="26" y="20" width="8" height="34" fill="#00bcd4">
-            <animate attributeName="height" values="0;34" dur="1s" begin="0.6s" fill="freeze" />
-          </rect>
-          <rect x="42" y="10" width="8" height="44" fill="#0097a7">
-            <animate attributeName="height" values="0;44" dur="1s" begin="0.9s" fill="freeze" />
-          </rect>
-        </svg>
-      </div>
-      <h3>Calculadora Financiera</h3>
-      <p>Herramienta interactiva para cálculos de porcentajes y estadísticas.</p>
-    </div>
-
-    <!-- Proyecto 2: Estética / Turismo -->
-    <div class="project-card" tabindex="0">
-      <div class="project-icon">
-        <!-- Icono SVG: Lápiz labial -->
-        <svg viewBox="0 0 64 64" width="64" height="64">
-          <path d="M32 4 L36 20 L28 20 Z" fill="#e91e63">
-            <animateTransform attributeName="transform" type="translate" values="0 -10; 0 0" dur="1s" begin="0.3s" fill="freeze" />
-          </path>
-          <rect x="26" y="20" width="12" height="28" fill="#880e4f" rx="2">
-            <animate attributeName="y" values="30;20" dur="0.8s" begin="0.5s" fill="freeze" />
-          </rect>
-        </svg>
-      </div>
-      <h3>Guía de Estilo y Turismo</h3>
-      <p>Proyecto interactivo orientado al mundo de la estética y viajes.</p>
-    </div>
-
-    <!-- Proyecto 3: App del Clima -->
-    <div class="project-card" tabindex="0">
-      <div class="project-icon">
-        <!-- Icono SVG: Nube y sol -->
-        <svg viewBox="0 0 64 64" width="64" height="64">
-          <circle cx="20" cy="20" r="10" fill="#ffca28">
-            <animateTransform attributeName="transform" type="rotate" values="0 20 20;360 20 20" dur="6s" repeatCount="indefinite" />
-          </circle>
-          <ellipse cx="34" cy="34" rx="14" ry="10" fill="#90caf9">
-            <animate attributeName="opacity" values="0;1" dur="1s" begin="0.5s" fill="freeze" />
-          </ellipse>
-        </svg>
-      </div>
-      <h3>App del Clima</h3>
-      <p>Consulta automática del clima según tu ubicación con animaciones.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ======= Sección Habilidades ======= -->
-<section id="skills" data-animate>
-  <h2>Habilidades</h2>
-  <div class="skills-container">
-    <div class="skill">Trabajo en equipo colaborativo</div>
-    <div class="skill">Comunicación efectiva</div>
-    <div class="skill">Resolución de problemas</div>
-    <div class="skill">Visión proactiva y analítica</div>
-    <div class="skill">Adaptabilidad y flexibilidad</div>
-    <div class="skill">Gestión eficiente del tiempo</div>
-    <div class="skill">Pensamiento crítico</div>
-    <div class="skill">Creatividad e innovación</div>
-    <div class="skill">Atención al detalle</div>
-    <div class="skill">Aprendizaje continuo</div>
-  </div>
-</section>
-
-<!-- ======= Botón flotante de contacto ======= -->
-<div id="floating-contact">
-  <button id="contact-toggle" aria-label="Mostrar contacto">✉️</button>
-  <div id="contact-info" aria-hidden="true">
-    <p><strong>Contacto</strong></p>
-    <p>Email: <a href="mailto:jairo@example.com">jairo@example.com</a></p>
-    <p>WhatsApp: <a href="https://wa.me/5493437457636" target="_blank">+54 9 3437 457636</a></p>
-    <p><a href="https://linkedin.com/in/jairolemuel" target="_blank">LinkedIn</a></p>
-  </div>
-</div>
-
-<!-- ========== ESTILOS embebidos (solo de esta sección) ========== -->
 <style>
-  #projects, #skills {
+  :root {
+    --accent-color: #00e5ff;
+    --bg-color: #0b0c10;
+    --text-color: #d0fafa;
+    --soft-pink: #ff99cc;
+    --soft-blue: #33c4ff;
+  }
+  /* Contenedor proyectos */
+  #projects {
     padding: 60px 20px;
-    max-width: 960px;
+    max-width: 1200px;
     margin: auto;
   }
-
-  #projects h2, #skills h2 {
-    font-size: 2.5rem;
+  #projects h2 {
+    font-size: 2.5em;
     text-align: center;
-    color: #00e5ff;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 10px #00e5ff88;
+    margin-bottom: 40px;
+    color: var(--accent-color);
+    text-shadow: 0 0 15px var(--accent-color);
   }
-
   .projects-container {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
-
   .project-card {
-    background: #14142d;
+    background: rgba(255 255 255 / 0.05);
+    border: 1px solid var(--accent-color);
     border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 15px #00e5ff44;
-    color: #cdefff;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-
-  .project-card:hover {
-    box-shadow: 0 0 30px #00e5ffaa;
-    transform: translateY(-6px);
-  }
-
-  .project-icon {
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  .skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-  }
-
-  .skill {
-    background: #1c1c3c;
-    color: #a0d8f7;
-    padding: 18px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #00e5ff44;
-    text-align: center;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .skill:hover {
-    background: #00e5ff22;
-    color: #00e5ff;
-    box-shadow: 0 0 20px #00e5ff88;
-    transform: translateY(-6px);
-  }
-
-  #floating-contact {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-
-  #contact-toggle {
-    background: #00e5ff;
-    color: #0f1624;
-    border: none;
-    border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    font-size: 28px;
-    cursor: pointer;
-    box-shadow: 0 0 15px #00e5ff;
-  }
-
-  #contact-info {
-    display: none;
-    margin-top: 12px;
-    background: #0e1a2b;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #00e5ff55;
-    text-align: center;
-    font-size: 0.9rem;
-  }
-
-  #contact-info a {
-    color: #00e5ff;
-    text-decoration: underline;
-  }
-
-  [data-animate] {
+    padding: 24px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(0,229,255,0.2);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s;
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
+    transform: translateY(30px);
+    position: relative;
+    overflow: hidden;
   }
-
-  [data-animate].active {
+  .project-card.visible {
     opacity: 1;
     transform: translateY(0);
   }
-</style>
-
-<!-- ========== JS embebido: Scroll Reveal + Contacto toggle ========== -->
-<script>
-  // Contacto toggle
-  document.getElementById('contact-toggle').addEventListener('click', () => {
-    const info = document.getElementById('contact-info');
-    info.style.display = info.style.display === 'block' ? 'none' : 'block';
-  });
-
-  // Scroll reveal animation
-  function animateScroll() {
-    const elements = document.querySelectorAll('[data-animate]');
-    const trigger = window.innerHeight * 0.85;
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < trigger) el.classList.add('active');
-    });
+  .project-card h3 {
+    color: #aaffff;
+    margin: 12px 0;
+    font-size: 1.7em;
+  }
+  .project-card p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  .project-card a.project-link {
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    padding: 10px 18px;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+  }
+  .project-card a.project-link:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    transform: translateY(-3px);
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(0,229,255,0.2), transparent 60%);
+    opacity: 0;
+    transform: rotate(45deg);
+    transition: opacity 0.5s ease;
+  }
+  .project-card:hover {
+    box-shadow: 0 0 20px rgba(0,229,255,0.4);
+  }
+  .project-card:hover::before {
+    opacity: 1;
+  }
+  canvas.proj-icon {
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+    background: transparent;
   }
 
-  window.addEventListener('scroll', animateScroll);
-  window.addEventListener('load', animateScroll);
-</script>
+  /* === Sección Habilidades === */
+  #skills {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  #skills h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--accent-color);
+    text-shadow: 0 0 15px var(--accent-color);
+  }
+  .skills-hard, .skills-soft {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .skill-hard {
+    width: 120px;
+    text-align: center;
+    color: var(--text-color);
+  }
+  .skill-hard canvas {
+    display: block;
+    margin: auto;
+    background: transparent;
+  }
+  .skill-hard span {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .skills-soft {
+    max-width: 600px;
+    margin: auto;
+    color: var(--text-color);
+    font-size: 1.2rem;
+  }
+  .skills-soft ul {
+    list-style: inside disc;
+  }
+
+  /* === Botón flotante Contact Me === */
+  #contact-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #contact-btn:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+  }
+  #contact-icons {
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    z-index: 999;
+  }
+  #contact-icons.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-color);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    background: transparent;
+  }
+  .contact-icon:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    transform: scale(1.15);
+    box-shadow: 0 0 15px var(--accent-color);
+  }
+  .contact-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+</style>
+
+<section id="projects" data-animate>
+  <h2>Featured Projects</h2>
+  <div class="projects-container">
+    
+    <div class="project-card">
+      <canvas class="proj-icon" data-type="beauty" width="80" height="80"></canvas>
+      <h3>Beauty Landing Page</h3>
+      <p>Feminine aesthetic with cursive headings, soft pink palette, and gentle scroll-triggered fades.</p>
+      <a href="https://tuproyectobelleza.vercel.app" class="project-link" target="_blank" rel="noopener">View Project</a>
+    </div>
+
+    <div class="project-card">
+      <canvas class="proj-icon" data-type="finance" width="80" height="80"></canvas>
+      <h3>Financial Calculator</h3>
+      <p>Professional, sober interface for dynamic financial computations and optional charting.</p>
+      <a href="./financiator/index.html" class="project-link" target="_blank" rel="noopener">View Project</a>
+    </div>
+
+    <div class="project-card">
+      <canvas class="proj-icon" data-type="tourism" width="80" height="80"></canvas>
+      <h3>Tourism Portal</h3>
+      <p>Vibrant, image-driven design with interactive galleries, smooth transitions, and mobile-first layout.</p>
+      <a href="https://portaldeturismo.vercel.app" class="project-link" target="_blank" rel="noopener">View Project</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Hard Skills</h2>
+  <div class="skills-hard">
+    <!-- HTML -->
+    <div class="skill-hard">
+      <canvas class="skill-icon" data-skill="html" width="80" height="80"></canvas>
+      <span>HTML5</span>
+    </div>
+    <!-- CSS -->
+    <div class="skill-hard">
+      <canvas class="skill-icon" data-skill="css" width="80" height="80"></canvas>
+      <span>CSS3</span>
+    </div>
+    <!-- JavaScript -->
+    <div class="skill-hard">
+      <canvas class="skill-icon" data-skill="js" width="80" height="80"></canvas>
+      <span>JavaScript</span>
+    </div>
+    <!-- React -->
+    <div class="skill-hard">
+      <canvas class="skill-icon" data-skill="react" width="80" height="80"></canvas>
+      <span>React</span>
+    </div>
+    <!-- Git -->
+    <div class="skill-hard">
+      <canvas class="skill-icon" data-skill="git" width="80" height="80"></canvas>
+      <span>Git</span>
+    </div>
+  </div>
+
+  <h2>Soft Skills</h2>
+  <div class="skills-soft">
+    <ul>
+      <li>Problem-solving mindset</li>
+      <li>Effective communication</li>
+      <li>Team collaboration</li>
+      <li>Adaptability & learning agility</li>
+      <li>Time management</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Botón flotante Contact Me -->
+<button id="contact-btn" aria-label="Contact Me">
+  Contact Me
+</button>
+<div id="contact-icons" aria-hidden="true">
+  <a href="https://linkedin.com/in/jairolemuellebarrientos" target="_blank" rel="noopener" class="contact-icon" aria-label="LinkedIn">
+    <!-- LinkedIn SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88071 3.88071 6 2.5 6C1.11929 6 0 4.88071 0 3.5C0 2.11929 1.11929 1 2.5 1C3.88071 1 4.98 2.11929 4.98 3.5zM0 8H5V24H0V8zM7.59 8H12.31V10.17H12.38C12.96 9.16 14.47 8.1 16.7 8.1C21.11 8.1 22 10.81 22 15.3V24H17V16.3C17 14.56 16.99 12.48 14.63 12.48C12.26 12.48 11.91 14.22 11.91 16.15V24H7.59V8Z"/></svg>
+  </a>
+  <a href="https://wa.me/54934374576536" target="_blank" rel="noopener" class="contact-icon" aria-label="WhatsApp">
+    <!-- WhatsApp SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48C18.7 1.66 15.79 1.1 13.41 2.14C11.03 3.18 9.92 5.81 10.77 7.94L10.83 8.07C8.14 7.94 5.55 6.89 3.75 5.13C1.95 3.37 1.26 0.74 2.8 0C4.34 -0.74 7.25 -0.14 9.63 0.9C12.01 1.94 13.12 4.6 12.27 6.75L12.21 6.88C14.89 7.01 17.48 8.07 19.29 9.83C21.09 11.59 21.78 14.22 20.24 14.97C18.7 15.71 15.79 15.11 13.41 14.07C12.66 16.15 10.2 18.28 8.28 18.28C6.36 18.28 4.49 16.35 4.49 14.43C4.49 12.51 6.42 10.64 8.34 10.64C9.95 10.64 11.01 11.12 11.44 11.53L11.52 11.59C11.92 11.99 12.41 12.25 12.94 12.37C13.49 12.48 14.04 12.44 14.56 12.26L14.56 12.26C15.18 11.98 15.76 11.51 16.15 10.91L17.1 9.52C17.36 9.19 17.5 8.79 17.5 8.38C17.5 7.97 17.37 7.57 17.12 7.23L15.42 4.25C15.19 3.93 14.87 3.68 14.5 3.53C14.13 3.37 13.72 3.36 13.35 3.5L13.35 3.5C12.85 3.68 12.42 4.12 12.19 4.68C11.96 5.25 12 5.88 12.26 6.42L13.36 9.74C13.4 9.82 13.44 9.91 13.47 9.99L13.47 9.99C13.53 10.14 13.65 10.29 13.78 10.42L13.78 10.42C14.33 10.99 15.17 11.06 15.82 10.57L17.51 9.01C18.13 8.49 18.41 7.7 18.3 6.91L17.5 2.61C17.44 2.13 17.09 1.72 16.62 1.46C16.15 1.19 15.57 1.14 15.04 1.33L13.41 2.14Z"/></svg>
+  </a>
+  <a href="mailto:jairolemuellebarrientos@gmail.com" target="_blank" rel="noopener" class="contact-icon" aria-label="Email">
+    <!-- Email SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M2 4h20v16H2z" fill="none"/><path d="M22 6v12H2V6h20m0-2H2c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h20c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zM4 8l8 5 8-5v10H4V8z"/></svg>
+  </a>
+</div>
+
+<script>
+  // Scroll animation para proyectos
+  function onScrollAnimate() {
+    document.querySelectorAll('.project-card').forEach(card => {
+      const rect = card.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 100) {
+        card.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScrollAnimate);
+  onScrollAnimate();
+
+  // Animaciones Canvas para proyectos destacados
+  document.querySelectorAll('.proj-icon').forEach(canvas => {
+    const ctx = canvas.getContext('2d');
+    const type = canvas.dataset.type;
+    let animationId;
+
+    if (type === 'beauty') {
+      // Lápiz labial estilizado con brillo animado
+      let shineX = 0;
+      function drawLipstick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Cuerpo labial
+        ctx.fillStyle = '#ff4d88';
+        ctx.beginPath();
+        ctx.moveTo(40, 15);
+        ctx.lineTo(50, 35);
+        ctx.lineTo(30, 35);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = '#ff99cc';
+        ctx.fillRect(30, 35, 20, 30);
+
+        ctx.fillStyle = '#222';
+        ctx.fillRect(30, 65, 20, 10);
+
+        // Brillo animado
+        let gradient = ctx.createLinearGradient(shineX, 10, shineX + 
