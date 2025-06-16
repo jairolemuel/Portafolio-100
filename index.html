@@ -139,7 +139,89 @@
       border-radius:2px;
     }
 
-   <!-- ── ESTILOS EXTRA PARA PROYECTOS ───────────────────────────────────────── -->
+    /* ── BOTÓN CONTACTAME ────────────────────────────────────────────── */
+    .contact-float {
+      position:fixed; bottom:30px; right:30px;
+      background: var(--button-bg);
+      backdrop-filter: var(--button-blur);
+      border:2px solid var(--accent);
+      border-radius:50px;
+      padding:12px 24px;
+      font-family: var(--font-heading);
+      font-weight:600;
+      font-size:1rem;
+      color: var(--accent);
+      cursor:pointer;
+      box-shadow:0 0 10px rgba(0,0,0,0.4);
+      z-index:999;
+      overflow:hidden;
+    }
+    .contact-float span {
+      display:inline-block;
+      animation: slideText 3s ease-in-out infinite;
+    }
+    @keyframes slideText {
+      0%   { transform: translateX(0); }
+      25%  { transform: translateX(-100%); }
+      50%  { transform: translateX(100%); }
+      75%  { transform: translateX(-100%); }
+      100% { transform: translateX(0); }
+    }
+    .contact-panel {
+      position:fixed; bottom:80px; right:30px;
+      display:flex; gap:16px; padding:12px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      border:1px solid var(--accent);
+      border-radius:10px;
+      transform: scale(0);
+      opacity:0;
+      transform-origin: bottom right;
+      transition: transform .3s ease, opacity .3s ease;
+      z-index:998;
+    }
+    .contact-panel.show {
+      transform: scale(1);
+      opacity:1;
+    }
+    .contact-panel canvas {
+      width:40px; height:40px;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────── */
+    footer {
+      text-align:center;
+      padding:2rem 1rem;
+      background: rgba(0,0,0,0.6);
+      color:#aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Menú principal">
+    <button aria-expanded="false" aria-controls="menu-dropdown" onclick="toggleMenu('menu-dropdown')">
+      Menu
+    </button>
+    <div id="menu-dropdown" class="menu-dropdown" role="menu">
+      <a href="#header">Inicio</a>
+      <a href="#projects">Proyectos</a>
+      <a href="#skills">Habilidades</a>
+      <a href="#contact">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- HEADER / PRESENTACIÓN -->
+  <header id="header" role="banner">
+    <div class="header-content">
+      <h1>Soy un programador full stack</h1>
+      <h2>Un joven soñador con grandes proyectos y sólidos conocimientos en Python</h2>
+    </div>
+  </header>
+  
+    <!-- ── ESTILOS EXTRA PARA PROYECTOS ───────────────────────────────────────── -->
   <style>
     .proj-extra {
       display: block;
@@ -294,182 +376,6 @@
       animateExtra(c, c.dataset.extra);
     });
   </script>
-
-    /* ── HABILIDADES ─────────────────────────────────────────────────── */
-    #skills {
-      position: relative;
-      background: var(--bg-secondary);
-      overflow: hidden;
-    }
-    #skills canvas { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
-    .skills-container, .soft-container {
-      display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:2rem;
-      position:relative; z-index:2;
-    }
-    .skill-tag, .soft-skill {
-      background: rgba(255,255,255,0.05);
-      border-radius:8px;
-      padding:10px 16px;
-      opacity:0;
-      transform: translateY(20px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .skill-tag {
-      border:1px solid var(--accent);
-      color: var(--accent);
-    }
-    .soft-skill {
-      border:1px solid #555;
-      color:#ccc;
-    }
-    .skill-tag.visible, .soft-skill.visible {
-      animation: popIn .4s ease-out forwards;
-    }
-    @keyframes popIn {
-      0%   { transform: translateY(20px) scale(0.95); opacity:0; }
-      70%  { transform: translateY(-2px) scale(1.02); opacity:1; }
-      100% { transform: translateY(0) scale(1); opacity:1; }
-    }
-
-    /* ── BOTÓN CONTACTAME ────────────────────────────────────────────── */
-    .contact-float {
-      position:fixed; bottom:30px; right:30px;
-      background: var(--button-bg);
-      backdrop-filter: var(--button-blur);
-      border:2px solid var(--accent);
-      border-radius:50px;
-      padding:12px 24px;
-      font-family: var(--font-heading);
-      font-weight:600;
-      font-size:1rem;
-      color: var(--accent);
-      cursor:pointer;
-      box-shadow:0 0 10px rgba(0,0,0,0.4);
-      z-index:999;
-      overflow:hidden;
-    }
-    .contact-float span {
-      display:inline-block;
-      animation: slideText 3s ease-in-out infinite;
-    }
-    @keyframes slideText {
-      0%   { transform: translateX(0); }
-      25%  { transform: translateX(-100%); }
-      50%  { transform: translateX(100%); }
-      75%  { transform: translateX(-100%); }
-      100% { transform: translateX(0); }
-    }
-    .contact-panel {
-      position:fixed; bottom:80px; right:30px;
-      display:flex; gap:16px; padding:12px;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
-      border:1px solid var(--accent);
-      border-radius:10px;
-      transform: scale(0);
-      opacity:0;
-      transform-origin: bottom right;
-      transition: transform .3s ease, opacity .3s ease;
-      z-index:998;
-    }
-    .contact-panel.show {
-      transform: scale(1);
-      opacity:1;
-    }
-    .contact-panel canvas {
-      width:40px; height:40px;
-    }
-
-    /* ── FOOTER ──────────────────────────────────────────────────────── */
-    footer {
-      text-align:center;
-      padding:2rem 1rem;
-      background: rgba(0,0,0,0.6);
-      color:#aaa;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- NAVBAR -->
-  <nav class="navbar" aria-label="Menú principal">
-    <button aria-expanded="false" aria-controls="menu-dropdown" onclick="toggleMenu('menu-dropdown')">
-      Menu
-    </button>
-    <div id="menu-dropdown" class="menu-dropdown" role="menu">
-      <a href="#header">Inicio</a>
-      <a href="#projects">Proyectos</a>
-      <a href="#skills">Habilidades</a>
-      <a href="#contact">Contacto</a>
-    </div>
-  </nav>
-
-  <!-- HEADER / PRESENTACIÓN -->
-  <header id="header" role="banner">
-    <div class="header-content">
-      <h1>Soy un programador full stack</h1>
-      <h2>Un joven soñador con grandes proyectos y sólidos conocimientos en Python</h2>
-    </div>
-  </header>
-  
-  <!-- SECCIÓN PROYECTOS (con canvas extra) -->
-  <section id="projects" class="section">
-    <h2>Proyectos Destacados</h2>
-    <div class="projects-container">
-
-      <!-- Beauty sigue igual (solo ícono giratorio) -->
-      <div class="project-card">
-        <canvas class="proj-icon" data-type="beauty" width="60" height="60"></canvas>
-        <h3>Beauty Landing Page</h3>
-        <p>Estética femenina con tipografías cursivas y transiciones.</p>
-        <a href="https://tuproyectobelleza.vercel.app" target="_blank">Ver Proyecto</a>
-        <div class="project-details">
-          <p>• HTML5, CSS3 (Flexbox, Grid)</p>
-          <p>• Canvas API para iconos animados</p>
-          <p>• Scroll-triggered fade-in</p>
-          <p><a href="https://github.com/tuusuario/beauty-landing" target="_blank">GitHub</a></p>
-          <button class="close-details">Cerrar</button>
-        </div>
-      </div>
-
-      <!-- Calculadora Financiera: añadimos canvas extra para "encuesta" -->
-      <div class="project-card">
-        <canvas class="proj-icon" data-type="finance" width="60" height="60"></canvas>
-        <h3>Calculadora Financiera</h3>
-        <p>Interfaz profesional para cálculos dinámicos y gráfica opcional.</p>
-        <a href="./financiator/index.html" target="_blank">Ver Proyecto</a>
-        <!-- canvas extra: barras de encuesta -->
-        <canvas class="proj-extra" data-extra="finance-survey" width="300" height="100"></canvas>
-        <div class="project-details">
-          <p>• JavaScript ES6+, manejo de eventos</p>
-          <p>• Chart.js para visualización de datos</p>
-          <p>• Validaciones en tiempo real</p>
-          <p><a href="https://github.com/tuusuario/calculadora-financiera" target="_blank">GitHub</a></p>
-          <button class="close-details">Cerrar</button>
-        </div>
-      </div>
-
-      <!-- Portal de Turismo: añadimos canvas extra para "avión volando" -->
-      <div class="project-card">
-        <canvas class="proj-icon" data-type="tourism" width="60" height="60"></canvas>
-        <h3>Portal de Turismo</h3>
-        <p>Diseño vibrante, galerías interactivas y experiencia mobile-first.</p>
-        <a href="https://portaldeturismo.vercel.app" target="_blank">Ver Proyecto</a>
-        <!-- canvas extra: avión animado -->
-        <canvas class="proj-extra" data-extra="tourism-plane" width="300" height="100"></canvas>
-        <div class="project-details">
-          <p>• React + React Router</p>
-          <p>• Animaciones con Framer Motion</p>
-          <p>• API de imágenes y mapas</p>
-          <p><a href="https://github.com/tuusuario/portal-turismo" target="_blank">GitHub</a></p>
-          <button class="close-details">Cerrar</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- SECCIÓN HABILIDADES -->
   <section id="skills" class="section">
     <h2>Habilidades</h2>
