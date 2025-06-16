@@ -221,173 +221,305 @@
     </div>
   </header>
 
+<!-- Incluye este bloque en tu HTML, donde corresponda -->
 <section id="projects" class="section-projects">
   <h2>Proyectos Destacados</h2>
   <div class="projects-container">
 
     <!-- 1) FinancePro -->
-    <a class="project-card" href="./financiator/index.html" aria-label="FinancePro - Calculadora financiera">
-      <div class="project-icon">
-        <svg width="80" height="80" viewBox="0 0 100 100" class="chart-bars">
-          <rect x="20" y="60" width="10" height="30" fill="#00e5ff" />
-          <rect x="40" y="50" width="10" height="40" fill="#00e5ff" />
-          <rect x="60" y="40" width="10" height="50" fill="#00e5ff" />
-        </svg>
+    <article class="project-card" onclick="window.location.href='./financiator/index.html'" role="link" aria-label="FinancePro: Calculadora financiera">
+      <div class="project-content">
+        <h3>FinancePro</h3>
+        <p>Calculadora financiera con dashboard animado.</p>
+        <canvas id="financeChart" aria-label="Gráfico financiero" role="img"></canvas>
       </div>
-      <h3>FinancePro</h3>
-      <p>Calculadora financiera interactiva para simulaciones precisas.</p>
-    </a>
+    </article>
 
     <!-- 2) BeautySpark -->
-    <a class="project-card" href="https://tuproyectobelleza.vercel.app" aria-label="BeautySpark - Landing de cosmética">
-      <div class="project-icon">
-        <svg width="80" height="80" viewBox="0 0 100 100" class="sparkle">
-          <rect x="45" y="25" width="10" height="45" rx="5" fill="crimson" />
-          <circle cx="50" cy="20" r="6" fill="pink" />
-          <path d="M45 75 Q50 85 55 75" stroke="pink" stroke-width="2" fill="none"/>
-        </svg>
+    <article class="project-card" onclick="window.location.href='https://tuproyectobelleza.vercel.app'" role="link" aria-label="BeautySpark: Landing de cosmética">
+      <div class="project-content">
+        <h3>BeautySpark</h3>
+        <p>Landing de cosmética con ícono animado.</p>
+        <figure>
+          <!-- Ícono de frasco de perfume SVG inline -->
+          <svg id="perfumeIcon" width="80" height="120" viewBox="0 0 80 120" aria-hidden="true">
+            <rect x="15" y="30" width="50" height="70" rx="8" ry="8" fill="#f8f0f5" stroke="#ccc" stroke-width="2"/>
+            <circle cx="40" cy="25" r="15" fill="#ffe4e1" stroke="#ccc" stroke-width="2"/>
+            <rect x="33" y="15" width="14" height="10" rx="4" ry="4" fill="#ffccd5"/>
+            <circle id="sparkle" cx="40" cy="25" r="8" fill="rgba(255,255,255,0.6)"/>
+          </svg>
+          <figcaption class="visually-hidden">Icono de frasco de perfume</figcaption>
+        </figure>
       </div>
-      <h3>BeautySpark</h3>
-      <p>Landing page moderna con diseño cosmético atractivo.</p>
-    </a>
+    </article>
 
     <!-- 3) Portal de Destinos Turísticos -->
-    <a class="project-card" href="https://portaldeturismo.vercel.app" aria-label="Portal de destinos turísticos">
-      <div class="project-icon">
-        <svg width="80" height="80" viewBox="0 0 100 100" class="airplane">
-          <path d="M10 50 L40 40 L10 30 Z" fill="white" />
-          <line x1="40" y1="40" x2="90" y2="50" stroke="#00e5ff" stroke-width="3"/>
-          <circle cx="10" cy="50" r="2" fill="#00e5ff"/>
-        </svg>
+    <article class="project-card" onclick="window.location.href='https://portaldeturismo.vercel.app'" role="link" aria-label="Portal de Destinos Turísticos">
+      <div class="project-content">
+        <h3>Portal Destinos Turísticos</h3>
+        <p>Portal interactivo con avión animado en ruta.</p>
+        <div class="map-container">
+          <svg id="rutaMapa" viewBox="0 0 300 200" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+            <!-- Ruta de ejemplo: curva suave -->
+            <path id="flightPath" d="M20,150 C100,80 200,80 280,50" stroke="#007aff" stroke-width="2" fill="none"
+                  stroke-dasharray="500" stroke-dashoffset="500"/>
+            <!-- Avión: triangulito simple -->
+            <polygon id="plane" points="0,-5 10,0 0,5 2,0" fill="#007aff" transform="translate(20,150)"/>
+          </svg>
+        </div>
       </div>
-      <h3>Portal de Destinos Turísticos</h3>
-      <p>Explora lugares únicos con diseño vibrante y dinámico.</p>
-    </a>
+    </article>
 
   </div>
 </section>
 
 <style>
+  /* Contenedor general */
   .section-projects {
-    background: linear-gradient(to bottom, #050505, #0f0f0f);
-    color: white;
-    padding: 100px 20px;
+    background: #fafafa;
+    color: #000;
+    padding: 80px 20px;
     text-align: center;
-    overflow-x: hidden;
   }
-
   .section-projects h2 {
-    font-size: 3rem;
-    margin-bottom: 3rem;
-    background: linear-gradient(90deg, #00e5ff, #ff00c3);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 10px rgba(0,229,255,0.4);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+    color: #111;
   }
 
+  /* Flexgrid responsive */
   .projects-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2.5rem;
+    gap: 1.5rem;
   }
-
   .project-card {
-    display: block;
-    width: 280px;
-    padding: 2rem;
-    background: linear-gradient(145deg, #1c1c1c, #0e0e0e);
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 229, 255, 0.1);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 320px;
     cursor: pointer;
+    overflow: hidden;
+    transform: translateY(30px);
     opacity: 0;
-    transform: translateY(50px) rotateY(5deg) scale(0.95);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
   }
-
   .project-card:hover {
-    background: linear-gradient(145deg, #202020, #1a1a1a);
-    box-shadow: 0 0 25px rgba(255, 0, 195, 0.3), 0 0 15px rgba(0, 229, 255, 0.2);
-    transform: scale(1.03);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    transform: translateY(0) scale(1.02);
   }
-
-  .project-icon {
-    margin-bottom: 1.5rem;
+  .project-content {
+    padding: 1.5rem;
   }
-
-  .project-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #00e5ff;
+  .project-content h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #007aff;
   }
-
-  .project-card p {
+  .project-content p {
+    margin: 0 0 1rem;
     font-size: 1rem;
-    opacity: 0.85;
-    color: #ddd;
+    color: #333;
   }
 
-  /* FinancePro - animación de barras */
-  .chart-bars rect {
-    transform-origin: bottom;
-    transform: scaleY(0);
-    animation: growBars 1s ease-out forwards;
-  }
-  @keyframes growBars {
-    to { transform: scaleY(1); }
+  /* Canvas del gráfico */
+  #financeChart {
+    width: 100%;
+    height: 200px;
   }
 
-  /* BeautySpark - brillo pulsante */
-  .sparkle circle, .sparkle path {
-    animation: pulse 2s infinite ease-in-out;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
+  /* BeautySpark: centrar SVG */
+  #perfumeIcon {
+    display: block;
+    margin: 0 auto;
   }
 
-  /* Avión moviéndose de derecha a izquierda */
-  .airplane {
-    animation: fly 4s ease-in-out infinite alternate;
+  /* Portal Destinos: contenedor SVG */
+  .map-container {
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
   }
-  @keyframes fly {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-20px); }
+  #rutaMapa {
+    width: 100%;
+    height: auto;
   }
 
-  @media (max-width: 600px) {
+  /* Preferencias de movimiento reducido */
+  @media (prefers-reduced-motion: reduce) {
+    .project-card {
+      transition: none;
+    }
+  }
+
+  /* Responsive: en móviles apilar verticalmente */
+  @media (max-width: 640px) {
     .section-projects h2 {
       font-size: 2rem;
     }
     .project-card {
       width: 90%;
-      padding: 1.5rem;
     }
   }
 </style>
 
+<!-- CDN de librerías necesarias -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script>
-  gsap.registerPlugin(ScrollTrigger);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
 
-  gsap.utils.toArray(".project-card").forEach((card, i) => {
-    gsap.to(card, {
-      opacity: 1,
-      y: 0,
-      rotationY: 0,
-      scale: 1,
-      duration: 1,
-      delay: i * 0.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: card,
-        start: "top 85%",
-        toggleActions: "play none none none"
+<script>
+  // GSAP ScrollTrigger de entrada (opcional: si ya incluyes ScrollTrigger, registra plugin)
+  if (gsap && gsap.registerPlugin) {
+    // Registrar ScrollTrigger si lo usas; si no, basta animar al load
+    // gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray(".project-card").forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: i * 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+  } else {
+    // Si no usas ScrollTrigger, animar al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.project-card').forEach((card, i) => {
+        setTimeout(() => {
+          card.style.transform = 'translateY(0)';
+          card.style.opacity = '1';
+        }, i * 200);
+      });
+    });
+  }
+
+  // Proyecto 1: FinancePro con Chart.js
+  document.addEventListener('DOMContentLoaded', () => {
+    const ctx = document.getElementById('financeChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Ene','Feb','Mar','Abr','May','Jun','Jul'],
+        datasets: [{
+          label: 'Ingresos',
+          data: [120, 150, 170, 130, 180, 200, 220],
+          borderColor: '#007aff',
+          backgroundColor: 'rgba(0,122,255,0.1)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutQuart'
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: '#555' }
+          },
+          y: {
+            beginAtZero: true,
+            grid: { color: '#eee' },
+            ticks: { color: '#555' }
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
       }
     });
+  });
+
+  // Proyecto 2: BeautySpark con Anime.js
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Aparición suave del ícono
+      anime({
+        targets: '#perfumeIcon',
+        scale: [0.8, 1],
+        opacity: [0, 1],
+        duration: 800,
+        easing: 'easeOutElastic(1, .6)'
+      });
+      // Brillo sutil en el tapón
+      anime({
+        targets: '#sparkle',
+        scale: [
+          { value: 1.2, duration: 1000 },
+          { value: 1, duration: 1000 }
+        ],
+        loop: true,
+        easing: 'easeInOutQuad'
+      });
+      // Hover: giro leve
+      const icon = document.getElementById('perfumeIcon');
+      icon.addEventListener('mouseenter', () => {
+        anime.remove(icon);
+        anime({
+          targets: '#perfumeIcon',
+          rotate: 3,
+          duration: 300,
+          easing: 'easeOutQuad'
+        });
+      });
+      icon.addEventListener('mouseleave', () => {
+        anime.remove(icon);
+        anime({
+          targets: '#perfumeIcon',
+          rotate: 0,
+          duration: 300,
+          easing: 'easeOutQuad'
+        });
+      });
+    } else {
+      // Si prefiere reducir movimiento, mostrar ícono sin animación extra
+      document.getElementById('perfumeIcon').style.opacity = '1';
+    }
+  });
+
+  // Proyecto 3: Portal Destinos con GSAP MotionPath
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.registerPlugin(MotionPathPlugin);
+      const path = document.querySelector('#flightPath');
+      const plane = document.querySelector('#plane');
+      // Dibujo de la ruta
+      gsap.fromTo(path, 
+        { strokeDashoffset: 500 }, 
+        { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }
+      );
+      // Vuelo del avión
+      gsap.to(plane, {
+        motionPath: {
+          path: path,
+          align: path,
+          autoRotate: true,
+          alignOrigin: [0.5, 0.5]
+        },
+        duration: 3,
+        ease: "power1.inOut",
+        repeat: -1,
+        yoyo: true
+      });
+    } else {
+      // Sin animación: colocar avión en posición inicial visible
+      document.querySelector('#plane').setAttribute('transform', 'translate(20,150)');
+    }
   });
 </script>
 <section id="skills" class="section-skills">
