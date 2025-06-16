@@ -222,7 +222,7 @@
   </header>
   
     <!-- ── ESTILOS EXTRA PARA PROYECTOS ───────────────────────────────────────── -->
-  <section id="projects" class="section" style="background: linear-gradient(#1a1a1a, #2a2a2a); color: white; padding: 3rem 1rem; font-family: 'Segoe UI', sans-serif;">
+<section id="projects" class="section" style="background: linear-gradient(#1a1a1a, #2a2a2a); color: white; padding: 3rem 1rem; font-family: 'Segoe UI', sans-serif;">
   <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">Proyectos Destacados</h2>
   <div class="projects-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
 
@@ -405,76 +405,6 @@
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
       let t = 0;
-
-      function drawFinance() {
-        const w = canvas.width, h = canvas.height;
-        ctx.clearRect(0,0,w,h);
-        [0.5,0.7,0.4].forEach((pct,i) => {
-          const bw = w/5, x = (i+1)*bw, barH = h*pct*Math.abs(Math.sin(t+i));
-          ctx.fillStyle = 'rgba(0,229,255,0.6)';
-          ctx.fillRect(x, h-barH, bw*0.6, barH);
-        });
-      }
-
-      function drawLipstick() {
-        const w = canvas.width, h = canvas.height;
-        ctx.clearRect(0,0,w,h);
-
-        // cuerpo del lápiz labial
-        const lipLength = 80, lipWidth = 20;
-        const x0 = w/2 - lipLength/2, y0 = h/2 - lipWidth/2;
-        // base metalizada
-        ctx.fillStyle = 'rgba(200,200,200,0.8)';
-        ctx.fillRect(x0, y0 + lipWidth, lipLength, 8);
-        // tubo
-        ctx.fillStyle = 'rgba(50,50,50,0.9)';
-        ctx.fillRect(x0, y0, lipLength, lipWidth);
-        // barra de color oscilante
-        const rise = 10 + 5 * Math.sin(t*2);
-        ctx.fillStyle = 'crimson';
-        ctx.fillRect(x0 + lipLength/4, y0 - rise, lipLength/2, rise);
-        // destello de brillo
-        if (Math.sin(t*5) > 0.9) {
-          ctx.strokeStyle = 'rgba(255,255,255,0.8)';
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.moveTo(x0 + lipLength*0.75, y0 - rise + 5);
-          ctx.lineTo(x0 + lipLength*0.75 + 10, y0 - rise + 15);
-          ctx.moveTo(x0 + lipLength*0.85, y0 - rise + 2);
-          ctx.lineTo(x0 + lipLength*0.85 - 8, y0 - rise + 12);
-          ctx.stroke();
-        }
-      }
-
-      function drawPlane() {
-        const w = canvas.width, h = canvas.height;
-        ctx.clearRect(0,0,w,h);
-        const speed = 0.3;
-        const x = ((t * speed) % (w + 80)) - 40;
-        const y = h/2 + 10 * Math.sin(t * 2);
-        ctx.fillStyle = 'white';
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x+40, y+10);
-        ctx.lineTo(x+30, y+5);
-        ctx.lineTo(x+40, y-10);
-        ctx.closePath();
-        ctx.fill();
-        ctx.beginPath();
-        ctx.moveTo(x+10,y+5);
-        ctx.lineTo(x+20,y-10);
-        ctx.lineTo(x+25,y+5);
-        ctx.fill();
-      }
-
-      (function loop() {
-        if (extra === 'finance-survey') drawFinance();
-        else if (extra === 'beauty-lipstick') drawLipstick();
-        else if (extra === 'tourism-plane') drawPlane();
-        t += 0.02;
-        requestAnimationFrame(loop);
-      })();
-    }
 
     // inicializa todas las animaciones extra
     document.querySelectorAll('canvas[data-extra]').forEach(c => {
