@@ -221,458 +221,230 @@
     </div>
   </header>
 
-<section id="projects" class="section-projects-rich">
+<section id="projects" class="section-projects-lottie">
+  <!-- Estilos embebidos -->
+  <style>
+    .section-projects-lottie {
+      background: #111;
+      color: #eee;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .section-projects-lottie h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #fff;
+    }
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .project-card {
+      position: relative;
+      width: 320px;
+      background: #222;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transform: translateY(40px);
+      opacity: 0;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 20px rgba(0,150,255,0.4);
+      transform: translateY(0) scale(1.03);
+    }
+    .project-content {
+      padding: 1rem;
+      background: rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 2;
+    }
+    .project-content h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.3rem;
+      color: #0af;
+    }
+    .project-content p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+    .lottie-container {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+    }
+    @media (max-width: 768px) {
+      .project-card { width: 90%; }
+      .section-projects-lottie h2 { font-size: 2rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .project-card { transition: none; }
+    }
+  </style>
+
   <h2>Proyectos Destacados</h2>
   <div class="projects-container">
 
-    <!-- 1) FinancePro: barras 3D + flecha ascendente -->
-    <article class="project-card" id="finance-card" role="link"
-             aria-label="FinancePro: Calculadora financiera" onclick="location.href='./financiator/index.html'">
+    <!-- 1) FinancePro -->
+    <article class="project-card" role="link" aria-label="FinancePro: Calculadora financiera"
+             onclick="location.href='./financiator/index.html'">
       <div class="project-content">
         <h3>FinancePro</h3>
-        <p>Calculadora financiera con gráficos 3D y flecha de crecimiento.</p>
+        <p>Calculadora financiera con animación de gráfico 3D simulado (Lottie).</p>
       </div>
-      <div class="three-container" id="finance3d"></div>
+      <div class="lottie-container" id="lottie-finance"></div>
     </article>
 
-    <!-- 2) BeautySpark: lápiz labial 3D + partículas sutiles -->
-    <article class="project-card" id="beauty-card" role="link"
-             aria-label="BeautySpark: Landing cosmética" onclick="location.href='https://tuproyectobelleza.vercel.app'">
+    <!-- 2) BeautySpark -->
+    <article class="project-card" role="link" aria-label="BeautySpark: Landing cosmética"
+             onclick="location.href='https://tuproyectobelleza.vercel.app'">
       <div class="project-content">
         <h3>BeautySpark</h3>
-        <p>Landing cosmética con lápiz labial 3D y partículas.</p>
+        <p>Landing de cosmética con animación de producto (lipstick/perfume) en Lottie.</p>
       </div>
-      <div class="three-container" id="beauty3d"></div>
+      <div class="lottie-container" id="lottie-beauty"></div>
     </article>
 
-    <!-- 3) Portal Destinos: escena de playa 3D con palmera y olas -->
-    <article class="project-card" id="tourism-card" role="link"
-             aria-label="Portal Destinos Turísticos" onclick="location.href='https://portaldeturismo.vercel.app'">
+    <!-- 3) Portal Destinos -->
+    <article class="project-card" role="link" aria-label="Portal Destinos Turísticos"
+             onclick="location.href='https://portaldeturismo.vercel.app'">
       <div class="project-content">
         <h3>Portal Destinos</h3>
-        <p>Escena de playa 3D con palmera y agua animada.</p>
+        <p>Explora destinos con animación de viaje (playa/avión) en Lottie.</p>
       </div>
-      <div class="three-container" id="tourism3d"></div>
+      <div class="lottie-container" id="lottie-travel"></div>
     </article>
 
   </div>
-</section>
 
-<style>
-  .section-projects-rich {
-    background: #111;
-    color: #eee;
-    padding: 80px 20px;
-    text-align: center;
-  }
-  .section-projects-rich h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    color: #fff;
-    text-shadow: 0 0 8px rgba(255,255,255,0.2);
-  }
-  .projects-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .project-card {
-    position: relative;
-    width: 340px;
-    background: #222;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    transform: translateY(40px);
-    opacity: 0;
-    transition: transform 0.4s ease, box-shadow 0.3s ease;
-  }
-  .project-card:hover {
-    box-shadow: 0 8px 20px rgba(0,150,255,0.4);
-    transform: translateY(0) scale(1.03);
-  }
-  .project-content {
-    padding: 1rem;
-    background: rgba(0,0,0,0.6);
-    z-index: 2;
-    position: relative;
-  }
-  .project-content h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1.3rem;
-    color: #0af;
-  }
-  .project-content p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: #ccc;
-  }
-  .three-container {
-    width: 100%;
-    height: 220px;
-  }
-  @media (max-width: 768px) {
-    .project-card {
-      width: 90%;
-    }
-    .section-projects-rich h2 {
-      font-size: 2rem;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .project-card {
-      transition: none;
-    }
-  }
-</style>
+  <!-- Librerías embebidas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-<!-- CDN: Three.js y GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Entrada de cards con GSAP
-  gsap.utils.toArray(".project-card").forEach((card, i) => {
-    gsap.to(card, {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      delay: i * 0.2,
-      ease: "power2.out"
-    });
-  });
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // No inicializar escenas 3D si user prefiere reducir movimiento
-    return;
-  }
-
-  /* ===== 1) FinancePro: barras 3D + flecha ascendente ===== */
-  (function(){
-    const container = document.getElementById('finance3d');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth/container.clientHeight, 0.1, 100);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    // Iluminación
-    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    const dir = new THREE.DirectionalLight(0xffffff, 0.6);
-    dir.position.set(5,10,7);
-    scene.add(dir);
-
-    // Grupo para barras y flecha
-    const group = new THREE.Group();
-
-    // Barras 3D
-    const barColors = [0x00ffff, 0x00aaff, 0x0088ff];
-    const targetHeights = [2, 3.2, 1.8];
-    for (let i=0; i<3; i++) {
-      const geom = new THREE.BoxGeometry(0.6, 0.1, 0.6);
-      const mat = new THREE.MeshStandardMaterial({ color: barColors[i], emissive: barColors[i]*0.2, roughness:0.4 });
-      const mesh = new THREE.Mesh(geom, mat);
-      mesh.position.set((i-1)*1.0, 0.05, 0);
-      mesh.scale.y = 0.01;
-      group.add(mesh);
-
-      // Animación con GSAP: crecer
-      gsap.to(mesh.scale, {
-        y: targetHeights[i],
-        duration: 1.5,
-        delay: 0.5 + i*0.3,
-        ease: "elastic.out(1, 0.5)"
-      });
-      gsap.to(mesh.position, {
-        y: targetHeights[i]/2,
-        duration: 1.5,
-        delay: 0.5 + i*0.3,
-        ease: "elastic.out(1, 0.5)"
-      });
-    }
-
-    // Flecha ascendente: flecha 3D encima de la barra más alta
-    // Crear flecha: cilindro + cono
-    const arrowGroup = new THREE.Group();
-    const shaftGeom = new THREE.CylinderGeometry(0.1, 0.1, 1.5, 16);
-    const shaftMat = new THREE.MeshStandardMaterial({ color: 0xffff00, emissive: 0x444400, roughness:0.3 });
-    const shaft = new THREE.Mesh(shaftGeom, shaftMat);
-    shaft.position.y = 0.75;
-    arrowGroup.add(shaft);
-    const headGeom = new THREE.ConeGeometry(0.2, 0.5, 16);
-    const headMat = new THREE.MeshStandardMaterial({ color: 0xffff00, emissive: 0x444400, roughness:0.3 });
-    const head = new THREE.Mesh(headGeom, headMat);
-    head.position.y = 1.75;
-    arrowGroup.add(head);
-    // Posicionar flecha al centro encima de la barra del medio (índice 1)
-    arrowGroup.position.set(0, targetHeights[1], 0);
-    group.add(arrowGroup);
-
-    // Animar flecha: pequeña subida y bajada cíclica
-    gsap.to(arrowGroup.position, {
-      y: targetHeights[1] + 0.3,
-      duration: 1,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut"
-    });
-
-    scene.add(group);
-
-    // Rotación lenta del grupo para dinamismo
-    gsap.to(group.rotation, {
-      y: Math.PI*2,
-      duration: 12,
-      repeat: -1,
-      ease: "none"
-    });
-
-    // Cámara
-    camera.position.set(0, 3, 5);
-    camera.lookAt(0, 1, 0);
-
-    // Resize
-    window.addEventListener('resize', () => {
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      camera.aspect = container.clientWidth/container.clientHeight;
-      camera.updateProjectionMatrix();
-    });
-    // Render loop
-    const animate = () => {
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    };
-    animate();
-  })();
-
-  /* ===== 2) BeautySpark: lápiz labial 3D + partículas ===== */
-  (function(){
-    const container = document.getElementById('beauty3d');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(40, container.clientWidth/container.clientHeight, 0.1, 100);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    // Iluminación suave
-    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-    const point = new THREE.PointLight(0xff88aa, 0.8);
-    point.position.set(5,5,5);
-    scene.add(point);
-
-    // Modelo 3D de lápiz labial:
-    // Cuerpo: cilindro vertical
-    const bodyGeom = new THREE.CylinderGeometry(0.3, 0.3, 2, 32);
-    const bodyMat = new THREE.MeshStandardMaterial({ color: 0x880000, roughness: 0.4, metalness: 0.3, emissive:0x220000, emissiveIntensity:0.1 });
-    const body = new THREE.Mesh(bodyGeom, bodyMat);
-    body.position.y = 1;
-    scene.add(body);
-    // Base (parte inferior metálica)
-    const baseGeom = new THREE.CylinderGeometry(0.32, 0.32, 0.2, 32);
-    const baseMat = new THREE.MeshStandardMaterial({ color: 0x333333, roughness: 0.5, metalness: 0.8 });
-    const base = new THREE.Mesh(baseGeom, baseMat);
-    base.position.y = 0.1;
-    scene.add(base);
-    // Punta de labial: cono inclinado
-    const tipGeom = new THREE.ConeGeometry(0.25, 0.7, 32);
-    const tipMat = new THREE.MeshStandardMaterial({ color: 0xff4466, roughness: 0.3, metalness: 0.2, emissive:0x440000, emissiveIntensity:0.1 });
-    const tip = new THREE.Mesh(tipGeom, tipMat);
-    // Rotar el cono para que la punta mire hacia fuera: girar alrededor de X
-    tip.rotation.z = Math.PI; // orientar
-    // Mover la punta a la parte superior del cilindro
-    tip.position.y = 2.1;
-    scene.add(tip);
-
-    // Agrupar lápiz labial para animaciones
-    const lipstickGroup = new THREE.Group();
-    lipstickGroup.add(body);
-    lipstickGroup.add(base);
-    lipstickGroup.add(tip);
-    scene.add(lipstickGroup);
-
-    // Partículas sutiles alrededor: pequeños puntos que giran
-    const particles = new THREE.Group();
-    const pGeom = new THREE.SphereGeometry(0.03, 8, 8);
-    const pMat = new THREE.MeshBasicMaterial({ color: 0xffccd5, transparent: true, opacity: 0.7 });
-    const count = 20;
-    for (let i=0; i<count; i++) {
-      const p = new THREE.Mesh(pGeom, pMat.clone());
-      // posición aleatoria alrededor del lápiz
-      const angle = Math.random()*Math.PI*2;
-      const radius = 1.5 + Math.random()*0.3;
-      const y = 1 + (Math.random()-0.5)*0.5;
-      p.position.set(Math.cos(angle)*radius, y, Math.sin(angle)*radius);
-      particles.add(p);
-    }
-    scene.add(particles);
-
-    // Cámara
-    camera.position.set(0, 1.5, 4);
-    camera.lookAt(0, 1, 0);
-
-    // Animaciones GSAP:
-    // Lápiz: rotación lenta y leve bobbing
-    gsap.to(lipstickGroup.rotation, {
-      y: Math.PI*2,
-      duration: 16,
-      repeat: -1,
-      ease: "none"
-    });
-    gsap.to(lipstickGroup.position, {
-      y: "+=0.1",
-      duration: 2,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut"
-    });
-    // Partículas: rotación alrededor y pulsos de opacidad
-    gsap.to(particles.rotation, {
-      y: Math.PI*2,
-      duration: 20,
-      repeat: -1,
-      ease: "none"
-    });
-    particles.children.forEach((p, idx) => {
-      gsap.to(p.material, {
-        opacity: [0.3, 0.7],
-        duration: 1.5 + Math.random(),
-        yoyo: true,
-        repeat: -1,
-        delay: idx*0.1,
-        ease: "sine.inOut"
-      });
-    });
-
-    // Resize
-    window.addEventListener('resize', () => {
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      camera.aspect = container.clientWidth/container.clientHeight;
-      camera.updateProjectionMatrix();
-    });
-    // Render loop
-    const animate = () => {
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    };
-    animate();
-  })();
-
-  /* ===== 3) Portal Destinos: escena de playa 3D ===== */
-  (function(){
-    const container = document.getElementById('tourism3d');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, container.clientWidth/container.clientHeight, 0.1, 100);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    // Iluminación
-    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    const sunLight = new THREE.DirectionalLight(0xffee88, 0.8);
-    sunLight.position.set(5,10,5);
-    scene.add(sunLight);
-
-    // Suelo de arena: plano con color arena
-    const sandGeom = new THREE.PlaneGeometry(6, 6, 32, 32);
-    const sandMat = new THREE.MeshStandardMaterial({ color: 0xC2B280, roughness: 1 });
-    const sand = new THREE.Mesh(sandGeom, sandMat);
-    sand.rotation.x = -Math.PI/2;
-    sand.position.y = 0;
-    scene.add(sand);
-
-    // Agua: plano semi-transparente sobre un poco más bajo, con animación de olas simples
-    const waterGeom = new THREE.PlaneGeometry(6, 6, 32, 32);
-    const waterMat = new THREE.MeshStandardMaterial({
-      color: 0x3399ff,
-      transparent: true,
-      opacity: 0.6,
-      roughness: 0.8,
-      metalness: 0.1
-    });
-    const water = new THREE.Mesh(waterGeom, waterMat);
-    water.rotation.x = -Math.PI/2;
-    water.position.y = 0.05;
-    scene.add(water);
-
-    // Palmera: tronco + hojas
-    const trunkGeom = new THREE.CylinderGeometry(0.05, 0.1, 1.5, 8);
-    const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8B5A2B, roughness: 1 });
-    const trunk = new THREE.Mesh(trunkGeom, trunkMat);
-    trunk.position.set(1.5, 0.75, -1.5);
-    scene.add(trunk);
-    // Hojas: varias planas inclinadas
-    const leafMat = new THREE.MeshStandardMaterial({ color: 0x228B22, side: THREE.DoubleSide });
-    const leafGeom = new THREE.PlaneGeometry(0.6, 0.2);
-    const leaves = new THREE.Group();
-    for (let i=0; i<6; i++) {
-      const leaf = new THREE.Mesh(leafGeom, leafMat);
-      leaf.position.y = 1.5;
-      leaf.rotation.x = -Math.PI/3;
-      leaf.rotation.z = (i/6)*Math.PI*2;
-      leaf.position.x = trunk.position.x + Math.cos((i/6)*Math.PI*2)*0.3;
-      leaf.position.z = trunk.position.z + Math.sin((i/6)*Math.PI*2)*0.3;
-      leaves.add(leaf);
-    }
-    scene.add(leaves);
-
-    // Cámara
-    camera.position.set(0, 2.5, 4);
-    camera.lookAt(0, 0.5, 0);
-
-    // Animaciones GSAP:
-    // Olas: modificar posición Y de vértices water en cada frame desde loop de render
-    const waterVertices = water.geometry.attributes.position.array;
-    const basePositions = water.geometry.attributes.position.array.slice();
-    const waveParams = { time: 0 };
-    gsap.to(waveParams, {
-      time: 1,
-      duration: 4,
-      repeat: -1,
-      ease: "none"
-    });
-    // Palmera: leve balanceo
-    gsap.to(leaves.rotation, {
-      z: 0.2,
-      duration: 2,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut"
-    });
-    // Sol: podemos simular cambiando color luz o posición, pero omitimos por simplicidad
-
-    // Resize
-    window.addEventListener('resize', () => {
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      camera.aspect = container.clientWidth/container.clientHeight;
-      camera.updateProjectionMatrix();
-    });
-    // Render loop
-    const animate = () => {
-      // Animar olas: simple sinusoide en vértices
-      const pos = water.geometry.attributes.position;
-      const time = waveParams.time * Math.PI * 2;
-      for (let i=0; i<pos.count; i++) {
-        const ix = i*3;
-        const x = basePositions[ix];
-        const z = basePositions[ix+2];
-        // onda senoidal según posición x,z y tiempo
-        pos.array[ix+1] = 0.05 * Math.sin((x+z) * 1.5 + time);
+  <!-- Script embebido con JSON inline -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Entrada de cards con GSAP + ScrollTrigger
+      if (gsap && gsap.registerPlugin && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".project-card").forEach((card, i) => {
+          gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: i * 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              toggleActions: "play none none none"
+            }
+          });
+        });
+      } else {
+        // Fallback: animar al cargar
+        document.querySelectorAll('.project-card').forEach((card, i) => {
+          setTimeout(() => {
+            card.style.transform = 'translateY(0)';
+            card.style.opacity = '1';
+          }, i * 200);
+        });
       }
-      pos.needsUpdate = true;
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    };
-    animate();
-  })();
 
-}); // DOMContentLoaded
-</script>
+      // Si prefiere reducir movimiento, no cargamos animaciones Lottie
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+
+      // JSON inline: reemplaza con tu JSON descargado de LottieFiles
+      const financeAnimationData = {
+        /* Pega aquí el contenido completo de finance-chart.json */
+      };
+      const beautyAnimationData = {
+        /* Pega aquí el contenido completo de beauty-perfume.json */
+      };
+      const travelAnimationData = {
+        /* Pega aquí el contenido completo de travel-beach.json */
+      };
+
+      // Cargar animaciones Lottie usando animationData en lugar de path
+      const animFinance = lottie.loadAnimation({
+        container: document.getElementById('lottie-finance'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        animationData: financeAnimationData
+      });
+      const animBeauty = lottie.loadAnimation({
+        container: document.getElementById('lottie-beauty'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        animationData: beautyAnimationData
+      });
+      const animTravel = lottie.loadAnimation({
+        container: document.getElementById('lottie-travel'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        animationData: travelAnimationData
+      });
+
+      // Interacciones hover: ajusta según prefieras
+      const financeContainer = document.getElementById('lottie-finance');
+      financeContainer.addEventListener('mouseenter', () => animFinance.setSpeed(1.5));
+      financeContainer.addEventListener('mouseleave', () => animFinance.setSpeed(1));
+
+      const beautyContainer = document.getElementById('lottie-beauty');
+      beautyContainer.addEventListener('mouseenter', () => animBeauty.setSpeed(0.5));
+      beautyContainer.addEventListener('mouseleave', () => animBeauty.setSpeed(1));
+
+      const travelContainer = document.getElementById('lottie-travel');
+      travelContainer.addEventListener('mouseenter', () => animTravel.pause());
+      travelContainer.addEventListener('mouseleave', () => animTravel.play());
+
+      // ScrollTrigger para pausar/reanudar cuando no está en viewport
+      if (gsap && typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.create({
+          trigger: '#lottie-finance',
+          start: 'top bottom',
+          end: 'bottom top',
+          onEnter: () => animFinance.play(),
+          onLeave: () => animFinance.pause(),
+          onEnterBack: () => animFinance.play(),
+          onLeaveBack: () => animFinance.pause()
+        });
+        ScrollTrigger.create({
+          trigger: '#lottie-beauty',
+          start: 'top bottom',
+          end: 'bottom top',
+          onEnter: () => animBeauty.play(),
+          onLeave: () => animBeauty.pause(),
+          onEnterBack: () => animBeauty.play(),
+          onLeaveBack: () => animBeauty.pause()
+        });
+        ScrollTrigger.create({
+          trigger: '#lottie-travel',
+          start: 'top bottom',
+          end: 'bottom top',
+          onEnter: () => animTravel.play(),
+          onLeave: () => animTravel.pause(),
+          onEnterBack: () => animTravel.play(),
+          onLeaveBack: () => animTravel.pause()
+        });
+      }
+    });
+  </script>
+</section>
 <section id="skills" class="section-skills">
   <div id="skills-bg"></div>
   <div class="skills-wrapper">
