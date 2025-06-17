@@ -427,11 +427,14 @@
         onEnterBack: () => animTravel.play(),
         onLeaveBack: () => animTravel.pause()
       });
-
-    } catch (err) {
-      console.error('Error cargando las animaciones:', err);
-    }
-  });
+catch (err) {
+  console.error('Error cargando las animaciones:', err);
+  const errorMessage = document.createElement('div');
+  errorMessage.textContent = 'No se pudieron cargar las animaciones. Por favor, inténtalo más tarde.';
+  errorMessage.style.color = 'red';
+  errorMessage.style.textAlign = 'center';
+  document.querySelector('.projects-container').appendChild(errorMessage);
+}    
 </script>
 <section id="skills" class="section-skills">
   <div id="skills-bg"></div>
