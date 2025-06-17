@@ -384,6 +384,8 @@ function calcCustom() {
         autoplay: true,
         animationData: animations.financeChart
       });
+      document.getElementById('lottie-finance').addEventListener('mouseenter', () => animFinance.setSpeed(1.5));
+document.getElementById('lottie-finance').addEventListener('mouseleave', () => animFinance.setSpeed(1));
 
       const animBeauty = lottie.loadAnimation({
         container: document.getElementById('lottie-beauty'),
