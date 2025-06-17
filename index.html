@@ -334,13 +334,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-<!-- function toggleMenu(menuId) {
-  const menu = document.getElementById(menuId);
-  const button = document.querySelector(`[aria-controls="${menuId}"]`);
-  const isExpanded = button.getAttribute('aria-expanded') === 'true';
-  button.setAttribute('aria-expanded', !isExpanded);
-  menu.classList.toggle('show');
-}Script principal corregido -->
+function calcCustom() {
+  try {
+    const expr = document.getElementById('custom-expression').value;
+    if (!/^[0-9+\-*/().\s]+$/.test(expr)) {
+      throw new Error('Expresión inválida');
+    }
+    const res = Function('"use strict";return (' + expr + ')')();
+    document.getElementById('custom-result').textContent = `Resultado: ${res}`;
+  } catch (error) {
+    document.getElementById('custom-result').textContent = 'Error en la expresión';
+  }
+}
 <script>
   document.addEventListener('DOMContentLoaded', async () => {
     gsap.registerPlugin(ScrollTrigger);
