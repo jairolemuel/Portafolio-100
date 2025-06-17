@@ -19,196 +19,149 @@
   <!-- Tu script de inicialización de Proyectos -->
   <script src="js/projects.js" defer></script>
 
-  <!-- ESTILOS GLOBALES -->
+  <section id="projects" class="section-projects-lottie">
   <style>
-    :root {
-      /* Colores */
-      --bg-primary: #0e0e1a;
-      --bg-secondary: #141425;
-      --text-light: #f5f5f5;
-      --accent: #00e5ff;
-      --button-bg: rgba(255,255,255,0.1);
-      --button-blur: blur(6px);
-      --font-heading: 'Playfair Display', serif;
-      --font-body: 'Montserrat', sans-serif;
+    .section-projects-lottie {
+      background: #111;
+      color: #eee;
+      padding: 80px 20px;
+      text-align: center;
     }
-    /* Reset global */
-    *, *::before, *::after {
-      margin:0; padding:0; box-sizing:border-box;
+    .section-projects-lottie h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #fff;
     }
-    html { scroll-behavior:smooth; font-size:16px; }
-    body {
-      background: var(--bg-primary);
-      color: var(--text-light);
-      font-family: var(--font-body);
-      line-height:1.6;
-      overflow-x:hidden;
-      -webkit-font-smoothing: antialiased;
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
     }
-    a { color: inherit; text-decoration: none; }
-
-    /* ── NAVBAR (ejemplo) ───────────────────────────────────────────────── */
-    nav.navbar {
-      position: fixed; top:0; left:0; width:100%;
-      padding:1rem 2rem;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(8px);
-      display:flex; justify-content:flex-end;
-      z-index:100;
-    }
-    nav.navbar button {
-      font-family: var(--font-heading);
-      font-weight:600;
-      background: var(--button-bg);
-      backdrop-filter: var(--button-blur);
-      border:1px solid var(--accent);
-      border-radius:6px;
-      padding:0.5rem 1rem;
-      color: var(--accent);
-      cursor:pointer;
-      transition: transform .2s;
-    }
-    nav.navbar button:hover { transform: scale(1.05); }
-    .menu-dropdown {
-      position:absolute; top:100%; right:2rem;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
-      border:1px solid var(--accent);
-      border-radius:8px;
-      padding:1rem;
-      display:none;
-      flex-direction:column;
-      gap:0.75rem;
-    }
-    .menu-dropdown.show { display:flex; }
-    .menu-dropdown a:hover { color: var(--accent); }
-
-    /* ── HEADER ───────────────────────────────────────────────────────── */
-    header {
+    .project-card {
       position: relative;
-      width:100%; height:100vh;
-      background: url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg') center/cover fixed;
-      display:flex; align-items:center; justify-content:center;
+      width: 320px;
+      background: #222;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transform: translateY(0); /* Forzar aparición */
+      opacity: 1; /* Forzar aparición */
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
     }
-    header::before {
-      content:'';
-      position:absolute; inset:0;
-      background: rgba(14,14,26,0.75);
-      backdrop-filter: grayscale(20%) blur(3px);
+    .project-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 150, 255, 0.4);
+      transform: translateY(-5px) scale(1.03); /* Efecto más suave */
     }
-    .header-content {
-      position:relative; z-index:1;
-      text-align:center;
-      padding:2rem;
-      background: rgba(0,0,0,0.3);
-      border-radius:12px;
+    .project-content {
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 2;
     }
-    .header-content h1 {
-      font-family: var(--font-heading);
-      font-size:3rem;
-      background: linear-gradient(90deg, var(--accent), #3a7bd5, var(--accent));
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      background-size: 200% auto;
-      animation: gradientMove 6s linear infinite;
-      margin-bottom:0.5rem;
-      line-height:1.2;
+    .project-content h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.3rem;
+      color: #0af;
     }
-    .header-content h2 {
-      font-size:1.25rem;
-      opacity:0.9;
-      font-weight:500;
+    .project-content p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #ccc;
     }
-    @keyframes gradientMove {
-      0%   { background-position:   0% center; }
-      100% { background-position: -200% center; }
+    .lottie-container {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
     }
-
-    /* ── SECCIONES GENERALES ─────────────────────────────────────────── */
-    .section {
-      padding:6rem 1rem;
-    }
-    .section h2 {
-      font-family: var(--font-heading);
-      font-size:2.25rem;
-      text-align:center;
-      color: var(--accent);
-      margin-bottom:2rem;
-      position:relative;
-    }
-    .section h2::after {
-      content:'';
-      position:absolute; bottom:-0.5rem; left:50%;
-      transform: translateX(-50%);
-      width:4rem; height:0.25rem;
-      background: var(--accent);
-      border-radius:2px;
-    }
-
-    /* ── BOTÓN CONTACTAME ────────────────────────────────────────────── */
-    .contact-float {
-      position:fixed; bottom:30px; right:30px;
-      background: var(--button-bg);
-      backdrop-filter: var(--button-blur);
-      border:2px solid var(--accent);
-      border-radius:50px;
-      padding:12px 24px;
-      font-family: var(--font-heading);
-      font-weight:600;
-      font-size:1rem;
-      color: var(--accent);
-      cursor:pointer;
-      box-shadow:0 0 10px rgba(0,0,0,0.4);
-      z-index:999;
-      overflow:hidden;
-    }
-    .contact-float span {
-      display:inline-block;
-      animation: slideText 3s ease-in-out infinite;
-    }
-    @keyframes slideText {
-      0%   { transform: translateX(0); }
-      25%  { transform: translateX(-100%); }
-      50%  { transform: translateX(100%); }
-      75%  { transform: translateX(-100%); }
-      100% { transform: translateX(0); }
-    }
-    .contact-panel {
-      position:fixed; bottom:80px; right:30px;
-      display:flex; gap:16px; padding:12px;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
-      border:1px solid var(--accent);
-      border-radius:10px;
-      transform: scale(0);
-      opacity:0;
-      transform-origin: bottom right;
-      transition: transform .3s ease, opacity .3s ease;
-      z-index:998;
-    }
-    .contact-panel.show {
-      transform: scale(1);
-      opacity:1;
-    }
-    .contact-panel canvas {
-      width:40px; height:40px;
-    }
-
-    /* ── FOOTER ──────────────────────────────────────────────────────── */
-    footer {
-      text-align:center;
-      padding:2rem 1rem;
-      background: rgba(0,0,0,0.6);
-      color:#aaa;
+    @media (max-width: 768px) {
+      .project-card { width: 90%; }
+      .section-projects-lottie h2 { font-size: 2rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-  #skills-bg {
-    animation: none;
-  }
-}
+      .project-card { transition: none; }
+    }
   </style>
-</head>
+
+  <h2>Proyectos Destacados</h2>
+  <div class="projects-container">
+    <!-- Proyecto 1 -->
+    <article class="project-card" role="link" aria-label="FinancePro: Calculadora financiera"
+             onclick="location.href='./financiator/index.html'">
+      <div class="project-content">
+        <h3>FinancePro</h3>
+        <p>Calculadora financiera con animación de gráfico 3D simulado.</p>
+      </div>
+      <div class="lottie-container" id="lottie-finance"></div>
+    </article>
+
+    <!-- Proyecto 2 -->
+    <article class="project-card" role="link" aria-label="BeautySpark: Landing cosmética"
+             onclick="location.href='https://tuproyectobelleza.vercel.app'">
+      <div class="project-content">
+        <h3>BeautySpark</h3>
+        <p>Landing de cosmética con animación de producto (lipstick/perfume).</p>
+      </div>
+      <div class="lottie-container" id="lottie-beauty"></div>
+    </article>
+
+    <!-- Proyecto 3 -->
+    <article class="project-card" role="link" aria-label="Portal Destinos Turísticos"
+             onclick="location.href='https://portaldeturismo.vercel.app'">
+      <div class="project-content">
+        <h3>Portal Destinos</h3>
+        <p>Explora destinos con animación de viaje (playa/avión).</p>
+      </div>
+      <div class="lottie-container" id="lottie-travel"></div>
+    </article>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Cargar animaciones desde el archivo animations.json
+        const res = await fetch('./assets/animations.json');
+        const animations = await res.json();
+
+        // Configuración de animaciones Lottie para cada proyecto
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-finance'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animations.financeChart
+        });
+
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-beauty'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animations.beautyPerfume
+        });
+
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-travel'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animations.travelBeach
+        });
+      } catch (err) {
+        console.error('Error cargando las animaciones:', err);
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = 'No se pudieron cargar las animaciones. Por favor, verifica el archivo "animations.json".';
+        errorMessage.style.color = 'red';
+        errorMessage.style.textAlign = 'center';
+        document.querySelector('.projects-container').appendChild(errorMessage);
+      }
+    });
+  </script>
+</section>
 
 <body>
 
