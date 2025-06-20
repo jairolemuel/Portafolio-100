@@ -1,143 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome | Jairo Lemuel Barrientos</title>
-  <!-- Fuente para el typewriter (opcional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* ===== Reset ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width:100%; height:100%; }
 
-    /* ===== Fondo animado azul ===== */
+  <!-- D3.js para simulación de fuerzas -->
+  <script src="https://d3js.org/d3.v7.min.js" defer></script>
+  <!-- GSAP cargado en caso de querer complementar animaciones -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+
+  <style>
+    /* -------------------- Reset básico -------------------- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    /* ---------------- Fondo animado en degradado ---------------- */
     body {
-      background: linear-gradient(120deg, #002244, #004466, #006688);
-      background-size: 300% 300%;
-      animation: bgShift 12s ease infinite;
+      background: linear-gradient(135deg, #1E90FF, #003087);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: sans-serif;
-      overflow: hidden;
+      position: relative;
+      color: #00ffff;
     }
-    @keyframes bgShift {
-      0%   { background-position: 0%   50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0%   50%; }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 0;
     }
 
-    /* ===== Contenedor centrado ===== */
+    /* ---------------- Contenedor principal ---------------- */
     .header-content {
+      position: relative;
+      z-index: 1;
       text-align: center;
       padding: 2rem;
       max-width: 800px;
       width: 90%;
-      color: #fff;
     }
 
-    /* ===== Collage de letras ===== */
-    #collageTitle {
-      display: inline-block;
-      font-size: clamp(2rem, 8vw, 5rem);
-      line-height: 1;
-      margin-bottom: 1.5rem;
-    }
-    #collageTitle span {
-      display: inline-block;
-      background: #fff;
-      color: #000;
-      padding: 0.1em 0.2em;
-      margin: 0 .05em;
-      box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-      clip-path: polygon(
-        5% 5%, 95% 2%, 100% 25%,
-        90% 90%, 10% 95%, 0% 50%
-      );
-      opacity: 0;
-      transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
-      transition: transform 0.8s ease, opacity 0.8s ease;
-    }
-
-    /* ===== Avatar futurista ===== */
+    /* ---------------- Avatar futurista ---------------- */
     .avatar-container {
       position: relative;
-      width: 120px; height: 120px;
+      width: 140px;
+      height: 140px;
       margin: 0 auto 1.5rem;
       animation: float 6s ease-in-out infinite;
     }
-    .avatar, .avatar-glow {
-      position: absolute; top:0; left:0;
-      width:100%; height:100%; border-radius:50%;
-    }
     .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid #00ffffcc;
       object-fit: cover;
-      border: 3px solid #00ffff;
       box-shadow:
         0 0 12px #00ffff99,
         0 0 24px #00ffff33,
         inset 0 0 8px #00ffff44;
+      position: relative;
       z-index: 2;
     }
     .avatar-glow {
-      background: radial-gradient(circle, rgba(0,255,255,0.3) 20%, transparent 60%);
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      width: calc(100% + 16px);
+      height: calc(100% + 16px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,255,0.25) 15%, transparent 60%);
       filter: blur(8px);
-      animation: pulseGlow 3s infinite ease-in-out;
+      animation: pulseGlow 3s infinite ease-in-out, flicker 1s infinite;
       z-index: 1;
     }
     @keyframes pulseGlow {
-      0%,100% { transform: scale(1); opacity: .7; }
-      50%     { transform: scale(1.1); opacity: 1; }
+      0%,100% { opacity: 0.7; transform: scale(1); }
+      50%     { opacity: 1; transform: scale(1.08); }
     }
     @keyframes float {
       0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-8px); }
+      50%     { transform: translateY(-6px); }
+    }
+    @keyframes flicker {
+      0%   { opacity: 0.9; }
+      50%  { opacity: 0.7; }
+      100% { opacity: 0.9; }
     }
 
-    /* ===== Typewriter ===== */
-    .typewriter {
-      font-family: 'Orbitron', sans-serif;
+    /* ---------------- Collage de letras ---------------- */
+    .collage {
+      position: relative;
+      height: 120px;
+      margin-bottom: 2rem;
+    }
+    .collage .letter {
+      position: absolute;
       display: inline-block;
-      font-size: clamp(1.3rem,4vw,1.8rem);
-      color: #00ffff;
-      border-right: .12em solid #00ffff;
+      background: #fff;
+      color: #000;
+      padding: 0.15em 0.3em;
+      margin: 0 0.05em;
+      /* Borde irregular imitando tijeras */
+      clip-path: polygon(
+        5% 5%, 95% 3%, 100% 25%,
+        92% 92%, 12% 95%, 2% 50%
+      );
+      /* Sombra para simular elevación sobre el fondo */
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      /* Mezcla ligera para textura */
+      mix-blend-mode: multiply;
+      /* Fuentes, tamaño y user-select */
+      font-size: clamp(2rem, 6vw, 4rem);
+      user-select: none;
+      cursor: default;
+      opacity: 0;
+      transform-origin: center center;
+    }
+
+    /* ---------------- Efecto typewriter ---------------- */
+    .typewriter {
+      font-family: 'Courier New', monospace;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      border-right: 0.15em solid #00ffff;
       white-space: nowrap;
       overflow: hidden;
       width: 0;
-      margin: 1rem auto;
-      animation: typing 3s steps(30,end) 1s forwards,
-                 blink 0.7s step-end infinite 4s;
+      animation:
+        typing 3s steps(30, end) 0.5s forwards,
+        blink   0.7s step-end infinite 3.5s;
+      margin-bottom: 1rem;
     }
-    @keyframes typing { to { width: 100%; } }
-    @keyframes blink  { 50% { border-color: transparent; } }
+    @keyframes typing {
+      from { width: 0 }
+      to   { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
 
-    /* ===== Descripción ===== */
+    /* ---------------- Descripción personal ---------------- */
     .description {
-      font-size: clamp(1rem,2.5vw,1.3rem);
       color: rgba(255,255,255,0.85);
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
       line-height: 1.4;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
 </head>
+
 <body>
+  <div class="overlay"></div>
 
   <div class="header-content">
     <!-- Collage dinámico -->
-    <div id="collageTitle"></div>
+    <div class="collage" id="collage"></div>
 
     <!-- Avatar con glow -->
     <div class="avatar-container">
-      <img src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png"
-           alt="Jairo Lemuel Avatar" class="avatar"/>
+      <img
+        src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png"
+        alt="Avatar de Jairo Lemuel Barrientos"
+        class="avatar"
+      />
       <div class="avatar-glow"></div>
     </div>
 
-    <!-- Presentación typewriter -->
-    <div class="typewriter">Hi, I am Jairo Lemuel Barrientos.</div>
-
-    <!-- Descripción breve -->
+    <!-- Presentación con efecto typewriter -->
+    <div class="typewriter">
+      Hi, I am Jairo Lemuel Barrientos.
+    </div>
+    <!-- Descripción personal -->
     <p class="description">
       Hola, soy un joven The Signal soñador.<br/>
       Desarrollador Full Stack con grandes sueños y proyectos.
@@ -145,34 +190,63 @@
   </div>
 
   <script>
-    (function(){
-      const text = "Welcome to my portfolio";
-      const container = document.getElementById("collageTitle");
+    document.addEventListener('DOMContentLoaded', () => {
+      const text = "Welcome to mi Portafolio";
+      const container = d3.select('#collage');
+      const fonts  = ['Impact','Georgia','Arial Black','Courier New','Times New Roman'];
+      const colors = ['#FF6B6B','#FFD93D','#6BCB77','#4D96FF','#9D4EDD'];
 
-      // Generar cada letra con variables CSS aleatorias
-      text.split("").forEach((char,i) => {
-        const span = document.createElement("span");
-        span.textContent = char;
-        // vectores aleatorios
-        const tx  = Math.random()*40 - 20 + "px";
-        const ty  = Math.random()*40 - 20 + "px";
-        const rot = Math.random()*60 - 30 + "deg";
-        span.style.setProperty('--tx', tx);
-        span.style.setProperty('--ty', ty);
-        span.style.setProperty('--rot', rot);
-        span.style.transitionDelay = `${0.5 + i*0.05}s`;
-        container.appendChild(span);
+      // Prepara datos de letras con posición objetivo
+      let xCursor = 0;
+      const letterData = text.split('').map(char => {
+        if (char === ' ') {
+          xCursor += 30; // espacio
+          return null;
+        }
+        const datum = {
+          char,
+          targetX: xCursor,
+          targetY: 0
+        };
+        xCursor += 40;
+        return datum;
+      }).filter(d => d);
+
+      // Crea spans en posiciones aleatorias
+      letterData.forEach(d => {
+        container.append('span')
+          .attr('class', 'letter')
+          .text(d.char)
+          .style('font-family', fonts[Math.floor(Math.random() * fonts.length)])
+          .style('color', colors[Math.floor(Math.random() * colors.length)])
+          .style('left',
+            (Math.random() * window.innerWidth - window.innerWidth/2) + 'px'
+          )
+          .style('top',
+            (Math.random() * window.innerHeight - window.innerHeight/2) + 'px'
+          )
+          .each(function() {
+            // enlaza nodo D3 al datum
+            d.node = this;
+          });
       });
 
-      // Animar al lugar
-      window.addEventListener("load", () => {
-        container.querySelectorAll("span").forEach(span => {
-          span.style.opacity = 1;
-          span.style.transform = "translate(0,0) rotate(0deg)";
+      // Simulación de fuerzas para animar al lugar
+      const sim = d3.forceSimulation(letterData)
+        .force('x', d3.forceX(d => d.targetX).strength(0.1))
+        .force('y', d3.forceY(d => d.targetY).strength(0.1))
+        .force('collide', d3.forceCollide(25))
+        .alphaDecay(0.02)
+        .on('tick', () => {
+          letterData.forEach(d => {
+            const el = d.node;
+            el.style.left = (d.x + container.node().clientWidth/2) + 'px';
+            el.style.top  = (d.y + 60) + 'px';
+            el.style.opacity = 1;
+            el.style.transform = 'rotate(0deg)';
+          });
         });
-      });
-    })();
+    });
   </script>
-
 </body>
 </html>
