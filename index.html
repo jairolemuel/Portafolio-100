@@ -1,1035 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Jairo Lemuel Barrientos | Programador Full Stack"/>
-  <title>Jairo L. Barrientos | Portafolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome | Jairo Lemuel Barrientos</title>
+  <!-- Fuente Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- FUENTES -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
-
-  <!-- Lottie Web y GSAP con defer -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-
-  <!-- Tu script de inicialización de Proyectos -->
-  <script src="js/projects.js" defer></script>
-
-<style>
-  /* ==============================
-     Variables y temas (claro/oscuro)
-     ============================== */
-  :root {
-    --bg-primary: #0e0e1a;
-    --bg-secondary: #141425;
-    --text-light: #f5f5f5;
-    --text-dark: #111;
-    --accent: #00e5ff;
-    --accent-alt: #3a7bd5;
-    --button-bg: rgba(255, 255, 255, 0.1);
-    --button-blur: blur(6px);
-    --radius: 12px;
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Montserrat', sans-serif;
-    --shadow-light: rgba(0, 0, 0, 0.4);
-    --shadow-hover: rgba(0, 229, 255, 0.3);
-    --transition-fast: 0.2s ease;
-    --transition-medium: 0.3s ease;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg-primary: #fafafa;
-      --bg-secondary: #eaeaea;
-      --text-light: #111;
-      --text-dark: #111;
-      --accent: #0077cc;
-      --accent-alt: #005fa3;
-      --button-bg: rgba(0, 0, 0, 0.05);
-      --shadow-light: rgba(0, 0, 0, 0.2);
-      --shadow-hover: rgba(0, 119, 204, 0.3);
-    }
-  }
-
-  /* ====================
-     Reset y fundamentos
-     ==================== */
-  *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  html {
-    scroll-behavior: smooth;
-    font-size: 16px;
-  }
-  body {
-    font-family: var(--font-body);
-    background-color: var(--bg-primary);
-    color: var(--text-light);
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-    transition: color var(--transition-fast);
-  }
-  a:hover {
-    color: var(--accent);
-  }
-  img, video {
-    max-width: 100%;
-    display: block;
-  }
-
-  /* =================
-     Tipografía básica
-     ================= */
-  h1, h2, h3, h4, h5 {
-    font-family: var(--font-heading);
-    color: var(--accent);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  p, li, span, input, button {
-    font-family: var(--font-body);
-    color: var(--text-light);
-  }
-  /* Ajustes responsivos de títulos */
-  h1 { font-size: clamp(2rem, 5vw, 3rem); }
-  h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); position: relative; }
-  h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-
-  /* Subtítulos o descripciones */
-  .subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--text-light);
-    opacity: 0.85;
-    margin-bottom: 2rem;
-  }
-
-  /* =================
-     Navbar / Menú
-     ================= */
-  nav.navbar {
-    position: fixed;
-    top: 0; left: 0; width: 100%;
-    padding: 1rem 2rem;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: flex-end;
-    z-index: 100;
-  }
-  nav.navbar button, nav.navbar .menu-btn {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    background: var(--button-bg);
-    backdrop-filter: var(--button-blur);
-    border: 1px solid var(--accent);
-    border-radius: 6px;
-    padding: 0.5rem 1rem;
-    color: var(--accent);
-    cursor: pointer;
-    transition: transform var(--transition-fast);
-  }
-  nav.navbar button:hover, nav.navbar .menu-btn:hover {
-    transform: scale(1.05);
-  }
-  .menu-dropdown {
-    position: absolute;
-    top: 100%; right: 2rem;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    padding: 1rem;
-    display: none;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .menu-dropdown.show {
-    display: flex;
-  }
-  .menu-dropdown a {
-    font-weight: 500;
-    transition: color var(--transition-fast);
-  }
-  .menu-dropdown a:hover {
-    color: var(--accent);
-  }
-
-  /* =================
-     Header / Hero
-     ================= */
-  header {
-    position: relative;
-    width: 100%; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    background: url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg') center/cover fixed;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: rgba(14,14,26,0.75);
-    backdrop-filter: grayscale(20%) blur(3px);
-  }
-  .header-content {
-    position: relative; z-index: 1;
-    text-align: center;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: var(--radius);
-  }
-  .header-content h1 {
-    font-size: clamp(2rem, 6vw, 3rem);
-    background: linear-gradient(90deg, var(--accent), var(--accent-alt), var(--accent));
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    background-size: 200% auto;
-    animation: gradientMove 6s linear infinite;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  .header-content h2 {
-    font-size: clamp(1rem, 3vw, 1.5rem);
-    color: var(--text-light);
-    opacity: 0.85;
-    font-weight: 500;
-  }
-  @keyframes gradientMove {
-    0%   { background-position:   0% center; }
-    100% { background-position: -200% center; }
-  }
-
-  /* ===================
-     Secciones generales
-     =================== */
-  .section {
-    padding: 6rem 1rem;
-  }
-  .section h2::after {
-    content: '';
-    position: absolute;
-    bottom: -0.5rem; left: 50%;
-    transform: translateX(-50%);
-    width: 4rem; height: 0.25rem;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-
-  /* ===================
-     Botones globales
-     =================== */
-  .btn {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--accent);
-    background: var(--button-bg);
-    backdrop-filter: var(--button-blur);
-    color: var(--accent);
-    font-family: var(--font-body);
-    font-weight: 600;
-    transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-    pointer-events: none;
-  }
-  .btn:hover::before {
-    opacity: 1;
-  }
-  .btn:hover {
-    background: var(--accent);
-    color: var(--bg-primary);
-    transform: scale(1.05);
-  }
-
-  /* ==============================
-     Sección Proyectos Destacados
-     ============================== */
-  .section-projects {
-    background: var(--bg-primary);
-    color: var(--text-light);
-    padding: 6rem 1rem;
-  }
-  .section-projects h2 {
-    /* ya estilado en .section h2 */
-  }
-  .section-projects .projects-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .section-projects .project-card {
-    width: 320px;
-    background: var(--bg-secondary);
-    border-radius: var(--radius);
-    overflow: hidden;
-    position: relative;
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 4px 12px var(--shadow-light);
-    transform: translateY(40px);
-    opacity: 0;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    will-change: transform;
-    cursor: pointer;
-  }
-  .section-projects .project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0,229,255,0.1), rgba(255,0,195,0.1));
-    opacity: 0;
-    transition: opacity var(--transition-medium);
-    pointer-events: none;
-  }
-  .section-projects .project-card:hover::before {
-    opacity: 1;
-  }
-  .section-projects .project-card:hover {
-    transform: translateY(0) scale(1.02);
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 8px 24px var(--shadow-hover);
-  }
-  .section-projects .lottie-container {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    background: var(--bg-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .section-projects .lottie-container::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.2), transparent 60%);
-    pointer-events: none;
-  }
-  .section-projects .project-content {
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    color: var(--text-light);
-  }
-  .section-projects .project-content h3 {
-    font-family: var(--font-heading);
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-    margin-bottom: 0.5rem;
-    color: var(--accent);
-  }
-  .section-projects .project-content p {
-    font-family: var(--font-body);
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    color: var(--text-light);
-    opacity: 0.85;
-    margin-bottom: 0.75rem;
-  }
-  .section-projects .project-content .btn {
-    position: relative;
-    display: inline-block;
-    margin-top: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    background: linear-gradient(135deg, rgba(0,229,255,0.2), rgba(255,0,195,0.2));
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-family: var(--font-body);
-    font-weight: 600;
-    transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .section-projects .project-content .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius);
-    background: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-    pointer-events: none;
-  }
-  .section-projects .project-content .btn:hover::before {
-    opacity: 1;
-  }
-  .section-projects .project-content .btn:hover {
-    background: var(--accent);
-    color: var(--bg-primary);
-    transform: scale(1.05);
-  }
-
-  /* ====================
-     Sección siguiente (ej. Testimonios)
-     ==================== */
-  /* Ejemplo base para integrar dinámicamente: */
-  .section-next {
-    background: var(--bg-secondary);
-    color: var(--text-light);
-    padding: 6rem 1rem;
-  }
-  .section-next h2 {
-    /* igual estilo de .section h2 */
-  }
-  .section-next .items-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .section-next .item-card {
-    width: 300px;
-    background: var(--bg-primary);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 4px 12px var(--shadow-light);
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    cursor: pointer;
-  }
-  .section-next .item-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 24px var(--shadow-hover);
-  }
-  .section-next .item-content {
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.3);
-  }
-  .section-next .item-content h3 {
-    font-family: var(--font-heading);
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-  }
-  .section-next .item-content p {
-    font-family: var(--font-body);
-    color: var(--text-light);
-    opacity: 0.85;
-    font-size: 0.95rem;
-  }
-
-  /* =================
-     Botón Contacto Flotante
-     ================= */
-  .contact-float {
-    position: fixed;
-    bottom: 30px; right: 30px;
-    background: var(--button-bg);
-    backdrop-filter: var(--button-blur);
-    border: 2px solid var(--accent);
-    border-radius: 50px;
-    padding: 12px 24px;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--accent);
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    z-index: 999;
-    overflow: hidden;
-  }
-  .contact-float span {
-    display: inline-block;
-    animation: slideText 3s ease-in-out infinite;
-  }
-  @keyframes slideText {
-    0%   { transform: translateX(0); }
-    25%  { transform: translateX(-100%); }
-    50%  { transform: translateX(100%); }
-    75%  { transform: translateX(-100%); }
-    100% { transform: translateX(0); }
-  }
-  .contact-panel {
-    position: fixed; bottom: 80px; right: 30px;
-    display: flex; gap: 16px; padding: 12px;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--accent);
-    border-radius: 10px;
-    transform: scale(0);
-    opacity: 0;
-    transform-origin: bottom right;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 998;
-  }
-  .contact-panel.show {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  /* ============
-     Footer
-     ============ */
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    background: rgba(0, 0, 0, 0.6);
-    color: #aaa;
-    font-size: 0.9rem;
-  }
-  footer a:hover {
-    color: var(--accent);
-  }
-
-  /* ====================
-     Accesibilidad y rendimiento
-     ==================== */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-  @media (max-width: 768px) {
-    /* Ajustes globales móviles */
-    html { font-size: 14px; }
-    nav.navbar { padding: 0.75rem 1rem; }
-    .contact-float { bottom: 20px; right: 20px; padding: 10px 20px; }
-  }
-</style>
-
-  <h2>Proyectos Destacados</h2>
-  <div class="projects-container">
-    <!-- Proyecto 1 -->
-    <article class="project-card" role="link" aria-label="FinancePro: Calculadora financiera"
-             onclick="location.href='./financiator/index.html'">
-      <div class="project-content">
-        <h3>FinancePro</h3>
-        <p>Calculadora financiera con animación de gráfico 3D simulado.</p>
-      </div>
-      <div class="lottie-container" id="lottie-finance"></div>
-    </article>
-
-    <!-- Proyecto 2 -->
-    <article class="project-card" role="link" aria-label="BeautySpark: Landing cosmética"
-             onclick="location.href='https://tuproyectobelleza.vercel.app'">
-      <div class="project-content">
-        <h3>BeautySpark</h3>
-        <p>Landing de cosmética con animación de producto (lipstick/perfume).</p>
-      </div>
-      <div class="lottie-container" id="lottie-beauty"></div>
-    </article>
-
-    <!-- Proyecto 3 -->
-    <article class="project-card" role="link" aria-label="Portal Destinos Turísticos"
-             onclick="location.href='https://portaldeturismo.vercel.app'">
-      <div class="project-content">
-        <h3>Portal Destinos</h3>
-        <p>Explora destinos con animación de viaje (playa/avión).</p>
-      </div>
-      <div class="lottie-container" id="lottie-travel"></div>
-    </article>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        // Cargar animaciones desde el archivo animations.json
-        const res = await fetch('./assets/animations.json');
-        const animations = await res.json();
-
-        // Configuración de animaciones Lottie para cada proyecto
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-finance'),
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          animationData: animations.financeChart
-        });
-
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-beauty'),
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          animationData: animations.beautyPerfume
-        });
-
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-travel'),
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          animationData: animations.travelBeach
-        });
-      } catch (err) {
-        console.error('Error cargando las animaciones:', err);
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'No se pudieron cargar las animaciones. Por favor, verifica el archivo "animations.json".';
-        errorMessage.style.color = 'red';
-        errorMessage.style.textAlign = 'center';
-        document.querySelector('.projects-container').appendChild(errorMessage);
-      }
-    });
-  </script>
-</section>
-
-<body>
-
-  <!-- NAVBAR -->
-  <nav class="navbar" aria-label="Menú principal">
-    <button aria-expanded="false" aria-controls="menu-dropdown" onclick="toggleMenu('menu-dropdown')">
-      Menu
-    </button>
-    <div id="menu-dropdown" class="menu-dropdown" role="menu">
-      <a href="#header">Inicio</a>
-      <a href="#projects">Proyectos</a>
-      <a href="#skills">Habilidades</a>
-      <a href="#contact">Contacto</a>
-    </div>
-  </nav>
-
-  <!-- HEADER / PRESENTACIÓN -->
-  <header id="header" role="banner">
-    <div class="header-content">
-      <h1>Soy un programador full stack</h1>
-      <h2>Un joven soñador con grandes proyectos y sólidos conocimientos en Python</h2>
-    </div>
-  </header>
-
-<section id="projects" class="section-projects-lottie">
   <style>
-    .section-projects-lottie {
-      background: #111;
-      color: #eee;
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .section-projects-lottie h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      color: #fff;
-    }
-    .projects-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .project-card {
+    /* Reset básico */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; }
+
+    /* Contenedor general */
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: url('https://images.unsplash.com/photo-1581091870632-2fb0f6b04e3f?auto=format&fit=crop&w=1400&q=80')
+                  no-repeat center/cover;
       position: relative;
-      width: 320px;
-      background: #222;
-      border-radius: 12px;
       overflow: hidden;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      transform: translateY(40px);
-      opacity: 0;
-      transition: transform 0.4s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      box-shadow: 0 8px 20px rgba(0,150,255,0.4);
-      transform: translateY(0) scale(1.03);
-    }
-    .project-content {
-      padding: 1rem;
-      background: rgba(0,0,0,0.6);
-      position: relative;
-      z-index: 2;
-    }
-    .project-content h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.3rem;
-      color: #0af;
-    }
-    .project-content p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #ccc;
-    }
-    .lottie-container {
-      width: 100%;
-      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #111;
+      color: #00ffff;
     }
-    @media (max-width: 768px) {
-      .project-card { width: 90%; }
-      .section-projects-lottie h2 { font-size: 2rem; }
+    /* Capa oscura para contraste */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 0;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .project-card { transition: none; }
+
+    /* Contenido centrado */
+    .header-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      max-width: 90%;
+    }
+
+    /* Avatar futurista */
+    .avatar-container {
+      position: relative;
+      width: 140px; height: 140px;
+      margin: 0 auto 1.5rem;
+      animation: float 6s ease-in-out infinite;
+    }
+    .avatar {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      border: 2px solid #00ffffcc;
+      object-fit: cover;
+      position: relative; z-index: 2;
+      box-shadow:
+        0 0 12px #00ffff99,
+        0 0 24px #00ffff33,
+        inset 0 0 8px #00ffff44;
+    }
+    .avatar-glow {
+      position: absolute;
+      top: -8px; left: -8px;
+      width: calc(100% + 16px);
+      height: calc(100% + 16px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,255,0.25) 10%, transparent 60%);
+      filter: blur(8px);
+      animation: pulseGlow 3s infinite ease-in-out;
+      z-index: 1;
+    }
+
+    @keyframes pulseGlow {
+      0%,100% { opacity: 0.7; transform: scale(1); }
+      50%     { opacity: 1;   transform: scale(1.08); }
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-6px); }
+    }
+
+    /* Texto “sopa de letras” */
+    #scrambleText {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    /* Typewriter para presentación */
+    .typewriter {
+      display: inline-block;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      border-right: 0.15em solid #00ffff;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(30,end) 0.5s forwards,
+                 blink 0.7s step-end infinite 3.5s;
+      margin-bottom: 1rem;
+    }
+    @keyframes typing {
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Descripción personal */
+    .description {
+      color: #ffffffcc;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.4;
     }
   </style>
+</head>
 
-  <h2>Proyectos Destacados</h2>
-  <div class="projects-container">
-    <!-- 1) FinancePro -->
-    <article class="project-card" role="link" aria-label="FinancePro: Calculadora financiera"
-             onclick="location.href='./financiator/index.html'">
-      <div class="project-content">
-        <h3>FinancePro</h3>
-        <p>Calculadora financiera con animación de gráfico 3D simulado (Lottie).</p>
-      </div>
-      <div class="lottie-container" id="lottie-finance"></div>
-    </article>
+<body>
+  <div class="overlay"></div>
 
-    <!-- 2) BeautySpark -->
-    <article class="project-card" role="link" aria-label="BeautySpark: Landing cosmética"
-             onclick="location.href='https://tuproyectobelleza.vercel.app'">
-      <div class="project-content">
-        <h3>BeautySpark</h3>
-        <p>Landing de cosmética con animación de producto (lipstick/perfume) en Lottie.</p>
-      </div>
-      <div class="lottie-container" id="lottie-beauty"></div>
-    </article>
-
-    <!-- 3) Portal Destinos -->
-    <article class="project-card" role="link" aria-label="Portal Destinos Turísticos"
-             onclick="location.href='https://portaldeturismo.vercel.app'">
-      <div class="project-content">
-        <h3>Portal Destinos</h3>
-        <p>Explora destinos con animación de viaje (playa/avión) en Lottie.</p>
-      </div>
-      <div class="lottie-container" id="lottie-travel"></div>
-    </article>
-  </div>
-
-  <!-- Scripts externos -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-function calcCustom() {
-  try {
-    const expr = document.getElementById('custom-expression').value;
-    if (!/^[0-9+\-*/().\s]+$/.test(expr)) {
-      throw new Error('Expresión inválida');
-    }
-    const res = Function('"use strict";return (' + expr + ')')();
-    document.getElementById('custom-result').textContent = `Resultado: ${res}`;
-  } catch (error) {
-    document.getElementById('custom-result').textContent = 'Error en la expresión';
-  }
-}
-<!-- Scripts externos -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-<script>
-  // Función de calculadora personalizada
-  function calcCustom() {
-    try {
-      const expr = document.getElementById('custom-expression').value;
-      // Verificación de expresión válida
-      if (!/^[0-9+\-*/().\s]+$/.test(expr)) {
-        throw new Error('Expresión inválida');
-      }
-      // Evaluación segura de la expresión
-      const res = Function('"use strict";return (' + expr + ')')();
-      document.getElementById('custom-result').textContent = `Resultado: ${res}`;
-    } catch (error) {
-      document.getElementById('custom-result').textContent = 'Error en la expresión';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', async () => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animaciones de entrada para las tarjetas de proyectos
-    gsap.utils.toArray(".project-card").forEach((card, i) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        delay: i * 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 90%",
-          toggleActions: "play none none none"
-        }
-      });
-    });
-
-    // Manejo de preferencias de movimiento reducido
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    try {
-      // Cargar animaciones desde el archivo animations.json
-      const res = await fetch('./assets/animations.json');
-      const animations = await res.json();
-
-      // Configuración de animaciones Lottie para cada proyecto
-      const animFinance = lottie.loadAnimation({
-        container: document.getElementById('lottie-finance'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations.financeChart
-      });
-
-      const animBeauty = lottie.loadAnimation({
-        container: document.getElementById('lottie-beauty'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations.beautyPerfume
-      });
-
-      const animTravel = lottie.loadAnimation({
-        container: document.getElementById('lottie-travel'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations.travelBeach
-      });
-
-      // Efectos hover para las animaciones
-      document.getElementById('lottie-finance').addEventListener('mouseenter', () => animFinance.setSpeed(1.5));
-      document.getElementById('lottie-finance').addEventListener('mouseleave', () => animFinance.setSpeed(1));
-      document.getElementById('lottie-beauty').addEventListener('mouseenter', () => animBeauty.setSpeed(0.5));
-      document.getElementById('lottie-beauty').addEventListener('mouseleave', () => animBeauty.setSpeed(1));
-      document.getElementById('lottie-travel').addEventListener('mouseenter', () => animTravel.pause());
-      document.getElementById('lottie-travel').addEventListener('mouseleave', () => animTravel.play());
-
-      // Control por scroll para reproducir o pausar las animaciones
-      ScrollTrigger.create({
-        trigger: '#lottie-finance',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animFinance.play(),
-        onLeave: () => animFinance.pause(),
-        onEnterBack: () => animFinance.play(),
-        onLeaveBack: () => animFinance.pause()
-      });
-
-      ScrollTrigger.create({
-        trigger: '#lottie-beauty',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animBeauty.play(),
-        onLeave: () => animBeauty.pause(),
-        onEnterBack: () => animBeauty.play(),
-        onLeaveBack: () => animBeauty.pause()
-      });
-
-      ScrollTrigger.create({
-        trigger: '#lottie-travel',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animTravel.play(),
-        onLeave: () => animTravel.pause(),
-        onEnterBack: () => animTravel.play(),
-        onLeaveBack: () => animTravel.pause()
-      });
-    } catch (err) {
-      console.error('Error cargando las animaciones:', err);
-      const errorMessage = document.createElement('div');
-      errorMessage.textContent = 'No se pudieron cargar las animaciones. Por favor, inténtalo más tarde.';
-      errorMessage.style.color = 'red';
-      errorMessage.style.textAlign = 'center';
-      document.querySelector('.projects-container').appendChild(errorMessage);
-    }
-  });
-</script>
-<section id="skills" class="section-skills">
-  <div id="skills-bg"></div>
-  <div class="skills-wrapper">
-    <h2>Habilidades</h2>
-
-    <div class="skills-container">
-      <!-- HABILIDADES TÉCNICAS -->
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#E44D26" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#F16529" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
-        HTML5
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#264DE4" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#2965F1" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
-        CSS3
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F7DF1E" d="M0 0h128v128H0z"/><path d="M116 116H12V12h104v104z" fill="#000"/><path fill="#F7DF1E" d="M34 105l7-5c1 2 2 4 5 4 3 0 4-1 4-5V56h8v44c0 9-5 13-13 13-7 0-11-4-13-9zm31-1l7-4c2 3 5 6 10 6 4 0 6-2 6-5 0-3-2-4-7-6l-3-1c-9-3-13-7-13-13 0-6 5-11 12-11 5 0 9 2 12 7l-6 4c-1-2-3-4-6-4-3 0-5 2-5 4 0 3 2 4 7 6l3 1c10 4 13 8 13 14 0 8-6 12-14 12-8 0-13-4-16-8z"/></svg>
-        JavaScript
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3178C6" d="M0 0h128v128H0z"/><path fill="#fff" d="M51 90h10v16c0 6 4 10 10 10s10-4 10-10V90h10V76H51v14zm10-22h10v-5h-10v5zm17 0h10v-5H78v5z"/></svg>
-        TypeScript
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#61DAFB" d="M64 8c30 0 56 26 56 56s-26 56-56 56S8 94 8 64 34 8 64 8z"/><path fill="#fff" d="M64 26a38 38 0 100 76 38 38 0 000-76zm0 64a26 26 0 110-52 26 26 0 010 52z"/></svg>
-        React
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 100 100"><path fill="#000" d="M10 10h80v80H10z"/><path fill="#fff" d="M20 50h60M50 20v60"/></svg>
-        Next.js
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#539E43" d="M64 0C28 0 0 28 0 64s28 64 64 64 64-28 64-64S100 0 64 0z"/><path fill="#fff" d="M49 95L35 37h16l7 38 20-38h18L67 95H49z"/></svg>
-        Node.js
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#777BB4" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-14 0-24 10-24 24 0 14 10 24 24 24 14 0 24-10 24-24 0-14-10-24-24-24zm0 40c-8 0-16-8-16-16s8-16 16-16 16 8 16 16-8 16-16 16z"/></svg>
-        PHP
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3776AB" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-22 0-40 18-40 40s18 40 40 40 40-18 40-40-18-40-40-40zm0 64c-14 0-24-10-24-24s10-24 24-24 24 10 24 24-10 24-24 24z"/></svg>
-        Python
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 512 512"><path fill="#00758F" d="M256 0c141 0 256 115 256 256S397 512 256 512 0 397 0 256 115 0 256 0z"/><path fill="#fff" d="M146 218l110 110 110-110-110-110-110 110z"/></svg>
-        MySQL / SQL
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F05032" d="M64 0L12 64l52 64 52-64L64 0z"/><path fill="#fff" d="M64 16l-34 48h68L64 16zm0 96l34-48H30l34 48z"/></svg>
-        Git
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><circle fill="#181717" cx="64" cy="64" r="64"/><path fill="#fff" d="M85 69c-1 0-2 0-3-1v5h-4v-5c-3 0-5-1-7-3l3-3c1 1 3 2 5 2 2 0 3-1 3-3 0-1-1-2-3-3-4-1-7-3-7-7 0-4 3-7 7-7v-5h4v5c2 0 4 1 5 2l-2 4c-1-1-3-2-5-2-2 0-3 1-3 3 0 1 1 2 3 3 4 1 7 3 7 7 0 4-3 7-7 7z"/></svg>
-        GitHub
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#FCC624" d="M0 0h128v128H0z"/><path fill="#000" d="M64 34c-17 0-30 13-30 30s13 30 30 30 30-13 30-30-13-30-30-30zm0 48c-10 0-18-8-18-18s8-18 18-18 18 8 18 18-8 18-18 18z"/></svg>
-        Linux
-      </div>
-
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#2496ED" d="M64 0c35 0 64 29 64 64s-29 64-64 64S0 99 0 64 29 0 64 0z"/><path fill="#fff" d="M32 96h64v-8H32v8zm0-16h64v-8H32v8zm0-16h64v-8H32v8z"/></svg>
-        Docker
-      </div>
+  <div class="header-content">
+    <!-- Avatar con glow -->
+    <div class="avatar-container">
+      <img src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png"
+           alt="Jairo Lemuel Avatar" class="avatar" />
+      <div class="avatar-glow"></div>
     </div>
 
-    <!-- HABILIDADES BLANDAS -->
-    <div class="skills-container">
-      <div class="skill-tag">Comunicación</div>
-      <div class="skill-tag">Trabajo en equipo</div>
-      <div class="skill-tag">Liderazgo</div>
-      <div class="skill-tag">Adaptabilidad</div>
-      <div class="skill-tag">Proactividad</div>
-      <div class="skill-tag">Resolución de problemas</div>
-      <div class="skill-tag">Pensamiento crítico</div>
-      <div class="skill-tag">Creatividad</div>
-    </div>
+    <!-- Sopa de letras que forma “Welcome to my portfolio” -->
+    <div id="scrambleText">█████████████████████████</div>
+
+    <!-- Presentación con efecto typewriter -->
+    <div class="typewriter">Hi, I am Jairo Lemuel Barrientos.</div>
+
+    <!-- Descripción breve -->
+    <p class="description">
+      Hola, soy un joven The Signal soñador.<br>
+      Desarrollador Full Stack con grandes sueños y proyectos.
+    </p>
   </div>
-</section>
 
-<!-- LIBRERÍAS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- JavaScript embebido para el efecto sopa de letras -->
+  <script>
+    (function(){
+      const text = "Welcome to my portfolio";
+      const target = document.getElementById("scrambleText");
+      const chars  = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let iter = 0;
 
-<style>
-  .section-skills {
-    position: relative;
-    padding: 100px 20px;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    overflow: hidden;
-    color: white;
-    text-align: center;
-  }
+      const timer = setInterval(() => {
+        target.textContent = text.split("").map((c,i) => {
+          if (c === " ") return " ";
+          return i < iter
+            ? c
+            : chars[Math.floor(Math.random()*chars.length)];
+        }).join("");
 
-  #skills-bg {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent);
-    animation: moveBg 10s linear infinite alternate;
-    z-index: 0;
-  }
-
-  @keyframes moveBg {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-  }
-
-  .skills-wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 1000px;
-    margin: auto;
-  }
-
-  .skills-wrapper h2 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
-    background: linear-gradient(90deg, #00e5ff, #ff00c3);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 10px rgba(0,229,255,0.5);
-  }
-
-  .skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .skill-tag {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    border-radius: 30px;
-    background: rgba(255,255,255,0.08);
-    font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(6px);
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  .skill-tag svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .skill-tag:hover {
-    background: rgba(0, 229, 255, 0.2);
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-  }
-</style>
-
-<script>
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.utils.toArray('.skill-tag').forEach((el, i) => {
-    gsap.to(el, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      delay: i * 0.08,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      }
-    });
-  });
-</script>
+        iter += 1/2; /* controla velocidad de fijado */
+        if (iter >= text.length) clearInterval(timer);
+      }, 80);
+    })();
+  </script>
+</body>
+</html>
