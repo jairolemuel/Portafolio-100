@@ -5,206 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jairo Lemuel Barrientos | Portfolio</title>
 
-  <!-- Fonts + SplitType + GSAP + Vanta.js -->
+  <!-- Orbitron font -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Three.js y controles -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/examples/js/controls/OrbitControls.min.js"></script>
+
+  <!-- SplitType + GSAP -->
   <script src="https://unpkg.com/split-type"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: #000;
-      color: white;
-      overflow-x: hidden;
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Orbitron', sans-serif; background:#000014; color:#fff; overflow:hidden; }
+    header { position:fixed; top:0; width:100%; display:flex; justify-content:space-between;
+      align-items:center; padding:1rem 2rem; background:rgba(0,0,20,0.8); z-index:10; }
+    .logo { color:#00ffff; font-size:1.4rem; }
+    nav ul { display:flex; gap:1.5rem; list-style:none; }
+    nav a { color:#fff; text-decoration:none; transition:0.3s; }
+    nav a:hover { color:#00ffff; }
+    .menu-toggle { display:none; flex-direction:column; cursor:pointer; }
+    .menu-toggle span { width:25px; height:3px; background:#fff; margin:3px 0; }
+
+    @media(max-width:768px){
+      .menu-toggle { display:flex; }
+      nav ul { position:absolute; right:20px; top:60px; background:#111; flex-direction:column;
+        padding:1rem; border-radius:8px; display:none; }
+      nav ul.active { display:flex; }
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-      background-color: rgba(0, 0, 0, 0.8);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+    canvas { display:block; position:fixed; top:0; left:0; width:100%; height:100vh; z-index: -1; }
 
-    .logo {
-      font-weight: bold;
-      color: orange;
-      font-size: 1.4rem;
-    }
+    .intro { position:relative; min-height:100vh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; text-align:center; padding:0 1rem; }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    nav ul li a:hover {
-      color: orange;
-    }
-
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .menu-toggle span {
-      height: 3px;
-      width: 25px;
-      background: white;
-      margin: 4px 0;
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: flex;
-      }
-
-      nav ul {
-        display: none;
-        flex-direction: column;
-        background: #111;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        padding: 1rem;
-        border-radius: 10px;
-      }
-
-      nav ul.active {
-        display: flex;
-      }
-    }
-
-    .intro {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    #vanta-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      z-index: -1;
-    }
-
-    .title {
-      font-size: 3rem;
-      line-height: 1.2;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: white;
-      max-width: 90%;
-      mix-blend-mode: screen;
-    }
+    h1 { font-size:3rem; max-width:90%; line-height:1.2; }
 
     .char {
-      display: inline-block;
-      transform: translateY(-100px) rotate(-15deg);
-      opacity: 0;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 0.2rem 0.4rem;
-      border-radius: 3px;
-      margin: 0 1px;
-      box-shadow: 1px 1px 5px rgba(255,255,255,0.1);
+      display:inline-block; opacity:0;
+      transform: translateY(-100px) rotate(-20deg) scale(0.8);
+      margin:0 2px;
+      padding:0.2rem 0.4rem;
+      border-radius:4px;
+      background:rgba(0,255,255,0.1);
+      border:1px dashed rgba(0,255,255,0.3);
+      box-shadow:1px 1px 5px rgba(0,255,255,0.5);
+      transition: box-shadow 0.3s;
     }
-
-    .char:nth-child(odd) {
-      background: rgba(255, 165, 0, 0.2);
-      color: #fff;
-      transform: translateY(100px) rotate(15deg);
+    .char:nth-child(even) {
+      background:rgba(0,120,255,0.2);
+      transform: translateY(100px) rotate(15deg) scale(0.8);
+    }
+    .char:hover {
+      box-shadow:0 0 15px rgba(0,255,255,0.8);
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin-top: 2rem;
-      border: 3px solid orange;
-      object-fit: cover;
+      width:120px; height:120px; border-radius:50%; margin-top:2rem;
+      border:3px solid #00ffff; object-fit:cover;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">Jairo B.</div>
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span><span></span><span></span>
-    </div>
-    <nav>
-      <ul id="menu">
-        <li><a href="#intro">Home</a></li>
-        <li><a href="#about">About</a></li>
-      </ul>
-    </nav>
-  </header>
+<header>
+  <div class="logo">Jairo Barrientos</div>
+  <div class="menu-toggle" id="toggle"><span></span><span></span><span></span></div>
+  <nav><ul id="menu"><li><a href="#intro">Home</a></li><li><a href="#about">About</a></li></ul></nav>
+</header>
 
-  <!-- Fondo animado -->
-  <div id="vanta-bg"></div>
+<canvas id="bg"></canvas>
 
-  <!-- Intro animado -->
-  <section class="intro" id="intro">
-    <h1 class="title" id="collage-text">
-      Welcome to my Portfolio
-    </h1>
-    <img src="your-photo.jpg" alt="Your photo" class="avatar" />
-  </section>
+<section class="intro" id="intro">
+  <h1 id="title">Welcome to my Portfolio</h1>
+  <img src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04/avatar.png" alt="Avatar" class="avatar">
+</section>
 
-  <!-- JS Total -->
-  <script>
-    // Menú hamburguesa
-    const toggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("menu");
-    toggle.addEventListener("click", () => {
-      menu.classList.toggle("active");
-    });
+<section id="about" style="padding:2rem;text-align:center; color:#ddd;">
+  <h2>About Me</h2>
+  <p>I'm a young developer and dreamer with bold ideas... (continúa tu texto aquí)</p>
+</section>
 
-    // Vanta background efecto HALO (planeta girando)
-    VANTA.HALO({
-      el: "#vanta-bg",
-      mouseControls: true,
-      touchControls: true,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      baseColor: 0xff8000,
-      backgroundColor: 0x0a0a0a,
-      amplitudeFactor: 1.2,
-      size: 2.00
-    });
+<script>
+  // Menú responsive
+  document.getElementById('toggle')
+    .addEventListener('click', () => document.getElementById('menu').classList.toggle('active'));
 
-    // SplitType + GSAP para animar letras tipo collage
-    const split = new SplitType('#collage-text', { types: 'chars' });
-    gsap.to('.char', {
-      y: 0,
-      rotate: 0,
-      opacity: 1,
-      ease: "back.out(1.7)",
-      duration: 1.2,
-      stagger: 0.05
-    });
-  </script>
+  // Texto collage animado
+  new SplitType('#title',{types:'chars'});
+  gsap.to('.char', {
+    y:0, rotate:0, scale:1, opacity:1,
+    ease:"back.out(1.7)",
+    duration:1.2,
+    stagger:0.06
+  });
+
+  // Three.js: escena, cámara y render
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 0.1, 1000);
+  camera.position.z = 5;
+
+  const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('bg'), antialias:true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.3;
+  controls.enableZoom = false;
+  controls.enablePan = false;
+
+  // Luz ambiente y direccional
+  scene.add(new THREE.AmbientLight(0x333333, 0.8));
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(5,3,5);
+  scene.add(light);
+
+  // Tierra con texturas realistas
+  const loader = new THREE.TextureLoader();
+  const earthTexture = loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_daymap.jpg');
+  const bumpMap = loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_bump.jpg');
+  const specMap = loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_spec.jpg');
+  const cloudsMap = loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_clouds.png');
+
+  const earthGeo = new THREE.SphereGeometry(2,64,64);
+  const earthMat = new THREE.MeshPhongMaterial({
+    map: earthTexture,
+    bumpMap: bumpMap,
+    bumpScale:0.05,
+    specularMap: specMap,
+    specular: new THREE.Color('grey')
+  });
+  const earth = new THREE.Mesh(earthGeo, earthMat);
+  scene.add(earth);
+
+  // Nubes
+  const cloudMat = new THREE.MeshLambertMaterial({
+    map: cloudsMap, transparent:true, opacity:0.4, depthWrite:false
+  });
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(2.02,64,64), cloudMat));
+
+  // Estrellas de fondo
+  const starGeo = new THREE.SphereGeometry(90,64,64);
+  const starMat = new THREE.MeshBasicMaterial({
+    map: loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/galaxy_starfield.png'),
+    side: THREE.BackSide
+  });
+  scene.add(new THREE.Mesh(starGeo, starMat));
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // Animación loop
+  function animate() {
+    requestAnimationFrame(animate);
+    earth.rotation.y += 0.0005;
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
+
 </body>
 </html>
