@@ -287,3 +287,35 @@
       filter:
         drop-shadow(0 0 6px #00ffffcc)
         drop-shadow(0 0 10px #00ffffaa);
+      transition: filter 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+    .contact-icon:hover {
+      filter:
+        drop-shadow(0 0 12px #00ffffee)
+        drop-shadow(0 0 20px #00ffffee);
+      transform: scale(1.2);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Canvas para Estrellas -->
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <!-- Capas Auroras -->
+  <div class="aurora-layer layer1"></div>
+  <div class="aurora-layer layer2"></div>
+  <div class="aurora-layer layer3"></div>
+
+  <!-- Header -->
+  <header role="banner">
+    <div class="logo">Welcome to my Portfolio</div>
+    <nav role="navigation" aria-label="Main menu">
+      <ul id="menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About me</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="burger" aria-label="Toggle menu"
