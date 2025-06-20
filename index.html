@@ -896,23 +896,148 @@
 
     <main>
         <section id="hero" class="section-hero" role="region" aria-label="Introduction to Jairo Barrientos">
-            <div class="avatar-container" aria-hidden="true">
-                <svg id="my-avatar" viewBox="0 0 100 100" aria-label="Developer Avatar of Jairo Barrientos">
-                    <circle cx="50" cy="45" r="40" fill="#2d526e"/>
-                    <circle class="avatar-eye left" cx="35" cy="40" r="5" fill="#e0f2f7"/>
-                    <circle class="avatar-eye right" cx="65" cy="40" r="5" fill="#e0f2f7"/>
-                    <path class="avatar-mouth" d="M40 60 Q50 70 60 60" stroke="#a0e6ff" stroke-width="2" fill="none"/>
-                    <path class="avatar-glasses" d="M25 45 H75 M30 45 C30 55 20 55 20 45 M70 45 C70 55 80 55 80 45"
-                          stroke="#00c0ff" stroke-width="2" fill="none"
-                          stroke-dasharray="100" stroke-dashoffset="100"/>
-                    <path d="M20 20 C30 10 70 10 80 20 L75 40 H25 Z" fill="#000"/>
-                    <rect x="40" y="85" width="20" height="10" fill="#0d0d0d"/>
-                </svg>
-            </div>
-            <h1 class="fade-in-up">¡Hola! Soy Jairo Barrientos</h1>
-            <p class="fade-in-up delay-1">Desarrollador Full Stack & Asociado en Ciberseguridad</p>
-            <p class="fade-in-up delay-2">Creando soluciones web robustas y seguras, desde Santa Elena, Entre Ríos.</p>
-        </section>
+           <style>
+    /* Basic Reset & Body Styling for a Dark, Futuristic Theme */
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #1a1a2e; /* Dark background */
+        color: #e0f2f7; /* Light text color */
+        font-family: 'Rajdhani', sans-serif; /* Recommended futuristic font */
+        overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Section Styling */
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh; /* Adjust height as needed */
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Avatar Container */
+    .avatar-container {
+        margin-bottom: 25px; /* Spacing below avatar */
+    }
+
+    /* Avatar Image */
+    #my-avatar {
+        width: 180px; /* Larger avatar */
+        height: auto;
+        border-radius: 50%; /* Ensures it's round */
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.9); /* Stronger glow */
+        animation: pulse 2s infinite alternate ease-in-out; /* Smooth pulsing */
+        will-change: transform, box-shadow; /* Optimize for animation */
+    }
+
+    /* Avatar Pulse Animation */
+    @keyframes pulse {
+        from {
+            transform: scale(1);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.9);
+        }
+        to {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 1);
+        }
+    }
+
+    /* Heading Styles */
+    h1 {
+        font-size: 3.5em; /* Larger heading */
+        margin-bottom: 10px;
+        font-weight: 700; /* Bold */
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.6); /* Initial text glow */
+        transition: text-shadow 0.3s ease-out; /* Smooth transition for hover */
+    }
+
+    /* Paragraph Styles */
+    p {
+        font-size: 1.4em; /* Slightly larger paragraph text */
+        margin-bottom: 10px;
+        max-width: 700px;
+        line-height: 1.6;
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.3); /* Subtle initial text glow */
+        transition: text-shadow 0.3s ease-out; /* Smooth transition for hover */
+    }
+
+    /* Fade-in-up animation (initial state) */
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+</style>
+
+<section>
+    <div class="avatar-container">
+        <img id="my-avatar" src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Barrientos Avatar">
+    </div>
+    <h1 class="fade-in-up">¡Hola! Soy Jairo Barrientos</h1>
+    <p class="fade-in-up delay-1">Desarrollador Full Stack & Asociado en Ciberseguridad</p>
+    <p class="fade-in-up delay-2">Creando soluciones web robustas y seguras.</p>
+</section>
+
+<script>
+    // Embed Google Fonts link (place this in your HTML's <head> section usually)
+    // For this embedded example, we'll assume it's already there or handled by the parent document.
+    // If you need to explicitly include it here, you'd add:
+    /*
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+    */
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const avatar = document.getElementById('my-avatar');
+        let floatingDirection = 1; // 1 for up, -1 for down
+        let currentY = 0;
+        const floatHeight = 15; // Max float height in pixels
+        const floatSpeed = 0.08; // Adjust speed
+
+        function animateAvatarFloat() {
+            currentY += floatingDirection * floatSpeed;
+            if (currentY > floatHeight || currentY < -floatHeight) {
+                floatingDirection *= -1;
+            }
+            avatar.style.transform = `translateY(${currentY}px) scale(1.02)`; // Combine with a slight scale
+            requestAnimationFrame(animateAvatarFloat);
+        }
+
+        // Start the floating animation
+        animateAvatarFloat();
+
+        // Enhanced Text Animations
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        fadeElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                el.style.opacity = 1;
+                el.style.transform = 'translateY(0)';
+            }, 300 + (index * 250)); // Stagger the animation more
+        });
+
+        // Hover Effect for Text (subtle futuristic glow)
+        const textElements = document.querySelectorAll('h1, p');
+
+        textElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.textShadow = '0 0 15px rgba(0, 255, 255, 0.9), 0 0 25px rgba(0, 255, 255, 0.7)';
+            });
+            element.addEventListener('mouseleave', () => {
+                if (element.tagName === 'H1') {
+                    element.style.textShadow = '0 0 15px rgba(0, 255, 255, 0.6)';
+                } else {
+                    element.style.textShadow = '0 0 5px rgba(0, 255, 255, 0.3)';
+                }
+            });
+        });
+    });
+</script>
 
         ---
 
