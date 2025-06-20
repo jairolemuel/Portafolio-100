@@ -1,60 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- META SEO -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to my Portfolio</title>
-  <meta name="description" content="Portafolio de Jairo Lemuel Barrientos: desarrollador web y soñador.">
+  <meta name="description" content="Portfolio de Jairo Lemuel Barrientos: desarrollador web y soñador con proyectos innovadores.">
 
-  <!-- FUENTE -->
+  <!-- Fuente Orbitron -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
 
-  <!-- ESTILOS INLINE -->
   <style>
-    * { margin:0; padding:0; box-sizing:border-box }
-    html { scroll-behavior:smooth }
+    /* —— RESET & BASE —— */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family:'Orbitron', sans-serif;
-      background:#000014; color:#fff;
-      overflow:hidden; min-height:100vh; position:relative;
+      font-family:'Orbitron',sans-serif;
+      background:#000014;
+      color:#fff;
+      overflow:hidden;
+      min-height:100vh;
+      position:relative;
     }
-    /* HEADER */
-    header {
-      position:fixed; top:0; left:0; right:0;
-      display:flex; justify-content:center; align-items:center;
-      padding:1rem; background:rgba(0,0,20,0.8); z-index:10;
-    }
-    header h1 {
-      color:#00ffff; font-size:1.8rem;
-    }
-    /* SALUDO FLOTANTE */
-    .floating-intro {
-      position:fixed; top:4rem; left:50%; transform:translateX(-50%);
-      background:rgba(0,0,20,0.7); color:#00ffff;
-      padding:.5rem 1rem; border-radius:6px;
-      pointer-events:none; z-index:11;
-    }
-    /* CANVAS FONDO */
+
+    /* —— CANVAS 3D —— */
     #bgCanvas {
-      position:fixed; top:0; left:0;
-      width:100%; height:100vh; z-index:-1;
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100vh;
+      z-index:-1;
     }
-    /* INTRO */
+
+    /* —— SALUDO FLOTANTE —— */
+    .floating-intro {
+      position:fixed;
+      top:2rem; left:50%;
+      transform:translateX(-50%);
+      background:rgba(0,0,20,0.7);
+      color:#00ffff;
+      padding:.5rem 1rem;
+      border-radius:6px;
+      z-index:10;
+      pointer-events:none;
+    }
+
+    /* —— INTRO SECTION —— */
     .intro {
-      padding-top:6rem; /* espacio por header */
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      min-height:100vh; text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      height:100vh;
+      padding:0 1rem;
     }
+
     .title-line {
-      display:flex; flex-wrap:wrap; justify-content:center;
-      font-size:3rem; line-height:1.2; margin-bottom:1rem;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      font-size:3rem;
+      line-height:1.2;
+      overflow:visible;
     }
     .title-line .char {
-      display:inline-block; opacity:0;
+      display:inline-block;
+      opacity:0;
       transform:translateY(-80px) rotate(-15deg) scale(.8);
-      margin:0 3px; padding:.2rem .5rem; border-radius:4px;
+      margin:0 4px;
+      padding:.3rem .6rem;
+      border-radius:4px;
       background:#111 url('https://i.imgur.com/dVvsZ5c.png') center/cover no-repeat;
       border:1px solid rgba(0,255,255,.3);
       box-shadow:1px 1px 5px rgba(0,255,255,.4);
@@ -63,116 +77,134 @@
       transform:translateY(80px) rotate(15deg) scale(.8);
       background:#022 url('https://i.imgur.com/a8p7Zet.png') center/cover no-repeat;
     }
+
     .tagline {
-      color:#00ffff; font-size:1.2rem; margin-bottom:2rem;
+      font-size:1.2rem;
+      color:#00ffff;
+      margin:1.5rem 0;
     }
+
     .avatar {
-      width:140px; height:140px; border-radius:50%;
-      border:3px solid #00ffff; object-fit:cover;
-      /* Ruta correcta a tu carpeta */
-      src: url('A2C8874B-5C6D-43B4-9C56-B2E8295A4A04/avatar.png');
+      width:140px; height:140px;
+      border-radius:50%;
+      border:3px solid #00ffff;
+      object-fit:cover;
+      z-index:10;
     }
+
     @media(max-width:480px){
-      .title-line { font-size:2rem }
-      .avatar { width:110px; height:110px }
+      .title-line { font-size:2rem; }
+      .avatar { width:110px; height:110px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- CANVAS para Three.js -->
+  <!-- Canvas de fondo 3D -->
   <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
-  <!-- HEADER fijo con título único -->
-  <header><h1>Welcome to my Portfolio</h1></header>
-
-  <!-- Saludo -->
+  <!-- Saludo flotante -->
   <div class="floating-intro">👋 Hi, I’m Jairo Lemuel Barrientos</div>
 
-  <!-- INTRO: collage + avatar -->
-  <section class="intro">
+  <!-- Intro principal -->
+  <section class="intro" aria-labelledby="intro-heading">
     <div class="title-line" id="line1">Welcome to my</div>
     <div class="title-line" id="line2">Portfolio</div>
     <div class="tagline">A young dreamer with many projects</div>
-    <img class="avatar" alt="Avatar Jairo Lemuel Barrientos" 
-         src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04/avatar.png" />
+    <img
+      class="avatar"
+      src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04/avatar.png"
+      alt="Avatar Jairo Lemuel Barrientos"
+    />
   </section>
 
-  <!-- LIBRERÍAS JS al final, en orden -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/examples/js/controls/OrbitControls.min.js"></script>
+  <!-- Librerías JS necesarias -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/examples/js/controls/OrbitControls.min.js"></script>
   <script src="https://unpkg.com/split-type@0.4.0/dist/split-type.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-  <!-- SCRIPT: animaciones y 3D -->
   <script>
-    // Collage de letras
-    ['line1','line2'].forEach(id=>{
-      const split = new SplitType(`#${id}`,{types:'chars'});
-      gsap.to(`#${id} .char`,{
-        y:0, rotate:0, opacity:1, scale:1,
-        ease:'back.out(1.7)', duration:1.2, stagger:0.05, delay:0.2
+    // Animación de collage
+    ['line1','line2'].forEach(id => {
+      const split = new SplitType(`#${id}`, { types: 'chars' });
+      gsap.to(`#${id} .char`, {
+        y: 0,
+        rotate: 0,
+        scale: 1,
+        opacity: 1,
+        ease: "back.out(1.7)",
+        duration: 1.2,
+        stagger: 0.05,
+        delay: 0.3
       });
     });
 
-    // Three.js: planeta girando
-    function init3D(){
+    // Inicializar Three.js con planeta y estrellas
+    function init3D() {
       const canvas = document.getElementById('bgCanvas');
-      const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-      renderer.setSize(window.innerWidth,window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(35,window.innerWidth/window.innerHeight,0.1,1000);
-      camera.position.z=5;
+      const camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 0.1, 1000);
+      camera.position.z = 5;
 
-      const controls=new THREE.OrbitControls(camera,renderer.domElement);
-      controls.autoRotate=true; controls.autoRotateSpeed=0.3;
-      controls.enableZoom=false; controls.enablePan=false;
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.3;
+      controls.enableZoom = false;
+      controls.enablePan = false;
 
-      scene.add(new THREE.AmbientLight(0x333333,0.8));
-      const light=new THREE.DirectionalLight(0xffffff,1);
-      light.position.set(5,3,5); scene.add(light);
+      scene.add(new THREE.AmbientLight(0x333333, 0.8));
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(5, 3, 5);
+      scene.add(light);
 
-      const loader=new THREE.TextureLoader();
-      const day=loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_daymap.jpg');
-      const bump=loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_bump.jpg');
-      const spec=loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_spec.jpg');
-      const clouds=loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_clouds.png');
+      const loader = new THREE.TextureLoader();
+      const dayMap   = loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_daymap.jpg');
+      const bumpMap  = loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_bump.jpg');
+      const specMap  = loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_spec.jpg');
+      const clouds   = loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/earth_clouds.png');
 
-      const earth=new THREE.Mesh(
-        new THREE.SphereGeometry(2,64,64),
-        new THREE.MeshPhongMaterial({map:day,bumpMap:bump,bumpScale:0.05,specularMap:spec,specular:new THREE.Color('grey')})
+      const earth = new THREE.Mesh(
+        new THREE.SphereGeometry(2, 64, 64),
+        new THREE.MeshPhongMaterial({
+          map: dayMap,
+          bumpMap: bumpMap, bumpScale: 0.05,
+          specularMap: specMap, specular: new THREE.Color('grey')
+        })
       );
       scene.add(earth);
 
-      const cloudMesh=new THREE.Mesh(
-        new THREE.SphereGeometry(2.02,64,64),
-        new THREE.MeshLambertMaterial({map:clouds,transparent:true,opacity:0.4,depthWrite:false})
+      const cloudMesh = new THREE.Mesh(
+        new THREE.SphereGeometry(2.02, 64, 64),
+        new THREE.MeshLambertMaterial({ map: clouds, transparent: true, opacity: 0.4, depthWrite: false })
       );
       scene.add(cloudMesh);
 
-      const stars=new THREE.Mesh(
-        new THREE.SphereGeometry(90,64,64),
-        new THREE.MeshBasicMaterial({map:loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/galaxy_starfield.png'),side:THREE.BackSide})
-      );
-      scene.add(stars);
+      const starGeo = new THREE.SphereGeometry(90, 64, 64);
+      const starMat = new THREE.MeshBasicMaterial({
+        map: loader.load('https://cdn.jsdelivr.net/gh/Harman8815/Earth/textures/galaxy_starfield.png'),
+        side: THREE.BackSide
+      });
+      scene.add(new THREE.Mesh(starGeo, starMat));
 
-      window.addEventListener('resize', ()=> {
-        camera.aspect=window.innerWidth/window.innerHeight;
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth/window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth,window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
       });
 
-      (function animate(){
+      (function animate() {
         requestAnimationFrame(animate);
-        earth.rotation.y+=0.0005;
-        cloudMesh.rotation.y+=0.0006;
-        renderer.render(scene,camera);
+        earth.rotation.y += 0.0005;
+        cloudMesh.rotation.y += 0.0006;
+        renderer.render(scene, camera);
       })();
     }
 
-    // Espera al DOM
     window.addEventListener('load', init3D);
   </script>
 </body>
