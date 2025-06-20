@@ -332,11 +332,12 @@
         }
 
         /* --- Projects Section --- */
-   <section class="section-projects" id="projects">
+  <section class="section-projects" id="projects">
     <h2>My Projects</h2>
     <div class="projects-container">
+
         <div class="project-card">
-            <a href="financiator/index.html" target="_blank" rel="noopener noreferrer">
+            <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
                 <div class="project-svg-container">
                     <img src="assets/images/financiator-thumbnail.png" alt="Miniatura del proyecto Financiator">
                 </div>
@@ -344,14 +345,14 @@
                     <h3>Financiator</h3>
                     <p>Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
                 </div>
+                <div class="project-button-wrapper">
+                    <span class="project-button">Ver más</span>
+                </div>
             </a>
-            <div class="project-button-wrapper">
-                <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-button">Ver más</a>
-            </div>
         </div>
 
         <div class="project-card">
-            <a href="otro-proyecto/index.html" target="_blank" rel="noopener noreferrer">
+            <a href="otro-proyecto/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
                 <div class="project-svg-container">
                     <img src="assets/images/otro-proyecto-thumbnail.png" alt="Miniatura de Otro Proyecto">
                 </div>
@@ -359,12 +360,13 @@
                     <h3>Otro Proyecto Genial</h3>
                     <p>Una breve descripción de este otro proyecto, sus funcionalidades y tecnologías.</p>
                 </div>
+                <div class="project-button-wrapper">
+                    <span class="project-button">Ver más</span>
+                </div>
             </a>
-            <div class="project-button-wrapper">
-                <a href="otro-proyecto/index.html" target="_blank" rel="noopener noreferrer" class="project-button">Ver más</a>
-            </div>
         </div>
-        </div>
+
+    </div>
 </section>
 
 <style>
@@ -400,18 +402,18 @@
         width: 340px;
         background: var(--card-bg);
         border-radius: 15px;
-        overflow: hidden;
+        overflow: hidden; /* Esto es importante para que el border-radius se aplique al contenido */
         cursor: pointer;
         box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
         transform: translateY(50px) scale(0.95);
         opacity: 0;
         transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, opacity 0.5s ease;
-        will-change: transform, opacity;
+        will-change: transform, opacity; /* Puedes quitar esta línea si no notas problemas de rendimiento */
         border: 1px solid var(--card-border);
-        /* --- INICIO DE ADICIONES AL CSS DE .project-card --- */
-        display: flex; /* Para usar flexbox internamente */
-        flex-direction: column; /* Para apilar el contenido y el botón */
-        /* --- FIN DE ADICIONES --- */
+        
+        /* ¡IMPORTANTE! Hacer que la tarjeta sea un contenedor flex para que el enlace interno ocupe todo el espacio */
+        display: flex; 
+        flex-direction: column; /* Apila el contenido verticalmente */
     }
 
     .project-card:hover {
@@ -420,27 +422,35 @@
         background: rgba(25, 40, 60, 0.95);
     }
 
+    /* ESTILO NUEVO/MODIFICADO: El enlace que cubre toda la tarjeta */
+    .project-card-link {
+        text-decoration: none; /* Quita el subrayado predeterminado del enlace */
+        color: inherit; /* Hereda el color del texto de la tarjeta */
+        display: flex; /* Permite que el contenido interno del enlace se organice con flexbox */
+        flex-direction: column; /* Apila el contenido verticalmente */
+        height: 100%; /* Asegura que el enlace ocupe toda la altura de la tarjeta */
+        justify-content: space-between; /* Empuja el botón hacia abajo si el contenido no llena */
+    }
+
     .project-content {
         padding: 1.5rem;
         background: rgba(0,0,0,0.7);
         position: relative;
         z-index: 2;
-        /* --- INICIO DE ADICIONES AL CSS DE .project-content --- */
         flex-grow: 1; /* Permite que el contenido crezca y empuje el botón hacia abajo */
-        /* --- FIN DE ADICIONES --- */
     }
 
     .project-content h3 {
         margin: 0 0 0.7rem;
         font-size: 1.5rem;
-        color: var(--color-primary-dark);
+        color: var(--color-primary-dark); /* Asegúrate de que esta variable exista o define el color directamente */
         text-shadow: none;
     }
 
     .project-content p {
         margin: 0;
         font-size: 1rem;
-        color: var(--color-text-dark);
+        color: var(--color-text-dark); /* Asegúrate de que esta variable exista o define el color directamente */
     }
 
     .project-svg-container {
@@ -450,14 +460,15 @@
         align-items: center;
         justify-content: center;
         background: rgba(0, 0, 0, 0.5);
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
+        /* Quitamos estos bordes de aquí si la tarjeta ya tiene overflow: hidden */
+        /* border-bottom-left-radius: 12px; */
+        /* border-bottom-right-radius: 12px; */
         overflow: hidden;
         position: relative;
-        /* --- INICIO DE ADICIONES AL CSS DE .project-svg-container (AJUSTE DE BORDES) --- */
-        border-radius: 0; /* Asegura que el contenedor de la imagen no tenga bordes redondeados si la tarjeta los tiene */
-        /* --- FIN DE ADICIONES --- */
+        /* Aseguramos que la imagen no tenga bordes redondeados si la tarjeta los tiene */
+        border-radius: 0; 
     }
+    
     .project-svg-container::after {
         content: '';
         position: absolute;
@@ -474,66 +485,50 @@
         100% { transform: scale(1); opacity: 0.5; }
     }
 
-    /* --- INICIO DE ADICIONES AL CSS (NUEVAS REGLAS) --- */
-    .project-card > a { /* Estilo para el enlace que envuelve la mayor parte de la tarjeta */
-        text-decoration: none;
-        color: inherit; /* Hereda el color del texto de la tarjeta */
-        display: block; /* Hace que el enlace ocupe todo el espacio disponible */
-        flex-grow: 1; /* Permite que el enlace crezca para llenar el espacio */
-        display: flex; /* Para el layout interno del enlace */
-        flex-direction: column;
-        justify-content: space-between; /* Para empujar el contenido hacia arriba */
-    }
-
-    .project-svg-container img { /* Estilos para la imagen dentro del SVG container */
+    /* ESTILO MODIFICADO: La imagen dentro del SVG container */
+    .project-svg-container img { 
         max-width: 100%;
         max-height: 100%;
-        object-fit: contain; /* Asegura que la imagen se ajuste sin distorsión */
-    }
-
-    /* Aseguramos que la tarjeta en sí mantenga sus bordes redondeados */
-    .project-card {
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
+        object-fit: contain; 
     }
 
     /* Contenedor para el botón, ayuda a centrarlo */
     .project-button-wrapper {
-        padding: 0 1.5rem 1.5rem; /* Padding inferior y lateral */
-        text-align: center; /* Centra el botón */
+        padding: 0 1.5rem 1.5rem; 
+        text-align: center; 
     }
 
-    /* Estilos para el Botón "Ver más" */
+    /* Estilos para el Botón "Ver más" (ahora se aplican a un SPAN dentro del enlace) */
     .project-button {
         display: inline-block;
-        margin-top: 1.5rem; /* Espacio superior para separarlo del texto de la descripción */
+        margin-top: 1.5rem; 
         padding: 0.8rem 1.8rem;
         background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
         color: var(--color-text-light);
-        text-decoration: none;
+        /* Ya no necesita text-decoration: none; ni cursor: pointer; porque es un span, 
+           pero el <a> padre ya maneja el cursor y el clic. */
         border-radius: 8px;
         font-size: 1rem;
         font-weight: bold;
         letter-spacing: 0.05em;
         transition: transform 0.3s var(--bezier-smooth), box-shadow 0.4s ease, background 0.4s ease;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        cursor: pointer;
     }
 
-    .project-button:hover {
+    /* EL EFECTO HOVER AHORA DEBE IR EN EL ENLACE DE LA TARJETA COMPLETA o en el propio .project-button-wrapper */
+    .project-card-link:hover .project-button { /* Cuando se hace hover sobre el enlace de la tarjeta */
         transform: translateY(-5px);
         box-shadow: 0 8px 25px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
         background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
     }
-    /* --- FIN DE ADICIONES AL CSS --- */
-</style>
 
-        .project-svg-container svg {
-            width: 85%;
-            height: 85%;
-            filter: drop-shadow(0 0 5px var(--glow-light-alpha));
-        }
-
+    /* Esta regla solo aplica si de verdad insertas un <svg> directamente en el HTML, no una imagen con .png */
+    /* Si solo usas PNGs, JPGs, puedes borrarla. */
+    .project-svg-container svg {
+        width: 85%;
+        height: 85%;
+        filter: drop-shadow(0 0 5px var(--glow-light-alpha));
+    }
         /* Project SVG Animations */
         #svg-finance .bar {
             transform-origin: bottom;
