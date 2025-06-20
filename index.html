@@ -9,10 +9,7 @@
   <meta property="og:description" content="Hi, I’m Jairo Lemuel Barrientos – a young programmer and FullStack developer with big dreams and projects." />
   <meta property="og:image" content="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" />
   <meta name="theme-color" content="#000014" />
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet" />
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -131,7 +128,7 @@
     </div>
   </main>
 
-  <!-- Three.js -->
+  <!-- THREE.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
   <script>
     window.addEventListener('load', () => {
@@ -139,6 +136,7 @@
       initThreeJS();
     });
 
+    // Burger menu
     const burger = document.querySelector('.burger');
     const menu = document.getElementById('menu');
     burger.addEventListener('click', () => {
@@ -158,23 +156,19 @@
       renderer.setPixelRatio(window.devicePixelRatio);
 
       const geometry = new THREE.SphereGeometry(1, 64, 64);
-      const texture = new THREE.TextureLoader().load('./textures/earth_texture.jpg');
-      const normalMap = new THREE.TextureLoader().load('./textures/earth_normal.jpg');
+      const texture = new THREE.TextureLoader().load('./textures/earth_texture.jpg'); // tu imagen nocturna
 
       const material = new THREE.MeshStandardMaterial({
-        map: texture,
-        normalMap: normalMap
+        map: texture
       });
 
       const earth = new THREE.Mesh(geometry, material);
       scene.add(earth);
 
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-      scene.add(ambientLight);
-
-      const pointLight = new THREE.PointLight(0xffffff, 1);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      const pointLight = new THREE.PointLight(0xffffff, 0.8);
       pointLight.position.set(5, 5, 5);
-      scene.add(pointLight);
+      scene.add(ambientLight, pointLight);
 
       function animate() {
         requestAnimationFrame(animate);
