@@ -12,11 +12,12 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; width: 100%; }
 
-    /* Contenedor general */
+    /* Fondo animado en tonos azules */
     body {
       font-family: 'Orbitron', sans-serif;
-      background: url('https://images.unsplash.com/photo-1581091870632-2fb0f6b04e3f?auto=format&fit=crop&w=1400&q=80')
-                  no-repeat center/cover;
+      background: linear-gradient(120deg, #001f3f, #005f99, #009fcc);
+      background-size: 300% 300%;
+      animation: bgShift 15s ease infinite;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -24,12 +25,10 @@
       justify-content: center;
       color: #00ffff;
     }
-    /* Capa oscura para contraste */
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 0;
+    @keyframes bgShift {
+      0%   { background-position: 0%   50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0%   50%; }
     }
 
     /* Contenido centrado */
@@ -121,8 +120,6 @@
 </head>
 
 <body>
-  <div class="overlay"></div>
-
   <div class="header-content">
     <!-- Avatar con glow -->
     <div class="avatar-container">
