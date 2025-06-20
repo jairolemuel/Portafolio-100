@@ -1,366 +1,1055 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Welcome to my Portfolio</title>
-  <meta name="theme-color" content="#000014" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet" />
-  <style>
-    /* Reset */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    body {
-      background-color: #000014;
-      color: #ECECF1;
-      font-family: 'IBM Plex Mono', monospace;
-      overflow: hidden;
-      height: 100vh;
-      position: relative;
-    }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Jairo Lemuel Barrientos | Programador Full Stack"/>
+    <title>Jairo L. Barrientos | Portafolio</title>
 
-    /* Auroras */
-    .aurora-layer {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background-size: 400% 400%;
-      filter: blur(100px) brightness(1.3);
-      opacity: 0.4;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .layer1 {
-      background-image: linear-gradient(130deg, #00ffc3, #000428, #2b5876);
-      animation: aurora1 16s ease-in-out infinite;
-    }
-    .layer2 {
-      background-image: linear-gradient(120deg, #ff00c8, #302b63, #24243e);
-      animation: aurora2 20s ease-in-out infinite;
-    }
-    .layer3 {
-      background-image: linear-gradient(140deg, #00c9ff, #92fe9d, #2C3E50);
-      animation: aurora3 24s ease-in-out infinite;
-    }
-    @keyframes aurora1 {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes aurora2 {
-      0% { background-position: 100% 0%; }
-      50% { background-position: 0% 100%; }
-      100% { background-position: 100% 0%; }
-    }
-    @keyframes aurora3 {
-      0% { background-position: 50% 0%; }
-      50% { background-position: 0% 50%; }
-      100% { background-position: 50% 100%; }
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
 
-    /* Stars canvas */
-    #stars-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      background: transparent;
-    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-    /* Header */
-    header {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      background: rgba(0,0,20,0.8);
-      backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      z-index: 20;
-    }
-    .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #00ffff;
-      text-shadow:
-        0 0 5px #00ffff,
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #0ff;
-      animation: glowText 3s ease-in-out infinite alternate;
-    }
-    @keyframes glowText {
-      from {
-        text-shadow:
-          0 0 5px #00ffff,
-          0 0 10px #00ffff,
-          0 0 20px #00ffff,
-          0 0 30px #0ff;
-      }
-      to {
-        text-shadow:
-          0 0 10px #00ffff,
-          0 0 15px #00ffff,
-          0 0 30px #00ffff,
-          0 0 40px #0ff;
-      }
-    }
+    <style>
+        /* ==============================
+           Variables y temas (claro/oscuro)
+           ============================== */
+        :root {
+            --bg-primary: #0e0e1a;
+            --bg-secondary: #141425;
+            --text-light: #f5f5f5;
+            --text-dark: #111;
+            --accent: #00e5ff; /* Cyan-blue for a futuristic feel */
+            --accent-alt: #3a7bd5; /* Deeper blue for contrast */
+            --button-bg: rgba(255, 255, 255, 0.1);
+            --button-blur: blur(6px);
+            --radius: 12px;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --shadow-light: rgba(0, 0, 0, 0.4);
+            --shadow-hover: rgba(0, 229, 255, 0.3); /* Accent-colored shadow on hover */
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --gradient-1: linear-gradient(90deg, var(--accent), var(--accent-alt), var(--accent));
+            --gradient-2: linear-gradient(135deg, rgba(0,229,255,0.2), rgba(255,0,195,0.2)); /* More vibrant for buttons */
+        }
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-primary: #fafafa;
+                --bg-secondary: #eaeaea;
+                --text-light: #111;
+                --text-dark: #111;
+                --accent: #0077cc;
+                --accent-alt: #005fa3;
+                --button-bg: rgba(0, 0, 0, 0.05);
+                --shadow-light: rgba(0, 0, 0, 0.2);
+                --shadow-hover: rgba(0, 119, 204, 0.3);
+                --gradient-1: linear-gradient(90deg, var(--accent), var(--accent-alt), var(--accent));
+                --gradient-2: linear-gradient(135deg, rgba(0,119,204,0.2), rgba(204,0,119,0.2));
+            }
+        }
 
-    /* Main content */
-    main {
-      position: relative;
-      z-index: 15;
-      padding-top: 100px;
-      text-align: center;
-    }
-    h1, .intro p {
-      font-family: 'Space Grotesk', sans-serif;
-      animation: fadeInUp 1.6s ease forwards;
-      opacity: 0;
-      color: #00ffff;
-      text-shadow:
-        0 0 8px #00ffff,
-        0 0 20px #00ffff;
-    }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      line-height: 1.2;
-      animation-delay: 0.3s;
-    }
-    .intro {
-      margin-top: 1.5rem;
-    }
-    .intro img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      border: 3px solid #00FFFF;
-      position: relative;
-      animation: float 4s ease-in-out infinite;
-      filter:
-        drop-shadow(0 0 5px #00ffff)
-        drop-shadow(0 0 10px #00ffff);
-      background: linear-gradient(135deg, #00ffff55, #000014cc);
-      box-shadow:
-        0 0 30px #00ffffaa,
-        inset 0 0 10px #00ffff66;
-      transition: box-shadow 0.3s ease;
-      z-index: 20;
-    }
-    .intro img:hover {
-      box-shadow:
-        0 0 50px #00ffffee,
-        inset 0 0 20px #00ffffaa;
-      cursor: pointer;
-    }
-    .intro p {
-      margin-top: 1rem;
-      font-size: 1rem;
-      line-height: 1.4;
-      animation-delay: 0.8s;
-      color: #cdf9ff;
-      text-shadow:
-        0 0 4px #00ffffaa;
-      max-width: 450px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        /* ====================
+           Reset y fundamentos
+           ==================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        a:hover {
+            color: var(--accent);
+        }
+        img, video {
+            max-width: 100%;
+            display: block;
+        }
 
-    /* Animations */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+        /* =================
+           Tipografía básica
+           ================= */
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-heading);
+            color: var(--accent);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        p, li, span, input, button {
+            font-family: var(--font-body);
+            color: var(--text-light);
+        }
+        /* Ajustes responsivos de títulos */
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); position: relative; text-align: center;}
+        h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
 
-    /* Contactame Button Fixed */
-    #contact-button {
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      background: rgba(0, 255, 255, 0.15);
-      border: 1.5px solid #00ffff;
-      color: #00ffff;
-      padding: 12px 24px;
-      border-radius: 28px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      font-family: 'Space Grotesk', sans-serif;
-      z-index: 30;
-      box-shadow:
-        0 0 12px #00ffff66;
-    }
-    #contact-button:hover {
-      background: rgba(0, 255, 255, 0.35);
-      box-shadow:
-        0 0 20px #00ffffcc,
-        0 0 40px #00ffffcc;
-    }
+        /* Subtítulos o descripciones */
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-light);
+            opacity: 0.85;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
 
-    /* Contact Icons container (desplegable) */
-    #contact-icons {
-      position: fixed;
-      bottom: 90px; /* justo encima del botón */
-      right: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      z-index: 31;
-    }
-    #contact-icons.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
+        /* =================
+           Navbar / Menú
+           ================= */
+        nav.navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: flex-end;
+            z-index: 100;
+        }
+        nav.navbar button, nav.navbar .menu-btn {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            background: var(--button-bg);
+            backdrop-filter: var(--button-blur);
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            color: var(--accent);
+            cursor: pointer;
+            transition: transform var(--transition-fast);
+        }
+        nav.navbar button:hover, nav.navbar .menu-btn:hover {
+            transform: scale(1.05);
+        }
+        .menu-dropdown {
+            position: absolute;
+            top: 100%; right: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .menu-dropdown.show {
+            display: flex;
+        }
+        .menu-dropdown a {
+            font-weight: 500;
+            transition: color var(--transition-fast);
+        }
+        .menu-dropdown a:hover {
+            color: var(--accent);
+        }
 
-    /* Iconos SVG futuristas */
-    .contact-icon {
-      width: 50px;
-      height: 50px;
-      cursor: pointer;
-      fill: #00ffff;
-      filter:
-        drop-shadow(0 0 6px #00ffffcc)
-        drop-shadow(0 0 10px #00ffffaa);
-      transition: filter 0.3s ease, transform 0.3s ease;
-      user-select: none;
-    }
-    .contact-icon:hover {
-      filter:
-        drop-shadow(0 0 12px #00ffffee)
-        drop-shadow(0 0 20px #00ffffee);
-      transform: scale(1.2);
-    }
+        /* =================
+           Header / Hero
+           ================= */
+        header {
+            position: relative;
+            width: 100%; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; /* Added for avatar positioning */
+            background: url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg') center/cover fixed;
+            overflow: hidden; /* For background particles */
+        }
+        header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: rgba(14,14,26,0.75);
+            backdrop-filter: grayscale(20%) blur(3px);
+            z-index: 0;
+        }
+        .header-content {
+            position: relative; z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            box-shadow: 0 0 20px rgba(0,229,255,0.3); /* Glow effect */
+            animation: fadeIn 2s ease-out;
+        }
+        .header-content h1 {
+            background: var(--gradient-1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradientMove 6s linear infinite;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .header-content h2 {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-light);
+            opacity: 0.85;
+            font-weight: 500;
+        }
+        @keyframes gradientMove {
+            0%   { background-position:   0% center; }
+            100% { background-position: -200% center; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
 
-  </style>
+        /* Avatar styling */
+        .avatar {
+            position: relative;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(0,229,255,0.5), 0 0 40px rgba(0,229,255,0.2);
+            animation: pulse 2s infinite alternate;
+        }
+        @keyframes pulse {
+            from { transform: scale(1); box-shadow: 0 0 20px rgba(0,229,255,0.5), 0 0 40px rgba(0,229,255,0.2); }
+            to   { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,229,255,0.7), 0 0 50px rgba(0,229,255,0.4); }
+        }
+
+        /* Background Particles */
+        .particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0; /* Behind other content */
+        }
+
+        /* ===================
+           Secciones generales
+           =================== */
+        .section {
+            padding: 6rem 1rem;
+            text-align: center;
+        }
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem; left: 50%;
+            transform: translateX(-50%);
+            width: 4rem; height: 0.25rem;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* ===================
+           Botones globales
+           =================== */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--accent);
+            background: var(--button-bg);
+            backdrop-filter: var(--button-blur);
+            color: var(--accent);
+            font-family: var(--font-body);
+            font-weight: 600;
+            transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+            pointer-events: none;
+        }
+        .btn:hover::before {
+            opacity: 1;
+        }
+        .btn:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        /* ==============================
+           Sección Proyectos Destacados
+           ============================== */
+        .section-projects {
+            background: var(--bg-primary);
+            color: var(--text-light);
+            padding: 6rem 1rem;
+        }
+        .section-projects .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .section-projects .project-card {
+            width: 320px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 4px 12px var(--shadow-light);
+            transform: translateY(40px);
+            opacity: 0;
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+            will-change: transform;
+            cursor: pointer;
+        }
+        .section-projects .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,229,255,0.1), rgba(255,0,195,0.1));
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+            pointer-events: none;
+        }
+        .section-projects .project-card:hover::before {
+            opacity: 1;
+        }
+        .section-projects .project-card:hover {
+            transform: translateY(0) scale(1.02);
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 8px 24px var(--shadow-hover);
+        }
+        .section-projects .lottie-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-projects .lottie-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.2), transparent 60%);
+            pointer-events: none;
+        }
+        .section-projects .project-content {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            color: var(--text-light);
+        }
+        .section-projects .project-content h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        .section-projects .project-content p {
+            font-family: var(--font-body);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--text-light);
+            opacity: 0.85;
+            margin-bottom: 0.75rem;
+        }
+        .section-projects .project-content .btn {
+            position: relative;
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius);
+            background: var(--gradient-2); /* Using the new gradient variable */
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: var(--font-body);
+            font-weight: 600;
+            transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .section-projects .project-content .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+            pointer-events: none;
+        }
+        .section-projects .project-content .btn:hover::before {
+            opacity: 1;
+        }
+        .section-projects .project-content .btn:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        /* ==============================
+           Sección Habilidades (Skills)
+           ============================== */
+        .section-skills {
+            position: relative;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Dark blue/green gradient */
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+        #skills-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent);
+            animation: moveBg 10s linear infinite alternate;
+            z-index: 0;
+        }
+        @keyframes moveBg {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .skills-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .skills-wrapper h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0,229,255,0.5); /* Glowing text */
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+            margin-bottom: 40px; /* Space between technical and soft skills */
+        }
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: var(--text-light);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .skill-tag:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: var(--accent);
+            color: var(--bg-primary);
+            box-shadow: 0 5px 15px var(--shadow-hover);
+        }
+        .skill-tag svg {
+            fill: var(--accent); /* Ensure icons take accent color */
+            transition: fill 0.2s ease;
+        }
+        .skill-tag:hover svg {
+            fill: var(--bg-primary); /* Change icon color on hover */
+        }
+
+        /* ====================
+           Sección siguiente (ej. Testimonios)
+           ==================== */
+        .section-next { /* Renamed for clarity - this is for general sections */
+            background: var(--bg-secondary);
+            color: var(--text-light);
+            padding: 6rem 1rem;
+            text-align: center;
+        }
+        .section-next h2 {
+            /* already styled in .section h2 */
+        }
+        .section-next .items-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .section-next .item-card {
+            width: 300px;
+            background: var(--bg-primary);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-light);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+            cursor: pointer;
+        }
+        .section-next .item-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+        .section-next .item-content {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .section-next .item-content h3 {
+            font-family: var(--font-heading);
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .section-next .item-content p {
+            font-family: var(--font-body);
+            color: var(--text-light);
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+
+        /* =================
+           Botón Contacto Flotante
+           ================= */
+        .contact-float {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            background: var(--button-bg);
+            backdrop-filter: var(--button-blur);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+            z-index: 999;
+            overflow: hidden;
+        }
+        .contact-float span {
+            display: inline-block;
+            animation: slideText 3s ease-in-out infinite;
+        }
+        @keyframes slideText {
+            0%   { transform: translateX(0); }
+            25%  { transform: translateX(-100%); }
+            50%  { transform: translateX(100%); }
+            75%  { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+        .contact-panel {
+            position: fixed; bottom: 80px; right: 30px;
+            display: flex; gap: 16px; padding: 12px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 998;
+        }
+        .contact-panel.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* ============
+           Footer
+           ============ */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        /* ====================
+           Accesibilidad y rendimiento
+           ==================== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+        @media (max-width: 768px) {
+            /* Ajustes globales móviles */
+            html { font-size: 14px; }
+            nav.navbar { padding: 0.75rem 1rem; }
+            .contact-float { bottom: 20px; right: 20px; padding: 10px 20px; }
+            .header-content { padding: 1.5rem; }
+            .header-content h1 { font-size: clamp(2rem, 8vw, 3rem); }
+            .header-content h2 { font-size: clamp(0.9rem, 4vw, 1.25rem); }
+            .section h2 { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+            .skill-tag { padding: 8px 15px; font-size: 0.9rem; }
+            .project-card { width: 90%; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Canvas para Estrellas -->
-  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+    <nav class="navbar" aria-label="Menú principal">
+        <button aria-expanded="false" aria-controls="menu-dropdown" onclick="toggleMenu('menu-dropdown')">
+            Menu
+        </button>
+        <div id="menu-dropdown" class="menu-dropdown" role="menu">
+            <a href="#header">Inicio</a>
+            <a href="#projects">Proyectos</a>
+            <a href="#skills">Habilidades</a>
+            <a href="#contact">Contacto</a>
+        </div>
+    </nav>
 
-  <!-- Capas Auroras -->
-  <div class="aurora-layer layer1"></div>
-  <div class="aurora-layer layer2"></div>
-  <div class="aurora-layer layer3"></div>
+    <header id="header" role="banner">
+        <div id="particles-js" class="particles-js"></div>
+        <img src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Avatar de Jairo L. Barrientos" class="avatar">
+        <div class="header-content">
+            <h1>Soy un programador full stack</h1>
+            <h2>Un joven soñador con grandes proyectos y sólidos conocimientos en Python</h2>
+        </div>
+    </header>
 
-  <!-- Header -->
-  <header role="banner">
-    <div class="logo">Welcome to my Portfolio</div>
-  </header>
+    <section id="projects" class="section section-projects">
+        <h2>Proyectos Destacados</h2>
+        <div class="projects-container">
+            <article class="project-card" role="link" aria-label="FinancePro: Calculadora financiera"
+                     onclick="location.href='./financiator/index.html'">
+                <div class="lottie-container" id="lottie-finance"></div>
+                <div class="project-content">
+                    <h3>FinancePro</h3>
+                    <p>Calculadora financiera con animación de gráfico 3D simulado.</p>
+                    <a href="./financiator/index.html" class="btn">Ver Proyecto</a>
+                </div>
+            </article>
 
-  <!-- Main -->
-  <main>
-    <section id="home" class="intro" aria-label="About me introduction">
-      <img src="https://i.ibb.co/3fPrQK5/IMG-20240101-124537.jpg" alt="Foto de Jairo Barrientos" />
-      <p>
-        Soy Jairo Barrientos, un joven programador y desarrollador FullStack con grandes sueños y proyectos.
-        Apasionado por crear experiencias digitales modernas con estilo futurista.
-      </p>
+            <article class="project-card" role="link" aria-label="BeautySpark: Landing cosmética"
+                     onclick="location.href='https://tuproyectobelleza.vercel.app'">
+                <div class="lottie-container" id="lottie-beauty"></div>
+                <div class="project-content">
+                    <h3>BeautySpark</h3>
+                    <p>Landing de cosmética con animación de producto (lipstick/perfume).</p>
+                    <a href="https://tuproyectobelleza.vercel.app" class="btn">Ver Proyecto</a>
+                </div>
+            </article>
+
+            <article class="project-card" role="link" aria-label="Portal Destinos Turísticos"
+                     onclick="location.href='https://portaldeturismo.vercel.app'">
+                <div class="lottie-container" id="lottie-travel"></div>
+                <div class="project-content">
+                    <h3>Portal Destinos</h3>
+                    <p>Explora destinos con animación de viaje (playa/avión).</p>
+                    <a href="https://portaldeturismo.vercel.app" class="btn">Ver Proyecto</a>
+                </div>
+            </article>
+        </div>
     </section>
-  </main>
 
-  <!-- Botón Contactame -->
-  <button id="contact-button" aria-haspopup="true" aria-expanded="false" aria-controls="contact-icons" aria-label="Mostrar opciones de contacto">
-    Contáctame
-  </button>
+    <section id="skills" class="section section-skills">
+        <div id="skills-bg"></div>
+        <div class="skills-wrapper">
+            <h2>Habilidades</h2>
 
-  <!-- Iconos Contacto desplegables -->
-  <div id="contact-icons" role="menu" aria-label="Opciones de contacto">
-    <!-- GitHub -->
-    <a href="https://github.com/jairolemuel" target="_blank" rel="noopener" class="contact-icon" role="menuitem" aria-label="GitHub">
-      <svg viewBox="0 0 24 24" >
-        <path d="M12 0.297C5.372 0.297 0 5.67 0 12.297c0 5.297 3.438 9.797 8.207 11.387 0.6 0.11 0.82-0.26 0.82-0.577 0-0.286-0.01-1.04-0.015-2.04-3.338 0.726-4.042-1.612-4.042-1.612-0.546-1.387-1.333-1.757-1.333-1.757-1.09-0.745 0.082-0.73 0.082-0.73 1.205 0.084 1.84 1.236 1.84 1.236 1.07 1.834 2.807 1.304 3.492 0.997 0.107-0.775 0.418-1.305 0.76-1.605-2.665-0.303-5.467-1.335-5.467-5.935 0-1.312 0.47-2.384 1.235-3.223-0.124-0.303-0.535-1.523 0.117-3.176 0 0 1.005-0.322 3.3 1.23 0.957-0.266 1.983-0.399 3.003-0.404 1.02 0.005 2.047 0.138 3.006 0.404 2.29-1.552 3.293-1.23 3.293-1.23 0.655 1.653 0.244 2.873 0.12 3.176 0.77 0.839 1.233 1.911 1.233 3.223 0 4.61-2.807 5.628-5.48 5.922 0.43 0.372 0.823 1.102 0.823 2.222 0 1.606-0.015 2.896-0.015 3.293 0 0.32 0.216 0.694 0.825 0.576C20.565 22.09 24 17.59 24 12.297c0-6.627-5.373-12-12-12"/>
-      </svg>
-    </a>
-    <!-- LinkedIn -->
-    <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener" class="contact-icon" role="menuitem" aria-label="LinkedIn">
-      <svg viewBox="0 0 24 24">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-0.026-3.039-1.85-3.039-1.851 0-2.135 1.445-2.135 2.939v5.669h-3.554v-11.48h3.414v1.568h0.048c0.476-0.9 1.635-1.85 3.366-1.85 3.6 0 4.268 2.369 4.268 5.455v6.307zm-14.693-13.109c-1.145 0-2.071-0.926-2.071-2.07 0-1.145 0.926-2.07 2.071-2.07 1.145 0 2.07 0.925 2.07 2.07 0 1.144-0.925 2.07-2.07 2.07zm1.777 13.109h-3.553v-11.48h3.553v11.48zm16.469-20.452h-20.499c-0.741 0-1.344 0.604-1.344 1.344v20.498c0 0.74 0.603 1.343 1.344 1.343h20.499c0.741 0 1.344-0.603 1.344-
-              <!-- Continuación SVG y botones de contacto -->
+            <div class="skills-container">
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#E44D26" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#F16529" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
+                    HTML5
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#264DE4" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#2965F1" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
+                    CSS3
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F7DF1E" d="M0 0h128v128H0z"/><path d="M116 116H12V12h104v104z" fill="#000"/><path fill="#F7DF1E" d="M34 105l7-5c1 2 2 4 5 4 3 0 4-1 4-5V56h8v44c0 9-5 13-13 13-7 0-11-4-13-9zm31-1l7-4c2 3 5 6 10 6 4 0 6-2 6-5 0-3-2-4-7-6l-3-1c-9-3-13-7-13-13 0-6 5-11 12-11 5 0 9 2 12 7l-6 4c-1-2-3-4-6-4-3 0-5 2-5 4 0 3 2 4 7 6l3 1c10 4 13 8 13 14 0 8-6 12-14 12-8 0-13-4-16-8z"/></svg>
+                    JavaScript
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3178C6" d="M0 0h128v128H0z"/><path fill="#fff" d="M51 90h10v16c0 6 4 10 10 10s10-4 10-10V90h10V76H51v14zm10-22h10v-5h-10v5zm17 0h10v-5H78v5z"/></svg>
+                    TypeScript
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#61DAFB" d="M64 8c30 0 56 26 56 56s-26 56-56 56S8 94 8 64 34 8 64 8z"/><path fill="#fff" d="M64 26a38 38 0 100 76 38 38 0 000-76zm0 64a26 26 0 110-52 26 26 0 010 52z"/></svg>
+                    React
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 100 100"><path fill="#000" d="M10 10h80v80H10z"/><path fill="#fff" d="M20 50h60M50 20v60"/></svg>
+                    Next.js
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#539E43" d="M64 0C28 0 0 28 0 64s28 64 64 64 64-28 64-64S100 0 64 0z"/><path fill="#fff" d="M49 95L35 37h16l7 38 20-38h18L67 95H49z"/></svg>
+                    Node.js
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#777BB4" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-14 0-24 10-24 24 0 14 10 24 24 24 14 0 24-10 24-24 0-14-10-24-24-24zm0 40c-8 0-16-8-16-16s8-16 16-16 16 8 16 16-8 16-16 16z"/></svg>
+                    PHP
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3776AB" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-22 0-40 18-40 40s18 40 40 40 40-18 40-40-18-40-40-40zm0 64c-14 0-24-10-24-24s10-24 24-24 24 10 24 24-10 24-24 24z"/></svg>
+                    Python
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 512 512"><path fill="#00758F" d="M256 0c141 0 256 115 256 256S397 512 256 512 0 397 0 256 115 0 256 0z"/><path fill="#fff" d="M146 218l110 110 110-110-110-110-110 110z"/></svg>
+                    MySQL / SQL
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F05032" d="M64 0L12 64l52 64 52-64L64 0z"/><path fill="#fff" d="M64 16l-34 48h68L64 16zm0 96l34-48H30l34 48z"/></svg>
+                    Git
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><circle fill="#181717" cx="64" cy="64" r="64"/><path fill="#fff" d="M85 69c-1 0-2 0-3-1v5h-4v-5c-3 0-5-1-7-3l3-3c1 1 3 2 5 2 2 0 3-1 3-3 0-1-1-2-3-3-4-1-7-3-7-7 0-4 3-7 7-7v-5h4v5c2 0 4 1 5 2l-2 4c-1-1-3-2-5-2-2 0-3 1-3 3 0 1 1 2 3 3 4 1 7 3 7 7 0 4-3 7-7 7z"/></svg>
+                    GitHub
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#FCC624" d="M0 0h128v128H0z"/><path fill="#000" d="M64 34c-17 0-30 13-30 30s13 30 30 30 30-13 30-30-13-30-30-30zm0 48c-10 0-18-8-18-18s8-18 18-18 18 8 18 18-8 18-18 18z"/></svg>
+                    Linux
+                </div>
+                <div class="skill-tag">
+                    <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#2496ED" d="M64 0c35 0 64 29 64 64s-29 64-64 64S0 99 0 64 29 0 64 0z"/><path fill="#fff" d="M32 96h64v-8H32v8zm0-16h64v-8H32v8zm0-16h64v-8H32v8z"/></svg>
+                    Docker
+                </div>
+            </div>
 
-      <!-- LinkedIn -->
-      <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="#00ffff" viewBox="0 0 24 24" width="28" height="28" >
-          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14
-                   c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966
-                   0-1.75-.796-1.75-1.777 0-.981.784-1.776 1.75-1.776s1.75.795
-                   1.75 1.776c0 .981-.784 1.777-1.75 1.777zm13.5 11.268h-3v-5.604c0-1.337-.026-3.061-1.865-3.061-1.867
-                   0-2.153 1.459-2.153 2.965v5.7h-3v-10h2.881v1.367h.041c.401-.761
-                   1.381-1.563 2.841-1.563 3.038 0 3.6 2.002 3.6 4.602v5.594z"/>
-        </svg>
-      </a>
+            <h3>Habilidades Blandas</h3>
+            <div class="skills-container">
+                <div class="skill-tag">Comunicación</div>
+                <div class="skill-tag">Trabajo en equipo</div>
+                <div class="skill-tag">Liderazgo</div>
+                <div class="skill-tag">Adaptabilidad</div>
+                <div class="skill-tag">Proactividad</div>
+                <div class="skill-tag">Resolución de problemas</div>
+                <div class="skill-tag">Pensamiento crítico</div>
+                <div class="skill-tag">Creatividad</div>
+            </div>
+        </div>
+    </section>
 
-      <!-- WhatsApp -->
-      <a href="https://wa.me/543437457636" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="#00ffff" viewBox="0 0 24 24" width="28" height="28" >
-          <path d="M20.52 3.48a11.81 11.81 0 0 0-16.7
-                   0 11.862 11.862 0 0 0 0 16.7l-1.8 5.25
-                   5.4-1.8a11.837 11.837 0 0 0 6.1 1.65c6.54 0
-                   11.88-5.34 11.88-11.88a11.77 11.77 0 0 0-3.78-8.4zm-8.28
-                   15.54c-1.59 0-3.12-.45-4.41-1.29l-.3-.18-3.3 1.08
-                   1.08-3.3-.18-.3a7.893 7.893 0 0 1-1.29-4.41c0-4.38
-                   3.57-7.95 7.95-7.95s7.95 3.57 7.95 7.95-3.57 7.95-7.95
-                   7.95zm4.38-5.94c-.24-.12-1.44-.72-1.68-.8-.24-.12-.42-.12-.6.12-.18.24-.72.8-.9.96-.18.18-.36.21-.6.06-.24-.12-1.02-.36-1.92-1.2-.72-.66-1.2-1.5-1.35-1.74-.12-.18 0-.3.06-.42.06-.12.12-.3.18-.42.06-.12.06-.18.12-.3.06-.12
-                   0-.3-.06-.42-.12-.12-.6-1.44-.84-1.98-.24-.54-.48-.48-.6-.48-.12
-                   0-.3 0-.48 0s-.42.06-.66.3c-.24.24-.9.9-.9
-                   2.16s.96 2.52 1.08 2.7c.12.18 1.86 2.88 4.5 4.02.63.27
-                   1.12.42 1.5.54.63.18 1.2.15 1.65.09.5-.06
-                   1.44-.6 1.65-1.2.18-.6.18-1.11.12-1.2-.06-.12-.24-.18-.48-.3z"/>
-        </svg>
-      </a>
+    <section id="contact" class="section section-next">
+        <h2>Contacto</h2>
+        <p class="subtitle">¡Me encantaría saber de ti! Puedes contactarme a través de:</p>
+        <div class="items-container">
+            <div class="item-card">
+                <div class="item-content">
+                    <h3>Email</h3>
+                    <p>jairo.barrientos@example.com</p>
+                    <a href="mailto:jairo.barrientos@example.com" class="btn">Enviar Email</a>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-content">
+                    <h3>LinkedIn</h3>
+                    <p>Conéctate conmigo en LinkedIn.</p>
+                    <a href="https://www.linkedin.com/in/jairobarrientos" target="_blank" class="btn">Mi Perfil</a>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-content">
+                    <h3>GitHub</h3>
+                    <p>Explora mi código en GitHub.</p>
+                    <a href="https://github.com/jairobarrientos" target="_blank" class="btn">Mi Repositorio</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <!-- GitHub -->
-      <a href="https://github.com/jairolemuel" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="#00ffff" viewBox="0 0 24 24" width="28" height="28" >
-          <path d="M12 0c-6.627 0-12 5.373-12 12 0 5.302 3.438
-                   9.8 8.205 11.387.6.113.82-.258.82-.577
-                   0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61
-                   -.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729
-                   1.205.084 1.838 1.237 1.838 1.237 1.07 1.835 2.809 1.305 3.495
-                   .998.108-.776.418-1.305.76-1.605-2.665-.3-5.466-1.335-5.466-5.93
-                   0-1.31.47-2.38 1.236-3.22-.124-.303-.536-1.523.117-3.176
-                   0 0 1.008-.322 3.301 1.23.96-.267 1.98-.399 3-.405
-                   1.02.006 2.04.138 3 .405 2.292-1.552 3.297-1.23 3.297-1.23
-                   .655 1.653.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22
-                   0 4.61-2.807 5.625-5.48 5.92.43.37.81 1.096.81 2.21
-                   0 1.595-.015 2.877-.015 3.273 0 .32.216.694.825.576
-                   4.765-1.59 8.2-6.088 8.2-11.388 0-6.627-5.373-12-12-12z"/>
-        </svg>
-      </a>
+    <button class="contact-float" onclick="toggleContactPanel()">
+        <span>Contacto</span>
+    </button>
+    <div id="contact-panel" class="contact-panel">
+        <a href="mailto:jairo.barrientos@example.com" class="btn" aria-label="Enviar email">Email</a>
+        <a href="https://wa.me/XXXXXXXXXX" target="_blank" class="btn" aria-label="Enviar mensaje por WhatsApp">WhatsApp</a>
     </div>
 
+    <footer>
+        <p>&copy; 2025 Jairo L. Barrientos. Todos los derechos reservados.</p>
+        <p>Diseñado con <span style="color: #e25555;">&hearts;</span> y código.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-      // Burger menu toggle
-      const burger = document.querySelector('.burger');
-      const menu = document.getElementById('menu');
-      burger.addEventListener('click', () => {
-        const open = burger.getAttribute('aria-expanded') === 'true';
-        burger.setAttribute('aria-expanded', String(!open));
-        menu.classList.toggle('open');
-      });
+        // particles.js config for background animation
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00e5ff" /* Accent color */
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00e5ff", /* Accent color */
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
 
-      // Contact button toggle
-      const contactBtn = document.getElementById('contact-btn');
-      const contactIcons = document.getElementById('contact-icons');
 
-      contactBtn.addEventListener('click', () => {
-        contactIcons.classList.toggle('show');
-      });
+        // Menu Toggle
+        function toggleMenu(id) {
+            document.getElementById(id).classList.toggle('show');
+        }
+
+        // Contact Panel Toggle
+        function toggleContactPanel() {
+            document.getElementById('contact-panel').classList.toggle('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Animaciones de entrada para las tarjetas de proyectos
+            gsap.utils.toArray(".project-card").forEach((card, i) => {
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: i * 0.2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 90%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+
+            // Animaciones de entrada para las habilidades
+            gsap.utils.toArray(".skill-tag").forEach((tag, i) => {
+                gsap.fromTo(tag, {
+                    opacity: 0,
+                    scale: 0.8
+                }, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    delay: i * 0.05,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: ".skills-container",
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+
+            // Manejo de preferencias de movimiento reducido
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                // If reduced motion is preferred, ensure Lottie animations are static or simplified
+                console.log("Reduced motion is preferred. Lottie animations will play once or be disabled.");
+                // For Lottie, you might set loop to false, or remove autoplay and require user interaction.
+                // For now, we'll let them autoplay once.
+            } else {
+                try {
+                    // Cargar animaciones desde el archivo animations.json
+                    const res = await fetch('./assets/animations.json');
+                    const animations = await res.json();
+
+                    // Configuración de animaciones Lottie para cada proyecto
+                    const animFinance = lottie.loadAnimation({
+                        container: document.getElementById('lottie-finance'),
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        animationData: animations.financeChart
+                    });
+
+                    const animBeauty = lottie.loadAnimation({
+                        container: document.getElementById('lottie-beauty'),
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        animationData: animations.beautyPerfume
+                    });
+
+                    const animTravel = lottie.loadAnimation({
+                        container: document.getElementById('lottie-travel'),
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        animationData: animations.travelBeach
+                    });
+
+                    // Efectos hover para las animaciones
+                    document.getElementById('lottie-finance').addEventListener('mouseenter', () => animFinance.setSpeed(1.5));
+                    document.getElementById('lottie-finance').addEventListener('mouseleave', () => animFinance.setSpeed(1));
+                    document.getElementById('lottie-beauty').addEventListener('mouseenter', () => animBeauty.setSpeed(0.5));
+                    document.getElementById('lottie-beauty').addEventListener('mouseleave', () => animBeauty.setSpeed(1));
+                    document.getElementById('lottie-travel').addEventListener('mouseenter', () => animTravel.pause());
+                    document.getElementById('lottie-travel').addEventListener('mouseleave', () => animTravel.play());
+
+                    // Control por scroll para reproducir o pausar las animaciones
+                    ScrollTrigger.create({
+                        trigger: '#lottie-finance',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        onEnter: () => animFinance.play(),
+                        onLeave: () => animFinance.pause(),
+                        onEnterBack: () => animFinance.play(),
+                        onLeaveBack: () => animFinance.pause()
+                    });
+
+                    ScrollTrigger.create({
+                        trigger: '#lottie-beauty',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        onEnter: () => animBeauty.play(),
+                        onLeave: () => animBeauty.pause(),
+                        onEnterBack: () => animBeauty.play(),
+                        onLeaveBack: () => animBeauty.pause()
+                    });
+
+                    ScrollTrigger.create({
+                        trigger: '#lottie-travel',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        onEnter: () => animTravel.play(),
+                        onLeave: () => animTravel.pause(),
+                        onEnterBack: () => animTravel.play(),
+                        onLeaveBack: () => animTravel.pause()
+                    });
+                } catch (err) {
+                    console.error('Error cargando las animaciones:', err);
+                    const projectsContainer = document.querySelector('.projects-container');
+                    if (projectsContainer) {
+                        const errorMessage = document.createElement('div');
+                        errorMessage.textContent = 'No se pudieron cargar las animaciones de Lottie. Por favor, verifica el archivo "animations.json" y tu conexión.';
+                        errorMessage.style.color = 'red';
+                        errorMessage.style.textAlign = 'center';
+                        errorMessage.style.marginTop = '20px';
+                        projectsContainer.appendChild(errorMessage);
+                    }
+                }
+            }
+        });
     </script>
-  </body>
+</body>
 </html>
