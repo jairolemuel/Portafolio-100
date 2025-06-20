@@ -332,100 +332,201 @@
         }
 
         /* --- Projects Section --- */
-        .section-projects {
-            background: var(--color-bg-dark);
-            color: var(--color-text-light);
-            padding: 80px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+   <section class="section-projects" id="projects">
+    <h2>My Projects</h2>
+    <div class="projects-container">
+        <div class="project-card">
+            <a href="financiator/index.html" target="_blank" rel="noopener noreferrer">
+                <div class="project-svg-container">
+                    <img src="assets/images/financiator-thumbnail.png" alt="Miniatura del proyecto Financiator">
+                </div>
+                <div class="project-content">
+                    <h3>Financiator</h3>
+                    <p>Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
+                </div>
+            </a>
+            <div class="project-button-wrapper">
+                <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-button">Ver más</a>
+            </div>
+        </div>
 
-        .section-projects h2 {
-            font-size: 3.5rem;
-            margin-bottom: 2.5rem;
-            color: #fff;
-            text-shadow: 0 0 15px var(--glow-light-alpha);
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            -webkit-background-clip: text;
-            color: transparent;
-        }
+        <div class="project-card">
+            <a href="otro-proyecto/index.html" target="_blank" rel="noopener noreferrer">
+                <div class="project-svg-container">
+                    <img src="assets/images/otro-proyecto-thumbnail.png" alt="Miniatura de Otro Proyecto">
+                </div>
+                <div class="project-content">
+                    <h3>Otro Proyecto Genial</h3>
+                    <p>Una breve descripción de este otro proyecto, sus funcionalidades y tecnologías.</p>
+                </div>
+            </a>
+            <div class="project-button-wrapper">
+                <a href="otro-proyecto/index.html" target="_blank" rel="noopener noreferrer" class="project-button">Ver más</a>
+            </div>
+        </div>
+        </div>
+</section>
 
-        .projects-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-        }
+<style>
+    /* --- Projects Section (TU CÓDIGO ORIGINAL - MANTENIDO PARA CONTEXTO) --- */
+    .section-projects {
+        background: var(--color-bg-dark);
+        color: var(--color-text-light);
+        padding: 80px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
 
-        .project-card {
-            position: relative;
-            width: 340px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
-            transform: translateY(50px) scale(0.95);
-            opacity: 0;
-            transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, opacity 0.5s ease;
-            will-change: transform, opacity;
-            border: 1px solid var(--card-border);
-        }
+    .section-projects h2 {
+        font-size: 3.5rem;
+        margin-bottom: 2.5rem;
+        color: #fff;
+        text-shadow: 0 0 15px var(--glow-light-alpha);
+        background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+        -webkit-background-clip: text;
+        color: transparent;
+    }
 
-        .project-card:hover {
-            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(25, 40, 60, 0.95);
-        }
+    .projects-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5rem;
+    }
 
-        .project-content {
-            padding: 1.5rem;
-            background: rgba(0,0,0,0.7);
-            position: relative;
-            z-index: 2;
-        }
+    .project-card {
+        position: relative;
+        width: 340px;
+        background: var(--card-bg);
+        border-radius: 15px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+        transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, opacity 0.5s ease;
+        will-change: transform, opacity;
+        border: 1px solid var(--card-border);
+        /* --- INICIO DE ADICIONES AL CSS DE .project-card --- */
+        display: flex; /* Para usar flexbox internamente */
+        flex-direction: column; /* Para apilar el contenido y el botón */
+        /* --- FIN DE ADICIONES --- */
+    }
 
-        .project-content h3 {
-            margin: 0 0 0.7rem;
-            font-size: 1.5rem;
-            color: var(--color-primary-dark);
-            text-shadow: none;
-        }
+    .project-card:hover {
+        box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+        transform: translateY(-5px) scale(1.02);
+        background: rgba(25, 40, 60, 0.95);
+    }
 
-        .project-content p {
-            margin: 0;
-            font-size: 1rem;
-            color: var(--color-text-dark);
-        }
+    .project-content {
+        padding: 1.5rem;
+        background: rgba(0,0,0,0.7);
+        position: relative;
+        z-index: 2;
+        /* --- INICIO DE ADICIONES AL CSS DE .project-content --- */
+        flex-grow: 1; /* Permite que el contenido crezca y empuje el botón hacia abajo */
+        /* --- FIN DE ADICIONES --- */
+    }
 
-        .project-svg-container {
-            width: 100%;
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-        .project-svg-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 192, 255, 0.1) 0%, transparent 60%);
-            animation: pulseLight 5s infinite ease-in-out;
-            pointer-events: none;
-        }
+    .project-content h3 {
+        margin: 0 0 0.7rem;
+        font-size: 1.5rem;
+        color: var(--color-primary-dark);
+        text-shadow: none;
+    }
 
-        @keyframes pulseLight {
-            0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 0.5; }
-        }
+    .project-content p {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--color-text-dark);
+    }
+
+    .project-svg-container {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        /* --- INICIO DE ADICIONES AL CSS DE .project-svg-container (AJUSTE DE BORDES) --- */
+        border-radius: 0; /* Asegura que el contenedor de la imagen no tenga bordes redondeados si la tarjeta los tiene */
+        /* --- FIN DE ADICIONES --- */
+    }
+    .project-svg-container::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: radial-gradient(circle at center, rgba(0, 192, 255, 0.1) 0%, transparent 60%);
+        animation: pulseLight 5s infinite ease-in-out;
+        pointer-events: none;
+    }
+
+    @keyframes pulseLight {
+        0% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.2); opacity: 0.8; }
+        100% { transform: scale(1); opacity: 0.5; }
+    }
+
+    /* --- INICIO DE ADICIONES AL CSS (NUEVAS REGLAS) --- */
+    .project-card > a { /* Estilo para el enlace que envuelve la mayor parte de la tarjeta */
+        text-decoration: none;
+        color: inherit; /* Hereda el color del texto de la tarjeta */
+        display: block; /* Hace que el enlace ocupe todo el espacio disponible */
+        flex-grow: 1; /* Permite que el enlace crezca para llenar el espacio */
+        display: flex; /* Para el layout interno del enlace */
+        flex-direction: column;
+        justify-content: space-between; /* Para empujar el contenido hacia arriba */
+    }
+
+    .project-svg-container img { /* Estilos para la imagen dentro del SVG container */
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Asegura que la imagen se ajuste sin distorsión */
+    }
+
+    /* Aseguramos que la tarjeta en sí mantenga sus bordes redondeados */
+    .project-card {
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    /* Contenedor para el botón, ayuda a centrarlo */
+    .project-button-wrapper {
+        padding: 0 1.5rem 1.5rem; /* Padding inferior y lateral */
+        text-align: center; /* Centra el botón */
+    }
+
+    /* Estilos para el Botón "Ver más" */
+    .project-button {
+        display: inline-block;
+        margin-top: 1.5rem; /* Espacio superior para separarlo del texto de la descripción */
+        padding: 0.8rem 1.8rem;
+        background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+        color: var(--color-text-light);
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+        transition: transform 0.3s var(--bezier-smooth), box-shadow 0.4s ease, background 0.4s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
+
+    .project-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
+        background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+    }
+    /* --- FIN DE ADICIONES AL CSS --- */
+</style>
 
         .project-svg-container svg {
             width: 85%;
