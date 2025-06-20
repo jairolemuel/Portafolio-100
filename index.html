@@ -1,251 +1,112 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome | Jairo Lemuel Barrientos</title>
-
-  <!-- D3.js para simulación de fuerzas -->
-  <script src="https://d3js.org/d3.v7.min.js" defer></script>
-  <!-- GSAP cargado en caso de querer complementar animaciones -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-
-  <style>
-    /* -------------------- Reset básico -------------------- */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: sans-serif;
-    }
-
-    /* ---------------- Fondo animado en degradado ---------------- */
-    body {
-      background: linear-gradient(135deg, #1E90FF, #003087);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      color: #00ffff;
-    }
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 0;
-    }
-
-    /* ---------------- Contenedor principal ---------------- */
-    .header-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2rem;
-      max-width: 800px;
-      width: 90%;
-    }
-
-    /* ---------------- Avatar futurista ---------------- */
-    .avatar-container {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 1.5rem;
-      animation: float 6s ease-in-out infinite;
-    }
-    .avatar {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3px solid #00ffffcc;
-      object-fit: cover;
-      box-shadow:
-        0 0 12px #00ffff99,
-        0 0 24px #00ffff33,
-        inset 0 0 8px #00ffff44;
-      position: relative;
-      z-index: 2;
-    }
-    .avatar-glow {
-      position: absolute;
-      top: -8px;
-      left: -8px;
-      width: calc(100% + 16px);
-      height: calc(100% + 16px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,255,255,0.25) 15%, transparent 60%);
-      filter: blur(8px);
-      animation: pulseGlow 3s infinite ease-in-out, flicker 1s infinite;
-      z-index: 1;
-    }
-    @keyframes pulseGlow {
-      0%,100% { opacity: 0.7; transform: scale(1); }
-      50%     { opacity: 1; transform: scale(1.08); }
-    }
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-6px); }
-    }
-    @keyframes flicker {
-      0%   { opacity: 0.9; }
-      50%  { opacity: 0.7; }
-      100% { opacity: 0.9; }
-    }
-
-    /* ---------------- Collage de letras ---------------- */
-    .collage {
-      position: relative;
-      height: 120px;
-      margin-bottom: 2rem;
-    }
-    .collage .letter {
-      position: absolute;
-      display: inline-block;
-      background: #fff;
-      color: #000;
-      padding: 0.15em 0.3em;
-      margin: 0 0.05em;
-      /* Borde irregular imitando tijeras */
-      clip-path: polygon(
-        5% 5%, 95% 3%, 100% 25%,
-        92% 92%, 12% 95%, 2% 50%
-      );
-      /* Sombra para simular elevación sobre el fondo */
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.5);
-      /* Mezcla ligera para textura */
-      mix-blend-mode: multiply;
-      /* Fuentes, tamaño y user-select */
-      font-size: clamp(2rem, 6vw, 4rem);
-      user-select: none;
-      cursor: default;
-      opacity: 0;
-      transform-origin: center center;
-    }
-
-    /* ---------------- Efecto typewriter ---------------- */
-    .typewriter {
-      font-family: 'Courier New', monospace;
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      border-right: 0.15em solid #00ffff;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation:
-        typing 3s steps(30, end) 0.5s forwards,
-        blink   0.7s step-end infinite 3.5s;
-      margin-bottom: 1rem;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to   { width: 100% }
-    }
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
-    /* ---------------- Descripción personal ---------------- */
-    .description {
-      color: rgba(255,255,255,0.85);
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      line-height: 1.4;
-      margin-top: 0.5rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
+  <title>Jairo Lemuel Barrientos | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div class="overlay"></div>
-
-  <div class="header-content">
-    <!-- Collage dinámico -->
-    <div class="collage" id="collage"></div>
-
-    <!-- Avatar con glow -->
-    <div class="avatar-container">
-      <img
-        src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png"
-        alt="Avatar de Jairo Lemuel Barrientos"
-        class="avatar"
-      />
-      <div class="avatar-glow"></div>
-    </div>
-
-    <!-- Presentación con efecto typewriter -->
-    <div class="typewriter">
-      Hi, I am Jairo Lemuel Barrientos.
-    </div>
-    <!-- Descripción personal -->
-    <p class="description">
-      Hola, soy un joven The Signal soñador.<br/>
-      Desarrollador Full Stack con grandes sueños y proyectos.
-    </p>
+  <!-- Welcome Animation -->
+  <div id="welcome" class="screen-intro">
+    <h1>Welcome to my portfolio</h1>
   </div>
 
+  <!-- Floating Intro -->
+  <div class="floating-intro">
+    Hi, I'm Jairo Lemuel Barrientos 👋
+  </div>
+
+  <!-- Main Header -->
+  <header id="main-header" data-aos="fade-up">
+    <img src="your-logo.png" alt="My Logo" class="logo" />
+    <p class="subtitle">Discover more about my work</p>
+    <p class="description">
+      Full-Stack Developer specialized in scalable architectures and robust backend solutions for modern web applications. I apply advanced AI techniques to enhance innovation and technological efficiency. Versatile, creative, and focused on design and user experience.
+    </p>
+  </header>
+
+  <!-- Projects Section -->
+  <section class="section projects" id="projects">
+    <h2 data-aos="fade-right">Projects</h2>
+
+    <!-- Project 1 -->
+    <div class="project-card beauty" data-aos="zoom-in">
+      <h3>Skin Care Product</h3>
+      <p>
+        A stylish landing page to promote a skincare product, designed for engagement and conversion.
+      </p>
+      <ul>
+        <li>✔ Responsive and brand-focused layout</li>
+        <li>✔ Smooth transitions and modern color palette</li>
+        <li>✔ Optimized for marketing and mobile</li>
+      </ul>
+      <div class="tags">
+        <span>Design</span>
+        <span>Marketing</span>
+        <span>CSS</span>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card finance" data-aos="zoom-in">
+      <h3>Financial Calculator</h3>
+      <p>
+        A web app designed to calculate compound interest and visualize financial growth.
+      </p>
+      <ul>
+        <li>✔ User input for principal, interest, and time</li>
+        <li>✔ Real-time calculations</li>
+        <li>✔ Clean UI with financial chart output</li>
+      </ul>
+      <div class="tags">
+        <span>JavaScript</span>
+        <span>Finance</span>
+        <span>UI Design</span>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card tourism" data-aos="zoom-in">
+      <h3>Tourism & Travel Agency</h3>
+      <p>
+        A website showcasing travel packages, destinations, and tools for planning trips.
+      </p>
+      <ul>
+        <li>✔ Destination highlights and booking tools</li>
+        <li>✔ Visual storytelling layout</li>
+        <li>✔ Fully responsive for all devices</li>
+      </ul>
+      <div class="tags">
+        <span>Travel</span>
+        <span>Tourism</span>
+        <span>Responsive</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact" data-aos="fade-up">
+    <h2>Contact</h2>
+    <p><strong>Email:</strong> <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
+    <p><strong>Phone:</strong> +54 3745 7636</p>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const text = "Welcome to mi Portafolio";
-      const container = d3.select('#collage');
-      const fonts  = ['Impact','Georgia','Arial Black','Courier New','Times New Roman'];
-      const colors = ['#FF6B6B','#FFD93D','#6BCB77','#4D96FF','#9D4EDD'];
+    AOS.init({ duration: 1200 });
 
-      // Prepara datos de letras con posición objetivo
-      let xCursor = 0;
-      const letterData = text.split('').map(char => {
-        if (char === ' ') {
-          xCursor += 30; // espacio
-          return null;
-        }
-        const datum = {
-          char,
-          targetX: xCursor,
-          targetY: 0
-        };
-        xCursor += 40;
-        return datum;
-      }).filter(d => d);
-
-      // Crea spans en posiciones aleatorias
-      letterData.forEach(d => {
-        container.append('span')
-          .attr('class', 'letter')
-          .text(d.char)
-          .style('font-family', fonts[Math.floor(Math.random() * fonts.length)])
-          .style('color', colors[Math.floor(Math.random() * colors.length)])
-          .style('left',
-            (Math.random() * window.innerWidth - window.innerWidth/2) + 'px'
-          )
-          .style('top',
-            (Math.random() * window.innerHeight - window.innerHeight/2) + 'px'
-          )
-          .each(function() {
-            // enlaza nodo D3 al datum
-            d.node = this;
-          });
-      });
-
-      // Simulación de fuerzas para animar al lugar
-      const sim = d3.forceSimulation(letterData)
-        .force('x', d3.forceX(d => d.targetX).strength(0.1))
-        .force('y', d3.forceY(d => d.targetY).strength(0.1))
-        .force('collide', d3.forceCollide(25))
-        .alphaDecay(0.02)
-        .on('tick', () => {
-          letterData.forEach(d => {
-            const el = d.node;
-            el.style.left = (d.x + container.node().clientWidth/2) + 'px';
-            el.style.top  = (d.y + 60) + 'px';
-            el.style.opacity = 1;
-            el.style.transform = 'rotate(0deg)';
-          });
-        });
+    // Welcome animation
+    window.addEventListener('load', () => {
+      const welcome = document.getElementById('welcome');
+      setTimeout(() => {
+        welcome.style.opacity = '0';
+        welcome.style.visibility = 'hidden';
+      }, 2500);
     });
   </script>
 </body>
