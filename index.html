@@ -67,8 +67,8 @@
             --color-text-medium: #b0e0e6;
             --color-text-dark: #c0c0c0;
             --glow-light-alpha: rgba(0, 192, 255, 0.7);
-            --glow-dark-alpha: rgba(128, 0, 255, 0.7); /* Consistent with the certifications section */
-            --card-bg: rgba(10, 20, 30, 0.9); /* Slightly darker for better contrast */
+            --glow-dark-alpha: rgba(128, 0, 255, 0.7);
+            --card-bg: rgba(10, 20, 30, 0.9);
             --card-border: rgba(0, 192, 255, 0.3);
             --transition-speed: 0.4s;
             --bezier-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
@@ -81,16 +81,15 @@
             background: var(--color-bg-dark);
             color: var(--color-text-light);
             line-height: 1.6;
-            overflow-x: hidden; /* Evita el scroll horizontal */
-            scroll-behavior: smooth; /* Scroll suave para enlaces ancla */
+            overflow-x: hidden;
+            scroll-behavior: smooth;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="rgba(0, 192, 255, 0.8)" stroke="rgba(0, 192, 255, 0.2)" stroke-width="2"/></svg>') 12 12, auto;
         }
 
-        body.hover-pointer,
         a:hover,
         button:hover,
         .contact-fab:hover,
-        .project-card-link:hover, /* Hover for the entire link wrapper */
+        .project-card-link:hover,
         .skill-tag:hover,
         .certification-card:hover {
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0L0 12h8v12h8V12h8z" fill="rgba(0, 229, 255, 0.9)"/></svg>') 12 12, pointer;
@@ -108,6 +107,7 @@
             margin-bottom: 2.5rem;
             -webkit-background-clip: text;
             color: transparent;
+            display: inline-block; /* To ensure text-shadow works consistently */
         }
 
         .section-projects .section-title {
@@ -123,6 +123,11 @@
         .section-certifications .section-title {
             background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
             text-shadow: 0 0 18px var(--glow-dark-alpha);
+        }
+
+        .section-contact .section-title {
+             background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            text-shadow: 0 0 15px var(--glow-light-alpha);
         }
 
         a {
@@ -149,12 +154,23 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0, 192, 255, 0.2);
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            height: 80px; /* Base height */
+            box-sizing: border-box;
         }
 
         .main-header.scrolled {
             background: rgba(0, 0, 0, 0.95);
             box-shadow: 0 4px 15px rgba(0, 192, 255, 0.4);
+            height: 60px; /* Smaller height on scroll */
+            padding: 10px 30px;
+        }
+
+        .main-header.scrolled .logo {
+            font-size: 1.5rem;
+        }
+         .main-header.scrolled .nav-menu a {
+            font-size: 0.95rem;
         }
 
         .logo {
@@ -164,6 +180,7 @@
             -webkit-background-clip: text;
             color: transparent;
             text-shadow: 0 0 10px rgba(0,229,255,0.5);
+            transition: font-size 0.3s ease;
         }
 
         .nav-menu {
@@ -183,6 +200,7 @@
             font-weight: 500;
             padding: 5px 0;
             position: relative;
+            transition: all 0.3s ease;
         }
 
         .nav-menu a::after {
@@ -208,7 +226,7 @@
             height: 4px;
             background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
             width: 0%;
-            z-index: 101; /* Above header */
+            z-index: 101;
         }
 
         /* --- Section Base Styling --- */
@@ -218,17 +236,47 @@
             position: relative;
             overflow: hidden;
             color: var(--color-text-light);
+            min-height: 50vh; /* Ensure sections have some height */
+        }
+
+        /* Animation for elements entering viewport */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: transform, opacity;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll.from-left {
+            transform: translateX(-50px);
+        }
+        .animate-on-scroll.from-left.is-visible {
+            transform: translateX(0);
+        }
+
+        .animate-on-scroll.from-right {
+            transform: translateX(50px);
+        }
+        .animate-on-scroll.from-right.is-visible {
+            transform: translateX(0);
         }
 
         /* --- Hero Section: Futuristic Holographic Vibe --- */
         .section-hero {
-            padding: 160px 20px 80px; /* Adjusted padding for header */
+            padding: 160px 20px 80px;
             background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative; /* Ensure relative for child absolute positioning */
+            perspective: 1000px; /* For 3D parallax effect */
         }
 
         /* Holographic Grid Overlay (Parallax) */
@@ -247,6 +295,7 @@
             opacity: 0.3;
             z-index: 0;
             transform: translateZ(-100px) scale(2); /* Parallax setup */
+            will-change: transform;
         }
         .section-hero::after { /* Another layer for more depth */
             content: '';
@@ -256,6 +305,7 @@
             background: radial-gradient(circle at 70% 30%, rgba(0, 192, 255, 0.08), transparent 70%);
             animation: radialPulse 20s infinite ease-in-out;
             z-index: 1;
+            will-change: transform;
         }
 
         @keyframes gridFlow {
@@ -291,8 +341,8 @@
             line-height: 1.4;
         }
 
-        /* Fade-in-up animation for text */
-        .fade-in-up {
+        /* Fade-in-up animation for text (specific to hero) */
+        .hero-text-fade {
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.9s forwards;
@@ -302,8 +352,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .fade-in-up.delay-1 { animation-delay: 0.4s; }
-        .fade-in-up.delay-2 { animation-delay: 0.8s; }
+        .hero-text-fade.delay-1 { animation-delay: 0.4s; }
+        .hero-text-fade.delay-2 { animation-delay: 0.8s; }
 
         /* --- Avatar Styles --- */
         .avatar-container {
@@ -321,6 +371,7 @@
             border: 2px solid rgba(0, 192, 255, 0.5);
             mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
             -webkit-mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
+            will-change: transform, opacity;
         }
 
         @keyframes avatarEntry {
@@ -365,7 +416,7 @@
             stroke-dashoffset: 100;
             stroke: #fff;
         }
-        @keyframes drawGlasses { /* Dynamically inserted by JS */
+        @keyframes drawGlasses {
             to { stroke-dashoffset: 0; }
         }
 
@@ -385,12 +436,9 @@
 
         /* --- Project Card Styling --- */
         .project-card-wrapper {
+            /* Inherits animate-on-scroll */
             display: flex;
             flex-direction: column;
-            opacity: 1;
-            transform: translateY(0);
-            transition: transform 0.5s var(--bezier-smooth), opacity 0.5s ease, box-shadow 0.4s ease;
-            will-change: transform, opacity;
         }
 
         .project-card-link {
@@ -500,15 +548,27 @@
             z-index: 2;
         }
 
-        .project-card-link:hover .button-primary {
+        /* Only apply hover effect to the button itself, not when the card is hovered */
+        .button-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
             background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
         }
 
+        /* Ensure button remains styled correctly when card is hovered */
+        .project-card-link:hover .button-primary {
+            /* Override any unwanted transform from parent hover if necessary, or ensure button's own hover still works */
+            transform: translateY(0); /* Reset from card hover if it was influencing button */
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary)); /* Keep base background */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+
         /* --- Skills Section --- */
         .section-skills {
             background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
+            position: relative;
+            perspective: 1000px;
         }
 
         #skills-bg {
@@ -518,7 +578,8 @@
             background: radial-gradient(circle at 50% 50%, rgba(0,255,255,0.08), transparent);
             animation: moveBg 15s linear infinite alternate;
             z-index: 0;
-            transform: translateZ(-100px) scale(2); /* Parallax setup */
+            transform: translateZ(-100px) scale(2);
+            will-change: transform;
         }
 
         @keyframes moveBg {
@@ -552,11 +613,9 @@
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 0 8px rgba(0, 192, 255, 0.2);
             backdrop-filter: blur(8px);
             transition: all var(--transition-speed) var(--bezier-smooth);
-            opacity: 0;
-            transform: translateY(40px);
-            will-change: transform, opacity, background, box-shadow;
             border: 1px solid var(--card-border);
             color: var(--color-text-medium);
+            /* Inherits animate-on-scroll */
         }
 
         .skill-tag svg {
@@ -576,6 +635,8 @@
         /* --- Certifications Section --- */
         .section-certifications {
             background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-gradient-mid), var(--color-bg-dark));
+            position: relative;
+            perspective: 1000px;
         }
 
         .section-certifications::before {
@@ -587,7 +648,8 @@
                         radial-gradient(circle at 20% 80%, rgba(128, 0, 255, 0.08), transparent 70%);
             animation: backgroundPulse 20s infinite ease-in-out;
             z-index: 0;
-            transform: translateZ(-100px) scale(2); /* Parallax setup */
+            transform: translateZ(-100px) scale(2);
+            will-change: transform;
         }
 
         @keyframes backgroundPulse {
@@ -618,15 +680,14 @@
             border: 1px solid var(--card-border);
             padding: 30px;
             width: 380px;
-            max-width: 100%; /* Ensure it's responsive */
+            max-width: 100%;
             text-align: left;
-            opacity: 0;
-            transform: translateY(50px) scale(0.95);
             transition: transform 0.5s var(--bezier-smooth), opacity 0.5s ease, box-shadow 0.4s ease;
             will-change: transform, opacity, box-shadow;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            /* Inherits animate-on-scroll */
         }
 
         .certification-card:hover {
@@ -654,7 +715,6 @@
             margin-bottom: 15px;
         }
 
-        /* Specific styles for Credly badge embed */
         .credly-badge-embed {
             margin-top: 25px;
             display: flex;
@@ -672,26 +732,37 @@
         .view-credential-btn {
             display: inline-block;
             margin-top: 20px;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, var(--color-secondary), var(--color-primary-dark));
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-decoration: none; /* Inherit button-primary styles */
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Add button-primary shadow */
         }
 
-        .view-credential-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
-            background: linear-gradient(45deg, var(--color-primary-dark), var(--color-secondary)); /* Reverse gradient on hover */
+        /* --- Contact Section --- */
+        .section-contact {
+            background: var(--color-bg-dark);
+            padding-bottom: 100px; /* More space for contact */
         }
 
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .contact-links .button-primary {
+            padding: 1rem 2.2rem;
+            font-size: 1.1rem;
+        }
 
-        /* Project SVG Animations (Keep these as they are specific) */
+        /* --- Footer --- */
+        .main-footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px 20px;
+            color: var(--color-text-dark);
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 10px rgba(0, 192, 255, 0.1);
+            min-height: unset; /* Override section-base min-height */
+        }
+
+        /* Project SVG Animations */
         #svg-finance {
             width: 85%;
             height: 85%;
@@ -724,7 +795,7 @@
             to { stroke-dashoffset: 0; }
         }
 
-        #svg-beauty { /* Assuming this is for e-commerce or a similar project icon */
+        #svg-beauty {
             width: 85%;
             height: 85%;
             filter: drop-shadow(0 0 5px var(--glow-light-alpha));
@@ -752,37 +823,46 @@
             to { transform: translateY(0); }
         }
 
-        #svg-travel { /* Placeholder for a travel-related project, perhaps for `cyberguard` icon? */
+        #svg-cyber { /* Renamed from svg-travel for clarity */
             width: 85%;
             height: 85%;
             filter: drop-shadow(0 0 5px var(--glow-light-alpha));
         }
-        #svg-travel .plane-body, #svg-travel .plane-wing {
-            transform: translateX(-100%) translateY(20px) rotate(-10deg);
+        #svg-cyber .shield-path {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+        }
+        #svg-cyber.animated .shield-path {
+            animation: drawShield 1.5s ease-out forwards;
+        }
+        @keyframes drawShield {
+            to { stroke-dashoffset: 0; }
+        }
+        #svg-cyber .lock-body, #svg-cyber .lock-shackle {
+            transform-origin: center;
             opacity: 0;
+            transform: scale(0.5);
         }
-        #svg-travel.animated .plane-body {
-            animation: flyIn 2.2s var(--bezier-smooth) forwards;
+        #svg-cyber.animated .lock-body {
+            animation: fadeInScale 0.8s ease-out forwards 0.5s;
         }
-        #svg-travel.animated .plane-wing {
-            animation: flyIn 2.2s var(--bezier-smooth) forwards 0.3s;
+        #svg-cyber.animated .lock-shackle {
+            animation: fadeInScale 0.8s ease-out forwards 0.7s;
         }
-        @keyframes flyIn {
-            from { transform: translateX(-100%) translateY(20px) rotate(-10deg); opacity: 0; }
-            to { transform: translateX(0) translateY(0) rotate(0deg); opacity: 1; }
+        @keyframes fadeInScale {
+            to { opacity: 1; transform: scale(1); }
         }
-        #svg-travel .plane-engine {
-            animation: enginePulse 1.5s infinite ease-in-out;
-        }
-        @keyframes enginePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
+
 
         /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
             .main-header {
                 flex-direction: column;
+                padding: 10px 20px;
+                height: auto; /* Allow height to adjust */
+            }
+            .main-header.scrolled {
+                height: auto;
                 padding: 10px 20px;
             }
             .nav-menu {
@@ -806,7 +886,7 @@
                 grid-template-columns: 1fr;
             }
             .project-card-wrapper, .certification-card {
-                width: 95%; /* Adjust width for smaller screens */
+                width: 95%;
                 margin: 0 auto;
             }
         }
@@ -829,6 +909,12 @@
                 width: 20px;
                 height: 20px;
             }
+             .logo {
+                font-size: 1.6rem;
+            }
+            .main-header.scrolled .logo {
+                font-size: 1.4rem;
+            }
         }
 
         /* Reduced motion accessibility */
@@ -841,6 +927,10 @@
             }
             .section-hero::before, .section-hero::after, #skills-bg, .section-certifications::before {
                 animation: none !important;
+            }
+            .animate-on-scroll {
+                opacity: 1 !important;
+                transform: none !important;
             }
         }
     </style>
@@ -875,77 +965,69 @@
                     <path class="avatar-mouth" d="M40 55 Q50 60 60 55" stroke="#fff" stroke-width="2" fill="none"/>
                 </svg>
             </div>
-            <h1 id="hero-title" class="fade-in-up">Jairo Barrientos</h1>
-            <p class="fade-in-up delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
-            <p class="fade-in-up delay-2">Crafting secure and innovative web experiences.</p>
+            <h1 id="hero-title" class="hero-text-fade">Jairo Barrientos</h1>
+            <p class="hero-text-fade delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
+            <p class="hero-text-fade delay-2">Crafting secure and innovative web experiences.</p>
         </section>
 
         <section id="projects" class="section-projects section-base" aria-labelledby="projects-title">
-            <h2 id="projects-title" class="section-title">My Projects</h2>
+            <h2 id="projects-title" class="section-title animate-on-scroll">My Projects</h2>
             <div class="projects-container">
-                <div class="project-card-wrapper">
+                <div class="project-card-wrapper animate-on-scroll">
                     <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                        <div class="project-card">
-                            <div class="project-image-container">
-                                <svg id="svg-finance" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="15" y="60" width="15" height="25" rx="3" fill="#00E5FF" class="bar bar-1"/>
-                                    <rect x="40" y="45" width="15" height="40" rx="3" fill="#00C0FF" class="bar bar-2"/>
-                                    <rect x="65" y="30" width="15" height="55" rx="3" fill="#8000FF" class="bar bar-3"/>
-                                    <polyline points="10,20 30,40 50,25 70,35 90,15" stroke="#00E5FF" stroke-width="4" stroke-linecap="round" fill="none" class="line-chart"/>
-                                    <circle cx="90" cy="15" r="5" fill="#00E5FF"/>
-                                </svg>
-                            </div>
-                            <div class="project-content">
-                                <h3>Financiator</h3>
-                                <p>An interactive financial calculator designed to help users efficiently manage their investments and loans.</p>
-                            </div>
-                            <div class="project-button-area">
-                                <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="button-primary">View Project</a>
-                            </div>
+                        <div class="project-image-container">
+                            <svg id="svg-finance" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="15" y="60" width="15" height="25" rx="3" fill="#00E5FF" class="bar bar-1"/>
+                                <rect x="40" y="45" width="15" height="40" rx="3" fill="#00C0FF" class="bar bar-2"/>
+                                <rect x="65" y="30" width="15" height="55" rx="3" fill="#8000FF" class="bar bar-3"/>
+                                <polyline points="10,20 30,40 50,25 70,35 90,15" stroke="#00E5FF" stroke-width="4" stroke-linecap="round" fill="none" class="line-chart"/>
+                                <circle cx="90" cy="15" r="5" fill="#00E5FF"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>Financiator</h3>
+                            <p>An interactive financial calculator designed to help users efficiently manage their investments and loans.</p>
+                        </div>
+                        <div class="project-button-area">
+                            <span class="button-primary">View Project</span>
                         </div>
                     </a>
                 </div>
 
-                <div class="project-card-wrapper">
+                <div class="project-card-wrapper animate-on-scroll">
                     <a href="cyberguard/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                        <div class="project-card">
-                            <div class="project-image-container">
-                                <svg id="svg-travel" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path class="plane-body" d="M10 50 L90 50 L75 60 L75 70 L65 65 L60 80 L50 75 L45 80 L35 65 L25 70 L25 60 Z" fill="#00E5FF"/>
-                                    <path class="plane-wing" d="M70 55 L85 45 M70 45 L85 55" stroke="#00C0FF" stroke-width="4" stroke-linecap="round"/>
-                                    <circle class="plane-engine" cx="20" cy="50" r="8" fill="#1a2a3a" stroke="#00C0FF" stroke-width="2"/>
-                                    <path d="M50 30 C 60 20, 70 20, 80 30" stroke="#8000FF" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                    <path d="M40 20 C 50 10, 60 10, 70 20" stroke="#8000FF" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                </svg>
-                            </div>
-                            <div class="project-content">
-                                <h3>CyberGuard Analytics</h3>
-                                <p>A web application for visualizing network security data and identifying potential threats.</p>
-                            </div>
-                            <div class="project-button-area">
-                                <a href="cyberguard/index.html" target="_blank" rel="noopener noreferrer" class="button-primary">View Project</a>
-                            </div>
+                        <div class="project-image-container">
+                            <svg id="svg-cyber" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="shield-path" d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="#00E5FF" stroke-width="3" fill="none"/>
+                                <circle class="lock-body" cx="12" cy="12" r="6" fill="#1a2a3a" stroke="#00C0FF" stroke-width="2"/>
+                                <path class="lock-shackle" d="M12 6V8C9.79086 8 8 9.79086 8 12H12" stroke="#8000FF" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>CyberGuard Analytics</h3>
+                            <p>A web application for visualizing network security data and identifying potential threats.</p>
+                        </div>
+                        <div class="project-button-area">
+                            <span class="button-primary">View Project</span>
                         </div>
                     </a>
                 </div>
 
-                <div class="project-card-wrapper">
+                <div class="project-card-wrapper animate-on-scroll">
                     <a href="ecommerce/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                        <div class="project-card">
-                            <div class="project-image-container">
-                                <svg id="svg-beauty" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="30" y="40" width="40" height="40" rx="5" fill="#00E5FF" class="lipstick-base"/>
-                                    <path d="M30 40 L70 40 L50 20 L30 40 Z" fill="#8000FF" class="lipstick-tip"/>
-                                    <path d="M25 80 H75 L70 90 H30 L25 80 Z" fill="#1a2a3a"/>
-                                </svg>
-                            </div>
-                            <div class="project-content">
-                                <h3>Modern E-commerce Platform</h3>
-                                <p>A responsive e-commerce site with product listings, shopping cart functionality, and user authentication.</p>
-                            </div>
-                            <div class="project-button-area">
-                                <a href="ecommerce/index.html" target="_blank" rel="noopener noreferrer" class="button-primary">View Project</a>
-                            </div>
+                        <div class="project-image-container">
+                            <svg id="svg-beauty" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="30" y="40" width="40" height="40" rx="5" fill="#00E5FF" class="lipstick-base"/>
+                                <path d="M30 40 L70 40 L50 20 L30 40 Z" fill="#8000FF" class="lipstick-tip"/>
+                                <path d="M25 80 H75 L70 90 H30 L25 80 Z" fill="#1a2a3a"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>Modern E-commerce Platform</h3>
+                            <p>A responsive e-commerce site with product listings, shopping cart functionality, and user authentication.</p>
+                        </div>
+                        <div class="project-button-area">
+                            <span class="button-primary">View Project</span>
                         </div>
                     </a>
                 </div>
@@ -955,64 +1037,64 @@
         <section id="skills" class="section-skills section-base" aria-labelledby="skills-title">
             <div id="skills-bg"></div>
             <div class="skills-wrapper">
-                <h2 id="skills-title" class="section-title">My Skills</h2>
+                <h2 id="skills-title" class="section-title animate-on-scroll">My Skills</h2>
                 <div class="skills-container">
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="HTML5 icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.5 0H22.5L20.5 24L12 20.25L3.5 24L1.5 0ZM18.5 4H5.5L6.5 16H17.5L16.5 4ZM12 18L17 17L16.5 7H7.5L7 17L12 18Z"/>
                         </svg>
                         HTML5
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="CSS3 icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.5 0H22.5L20.5 24L12 20.25L3.5 24L1.5 0ZM18.5 4H5.5L6.5 16H17.5L16.5 4ZM12 18L17 17L16.5 7H7.5L7 17L12 18Z"/>
                         </svg>
                         CSS3
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="JavaScript icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0H24V24H0V0Z" fill="none"/>
                             <path d="M12 0.75C6.062 0.75 1.25 5.562 1.25 11.5S6.062 22.25 12 22.25 22.75 17.438 22.75 11.5 17.938 0.75 12 0.75ZM15.5 17.5H12.75C11.545 17.5 10.75 16.593 10.75 15.352V10.25H9.25V15.352C9.25 17.5 10.795 19 12.75 19H15.5V17.5ZM17.5 12H16.25V10.25H17.5V12ZM15.5 8H9.25V9.5H15.5V8Z"/>
                         </svg>
                         JavaScript
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="React icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2.5C6.477 2.5 2 7.042 2 12.5C2 17.958 6.477 22.5 12 22.5C17.523 22.5 22 17.958 22 12.5C22 7.042 17.523 2.5 12 2.5ZM17.5 15.5L12 12.5L6.5 15.5L12 18.5L17.5 15.5ZM12 4.5L6.5 7.5L12 10.5L17.5 7.5L12 4.5Z"/>
                         </svg>
                         React
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="Node.js icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 0C5.373 0 0 5.373 0 12C0 18.627 5.373 24 12 24C18.627 24 24 18.627 24 12C24 5.373 18.627 0 12 0ZM18.72 17.152L12.002 6.84L5.28 17.152H18.72ZM12.002 5.093L1.932 17.098L11.996 23.364L22.068 17.098L12.002 5.093Z"/>
                         </svg>
                         Node.js
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="PHP icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.52 0.81L0 12.19L2.52 23.57H21.48L24 12.19L21.48 0.81H2.52ZM15.55 18.71L12.12 12.44L15.55 6.18H18.98L15.55 12.44L18.98 18.71H15.55ZM11.45 18.71L8.02 12.44L11.45 6.18H14.88L11.45 12.44L14.88 18.71H11.45ZM7.35 18.71L3.92 12.44L7.35 6.18H10.78L7.35 12.44L10.78 18.71H7.35Z"/>
                         </svg>
                         PHP
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="MySQL icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 0C5.373 0 0 5.373 0 12C0 18.627 5.373 24 12 24C18.627 24 24 18.627 24 12C24 5.373 18.627 0 12 0ZM12 2C17.522 2 22 6.477 22 12C22 17.523 17.522 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2ZM12 4C7.589 4 4 7.589 4 12C4 16.411 7.589 20 12 20C16.411 20 20 16.411 20 12C20 7.589 16.411 4 12 4ZM12 6C8.686 6 6 8.686 6 12C6 15.314 8.686 18 12 18C15.314 18 18 15.314 18 12C18 8.686 15.314 6 12 6Z"/>
                         </svg>
                         MySQL
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="Cybersecurity icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.3L19.2 8.1L12 11.9L4.8 8.1L12 4.3ZM4 9.4L11 13.2V20.1L4 16.3V9.4ZM13 13.2L20 9.4V16.3L13 20.1V13.2Z"/>
                         </svg>
                         Cybersecurity
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="UI/UX Design icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM12 4C16.411 4 20 7.589 20 12C20 16.411 16.411 20 12 20C7.589 20 4 16.411 4 12C4 7.589 7.589 4 12 4ZM10 7H14V9H10V7ZM7 10H9V14H7V10ZM15 10H17V14H15V10ZM10 15H14V17H10V15Z"/>
                         </svg>
                         UI/UX Design
                     </div>
-                    <div class="skill-tag">
+                    <div class="skill-tag animate-on-scroll">
                         <svg role="img" aria-label="SEO icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"/>
                         </svg>
@@ -1024,9 +1106,9 @@
 
         <section id="certifications" class="section-certifications section-base" aria-labelledby="certifications-title">
             <div class="certifications-wrapper">
-                <h2 id="certifications-title" class="section-title">Certifications</h2>
+                <h2 id="certifications-title" class="section-title animate-on-scroll">Certifications</h2>
                 <div class="certification-grid">
-                    <div class="certification-card">
+                    <div class="certification-card animate-on-scroll">
                         <div class="card-header">
                             <h3>Cisco Certified CyberOps Associate</h3>
                             <p class="issuer">Issued by Cisco</p>
@@ -1038,17 +1120,32 @@
                                     <img src="assets/images/cisco-cyberops-badge.png" alt="Cisco Certified CyberOps Associate Badge" width="120" height="120">
                                 </a>
                             </div>
-                            <a href="https://www.credly.com/badges/YOUR_BADGE_ID/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">View Credential</a>
+                            <a href="https://www.credly.com/badges/YOUR_BADGE_ID/public_url" target="_blank" rel="noopener noreferrer" class="button-primary view-credential-btn">View Credential</a>
                         </div>
                     </div>
+                    <div class="certification-card animate-on-scroll">
+                        <div class="card-header">
+                            <h3>Another Key Certification</h3>
+                            <p class="issuer">Issued by Tech Academy</p>
+                        </div>
+                        <div class="card-content">
+                            <p>This certification covers advanced topics in Full Stack JavaScript development, including MERN stack.</p>
+                            <div class="credly-badge-embed">
+                                <a href="https://www.credly.com/badges/ANOTHER_BADGE_ID/public_url" target="_blank" rel="noopener noreferrer" aria-label="View Full Stack Certification Credential on Credly">
+                                    <img src="assets/images/fullstack-badge.png" alt="Full Stack Developer Certification Badge" width="120" height="120">
+                                </a>
+                            </div>
+                            <a href="https://www.credly.com/badges/ANOTHER_BADGE_ID/public_url" target="_blank" rel="noopener noreferrer" class="button-primary view-credential-btn">View Credential</a>
+                        </div>
                     </div>
+                </div>
             </div>
         </section>
 
         <section id="contact" class="section-contact section-base" aria-labelledby="contact-title">
-            <h2 id="contact-title" class="section-title">Get in Touch</h2>
-            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
-            <div class="contact-links">
+            <h2 id="contact-title" class="section-title animate-on-scroll">Get in Touch</h2>
+            <p class="animate-on-scroll">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            <div class="contact-links animate-on-scroll">
                 <a href="mailto:your.email@example.com" class="button-primary" aria-label="Email Jairo Barrientos">Email Me</a>
                 <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" class="button-primary" aria-label="Connect with Jairo Barrientos on LinkedIn">LinkedIn</a>
                 <a href="https://github.com/tu-usuario-github" target="_blank" rel="noopener noreferrer" class="button-primary" aria-label="View Jairo Barrientos's GitHub profile">GitHub</a>
@@ -1062,132 +1159,140 @@
     </footer>
 
     <script>
-        // Smooth scroll for navigation
-        document.querySelectorAll('.nav-menu a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Header scroll effect and active link
-        const header = document.querySelector('.main-header');
-        const sections = document.querySelectorAll('main section');
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        const progressBar = document.querySelector('.scroll-progress-bar');
-
-        window.addEventListener('scroll', () => {
-            // Header sticky effect
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-
-            // Active nav link on scroll
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - header.offsetHeight; // Adjust for fixed header
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-
-            // Scroll progress bar
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / scrollHeight) * 100;
-            progressBar.style.width = scrolled + '%';
-
-            // Animation on scroll for sections
-            sections.forEach(section => {
-                const sectionPos = section.getBoundingClientRect().top;
-                const screenHeight = window.innerHeight;
-                if (sectionPos < screenHeight * 0.8) { // When 80% of the section is visible
-                    section.classList.add('animate-in'); // Add a class to trigger animations
-                } else {
-                    section.classList.remove('animate-in'); // Remove if scrolled out
-                }
-            });
-        });
-
-        // Initialize animations for elements in view on load
         document.addEventListener('DOMContentLoaded', () => {
-            const animateElements = document.querySelectorAll('.fade-in-up, .skill-tag, .certification-card');
-            const observer = new IntersectionObserver((entries) => {
+            // --- Navigation and Scroll Progress ---
+            const header = document.querySelector('.main-header');
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const progressBar = document.querySelector('.scroll-progress-bar');
+            const heroSection = document.getElementById('hero');
+
+            // Cache for IntersectionObserver instances to prevent re-observing
+            const observedElements = new WeakSet();
+
+            // Intersection Observer for Animations (General "fade-in-up" like)
+            const animateObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        if (entry.target.classList.contains('skill-tag') || entry.target.classList.contains('certification-card')) {
-                            // Delay for skills and certifications
-                            const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
-                            entry.target.style.animationDelay = `${index * 0.1}s`;
-                            entry.target.style.animationName = 'fadeInUp';
-                            entry.target.style.animationFillMode = 'forwards';
-                            entry.target.style.animationDuration = '0.7s';
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        } else if (entry.target.classList.contains('fade-in-up')) {
-                            // Hero section elements already have delays defined
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
+                        const target = entry.target;
+
+                        // Apply base animation class
+                        target.classList.add('is-visible');
+
+                        // Specific delays for skill tags and certification cards
+                        if (target.classList.contains('skill-tag') || target.classList.contains('certification-card')) {
+                            const parentContainer = target.closest('.skills-container') || target.closest('.certification-grid');
+                            if (parentContainer) {
+                                const index = Array.from(parentContainer.children).indexOf(target);
+                                target.style.transitionDelay = `${index * 0.08}s`; // Staggered delay
+                            }
                         }
 
-                        // Play SVG animations when their respective project card wrappers are in view
-                        if (entry.target.classList.contains('project-card-wrapper')) {
-                            const svg = entry.target.querySelector('svg');
+                        // Trigger SVG animations for project cards
+                        if (target.classList.contains('project-card-wrapper')) {
+                            const svg = target.querySelector('svg');
                             if (svg && !svg.classList.contains('animated')) {
                                 svg.classList.add('animated');
                             }
                         }
-
-                        // For glasses animation on avatar
-                        if (entry.target.id === 'hero') {
-                            const glassesPath = document.querySelector('#my-avatar .avatar-glasses');
-                            if (glassesPath && !glassesPath.classList.contains('drawn')) {
-                                glassesPath.style.animation = 'drawGlasses 1.5s forwards 1s';
-                                glassesPath.classList.add('drawn'); // Prevent re-animation
-                            }
-                        }
-
-                        observer.unobserve(entry.target); // Stop observing once animated
+                        observer.unobserve(target); // Stop observing once animated
                     }
                 });
-            }, { threshold: 0.2 }); // Trigger when 20% of element is visible
+            }, { threshold: 0.15 }); // Trigger when 15% of element is visible
 
-            animateElements.forEach(el => observer.observe(el));
-
-            // Observe project card wrappers for SVG animations
-            document.querySelectorAll('.project-card-wrapper').forEach(card => {
-                observer.observe(card);
+            // Observe all elements that should animate on scroll
+            document.querySelectorAll('.animate-on-scroll, .hero-text-fade').forEach(el => {
+                // hero-text-fade elements are animated on load via CSS,
+                // but adding them to observer ensures future dynamic content also animates.
+                if (!el.classList.contains('hero-text-fade')) { // Hero text has its own initial animation
+                    animateObserver.observe(el);
+                }
             });
 
-            // Observe hero section for avatar glasses animation
-            observer.observe(document.getElementById('hero'));
+
+            // Avatar specific animations using Intersection Observer for initial appearance
+            const avatarObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const glassesPath = document.querySelector('#my-avatar .avatar-glasses');
+                        if (glassesPath && !glassesPath.classList.contains('drawn')) {
+                            glassesPath.style.animation = 'drawGlasses 1.5s forwards 1s';
+                            glassesPath.classList.add('drawn');
+                        }
+                        // Start blinking only once hero section is visible
+                        blink();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% of hero is visible
+            avatarObserver.observe(heroSection);
+
+
+            // Function to handle scroll events (header, active links, scroll progress)
+            const handleScroll = () => {
+                const scrollY = window.scrollY;
+
+                // Header sticky effect
+                if (scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                // Active nav link on scroll
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - header.offsetHeight;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(currentSectionId) && currentSectionId !== '') {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Scroll progress bar
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolledPercentage = (scrollY / docHeight) * 100;
+                progressBar.style.width = scrolledPercentage + '%';
+            };
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Call on load to set initial state
+
+            // Smooth scroll for navigation
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Remove active class from all and add to clicked one immediately for responsiveness
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // --- Avatar Blinking Eyes ---
+            const avatarEyes = document.querySelectorAll('#my-avatar .avatar-eye');
+            let blinkTimeout;
+
+            function blink() {
+                avatarEyes.forEach(eye => eye.classList.add('blink'));
+                setTimeout(() => {
+                    avatarEyes.forEach(eye => eye.classList.remove('blink'));
+                }, 300);
+                blinkTimeout = setTimeout(blink, Math.random() * 5000 + 2000); // Blink every 2-7 seconds
+            }
+
+            // --- Update Footer Year ---
+            document.getElementById('current-year').textContent = new Date().getFullYear();
         });
-
-        // Avatar blinking eyes
-        const avatarEyes = document.querySelectorAll('#my-avatar .avatar-eye');
-        function blink() {
-            avatarEyes.forEach(eye => eye.classList.add('blink'));
-            setTimeout(() => {
-                avatarEyes.forEach(eye => eye.classList.remove('blink'));
-            }, 300); // Duration of blink animation
-            setTimeout(blink, Math.random() * 5000 + 2000); // Blink every 2-7 seconds
-        }
-        blink(); // Start blinking
-
-        // Update current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
