@@ -332,200 +332,256 @@
         }
 
         /* --- Projects Section --- */
-  <section class="section-projects" id="projects">
+<section id="projects" class="section-projects">
+    <style>
+        /* CSS específico para la sección de Proyectos (incrustado) */
+        /*
+        -- VARIABLES GLOBALES (asegúrate de que estas estén definidas en tu CSS principal o <head>) --
+        :root {
+            --color-bg-dark: #000;
+            --color-bg-gradient-start: #050a11;
+            --color-bg-gradient-mid: #1a2a3a;
+            --color-primary-light: #00e5ff;
+            --color-primary-dark: #00c0ff;
+            --color-secondary: #8000ff;
+            --color-text-light: #e0e0e0;
+            --color-text-medium: #b0e0e6;
+            --color-text-dark: #c0c0c0;
+            --glow-light-alpha: rgba(0, 192, 255, 0.7);
+            --card-bg: rgba(10, 20, 30, 0.9);
+            --card-border: rgba(0, 192, 255, 0.3);
+            --transition-speed: 0.4s;
+            --bezier-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        */
+
+        .section-projects {
+            background: var(--color-bg-dark);
+            color: var(--color-text-light);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-projects h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px var(--glow-light-alpha);
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Estilo Principal de la Tarjeta de Proyecto --- */
+
+        .project-card-wrapper {
+            display: flex;
+            flex-direction: column;
+            opacity: 1; /* Establecido en 1 para que sea visible por defecto, puedes controlarlo con JS si quieres animación de carga */
+            transform: translateY(0); /* Estado inicial sin transformación */
+            transition: transform 0.5s var(--bezier-smooth), opacity 0.5s ease, box-shadow 0.4s ease;
+            will-change: transform, opacity;
+        }
+
+        .project-card-link {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+            transition: all var(--transition-speed) var(--bezier-smooth);
+            cursor: pointer;
+            position: relative; /* Necesario para que z-index funcione en elementos hijos */
+            z-index: 1; /* Asegura que la tarjeta sea interactiva */
+        }
+
+        /* Efectos de hover para toda la tarjeta clicable */
+        .project-card-link:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px var(--glow-light-alpha), inset 0 0 20px rgba(0, 192, 255, 0.5);
+            background: rgba(25, 40, 60, 0.95);
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+        }
+
+        .project-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 192, 255, 0.1) 0%, transparent 60%);
+            animation: pulseLight 5s infinite ease-in-out;
+            pointer-events: none; /* Crucial para no bloquear el clic en la imagen */
+        }
+
+        @keyframes pulseLight {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .project-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card-link:hover .project-image-container img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .project-content h3 {
+            margin: 0 0 0.7rem;
+            font-size: 1.5rem;
+            color: var(--color-primary-light);
+            text-shadow: none;
+        }
+
+        .project-content p {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--color-text-medium);
+        }
+
+        .project-button-area {
+            padding: 0 1.5rem 1.5rem;
+            text-align: right;
+            margin-top: auto;
+        }
+
+        .project-button {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            color: var(--color-text-light);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s var(--bezier-smooth);
+            cursor: pointer;
+            text-decoration: none;
+            /* Asegura que el botón esté por encima del enlace padre si hay superposición mínima */
+            position: relative; 
+            z-index: 2; /* Mayor que el z-index del .project-card-link */
+        }
+
+        /* Hover effect for the button when the whole card is hovered */
+        .project-card-link:hover .project-button {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+        }
+
+        /* --- Ajustes Responsivos --- */
+        @media (max-width: 768px) {
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card-wrapper {
+                width: 100%;
+            }
+        }
+    </style>
+
     <h2>My Projects</h2>
     <div class="projects-container">
-<div class="project-card">
-   <div class="project-card">
-    <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-        <div class="project-svg-container">
-            <img src="assets/images/financiator-thumbnail.png" alt="Miniatura del proyecto Financiator">
-        </div>
-        <div class="project-content">
-            <h3>Financiator</h3>
-            <p>Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
-        </div>
-    </a>
-    <!-- Botón adicional con redirección forzada -->
-    <div class="project-button-wrapper">
-        <button class="project-button" onclick="window.location.href='financiator/index.html';">Ver más</button>
-    </div>
-</div>
 
-        <div class="project-card">
-            <a href="otro-proyecto/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                <div class="project-svg-container">
-                    <img src="assets/images/otro-proyecto-thumbnail.png" alt="Miniatura de Otro Proyecto">
-                </div>
-                <div class="project-content">
-                    <h3>Otro Proyecto Genial</h3>
-                    <p>Una breve descripción de este otro proyecto, sus funcionalidades y tecnologías.</p>
-                </div>
-                <div class="project-button-wrapper">
-                    <span class="project-button">Ver más</span>
+        <div class="project-card-wrapper">
+            <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="assets/images/financiator-thumbnail.png" alt="Financiator Project Thumbnail">
+                    </div>
+                    <div class="project-content">
+                        <h3>Financiator</h3>
+                        <p>An interactive financial calculator designed to help users efficiently manage their investments and loans.</p>
+                    </div>
+                    <div class="project-button-area">
+                        <button type="button" class="project-button" onclick="window.open('financiator/index.html', '_blank');">View Project</button>
+                    </div>
                 </div>
             </a>
         </div>
 
-    </div>
-</section>
+        <div class="project-card-wrapper">
+            <a href="cyberguard/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="assets/images/cyberguard-thumbnail.png" alt="CyberGuard Project Thumbnail">
+                    </div>
+                    <div class="project-content">
+                        <h3>CyberGuard Analytics</h3>
+                        <p>A web application for visualizing network security data and identifying potential threats.</p>
+                    </div>
+                    <div class="project-button-area">
+                        <button type="button" class="project-button" onclick="window.open('cyberguard/index.html', '_blank');">View Project</button>
+                    </div>
+                </div>
+            </a>
+        </div>
 
-<style>
-    /* --- Projects Section (TU CÓDIGO ORIGINAL - MANTENIDO PARA CONTEXTO) --- */
-    .section-projects {
-        background: var(--color-bg-dark);
-        color: var(--color-text-light);
-        padding: 80px 20px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
+        <div class="project-card-wrapper">
+            <a href="ecommerce/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="assets/images/ecommerce-thumbnail.png" alt="E-commerce Project Thumbnail">
+                    </div>
+                    <div class="project-content">
+                        <h3>Modern E-commerce Platform</h3>
+                        <p>A responsive e-commerce site with product listings, shopping cart functionality, and user authentication.</p>
+                    </div>
+                    <div class="project-button-area">
+                        <button type="button" class="project-button" onclick="window.open('ecommerce/index.html', '_blank');">View Project</button>
+                    </div>
+                </div>
+            </a>
+        </div>
 
-    .section-projects h2 {
-        font-size: 3.5rem;
-        margin-bottom: 2.5rem;
-        color: #fff;
-        text-shadow: 0 0 15px var(--glow-light-alpha);
-        background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-        -webkit-background-clip: text;
-        color: transparent;
-    }
-
-    .projects-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2.5rem;
-    }
-
-    .project-card {
-        position: relative;
-        width: 340px;
-        background: var(--card-bg);
-        border-radius: 15px;
-        overflow: hidden; /* Esto es importante para que el border-radius se aplique al contenido */
-        cursor: pointer;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
-        transform: translateY(50px) scale(0.95);
-        opacity: 0;
-        transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, opacity 0.5s ease;
-        will-change: transform, opacity; /* Puedes quitar esta línea si no notas problemas de rendimiento */
-        border: 1px solid var(--card-border);
-        
-        /* ¡IMPORTANTE! Hacer que la tarjeta sea un contenedor flex para que el enlace interno ocupe todo el espacio */
-        display: flex; 
-        flex-direction: column; /* Apila el contenido verticalmente */
-    }
-
-    .project-card:hover {
-        box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
-        transform: translateY(-5px) scale(1.02);
-        background: rgba(25, 40, 60, 0.95);
-    }
-
-    /* ESTILO NUEVO/MODIFICADO: El enlace que cubre toda la tarjeta */
-    .project-card-link {
-        text-decoration: none; /* Quita el subrayado predeterminado del enlace */
-        color: inherit; /* Hereda el color del texto de la tarjeta */
-        display: flex; /* Permite que el contenido interno del enlace se organice con flexbox */
-        flex-direction: column; /* Apila el contenido verticalmente */
-        height: 100%; /* Asegura que el enlace ocupe toda la altura de la tarjeta */
-        justify-content: space-between; /* Empuja el botón hacia abajo si el contenido no llena */
-    }
-
-    .project-content {
-        padding: 1.5rem;
-        background: rgba(0,0,0,0.7);
-        position: relative;
-        z-index: 2;
-        flex-grow: 1; /* Permite que el contenido crezca y empuje el botón hacia abajo */
-    }
-
-    .project-content h3 {
-        margin: 0 0 0.7rem;
-        font-size: 1.5rem;
-        color: var(--color-primary-dark); /* Asegúrate de que esta variable exista o define el color directamente */
-        text-shadow: none;
-    }
-
-    .project-content p {
-        margin: 0;
-        font-size: 1rem;
-        color: var(--color-text-dark); /* Asegúrate de que esta variable exista o define el color directamente */
-    }
-
-    .project-svg-container {
-        width: 100%;
-        height: 220px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.5);
-        /* Quitamos estos bordes de aquí si la tarjeta ya tiene overflow: hidden */
-        /* border-bottom-left-radius: 12px; */
-        /* border-bottom-right-radius: 12px; */
-        overflow: hidden;
-        position: relative;
-        /* Aseguramos que la imagen no tenga bordes redondeados si la tarjeta los tiene */
-        border-radius: 0; 
-    }
-    
-    .project-svg-container::after {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: radial-gradient(circle at center, rgba(0, 192, 255, 0.1) 0%, transparent 60%);
-        animation: pulseLight 5s infinite ease-in-out;
-        pointer-events: none;
-    }
-
-    @keyframes pulseLight {
-        0% { transform: scale(1); opacity: 0.5; }
-        50% { transform: scale(1.2); opacity: 0.8; }
-        100% { transform: scale(1); opacity: 0.5; }
-    }
-
-    /* ESTILO MODIFICADO: La imagen dentro del SVG container */
-    .project-svg-container img { 
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain; 
-    }
-
-    /* Contenedor para el botón, ayuda a centrarlo */
-    .project-button-wrapper {
-        padding: 0 1.5rem 1.5rem; 
-        text-align: center; 
-    }
-
-    /* Estilos para el Botón "Ver más" (ahora se aplican a un SPAN dentro del enlace) */
-    .project-button {
-        display: inline-block;
-        margin-top: 1.5rem; 
-        padding: 0.8rem 1.8rem;
-        background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-        color: var(--color-text-light);
-        /* Ya no necesita text-decoration: none; ni cursor: pointer; porque es un span, 
-           pero el <a> padre ya maneja el cursor y el clic. */
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: bold;
-        letter-spacing: 0.05em;
-        transition: transform 0.3s var(--bezier-smooth), box-shadow 0.4s ease, background 0.4s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    /* EL EFECTO HOVER AHORA DEBE IR EN EL ENLACE DE LA TARJETA COMPLETA o en el propio .project-button-wrapper */
-    .project-card-link:hover .project-button { /* Cuando se hace hover sobre el enlace de la tarjeta */
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
-        background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
-    }
-
-    /* Esta regla solo aplica si de verdad insertas un <svg> directamente en el HTML, no una imagen con .png */
-    /* Si solo usas PNGs, JPGs, puedes borrarla. */
-    .project-svg-container svg {
+        </div>
         width: 85%;
         height: 85%;
         filter: drop-shadow(0 0 5px var(--glow-light-alpha));
