@@ -1,1035 +1,1527 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Jairo Lemuel Barrientos | Programador Full Stack"/>
-  <title>Jairo L. Barrientos | Portafolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate</title>
+    <meta name="description" content="Jairo Barrientos's professional portfolio showcasing expertise in Full Stack Web Development (React, Node.js, PHP) and cybersecurity, including a Cisco Certified CyberOps Associate certification. Located in Santa Elena, Entre Ríos, Argentina.">
+    <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Web Development, Cybersecurity, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, Cisco Certified CyberOps Associate, Santa Elena, Entre Ríos, Argentina, UI/UX, SEO">
+    <meta name="author" content="Jairo Barrientos">
 
-  <!-- FUENTES -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
-
-  <!-- Lottie Web y GSAP con defer -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-
-  <!-- Tu script de inicialización de Proyectos -->
-  <script src="js/projects.js" defer></script>
-
-<style>
-  /* ==============================
-     Variables y temas (claro/oscuro)
-     ============================== */
-  :root {
-    --bg-primary: #0e0e1a;
-    --bg-secondary: #141425;
-    --text-light: #f5f5f5;
-    --text-dark: #111;
-    --accent: #00e5ff;
-    --accent-alt: #3a7bd5;
-    --button-bg: rgba(255, 255, 255, 0.1);
-    --button-blur: blur(6px);
-    --radius: 12px;
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Montserrat', sans-serif;
-    --shadow-light: rgba(0, 0, 0, 0.4);
-    --shadow-hover: rgba(0, 229, 255, 0.3);
-    --transition-fast: 0.2s ease;
-    --transition-medium: 0.3s ease;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg-primary: #fafafa;
-      --bg-secondary: #eaeaea;
-      --text-light: #111;
-      --text-dark: #111;
-      --accent: #0077cc;
-      --accent-alt: #005fa3;
-      --button-bg: rgba(0, 0, 0, 0.05);
-      --shadow-light: rgba(0, 0, 0, 0.2);
-      --shadow-hover: rgba(0, 119, 204, 0.3);
-    }
-  }
-
-  /* ====================
-     Reset y fundamentos
-     ==================== */
-  *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  html {
-    scroll-behavior: smooth;
-    font-size: 16px;
-  }
-  body {
-    font-family: var(--font-body);
-    background-color: var(--bg-primary);
-    color: var(--text-light);
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-    transition: color var(--transition-fast);
-  }
-  a:hover {
-    color: var(--accent);
-  }
-  img, video {
-    max-width: 100%;
-    display: block;
-  }
-
-  /* =================
-     Tipografía básica
-     ================= */
-  h1, h2, h3, h4, h5 {
-    font-family: var(--font-heading);
-    color: var(--accent);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  p, li, span, input, button {
-    font-family: var(--font-body);
-    color: var(--text-light);
-  }
-  /* Ajustes responsivos de títulos */
-  h1 { font-size: clamp(2rem, 5vw, 3rem); }
-  h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); position: relative; }
-  h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-
-  /* Subtítulos o descripciones */
-  .subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--text-light);
-    opacity: 0.85;
-    margin-bottom: 2rem;
-  }
-
-  /* =================
-     Navbar / Menú
-     ================= */
-  nav.navbar {
-    position: fixed;
-    top: 0; left: 0; width: 100%;
-    padding: 1rem 2rem;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: flex-end;
-    z-index: 100;
-  }
-  nav.navbar button, nav.navbar .menu-btn {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    background: var(--button-bg);
-    backdrop-filter: var(--button-blur);
-    border: 1px solid var(--accent);
-    border-radius: 6px;
-    padding: 0.5rem 1rem;
-    color: var(--accent);
-    cursor: pointer;
-    transition: transform var(--transition-fast);
-  }
-  nav.navbar button:hover, nav.navbar .menu-btn:hover {
-    transform: scale(1.05);
-  }
-  .menu-dropdown {
-    position: absolute;
-    top: 100%; right: 2rem;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    padding: 1rem;
-    display: none;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .menu-dropdown.show {
-    display: flex;
-  }
-  .menu-dropdown a {
-    font-weight: 500;
-    transition: color var(--transition-fast);
-  }
-  .menu-dropdown a:hover {
-    color: var(--accent);
-  }
-
-  /* =================
-     Header / Hero
-     ================= */
-  header {
-    position: relative;
-    width: 100%; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    background: url('https://i.pinimg.com/736x/bc/37/10/bc3710a7da6276c98119e409c9bab646.jpg') center/cover fixed;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: rgba(14,14,26,0.75);
-    backdrop-filter: grayscale(20%) blur(3px);
-  }
-  .header-content {
-    position: relative; z-index: 1;
-    text-align: center;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: var(--radius);
-  }
-  .header-content h1 {
-    font-size: clamp(2rem, 6vw, 3rem);
-    background: linear-gradient(90deg, var(--accent), var(--accent-alt), var(--accent));
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    background-size: 200% auto;
-    animation: gradientMove 6s linear infinite;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  .header-content h2 {
-    font-size: clamp(1rem, 3vw, 1.5rem);
-    color: var(--text-light);
-    opacity: 0.85;
-    font-weight: 500;
-  }
-  @keyframes gradientMove {
-    0%   { background-position:   0% center; }
-    100% { background-position: -200% center; }
-  }
-
-  /* ===================
-     Secciones generales
-     =================== */
-  .section {
-    padding: 6rem 1rem;
-  }
-  .section h2::after {
-    content: '';
-    position: absolute;
-    bottom: -0.5rem; left: 50%;
-    transform: translateX(-50%);
-    width: 4rem; height: 0.25rem;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-
-  /* ===================
-     Botones globales
-     =================== */
-  .btn {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--accent);
-    background: var(--button-bg);
-    backdrop-filter: var(--button-blur);
-    color: var(--accent);
-    font-family: var(--font-body);
-    font-weight: 600;
-    transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-    pointer-events: none;
-  }
-  .btn:hover::before {
-    opacity: 1;
-  }
-  .btn:hover {
-    background: var(--accent);
-    color: var(--bg-primary);
-    transform: scale(1.05);
-  }
-
-  /* ==============================
-     Sección Proyectos Destacados
-     ============================== */
-  .section-projects {
-    background: var(--bg-primary);
-    color: var(--text-light);
-    padding: 6rem 1rem;
-  }
-  .section-projects h2 {
-    /* ya estilado en .section h2 */
-  }
-  .section-projects .projects-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .section-projects .project-card {
-    width: 320px;
-    background: var(--bg-secondary);
-    border-radius: var(--radius);
-    overflow: hidden;
-    position: relative;
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 4px 12px var(--shadow-light);
-    transform: translateY(40px);
-    opacity: 0;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    will-change: transform;
-    cursor: pointer;
-  }
-  .section-projects .project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0,229,255,0.1), rgba(255,0,195,0.1));
-    opacity: 0;
-    transition: opacity var(--transition-medium);
-    pointer-events: none;
-  }
-  .section-projects .project-card:hover::before {
-    opacity: 1;
-  }
-  .section-projects .project-card:hover {
-    transform: translateY(0) scale(1.02);
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 8px 24px var(--shadow-hover);
-  }
-  .section-projects .lottie-container {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    background: var(--bg-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .section-projects .lottie-container::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.2), transparent 60%);
-    pointer-events: none;
-  }
-  .section-projects .project-content {
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    color: var(--text-light);
-  }
-  .section-projects .project-content h3 {
-    font-family: var(--font-heading);
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-    margin-bottom: 0.5rem;
-    color: var(--accent);
-  }
-  .section-projects .project-content p {
-    font-family: var(--font-body);
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    color: var(--text-light);
-    opacity: 0.85;
-    margin-bottom: 0.75rem;
-  }
-  .section-projects .project-content .btn {
-    position: relative;
-    display: inline-block;
-    margin-top: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    background: linear-gradient(135deg, rgba(0,229,255,0.2), rgba(255,0,195,0.2));
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-family: var(--font-body);
-    font-weight: 600;
-    transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .section-projects .project-content .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius);
-    background: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-    pointer-events: none;
-  }
-  .section-projects .project-content .btn:hover::before {
-    opacity: 1;
-  }
-  .section-projects .project-content .btn:hover {
-    background: var(--accent);
-    color: var(--bg-primary);
-    transform: scale(1.05);
-  }
-
-  /* ====================
-     Sección siguiente (ej. Testimonios)
-     ==================== */
-  /* Ejemplo base para integrar dinámicamente: */
-  .section-next {
-    background: var(--bg-secondary);
-    color: var(--text-light);
-    padding: 6rem 1rem;
-  }
-  .section-next h2 {
-    /* igual estilo de .section h2 */
-  }
-  .section-next .items-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .section-next .item-card {
-    width: 300px;
-    background: var(--bg-primary);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 4px 12px var(--shadow-light);
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    cursor: pointer;
-  }
-  .section-next .item-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 24px var(--shadow-hover);
-  }
-  .section-next .item-content {
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.3);
-  }
-  .section-next .item-content h3 {
-    font-family: var(--font-heading);
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-  }
-  .section-next .item-content p {
-    font-family: var(--font-body);
-    color: var(--text-light);
-    opacity: 0.85;
-    font-size: 0.95rem;
-  }
-
-  /* =================
-     Botón Contacto Flotante
-     ================= */
-  .contact-float {
-    position: fixed;
-    bottom: 30px; right: 30px;
-    background: var(--button-bg);
-    backdrop-filter: var(--button-blur);
-    border: 2px solid var(--accent);
-    border-radius: 50px;
-    padding: 12px 24px;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--accent);
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    z-index: 999;
-    overflow: hidden;
-  }
-  .contact-float span {
-    display: inline-block;
-    animation: slideText 3s ease-in-out infinite;
-  }
-  @keyframes slideText {
-    0%   { transform: translateX(0); }
-    25%  { transform: translateX(-100%); }
-    50%  { transform: translateX(100%); }
-    75%  { transform: translateX(-100%); }
-    100% { transform: translateX(0); }
-  }
-  .contact-panel {
-    position: fixed; bottom: 80px; right: 30px;
-    display: flex; gap: 16px; padding: 12px;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--accent);
-    border-radius: 10px;
-    transform: scale(0);
-    opacity: 0;
-    transform-origin: bottom right;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 998;
-  }
-  .contact-panel.show {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  /* ============
-     Footer
-     ============ */
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    background: rgba(0, 0, 0, 0.6);
-    color: #aaa;
-    font-size: 0.9rem;
-  }
-  footer a:hover {
-    color: var(--accent);
-  }
-
-  /* ====================
-     Accesibilidad y rendimiento
-     ==================== */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-  @media (max-width: 768px) {
-    /* Ajustes globales móviles */
-    html { font-size: 14px; }
-    nav.navbar { padding: 0.75rem 1rem; }
-    .contact-float { bottom: 20px; right: 20px; padding: 10px 20px; }
-  }
-</style>
-
-  <h2>Proyectos Destacados</h2>
-  <div class="projects-container">
-    <!-- Proyecto 1 -->
-    <article class="project-card" role="link" aria-label="FinancePro: Calculadora financiera"
-             onclick="location.href='./financiator/index.html'">
-      <div class="project-content">
-        <h3>FinancePro</h3>
-        <p>Calculadora financiera con animación de gráfico 3D simulado.</p>
-      </div>
-      <div class="lottie-container" id="lottie-finance"></div>
-    </article>
-
-    <!-- Proyecto 2 -->
-    <article class="project-card" role="link" aria-label="BeautySpark: Landing cosmética"
-             onclick="location.href='https://tuproyectobelleza.vercel.app'">
-      <div class="project-content">
-        <h3>BeautySpark</h3>
-        <p>Landing de cosmética con animación de producto (lipstick/perfume).</p>
-      </div>
-      <div class="lottie-container" id="lottie-beauty"></div>
-    </article>
-
-    <!-- Proyecto 3 -->
-    <article class="project-card" role="link" aria-label="Portal Destinos Turísticos"
-             onclick="location.href='https://portaldeturismo.vercel.app'">
-      <div class="project-content">
-        <h3>Portal Destinos</h3>
-        <p>Explora destinos con animación de viaje (playa/avión).</p>
-      </div>
-      <div class="lottie-container" id="lottie-travel"></div>
-    </article>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        // Cargar animaciones desde el archivo animations.json
-        const res = await fetch('./assets/animations.json');
-        const animations = await res.json();
-
-        // Configuración de animaciones Lottie para cada proyecto
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-finance'),
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          animationData: animations.financeChart
-        });
-
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-beauty'),
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          animationData: animations.beautyPerfume
-        });
-
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-travel'),
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          animationData: animations.travelBeach
-        });
-      } catch (err) {
-        console.error('Error cargando las animaciones:', err);
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'No se pudieron cargar las animaciones. Por favor, verifica el archivo "animations.json".';
-        errorMessage.style.color = 'red';
-        errorMessage.style.textAlign = 'center';
-        document.querySelector('.projects-container').appendChild(errorMessage);
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yourportfolio.com/"> <meta property="og:title" content="Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate">
+    <meta property="og:description" content="Explore Jairo Barrientos's professional portfolio, featuring web development projects and a Cisco Certified CyberOps Associate certification.">
+    <meta property="og:image" content="https://www.yourportfolio.com/images/og-image.jpg"> <link rel="icon" type="image/png" href="/favicon.png"> <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jairo Barrientos",
+      "url": "https://www.yourportfolio.com", "sameAs": [
+        "https://www.linkedin.com/in/jairo-barrientos-8a6b00226", "https://github.com/tu-usuario-github" ],
+      "jobTitle": "Full Stack Web Developer | Cybersecurity Associate",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance" },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Nombre de tu Universidad/Bootcamp si aplica"
+      },
+      "knowsAbout": ["Web Development", "React.js", "Node.js", "PHP", "MySQL", "Cybersecurity", "UI/UX Design", "SEO"],
+      "nationality": "Argentinian",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santa Elena",
+        "addressRegion": "Entre Ríos",
+        "addressCountry": "AR"
       }
-    });
-  </script>
-</section>
+    }
+    </script>
 
-<body>
+    <style>
+        /*
+        * Principios de Ingeniería y Arquitectura Web:
+        * 1. Rendimiento Primero: Eliminación de solicitudes externas (todo incrustado).
+        * 2. CSS Modular: Secciones organizadas para legibilidad y mantenimiento.
+        * 3. Diseño Responsivo: Enfoque mobile-first con media queries.
+        * 4. Accesibilidad: Atributos ARIA, navegación por teclado, preferencia de movimiento reducido.
+        * 5. Mejora Progresiva: Contenido central visible, animaciones como capa superior.
+        * 6. Seguridad: Compatible con CSP (sin scripts 'unsafe-inline' o eventos inline).
+        */
 
-  <!-- NAVBAR -->
-  <nav class="navbar" aria-label="Menú principal">
-    <button aria-expanded="false" aria-controls="menu-dropdown" onclick="toggleMenu('menu-dropdown')">
-      Menu
-    </button>
-    <div id="menu-dropdown" class="menu-dropdown" role="menu">
-      <a href="#header">Inicio</a>
-      <a href="#projects">Proyectos</a>
-      <a href="#skills">Habilidades</a>
-      <a href="#contact">Contacto</a>
-    </div>
-  </nav>
-
-  <!-- HEADER / PRESENTACIÓN -->
-  <header id="header" role="banner">
-    <div class="header-content">
-      <h1>Soy un programador full stack</h1>
-      <h2>Un joven soñador con grandes proyectos y sólidos conocimientos en Python</h2>
-    </div>
-  </header>
-
-<section id="projects" class="section-projects-lottie">
-  <style>
-    .section-projects-lottie {
-      background: #111;
-      color: #eee;
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .section-projects-lottie h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      color: #fff;
-    }
-    .projects-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .project-card {
-      position: relative;
-      width: 320px;
-      background: #222;
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      transform: translateY(40px);
-      opacity: 0;
-      transition: transform 0.4s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      box-shadow: 0 8px 20px rgba(0,150,255,0.4);
-      transform: translateY(0) scale(1.03);
-    }
-    .project-content {
-      padding: 1rem;
-      background: rgba(0,0,0,0.6);
-      position: relative;
-      z-index: 2;
-    }
-    .project-content h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.3rem;
-      color: #0af;
-    }
-    .project-content p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #ccc;
-    }
-    .lottie-container {
-      width: 100%;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #111;
-    }
-    @media (max-width: 768px) {
-      .project-card { width: 90%; }
-      .section-projects-lottie h2 { font-size: 2rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .project-card { transition: none; }
-    }
-  </style>
-
-  <h2>Proyectos Destacados</h2>
-  <div class="projects-container">
-    <!-- 1) FinancePro -->
-    <article class="project-card" role="link" aria-label="FinancePro: Calculadora financiera"
-             onclick="location.href='./financiator/index.html'">
-      <div class="project-content">
-        <h3>FinancePro</h3>
-        <p>Calculadora financiera con animación de gráfico 3D simulado (Lottie).</p>
-      </div>
-      <div class="lottie-container" id="lottie-finance"></div>
-    </article>
-
-    <!-- 2) BeautySpark -->
-    <article class="project-card" role="link" aria-label="BeautySpark: Landing cosmética"
-             onclick="location.href='https://tuproyectobelleza.vercel.app'">
-      <div class="project-content">
-        <h3>BeautySpark</h3>
-        <p>Landing de cosmética con animación de producto (lipstick/perfume) en Lottie.</p>
-      </div>
-      <div class="lottie-container" id="lottie-beauty"></div>
-    </article>
-
-    <!-- 3) Portal Destinos -->
-    <article class="project-card" role="link" aria-label="Portal Destinos Turísticos"
-             onclick="location.href='https://portaldeturismo.vercel.app'">
-      <div class="project-content">
-        <h3>Portal Destinos</h3>
-        <p>Explora destinos con animación de viaje (playa/avión) en Lottie.</p>
-      </div>
-      <div class="lottie-container" id="lottie-travel"></div>
-    </article>
-  </div>
-
-  <!-- Scripts externos -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-function calcCustom() {
-  try {
-    const expr = document.getElementById('custom-expression').value;
-    if (!/^[0-9+\-*/().\s]+$/.test(expr)) {
-      throw new Error('Expresión inválida');
-    }
-    const res = Function('"use strict";return (' + expr + ')')();
-    document.getElementById('custom-result').textContent = `Resultado: ${res}`;
-  } catch (error) {
-    document.getElementById('custom-result').textContent = 'Error en la expresión';
-  }
-}
-<!-- Scripts externos -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-<script>
-  // Función de calculadora personalizada
-  function calcCustom() {
-    try {
-      const expr = document.getElementById('custom-expression').value;
-      // Verificación de expresión válida
-      if (!/^[0-9+\-*/().\s]+$/.test(expr)) {
-        throw new Error('Expresión inválida');
-      }
-      // Evaluación segura de la expresión
-      const res = Function('"use strict";return (' + expr + ')')();
-      document.getElementById('custom-result').textContent = `Resultado: ${res}`;
-    } catch (error) {
-      document.getElementById('custom-result').textContent = 'Error en la expresión';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', async () => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animaciones de entrada para las tarjetas de proyectos
-    gsap.utils.toArray(".project-card").forEach((card, i) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        delay: i * 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 90%",
-          toggleActions: "play none none none"
+        /* Base & Global Styles */
+        :root {
+            --color-bg-dark: #000;
+            --color-bg-gradient-start: #050a11;
+            --color-bg-gradient-mid: #1a2a3a;
+            --color-primary-light: #00e5ff;
+            --color-primary-dark: #00c0ff;
+            --color-secondary: #8000ff;
+            --color-text-light: #e0e0e0;
+            --color-text-medium: #b0e0e6;
+            --color-text-dark: #c0c0c0;
+            --glow-light-alpha: rgba(0, 192, 255, 0.7);
+            --glow-dark-alpha: rgba(128, 0, 255, 0.7);
+            --card-bg: rgba(18, 30, 45, 0.8);
+            --card-border: rgba(0, 192, 255, 0.3);
+            --transition-speed: 0.4s;
+            --bezier-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            --bezier-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-      });
-    });
 
-    // Manejo de preferencias de movimiento reducido
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            background: var(--color-bg-dark);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* Evita el scroll horizontal */
+            scroll-behavior: smooth; /* Scroll suave para enlaces ancla */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="rgba(0, 192, 255, 0.8)" stroke="rgba(0, 192, 255, 0.2)" stroke-width="2"/></svg>') 12 12, auto;
+        }
 
-    try {
-      // Cargar animaciones desde el archivo animations.json
-      const res = await fetch('./assets/animations.json');
-      const animations = await res.json();
+        body.hover-pointer, a:hover, button:hover, .contact-fab:hover, .project-card:hover, .skill-tag:hover, .certification-card:hover {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0L0 12h8v12h8V12h8z" fill="rgba(0, 229, 255, 0.9)"/></svg>') 12 12, pointer;
+        }
 
-      // Configuración de animaciones Lottie para cada proyecto
-      const animFinance = lottie.loadAnimation({
-        container: document.getElementById('lottie-finance'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations.financeChart
-      });
+        h1, h2, h3 {
+            margin-top: 0;
+            font-weight: 600;
+            text-shadow: 0 0 10px var(--glow-light-alpha);
+        }
 
-      const animBeauty = lottie.loadAnimation({
-        container: document.getElementById('lottie-beauty'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations.beautyPerfume
-      });
+        a {
+            color: var(--color-primary-light);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        a:hover {
+            color: var(--color-primary-dark);
+            text-decoration: underline;
+        }
 
-      const animTravel = lottie.loadAnimation({
-        container: document.getElementById('lottie-travel'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: animations.travelBeach
-      });
+        /* --- Header / Navigation --- */
+        .main-header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 192, 255, 0.2);
+            transition: background 0.3s ease;
+        }
 
-      // Efectos hover para las animaciones
-      document.getElementById('lottie-finance').addEventListener('mouseenter', () => animFinance.setSpeed(1.5));
-      document.getElementById('lottie-finance').addEventListener('mouseleave', () => animFinance.setSpeed(1));
-      document.getElementById('lottie-beauty').addEventListener('mouseenter', () => animBeauty.setSpeed(0.5));
-      document.getElementById('lottie-beauty').addEventListener('mouseleave', () => animBeauty.setSpeed(1));
-      document.getElementById('lottie-travel').addEventListener('mouseenter', () => animTravel.pause());
-      document.getElementById('lottie-travel').addEventListener('mouseleave', () => animTravel.play());
+        .main-header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 192, 255, 0.4);
+        }
 
-      // Control por scroll para reproducir o pausar las animaciones
-      ScrollTrigger.create({
-        trigger: '#lottie-finance',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animFinance.play(),
-        onLeave: () => animFinance.pause(),
-        onEnterBack: () => animFinance.play(),
-        onLeaveBack: () => animFinance.pause()
-      });
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--color-primary-light);
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0,229,255,0.5);
+        }
 
-      ScrollTrigger.create({
-        trigger: '#lottie-beauty',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animBeauty.play(),
-        onLeave: () => animBeauty.pause(),
-        onEnterBack: () => animBeauty.play(),
-        onLeaveBack: () => animBeauty.pause()
-      });
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
 
-      ScrollTrigger.create({
-        trigger: '#lottie-travel',
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => animTravel.play(),
-        onLeave: () => animTravel.pause(),
-        onEnterBack: () => animTravel.play(),
-        onLeaveBack: () => animTravel.pause()
-      });
-    } catch (err) {
-      console.error('Error cargando las animaciones:', err);
-      const errorMessage = document.createElement('div');
-      errorMessage.textContent = 'No se pudieron cargar las animaciones. Por favor, inténtalo más tarde.';
-      errorMessage.style.color = 'red';
-      errorMessage.style.textAlign = 'center';
-      document.querySelector('.projects-container').appendChild(errorMessage);
-    }
-  });
-</script>
-<section id="skills" class="section-skills">
-  <div id="skills-bg"></div>
-  <div class="skills-wrapper">
-    <h2>Habilidades</h2>
+        .nav-menu li {
+            margin-left: 30px;
+        }
 
-    <div class="skills-container">
-      <!-- HABILIDADES TÉCNICAS -->
+        .nav-menu a {
+            color: var(--color-text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#E44D26" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#F16529" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
-        HTML5
-      </div>
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            transition: width 0.3s ease-out;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#264DE4" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#2965F1" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
-        CSS3
-      </div>
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F7DF1E" d="M0 0h128v128H0z"/><path d="M116 116H12V12h104v104z" fill="#000"/><path fill="#F7DF1E" d="M34 105l7-5c1 2 2 4 5 4 3 0 4-1 4-5V56h8v44c0 9-5 13-13 13-7 0-11-4-13-9zm31-1l7-4c2 3 5 6 10 6 4 0 6-2 6-5 0-3-2-4-7-6l-3-1c-9-3-13-7-13-13 0-6 5-11 12-11 5 0 9 2 12 7l-6 4c-1-2-3-4-6-4-3 0-5 2-5 4 0 3 2 4 7 6l3 1c10 4 13 8 13 14 0 8-6 12-14 12-8 0-13-4-16-8z"/></svg>
-        JavaScript
-      </div>
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            width: 0%;
+            z-index: 101; /* Above header */
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3178C6" d="M0 0h128v128H0z"/><path fill="#fff" d="M51 90h10v16c0 6 4 10 10 10s10-4 10-10V90h10V76H51v14zm10-22h10v-5h-10v5zm17 0h10v-5H78v5z"/></svg>
-        TypeScript
-      </div>
+        /* --- Hero Section: Futuristic Holographic Vibe --- */
+        .section-hero {
+            padding: 160px 20px 80px; /* Adjusted padding for header */
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#61DAFB" d="M64 8c30 0 56 26 56 56s-26 56-56 56S8 94 8 64 34 8 64 8z"/><path fill="#fff" d="M64 26a38 38 0 100 76 38 38 0 000-76zm0 64a26 26 0 110-52 26 26 0 010 52z"/></svg>
-        React
-      </div>
+        /* Holographic Grid Overlay (Parallax) */
+        .section-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(to right, rgba(0,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridFlow 60s linear infinite;
+            opacity: 0.3;
+            z-index: 0;
+            transform: translateZ(-100px) scale(2); /* Parallax setup */
+        }
+        .section-hero::after { /* Another layer for more depth */
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(0, 192, 255, 0.08), transparent 70%);
+            animation: radialPulse 20s infinite ease-in-out;
+            z-index: 1;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 100 100"><path fill="#000" d="M10 10h80v80H10z"/><path fill="#fff" d="M20 50h60M50 20v60"/></svg>
-        Next.js
-      </div>
+        @keyframes gridFlow {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+        @keyframes radialPulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#539E43" d="M64 0C28 0 0 28 0 64s28 64 64 64 64-28 64-64S100 0 64 0z"/><path fill="#fff" d="M49 95L35 37h16l7 38 20-38h18L67 95H49z"/></svg>
-        Node.js
-      </div>
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#777BB4" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-14 0-24 10-24 24 0 14 10 24 24 24 14 0 24-10 24-24 0-14-10-24-24-24zm0 40c-8 0-16-8-16-16s8-16 16-16 16 8 16 16-8 16-16 16z"/></svg>
-        PHP
-      </div>
+        .section-hero h1, .section-hero p, .avatar-container {
+            position: relative;
+            z-index: 10;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3776AB" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-22 0-40 18-40 40s18 40 40 40 40-18 40-40-18-40-40-40zm0 64c-14 0-24-10-24-24s10-24 24-24 24 10 24 24-10 24-24 24z"/></svg>
-        Python
-      </div>
+        .section-hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0,229,255,0.8);
+            letter-spacing: 2px;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 512 512"><path fill="#00758F" d="M256 0c141 0 256 115 256 256S397 512 256 512 0 397 0 256 115 0 256 0z"/><path fill="#fff" d="M146 218l110 110 110-110-110-110-110 110z"/></svg>
-        MySQL / SQL
-      </div>
+        .section-hero p {
+            font-size: 1.8rem;
+            color: var(--color-text-medium);
+            margin-top: 0;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F05032" d="M64 0L12 64l52 64 52-64L64 0z"/><path fill="#fff" d="M64 16l-34 48h68L64 16zm0 96l34-48H30l34 48z"/></svg>
-        Git
-      </div>
+        /* Fade-in-up animation for text */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.9s forwards;
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><circle fill="#181717" cx="64" cy="64" r="64"/><path fill="#fff" d="M85 69c-1 0-2 0-3-1v5h-4v-5c-3 0-5-1-7-3l3-3c1 1 3 2 5 2 2 0 3-1 3-3 0-1-1-2-3-3-4-1-7-3-7-7 0-4 3-7 7-7v-5h4v5c2 0 4 1 5 2l-2 4c-1-1-3-2-5-2-2 0-3 1-3 3 0 1 1 2 3 3 4 1 7 3 7 7 0 4-3 7-7 7z"/></svg>
-        GitHub
-      </div>
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#FCC624" d="M0 0h128v128H0z"/><path fill="#000" d="M64 34c-17 0-30 13-30 30s13 30 30 30 30-13 30-30-13-30-30-30zm0 48c-10 0-18-8-18-18s8-18 18-18 18 8 18 18-8 18-18 18z"/></svg>
-        Linux
-      </div>
+        .fade-in-up.delay-1 { animation-delay: 0.4s; }
+        .fade-in-up.delay-2 { animation-delay: 0.8s; }
 
-      <div class="skill-tag">
-        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#2496ED" d="M64 0c35 0 64 29 64 64s-29 64-64 64S0 99 0 64 29 0 64 0z"/><path fill="#fff" d="M32 96h64v-8H32v8zm0-16h64v-8H32v8zm0-16h64v-8H32v8z"/></svg>
-        Docker
-      </div>
+        /* --- Avatar Styles --- */
+        .avatar-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            position: relative;
+            border-radius: 50%;
+            box-shadow: 0 0 40px var(--glow-light-alpha), inset 0 0 20px rgba(0, 192, 255, 0.4);
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a3a4a 0%, #050a11 100%);
+            transform: scale(0.7);
+            opacity: 0;
+            animation: avatarEntry 1.2s var(--bezier-bounce) forwards 0.3s;
+            border: 2px solid rgba(0, 192, 255, 0.5);
+            /* Particle effect for avatar */
+            mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
+        }
+
+        @keyframes avatarEntry {
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        #my-avatar {
+            width: 100%;
+            height: 100%;
+            display: block;
+            transition: transform var(--transition-speed) ease-out;
+            filter: drop-shadow(0 0 8px rgba(0, 192, 255, 0.4));
+        }
+
+        #my-avatar:hover {
+            transform: scale(1.05) rotateY(10deg);
+        }
+
+        /* Avatar SVG specific styles for animation */
+        #my-avatar .avatar-eye {
+            transform-origin: center center;
+            transition: transform 0.2s ease-in-out;
+        }
+        #my-avatar .avatar-eye.blink {
+            animation: blinkEye 0.3s forwards;
+        }
+        @keyframes blinkEye {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.1); }
+        }
+
+        #my-avatar .avatar-mouth {
+            transition: transform 0.3s ease-out;
+            transform-origin: center;
+        }
+        #my-avatar:hover .avatar-mouth {
+            transform: translateY(2px) scale(1.1);
+        }
+
+        #my-avatar .avatar-glasses {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            stroke: #fff;
+        }
+        @keyframes drawGlasses { /* Dynamically inserted by JS */
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* --- Projects Section --- */
+  <section class="section-projects" id="projects">
+    <h2>My Projects</h2>
+    <div class="projects-container">
+
+        <div class="project-card">
+            <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                <div class="project-svg-container">
+                    <img src="assets/images/financiator-thumbnail.png" alt="Miniatura del proyecto Financiator">
+                </div>
+                <div class="project-content">
+                    <h3>Financiator</h3>
+                    <p>Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
+                </div>
+                <div class="project-button-wrapper">
+                    <span class="project-button">Ver más</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="project-card">
+            <a href="otro-proyecto/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                <div class="project-svg-container">
+                    <img src="assets/images/otro-proyecto-thumbnail.png" alt="Miniatura de Otro Proyecto">
+                </div>
+                <div class="project-content">
+                    <h3>Otro Proyecto Genial</h3>
+                    <p>Una breve descripción de este otro proyecto, sus funcionalidades y tecnologías.</p>
+                </div>
+                <div class="project-button-wrapper">
+                    <span class="project-button">Ver más</span>
+                </div>
+            </a>
+        </div>
+
     </div>
-
-    <!-- HABILIDADES BLANDAS -->
-    <div class="skills-container">
-      <div class="skill-tag">Comunicación</div>
-      <div class="skill-tag">Trabajo en equipo</div>
-      <div class="skill-tag">Liderazgo</div>
-      <div class="skill-tag">Adaptabilidad</div>
-      <div class="skill-tag">Proactividad</div>
-      <div class="skill-tag">Resolución de problemas</div>
-      <div class="skill-tag">Pensamiento crítico</div>
-      <div class="skill-tag">Creatividad</div>
-    </div>
-  </div>
 </section>
 
-<!-- LIBRERÍAS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
 <style>
-  .section-skills {
-    position: relative;
-    padding: 100px 20px;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    overflow: hidden;
-    color: white;
-    text-align: center;
-  }
+    /* --- Projects Section (TU CÓDIGO ORIGINAL - MANTENIDO PARA CONTEXTO) --- */
+    .section-projects {
+        background: var(--color-bg-dark);
+        color: var(--color-text-light);
+        padding: 80px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
 
-  #skills-bg {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent);
-    animation: moveBg 10s linear infinite alternate;
-    z-index: 0;
-  }
+    .section-projects h2 {
+        font-size: 3.5rem;
+        margin-bottom: 2.5rem;
+        color: #fff;
+        text-shadow: 0 0 15px var(--glow-light-alpha);
+        background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+        -webkit-background-clip: text;
+        color: transparent;
+    }
 
-  @keyframes moveBg {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-  }
+    .projects-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5rem;
+    }
 
-  .skills-wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 1000px;
-    margin: auto;
-  }
+    .project-card {
+        position: relative;
+        width: 340px;
+        background: var(--card-bg);
+        border-radius: 15px;
+        overflow: hidden; /* Esto es importante para que el border-radius se aplique al contenido */
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+        transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, opacity 0.5s ease;
+        will-change: transform, opacity; /* Puedes quitar esta línea si no notas problemas de rendimiento */
+        border: 1px solid var(--card-border);
+        
+        /* ¡IMPORTANTE! Hacer que la tarjeta sea un contenedor flex para que el enlace interno ocupe todo el espacio */
+        display: flex; 
+        flex-direction: column; /* Apila el contenido verticalmente */
+    }
 
-  .skills-wrapper h2 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
-    background: linear-gradient(90deg, #00e5ff, #ff00c3);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 10px rgba(0,229,255,0.5);
-  }
+    .project-card:hover {
+        box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+        transform: translateY(-5px) scale(1.02);
+        background: rgba(25, 40, 60, 0.95);
+    }
 
-  .skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
+    /* ESTILO NUEVO/MODIFICADO: El enlace que cubre toda la tarjeta */
+    .project-card-link {
+        text-decoration: none; /* Quita el subrayado predeterminado del enlace */
+        color: inherit; /* Hereda el color del texto de la tarjeta */
+        display: flex; /* Permite que el contenido interno del enlace se organice con flexbox */
+        flex-direction: column; /* Apila el contenido verticalmente */
+        height: 100%; /* Asegura que el enlace ocupe toda la altura de la tarjeta */
+        justify-content: space-between; /* Empuja el botón hacia abajo si el contenido no llena */
+    }
 
-  .skill-tag {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    border-radius: 30px;
-    background: rgba(255,255,255,0.08);
-    font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(6px);
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(30px);
-  }
+    .project-content {
+        padding: 1.5rem;
+        background: rgba(0,0,0,0.7);
+        position: relative;
+        z-index: 2;
+        flex-grow: 1; /* Permite que el contenido crezca y empuje el botón hacia abajo */
+    }
 
-  .skill-tag svg {
-    width: 24px;
-    height: 24px;
-  }
+    .project-content h3 {
+        margin: 0 0 0.7rem;
+        font-size: 1.5rem;
+        color: var(--color-primary-dark); /* Asegúrate de que esta variable exista o define el color directamente */
+        text-shadow: none;
+    }
 
-  .skill-tag:hover {
-    background: rgba(0, 229, 255, 0.2);
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-  }
+    .project-content p {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--color-text-dark); /* Asegúrate de que esta variable exista o define el color directamente */
+    }
+
+    .project-svg-container {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        /* Quitamos estos bordes de aquí si la tarjeta ya tiene overflow: hidden */
+        /* border-bottom-left-radius: 12px; */
+        /* border-bottom-right-radius: 12px; */
+        overflow: hidden;
+        position: relative;
+        /* Aseguramos que la imagen no tenga bordes redondeados si la tarjeta los tiene */
+        border-radius: 0; 
+    }
+    
+    .project-svg-container::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: radial-gradient(circle at center, rgba(0, 192, 255, 0.1) 0%, transparent 60%);
+        animation: pulseLight 5s infinite ease-in-out;
+        pointer-events: none;
+    }
+
+    @keyframes pulseLight {
+        0% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.2); opacity: 0.8; }
+        100% { transform: scale(1); opacity: 0.5; }
+    }
+
+    /* ESTILO MODIFICADO: La imagen dentro del SVG container */
+    .project-svg-container img { 
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; 
+    }
+
+    /* Contenedor para el botón, ayuda a centrarlo */
+    .project-button-wrapper {
+        padding: 0 1.5rem 1.5rem; 
+        text-align: center; 
+    }
+
+    /* Estilos para el Botón "Ver más" (ahora se aplican a un SPAN dentro del enlace) */
+    .project-button {
+        display: inline-block;
+        margin-top: 1.5rem; 
+        padding: 0.8rem 1.8rem;
+        background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+        color: var(--color-text-light);
+        /* Ya no necesita text-decoration: none; ni cursor: pointer; porque es un span, 
+           pero el <a> padre ya maneja el cursor y el clic. */
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+        transition: transform 0.3s var(--bezier-smooth), box-shadow 0.4s ease, background 0.4s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* EL EFECTO HOVER AHORA DEBE IR EN EL ENLACE DE LA TARJETA COMPLETA o en el propio .project-button-wrapper */
+    .project-card-link:hover .project-button { /* Cuando se hace hover sobre el enlace de la tarjeta */
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
+        background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+    }
+
+    /* Esta regla solo aplica si de verdad insertas un <svg> directamente en el HTML, no una imagen con .png */
+    /* Si solo usas PNGs, JPGs, puedes borrarla. */
+    .project-svg-container svg {
+        width: 85%;
+        height: 85%;
+        filter: drop-shadow(0 0 5px var(--glow-light-alpha));
+    }
+        /* Project SVG Animations */
+        #svg-finance .bar {
+            transform-origin: bottom;
+            transform: scaleY(0);
+            opacity: 0;
+        }
+        #svg-finance.animated .bar {
+            animation: barRise 1.5s var(--bezier-bounce) forwards;
+            opacity: 1;
+        }
+        #svg-finance.animated .bar-1 { animation-delay: 0.2s; }
+        #svg-finance.animated .bar-2 { animation-delay: 0.4s; }
+        #svg-finance.animated .bar-3 { animation-delay: 0.6s; }
+        @keyframes barRise {
+            from { transform: scaleY(0); opacity: 0; }
+            to { transform: scaleY(1); opacity: 1; }
+        }
+        #svg-finance .line-chart {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+        }
+        #svg-finance.animated .line-chart {
+            animation: drawLine 2s ease-out forwards 0.8s;
+        }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        #svg-beauty .lipstick-base {
+            transform-origin: bottom;
+            transform: scaleY(0);
+        }
+        #svg-beauty.animated .lipstick-base {
+            animation: popUp 0.8s var(--bezier-bounce) forwards;
+        }
+        #svg-beauty .lipstick-tip {
+            transform-origin: bottom;
+            transform: translateY(100%);
+        }
+        #svg-beauty.animated .lipstick-tip {
+            animation: slideInTip 0.8s var(--bezier-bounce) forwards 0.4s;
+        }
+        @keyframes popUp {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+        @keyframes slideInTip {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        #svg-travel .plane-body, #svg-travel .plane-wing {
+            transform: translateX(-100%) translateY(20px) rotate(-10deg);
+            opacity: 0;
+        }
+        #svg-travel.animated .plane-body {
+            animation: flyIn 2.2s var(--bezier-smooth) forwards;
+        }
+        #svg-travel.animated .plane-wing {
+            animation: flyIn 2.2s var(--bezier-smooth) forwards 0.3s;
+        }
+        @keyframes flyIn {
+            from { transform: translateX(-100%) translateY(20px) rotate(-10deg); opacity: 0; }
+            to { transform: translateX(0) translateY(0) rotate(0deg); opacity: 1; }
+        }
+        #svg-travel .plane-engine {
+            animation: enginePulse 1.5s infinite ease-in-out;
+        }
+        @keyframes enginePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* --- Skills Section --- */
+        .section-skills {
+            position: relative;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+
+        #skills-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0,255,255,0.08), transparent);
+            animation: moveBg 15s linear infinite alternate;
+            z-index: 0;
+            transform: translateZ(-100px) scale(2); /* Parallax setup */
+        }
+
+        @keyframes moveBg {
+            0% { background-position: 0% 50%; transform: scale(2); }
+            100% { background-position: 100% 50%; transform: scale(2.1); }
+        }
+
+        .skills-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .skills-wrapper h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px rgba(0,229,255,0.7);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.6rem;
+            border-radius: 40px;
+            background: rgba(30, 50, 70, 0.6);
+            font-size: 1.1rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 0 8px rgba(0, 192, 255, 0.2);
+            backdrop-filter: blur(8px);
+            transition: all var(--transition-speed) var(--bezier-smooth);
+            opacity: 0;
+            transform: translateY(40px);
+            will-change: transform, opacity, background, box-shadow;
+            border: 1px solid var(--card-border);
+            color: var(--color-text-medium);
+        }
+
+        .skill-tag svg {
+            width: 28px;
+            height: 28px;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 192, 255, 0.3);
+            box-shadow: 0 0 20px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            transform: translateY(-8px) scale(1.05);
+            border-color: rgba(0, 192, 255, 0.8);
+            color: #fff;
+        }
+
+        /* --- Certifications Section --- */
+        .section-certifications {
+            position: relative;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-gradient-mid), var(--color-bg-dark));
+            overflow: hidden;
+            color: var(--color-text-light);
+            text-align: center;
+        }
+
+        .section-certifications::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 192, 255, 0.08), transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(128, 0, 255, 0.08), transparent 70%);
+            animation: backgroundPulse 20s infinite ease-in-out;
+            z-index: 0;
+            transform: translateZ(-100px) scale(2); /* Parallax setup */
+        }
+
+        @keyframes backgroundPulse {
+            0% { transform: scale(2); opacity: 0.5; }
+            50% { transform: scale(2.05); opacity: 0.7; }
+            100% { transform: scale(2); opacity: 0.5; }
+        }
+
+        .certifications-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .certifications-wrapper h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px var(--glow-dark-alpha);
+        }
+
+        .certification-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .certification-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            width: 380px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: transform 0.5s var(--bezier-smooth), opacity 0.5s ease, box-shadow 0.4s ease;
+            will-change: transform, opacity, box-shadow;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .certification-card:hover {
+            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(30, 50, 70, 0.85);
+        }
+
+        .certification-card .card-header h3 {
+            font-size: 1.8rem;
+            color: var(--color-primary-light);
+            margin-bottom: 10px;
+            text-shadow: none;
+        }
+
+        .certification-card .card-header .issuer {
+            font-size: 0.95rem;
+            color: var(--color-text-medium);
+            margin-bottom: 20px;
+        }
+
+        .certification-card .card-content p {
+            font-size: 1.05rem;
+            color: var(--color-text-dark);
+            margin-bottom: 15px;
+        }
+
+        /* Specific styles for Credly badge embed */
+        .credly-badge-embed {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .certification-card:hover .credly-badge-embed {
+             transform: scale(1);
+        }
+
+        .view-credential-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--color-secondary), var(--color-primary-dark));
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 192, 255, 0.4);
+        }
+
+        .view-credential-btn:hover {
+            background: linear-gradient(45deg, var(--color-primary-dark), var(--color-secondary));
+            box-shadow: 0 6px 20px rgba(0, 192, 255, 0.6);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* --- Floating Contact Button --- */
+        .contact-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary-dark), var(--color-secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 30px var(--glow-light-alpha);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease-in-out;
+            z-index: 1000;
+            border: 2px solid rgba(255,255,255,0.3);
+            opacity: 0;
+            transform: scale(0.5);
+            animation: fabEnter 0.8s ease-out forwards 2s;
+        }
+
+        @keyframes fabEnter {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .contact-fab:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary));
+            box-shadow: 0 12px 25px rgba(0,0,0,0.8), 0 0 40px var(--glow-light-alpha);
+        }
+
+        .contact-fab.open {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            padding: 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: 1rem;
+            transition: all 0.5s var(--bezier-bounce);
+            background: rgba(18, 30, 45, 0.95);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.9), 0 0 50px var(--glow-light-alpha);
+        }
+
+        .contact-fab.open .fab-icon {
+            display: none;
+        }
+
+        .contact-info {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .contact-fab.open .contact-info {
+            display: flex;
+            animation: fadeIn 0.6s ease-out forwards 0.2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        .contact-info a {
+            display: flex;
+            align-items: center;
+            color: var(--color-text-medium);
+            font-size: 1.1rem;
+            transition: color var(--transition-speed);
+        }
+        .contact-info a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .contact-info a svg {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+            fill: var(--color-primary-dark);
+            flex-shrink: 0;
+        }
+        .contact-info a span {
+            word-break: break-all;
+        }
+        .contact-info a.email-link {
+            font-size: 0.95rem;
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+            .main-header { padding: 15px 20px; }
+            .nav-menu { display: none; } /* Hide desktop nav on smaller screens */
+            .section-hero h1 { font-size: 3.5rem; }
+            .section-hero p { font-size: 1.6rem; }
+            .project-card, .certification-card {
+                width: 90%;
+                max-width: 450px;
+            }
+            .section-projects h2, .skills-wrapper h2, .certifications-wrapper h2 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-hero { padding-top: 120px; }
+            .section-hero h1 { font-size: 2.8rem; }
+            .section-hero p { font-size: 1.3rem; }
+            .avatar-container { width: 140px; height: 140px; margin-bottom: 25px; }
+            .project-card { padding: 1.2rem; }
+            .section-projects h2, .skills-wrapper h2, .certifications-wrapper h2 { font-size: 2.5rem; }
+            .skill-tag { font-size: 0.9rem; padding: 0.6rem 1.2rem; gap: 0.3rem; }
+            .skill-tag svg { width: 20px; height: 20px; }
+            .section-certifications { padding: 60px 15px; }
+            .certification-card { padding: 20px; }
+            .certification-card .card-header h3 { font-size: 1.4rem; }
+            .credly-badge-embed { transform: scale(0.8); }
+            .certification-card:hover .credly-badge-embed { transform: scale(0.9); }
+
+            .contact-fab {
+                width: 55px;
+                height: 55px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 1.6rem;
+            }
+            .contact-fab.open {
+                width: calc(100% - 30px);
+                right: 15px;
+                bottom: 15px;
+                padding: 15px;
+            }
+            .contact-info a { font-size: 0.9rem; }
+            .contact-info a.email-link { font-size: 0.8rem; }
+        }
+
+        /* Reduced Motion Preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+            .project-card, .skill-tag, .avatar-container, .contact-fab {
+                opacity: 1 !important;
+            }
+            #my-avatar .avatar-glasses, #svg-finance .bar, #svg-finance .line-chart,
+            #svg-beauty .lipstick-base, #svg-beauty .lipstick-tip,
+            #svg-travel .plane-body, #svg-travel .plane-wing {
+                stroke-dashoffset: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body translate="no">
+
+    <header class="main-header" role="banner">
+        <a href="#hero" class="logo" aria-label="Jairo Barrientos Portfolio Home">Jairo Barrientos</a>
+        <nav role="navigation">
+            <ul class="nav-menu">
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#contact-fab-target" class="nav-link">Contact</a></li> </ul>
+        </nav>
+    </header>
+
+    <div class="scroll-progress-bar"></div>
+
+    <main>
+        <section id="hero" class="section-hero" role="region" aria-label="Introduction to Jairo Barrientos">
+           <style>
+    /* Basic Reset & Body Styling for a Dark, Futuristic Theme */
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #1a1a2e; /* Dark background */
+        color: #e0f2f7; /* Light text color */
+        font-family: 'Rajdhani', sans-serif; /* Recommended futuristic font */
+        overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Section Styling */
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh; /* Adjust height as needed */
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Avatar Container */
+    .avatar-container {
+        margin-bottom: 25px; /* Spacing below avatar */
+    }
+
+    /* Avatar Image */
+    #my-avatar {
+        width: 180px; /* Larger avatar */
+        height: auto;
+        border-radius: 50%; /* Ensures it's round */
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.9); /* Stronger glow */
+        animation: pulse 2s infinite alternate ease-in-out; /* Smooth pulsing */
+        will-change: transform, box-shadow; /* Optimize for animation */
+    }
+
+    /* Avatar Pulse Animation */
+    @keyframes pulse {
+        from {
+            transform: scale(1);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.9);
+        }
+        to {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 1);
+        }
+    }
+
+    /* Heading Styles */
+    h1 {
+        font-size: 3.5em; /* Larger heading */
+        margin-bottom: 10px;
+        font-weight: 700; /* Bold */
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.6); /* Initial text glow */
+        transition: text-shadow 0.3s ease-out; /* Smooth transition for hover */
+    }
+
+    /* Paragraph Styles */
+    p {
+        font-size: 1.4em; /* Slightly larger paragraph text */
+        margin-bottom: 10px;
+        max-width: 700px;
+        line-height: 1.6;
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.3); /* Subtle initial text glow */
+        transition: text-shadow 0.3s ease-out; /* Smooth transition for hover */
+    }
+
+    /* Fade-in-up animation (initial state) */
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+    }
 </style>
 
+<section>
+    <div class="avatar-container">
+        <img id="my-avatar" src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Barrientos Avatar">
+    </div>
+    <h1 class="fade-in-up">¡Hola! Soy Jairo Barrientos</h1>
+    <p class="fade-in-up delay-1">Desarrollador Full Stack & Asociado en Ciberseguridad</p>
+    <p class="fade-in-up delay-2">Creando soluciones web robustas y seguras.</p>
+</section>
+
 <script>
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.utils.toArray('.skill-tag').forEach((el, i) => {
-    gsap.to(el, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      delay: i * 0.08,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      }
+    // Embed Google Fonts link (place this in your HTML's <head> section usually)
+    // For this embedded example, we'll assume it's already there or handled by the parent document.
+    // If you need to explicitly include it here, you'd add:
+    /*
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+    */
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const avatar = document.getElementById('my-avatar');
+        let floatingDirection = 1; // 1 for up, -1 for down
+        let currentY = 0;
+        const floatHeight = 15; // Max float height in pixels
+        const floatSpeed = 0.08; // Adjust speed
+
+        function animateAvatarFloat() {
+            currentY += floatingDirection * floatSpeed;
+            if (currentY > floatHeight || currentY < -floatHeight) {
+                floatingDirection *= -1;
+            }
+            avatar.style.transform = `translateY(${currentY}px) scale(1.02)`; // Combine with a slight scale
+            requestAnimationFrame(animateAvatarFloat);
+        }
+
+        // Start the floating animation
+        animateAvatarFloat();
+
+        // Enhanced Text Animations
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        fadeElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                el.style.opacity = 1;
+                el.style.transform = 'translateY(0)';
+            }, 300 + (index * 250)); // Stagger the animation more
+        });
+
+        // Hover Effect for Text (subtle futuristic glow)
+        const textElements = document.querySelectorAll('h1, p');
+
+        textElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.textShadow = '0 0 15px rgba(0, 255, 255, 0.9), 0 0 25px rgba(0, 255, 255, 0.7)';
+            });
+            element.addEventListener('mouseleave', () => {
+                if (element.tagName === 'H1') {
+                    element.style.textShadow = '0 0 15px rgba(0, 255, 255, 0.6)';
+                } else {
+                    element.style.textShadow = '0 0 5px rgba(0, 255, 255, 0.3)';
+                }
+            });
+        });
     });
-  });
 </script>
+
+        ---
+
+        <section id="projects" class="section-projects" role="region" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Proyectos Destacados</h2>
+            <div class="projects-container">
+                <article class="project-card" role="link" tabindex="0" aria-label="Proyecto FinancePro: Calculadora Financiera"
+                         data-href="./financiator/index.html">
+                    <div class="project-content">
+                        <h3>FinancePro</h3>
+                        <p>Calculadora financiera interactiva con simulación de gráficos 3D dinámicos. Ideal para visualización de proyecciones y análisis de datos financieros.</p>
+                    </div>
+                    <div class="project-svg-container" id="svg-finance">
+                        <svg viewBox="0 0 100 100">
+                            <rect x="10" y="70" width="20" height="20" fill="#00c0ff" class="bar bar-1"/>
+                            <rect x="40" y="50" width="20" height="40" fill="#00c0ff" class="bar bar-2"/>
+                            <rect x="70" y="30" width="20" height="60" fill="#00c0ff" class="bar bar-3"/>
+                            <path d="M5 85 L95 85" stroke="#eee" stroke-width="1"/>
+                            <path d="M10 70 Q30 50 50 30 T90 10" stroke="#ff8c00" stroke-width="2" fill="none" class="line-chart"/>
+                        </svg>
+                    </div>
+                </article>
+
+                <article class="project-card" role="link" tabindex="0" aria-label="Proyecto BeautySpark: Landing Page de Cosméticos"
+                         data-href="https://tuproyectobelleza.vercel.app"> <div class="project-content">
+                        <h3>BeautySpark</h3>
+                        <p>Landing page para una marca de cosméticos, destacada por su atractiva animación de revelación de productos y diseño responsivo enfocado en la conversión.</p>
+                    </div>
+                    <div class="project-svg-container" id="svg-beauty">
+                        <svg viewBox="0 0 100 100">
+                            <rect x="35" y="50" width="30" height="40" fill="#d83681" rx="5" ry="5" class="lipstick-base"/>
+                            <rect x="38" y="40" width="24" height="15" fill="#f0f0f0" rx="3" ry="3" class="lipstick-tip"/>
+                            <text x="50" y="75" font-size="8" fill="#fff" text-anchor="middle">GLOW</text>
+                            <path d="M50 38 L55 30 L45 30 Z" fill="#f0f0f0" class="lipstick-tip"/>
+                        </svg>
+                    </div>
+                </article>
+
+                <article class="project-card" role="link" tabindex="0" aria-label="Proyecto Travel Portal: Destinos Turísticos"
+                         data-href="https://portaldeturismo.vercel.app"> <div class="project-content">
+                        <h3>Travel Portal</h3>
+                        <p>Plataforma para explorar destinos turísticos con una inmersiva animación de viaje. Optimizado para ofrecer una experiencia de usuario fluida y visualmente atractiva.</p>
+                    </div>
+                    <div class="project-svg-container" id="svg-travel">
+                        <svg viewBox="0 0 100 100">
+                            <path d="M10 50 L25 40 L85 40 L95 50 L85 60 L25 60 Z" fill="#99aadd" class="plane-body"/>
+                            <path d="M35 45 L45 30 L50 30 L40 45 Z" fill="#667799" class="plane-wing"/>
+                            <path d="M65 45 L75 30 L80 30 L70 45 Z" fill="#667799" class="plane-wing"/>
+                            <circle cx="90" cy="50" r="4" fill="#555" class="plane-engine"/>
+                            <circle cx="90" cy="50" r="2" fill="#fff" class="plane-engine"/>
+                        </svg>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        ---
+
+        <section id="skills" class="section-skills" role="region" aria-labelledby="skills-heading">
+            <div id="skills-bg" aria-hidden="true"></div>
+            <div class="skills-wrapper">
+                <h2 id="skills-heading">Habilidades y Expertise</h2>
+
+                <h3>Habilidades Técnicas</h3>
+                <div class="skills-container">
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#E44D26" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#F16529" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
+                        HTML5
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#264DE4" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#2965F1" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
+                        CSS3
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F7DF1E" d="M0 0h128v128H0z"/><path d="M116 116H12V12h104v104z" fill="#000"/><path fill="#F7DF1E" d="M34 105l7-5c1 2 2 4 5 4 3 0 4-1 4-5V56h8v44c0 9-5 13-13 13-7 0-11-4-13-9zm31-1l7-4c2 3 5 6 10 6 4 0 6-2 6-5 0-3-2-4-7-6l-3-1c-9-3-13-7-13-13 0-6 5-11 12-11 5 0 9 2 12 7l-6 4c-1-2-3-4-6-4-3 0-5 2-5 4 0 3 2 4 7 6l3 1c10 4 13 8 13 14 0 8-6 12-14 12-8 0-13-4-16-8z"/></svg>
+                        JavaScript
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3178C6" d="M0 0h128v128H0z"/><path fill="#fff" d="M51 90h10v16c0 6 4 10 10 10s10-4 10-10V90h10V76H51v14zm10-22h10v-5h-10v5zm17 0h10v-5H78v5z"/></svg>
+                        TypeScript
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#61DAFB" d="M64 8c30 0 56 26 56 56s-26 56-56 56S8 94 8 64 34 8 64 8z"/><path fill="#fff" d="M64 26a38 38 0 100 76 38 38 0 000-76zm0 64a26 26 0 110-52 26 26 0 010 52z"/></svg>
+                        React
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 100 100"><path fill="#000" d="M10 10h80v80H10z"/><path fill="#fff" d="M20 50h60M50 20v60"/></svg>
+                        Next.js
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#539E43" d="M64 0C28 0 0 28 0 64s28 64 64 64 64-28 64-64S100 0 64 0z"/><path fill="#fff" d="M49 95L35 37h16l7 38 20-38h18L67 95H49z"/></svg>
+                        Node.js
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#777BB4" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-14 0-24 10-24 24 0 14 10 24 24 24 14 0 24-10 24-24 0-14-10-24-24-24zm0 40c-8 0-16-8-16-16s8-16 16-16 16 8 16 16-8 16-16 16z"/></svg>
+                        PHP
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3776AB" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-22 0-40 18-40 40s18 40 40 40 40-18 40-40-18-40-40-40zm0 64c-14 0-24-10-24-24s10-24 24-24 24 10 24 24-10 24-24 24z"/></svg>
+                        Python
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 512 512"><path fill="#00758F" d="M256 0c141 0 256 115 256 256S397 512 256 512 0 397 0 256 115 0 256 0z"/><path fill="#fff" d="M146 218l110 110 110-110-110-110-110 110z"/></svg>
+                        MySQL / SQL
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F05032" d="M64 0L12 64l52 64 52-64L64 0z"/><path fill="#fff" d="M64 16l-34 48h68L64 16zm0 96l34-48H30l34 48z"/></svg>
+                        Git
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><circle fill="#181717" cx="64" cy="64" r="64"/><path fill="#fff" d="M85 69c-1 0-2 0-3-1v5h-4v-5c-3 0-5-1-7-3l3-3c1 1 3 2 5 2 2 0 3-1 3-3 0-1-1-2-3-3-4-1-7-3-7-7 0-4 3-7 7-7v-5h4v5c2 0 4 1 5 2l-2 4c-1-1-3-2-5-2-2 0-3 1-3 3 0 1 1 2 3 3 4 1 7 3 7 7 0 4-3 7-7 7z"/></svg>
+                        GitHub
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#FCC624" d="M0 0h128v128H0z"/><path fill="#000" d="M64 34c-17 0-30 13-30 30s13 30 30 30 30-13 30-30-13-30-30-30zm0 48c-10 0-18-8-18-18s8-18 18-18 18 8 18 18-8 18-18 18z"/></svg>
+                        Linux
+                    </div>
+                    <div class="skill-tag">
+                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#2496ED" d="M64 0c35 0 64 29 64 64s-29 64-64 64S0 99 0 64 29 0 64 0z"/><path fill="#fff" d="M32 96h64v-8H32v8zm0-16h64v-8H32v8zm0-16h64v-8H32v8z"/></svg>
+                        Docker
+                    </div>
+                </div>
+
+                <h3>Habilidades Blandas</h3>
+                <div class="skills-container">
+                    <div class="skill-tag">Comunicación Efectiva</div>
+                    <div class="skill-tag">Trabajo en Equipo</div>
+                    <div class="skill-tag">Liderazgo</div>
+                    <div class="skill-tag">Adaptabilidad</div>
+                    <div class="skill-tag">Proactividad</div>
+                    <div class="skill-tag">Resolución de Problemas</div>
+                    <div class="skill-tag">Pensamiento Crítico</div>
+                    <div class="skill-tag">Creatividad</div>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section id="certifications" class="section-certifications" role="region" aria-labelledby="certifications-heading">
+            <div class="certifications-wrapper">
+                <h2 id="certifications-heading">Logros Destacados y Certificaciones</h2>
+                <div class="certification-grid">
+                    <article class="certification-card cisco-card" role="article" aria-labelledby="cisco-cert-title">
+                        <div class="card-header">
+                            <h3 id="cisco-cert-title">Cisco Certified CyberOps Associate</h3>
+                            <p class="issuer">Emitido por Cisco Systems</p>
+                        </div>
+                        <div class="card-content">
+                            <p>Certificado en operaciones avanzadas de ciberseguridad, análisis de amenazas y respuesta a incidentes. Esta certificación valida un fuerte entendimiento de conceptos de seguridad, monitoreo, análisis basado en host, análisis de intrusiones de red y políticas de seguridad.</p>
+                            <div class="credly-badge-embed">
+                                <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="certification-card other-cert-card" role="article" aria-labelledby="js-cert-title">
+                        <div class="card-header">
+                            <h3 id="js-cert-title">Desarrollo Avanzado con JavaScript</h3>
+                            <p class="issuer">Emitido por [Nombre de Plataforma/Institución]</p>
+                        </div>
+                        <div class="card-content">
+                            <p>Dominio de patrones complejos de JavaScript, programación asíncrona y características modernas de ES6+. Enfocado en la construcción de aplicaciones web escalables y mantenibles.</p>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="contact-fab-target"></div>
+    <div class="contact-fab" role="button" tabindex="0" aria-label="Contactar a Jairo Barrientos">
+        <span class="fab-icon" aria-hidden="true">&oplus;</span> <div class="contact-info">
+            <a href="https://wa.me/543437457636" target="_blank" rel="noopener noreferrer" aria-label="Enviar mensaje a Jairo Barrientos por WhatsApp">
+                <svg viewBox="0 0 24 24"><path d="M12.04 2C7.34 2 3.56 5.78 3.56 10.48c0 2.51 1.05 4.88 2.87 6.64l-1.04 3.73 3.82-1.01c1.64 1 3.53 1.57 5.76 1.57 4.7 0 8.48-3.78 8.48-8.48S16.74 2 12.04 2zm0 15.68c-1.8 0-3.48-.5-4.9-1.42l-.35-.2-.93.24-.22.06-.05.01-.22.06-1.04 2.76 2.83-.75.32-.08.2-.05c1.37.8 2.94 1.25 4.71 1.25 3.56 0 6.46-2.9 6.46-6.46S15.6 4.02 12.04 4.02 5.58 6.92 5.58 10.48c0 2.12 1.05 4.07 2.78 5.25l.13.09.07.05.07.06.1.06zm4.84-5.32c-.09-.05-.55-.27-.63-.3c-.08-.03-.17-.05-.24.03-.07.08-.27.3-.33.36-.06.06-.13.07-.24.03-.1-.05-.4-.14-.76-.47-.28-.25-.48-.56-.54-.65-.06-.09-.01-.14.04-.22.04-.08.09-.16.13-.24.03-.08.02-.14-.01-.2-.03-.07-.24-.5-.33-.7-.08-.18-.17-.15-.24-.15h-.25c-.07 0-.15.02-.24.02-.08.01-.3.07-.46.23-.16.16-.62.6-.62 1.46 0 .86.64 1.69.73 1.8.09.11 1.27 1.95 3.07 2.74.37.16.66.26.89.34.36.14.7.12.96.08.29-.05.89-.36 1.02-.72.13-.36.13-.67.09-.73-.04-.06-.14-.1-.23-.15z"/></svg>
+                <span>343-745-7636</span>
+            </a>
+            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de LinkedIn de Jairo Barrientos">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.567c0-1.325-.029-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.665H9.279V9.593h3.419v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 6.879v7.161zM3.494 8.761c-1.229 0-2.203-.993-2.203-2.222 0-1.219.967-2.222 2.203-2.222s2.203.993 2.203 2.222c0 1.229-.967 2.222-2.203 2.222zm1.785 11.691H1.719V9.593h3.55V20.452zM22.229 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.458C23.208 24 24 23.226 24 22.271V1.729C24 .774 23.208 0 22.229 0z"/></svg>
+                <span>LinkedIn</span>
+            </a>
+            <a href="mailto:barrientosjairolemuel@gmail.com" class="email-link" aria-label="Enviar correo electrónico a Jairo Barrientos">
+                <svg viewBox="0 0 24 24"><path d="M12 12.713l-11.75 6.487c.22.42 1.48 1.8 1.75 1.8h18.5c.27 0 1.53-1.38 1.75-1.8L12 12.713zm0-1.426L.25 4.513c-.22-.42-1.48-1.8-1.75-1.8h23.5c.27 0 1.53 1.38 1.75 1.8L12 11.287z"/></svg>
+                <span>barrientosjairolemuel@gmail.com</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const styleSheet = document.styleSheets[0];
+
+            // --- Utility Function for Scroll Animations ---
+            const animateOnScroll = (elements, delayMultiplier = 0.1, threshold = 0.2, rootMargin = '0px 0px -50px 0px') => {
+                const observer = new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            if (!prefersReducedMotion) {
+                                entry.target.style.transition = `transform 0.8s var(--bezier-smooth), opacity 0.8s ease ${index * delayMultiplier}s`;
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateY(0) scale(1)';
+                            } else {
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateY(0) scale(1)';
+                            }
+                            observerInstance.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: threshold, rootMargin: rootMargin });
+
+                elements.forEach(el => observer.observe(el));
+            };
+
+            // --- Avatar Animations ---
+            const avatar = document.getElementById('my-avatar');
+            const leftEye = avatar.querySelector('.avatar-eye.left');
+            const rightEye = avatar.querySelector('.avatar-eye.right');
+            const glassesPath = avatar.querySelector('.avatar-glasses');
+
+            function randomBlink() {
+                if (prefersReducedMotion) return;
+                setTimeout(() => {
+                    leftEye.classList.add('blink');
+                    rightEye.classList.add('blink');
+                    setTimeout(() => {
+                        leftEye.classList.remove('blink');
+                        rightEye.classList.remove('blink');
+                        randomBlink();
+                    }, 300);
+                }, Math.random() * 3000 + 2000);
+            }
+            randomBlink();
+
+            const avatarContainer = document.querySelector('.avatar-container');
+            const avatarObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !prefersReducedMotion) {
+                        glassesPath.style.animation = 'drawGlasses 2s ease-out forwards 0.5s';
+                        avatarObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            avatarObserver.observe(avatarContainer);
+
+            // --- Project Card Click Handlers ---
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const url = card.dataset.href; // Using dataset for cleaner access
+                    if (url) window.location.href = url;
+                });
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        const url = card.dataset.href;
+                        if (url) window.location.href = url;
+                    }
+                });
+            });
+
+            // --- Apply Scroll Animations ---
+            animateOnScroll(document.querySelectorAll('.project-card'), 0.2, 0.2, '0px 0px -80px 0px');
+            animateOnScroll(document.querySelectorAll('.skill-tag'), 0.08, 0.1, '0px 0px -50px 0px');
+            animateOnScroll(document.querySelectorAll('.certification-card'), 0.2, 0.2, '0px 0px -100px 0px');
+
+            // --- Project SVGs Animation Trigger ---
+            const projectSvgContainers = document.querySelectorAll('.project-svg-container');
+            const svgObserver = new IntersectionObserver((entries, observerInstance) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!prefersReducedMotion) {
+                            entry.target.classList.add('animated');
+                        }
+                        observerInstance.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.7 });
+
+            projectSvgContainers.forEach(container => svgObserver.observe(container));
+
+            // --- Floating Contact Button Logic ---
+            const contactFab = document.querySelector('.contact-fab');
+            const contactInfo = contactFab.querySelector('.contact-info');
+            const fabIcon = contactFab.querySelector('.fab-icon');
+
+            contactFab.addEventListener('click', () => {
+                if (contactFab.classList.contains('open')) {
+                    contactInfo.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => {
+                        contactFab.classList.remove('open');
+                        fabIcon.style.display = 'flex';
+                    }, 300);
+                } else {
+                    contactFab.classList.add('open');
+                    setTimeout(() => {
+                        fabIcon.style.display = 'none';
+                    }, 100);
+                }
+            });
+
+            contactFab.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    contactFab.click();
+                }
+            });
+
+            document.addEventListener('click', (event) => {
+                if (contactFab.classList.contains('open') && !contactFab.contains(event.target)) {
+                    contactInfo.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => {
+                        contactFab.classList.remove('open');
+                        fabIcon.style.display = 'flex';
+                    }, 300);
+                }
+            });
+
+            // --- Credly Embed Script Load ---
+            const credlyEmbedContainer = document.querySelector('.credly-badge-embed');
+            if (credlyEmbedContainer) {
+                const credlyScript = document.createElement('script');
+                credlyScript.type = 'text/javascript';
+                credlyScript.async = true;
+                credlyScript.src = 'https://cdn.credly.com/assets/utilities/embed.js';
+                document.body.appendChild(credlyScript);
+            }
+
+            // --- Sticky Header and Active Nav Link Logic ---
+            const header = document.querySelector('.main-header');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id]');
+            const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+
+            window.addEventListener('scroll', () => {
+                // Sticky Header
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                // Active Nav Link
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - header.offsetHeight; // Adjust for sticky header
+                    if (window.scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                // Special handling for the contact FAB since it's not a section
+                const contactFabTarget = document.getElementById('contact-fab-target');
+                if (contactFabTarget && window.scrollY + window.innerHeight >= document.body.scrollHeight - 50) { // Near bottom of page
+                    current = 'contact-fab-target';
+                }
+
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.href.includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Scroll Progress Bar
+                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = (window.scrollY / scrollableHeight) * 100;
+                scrollProgressBar.style.width = scrolled + '%';
+            });
+
+            // --- Smooth Scroll for Navigation (override default behavior for custom control) ---
+            document.querySelectorAll('.nav-menu a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - header.offsetHeight, // Adjust for sticky header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
