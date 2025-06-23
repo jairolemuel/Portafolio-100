@@ -1366,9 +1366,37 @@
             </div>
         </section>
 
+        <!-- ==============================
+             Sección de Contacto (completa e integrada)
+             ============================== -->
         <section id="contact" style="padding: 100px 20px; text-align: center; background: #050a11; color: white;">
             <h2 class="holographic-text glitch" data-text="Contacto">Contacto</h2>
-            <p style="color: var(--color-text-medium);">Próximamente: ¡Mi formulario de contacto o detalles de contacto aquí!</p>
+            <p style="color: var(--color-text-medium);">
+                Próximamente: ¡Mi formulario de contacto o detalles de contacto aquí!
+            </p>
+
+            <!-- Botón integrado -->
+            <button
+              id="contact-btn"
+              class="fade-in-up"
+              style="
+                margin-top: 30px;
+                padding: 0.75rem 1.5rem;
+                font-family: 'Orbitron', sans-serif;
+                font-size: 1rem;
+                text-transform: uppercase;
+                border: none;
+                border-radius: 0.5rem;
+                background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+                color: #fff;
+                cursor: pointer;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+              "
+              aria-label="Contáctame ahora"
+            >
+              Contáctame ahora
+            </button>
         </section>
     </main>
 
@@ -1448,6 +1476,13 @@
                 observer.observe(element);
             });
 
+            // Listener para el botón de contacto
+            const contactBtn = document.getElementById('contact-btn');
+            contactBtn.addEventListener('click', () => {
+                // Aquí va tu lógica: abrir modal, desplazarte al formulario, etc.
+                alert('Aquí iría tu lógica para abrir el formulario o modal de contacto');
+            });
+
             // Avatar blink animation
             const avatarEyes = document.querySelectorAll('#my-avatar .avatar-eye');
             if (avatarEyes.length > 0) {
@@ -1508,5 +1543,4 @@
             // }, 5000); // Change slide every 5 seconds
         });
     </script>
-</body>
 </html>
