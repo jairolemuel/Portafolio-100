@@ -3,837 +3,1345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate</title>
-    <meta name="description" content="Jairo Barrientos's professional portfolio showcasing expertise in Full Stack Web Development (React, Node.js, PHP) and cybersecurity, including a Cisco Certified CyberOps Associate certification. Located in Santa Elena, Entre Ríos, Argentina.">
-    <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Web Development, Cybersecurity, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, Cisco Certified CyberOps Associate, Santa Elena, Entre Ríos, Argentina, UI/UX, SEO">
-    <meta name="author" content="Jairo Barrientos">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.yourportfolio.com/"> <meta property="og:title" content="Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate">
-    <meta property="og:description" content="Explore Jairo Barrientos's professional portfolio, featuring web development projects and a Cisco Certified CyberOps Associate certification.">
-    <meta property="og:image" content="https://www.yourportfolio.com/images/og-image.jpg"> <link rel="icon" type="image/png" href="/favicon.png"> <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Jairo Barrientos",
-      "url": "https://www.yourportfolio.com", "sameAs": [
-        "https://www.linkedin.com/in/jairo-barrientos-8a6b00226", "https://github.com/tu-usuario-github" ],
-      "jobTitle": "Full Stack Web Developer | Cybersecurity Associate",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance" },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Nombre de tu Universidad/Bootcamp si aplica"
-      },
-      "knowsAbout": ["Web Development", "React.js", "Node.js", "PHP", "MySQL", "Cybersecurity", "UI/UX Design", "SEO"],
-      "nationality": "Argentinian",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santa Elena",
-        "addressRegion": "Entre Ríos",
-        "addressCountry": "AR"
-      }
-    }
-    </script>
-
+    <title>Jairo Barrientos - Web Developer & CyberOps</title>
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /*
-        * Principios de Ingeniería y Arquitectura Web:
-        * 1. Rendimiento Primero: Eliminación de solicitudes externas (todo incrustado).
-        * 2. CSS Modular: Secciones organizadas para legibilidad y mantenimiento.
-        * 3. Diseño Responsivo: Enfoque mobile-first con media queries.
-        * 4. Accesibilidad: Atributos ARIA, navegación por teclado, preferencia de movimiento reducido.
-        * 5. Mejora Progresiva: Contenido central visible, animaciones como capa superior.
-        * 6. Seguridad: Compatible con CSP (sin scripts 'unsafe-inline' o eventos inline).
-        */
-
-        /* Base & Global Styles */
+        /* ========================================= */
+        /* === GLOBAL CSS & VARIABLES === */
+        /* ========================================= */
         :root {
-            --color-bg-dark: #000;
-            --color-bg-gradient-start: #050a11;
-            --color-bg-gradient-mid: #1a2a3a;
-            --color-primary-light: #00e5ff;
-            --color-primary-dark: #00c0ff;
-            --color-secondary: #8000ff;
-            --color-text-light: #e0e0e0;
-            --color-text-medium: #b0e0e6;
-            --color-text-dark: #c0c0c0;
-            --glow-light-alpha: rgba(0, 192, 255, 0.7);
-            --glow-dark-alpha: rgba(128, 0, 255, 0.7);
-            --card-bg: rgba(18, 30, 45, 0.8);
-            --card-border: rgba(0, 192, 255, 0.3);
+            --color-primary: #007bff; /* Vibrant Blue */
+            --color-primary-light: #00c0ff; /* Lighter Blue, for glows */
+            --color-primary-dark: #0056b3; /* Darker Blue */
+            --color-secondary: #8a2be2; /* Blue Violet */
+            --color-accent: #00e5ff; /* Neon Turquoise */
+            --color-python: #306998; /* Python Blue */
+            --color-python-light: #4B8BBE; /* Python Lighter Blue */
+
+            --color-bg-dark: #0a0a0a; /* Very dark background */
+            --color-bg-gradient-start: #141414;
+            --color-bg-gradient-mid: #0a0e1a; /* A very dark blue, almost black */
+            --color-bg-light: #2c2c2c; /* Background for lighter elements */
+
+            --color-text-light: #ffffff;
+            --color-text-medium: #cccccc;
+            --color-text-dark: #999999;
+
+            --card-bg: rgba(20, 20, 30, 0.9); /* Background for cards and sections */
+            --card-border: rgba(0, 192, 255, 0.2); /* Subtle border for cards */
+
+            --glow-light: #00e5ff;
+            --glow-light-alpha: rgba(0, 229, 255, 0.4);
+            --glow-dark: #8a2be2;
+            --glow-dark-alpha: rgba(138, 43, 226, 0.4);
+
+            --border-radius-main: 15px;
             --transition-speed: 0.4s;
-            --bezier-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            --bezier-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --bezier-smooth: cubic-bezier(0.4, 0, 0.2, 1); /* For smooth animations */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', 'Roboto', sans-serif;
-            margin: 0;
-            background: var(--color-bg-dark);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-bg-dark);
             color: var(--color-text-light);
             line-height: 1.6;
-            overflow-x: hidden; /* Evita el scroll horizontal */
-            scroll-behavior: smooth; /* Scroll suave para enlaces ancla */
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="rgba(0, 192, 255, 0.8)" stroke="rgba(0, 192, 255, 0.2)" stroke-width="2"/></svg>') 12 12, auto;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            cursor: url('assets/icons/custom-cursor.svg') 12 12, auto; /* Custom cursor */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        body.hover-pointer, a:hover, button:hover, .contact-fab:hover, .project-card:hover, .skill-tag:hover, .certification-card:hover {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0L0 12h8v12h8V12h8z" fill="rgba(0, 229, 255, 0.9)"/></svg>') 12 12, pointer;
+        /* Custom scrollbar */
+        body::-webkit-scrollbar {
+            width: 8px;
         }
 
-        h1, h2, h3 {
-            margin-top: 0;
-            font-weight: 600;
-            text-shadow: 0 0 10px var(--glow-light-alpha);
+        body::-webkit-scrollbar-track {
+            background: var(--color-bg-light);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: var(--color-primary-light);
+            border-radius: 10px;
+            border: 2px solid var(--color-bg-dark);
+        }
+
+        /* Global text selection styling */
+        ::selection {
+            background-color: var(--color-secondary);
+            color: var(--color-text-light);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1; /* Ensure text is above pseudo-elements */
         }
 
         a {
             color: var(--color-primary-light);
             text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-        a:hover {
-            color: var(--color-primary-dark);
-            text-decoration: underline;
+            transition: color var(--transition-speed) ease;
+            cursor: url('assets/icons/custom-cursor-pointer.svg') 12 12, pointer; /* Custom pointer cursor */
         }
 
-        /* --- Header / Navigation --- */
-        .main-header {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 15px 30px;
+        a:hover {
+            color: var(--color-accent);
+            text-decoration: underline;
+            text-shadow: 0 0 8px var(--glow-light-alpha);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--color-text-medium);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        section {
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1; /* Ensure content is above background effects */
+        }
+
+        /* ========================================= */
+        /* === HOLOGRAPHIC TEXT EFFECT === */
+        /* ========================================= */
+        .holographic-text {
+            color: transparent; /* Make original text transparent */
+            background-clip: text;
+            -webkit-background-clip: text;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 0 10px var(--glow-light-alpha);
+        }
+
+        .holographic-text::before,
+        .holographic-text::after {
+            content: attr(data-text); /* Use data-text attribute for pseudo-elements */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* First layer: subtle glow and color shift */
+        .holographic-text::before {
+            background-image: linear-gradient(45deg, var(--color-primary-light), var(--color-accent), var(--color-secondary));
+            animation: holographic-shift 8s ease-in-out infinite alternate,
+                       holographic-glitch 0.8s infinite;
+            filter: blur(1px);
+            z-index: -1;
+        }
+
+        /* Second layer: sharper highlights and slight offset */
+        .holographic-text::after {
+            background-image: linear-gradient(-45deg, var(--color-accent), var(--color-primary-light), var(--color-secondary));
+            animation: holographic-shift 10s ease-in-out infinite alternate-reverse,
+                       holographic-glitch 1.2s infinite;
+            filter: blur(0.5px);
+            mix-blend-mode: lighten;
+            z-index: -2;
+            transform: translate(0.5px, 0.5px); /* Subtle offset */
+            opacity: 0.8;
+        }
+
+        /* Keyframes for holographic effect */
+        @keyframes holographic-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes holographic-glitch {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(0, 229, 255, 0.5), 0 0 20px rgba(0, 192, 255, 0.3);
+                transform: translate(0, 0);
+            }
+            20% {
+                text-shadow: 0 0 8px rgba(138, 43, 226, 0.5), 0 0 15px rgba(138, 43, 226, 0.2);
+                transform: translate(-1px, 1px);
+            }
+            40% {
+                text-shadow: 0 0 12px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 192, 255, 0.4);
+                transform: translate(1px, -1px);
+            }
+            60% {
+                text-shadow: 0 0 7px rgba(138, 43, 226, 0.4), 0 0 12px rgba(138, 43, 226, 0.1);
+                transform: translate(-0.5px, -0.5px);
+            }
+            80% {
+                text-shadow: 0 0 10px rgba(0, 229, 255, 0.5), 0 0 20px rgba(0, 192, 255, 0.3);
+                transform: translate(0.5px, 0.5px);
+            }
+        }
+        /* ========================================= */
+        /* === END HOLOGRAPHIC TEXT EFFECT === */
+        /* ========================================= */
+
+        /* ========================================= */
+        /* === BACKGROUND & DECORATIONS === */
+        /* ========================================= */
+        .background-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 100;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(0, 192, 255, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.05) 0%, transparent 40%);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .animated-gradient-border {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent,
+                rgba(0, 192, 255, 0.8),
+                transparent 30%,
+                rgba(138, 43, 226, 0.8),
+                transparent 60%,
+                rgba(0, 192, 255, 0.8)
+            );
+            animation: rotateBorder 8s linear infinite;
+            z-index: -1;
+        }
+
+        .animated-gradient-border::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius-main);
+            z-index: -1;
+        }
+
+        @keyframes rotateBorder {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ========================================= */
+        /* === HEADER & NAVIGATION === */
+        /* ========================================= */
+        .main-header {
+            width: 100%;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 192, 255, 0.2);
-            transition: background 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background: transparent;
+            transition: background-color var(--transition-speed) ease-in-out;
+            box-shadow: none;
         }
 
         .main-header.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 4px 15px rgba(0, 192, 255, 0.4);
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
         }
 
         .logo {
             font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--color-primary-light);
+            font-weight: 700;
+            color: var(--color-text-light);
             background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
             -webkit-background-clip: text;
             color: transparent;
-            text-shadow: 0 0 10px rgba(0,229,255,0.5);
+            text-shadow: 0 0 15px var(--glow-light-alpha);
+            letter-spacing: 1px;
         }
 
         .nav-menu {
             list-style: none;
-            margin: 0;
-            padding: 0;
             display: flex;
+            gap: 30px;
         }
 
-        .nav-menu li {
-            margin-left: 30px;
-        }
-
-        .nav-menu a {
-            color: var(--color-text-light);
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 5px 0;
+        .nav-menu li a {
+            color: var(--color-text-medium);
+            font-weight: 600;
             position: relative;
+            padding-bottom: 5px;
+            transition: color var(--transition-speed) ease, text-shadow var(--transition-speed) ease;
         }
 
-        .nav-menu a::after {
+        .nav-menu li a::after {
             content: '';
             position: absolute;
-            left: 0;
             bottom: 0;
+            left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            transition: width 0.3s ease-out;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
+            transition: width var(--transition-speed) ease-out;
         }
 
-        .nav-menu a:hover::after,
-        .nav-menu a.active::after {
+        .nav-menu li a:hover {
+            color: var(--color-text-light);
+            text-shadow: 0 0 10px var(--glow-light-alpha);
+        }
+
+        .nav-menu li a:hover::after {
             width: 100%;
         }
 
-        .scroll-progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            width: 0%;
-            z-index: 101; /* Above header */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 101;
         }
 
-        /* --- Hero Section: Futuristic Holographic Vibe --- */
-        .section-hero {
-            padding: 160px 20px 80px; /* Adjusted padding for header */
-            text-align: center;
-            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
-            color: white;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
+        .hamburger-menu span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-primary-light);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Mobile navigation */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(10, 10, 10, 0.98);
+                padding-top: 100px;
+                align-items: center;
+                justify-content: flex-start;
+                transition: transform 0.5s ease-in-out;
+                transform: translateX(100%);
+            }
+
+            .nav-menu.active {
+                display: flex;
+                transform: translateX(0);
+            }
+
+            .nav-menu li {
+                margin: 20px 0;
+            }
+
+            .nav-menu li a {
+                font-size: 2rem;
+                padding-bottom: 10px;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+        }
+
+        /* ========================================= */
+        /* === HERO SECTION === */
+        /* ========================================= */
+        .hero-section {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-gradient-mid) 100%);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Holographic Grid Overlay (Parallax) */
-        .section-hero::before {
+        .hero-content {
+            z-index: 10;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            /* Using holographic text here */
+            animation: none; /* Remove previous animation if any */
+        }
+
+        /* No longer needed with holographic effect:
+        @keyframes textGlow {
+            from { text-shadow: 0 0 15px var(--glow-light-alpha), 0 0 30px rgba(0, 192, 255, 0.2); }
+            to { text-shadow: 0 0 25px var(--glow-light-alpha), 0 0 50px rgba(0, 192, 255, 0.4); }
+        }
+        */
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: var(--color-text-medium);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInText 1.5s ease-out 1s forwards;
+        }
+
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            color: white;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 8px 25px rgba(0, 192, 255, 0.4);
+            border: 2px solid var(--color-primary-light);
+            text-decoration: none;
+            animation: bounceIn 1s ease-out 1.5s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            60% { opacity: 1; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 35px var(--glow-light-alpha), 0 0 40px var(--glow-light-alpha);
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+            border-color: var(--color-accent);
+        }
+
+        .avatar-container {
+            width: 250px;
+            height: 250px;
+            margin-top: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid var(--color-primary-light);
+            box-shadow: 0 0 30px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            background-color: #1a1a2a;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.4s ease;
+            opacity: 0;
+            animation: fadeInScale 1s ease-out 0.8s forwards;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .avatar-container:hover {
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 0 0 50px var(--glow-light-alpha), inset 0 0 25px rgba(0, 192, 255, 0.6);
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Subtle particle effect for hero section */
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(to right, rgba(0,255,255,0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,255,255,0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridFlow 60s linear infinite;
-            opacity: 0.3;
-            z-index: 0;
-            transform: translateZ(-100px) scale(2); /* Parallax setup */
-        }
-        .section-hero::after { /* Another layer for more depth */
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 70% 30%, rgba(0, 192, 255, 0.08), transparent 70%);
-            animation: radialPulse 20s infinite ease-in-out;
-            z-index: 1;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="rgba(0,229,255,0.2)"/></svg>') repeat;
+            background-size: 20px 20px;
+            opacity: 0.1;
+            animation: moveBackground 60s linear infinite;
         }
 
-        @keyframes gridFlow {
+        @keyframes moveBackground {
             from { background-position: 0 0; }
             to { background-position: 100% 100%; }
         }
-        @keyframes radialPulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 0.5; }
-        }
 
-
-        .section-hero h1, .section-hero p, .avatar-container {
-            position: relative;
-            z-index: 10;
-        }
-
-        .section-hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 0.8rem;
+        /* Scroll progress bar */
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
             background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(0,229,255,0.8);
-            letter-spacing: 2px;
+            z-index: 1001;
+            box-shadow: 0 0 15px var(--glow-light-alpha);
+            transition: width 0.1s linear;
         }
 
-        .section-hero p {
-            font-size: 1.8rem;
-            color: var(--color-text-medium);
-            margin-top: 0;
-            letter-spacing: 1px;
-            line-height: 1.4;
-        }
-
-        /* Fade-in-up animation for text */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.9s forwards;
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in-up.delay-1 { animation-delay: 0.4s; }
-        .fade-in-up.delay-2 { animation-delay: 0.8s; }
-
-        /* --- Avatar Styles --- */
-        .avatar-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 40px;
+        /* ========================================= */
+        /* === ABOUT ME SECTION === */
+        /* ========================================= */
+        .section-about-me {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-gradient-start));
+            color: var(--color-text-light);
+            text-align: center;
             position: relative;
-            border-radius: 50%;
-            box-shadow: 0 0 40px var(--glow-light-alpha), inset 0 0 20px rgba(0, 192, 255, 0.4);
             overflow: hidden;
-            background: radial-gradient(circle at center, #1a3a4a 0%, #050a11 100%);
-            transform: scale(0.7);
-            opacity: 0;
-            animation: avatarEntry 1.2s var(--bezier-bounce) forwards 0.3s;
-            border: 2px solid rgba(0, 192, 255, 0.5);
-            /* Particle effect for avatar */
-            mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
         }
 
-        @keyframes avatarEntry {
-            to { transform: scale(1); opacity: 1; }
+        .section-about-me h2 {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            /* Using holographic text here */
         }
 
-        #my-avatar {
+        .about-me-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: auto;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 15px rgba(138, 43, 226, 0.3);
+            border: 1px solid var(--card-border);
+            text-align: left;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(50px); /* Initial state for animation */
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .about-me-section.is-animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-image {
+            flex-shrink: 0;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--color-primary-light);
+            box-shadow: 0 0 30px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            transition: transform 0.4s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 0 0 50px var(--glow-light-alpha), inset 0 0 25px rgba(0, 192, 255, 0.6);
+        }
+
+        .about-image img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
             display: block;
-            transition: transform var(--transition-speed) ease-out;
-            filter: drop-shadow(0 0 8px rgba(0, 192, 255, 0.4));
         }
 
-        #my-avatar:hover {
-            transform: scale(1.05) rotateY(10deg);
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 700px;
         }
 
-        /* Avatar SVG specific styles for animation */
-        #my-avatar .avatar-eye {
-            transform-origin: center center;
-            transition: transform 0.2s ease-in-out;
+        .about-content p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: var(--color-text-medium);
         }
-        #my-avatar .avatar-eye.blink {
-            animation: blinkEye 0.3s forwards;
-        }
-        @keyframes blinkEye {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(0.1); }
+        .about-content p strong {
+            color: var(--color-primary-light);
+            text-shadow: 0 0 5px rgba(0, 192, 255, 0.3);
         }
 
-        #my-avatar .avatar-mouth {
-            transition: transform 0.3s ease-out;
-            transform-origin: center;
-        }
-        #my-avatar:hover .avatar-mouth {
-            transform: translateY(2px) scale(1.1);
-        }
-
-        #my-avatar .avatar-glasses {
-            stroke-dasharray: 100;
-            stroke-dashoffset: 100;
-            stroke: #fff;
-        }
-        @keyframes drawGlasses { /* Dynamically inserted by JS */
-            to { stroke-dashoffset: 0; }
+        /* Responsive adjustments for about section */
+        @media (max-width: 768px) {
+            .about-me-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px;
+            }
+            .about-image {
+                margin-bottom: 30px;
+            }
+            .about-content {
+                text-align: center;
+            }
         }
 
-        /* --- Projects Section --- */
-  <section class="section-projects" id="projects">
-    <h2>My Projects</h2>
-    <div class="projects-container">
-
-        <div class="project-card">
-            <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                <div class="project-svg-container">
-                    <img src="assets/images/financiator-thumbnail.png" alt="Miniatura del proyecto Financiator">
-                </div>
-                <div class="project-content">
-                    <h3>Financiator</h3>
-                    <p>Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
-                </div>
-                <div class="project-button-wrapper">
-                    <span class="project-button">Ver más</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="project-card">
-            <a href="otro-proyecto/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                <div class="project-svg-container">
-                    <img src="assets/images/otro-proyecto-thumbnail.png" alt="Miniatura de Otro Proyecto">
-                </div>
-                <div class="project-content">
-                    <h3>Otro Proyecto Genial</h3>
-                    <p>Una breve descripción de este otro proyecto, sus funcionalidades y tecnologías.</p>
-                </div>
-                <div class="project-button-wrapper">
-                    <span class="project-button">Ver más</span>
-                </div>
-            </a>
-        </div>
-
-    </div>
-</section>
-
-<style>
-    /* --- Projects Section (TU CÓDIGO ORIGINAL - MANTENIDO PARA CONTEXTO) --- */
-    .section-projects {
-        background: var(--color-bg-dark);
-        color: var(--color-text-light);
-        padding: 80px 20px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .section-projects h2 {
-        font-size: 3.5rem;
-        margin-bottom: 2.5rem;
-        color: #fff;
-        text-shadow: 0 0 15px var(--glow-light-alpha);
-        background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-        -webkit-background-clip: text;
-        color: transparent;
-    }
-
-    .projects-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2.5rem;
-    }
-
-    .project-card {
-        position: relative;
-        width: 340px;
-        background: var(--card-bg);
-        border-radius: 15px;
-        overflow: hidden; /* Esto es importante para que el border-radius se aplique al contenido */
-        cursor: pointer;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
-        transform: translateY(50px) scale(0.95);
-        opacity: 0;
-        transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, opacity 0.5s ease;
-        will-change: transform, opacity; /* Puedes quitar esta línea si no notas problemas de rendimiento */
-        border: 1px solid var(--card-border);
-        
-        /* ¡IMPORTANTE! Hacer que la tarjeta sea un contenedor flex para que el enlace interno ocupe todo el espacio */
-        display: flex; 
-        flex-direction: column; /* Apila el contenido verticalmente */
-    }
-
-    .project-card:hover {
-        box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
-        transform: translateY(-5px) scale(1.02);
-        background: rgba(25, 40, 60, 0.95);
-    }
-
-    /* ESTILO NUEVO/MODIFICADO: El enlace que cubre toda la tarjeta */
-    .project-card-link {
-        text-decoration: none; /* Quita el subrayado predeterminado del enlace */
-        color: inherit; /* Hereda el color del texto de la tarjeta */
-        display: flex; /* Permite que el contenido interno del enlace se organice con flexbox */
-        flex-direction: column; /* Apila el contenido verticalmente */
-        height: 100%; /* Asegura que el enlace ocupe toda la altura de la tarjeta */
-        justify-content: space-between; /* Empuja el botón hacia abajo si el contenido no llena */
-    }
-
-    .project-content {
-        padding: 1.5rem;
-        background: rgba(0,0,0,0.7);
-        position: relative;
-        z-index: 2;
-        flex-grow: 1; /* Permite que el contenido crezca y empuje el botón hacia abajo */
-    }
-
-    .project-content h3 {
-        margin: 0 0 0.7rem;
-        font-size: 1.5rem;
-        color: var(--color-primary-dark); /* Asegúrate de que esta variable exista o define el color directamente */
-        text-shadow: none;
-    }
-
-    .project-content p {
-        margin: 0;
-        font-size: 1rem;
-        color: var(--color-text-dark); /* Asegúrate de que esta variable exista o define el color directamente */
-    }
-
-    .project-svg-container {
-        width: 100%;
-        height: 220px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.5);
-        /* Quitamos estos bordes de aquí si la tarjeta ya tiene overflow: hidden */
-        /* border-bottom-left-radius: 12px; */
-        /* border-bottom-right-radius: 12px; */
-        overflow: hidden;
-        position: relative;
-        /* Aseguramos que la imagen no tenga bordes redondeados si la tarjeta los tiene */
-        border-radius: 0; 
-    }
-    
-    .project-svg-container::after {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: radial-gradient(circle at center, rgba(0, 192, 255, 0.1) 0%, transparent 60%);
-        animation: pulseLight 5s infinite ease-in-out;
-        pointer-events: none;
-    }
-
-    @keyframes pulseLight {
-        0% { transform: scale(1); opacity: 0.5; }
-        50% { transform: scale(1.2); opacity: 0.8; }
-        100% { transform: scale(1); opacity: 0.5; }
-    }
-
-    /* ESTILO MODIFICADO: La imagen dentro del SVG container */
-    .project-svg-container img { 
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain; 
-    }
-
-    /* Contenedor para el botón, ayuda a centrarlo */
-    .project-button-wrapper {
-        padding: 0 1.5rem 1.5rem; 
-        text-align: center; 
-    }
-
-    /* Estilos para el Botón "Ver más" (ahora se aplican a un SPAN dentro del enlace) */
-    .project-button {
-        display: inline-block;
-        margin-top: 1.5rem; 
-        padding: 0.8rem 1.8rem;
-        background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-        color: var(--color-text-light);
-        /* Ya no necesita text-decoration: none; ni cursor: pointer; porque es un span, 
-           pero el <a> padre ya maneja el cursor y el clic. */
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: bold;
-        letter-spacing: 0.05em;
-        transition: transform 0.3s var(--bezier-smooth), box-shadow 0.4s ease, background 0.4s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    /* EL EFECTO HOVER AHORA DEBE IR EN EL ENLACE DE LA TARJETA COMPLETA o en el propio .project-button-wrapper */
-    .project-card-link:hover .project-button { /* Cuando se hace hover sobre el enlace de la tarjeta */
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
-        background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
-    }
-
-    /* Esta regla solo aplica si de verdad insertas un <svg> directamente en el HTML, no una imagen con .png */
-    /* Si solo usas PNGs, JPGs, puedes borrarla. */
-    .project-svg-container svg {
-        width: 85%;
-        height: 85%;
-        filter: drop-shadow(0 0 5px var(--glow-light-alpha));
-    }
-        /* Project SVG Animations */
-        #svg-finance .bar {
-            transform-origin: bottom;
-            transform: scaleY(0);
-            opacity: 0;
-        }
-        #svg-finance.animated .bar {
-            animation: barRise 1.5s var(--bezier-bounce) forwards;
-            opacity: 1;
-        }
-        #svg-finance.animated .bar-1 { animation-delay: 0.2s; }
-        #svg-finance.animated .bar-2 { animation-delay: 0.4s; }
-        #svg-finance.animated .bar-3 { animation-delay: 0.6s; }
-        @keyframes barRise {
-            from { transform: scaleY(0); opacity: 0; }
-            to { transform: scaleY(1); opacity: 1; }
-        }
-        #svg-finance .line-chart {
-            stroke-dasharray: 200;
-            stroke-dashoffset: 200;
-        }
-        #svg-finance.animated .line-chart {
-            animation: drawLine 2s ease-out forwards 0.8s;
-        }
-        @keyframes drawLine {
-            to { stroke-dashoffset: 0; }
-        }
-
-        #svg-beauty .lipstick-base {
-            transform-origin: bottom;
-            transform: scaleY(0);
-        }
-        #svg-beauty.animated .lipstick-base {
-            animation: popUp 0.8s var(--bezier-bounce) forwards;
-        }
-        #svg-beauty .lipstick-tip {
-            transform-origin: bottom;
-            transform: translateY(100%);
-        }
-        #svg-beauty.animated .lipstick-tip {
-            animation: slideInTip 0.8s var(--bezier-bounce) forwards 0.4s;
-        }
-        @keyframes popUp {
-            from { transform: scaleY(0); }
-            to { transform: scaleY(1); }
-        }
-        @keyframes slideInTip {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-
-        #svg-travel .plane-body, #svg-travel .plane-wing {
-            transform: translateX(-100%) translateY(20px) rotate(-10deg);
-            opacity: 0;
-        }
-        #svg-travel.animated .plane-body {
-            animation: flyIn 2.2s var(--bezier-smooth) forwards;
-        }
-        #svg-travel.animated .plane-wing {
-            animation: flyIn 2.2s var(--bezier-smooth) forwards 0.3s;
-        }
-        @keyframes flyIn {
-            from { transform: translateX(-100%) translateY(20px) rotate(-10deg); opacity: 0; }
-            to { transform: translateX(0) translateY(0) rotate(0deg); opacity: 1; }
-        }
-        #svg-travel .plane-engine {
-            animation: enginePulse 1.5s infinite ease-in-out;
-        }
-        @keyframes enginePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* --- Skills Section --- */
-        .section-skills {
-            position: relative;
+        /* ========================================= */
+        /* === SERVICES SECTION === */
+        /* ========================================= */
+        .section-services {
             padding: 100px 20px;
-            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
-            overflow: hidden;
-            color: white;
+            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid));
+            color: var(--color-text-light);
             text-align: center;
-        }
-
-        #skills-bg {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0,255,255,0.08), transparent);
-            animation: moveBg 15s linear infinite alternate;
-            z-index: 0;
-            transform: translateZ(-100px) scale(2); /* Parallax setup */
-        }
-
-        @keyframes moveBg {
-            0% { background-position: 0% 50%; transform: scale(2); }
-            100% { background-position: 100% 50%; transform: scale(2.1); }
-        }
-
-        .skills-wrapper {
             position: relative;
-            z-index: 1;
-            max-width: 1100px;
+            overflow: hidden;
+        }
+
+        .section-services h2 {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            /* Using holographic text here */
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
             margin: auto;
         }
 
-        .skills-wrapper h2 {
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+            border: 1px solid var(--card-border);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(25, 40, 60, 0.9);
+            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            color: var(--color-primary-light);
+            margin-bottom: 15px;
+            text-shadow: none;
+            background: none; /* Override gradient for h3 in cards */
+            -webkit-background-clip: unset;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-card ul li {
+            font-size: 0.95rem;
+            color: var(--color-text-medium);
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .service-card ul li::before {
+            content: '→'; /* Or an SVG icon */
+            color: var(--color-secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Animation for service cards (using Intersection Observer) */
+        .service-card.is-animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================= */
+        /* === PROJECTS SECTION === */
+        /* ========================================= */
+        .section-projects {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-gradient-mid), var(--color-bg-dark));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-projects h2 {
             font-size: 3.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
+            /* Using holographic text here */
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-main);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(50px); /* Initial state for animation */
+        }
+
+        .project-card.is-animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card-link {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+            color: inherit; /* Inherit text color from parent */
+            text-decoration: none; /* Remove underline */
+            padding: 20px;
+        }
+
+        .project-card-link:hover {
+            text-decoration: none; /* Ensure no underline on hover */
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            z-index: 5; /* Bring to front on hover */
+        }
+
+        .project-svg-container {
+            width: 100%;
+            height: 180px; /* Fixed height for image container */
+            background-color: var(--color-bg-dark); /* Placeholder background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .project-svg-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the container */
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-svg-container img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            flex-grow: 1;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--color-primary-light);
+            background: none;
+            -webkit-background-clip: unset;
+            text-shadow: none;
+        }
+
+        .project-content p {
+            font-size: 0.95rem;
+            color: var(--color-text-medium);
+            line-height: 1.5;
+        }
+
+        .project-button-wrapper {
+            text-align: right; /* Align button to the right */
+        }
+
+        .project-button {
+            display: inline-block;
+            padding: 8px 18px;
             background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 18px rgba(0,229,255,0.7);
+            color: white;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 192, 255, 0.3);
+        }
+
+        .project-card-link:hover .project-button {
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+            box-shadow: 0 6px 15px rgba(0, 192, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Thematic styles for project cards with JavaScript */
+        .project-card.theme-finance {
+            border: 1px solid var(--color-primary-light);
+            box-shadow: 0 8px 25px rgba(0, 192, 255, 0.4), inset 0 0 10px rgba(0, 192, 255, 0.3);
+        }
+        .project-card.theme-finance:hover {
+            background: rgba(0, 192, 255, 0.1);
+        }
+
+        .project-card.theme-ecommerce {
+            border: 1px solid var(--color-secondary);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4), inset 0 0 10px rgba(138, 43, 226, 0.3);
+        }
+        .project-card.theme-ecommerce:hover {
+            background: rgba(138, 43, 226, 0.1);
+        }
+
+        .project-card.theme-cybersecurity {
+            border: 1px solid #00ff88; /* A cyber green for this */
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4), inset 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+        .project-card.theme-cybersecurity:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        /* ========================================= */
+        /* === SKILLS SECTION === */
+        /* ========================================= */
+        .section-skills {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-gradient-start));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-skills h2 {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            /* Using holographic text here */
         }
 
         .skills-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.2rem;
-            margin-bottom: 2rem;
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
         }
 
         .skill-tag {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.8rem 1.6rem;
-            border-radius: 40px;
-            background: rgba(30, 50, 70, 0.6);
+            background-color: var(--card-bg);
+            color: var(--color-text-light);
+            padding: 12px 25px;
+            border-radius: 50px;
             font-size: 1.1rem;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 0 8px rgba(0, 192, 255, 0.2);
-            backdrop-filter: blur(8px);
-            transition: all var(--transition-speed) var(--bezier-smooth);
-            opacity: 0;
-            transform: translateY(40px);
-            will-change: transform, opacity, background, box-shadow;
-            border: 1px solid var(--card-border);
-            color: var(--color-text-medium);
+            font-weight: 500;
+            border: 1px solid var(--color-primary-light);
+            box-shadow: 0 4px 15px rgba(0, 192, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(20px) scale(0.9); /* Initial state for animation */
         }
 
-        .skill-tag svg {
-            width: 28px;
-            height: 28px;
-            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+        .skill-tag.is-animated {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 192, 255, 0.2), transparent);
+            transition: left 0.4s ease;
         }
 
         .skill-tag:hover {
-            background: rgba(0, 192, 255, 0.3);
-            box-shadow: 0 0 20px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
-            transform: translateY(-8px) scale(1.05);
-            border-color: rgba(0, 192, 255, 0.8);
-            color: #fff;
+            transform: translateY(-5px) scale(1.05);
+            background-color: rgba(0, 192, 255, 0.15);
+            box-shadow: 0 8px 25px var(--glow-light-alpha);
+            border-color: var(--color-accent);
         }
 
-        /* --- Certifications Section --- */
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+
+        /* Specific style for Python skill tag */
+        .skill-tag.python {
+            border-color: var(--color-python);
+            box-shadow: 0 4px 15px rgba(48, 105, 152, 0.3);
+        }
+        .skill-tag.python:hover {
+            background-color: rgba(48, 105, 152, 0.2);
+            box-shadow: 0 8px 25px rgba(48, 105, 152, 0.5);
+            border-color: var(--color-python-light);
+        }
+        .skill-tag.python::before {
+            background: linear-gradient(90deg, transparent, rgba(48, 105, 152, 0.2), transparent);
+        }
+
+
+        /* ========================================= */
+        /* === CERTIFICATIONS SECTION === */
+        /* ========================================= */
         .section-certifications {
-            position: relative;
             padding: 100px 20px;
-            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-gradient-mid), var(--color-bg-dark));
-            overflow: hidden;
-            color: var(--color-text-light);
+            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid));
             text-align: center;
-        }
-
-        .section-certifications::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 80% 20%, rgba(0, 192, 255, 0.08), transparent 70%),
-                        radial-gradient(circle at 20% 80%, rgba(128, 0, 255, 0.08), transparent 70%);
-            animation: backgroundPulse 20s infinite ease-in-out;
-            z-index: 0;
-            transform: translateZ(-100px) scale(2); /* Parallax setup */
-        }
-
-        @keyframes backgroundPulse {
-            0% { transform: scale(2); opacity: 0.5; }
-            50% { transform: scale(2.05); opacity: 0.7; }
-            100% { transform: scale(2); opacity: 0.5; }
-        }
-
-        .certifications-wrapper {
             position: relative;
-            z-index: 1;
+            overflow: hidden;
+        }
+
+        .section-certifications h2 {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            /* Using holographic text here */
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
             max-width: 1200px;
             margin: auto;
         }
 
-        .certifications-wrapper h2 {
-            font-size: 3.5rem;
-            margin-bottom: 2.5rem;
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 18px var(--glow-dark-alpha);
-        }
-
-        .certification-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-        }
-
         .certification-card {
             background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--card-border);
+            border-radius: var(--border-radius-main);
             padding: 30px;
-            width: 380px;
             text-align: left;
-            opacity: 0;
-            transform: translateY(50px) scale(0.95);
-            transition: transform 0.5s var(--bezier-smooth), opacity 0.5s ease, box-shadow 0.4s ease;
-            will-change: transform, opacity, box-shadow;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+            border: 1px solid var(--card-border);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(50px); /* Initial state for animation */
+        }
+
+        .certification-card.is-animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .certification-card:hover {
-            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(30, 50, 70, 0.85);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
         }
 
-        .certification-card .card-header h3 {
-            font-size: 1.8rem;
-            color: var(--color-primary-light);
+        .certification-card h3 {
+            font-size: 1.6rem;
             margin-bottom: 10px;
-            text-shadow: none;
+            color: var(--color-secondary);
+            background: none; /* Override gradient for h3 in cards */
+            -webkit-background-clip: unset;
         }
 
-        .certification-card .card-header .issuer {
-            font-size: 0.95rem;
+        .certification-card p {
+            font-size: 1rem;
             color: var(--color-text-medium);
-            margin-bottom: 20px;
-        }
-
-        .certification-card .card-content p {
-            font-size: 1.05rem;
-            color: var(--color-text-dark);
             margin-bottom: 15px;
         }
 
-        /* Specific styles for Credly badge embed */
-        .credly-badge-embed {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+        .certification-card .cert-issuer {
+            font-size: 0.9rem;
+            color: var(--color-text-dark);
+            font-style: italic;
+            margin-bottom: 10px;
         }
 
-        .certification-card:hover .credly-badge-embed {
-             transform: scale(1);
-        }
-
-        .view-credential-btn {
+        .certification-card .cert-link {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, var(--color-secondary), var(--color-primary-dark));
-            border-radius: 8px;
+            background-color: var(--color-primary-dark);
             color: white;
-            font-size: 1rem;
-            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 192, 255, 0.4);
         }
 
-        .view-credential-btn:hover {
-            background: linear-gradient(45deg, var(--color-primary-dark), var(--color-secondary));
-            box-shadow: 0 6px 20px rgba(0, 192, 255, 0.6);
+        .certification-card .cert-link:hover {
+            background-color: var(--color-primary);
+            box-shadow: 0 4px 10px rgba(0, 192, 255, 0.4);
             transform: translateY(-2px);
             text-decoration: none;
         }
 
-        /* --- Floating Contact Button --- */
+        /* ========================================= */
+        /* === AI AUTOMATION SECTION === */
+        /* ========================================= */
+        .section-ai-automation {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
+            color: var(--color-text-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-ai-automation h2 {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            /* Using holographic text here */
+        }
+
+        .ai-automation-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1200px;
+            margin: auto;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 15px rgba(138, 43, 226, 0.3);
+            border: 1px solid var(--card-border);
+            text-align: left;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(50px); /* Initial state for animation */
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .ai-automation-section.is-animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ai-content {
+            flex: 1.5;
+            min-width: 300px;
+        }
+
+        .ai-content p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: var(--color-text-medium);
+        }
+
+        .ai-content p strong {
+            color: var(--color-primary-light);
+            text-shadow: 0 0 5px rgba(0, 192, 255, 0.3);
+        }
+
+        .ai-content ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .ai-content ul li {
+            font-size: 1.05rem;
+            color: var(--color-text-dark);
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .ai-content ul li::before {
+            content: '🤖'; /* Or a robot/chip SVG icon */
+            position: absolute;
+            left: 0;
+            color: var(--color-primary-light);
+            font-size: 1.3em;
+            top: -2px;
+        }
+
+        .ai-cta {
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light)); /* Invert gradient to stand out */
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .ai-cta:hover {
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        }
+
+        .ai-visual {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ai-visual img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 192, 255, 0.6));
+            animation: floatingEffect 4s ease-in-out infinite alternate;
+        }
+        @keyframes floatingEffect {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-15px); }
+        }
+
+        /* Responsive adjustments for AI section */
+        @media (max-width: 768px) {
+            .ai-automation-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px;
+            }
+            .ai-visual {
+                margin-top: 30px;
+            }
+            .ai-content {
+                text-align: center;
+            }
+            .ai-content ul {
+                text-align: left; /* Keep list left-aligned */
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 90%;
+            }
+        }
+
+        /* ========================================= */
+        /* === CONTACT SECTION === */
+        /* ========================================= */
+        .section-contact {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-gradient-mid), var(--color-bg-dark));
+            color: var(--color-text-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-contact h2 {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            /* Using holographic text here */
+        }
+
+        .contact-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1200px;
+            margin: auto;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 15px rgba(0, 192, 255, 0.3);
+            border: 1px solid var(--card-border);
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(50px); /* Initial state for animation */
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .contact-section.is-animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-content {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-content p {
+            font-size: 1.1rem;
+            color: var(--color-text-medium);
+            line-height: 1.8;
+        }
+
+        .contact-details {
+            margin-top: 20px;
+        }
+        .contact-details p {
+            margin-bottom: 10px;
+        }
+        .contact-details a {
+            font-weight: bold;
+            color: var(--color-primary-light);
+        }
+
+        .contact-form {
+            flex: 1.2;
+            min-width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .contact-form label {
+            font-size: 1.1rem;
+            color: var(--color-primary-light);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: calc(100% - 20px); /* Adjust for padding */
+            padding: 12px 10px;
+            border: 1px solid var(--color-primary-dark);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--color-text-light);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--color-primary-light);
+            box-shadow: 0 0 10px rgba(0, 192, 255, 0.6);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 192, 255, 0.4);
+            margin-top: 15px;
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 192, 255, 0.6);
+        }
+
+        /* ========================================= */
+        /* === FLOATING CONTACT BUTTON (FAB) === */
+        /* ========================================= */
         .contact-fab {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
+            width: 180px; /* Width for text */
+            height: 60px; /* Height */
+            border-radius: 30px; /* Capsule shape */
             background: linear-gradient(135deg, var(--color-primary-dark), var(--color-secondary));
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            gap: 10px; /* Space between text and icon */
+            font-size: 1.1rem; /* Text size */
+            font-weight: bold;
             box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 30px var(--glow-light-alpha);
-            cursor: pointer;
+            cursor: url('assets/icons/custom-cursor-pointer.svg') 12 12, pointer;
             transition: all var(--transition-speed) ease-in-out;
             z-index: 1000;
             border: 2px solid rgba(255,255,255,0.3);
             opacity: 0;
             transform: scale(0.5);
-            animation: fabEnter 0.8s ease-out forwards 2s;
+            animation: fabEnter 0.8s ease-out forwards 2s; /* Entry animation */
+            text-decoration: none; /* Remove link underline */
         }
 
         @keyframes fabEnter {
@@ -841,686 +1349,572 @@
         }
 
         .contact-fab:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.05) translateY(-5px); /* Small lift on hover */
             background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary));
             box-shadow: 0 12px 25px rgba(0,0,0,0.8), 0 0 40px var(--glow-light-alpha);
         }
 
-        .contact-fab.open {
-            width: 300px;
-            height: auto;
-            border-radius: 15px;
-            padding: 20px;
-            flex-direction: column;
-            align-items: flex-start;
-            font-size: 1rem;
-            transition: all 0.5s var(--bezier-bounce);
-            background: rgba(18, 30, 45, 0.95);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.9), 0 0 50px var(--glow-light-alpha);
+        .contact-fab .fab-icon {
+            width: 28px;
+            height: 28px;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
         }
 
-        .contact-fab.open .fab-icon {
-            display: none;
+        .contact-fab::after {
+            content: 'Let\'s talk!'; /* Speech bubble text */
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%) scale(0); /* Initially hidden */
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        .contact-info {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
+        .contact-fab:hover::after {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
         }
 
-        .contact-fab.open .contact-info {
-            display: flex;
-            animation: fadeIn 0.6s ease-out forwards 0.2s;
+        /* ========================================= */
+        /* === FOOTER === */
+        /* ========================================= */
+        .main-footer {
+            background: var(--color-bg-dark);
+            color: var(--color-text-dark);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 192, 255, 0.2);
+            font-size: 0.9rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-10px); }
+        .main-footer p {
+            margin-bottom: 15px;
         }
 
-        .contact-info a {
-            display: flex;
-            align-items: center;
-            color: var(--color-text-medium);
-            font-size: 1.1rem;
-            transition: color var(--transition-speed);
-        }
-        .contact-info a:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
-        .contact-info a svg {
-            margin-right: 10px;
-            width: 24px;
-            height: 24px;
-            fill: var(--color-primary-dark);
-            flex-shrink: 0;
-        }
-        .contact-info a span {
-            word-break: break-all;
-        }
-        .contact-info a.email-link {
-            font-size: 0.95rem;
+        .main-footer .social-links a {
+            display: inline-block;
+            margin: 0 15px;
+            transition: transform 0.3s ease;
         }
 
-        /* --- Responsive Adjustments --- */
-        @media (max-width: 992px) {
-            .main-header { padding: 15px 20px; }
-            .nav-menu { display: none; } /* Hide desktop nav on smaller screens */
-            .section-hero h1 { font-size: 3.5rem; }
-            .section-hero p { font-size: 1.6rem; }
-            .project-card, .certification-card {
-                width: 90%;
-                max-width: 450px;
+        .main-footer .social-links img {
+            width: 30px;
+            height: 30px;
+            filter: drop-shadow(0 0 5px rgba(0, 192, 255, 0.3));
+        }
+
+        .main-footer .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            filter: drop-shadow(0 0 10px rgba(0, 192, 255, 0.7));
+        }
+
+        /* ========================================= */
+        /* === RESPONSIVE DESIGN === */
+        /* ========================================= */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
             }
-            .section-projects h2, .skills-wrapper h2, .certifications-wrapper h2 {
-                font-size: 3rem;
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            .cta-button {
+                font-size: 1rem;
+                padding: 12px 30px;
+            }
+            h2 {
+                font-size: 3rem !important;
+            }
+            .about-image, .ai-visual img {
+                width: 250px;
+                height: 250px;
             }
         }
 
         @media (max-width: 768px) {
-            .section-hero { padding-top: 120px; }
-            .section-hero h1 { font-size: 2.8rem; }
-            .section-hero p { font-size: 1.3rem; }
-            .avatar-container { width: 140px; height: 140px; margin-bottom: 25px; }
-            .project-card { padding: 1.2rem; }
-            .section-projects h2, .skills-wrapper h2, .certifications-wrapper h2 { font-size: 2.5rem; }
-            .skill-tag { font-size: 0.9rem; padding: 0.6rem 1.2rem; gap: 0.3rem; }
-            .skill-tag svg { width: 20px; height: 20px; }
-            .section-certifications { padding: 60px 15px; }
-            .certification-card { padding: 20px; }
-            .certification-card .card-header h3 { font-size: 1.4rem; }
-            .credly-badge-embed { transform: scale(0.8); }
-            .certification-card:hover .credly-badge-embed { transform: scale(0.9); }
-
-            .contact-fab {
-                width: 55px;
-                height: 55px;
-                bottom: 15px;
-                right: 15px;
-                font-size: 1.6rem;
+            .main-header {
+                padding: 15px 20px;
             }
-            .contact-fab.open {
-                width: calc(100% - 30px);
-                right: 15px;
-                bottom: 15px;
-                padding: 15px;
+            .logo {
+                font-size: 1.5rem;
             }
-            .contact-info a { font-size: 0.9rem; }
-            .contact-info a.email-link { font-size: 0.8rem; }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                font-size: 0.9rem;
+                padding: 10px 25px;
+            }
+            h2 {
+                font-size: 2.5rem !important;
+            }
+            .projects-grid, .skills-container, .certifications-grid, .services-grid {
+                grid-template-columns: 1fr; /* Single column layout */
+            }
+            .contact-form, .contact-content {
+                min-width: unset;
+                width: 100%;
+            }
+            .contact-section, .about-me-section, .ai-automation-section {
+                flex-direction: column;
+                padding: 30px;
+            }
+            .contact-form input[type="text"],
+            .contact-form input[type="email"],
+            .contact-form textarea {
+                width: 100%; /* Full width on smaller screens */
+            }
+            .about-image, .ai-visual img {
+                width: 200px;
+                height: 200px;
+            }
         }
 
-        /* Reduced Motion Preference */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation: none !important;
-                transition: none !important;
-                transform: none !important;
-                opacity: 1 !important;
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
             }
-            .project-card, .skill-tag, .avatar-container, .contact-fab {
-                opacity: 1 !important;
+            .hero-content p {
+                font-size: 0.9rem;
             }
-            #my-avatar .avatar-glasses, #svg-finance .bar, #svg-finance .line-chart,
-            #svg-beauty .lipstick-base, #svg-beauty .lipstick-tip,
-            #svg-travel .plane-body, #svg-travel .plane-wing {
-                stroke-dashoffset: 0 !important;
+            .main-header {
+                padding: 10px 15px;
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+            h2 {
+                font-size: 2rem !important;
+            }
+            section {
+                padding: 60px 15px;
+            }
+            .contact-fab {
+                width: 150px;
+                height: 50px;
+                font-size: 1rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            .contact-fab .fab-icon {
+                width: 24px;
+                height: 24px;
             }
         }
     </style>
 </head>
-<body translate="no">
-
-    <header class="main-header" role="banner">
-        <a href="#hero" class="logo" aria-label="Jairo Barrientos Portfolio Home">Jairo Barrientos</a>
-        <nav role="navigation">
-            <ul class="nav-menu">
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#certifications" class="nav-link">Certifications</a></li>
-                <li><a href="#contact-fab-target" class="nav-link">Contact</a></li> </ul>
-        </nav>
-    </header>
-
+<body>
     <div class="scroll-progress-bar"></div>
 
+    <div class="background-overlay"></div>
+
+    <header class="main-header">
+        <div class="logo">Jairo B.</div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#ai-automation">AI & Business</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
     <main>
-        <section id="hero" class="section-hero" role="region" aria-label="Introduction to Jairo Barrientos">
-           <style>
-    /* Basic Reset & Body Styling for a Dark, Futuristic Theme */
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: #1a1a2e; /* Dark background */
-        color: #e0f2f7; /* Light text color */
-        font-family: 'Rajdhani', sans-serif; /* Recommended futuristic font */
-        overflow-x: hidden; /* Prevent horizontal scroll */
-    }
-
-    /* Section Styling */
-    section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 80vh; /* Adjust height as needed */
-        text-align: center;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    /* Avatar Container */
-    .avatar-container {
-        margin-bottom: 25px; /* Spacing below avatar */
-    }
-
-    /* Avatar Image */
-    #my-avatar {
-        width: 180px; /* Larger avatar */
-        height: auto;
-        border-radius: 50%; /* Ensures it's round */
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.9); /* Stronger glow */
-        animation: pulse 2s infinite alternate ease-in-out; /* Smooth pulsing */
-        will-change: transform, box-shadow; /* Optimize for animation */
-    }
-
-    /* Avatar Pulse Animation */
-    @keyframes pulse {
-        from {
-            transform: scale(1);
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.9);
-        }
-        to {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 1);
-        }
-    }
-
-    /* Heading Styles */
-    h1 {
-        font-size: 3.5em; /* Larger heading */
-        margin-bottom: 10px;
-        font-weight: 700; /* Bold */
-        text-shadow: 0 0 15px rgba(0, 255, 255, 0.6); /* Initial text glow */
-        transition: text-shadow 0.3s ease-out; /* Smooth transition for hover */
-    }
-
-    /* Paragraph Styles */
-    p {
-        font-size: 1.4em; /* Slightly larger paragraph text */
-        margin-bottom: 10px;
-        max-width: 700px;
-        line-height: 1.6;
-        text-shadow: 0 0 5px rgba(0, 255, 255, 0.3); /* Subtle initial text glow */
-        transition: text-shadow 0.3s ease-out; /* Smooth transition for hover */
-    }
-
-    /* Fade-in-up animation (initial state) */
-    .fade-in-up {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-</style>
-
-<section>
-    <div class="avatar-container">
-        <img id="my-avatar" src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Barrientos Avatar">
-    </div>
-    <h1 class="fade-in-up">¡Hola! Soy Jairo Barrientos</h1>
-    <p class="fade-in-up delay-1">Desarrollador Full Stack & Asociado en Ciberseguridad</p>
-    <p class="fade-in-up delay-2">Creando soluciones web robustas y seguras.</p>
-</section>
-
-<script>
-    // Embed Google Fonts link (place this in your HTML's <head> section usually)
-    // For this embedded example, we'll assume it's already there or handled by the parent document.
-    // If you need to explicitly include it here, you'd add:
-    /*
-    const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
-    */
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const avatar = document.getElementById('my-avatar');
-        let floatingDirection = 1; // 1 for up, -1 for down
-        let currentY = 0;
-        const floatHeight = 15; // Max float height in pixels
-        const floatSpeed = 0.08; // Adjust speed
-
-        function animateAvatarFloat() {
-            currentY += floatingDirection * floatSpeed;
-            if (currentY > floatHeight || currentY < -floatHeight) {
-                floatingDirection *= -1;
-            }
-            avatar.style.transform = `translateY(${currentY}px) scale(1.02)`; // Combine with a slight scale
-            requestAnimationFrame(animateAvatarFloat);
-        }
-
-        // Start the floating animation
-        animateAvatarFloat();
-
-        // Enhanced Text Animations
-        const fadeElements = document.querySelectorAll('.fade-in-up');
-        fadeElements.forEach((el, index) => {
-            setTimeout(() => {
-                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-                el.style.opacity = 1;
-                el.style.transform = 'translateY(0)';
-            }, 300 + (index * 250)); // Stagger the animation more
-        });
-
-        // Hover Effect for Text (subtle futuristic glow)
-        const textElements = document.querySelectorAll('h1, p');
-
-        textElements.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                element.style.textShadow = '0 0 15px rgba(0, 255, 255, 0.9), 0 0 25px rgba(0, 255, 255, 0.7)';
-            });
-            element.addEventListener('mouseleave', () => {
-                if (element.tagName === 'H1') {
-                    element.style.textShadow = '0 0 15px rgba(0, 255, 255, 0.6)';
-                } else {
-                    element.style.textShadow = '0 0 5px rgba(0, 255, 255, 0.3)';
-                }
-            });
-        });
-    });
-</script>
-
-        ---
-
-        <section id="projects" class="section-projects" role="region" aria-labelledby="projects-heading">
-            <h2 id="projects-heading">Proyectos Destacados</h2>
-            <div class="projects-container">
-                <article class="project-card" role="link" tabindex="0" aria-label="Proyecto FinancePro: Calculadora Financiera"
-                         data-href="./financiator/index.html">
-                    <div class="project-content">
-                        <h3>FinancePro</h3>
-                        <p>Calculadora financiera interactiva con simulación de gráficos 3D dinámicos. Ideal para visualización de proyecciones y análisis de datos financieros.</p>
-                    </div>
-                    <div class="project-svg-container" id="svg-finance">
-                        <svg viewBox="0 0 100 100">
-                            <rect x="10" y="70" width="20" height="20" fill="#00c0ff" class="bar bar-1"/>
-                            <rect x="40" y="50" width="20" height="40" fill="#00c0ff" class="bar bar-2"/>
-                            <rect x="70" y="30" width="20" height="60" fill="#00c0ff" class="bar bar-3"/>
-                            <path d="M5 85 L95 85" stroke="#eee" stroke-width="1"/>
-                            <path d="M10 70 Q30 50 50 30 T90 10" stroke="#ff8c00" stroke-width="2" fill="none" class="line-chart"/>
-                        </svg>
-                    </div>
-                </article>
-
-                <article class="project-card" role="link" tabindex="0" aria-label="Proyecto BeautySpark: Landing Page de Cosméticos"
-                         data-href="https://tuproyectobelleza.vercel.app"> <div class="project-content">
-                        <h3>BeautySpark</h3>
-                        <p>Landing page para una marca de cosméticos, destacada por su atractiva animación de revelación de productos y diseño responsivo enfocado en la conversión.</p>
-                    </div>
-                    <div class="project-svg-container" id="svg-beauty">
-                        <svg viewBox="0 0 100 100">
-                            <rect x="35" y="50" width="30" height="40" fill="#d83681" rx="5" ry="5" class="lipstick-base"/>
-                            <rect x="38" y="40" width="24" height="15" fill="#f0f0f0" rx="3" ry="3" class="lipstick-tip"/>
-                            <text x="50" y="75" font-size="8" fill="#fff" text-anchor="middle">GLOW</text>
-                            <path d="M50 38 L55 30 L45 30 Z" fill="#f0f0f0" class="lipstick-tip"/>
-                        </svg>
-                    </div>
-                </article>
-
-                <article class="project-card" role="link" tabindex="0" aria-label="Proyecto Travel Portal: Destinos Turísticos"
-                         data-href="https://portaldeturismo.vercel.app"> <div class="project-content">
-                        <h3>Travel Portal</h3>
-                        <p>Plataforma para explorar destinos turísticos con una inmersiva animación de viaje. Optimizado para ofrecer una experiencia de usuario fluida y visualmente atractiva.</p>
-                    </div>
-                    <div class="project-svg-container" id="svg-travel">
-                        <svg viewBox="0 0 100 100">
-                            <path d="M10 50 L25 40 L85 40 L95 50 L85 60 L25 60 Z" fill="#99aadd" class="plane-body"/>
-                            <path d="M35 45 L45 30 L50 30 L40 45 Z" fill="#667799" class="plane-wing"/>
-                            <path d="M65 45 L75 30 L80 30 L70 45 Z" fill="#667799" class="plane-wing"/>
-                            <circle cx="90" cy="50" r="4" fill="#555" class="plane-engine"/>
-                            <circle cx="90" cy="50" r="2" fill="#fff" class="plane-engine"/>
-                        </svg>
-                    </div>
-                </article>
+        <section class="hero-section" id="home">
+            <div class="hero-content">
+                <h1 class="holographic-text" data-text="Jairo Barrientos: Innovating Digital Futures">Jairo Barrientos: Innovating Digital Futures</h1>
+                <p>Full Stack Web Developer | CyberOps Associate</p>
+                <a href="#projects" class="cta-button">View My Work</a>
+            </div>
+            <div class="avatar-container">
+                <img src="assets/images/jairo-profile.jpg" alt="Jairo Barrientos Avatar">
             </div>
         </section>
 
-        ---
-
-        <section id="skills" class="section-skills" role="region" aria-labelledby="skills-heading">
-            <div id="skills-bg" aria-hidden="true"></div>
-            <div class="skills-wrapper">
-                <h2 id="skills-heading">Habilidades y Expertise</h2>
-
-                <h3>Habilidades Técnicas</h3>
-                <div class="skills-container">
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#E44D26" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#F16529" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
-                        HTML5
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#264DE4" d="M19 0l9 104 46 13 46-13 9-104H19z"/><path fill="#2965F1" d="M64 117l37-10 8-92H64v102z"/><path fill="#EBEBEB" d="M64 52H42l-1-11h23V30H32l1 14 3 37h28v-11z"/><path fill="#fff" d="M64 85l-19-5-1-11H33l2 25 29 8V85z"/></svg>
-                        CSS3
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F7DF1E" d="M0 0h128v128H0z"/><path d="M116 116H12V12h104v104z" fill="#000"/><path fill="#F7DF1E" d="M34 105l7-5c1 2 2 4 5 4 3 0 4-1 4-5V56h8v44c0 9-5 13-13 13-7 0-11-4-13-9zm31-1l7-4c2 3 5 6 10 6 4 0 6-2 6-5 0-3-2-4-7-6l-3-1c-9-3-13-7-13-13 0-6 5-11 12-11 5 0 9 2 12 7l-6 4c-1-2-3-4-6-4-3 0-5 2-5 4 0 3 2 4 7 6l3 1c10 4 13 8 13 14 0 8-6 12-14 12-8 0-13-4-16-8z"/></svg>
-                        JavaScript
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3178C6" d="M0 0h128v128H0z"/><path fill="#fff" d="M51 90h10v16c0 6 4 10 10 10s10-4 10-10V90h10V76H51v14zm10-22h10v-5h-10v5zm17 0h10v-5H78v5z"/></svg>
-                        TypeScript
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#61DAFB" d="M64 8c30 0 56 26 56 56s-26 56-56 56S8 94 8 64 34 8 64 8z"/><path fill="#fff" d="M64 26a38 38 0 100 76 38 38 0 000-76zm0 64a26 26 0 110-52 26 26 0 010 52z"/></svg>
-                        React
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 100 100"><path fill="#000" d="M10 10h80v80H10z"/><path fill="#fff" d="M20 50h60M50 20v60"/></svg>
-                        Next.js
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#539E43" d="M64 0C28 0 0 28 0 64s28 64 64 64 64-28 64-64S100 0 64 0z"/><path fill="#fff" d="M49 95L35 37h16l7 38 20-38h18L67 95H49z"/></svg>
-                        Node.js
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#777BB4" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-14 0-24 10-24 24 0 14 10 24 24 24 14 0 24-10 24-24 0-14-10-24-24-24zm0 40c-8 0-16-8-16-16s8-16 16-16 16 8 16 16-8 16-16 16z"/></svg>
-                        PHP
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#3776AB" d="M0 0h128v128H0z"/><path fill="#fff" d="M64 24c-22 0-40 18-40 40s18 40 40 40 40-18 40-40-18-40-40-40zm0 64c-14 0-24-10-24-24s10-24 24-24 24 10 24 24-10 24-24 24z"/></svg>
-                        Python
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 512 512"><path fill="#00758F" d="M256 0c141 0 256 115 256 256S397 512 256 512 0 397 0 256 115 0 256 0z"/><path fill="#fff" d="M146 218l110 110 110-110-110-110-110 110z"/></svg>
-                        MySQL / SQL
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#F05032" d="M64 0L12 64l52 64 52-64L64 0z"/><path fill="#fff" d="M64 16l-34 48h68L64 16zm0 96l34-48H30l34 48z"/></svg>
-                        Git
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><circle fill="#181717" cx="64" cy="64" r="64"/><path fill="#fff" d="M85 69c-1 0-2 0-3-1v5h-4v-5c-3 0-5-1-7-3l3-3c1 1 3 2 5 2 2 0 3-1 3-3 0-1-1-2-3-3-4-1-7-3-7-7 0-4 3-7 7-7v-5h4v5c2 0 4 1 5 2l-2 4c-1-1-3-2-5-2-2 0-3 1-3 3 0 1 1 2 3 3 4 1 7 3 7 7 0 4-3 7-7 7z"/></svg>
-                        GitHub
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#FCC624" d="M0 0h128v128H0z"/><path fill="#000" d="M64 34c-17 0-30 13-30 30s13 30 30 30 30-13 30-30-13-30-30-30zm0 48c-10 0-18-8-18-18s8-18 18-18 18 8 18 18-8 18-18 18z"/></svg>
-                        Linux
-                    </div>
-                    <div class="skill-tag">
-                        <svg width="24" height="24" viewBox="0 0 128 128"><path fill="#2496ED" d="M64 0c35 0 64 29 64 64s-29 64-64 64S0 99 0 64 29 0 64 0z"/><path fill="#fff" d="M32 96h64v-8H32v8zm0-16h64v-8H32v8zm0-16h64v-8H32v8z"/></svg>
-                        Docker
-                    </div>
+        <section class="section-about-me" id="about">
+            <h2 class="holographic-text" data-text="About Me">About Me</h2>
+            <div class="about-me-section">
+                <div class="about-image">
+                    <img src="assets/images/jairo-profile.jpg" alt="Jairo Barrientos" aria-label="Jairo Barrientos Profile Photo">
                 </div>
-
-                <h3>Habilidades Blandas</h3>
-                <div class="skills-container">
-                    <div class="skill-tag">Comunicación Efectiva</div>
-                    <div class="skill-tag">Trabajo en Equipo</div>
-                    <div class="skill-tag">Liderazgo</div>
-                    <div class="skill-tag">Adaptabilidad</div>
-                    <div class="skill-tag">Proactividad</div>
-                    <div class="skill-tag">Resolución de Problemas</div>
-                    <div class="skill-tag">Pensamiento Crítico</div>
-                    <div class="skill-tag">Creatividad</div>
+                <div class="about-content">
+                    <p>Hi there! I'm **Jairo Barrientos**, a passionate **Full Stack Web Developer** based in Santa Elena, Entre Ríos, Argentina. My journey in technology began with a deep curiosity for how digital experiences are built and secured.</p>
+                    <p>With extensive experience in developing robust web applications using **React, Node.js, and PHP**, along with strong skills in **Python for backend development, scripting, and automation**, and expertise in **MySQL, PostgreSQL, and MongoDB databases**, I'm dedicated to creating efficient, scalable, and visually appealing solutions. My focus is on **functionality, user experience (UI/UX)**, and **SEO optimization**.</p>
+                    <p>Additionally, my **Cisco Certified CyberOps Associate** certification provides me with a unique perspective in **cybersecurity**, allowing me not only to build but also to protect digital systems. I firmly believe that a modern developer must understand both worlds to offer truly comprehensive solutions.</p>
+                    <p>I'm always learning and exploring new technologies, seeking challenges that allow me to grow and contribute to innovative projects. Outside of coding, I enjoy [mention a brief personal hobby or interest, e.g., photography, music, hiking] which helps keep my mind fresh and creative.</p>
+                    <a href="#contact" class="cta-button">Let's talk about your project!</a>
                 </div>
             </div>
         </section>
 
-        ---
-
-        <section id="certifications" class="section-certifications" role="region" aria-labelledby="certifications-heading">
-            <div class="certifications-wrapper">
-                <h2 id="certifications-heading">Logros Destacados y Certificaciones</h2>
-                <div class="certification-grid">
-                    <article class="certification-card cisco-card" role="article" aria-labelledby="cisco-cert-title">
-                        <div class="card-header">
-                            <h3 id="cisco-cert-title">Cisco Certified CyberOps Associate</h3>
-                            <p class="issuer">Emitido por Cisco Systems</p>
-                        </div>
-                        <div class="card-content">
-                            <p>Certificado en operaciones avanzadas de ciberseguridad, análisis de amenazas y respuesta a incidentes. Esta certificación valida un fuerte entendimiento de conceptos de seguridad, monitoreo, análisis basado en host, análisis de intrusiones de red y políticas de seguridad.</p>
-                            <div class="credly-badge-embed">
-                                <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="certification-card other-cert-card" role="article" aria-labelledby="js-cert-title">
-                        <div class="card-header">
-                            <h3 id="js-cert-title">Desarrollo Avanzado con JavaScript</h3>
-                            <p class="issuer">Emitido por [Nombre de Plataforma/Institución]</p>
-                        </div>
-                        <div class="card-content">
-                            <p>Dominio de patrones complejos de JavaScript, programación asíncrona y características modernas de ES6+. Enfocado en la construcción de aplicaciones web escalables y mantenibles.</p>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
-                        </div>
-                    </article>
-
+        <section class="section-services" id="services">
+            <h2 class="holographic-text" data-text="Services & Expertise">Services & Expertise</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Full Stack Web Development</h3>
+                    <p>Building complete web applications, from database to user interface, using modern technologies like React, Node.js, PHP, and Python. Experienced with RESTful APIs and microservices.</p>
+                    <ul>
+                        <li>Front-end (React, JavaScript, HTML5, CSS3)</li>
+                        <li>Back-end (Node.js, Express, PHP, Laravel, Python, Django, Flask)</li>
+                        <li>Databases (MySQL, PostgreSQL, MongoDB, SQLite)</li>
+                    </ul>
                 </div>
+                <div class="service-card">
+                    <h3>Cybersecurity & Audit</h3>
+                    <p>Protecting systems and data. Identifying vulnerabilities, threat analysis, implementing security measures, and ensuring compliance with regulations.</p>
+                    <ul>
+                        <li>Vulnerability Analysis & Penetration Testing</li>
+                        <li>Web Application Security (OWASP, WAF)</li>
+                        <li>Threat Monitoring & Detection (SIEM)</li>
+                        <li>Incident Response Planning</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Performance & SEO Optimization</h3>
+                    <p>Improving loading speed, user experience, and search engine visibility to ensure your project reaches its full potential.</p>
+                    <ul>
+                        <li>Speed Optimization (Core Web Vitals, Lighthouse)</li>
+                        <li>On-Page & Technical SEO (Schema Markup, sitemaps)</li>
+                        <li>Web Accessibility (WCAG Compliance)</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Digital Consulting & Strategy</h3>
+                    <p>Expert advice to transform your ideas into effective digital solutions, defining architecture, technologies, and roadmap.</p>
+                    <ul>
+                        <li>Project Planning & Management (Agile, Scrum)</li>
+                        <li>Cloud Solutions (AWS, Azure, Google Cloud)</li>
+                        <li>AI Tool Integration & Automation</li>
+                        <li>DevOps & CI/CD Pipelines</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-projects" id="projects">
+            <h2 class="holographic-text" data-text="My Projects">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                        <div class="project-svg-container">
+                            <img src="assets/images/financiator-thumbnail.png" alt="Financial Simulator Project Thumbnail">
+                        </div>
+                        <div class="project-content">
+                            <h3>Financial Simulator</h3>
+                            <p>An interactive tool for calculating loans, investments, and financial projections, designed for efficient economic management.</p>
+                        </div>
+                        <div class="project-button-wrapper">
+                            <span class="project-button" aria-hidden="true">View Project</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <a href="ecommerce-ia/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                        <div class="project-svg-container">
+                            <img src="assets/images/ecommerce-ia-thumbnail.png" alt="AI-Driven E-commerce Platform Project Thumbnail">
+                        </div>
+                        <div class="project-content">
+                            <h3>AI-Driven E-commerce Platform</h3>
+                            <p>Development of an online store with artificial intelligence functionalities for product personalization and sales optimization.</p>
+                        </div>
+                        <div class="project-button-wrapper">
+                            <span class="project-button" aria-hidden="true">View Project</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <a href="cyber-dashboard/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                        <div class="project-svg-container">
+                            <img src="assets/images/cyber-dashboard-thumbnail.png" alt="Interactive Cybersecurity Dashboard Project Thumbnail">
+                        </div>
+                        <div class="project-content">
+                            <h3>Interactive Cybersecurity Dashboard</h3>
+                            <p>Visual control panel for real-time threat monitoring, log analysis, and vulnerability management.</p>
+                        </div>
+                        <div class="project-button-wrapper">
+                            <span class="project-button" aria-hidden="true">View Project</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-skills" id="skills">
+            <h2 class="holographic-text" data-text="My Skills">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-tag">HTML5</div>
+                <div class="skill-tag">CSS3</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">React.js</div>
+                <div class="skill-tag">Next.js</div>
+                <div class="skill-tag">Node.js</div>
+                <div class="skill-tag">Express.js</div>
+                <div class="skill-tag">PHP</div>
+                <div class="skill-tag">Laravel</div>
+                <div class="skill-tag python">Python</div>
+                <div class="skill-tag python">Django</div>
+                <div class="skill-tag python">Flask</div>
+                <div class="skill-tag">SQL</div>
+                <div class="skill-tag">MySQL</div>
+                <div class="skill-tag">PostgreSQL</div>
+                <div class="skill-tag">MongoDB</div>
+                <div class="skill-tag">Git & GitHub</div>
+                <div class="skill-tag">RESTful APIs</div>
+                <div class="skill-tag">GraphQL</div>
+                <div class="skill-tag">Docker</div>
+                <div class="skill-tag">Kubernetes</div>
+                <div class="skill-tag">AWS</div>
+                <div class="skill-tag">Azure</div>
+                <div class="skill-tag">Google Cloud</div>
+                <div class="skill-tag">CI/CD</div>
+                <div class="skill-tag">DevOps</div>
+                <div class="skill-tag">Cybersecurity Audit</div>
+                <div class="skill-tag">Network Security</div>
+                <div class="skill-tag">Cloud Security</div>
+                <div class="skill-tag">Incident Response</div>
+                <div class="skill-tag">Linux</div>
+                <div class="skill-tag">Bash Scripting</div>
+                <div class="skill-tag">Data Structures</div>
+                <div class="skill-tag">Algorithms</div>
+                <div class="skill-tag">UI/UX Design</div>
+                <div class="skill-tag">Figma</div>
+                <div class="skill-tag">SEO Optimization</div>
+                <div class="skill-tag">Web Accessibility</div>
+                <div class="skill-tag">Technical Writing</div>
+            </div>
+        </section>
+
+        <section class="section-certifications" id="certifications">
+            <h2 class="holographic-text" data-text="Certifications">Certifications</h2>
+            <div class="certifications-grid">
+                <div class="certification-card">
+                    <h3>Cisco Certified CyberOps Associate</h3>
+                    <p>Demonstrates proficiency in security concepts, security monitoring, host-based analysis, network intrusion analysis, and security policies and procedures.</p>
+                    <span class="cert-issuer">Cisco Systems</span>
+                    <a href="https://www.credly.com/go/your-cisco-cert-link" target="_blank" rel="noopener noreferrer" class="cert-link">View Credential</a>
+                </div>
+                <div class="certification-card">
+                    <h3>IBM Full Stack Software Developer Professional Certificate</h3>
+                    <p>Covers a wide range of full stack development skills including front-end, back-end, and database development.</p>
+                    <span class="cert-issuer">IBM (via Coursera)</span>
+                    <a href="https://www.credly.com/go/your-ibm-cert-link" target="_blank" rel="noopener noreferrer" class="cert-link">View Credential</a>
+                </div>
+                <div class="certification-card">
+                    <h3>JavaScript Algorithms and Data Structures</h3>
+                    <p>Mastering fundamental programming concepts with JavaScript, including algorithms and data structures.</p>
+                    <span class="cert-issuer">freeCodeCamp</span>
+                    <a href="https://www.freecodecamp.org/fcc-cert-link" target="_blank" rel="noopener noreferrer" class="cert-link">View Credential</a>
+                </div>
+                <div class="certification-card">
+                    <h3>Python for Everybody Specialization</h3>
+                    <p>A comprehensive introduction to Python programming, covering data structures, network programming, and databases.</p>
+                    <span class="cert-issuer">University of Michigan (via Coursera)</span>
+                    <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/your-python-cert-link" target="_blank" rel="noopener noreferrer" class="cert-link">View Credential</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-ai-automation" id="ai-automation">
+            <h2 class="holographic-text" data-text="Automate with AI: Next Level Business">Automate with AI: Take Your Business to the Next Level</h2>
+            <div class="ai-automation-section">
+                <div class="ai-content">
+                    <p>In today's digital world, **Artificial Intelligence (AI)** is not just a buzzword, it's a **transformative tool** that can revolutionize how you operate. I offer customized solutions to integrate AI into your business, **automating repetitive tasks, optimizing processes, and gaining valuable insights**.</p>
+                    <p>From **smart chatbots** that enhance customer service to **predictive data analytics** that inform your strategic decisions, I help you harness the power of AI to:</p>
+                    <ul>
+                        <li>**Increase efficiency** and reduce operational costs.</li>
+                        <li>**Personalize customer experiences** at scale.</li>
+                        <li>**Make smarter decisions** based on data.</li>
+                        <li>**Free up your team** to focus on innovation.</li>
+                    </ul>
+                    <p>**Are you ready to unleash the potential of AI in your company?**</p>
+                    <a href="#contact" class="cta-button ai-cta">Transform Your Business with AI</a>
+                </div>
+                <div class="ai-visual">
+                    <img src="assets/images/ai-concept.png" alt="AI Automation Concept">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-contact" id="contact">
+            <h2 class="holographic-text" data-text="Contact Me">Contact Me</h2>
+            <div class="contact-section">
+                <div class="contact-content">
+                    <p>Do you have an innovative idea or need an expert in development and cybersecurity? Let's talk! Fill out the form or contact me directly.</p>
+                    <div class="contact-details">
+                        <p><strong>Email:</strong> <a href="mailto:jairo.barrientos@example.com">jairo.barrientos@example.com</a></p>
+                        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer">My Profile</a></p>
+                        <p><strong>GitHub:</strong> <a href="https://github.com/JairoBarrientosDev" target="_blank" rel="noopener noreferrer">My Repository</a></p>
+                        <p><strong>Location:</strong> Santa Elena, Entre Ríos, Argentina</p>
+                    </div>
+                </div>
+
+                <form class="contact-form" action="your_server_endpoint" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="your@example.com">
+
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" placeholder="Topic of your message">
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Write your message here..."></textarea>
+
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
             </div>
         </section>
     </main>
 
-    <div id="contact-fab-target"></div>
-    <div class="contact-fab" role="button" tabindex="0" aria-label="Contactar a Jairo Barrientos">
-        <span class="fab-icon" aria-hidden="true">&oplus;</span> <div class="contact-info">
-            <a href="https://wa.me/543437457636" target="_blank" rel="noopener noreferrer" aria-label="Enviar mensaje a Jairo Barrientos por WhatsApp">
-                <svg viewBox="0 0 24 24"><path d="M12.04 2C7.34 2 3.56 5.78 3.56 10.48c0 2.51 1.05 4.88 2.87 6.64l-1.04 3.73 3.82-1.01c1.64 1 3.53 1.57 5.76 1.57 4.7 0 8.48-3.78 8.48-8.48S16.74 2 12.04 2zm0 15.68c-1.8 0-3.48-.5-4.9-1.42l-.35-.2-.93.24-.22.06-.05.01-.22.06-1.04 2.76 2.83-.75.32-.08.2-.05c1.37.8 2.94 1.25 4.71 1.25 3.56 0 6.46-2.9 6.46-6.46S15.6 4.02 12.04 4.02 5.58 6.92 5.58 10.48c0 2.12 1.05 4.07 2.78 5.25l.13.09.07.05.07.06.1.06zm4.84-5.32c-.09-.05-.55-.27-.63-.3c-.08-.03-.17-.05-.24.03-.07.08-.27.3-.33.36-.06.06-.13.07-.24.03-.1-.05-.4-.14-.76-.47-.28-.25-.48-.56-.54-.65-.06-.09-.01-.14.04-.22.04-.08.09-.16.13-.24.03-.08.02-.14-.01-.2-.03-.07-.24-.5-.33-.7-.08-.18-.17-.15-.24-.15h-.25c-.07 0-.15.02-.24.02-.08.01-.3.07-.46.23-.16.16-.62.6-.62 1.46 0 .86.64 1.69.73 1.8.09.11 1.27 1.95 3.07 2.74.37.16.66.26.89.34.36.14.7.12.96.08.29-.05.89-.36 1.02-.72.13-.36.13-.67.09-.73-.04-.06-.14-.1-.23-.15z"/></svg>
-                <span>343-745-7636</span>
-            </a>
-            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de LinkedIn de Jairo Barrientos">
-                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.567c0-1.325-.029-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.665H9.279V9.593h3.419v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 6.879v7.161zM3.494 8.761c-1.229 0-2.203-.993-2.203-2.222 0-1.219.967-2.222 2.203-2.222s2.203.993 2.203 2.222c0 1.229-.967 2.222-2.203 2.222zm1.785 11.691H1.719V9.593h3.55V20.452zM22.229 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.458C23.208 24 24 23.226 24 22.271V1.729C24 .774 23.208 0 22.229 0z"/></svg>
-                <span>LinkedIn</span>
-            </a>
-            <a href="mailto:barrientosjairolemuel@gmail.com" class="email-link" aria-label="Enviar correo electrónico a Jairo Barrientos">
-                <svg viewBox="0 0 24 24"><path d="M12 12.713l-11.75 6.487c.22.42 1.48 1.8 1.75 1.8h18.5c.27 0 1.53-1.38 1.75-1.8L12 12.713zm0-1.426L.25 4.513c-.22-.42-1.48-1.8-1.75-1.8h23.5c.27 0 1.53 1.38 1.75 1.8L12 11.287z"/></svg>
-                <span>barrientosjairolemuel@gmail.com</span>
-            </a>
+    <a href="#contact" class="contact-fab" aria-label="Contact Me">
+        <span class="fab-text">Contact Me</span>
+        <svg class="fab-icon" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+    </a>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Jairo Barrientos. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" aria-label="LinkedIn"><img src="assets/icons/linkedin.svg" alt="LinkedIn"></a>
+            <a href="https://github.com/JairoBarrientosDev" target="_blank" aria-label="GitHub"><img src="assets/icons/github.svg" alt="GitHub"></a>
         </div>
-    </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const styleSheet = document.styleSheets[0];
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu if open
+                    const navMenu = document.querySelector('.nav-menu');
+                    const hamburger = document.querySelector('.hamburger-menu');
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        hamburger.classList.remove('active');
+                    }
+                });
+            });
 
-            // --- Utility Function for Scroll Animations ---
-            const animateOnScroll = (elements, delayMultiplier = 0.1, threshold = 0.2, rootMargin = '0px 0px -50px 0px') => {
-                const observer = new IntersectionObserver((entries, observerInstance) => {
+            // Hamburger menu functionality
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburgerMenu.addEventListener('click', () => {
+                hamburgerMenu.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Header background change on scroll
+            const mainHeader = document.querySelector('.main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    mainHeader.classList.add('scrolled');
+                } else {
+                    mainHeader.classList.remove('scrolled');
+                }
+            });
+
+            // Scroll progress bar
+            const progressBar = document.querySelector('.scroll-progress-bar');
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPosition = window.scrollY;
+                const progress = (scrollPosition / totalHeight) * 100;
+                progressBar.style.width = progress + '%';
+            });
+
+            // Intersection Observer for section animations
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.2 // When 20% of the element is visible
+            };
+
+            const createObserver = (elements, className, threshold = 0.2, delayMultiplier = 0) => {
+                const observer = new IntersectionObserver((entries, obs) => {
                     entries.forEach((entry, index) => {
                         if (entry.isIntersecting) {
-                            if (!prefersReducedMotion) {
-                                entry.target.style.transition = `transform 0.8s var(--bezier-smooth), opacity 0.8s ease ${index * delayMultiplier}s`;
-                                entry.target.style.opacity = '1';
-                                entry.target.style.transform = 'translateY(0) scale(1)';
-                            } else {
-                                entry.target.style.opacity = '1';
-                                entry.target.style.transform = 'translateY(0) scale(1)';
-                            }
-                            observerInstance.unobserve(entry.target);
+                            setTimeout(() => {
+                                entry.target.classList.add(className);
+                            }, index * delayMultiplier); // Apply staggered delay
+                            obs.unobserve(entry.target); // Stop observing once animated
                         }
                     });
-                }, { threshold: threshold, rootMargin: rootMargin });
-
+                }, { threshold: threshold });
                 elements.forEach(el => observer.observe(el));
             };
 
-            // --- Avatar Animations ---
-            const avatar = document.getElementById('my-avatar');
-            const leftEye = avatar.querySelector('.avatar-eye.left');
-            const rightEye = avatar.querySelector('.avatar-eye.right');
-            const glassesPath = avatar.querySelector('.avatar-glasses');
-
-            function randomBlink() {
-                if (prefersReducedMotion) return;
-                setTimeout(() => {
-                    leftEye.classList.add('blink');
-                    rightEye.classList.add('blink');
-                    setTimeout(() => {
-                        leftEye.classList.remove('blink');
-                        rightEye.classList.remove('blink');
-                        randomBlink();
-                    }, 300);
-                }, Math.random() * 3000 + 2000);
-            }
-            randomBlink();
-
-            const avatarContainer = document.querySelector('.avatar-container');
-            const avatarObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !prefersReducedMotion) {
-                        glassesPath.style.animation = 'drawGlasses 2s ease-out forwards 0.5s';
-                        avatarObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            avatarObserver.observe(avatarContainer);
-
-            // --- Project Card Click Handlers ---
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const url = card.dataset.href; // Using dataset for cleaner access
-                    if (url) window.location.href = url;
-                });
-                card.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        const url = card.dataset.href;
-                        if (url) window.location.href = url;
-                    }
-                });
-            });
-
-            // --- Apply Scroll Animations ---
-            animateOnScroll(document.querySelectorAll('.project-card'), 0.2, 0.2, '0px 0px -80px 0px');
-            animateOnScroll(document.querySelectorAll('.skill-tag'), 0.08, 0.1, '0px 0px -50px 0px');
-            animateOnScroll(document.querySelectorAll('.certification-card'), 0.2, 0.2, '0px 0px -100px 0px');
-
-            // --- Project SVGs Animation Trigger ---
-            const projectSvgContainers = document.querySelectorAll('.project-svg-container');
-            const svgObserver = new IntersectionObserver((entries, observerInstance) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (!prefersReducedMotion) {
-                            entry.target.classList.add('animated');
-                        }
-                        observerInstance.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.7 });
-
-            projectSvgContainers.forEach(container => svgObserver.observe(container));
-
-            // --- Floating Contact Button Logic ---
-            const contactFab = document.querySelector('.contact-fab');
-            const contactInfo = contactFab.querySelector('.contact-info');
-            const fabIcon = contactFab.querySelector('.fab-icon');
-
-            contactFab.addEventListener('click', () => {
-                if (contactFab.classList.contains('open')) {
-                    contactInfo.style.animation = 'fadeOut 0.3s forwards';
-                    setTimeout(() => {
-                        contactFab.classList.remove('open');
-                        fabIcon.style.display = 'flex';
-                    }, 300);
-                } else {
-                    contactFab.classList.add('open');
-                    setTimeout(() => {
-                        fabIcon.style.display = 'none';
-                    }, 100);
-                }
-            });
-
-            contactFab.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    contactFab.click();
-                }
-            });
-
-            document.addEventListener('click', (event) => {
-                if (contactFab.classList.contains('open') && !contactFab.contains(event.target)) {
-                    contactInfo.style.animation = 'fadeOut 0.3s forwards';
-                    setTimeout(() => {
-                        contactFab.classList.remove('open');
-                        fabIcon.style.display = 'flex';
-                    }, 300);
-                }
-            });
-
-            // --- Credly Embed Script Load ---
-            const credlyEmbedContainer = document.querySelector('.credly-badge-embed');
-            if (credlyEmbedContainer) {
-                const credlyScript = document.createElement('script');
-                credlyScript.type = 'text/javascript';
-                credlyScript.async = true;
-                credlyScript.src = 'https://cdn.credly.com/assets/utilities/embed.js';
-                document.body.appendChild(credlyScript);
+            // Animate About Me section
+            const aboutSection = document.querySelector('.about-me-section');
+            if (aboutSection) {
+                createObserver([aboutSection], 'is-animated', 0.1);
             }
 
-            // --- Sticky Header and Active Nav Link Logic ---
-            const header = document.querySelector('.main-header');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section[id]');
-            const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+            // Animate Service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            createObserver(serviceCards, 'is-animated', 0.1, 100); // 100ms delay per card
 
-            window.addEventListener('scroll', () => {
-                // Sticky Header
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
+            // Animate Project cards and apply thematic styles
+            const projectCards = document.querySelectorAll('.project-card');
+            createObserver(projectCards, 'is-animated', 0.2, 150); // 150ms delay per card
+
+            projectCards.forEach(card => {
+                const title = card.querySelector('h3').textContent;
+                if (title.includes('Financial')) {
+                    card.classList.add('theme-finance');
+                } else if (title.includes('E-commerce')) {
+                    card.classList.add('theme-ecommerce');
+                } else if (title.includes('Cybersecurity')) {
+                    card.classList.add('theme-cybersecurity');
                 }
-
-                // Active Nav Link
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - header.offsetHeight; // Adjust for sticky header
-                    if (window.scrollY >= sectionTop) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                // Special handling for the contact FAB since it's not a section
-                const contactFabTarget = document.getElementById('contact-fab-target');
-                if (contactFabTarget && window.scrollY + window.innerHeight >= document.body.scrollHeight - 50) { // Near bottom of page
-                    current = 'contact-fab-target';
-                }
-
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.href.includes(current)) {
-                        link.classList.add('active');
-                    }
-                });
-
-                // Scroll Progress Bar
-                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = (window.scrollY / scrollableHeight) * 100;
-                scrollProgressBar.style.width = scrolled + '%';
             });
 
-            // --- Smooth Scroll for Navigation (override default behavior for custom control) ---
-            document.querySelectorAll('.nav-menu a').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - header.offsetHeight, // Adjust for sticky header
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+            // Animate Skill tags
+            const skillTags = document.querySelectorAll('.skill-tag');
+            createObserver(skillTags, 'is-animated', 0.05, 50); // Small threshold, small delay
 
+            // Animate Certification cards
+            const certCards = document.querySelectorAll('.certification-card');
+            createObserver(certCards, 'is-animated', 0.1, 120); // 120ms delay per card
+
+            // Animate AI Automation section
+            const aiAutomationSection = document.querySelector('.ai-automation-section');
+            if (aiAutomationSection) {
+                createObserver([aiAutomationSection], 'is-animated', 0.1);
+            }
+
+            // Animate Contact section
+            const contactSection = document.querySelector('.contact-section');
+            if (contactSection) {
+                createObserver([contactSection], 'is-animated', 0.1);
+            }
         });
     </script>
 </body>
