@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jairo Barrientos | Full Stack Developer & CyberOps Associate</title>
-    <meta name="description" content="Jairo Barrientos: A Full Stack Web Developer with expertise in React, Node.js, PHP, Python, and cybersecurity, based in Santa Elena, Entre Ríos, Argentina.">
-    <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Web Development, React, Node.js, PHP, Python, Cybersecurity, CyberOps, Argentina, Entre Ríos, Portfolio, Frontend, Backend, UI/UX, SEO">
-    <meta name="author" content="Jairo Barrientos">
+    <title>Jairo Lemuel Barrientos | Full Stack Developer & CyberOps Associate</title>
+    <meta name="description" content="Jairo Lemuel Barrientos: A Full Stack Web Developer with expertise in React, Node.js, PHP, Python, cybersecurity, and AI-driven automation. Based in Santa Elena, Entre Ríos, Argentina.">
+    <meta name="keywords" content="Jairo Lemuel Barrientos, Jairo Barrientos, Full Stack Developer, Web Development, React, Node.js, PHP, Python, Cybersecurity, CyberOps, AI Automation, Argentina, Portfolio, Frontend, Backend, UI/UX, SEO, Professional Programmer">
+    <meta name="author" content="Jairo Lemuel Barrientos">
 
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
 
@@ -70,6 +70,8 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            /* Subtle text shadow for improved readability */
+            text-shadow: 0 0 1px rgba(224, 224, 224, 0.1);
         }
 
         a {
@@ -113,6 +115,10 @@
                 0 0 30px rgba(0, 192, 255, 0.3); /* Wider cyan glow */
             position: relative;
             animation: holographicGlow 2s ease-in-out infinite alternate;
+            /* Added very faint noise/grain effect for digital feel */
+            background-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>'),
+                              linear-gradient(45deg, var(--color-primary-light), var(--color-secondary), var(--color-primary));
+            background-blend-mode: overlay; /* Blend noise with gradient */
         }
 
         @keyframes holographicGlow {
@@ -135,6 +141,43 @@
             0% { clip-path: inset(0 100% 0 0); }
             50% { clip-path: inset(0 0 0 0); }
             100% { clip-path: inset(0 0 0 100%); }
+        }
+
+        /* Subtle Glitch/Noise for holographic text */
+        .holographic-text.glitch::before,
+        .holographic-text.glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-dark); /* Match background for glitch lines */
+            overflow: hidden;
+            color: var(--color-primary);
+            opacity: 0;
+            animation: glitchEffect 1.5s infinite linear alternate-reverse;
+        }
+
+        .holographic-text.glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--color-primary-light);
+            animation-delay: 0.1s;
+        }
+
+        .holographic-text.glitch::after {
+            left: -2px;
+            text-shadow: 2px 0 var(--color-secondary);
+            animation-delay: 0.2s;
+        }
+
+        @keyframes glitchEffect {
+            0% { clip-path: inset(100% 0 0 0); opacity: 0; }
+            5% { clip-path: inset(0 0 0 0); opacity: 0.8; }
+            10% { clip-path: inset(80% 0 0 0); opacity: 0.5; }
+            15% { clip-path: inset(0 0 90% 0); opacity: 0.9; }
+            20% { clip-path: inset(0 0 0 0); opacity: 0; }
+            100% { clip-path: inset(0 0 0 0); opacity: 0; }
         }
 
 
@@ -168,6 +211,38 @@
             50% { transform: scale(1.05); opacity: 0.8; }
             100% { transform: scale(1); opacity: 1; }
         }
+
+        /* Particles/Circuit background effect */
+        .background-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2; /* Below the overlay */
+            pointer-events: none;
+            opacity: 0.2; /* Subtle */
+        }
+
+        .background-particles::before {
+            content: '';
+            position: absolute;
+            width: 200%; /* Larger than viewport */
+            height: 200%;
+            background-image: radial-gradient(circle at center, rgba(0, 192, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(138, 43, 226, 0.05) 1px, transparent 1px),
+                              linear-gradient(rgba(0, 192, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px, 40px 40px, 40px 40px; /* Adjust grid size */
+            background-position: 0 0, 0 0, 0 0;
+            animation: backgroundPan 60s linear infinite; /* Slow pan animation */
+        }
+
+        @keyframes backgroundPan {
+            0% { background-position: 0 0, 0 0, 0 0; }
+            100% { background-position: -40px -40px, 40px 40px, -40px 40px; }
+        }
+
 
         /* --- Splash Screen --- */
         #splash-screen {
@@ -369,7 +444,11 @@
 
         .initial-avatar img {
             border: 3px solid var(--color-bg-dark); /* Thinner border for initial view */
+            /* New style for avatar image */
+            filter: saturate(1.2) contrast(1.1) brightness(1.1); /* Slightly more vibrant and brighter */
+            /* Assuming the user will provide a pre-styled image, this filter is a subtle enhancement */
         }
+
 
         .initial-tagline {
             font-family: 'Orbitron', sans-serif; /* Orbitron for tagline */
@@ -487,9 +566,6 @@
             box-shadow: 0 0 30px rgba(0, 192, 255, 0.7);
             animation: avatarGlow 3s ease-in-out infinite alternate;
             z-index: 1;
-            /* opacity: 0; Removed this, managed by initial-hero-content animation */
-            /* transform: scale(0.8); Removed this, managed by initial-hero-content animation */
-            /* transition: opacity 1s ease-out 0.8s, transform 1s ease-out 0.8s; Removed this */
         }
 
 
@@ -499,6 +575,9 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--color-bg-dark);
+            /* Avatar in About Me specific animation */
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation */
+            will-change: transform;
         }
 
         @keyframes avatarGlow {
@@ -530,7 +609,13 @@
             margin-bottom: 3rem;
             text-align: center;
             color: var(--color-primary-light);
+            position: relative; /* For glitch effect */
         }
+        h2.holographic-text.glitch.appear {
+            /* Enable glitch only when visible */
+            animation: holographicGlow 2s ease-in-out infinite alternate, glitchEffect 1.5s linear infinite alternate-reverse;
+        }
+
 
         /* Projects Grid */
         .projects-grid {
@@ -554,10 +639,31 @@
             isolation: isolate; /* Establishes a new stacking context for children */
         }
 
+        .project-card::before { /* Inner glow effect on hover */
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--border-radius-main);
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--color-primary-light), var(--color-secondary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3; /* Ensure it's above other project card elements but below actual content */
+            pointer-events: none; /* Make sure it doesn't interfere with clicks */
+        }
+
         .project-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 40px rgba(0, 192, 255, 0.6);
         }
+
+        .project-card:hover::before { /* Activate inner glow on hover */
+            opacity: 1;
+        }
+
 
         .project-card-link {
             display: flex;
@@ -628,6 +734,7 @@
             box-shadow: 0 5px 15px rgba(0, 192, 255, 0.3);
             transition: all var(--transition-speed) ease;
             cursor: pointer;
+            border: none; /* Ensure no default button border */
         }
 
         .project-card:hover .project-button {
@@ -658,14 +765,35 @@
             overflow: hidden;
             box-shadow: 0 0 25px rgba(0, 192, 255, 0.5);
             flex-shrink: 0; /* Prevents image from shrinking */
+            /* Initial state for scroll animation */
+            transform: translateX(-100px) rotateY(-90deg);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.2s ease-out;
+            will-change: transform, opacity;
+        }
+        .about-me-section.appear .about-image {
+            transform: translateX(0) rotateY(0deg);
+            opacity: 1;
         }
 
         .about-image img {
             width: 100%;
             height: 100%;
+            border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--color-bg-dark);
-            border-radius: 50%;
+        }
+
+        .about-content {
+            /* Initial state for scroll animation */
+            transform: translateX(100px);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s, opacity 1.2s ease-out 0.2s;
+            will-change: transform, opacity;
+        }
+        .about-me-section.appear .about-content {
+            transform: translateX(0);
+            opacity: 1;
         }
 
         .about-content p {
@@ -700,6 +828,15 @@
             text-align: center;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            /* Initial state for scroll animation */
+            transform: translateY(50px) scale(0.9);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        /* Applied by JS after checking viewport */
+        .service-card.appear {
+            transform: translateY(0) scale(1);
+            opacity: 1;
         }
 
         .service-card:hover {
@@ -767,9 +904,41 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            /* Initial state for scroll animation */
+            transform: scale(0.8);
+            opacity: 0;
+            will-change: transform, opacity;
+            padding-left: 35px; /* Added space for the new visual indicator */
+        }
+        /* Applied by JS after checking viewport */
+        .skill-tag.appear {
+            transform: scale(1);
+            opacity: 1;
         }
 
+        /* New: Visual indicator for skill tags */
         .skill-tag::before {
+            content: '';
+            position: absolute;
+            left: 12px; /* Position of the dot/line */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px; /* Size of the dot */
+            height: 8px;
+            border-radius: 50%; /* Makes it a dot */
+            background-color: currentColor; /* Inherits the skill's color */
+            box-shadow: 0 0 5px currentColor; /* Subtle glow */
+            transition: all var(--transition-speed) ease;
+            z-index: 1; /* Ensure it's above the hover effect */
+        }
+
+        .skill-tag:hover::before {
+            transform: translateY(-50%) scale(1.2); /* Slightly larger on hover */
+            box-shadow: 0 0 8px currentColor, 0 0 15px currentColor; /* More pronounced glow */
+        }
+
+        /* Original hover effect for the tag itself (shine) */
+        .skill-tag::after { /* Renamed from ::before to ::after to avoid conflict with new dot */
             content: '';
             position: absolute;
             top: 0;
@@ -778,16 +947,17 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(0, 192, 255, 0.1), transparent);
             transition: left 0.5s ease;
+            z-index: 0; /* Ensure it's behind the dot */
         }
 
-        .skill-tag:hover::before {
+        .skill-tag:hover::after {
             left: 0;
         }
 
         .skill-tag:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 192, 255, 0.4);
-            color: var(--color-primary);
+            color: var(--color-primary); /* This will change the dot color too */
         }
 
         /* Specific skill colors */
@@ -833,6 +1003,15 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            /* Initial state for scroll animation */
+            transform: scale(0.95);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        /* Applied by JS after checking viewport */
+        .certification-card.appear {
+            transform: scale(1);
+            opacity: 1;
         }
 
         .certification-card:hover {
@@ -920,6 +1099,15 @@
 
         .ai-content {
             flex: 1;
+            /* Initial state for scroll animation */
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s, opacity 1.2s ease-out 0.2s;
+            will-change: transform, opacity;
+        }
+        .ai-automation-section.appear .ai-content {
+            transform: translateX(0);
+            opacity: 1;
         }
 
         .ai-content p {
@@ -963,6 +1151,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            /* Initial state for scroll animation */
+            transform: translateX(100px);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.2s ease-out;
+            will-change: transform, opacity;
+        }
+        .ai-automation-section.appear .ai-visual {
+            transform: translateX(0);
+            opacity: 1;
         }
 
         .ai-visual img {
@@ -1000,6 +1197,25 @@
             text-align: left;
             padding: 20px;
         }
+        /* Initial state for scroll animation */
+        .contact-section .contact-content,
+        .contact-section .contact-form {
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.2s ease-out;
+            will-change: transform, opacity;
+        }
+        .contact-section.appear .contact-content {
+            transform: translateY(0);
+            opacity: 1;
+            transition-delay: 0s; /* No delay for first element */
+        }
+        .contact-section.appear .contact-form {
+            transform: translateY(0);
+            opacity: 1;
+            transition-delay: 0.2s; /* Slight delay for form */
+        }
+
 
         .contact-content {
             flex: 1;
@@ -1054,6 +1270,7 @@
 
         .contact-form input[type="text"],
         .contact-form input[type="email"],
+        .contact-form input[type="tel"], /* Added for phone number */
         .contact-form textarea {
             width: 100%;
             padding: 12px;
@@ -1068,6 +1285,7 @@
 
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
+        .contact-form input[type="tel"]:focus,
         .contact-form textarea:focus {
             border-color: var(--color-primary-light);
             box-shadow: 0 0 10px rgba(0, 192, 255, 0.5);
@@ -1248,11 +1466,6 @@
                 flex-direction: column;
                 padding: 30px;
             }
-            .contact-form input[type="text"],
-            .contact-form input[type="email"],
-            .contact-form textarea {
-                width: 100%; /* Full width on smaller screens */
-            }
             .about-image, .ai-visual img {
                 width: 200px;
                 height: 200px;
@@ -1300,15 +1513,13 @@
 </head>
 <body>
     <div id="splash-screen">
-        <h1>Welcome to My Portfolio</h1>
-        <p>Innovating Digital Futures...</p>
+        <h1 class="holographic-text" data-text="Welcome to My Portfolio">Welcome to My Portfolio</h1>
+        <p>The limit is our imagination.</p>
     </div>
 
     <div class="scroll-progress-bar"></div>
-
     <div class="background-overlay"></div>
-
-    <header class="main-header">
+    <div class="background-particles"></div> <header class="main-header">
         <a href="#home" class="logo">Jairo B.</a>
         <nav>
             <ul class="nav-menu">
@@ -1332,12 +1543,12 @@
         <section class="hero-section" id="home">
             <div class="initial-hero-content">
                 <div class="avatar-container initial-avatar">
-                    <img src="assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Barrientos Avatar">
+                    <img src="assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Lemuel Barrientos Digital Illustration Avatar">
                 </div>
                 <p class="initial-tagline">The limit is our imagination.</p>
             </div>
             <div class="hero-content">
-                <h1 class="holographic-text" data-text="Jairo Barrientos: Innovating Digital Futures">Jairo Barrientos: Innovating Digital Futures</h1>
+                <h1 class="holographic-text glitch" data-text="Jairo Lemuel Barrientos: Innovating Digital Futures">Jairo Lemuel Barrientos: Innovating Digital Futures</h1>
                 <p>Full Stack Web Developer | CyberOps Associate</p>
                 <a href="#projects" class="cta-button">View My Work</a>
             </div>
@@ -1345,16 +1556,15 @@
 
         <section class="section-about-me" id="about">
             <h2 class="holographic-text" data-text="About Me">About Me</h2>
-            <div class="about-me-section fade-in">
-                <div class="about-image">
-                    <img src="assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Barrientos" aria-label="Jairo Barrientos Profile Photo">
+            <div class="about-me-section"> <div class="about-image">
+                    <img src="assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Lemuel Barrientos Digital Illustration" aria-label="Jairo Lemuel Barrientos Profile Photo">
                 </div>
                 <div class="about-content">
-                    <p>Hi there! I'm **Jairo Barrientos**, a passionate **Full Stack Web Developer** based in Santa Elena, Entre Ríos, Argentina. My journey in technology began with a deep curiosity for how digital experiences are built and secured.</p>
-                    <p>Con amplia experiencia en el desarrollo de aplicaciones web robustas usando **React, Node.js y PHP**, junto con sólidas habilidades en **Python para desarrollo backend, scripting y automatización**, y expertise en bases de datos **MySQL, PostgreSQL y MongoDB**, me dedico a crear soluciones eficientes, escalables y visualmente atractivas. Mi enfoque está en la **funcionalidad, la experiencia de usuario (UI/UX)**, y la **optimización SEO**.</p>
-                    <p>Además, mi certificación **Cisco Certified CyberOps Associate** me proporciona una perspectiva única en **ciberseguridad**, permitiéndome no solo construir sino también proteger sistemas digitales. Creo firmemente que un desarrollador moderno debe entender ambos mundos para ofrecer soluciones verdaderamente integrales.</p>
-                    <p>Siempre estoy aprendiendo y explorando nuevas tecnologías, buscando desafíos que me permitan crecer y contribuir a proyectos innovadores. Fuera de la codificación, disfruto **explorando nuevas tendencias tecnológicas y contribuyendo a proyectos de código abierto**, lo que ayuda a mantener mi mente fresca y creativa.</p>
-                    <a href="#contact" class="cta-button">¡Hablemos de tu proyecto!</a>
+                    <p>Hi there! I'm **Jairo Lemuel Barrientos**, a passionate **Full Stack Web Developer** based in Santa Elena, Entre Ríos, Argentina. My journey in technology began with a deep curiosity for how digital experiences are built and secured.</p>
+                    <p>With extensive experience in building robust web applications using **React, Node.js, and PHP**, along with strong skills in **Python for backend development, scripting, and automation**, and expertise in **MySQL, PostgreSQL, and MongoDB** databases, I am dedicated to creating efficient, scalable, and visually appealing solutions. My focus is on **functionality, user experience (UI/UX)**, and **SEO optimization**.</p>
+                    <p>Furthermore, my **Cisco Certified CyberOps Associate** certification provides me with a unique perspective on **cybersecurity**, enabling me not only to build but also to protect digital systems. I firmly believe that a modern developer must understand both worlds to offer truly comprehensive solutions.</p>
+                    <p>I am always learning and exploring new technologies, seeking challenges that allow me to grow and contribute to innovative projects. Outside of coding, I enjoy **exploring new tech trends and contributing to open-source projects**, which helps keep my mind fresh and creative.</p>
+                    <a href="#contact" class="cta-button">Let's Discuss Your Project!</a>
                 </div>
             </div>
         </section>
@@ -1362,42 +1572,42 @@
         <section class="section-services" id="services">
             <h2 class="holographic-text" data-text="Services & Expertise">Services & Expertise</h2>
             <div class="services-grid">
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <h3>Full Stack Web Development</h3>
-                    <p>Construcción de aplicaciones web completas, desde la base de datos hasta la interfaz de usuario, utilizando tecnologías modernas como React, Node.js, PHP y Python. Experiencia con APIs RESTful y microservicios.</p>
+                    <p>Building complete web applications, from the database to the user interface, using modern technologies like React, Node.js, PHP, and Python. Experienced with RESTful APIs and microservices.</p>
                     <ul>
                         <li>Front-end (React, JavaScript, HTML5, CSS3)</li>
                         <li>Back-end (Node.js, Express, PHP, Laravel, Python, Django, Flask)</li>
-                        <li>Bases de Datos (MySQL, PostgreSQL, MongoDB, SQLite)</li>
+                        <li>Databases (MySQL, PostgreSQL, MongoDB, SQLite)</li>
                     </ul>
                 </div>
-                <div class="service-card fade-in">
-                    <h3>Ciberseguridad y Auditoría</h3>
-                    <p>Protección de sistemas y datos. Identificación de vulnerabilidades, análisis de amenazas, implementación de medidas de seguridad y aseguramiento del cumplimiento normativo.</p>
+                <div class="service-card">
+                    <h3>Cybersecurity & Audit</h3>
+                    <p>Protecting systems and data. Identifying vulnerabilities, threat analysis, implementing security measures, and ensuring compliance.</p>
                     <ul>
-                        <li>Análisis de Vulnerabilidades y Pruebas de Penetración</li>
-                        <li>Seguridad de Aplicaciones Web (OWASP, WAF)</li>
-                        <li>Monitoreo y Detección de Amenazas (SIEM)</li>
-                        <li>Planificación de Respuesta a Incidentes</li>
+                        <li>Vulnerability Analysis & Penetration Testing</li>
+                        <li>Web Application Security (OWASP, WAF)</li>
+                        <li>Threat Monitoring & Detection (SIEM)</li>
+                        <li>Incident Response Planning</li>
                     </ul>
                 </div>
-                <div class="service-card fade-in">
-                    <h3>Optimización de Rendimiento y SEO</h3>
-                    <p>Mejora de la velocidad de carga, la experiencia de usuario y la visibilidad en motores de búsqueda para asegurar que tu proyecto alcance su máximo potencial.</p>
+                <div class="service-card">
+                    <h3>Performance & SEO Optimization</h3>
+                    <p>Improving loading speed, user experience, and search engine visibility to ensure your project reaches its full potential.</p>
                     <ul>
-                        <li>Optimización de Velocidad (Core Web Vitals, Lighthouse)</li>
-                        <li>SEO On-Page y Técnico (Schema Markup, sitemaps)</li>
-                        <li>Accesibilidad Web (Cumplimiento WCAG)</li>
+                        <li>Speed Optimization (Core Web Vitals, Lighthouse)</li>
+                        <li>On-Page & Technical SEO (Schema Markup, sitemaps)</li>
+                        <li>Web Accessibility (WCAG Compliance)</li>
                     </ul>
                 </div>
-                <div class="service-card fade-in">
-                    <h3>Consultoría Digital y Estrategia</h3>
-                    <p>Asesoramiento experto para transformar tus ideas en soluciones digitales efectivas, definiendo arquitectura, tecnologías y hoja de ruta.</p>
+                <div class="service-card">
+                    <h3>Digital Consulting & Strategy</h3>
+                    <p>Expert advice to transform your ideas into effective digital solutions, defining architecture, technologies, and roadmap.</p>
                     <ul>
-                        <li>Planificación y Gestión de Proyectos (Agile, Scrum)</li>
-                        <li>Soluciones en la Nube (AWS, Azure, Google Cloud)</li>
-                        <li>Integración de Herramientas de IA y Automatización</li>
-                        <li>DevOps y Pipelines CI/CD</li>
+                        <li>Project Planning & Management (Agile, Scrum)</li>
+                        <li>Cloud Solutions (AWS, Azure, Google Cloud)</li>
+                        <li>AI & Automation Tool Integration</li>
+                        <li>DevOps & CI/CD Pipelines</li>
                     </ul>
                 </div>
             </div>
@@ -1406,47 +1616,47 @@
         <section class="section-projects" id="projects">
             <h2 class="holographic-text" data-text="My Projects">My Projects</h2>
             <div class="projects-grid">
-                <div class="project-card fade-in" data-project-type="financial">
+                <div class="project-card" data-project-type="financial">
                     <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
                         <div class="project-svg-container">
-                            <img src="assets/images/financiator-thumbnail.png" alt="Interactive Financial Planner Project Thumbnail">
+                            <img src="assets/images/financiator-thumbnail.png" alt="Intelligent Financial Calculator Project Thumbnail">
                         </div>
                         <div class="project-content">
-                            <h3>Interactive Financial Planner</h3>
-                            <p>Una herramienta intuitiva para calcular préstamos, inversiones y proyecciones financieras, diseñada para una gestión económica eficiente.</p>
+                            <h3>Intelligent Financial Calculator</h3>
+                            <p>An intuitive tool for calculating loans, investments, and financial projections, designed for efficient economic management.</p>
                         </div>
                         <div class="project-button-wrapper">
-                            <span class="project-button" aria-hidden="true">Ver Proyecto</span>
+                            <span class="project-button" aria-hidden="true">View Project</span>
                         </div>
                     </a>
                 </div>
 
-                <div class="project-card fade-in" data-project-type="ecommerce-ai">
+                <div class="project-card" data-project-type="ecommerce-ai">
                     <a href="ecommerce-ia/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
                         <div class="project-svg-container">
-                            <img src="assets/images/ecommerce-ia-thumbnail.png" alt="AI-Powered E-commerce Solution Project Thumbnail">
+                            <img src="assets/images/ecommerce-ia-thumbnail.png" alt="SynergyShop AI - E-commerce Platform Project Thumbnail">
                         </div>
                         <div class="project-content">
-                            <h3>AI-Powered E-commerce Solution</h3>
-                            <p>Desarrollo de una tienda en línea con funcionalidades de inteligencia artificial para la personalización de productos y la optimización de ventas.</p>
+                            <h3>SynergyShop AI - E-commerce Platform</h3>
+                            <p>Development of an online store with artificial intelligence functionalities for product personalization and sales optimization.</p>
                         </div>
                         <div class="project-button-wrapper">
-                            <span class="project-button" aria-hidden="true">Ver Proyecto</span>
+                            <span class="project-button" aria-hidden="true">View Project</span>
                         </div>
                     </a>
                 </div>
 
-                <div class="project-card fade-in" data-project-type="cyber-dashboard">
+                <div class="project-card" data-project-type="cyber-dashboard">
                     <a href="cyber-dashboard/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
                         <div class="project-svg-container">
-                            <img src="assets/images/cyber-dashboard-thumbnail.png" alt="Real-time Threat Monitoring Dashboard Project Thumbnail">
+                            <img src="assets/images/cyber-dashboard-thumbnail.png" alt="CyberWatch Pro - Security Dashboard Project Thumbnail">
                         </div>
                         <div class="project-content">
-                            <h3>Real-time Threat Monitoring Dashboard</h3>
-                            <p>Un panel de control visual para el monitoreo de amenazas en tiempo real, análisis de registros y gestión de vulnerabilidades, mejorando las operaciones de ciberseguridad.</p>
+                            <h3>CyberWatch Pro - Security Dashboard</h3>
+                            <p>A visual control panel for real-time threat monitoring, log analysis, and vulnerability management, enhancing cybersecurity operations.</p>
                         </div>
                         <div class="project-button-wrapper">
-                            <span class="project-button" aria-hidden="true">Ver Proyecto</span>
+                            <span class="project-button" aria-hidden="true">View Project</span>
                         </div>
                     </a>
                 </div>
@@ -1455,7 +1665,7 @@
 
         <section class="section-skills" id="skills">
             <h2 class="holographic-text" data-text="My Skills">My Skills</h2>
-            <div class="skills-container fade-in">
+            <div class="skills-container">
                 <div class="skill-tag html">HTML5</div>
                 <div class="skill-tag css">CSS3</div>
                 <div class="skill-tag javascript">JavaScript</div>
@@ -1501,50 +1711,32 @@
         <section class="section-certifications" id="certifications">
             <h2 class="holographic-text" data-text="Certifications">Certifications</h2>
             <div class="certifications-grid">
-                <div class="certification-card fade-in">
+                <div class="certification-card">
                     <h3>Cisco Certified CyberOps Associate</h3>
-                    <p>Demuestra competencia en conceptos de seguridad, monitoreo de seguridad, análisis basado en host, análisis de intrusiones de red y políticas y procedimientos de seguridad.</p>
+                    <p>Demonstrates competence in security concepts, security monitoring, host-based analysis, network intrusion analysis, and security policies and procedures.</p>
                     <span class="cert-issuer">Cisco Systems</span>
                     <div class="credly-badge">
                         <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
                     </div>
                 </div>
-                <div class="certification-card fade-in">
-                    <h3>IBM Full Stack Software Developer Professional Certificate</h3>
-                    <p>Cubre una amplia gama de habilidades de desarrollo full stack, incluyendo desarrollo front-end, back-end y bases de datos.</p>
-                    <span class="cert-issuer">IBM (via Coursera)</span>
-                    <a href="https://www.credly.com/go/your-ibm-cert-link" target="_blank" rel="noopener noreferrer" class="cert-link">Ver Credencial</a>
-                </div>
-                <div class="certification-card fade-in">
-                    <h3>JavaScript Algorithms and Data Structures</h3>
-                    <p>Dominio de conceptos fundamentales de programación con JavaScript, incluyendo algoritmos y estructuras de datos.</p>
-                    <span class="cert-issuer">freeCodeCamp</span>
-                    <a href="https://www.freecodecamp.org/fcc-cert-link" target="_blank" rel="noopener noreferrer" class="cert-link">Ver Credencial</a>
-                </div>
-                <div class="certification-card fade-in">
-                    <h3>Python for Everybody Specialization</h3>
-                    <p>Una introducción completa a la programación en Python, cubriendo estructuras de datos, programación de red y bases de datos.</p>
-                    <span class="cert-issuer">University of Michigan (via Coursera)</span>
-                    <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/your-python-cert-link" target="_blank" rel="noopener noreferrer" class="cert-link">Ver Credencial</a>
-                </div>
             </div>
         </section>
 
         <section class="section-ai-automation" id="ai-automation">
-            <h2 class="holographic-text" data-text="Automate with AI: Next Level Business">Automatiza con IA: Lleva Tu Negocio al Siguiente Nivel</h2>
-            <div class="ai-automation-section fade-in">
+            <h2 class="holographic-text" data-text="Automate with AI: Next Level Business">Automate with AI: Next Level Business</h2>
+            <div class="ai-automation-section">
                 <div class="ai-content">
-                    <p>En el mundo digital actual, la **Inteligencia Artificial (IA)** no es solo una palabra de moda, es una **herramienta transformadora** que puede revolucionar la forma en que operas. Ofrezco soluciones personalizadas para integrar la IA y la automatización en tus procesos de negocio, ayudándote a lograr una eficiencia e innovación sin precedentes.</p>
-                    <p>Mi expertise cubre:</p>
+                    <p>In today's digital world, **Artificial Intelligence (AI)** is not just a buzzword; it's a **transformative tool** that can revolutionize the way you operate. I offer tailored solutions to integrate AI and automation into your business processes, helping you achieve unprecedented efficiency and innovation.</p>
+                    <p>My expertise covers:</p>
                     <ul>
-                        <li>Automatización impulsada por IA para tareas repetitivas y flujos de trabajo.</li>
-                        <li>Análisis de datos inteligente y generación de insights.</li>
-                        <li>Desarrollo de modelos de IA personalizados para necesidades empresariales específicas.</li>
-                        <li>Integración de Grandes Modelos de Lenguaje (LLMs) para una interacción de usuario mejorada.</li>
-                        <li>Estrategias para aprovechar la IA y aumentar la productividad y reducir los costos operativos.</li>
+                        <li>AI-driven automation for repetitive tasks and workflows.</li>
+                        <li>Intelligent data analysis and insight generation.</li>
+                        <li>Development of custom AI models for specific business needs.</li>
+                        <li>Integration of Large Language Models (LLMs) for enhanced user interaction.</li>
+                        <li>Strategies to leverage AI to boost productivity and reduce operational costs.</li>
                     </ul>
-                    <p>¡Desbloqueemos todo el potencial de la IA para tu empresa y optimicemos tus operaciones para el crecimiento futuro!</p>
-                    <a href="#contact" class="cta-button ai-cta">Descubre Soluciones de IA</a>
+                    <p>Let's unlock the full potential of AI for your business and optimize your operations for future growth!</p>
+                    <a href="#contact" class="cta-button ai-cta">Discover AI Solutions</a>
                 </div>
                 <div class="ai-visual">
                     <img src="assets/images/ai-robot.png" alt="AI Robot Illustration">
@@ -1553,10 +1745,10 @@
         </section>
 
         <section class="section-contact" id="contact">
-            <h2 class="holographic-text" data-text="Get In Touch">Ponte en Contacto</h2>
-            <div class="contact-section fade-in">
+            <h2 class="holographic-text" data-text="Get In Touch">Get In Touch</h2>
+            <div class="contact-section">
                 <div class="contact-content">
-                    <p>Siempre estoy emocionado de discutir nuevos proyectos, ideas innovadoras o posibles colaboraciones. Ya sea que busques un desarrollador full-stack, experiencia en ciberseguridad, o simplemente quieras charlar sobre el futuro de la tecnología, ¡no dudes en contactarme!</p>
+                    <p>I'm always excited to discuss new projects, innovative ideas, or potential collaborations. Whether you're looking for a full-stack developer, cybersecurity expertise, or just want to chat about the future of technology, feel free to reach out!</p>
                     <div class="contact-details">
                         <p><strong>Email:</strong> <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
                         <p><strong>WhatsApp:</strong> <a href="https://wa.me/5493437457636" target="_blank" rel="noopener noreferrer">+54 9 3437 457636</a></p>
@@ -1564,19 +1756,22 @@
                     </div>
                 </div>
                 <form class="contact-form" action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST">
-                    <label for="name">Tu Nombre:</label>
+                    <label for="name">Your Name:</label>
                     <input type="text" id="name" name="name" placeholder="John Doe" required>
 
-                    <label for="email">Tu Email:</label>
+                    <label for="email">Your Email:</label>
                     <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
 
-                    <label for="subject">Asunto:</label>
-                    <input type="text" id="subject" name="subject" placeholder="Consulta de Proyecto / Colaboración" required>
+                    <label for="phone">Your Phone Number (Optional):</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
 
-                    <label for="message">Tu Mensaje:</label>
-                    <textarea id="message" name="message" placeholder="Cuéntame sobre tu proyecto o idea..." required></textarea>
+                    <label for="subject">Subject / Reason for Contact:</label>
+                    <input type="text" id="subject" name="subject" placeholder="Project Inquiry / Collaboration" required>
 
-                    <button type="submit" class="submit-button">Enviar Mensaje</button>
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your project or idea..." required></textarea>
+
+                    <button type="submit" class="submit-button">Send Message</button>
                 </form>
             </div>
         </section>
@@ -1584,20 +1779,20 @@
 
     <a href="#contact" class="contact-fab">
         <img src="assets/icons/message-icon.svg" alt="Message Icon" class="fab-icon">
-        Contáctame
+        Contact Me
     </a>
 
     <footer class="main-footer">
-        <p>&copy; <span id="current-year"></span> Jairo Barrientos. Todos los derechos reservados.</p>
-        <p>Construido con pasión e innovación.</p>
+        <p>&copy; <span id="current-year"></span> Jairo Lemuel Barrientos. All rights reserved.</p>
+        <p>Built with passion and innovation.</p>
         <div class="social-links">
-            <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub">
+            <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                 <img src="assets/icons/github-icon.svg" alt="GitHub">
             </a>
-            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn">
+            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
                 <img src="assets/icons/linkedin-icon.svg" alt="LinkedIn">
             </a>
-            <a href="https://twitter.com/your-twitter" target="_blank" rel="noopener noreferrer" aria-label="Perfil de Twitter">
+            <a href="https://twitter.com/your-twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile">
                 <img src="assets/icons/twitter-icon.svg" alt="Twitter">
             </a>
             </div>
@@ -1608,31 +1803,26 @@
             const splashScreen = document.getElementById('splash-screen');
             const heroSection = document.querySelector('.hero-section');
             const initialHeroContent = document.querySelector('.initial-hero-content');
-            const mainHeroContent = document.querySelector('.hero-content'); // This is the main content (h1, p, cta)
             const sections = document.querySelectorAll('section:not(#home)'); // Exclude hero section from general fade-in
             const navMenu = document.querySelector('.nav-menu');
             const hamburgerMenu = document.querySelector('.hamburger-menu');
             const scrollProgressBar = document.querySelector('.scroll-progress-bar');
             const contactFab = document.querySelector('.contact-fab');
+            const holographicTitles = document.querySelectorAll('h2.holographic-text, .hero-content h1.holographic-text');
+
 
             // --- 1. Splash Screen & Initial Hero Animation ---
             if (splashScreen) {
                 // First, hide the splash screen
                 setTimeout(() => {
                     splashScreen.classList.add('hidden');
-                    // After splash screen hides, reveal the initial hero content
-                    setTimeout(() => {
-                        // The initial-hero-content already has its fadeInInitialHero animation defined in CSS
-                        // No need to add a class here. It starts on page load because its opacity and transform properties
-                        // are initially set to 0 and scale(0.9) and then animated to 1 and scale(1) with a delay.
-                    }, 500); // Small delay after splash fades out
-                }, 2000); // Splash screen display for 2 seconds
+                }, 3000); // Splash screen display for 3 seconds
 
                 // Then, after a longer delay, transition from initial hero to main hero content
                 setTimeout(() => {
                     heroSection.classList.add('hide-initial-content'); // Fade out initial content
                     heroSection.classList.add('show-main-content'); // Fade in main content
-                }, 4500); // Wait for initial hero animation to play (e.g., 2s splash + ~2.5s initial hero animations = 4.5s)
+                }, 5000); // Wait for initial hero animation to play (e.g., 3s splash + ~2s initial hero animations = 5s)
 
             } else {
                 // If no splash screen, animate main hero section immediately (for direct access)
@@ -1655,27 +1845,76 @@
             });
 
             // --- 3. Scroll Progress Bar & General Section Animations ---
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the item is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        if (target.id === 'about') { // Specific animation for About Me
+                            const aboutImage = target.querySelector('.about-image');
+                            const aboutContent = target.querySelector('.about-content');
+                            if (aboutImage) aboutImage.classList.add('appear');
+                            if (aboutContent) aboutContent.classList.add('appear');
+                        } else if (target.id === 'services') {
+                            target.querySelectorAll('.service-card').forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('appear');
+                                }, index * 150); // Stagger cards
+                            });
+                        } else if (target.id === 'skills') {
+                            target.querySelectorAll('.skill-tag').forEach((tag, index) => {
+                                setTimeout(() => {
+                                    tag.classList.add('appear');
+                                }, index * 50); // Stagger tags
+                            });
+                        } else if (target.id === 'certifications') {
+                             target.querySelectorAll('.certification-card').forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('appear');
+                                }, index * 150); // Stagger cards
+                            });
+                        } else if (target.id === 'ai-automation') {
+                            const aiContent = target.querySelector('.ai-content');
+                            const aiVisual = target.querySelector('.ai-visual');
+                            if (aiContent) aiContent.classList.add('appear');
+                            if (aiVisual) aiVisual.classList.add('appear');
+                        } else if (target.id === 'contact') {
+                            const contactContent = target.querySelector('.contact-content');
+                            const contactForm = target.querySelector('.contact-form');
+                            if (contactContent) contactContent.classList.add('appear');
+                            if (contactForm) contactForm.classList.add('appear');
+                        } else {
+                            target.classList.add('appear'); // General fade-in for other sections
+                        }
+
+                        // Activate glitch effect on holographic titles when their section appears
+                        target.querySelectorAll('.holographic-text').forEach(title => {
+                            if (title.classList.contains('glitch')) {
+                                title.classList.add('glitch-active'); // Add a class to enable glitch animation
+                            }
+                        });
+
+
+                        observer.unobserve(target); // Stop observing once it's animated
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Scroll progress bar
             window.addEventListener('scroll', () => {
                 const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrollPosition = document.documentElement.scrollTop;
                 const progress = (scrollPosition / totalHeight) * 100;
                 scrollProgressBar.style.width = `${progress}%`;
-
-                // Animate sections on scroll
-                sections.forEach(section => {
-                    const sectionTop = section.getBoundingClientRect().top;
-                    const triggerPoint = window.innerHeight * 0.85; // When 85% of section is visible
-
-                    if (sectionTop < triggerPoint && !section.classList.contains('is-animated')) {
-                        section.classList.add('is-animated');
-                        // Apply 'appear' to children of animated sections
-                        section.querySelectorAll('.fade-in').forEach((el, index) => {
-                            setTimeout(() => {
-                                el.classList.add('appear');
-                            }, index * 100); // Stagger animation for children
-                        });
-                    }
-                });
 
                 // FAB visibility based on scroll
                 if (window.scrollY > 300) { // Show FAB after scrolling down 300px
@@ -1687,26 +1926,53 @@
                 }
             });
 
-            // Initial check for elements in view on page load
-            window.dispatchEvent(new Event('scroll'));
-
-
             // --- 4. Dynamic Current Year in Footer ---
             const currentYearSpan = document.getElementById('current-year');
             if (currentYearSpan) {
                 currentYearSpan.textContent = new Date().getFullYear();
             }
 
-            // --- 5. Project Card Specific JavaScript Enhancements ---
+            // --- 5. Project Card Specific JavaScript Enhancements (SVG-like animations) ---
             const projectCards = document.querySelectorAll('.project-card');
+
+            // Keyframe animations for JS-driven effects (ensure these are only defined once)
+            const styleSheet = document.createElement('style');
+            styleSheet.type = 'text/css';
+            styleSheet.innerText += `
+                @keyframes projectCardGlow {
+                    0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
+                    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
+                    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+                }
+                @keyframes dataFlow {
+                    0% { height: 0; opacity: 0; }
+                    50% { height: 100%; opacity: 0.8; }
+                    100% { height: 0; opacity: 0; transform: translateY(-100%); }
+                }
+                @keyframes aiPulseDot {
+                    0% { opacity: 0; transform: scale(0.5); }
+                    50% { opacity: 1; transform: scale(1); }
+                    100% { opacity: 0; transform: scale(0.5); }
+                }
+                @keyframes scanLine {
+                    0% { top: 0; }
+                    100% { top: 100%; }
+                }
+                /* Additional animation for project card border */
+                @keyframes borderPulse {
+                    0% { border-color: var(--card-border); }
+                    50% { border-color: var(--color-primary-light); }
+                    100% { border-color: var(--card-border); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+
 
             projectCards.forEach(card => {
                 const projectType = card.dataset.projectType;
-                const img = card.querySelector('.project-svg-container img');
 
-                // Add a subtle particle/sparkle effect on hover for all cards
                 card.addEventListener('mouseenter', () => {
-                    // Create a small, temporary glowing element
+                    // General glow effect for all cards on hover
                     const glowEffect = document.createElement('div');
                     glowEffect.style.cssText = `
                         position: absolute;
@@ -1724,30 +1990,32 @@
                         z-index: 2;
                     `;
                     card.appendChild(glowEffect);
-                    setTimeout(() => glowEffect.remove(), 800); // Remove after animation
 
                     // Specific effects based on project type
                     if (projectType === 'financial') {
                         // Simulate data flow/graph lines
-                        const line = document.createElement('div');
-                        line.style.cssText = `
-                            position: absolute;
-                            width: 2px;
-                            height: 0;
-                            background: linear-gradient(to bottom, ${getComputedStyle(card).getPropertyValue('--color-accent')}, transparent);
-                            left: ${Math.random() * 100}%;
-                            bottom: 0;
-                            animation: dataFlow ${1 + Math.random()}s linear forwards;
-                            opacity: 0.8;
-                            pointer-events: none;
-                            z-index: 1;
-                        `;
-                        card.appendChild(line);
-                        setTimeout(() => line.remove(), 1000);
+                        for(let i=0; i<3; i++) {
+                            const line = document.createElement('div');
+                            line.className = 'temp-animation-element'; // Add class for easy removal
+                            line.style.cssText = `
+                                position: absolute;
+                                width: 2px;
+                                height: 0;
+                                background: linear-gradient(to bottom, var(--color-accent), transparent);
+                                left: ${Math.random() * 90 + 5}%; /* Random horizontal position */
+                                bottom: 0;
+                                animation: dataFlow ${1.5 + Math.random()}s linear forwards ${i * 0.2}s; /* Staggered animation */
+                                opacity: 0.8;
+                                pointer-events: none;
+                                z-index: 1;
+                            `;
+                            card.appendChild(line);
+                        }
                     } else if (projectType === 'ecommerce-ai') {
                         // Subtle 'thinking' or 'connection' dots
-                        for (let i = 0; i < 3; i++) {
+                        for (let i = 0; i < 5; i++) {
                             const dot = document.createElement('div');
+                            dot.className = 'temp-animation-element'; // Add class for easy removal
                             dot.style.cssText = `
                                 position: absolute;
                                 width: 5px;
@@ -1755,19 +2023,19 @@
                                 background-color: #ADD8E6;
                                 border-radius: 50%;
                                 opacity: 0;
-                                animation: aiPulse ${0.5 + Math.random() * 0.5}s infinite alternate;
-                                left: ${Math.random() * 100}%;
-                                top: ${Math.random() * 100}%;
+                                animation: aiPulseDot ${0.5 + Math.random() * 0.5}s infinite alternate ${i * 0.1}s; /* Staggered pulse */
+                                left: ${Math.random() * 90 + 5}%;
+                                top: ${Math.random() * 90 + 5}%;
                                 box-shadow: 0 0 8px #ADD8E6;
                                 pointer-events: none;
                                 z-index: 1;
                             `;
                             card.appendChild(dot);
-                            setTimeout(() => dot.remove(), 1500); // Remove after a short while
                         }
                     } else if (projectType === 'cyber-dashboard') {
-                        // "Scanning" line effect
+                        // "Scanning" line effect and border pulse
                         const scanLine = document.createElement('div');
+                        scanLine.className = 'temp-animation-element'; // Add class for easy removal
                         scanLine.style.cssText = `
                             position: absolute;
                             top: 0;
@@ -1776,59 +2044,27 @@
                             height: 3px;
                             background: linear-gradient(to right, transparent, var(--color-security), transparent);
                             opacity: 0.7;
-                            animation: scanLine 1s linear infinite;
+                            animation: scanLine 1s linear forwards;
                             pointer-events: none;
                             z-index: 1;
                         `;
                         card.appendChild(scanLine);
-                        // Store interval ID to clear it later
-                        card.dataset.scanLineInterval = setInterval(() => {
-                            // Create a new element each time to ensure animation restarts
-                            const newScanLine = scanLine.cloneNode();
-                            card.appendChild(newScanLine);
-                            setTimeout(() => newScanLine.remove(), 1000);
-                        }, 500); // Add new scan lines periodically
+
+                        // Add a subtle border pulse animation directly to the card
+                        card.style.animation = 'borderPulse 2s infinite alternate';
                     }
                 });
 
                 card.addEventListener('mouseleave', () => {
-                    // Clean up any continuous animations on mouse leave
-                    if (projectType === 'cyber-dashboard' && card.dataset.scanLineInterval) {
-                        clearInterval(card.dataset.scanLineInterval);
-                        // Remove all generated scan lines
-                        card.querySelectorAll('.project-card > div[style*="animation: scanLine"]').forEach(el => el.remove());
-                    }
-                     // Remove any temporary glowing effects if still present
-                     card.querySelectorAll('.project-card > div[style*="animation: projectCardGlow"]').forEach(el => el.remove());
+                    // Clean up any temporary animation elements
+                    card.querySelectorAll('.temp-animation-element').forEach(el => el.remove());
+                    // Remove continuous animations from card
+                    card.style.animation = ''; // Remove borderPulse animation
                 });
             });
 
-            // Keyframe animations for JS-driven effects
-            // Ensure these are only defined once, not repeatedly on hover
-            const styleSheet = document.createElement('style');
-            styleSheet.type = 'text/css';
-            styleSheet.innerText = `
-                @keyframes projectCardGlow {
-                    0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
-                    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
-                    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-                }
-                @keyframes dataFlow {
-                    0% { height: 0; opacity: 0; }
-                    50% { height: 100%; opacity: 0.8; }
-                    100% { height: 0; opacity: 0; transform: translateY(-100%); }
-                }
-                @keyframes aiPulse {
-                    0% { opacity: 0; transform: scale(0.5); }
-                    50% { opacity: 1; transform: scale(1); }
-                    100% { opacity: 0; transform: scale(0.5); }
-                }
-                @keyframes scanLine {
-                    0% { top: 0; }
-                    100% { top: 100%; }
-                }
-            `;
-            document.head.appendChild(styleSheet);
+            // Initial check for elements in view on page load
+            window.dispatchEvent(new Event('scroll'));
         });
     </script>
 </body>
