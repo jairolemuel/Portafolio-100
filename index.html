@@ -3,272 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jairo Lemuel Barrientos - Full Stack & Cybersecurity Portfolio</title>
-    <meta name="description" content="Jairo Barrientos's professional portfolio showcasing Full Stack Web Development and Cybersecurity projects and skills.">
-    <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Cybersecurity Associate, Web Development, Portfolio, Projects, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, UI/UX, SEO">
-    <meta name="author" content="Jairo Barrientos">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.yourportfolio.com/">
-    <meta property="og:title" content="Jairo Barrientos - Full Stack & Cybersecurity Portfolio">
-    <meta property="og:description" content="Crafting secure and innovative web experiences. Explore my projects, skills, and certifications.">
-    <meta property="og:image" content="https://www.yourportfolio.com/assets/images/og-image.jpg">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.yourportfolio.com/">
-    <meta property="twitter:title" content="Jairo Barrientos - Full Stack & Cybersecurity Portfolio">
-    <meta property="twitter:description" content="Crafting secure and innovative web experiences. Explore my projects, skills, and certifications.">
-    <meta property="twitter:image" content="https://www.yourportfolio.com/assets/images/twitter-image.jpg">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>Jairo Barrientos - Full Stack & Cybersecurity Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        /* --- Root Variables (Color Palette & Global Settings) --- */
+        /* --- Variables CSS: Define your color palette and other global values --- */
         :root {
-            --color-primary: #00C0FF; /* Bright Cyan Blue - Main accent */
-            --color-primary-light: #00E5FF; /* Lighter Cyan */
-            --color-secondary: #8000FF; /* Vibrant Purple */
-            --color-accent-glow: rgba(0, 192, 255, 0.6); /* For softer glows */
-            --glow-light-alpha: rgba(0, 192, 255, 0.4); /* General glow effect */
+            --color-primary: #00e5ff; /* Bright Cyan - for highlights, primary text, glows */
+            --color-secondary: #8000ff; /* Vibrant Purple - for accents, gradients */
+            --color-primary-light: #00ffff; /* Lighter Cyan - for certain texts/borders */
 
-            --color-bg-dark: #0A0A1E; /* Very Dark Blue/Purple - Main background */
-            --color-bg-light: #12122F; /* Slightly lighter for sections */
-            --color-bg-gradient-start: #0B0E20;
-            --color-bg-gradient-mid: #180D30; /* Darker purple tint */
-            --color-bg-gradient-end: #0B0E20;
+            --color-text-dark: #cccccc; /* General body text color */
+            --color-text-light: #f0f0f0; /* Headings, main interactive elements */
+            --color-text-medium: #a0a0a0; /* Subtitles, descriptions */
 
-            --color-text-light: #E0E0E0; /* Light gray for general text */
-            --color-text-medium: #B0B0B0; /* Medium gray */
-            --color-text-dark: #888888; /* Darker gray for less prominent text */
+            --color-bg-dark: #1a1a2e; /* Deep Blue-Purple - Main background */
+            --color-bg-light: #2c3e50; /* Slightly lighter background for sections */
+            --color-bg-gradient-start: #0a0a1a; /* Darkest gradient start */
+            --color-bg-gradient-mid: #100a20; /* Mid gradient color */
 
-            --card-bg: rgba(18, 18, 47, 0.7); /* Dark semi-transparent background for cards */
-            --card-border: rgba(0, 192, 255, 0.3); /* Subtle blue border for cards */
+            --card-bg: rgba(26, 42, 62, 0.75); /* Semi-transparent dark card background */
+            --card-border: rgba(0, 192, 255, 0.3); /* Card border for a techy feel */
 
-            --font-heading: 'Rajdhani', sans-serif;
-            --font-body: 'Poppins', sans-serif;
+            --glow-light-alpha: rgba(0, 192, 255, 0.5); /* General light glow */
+            --glow-dark-alpha: rgba(128, 0, 255, 0.4); /* General dark glow */
 
-            --spacing-section: 120px; /* Standard vertical padding for sections */
-            --transition-speed: 0.5s;
-            --bezier-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --bezier-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --bezier-smooth: cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition timing function */
+            --bezier-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy transition timing function */
+
+            /* Font Families */
+            --font-heading: 'Orbitron', sans-serif; /* Futuristic for titles */
+            --font-body: 'Montserrat', sans-serif; /* Modern and readable for text */
         }
 
-        /* --- Base Styles --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
+        /* --- General Base Styles --- */
         html {
             scroll-behavior: smooth;
         }
 
         body {
             font-family: var(--font-body);
-            color: var(--color-text-light);
+            margin: 0;
+            padding: 0;
+            color: var(--color-text-dark);
             background-color: var(--color-bg-dark);
+            text-align: center;
             line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         a {
-            color: var(--color-primary);
+            color: var(--color-primary-light);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         a:hover {
-            color: var(--color-primary-light);
-            text-decoration: underline;
+            color: var(--color-secondary);
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-            color: var(--color-primary-light);
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(0, 192, 255, 0.3);
-            letter-spacing: 1px;
+        section {
+            padding: 100px 50px;
+            position: relative;
+            z-index: 2; /* Ensure sections are above background effects */
+            min-height: 80vh; /* Give sections some minimum height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Utility classes for animation */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity var(--transition-speed) var(--bezier-smooth), transform var(--transition-speed) var(--bezier-smooth);
-            will-change: opacity, transform;
-        }
-
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- Welcome Overlay Specific Styles --- */
-        /* Variables CSS para personalización para el overlay */
-        :root {
-            --color-bg-dark-overlay: #0A0F1A; /* Fondo oscuro espacial para el overlay */
-            --color-primary-overlay: #00FFFF; /* Cian eléctrico vibrante para el brillo principal del overlay */
-            --color-primary-light-overlay: #66FFFF; /* Cian más claro para el halo del overlay */
-            --color-text-medium-overlay: #A0A9B8; /* Gris azulado para el texto secundario del overlay, legible */
-            --font-heading-overlay: 'Orbitron', sans-serif; /* Fuente impactante y futurista para el overlay */
-            --font-body-overlay: 'Roboto', sans-serif; /* Fuente legible y limpia para el overlay */
-        }
-
-        /* --- Contenedor Principal del Overlay --- */
-        #welcome-overlay-container {
-            position: fixed; /* Fija el overlay en la ventana de visualización */
+        /* --- Welcome Overlay --- */
+        #welcome-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--color-bg-dark-overlay); /* Color de fondo definido por la variable */
-            z-index: 9999; /* Asegura que cubra todo el contenido de la página */
-            display: flex; /* Utiliza Flexbox para centrar contenido */
-            justify-content: center; /* Centra horizontalmente el contenido hijo */
-            align-items: center; /* Centra verticalmente el contenido hijo */
-            flex-direction: column; /* Apila los elementos verticalmente (título, eslogan) */
-            pointer-events: none; /* Permite que los clics pasen a través del overlay una vez que se desvanece */
-            opacity: 1; /* Comienza completamente visible */
-            transition: opacity 1s ease-out; /* Suave transición al desvanecerse */
-            overflow: hidden; /* Evita barras de desplazamiento si las partículas se salen de la pantalla */
+            background: linear-gradient(135deg, var(--color-bg-gradient-start) 0%, var(--color-bg-dark) 50%, var(--color-bg-gradient-mid) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-out, visibility 1s ease-out; /* Added visibility transition */
         }
 
-        /* --- Contenedor para el Texto Principal y Partículas --- */
-        #welcome-text-container {
-            position: relative; /* Esencial para posicionar las partículas de forma absoluta dentro de él */
-            /* No se usa overflow: hidden aquí para permitir que las partículas se dispersen librely */
+        #welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden; /* Hide element completely after transition */
+            pointer-events: none;
         }
 
-        /* --- Estilo del Título Principal --- */
-        #welcome-title {
-            font-family: var(--font-heading-overlay); /* Aplica la fuente futurista */
-            font-size: 4.5rem; /* Tamaño de fuente grande para impacto */
-            color: var(--color-primary-overlay); /* Color principal vibrante del texto */
-            /* Múltiples sombras para crear un efecto de "neón" o "glow" */
-            text-shadow:
-                0 0 15px var(--color-primary-overlay), /* Sombra base */
-                0 0 30px var(--color-primary-light-overlay), /* Sombra media, más brillante */
-                0 0 60px var(--color-primary-light-overlay), /* Sombra extendida para el halo */
-                0 0 100px rgba(0, 255, 255, 0.5); /* Sombra muy difusa y semitransparente para un glow ambiental */
-            white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-            opacity: 1; /* Comienza visible, se desvanece con JS */
-            transition: opacity 1s ease-in-out; /* Transición suave para su desaparición */
-            text-align: center; /* Centra el texto dentro de su propio contenedor */
-            line-height: 1; /* Ajusta la altura de línea para evitar espacio extra */
-            position: relative; /* Asegura que getBoundingClientRect funcione con precisión */
+        #welcome-text {
+            font-family: var(--font-heading); /* Use Orbitron for welcome text */
+            font-size: 3.8rem; /* Larger and more impactful */
+            font-weight: 700;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 1s forwards ease-out 0.5s;
+            color: var(--color-primary); /* Use primary color for welcome text */
+            text-shadow: 0 0 20px var(--color-primary); /* Add glow effect */
         }
 
-        /* --- Estilo del Eslogan --- */
-        #welcome-slogan-animated {
-            font-family: var(--font-body-overlay); /* Aplica la fuente legible */
-            font-size: 1.6rem; /* Tamaño de fuente adecuado para una frase secundaria */
-            color: var(--color-text-medium-overlay); /* Color de texto más suave */
-            opacity: 0; /* Comienza oculto */
-            margin-top: 25px; /* Espacio entre el título y el eslogan */
-            text-align: center; /* **Crucial: Centra la frase "El límite es nuestra imaginación"** */
-            line-height: 1.4; /* Mejora la legibilidad del texto */
-            font-style: italic; /* Añade un toque estilístico distintivo */
-            transform: translateY(20px); /* Posición inicial para la animación de "subida" */
-            /* Transiciones para su aparición y movimiento */
-            transition: opacity 1s ease-in-out, transform 0.8s ease-out;
+        #welcome-slogan {
+            font-family: var(--font-body);
+            font-size: 1.8rem;
+            color: var(--color-text-medium);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 1s forwards ease-out 1s;
         }
 
-        /* --- Estilo de las Partículas --- */
-        .particle {
-            position: absolute; /* Posiciona las partículas de forma absoluta respecto a #welcome-text-container */
-            background-color: var(--color-primary-overlay); /* Color base de la partícula (azul vibrante) */
-            border-radius: 50%; /* Las hace perfectamente redondas */
-            opacity: 0; /* Comienza oculto */
-            pointer-events: none; /* Las partículas no interfieren con el puntero del ratón */
-            box-shadow: 0 0 5px var(--color-primary-light-overlay); /* Pequeño glow para cada partícula */
+        .loading-bar {
+            width: 150px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-top: 30px;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards ease-out 1.5s;
         }
 
-        /* --- Media Queries para Responsividad del Overlay --- */
-        @media (max-width: 768px) {
-            #welcome-title {
-                font-size: 3rem; /* Reduce el tamaño del título en tabletas */
-            }
-            #welcome-slogan-animated {
-                font-size: 1.2rem; /* Reduce el tamaño del eslogan en tabletas */
+        .loading-bar::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            animation: fillBar 2s forwards ease-out 1.8s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @media (max-width: 480px) {
-            #welcome-title {
-                font-size: 2.2rem; /* Reduce aún más el tamaño del título en móviles */
-            }
-            #welcome-slogan-animated {
-                font-size: 1rem; /* Reduce aún más el tamaño del eslogan en móviles */
-            }
+        @keyframes fillBar {
+            from { width: 0%; }
+            to { width: 100%; }
         }
 
         /* --- Scroll Progress Bar --- */
         .scroll-progress-bar {
             position: fixed;
-            top: 0;
+            top: 80px; /* Adjust if the header has variable height */
             left: 0;
-            height: 4px;
-            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
             width: 0%;
-            z-index: 999;
+            height: 5px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            z-index: 1001;
             transition: width 0.1s linear;
+            box-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-secondary);
         }
 
-        /* --- Header --- */
+        .main-header.scrolled + .scroll-progress-bar {
+            top: 60px; /* Adjust to header height when scrolled */
+        }
+
+        /* --- Main Header Styles --- */
         .main-header {
+            background: rgba(26, 42, 62, 0.8);
+            backdrop-filter: blur(10px);
             position: fixed;
+            width: 100%;
             top: 0;
             left: 0;
-            width: 100%;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            background: rgba(10, 10, 30, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            transition: all 0.4s var(--bezier-smooth);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            height: 90px; /* Standard height */
+            padding: 20px 50px;
+            height: 80px;
+            transition: all 0.3s var(--bezier-smooth);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .main-header.scrolled {
-            padding: 10px 40px;
-            height: 70px;
-            background: rgba(10, 10, 30, 0.95);
-            box-shadow: 0 2px 15px rgba(0, 192, 255, 0.15);
+            padding: 10px 50px;
+            height: 60px;
+            background: rgba(26, 42, 62, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.6), 0 0 10px var(--glow-dark-alpha);
         }
 
         .logo {
             font-family: var(--font-heading);
             font-size: 2.2rem;
-            color: var(--color-primary-light);
-            text-shadow: 0 0 10px rgba(0, 192, 255, 0.5);
-            transition: all 0.4s var(--bezier-smooth);
+            font-weight: 700;
+            color: var(--color-primary);
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            transition: font-size 0.3s var(--bezier-smooth);
+            letter-spacing: 1px;
         }
 
         .main-header.scrolled .logo {
             font-size: 1.8rem;
-            text-shadow: 0 0 8px rgba(0, 192, 255, 0.4);
         }
 
         .nav-menu {
             list-style: none;
+            margin: 0;
+            padding: 0;
             display: flex;
             gap: 30px;
         }
 
         .nav-menu li a {
-            font-family: var(--font-heading);
+            color: var(--color-text-light);
             font-size: 1.1rem;
-            color: var(--color-text-medium);
-            padding: 5px 0;
+            font-weight: 500;
             position: relative;
+            padding-bottom: 5px;
             transition: color 0.3s ease;
         }
 
@@ -276,221 +235,42 @@
             content: '';
             position: absolute;
             left: 0;
-            bottom: -5px;
+            bottom: 0;
             width: 0;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            transition: width 0.3s ease-out;
-        }
-
-        .nav-menu li a:hover,
-        .nav-menu li a.active {
-            color: var(--color-primary-light);
-            text-shadow: 0 0 5px var(--glow-light-alpha);
+            transition: width 0.3s var(--bezier-smooth);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--glow-light-alpha);
         }
 
         .nav-menu li a:hover::after,
         .nav-menu li a.active::after {
             width: 100%;
         }
-    </style>
-</head>
-<body>
 
-    <div id="welcome-overlay-container">
-        <div id="welcome-text-container">
-            <h1 id="welcome-title">Welcome to my Portfolio</h1>
-        </div>
-        <p id="welcome-slogan-animated">El límite es nuestra imaginación</p>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const welcomeOverlay = document.getElementById('welcome-overlay-container');
-            const welcomeTitle = document.getElementById('welcome-title');
-            const welcomeSlogan = document.getElementById('welcome-slogan-animated');
-            const textContainer = document.getElementById('welcome-text-container');
-
-            const numParticles = 180; // Incrementado para un efecto más denso y visual
-            const particlesArray = [];
-
-            // Inicializar las partículas y añadirlas al DOM
-            for (let i = 0; i < numParticles; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                const size = Math.random() * 5 + 1; // Tamaño aleatorio entre 1px y 6px
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                textContainer.appendChild(particle); // Se añaden al textContainer
-                particlesArray.push(particle);
-            }
-
-            // Función para ejecutar la secuencia de animaciones
-            function animateWelcomeScreen() {
-                // Recalcular el tamaño y posición del título por si la ventana se redimensionó
-                const titleRect = welcomeTitle.getBoundingClientRect();
-
-                particlesArray.forEach((particle, index) => {
-                    // Generar un punto de inicio *dentro* de la caja del título para que parezca que emanan de él
-                    const startX = (Math.random() * titleRect.width) - (titleRect.width / 2);
-                    const startY = (Math.random() * titleRect.height) - (titleRect.height / 2);
-
-                    // --- Lógica para la dirección de las partículas (más controlada) ---
-                    // Queremos que se dispersen hacia afuera desde el centro del título.
-                    // Usamos un ángulo aleatorio para que se muevan en todas direcciones.
-                    const angle = Math.random() * Math.PI * 2; // Ángulo en radianes (0 a 360 grados)
-                    const distance = window.innerWidth * 0.7 + Math.random() * window.innerWidth * 0.3; // Distancia de dispersión
-
-                    const endX = startX + Math.cos(angle) * distance;
-                    const endY = startY + Math.sin(angle) * distance;
-
-                    const duration = 1800 + Math.random() * 1200; // Duración entre 1.8s y 3s
-                    const delay = Math.random() * 400; // Delay aleatorio para un efecto escalonado
-
-                    particle.animate([
-                        { transform: `translate(${startX}px, ${startY}px)`, opacity: 1 }, // Empiezan visibles en el texto
-                        { transform: `translate(${endX}px, ${endY}px)`, opacity: 0 } // Se mueven hacia afuera y se desvanecen
-                    ], {
-                        duration: duration,
-                        delay: delay,
-                        easing: 'ease-out', // Suave desaceleración
-                        fill: 'forwards' // Mantiene el estado final (oculto)
-                    });
-                });
-
-                // --- Control de Tiempos de las Animaciones ---
-
-                // 1. Desvanecer el título (después de un breve inicio de dispersión de partículas)
-                setTimeout(() => {
-                    welcomeTitle.style.opacity = 0;
-                }, 600); // Título comienza a desvanecerse 0.6 seconds after start
-
-                // 2. Mostrar el eslogan con animación de subida
-                setTimeout(() => {
-                    welcomeSlogan.style.opacity = 1;
-                    welcomeSlogan.style.transform = 'translateY(0)';
-                }, 1800); // El eslogan aparece 1.8 seconds after start
-
-                // 3. Ocultar el overlay completo
-                // Calculamos un tiempo total que permita que la animación de partículas y el eslogan se completen
-                // (La partícula más larga dura hasta 3 segundos). Daremos un tiempo extra después de que el eslogan aparezca.
-                const totalAnimationDuration = 1800 + 1500; // 1.8s (eslogan appears) + 1.5s (extra visible time) = 3300ms
-                setTimeout(() => {
-                    welcomeOverlay.style.opacity = 0; // Inicia la transición CSS de opacidad del overlay
-                    setTimeout(() => {
-                        welcomeOverlay.style.display = 'none'; // Finalmente, lo quita del flujo del DOM
-                    }, 1000); // Espera 1 second para que la transición de opacidad del overlay termine
-                }, totalAnimationDuration);
-            }
-
-            // Se ejecuta la función principal de animación poco después de que el DOM esté cargado
-            setTimeout(animateWelcomeScreen, 100);
-        });
-
-        // JavaScript for Scroll Progress Bar and Header changes
-        document.addEventListener('scroll', () => {
-            const scrollProgressBar = document.querySelector('.scroll-progress-bar');
-            const mainHeader = document.querySelector('.main-header');
-
-            const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (document.documentElement.scrollTop / totalHeight) * 100;
-            scrollProgressBar.style.width = `${scrolled}%`;
-
-            if (window.scrollY > 50) {
-                mainHeader.classList.add('scrolled');
-            } else {
-                mainHeader.classList.remove('scrolled');
-            }
-        });
-    </script>
-    <header class="main-header">
-        <div class="logo">Jairo</div>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="scroll-progress-bar"></div>
-
-    <section id="home" style="min-height: 100vh; display: flex; justify-content: center; align-items: center; background-color: var(--color-bg-light);">
-        <h2 class="animate-on-scroll">Welcome to my Portfolio!</h2>
-    </section>
-    <section id="about" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
-        <h2 class="animate-on-scroll">About Me</h2>
-    </section>
-    <section id="projects" style="min-height: 100vh; display: flex; justify-content: center; align-items: center; background-color: var(--color-bg-light);">
-        <h2 class="animate-on-scroll">My Projects</h2>
-    </section>
-    <section id="skills" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
-        <h2 class="animate-on-scroll">My Skills</h2>
-    </section>
-    <section id="contact" style="min-height: 100vh; display: flex; justify-content: center; align-items: center; background-color: var(--color-bg-light);">
-        <h2 class="animate-on-scroll">Contact Me</h2>
-    </section>
-
-    <script>
-        // Intersection Observer for animate-on-scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                } else {
-                    entry.target.classList.remove('is-visible');
-                }
-            });
-        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
-
-        document.querySelectorAll('.animate-on-scroll').forEach(element => {
-            observer.observe(element);
-        });
-
-        // Active navigation link on scroll (Optional, but common for portfolios)
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', navHighlighter);
-
-        function navHighlighter() {
-            let scrollY = window.scrollY;
-            sections.forEach(current => {
-                const sectionHeight = current.offsetHeight;
-                const sectionTop = current.offsetTop - 100; // Offset for header height
-                let sectionId = current.getAttribute('id');
-
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelector('.nav-menu li a[href*=' + sectionId + ']').classList.add('active');
-                } else {
-                    document.querySelector('.nav-menu li a[href*=' + sectionId + ']').classList.remove('active');
-                }
-            });
-        }
-    </script>
-</body>
-</html>
-
-        /* --- Section Base Styles --- */
+        /* --- Shared Section Styles --- */
         .section-base {
-            padding: var(--spacing-section) 40px;
-            text-align: center;
-            position: relative;
-            min-height: 100vh; /* Ensure sections take full viewport height */
+            padding: 100px 50px;
+            min-height: 100vh; /* Ensure sections take full viewport height initially */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
+            background-color: var(--color-bg-dark); /* Default background */
         }
 
         .section-title {
+            font-family: var(--font-heading);
             font-size: 3.5rem;
             margin-bottom: 50px;
             position: relative;
             display: inline-block;
             text-transform: uppercase;
             padding-bottom: 10px;
+            color: var(--color-primary-light);
+            text-shadow: 0 0 15px var(--glow-light-alpha);
             z-index: 1; /* Ensure title is above background effects */
         }
 
@@ -526,6 +306,7 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            font-family: var(--font-body);
         }
 
         .button-primary::before {
@@ -535,7 +316,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: all 0.5s ease;
             z-index: 0;
         }
@@ -543,7 +324,7 @@
         .button-primary:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 8px 25px rgba(0, 192, 255, 0.6), 0 0 30px var(--color-secondary);
-            color: white;
+            color: white; /* Ensure text color remains white on hover */
         }
 
         .button-primary:hover::before {
@@ -555,10 +336,12 @@
             background: radial-gradient(circle at top left, var(--color-bg-gradient-start) 0%, var(--color-bg-dark) 60%);
             overflow: hidden;
             position: relative;
+            padding-top: 150px; /* Adjust for fixed header */
         }
 
-        /* Glowing dots pattern */
-        .section-hero::before, .section-hero::after {
+        /* Glowing dots pattern for Hero */
+        .section-hero::before,
+        .section-hero::after {
             content: '';
             position: absolute;
             border-radius: 50%;
@@ -567,6 +350,7 @@
             opacity: 0.8;
             pointer-events: none;
             animation: pulseGlow 15s infinite alternate ease-in-out;
+            z-index: 0;
         }
 
         .section-hero::before {
@@ -587,443 +371,789 @@
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
         }
 
-        .hero-content {
-            z-index: 1;
-            position: relative;
-        }
-
+        /* Avatar Container */
         .avatar-container {
-            width: 180px;
-            height: 180px;
+            width: 200px; /* Size of the circular container */
+            height: 200px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--color-primary-light), var(--color-secondary));
-            padding: 5px;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 30px auto;
-            box-shadow: 0 0 30px var(--glow-light-alpha), 0 0 60px rgba(128, 0, 255, 0.4);
-            animation: floatUpDown 6s ease-in-out infinite;
-            position: relative; /* For the glow */
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px var(--color-primary), inset 0 0 15px var(--color-primary-light);
+            border: 4px solid var(--color-primary);
+            animation: avatarGlow 3s infinite alternate ease-in-out, floatAvatar 6s infinite ease-in-out;
+            position: relative;
+            z-index: 1; /* Ensure avatar is above background glows */
         }
 
-        @keyframes floatUpDown {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        #my-avatar {
+        .avatar-container img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            background: var(--color-bg-dark); /* Inner background for avatar */
-            overflow: hidden;
+            object-fit: cover;
+            object-position: center;
+            display: block;
         }
 
-        #my-avatar circle {
-            transition: fill 0.5s ease;
+        @keyframes avatarGlow {
+            0% { box-shadow: 0 0 30px var(--color-primary), inset 0 0 15px var(--color-primary-light); }
+            50% { box-shadow: 0 0 45px var(--color-primary-light), inset 0 0 25px var(--color-secondary); }
+            100% { box-shadow: 0 0 30px var(--color-primary), inset 0 0 15px var(--color-primary-light); }
         }
 
-        #my-avatar .avatar-glasses,
-        #my-avatar .avatar-mouth {
-            stroke-dasharray: 200;
-            stroke-dashoffset: 200;
-            animation: none; /* Controlled by JS observer */
-        }
-
-        @keyframes drawGlasses {
-            to { stroke-dashoffset: 0; }
-        }
-
-        @keyframes drawMouth {
-            to { stroke-dashoffset: 0; }
-        }
-
-        .avatar-eye, .avatar-pupil {
-            transition: all 0.2s ease-in-out;
-        }
-
-        .avatar-pupil.blink {
-            transform: scaleY(0);
+        @keyframes floatAvatar {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
 
         .section-hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 10px;
-            line-height: 1.1;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: heroTextFadeIn 1s forwards ease-out;
+            font-size: 4.2rem;
+            color: var(--color-text-light);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-family: var(--font-heading);
+            text-shadow: 0 0 20px var(--glow-light-alpha);
         }
 
         .section-hero p {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--color-text-medium);
+            margin-bottom: 25px;
             max-width: 800px;
-            margin: 0 auto 20px auto;
+            font-family: var(--font-body);
+        }
+
+        /* Hero Text Fade-in Animation */
+        .hero-text-fade {
             opacity: 0;
             transform: translateY(20px);
-            animation: heroTextFadeIn 1s forwards ease-out;
+            animation: fadeInSlideUp 1s forwards ease-out;
         }
 
-        .section-hero .hero-text-fade.delay-1 { animation-delay: 0.5s; }
-        .section-hero .hero-text-fade.delay-2 { animation-delay: 1s; }
-
-        @keyframes heroTextFadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- About Section (Optional for now, but placeholder if you add content) --- */
-        /* .section-about {
-            background: linear-gradient(135deg, var(--color-bg-light), var(--color-bg-dark), var(--color-bg-light));
-        } */
+        .hero-text-fade.delay-1 { animation-delay: 0.5s; }
+        .hero-text-fade.delay-2 { animation-delay: 1.0s; }
+        .hero-text-fade.delay-3 { animation-delay: 1.5s; }
 
 
         /* --- Projects Section --- */
         .section-projects {
-            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-gradient-mid), var(--color-bg-dark));
-            overflow: hidden; /* For inner animations */
+            background: linear-gradient(180deg, var(--color-bg-dark) 0%, var(--color-bg-light) 100%);
+            padding-bottom: 150px; /* Extra padding for bottom content */
         }
 
         .projects-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
             max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
+            margin-top: 50px;
         }
 
         .project-card-wrapper {
             background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
-            backdrop-filter: blur(8px);
             border: 1px solid var(--card-border);
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, background 0.4s ease;
-            will-change: transform, box-shadow, background;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px var(--glow-dark-alpha);
+            transition: transform 0.4s var(--bezier-smooth), box-shadow 0.4s var(--bezier-smooth);
+            position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            opacity: 0; /* Hidden by default, animated by JS */
+            transform: translateY(50px); /* Slide up effect */
+        }
+
+        .project-card-wrapper.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .project-card-wrapper:hover {
-            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
             transform: translateY(-10px) scale(1.03);
-            background: rgba(30, 50, 70, 0.85); /* Slightly darker on hover */
-            border-color: rgba(0, 192, 255, 0.8);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--glow-light-alpha);
         }
 
         .project-card-link {
             display: flex;
             flex-direction: column;
+            width: 100%;
             height: 100%;
-            color: var(--color-text-light); /* Ensure text color is light */
+            color: var(--color-text-light);
+            text-align: left;
+            padding: 25px;
+            box-sizing: border-box;
         }
 
         .project-image-container {
             width: 100%;
-            height: 200px; /* Fixed height for image area */
-            background: rgba(0, 0, 0, 0.3);
+            height: 180px;
+            background-color: #0d1222; /* Darker background for SVG */
+            border-radius: 10px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-bottom: 1px solid var(--card-border);
-            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden; /* Ensure SVG parts don't overflow */
         }
 
         .project-image-container svg {
-            width: 85%;
-            height: 85%;
-            filter: drop-shadow(0 0 5px var(--glow-light-alpha));
-            transform: scale(0.95); /* Slightly smaller on init */
-            transition: transform 0.4s var(--bezier-smooth);
+            width: 80%;
+            height: 80%;
+            display: block;
         }
 
-        .project-card-wrapper:hover .project-image-container svg {
-            transform: scale(1); /* Expand on hover */
-        }
-
-        .project-content {
-            padding: 25px;
-            flex-grow: 1; /* Allow content to take available space */
-            text-align: left;
-        }
-
-        .project-content h3 {
-            font-size: 1.8rem;
-            color: var(--color-primary-light);
-            margin-bottom: 10px;
-            text-shadow: none; /* Remove extra text-shadow from h3 */
-        }
-
-        .project-content p {
-            font-size: 1rem;
-            color: var(--color-text-dark);
-        }
-
-        .project-button-area {
-            padding: 25px;
-            padding-top: 0; /* Align button area properly */
-        }
-
-        .project-button-area .button-primary {
-            width: 100%;
-            font-size: 1rem;
-            padding: 0.8rem 1.5rem;
-        }
-
-        /* Project SVG Animations */
-        /* --- Aegis Finance Analyzer SVG --- */
-        #svg-finance {
-            filter: drop-shadow(0 0 10px rgba(0,255,255,0.7)); /* Stronger glow for finance */
-        }
+        /* SVG Animations for Projects */
         #svg-finance .bar {
             transform-origin: bottom;
             transform: scaleY(0);
-            opacity: 0;
+            animation: barRise 1.5s forwards var(--bezier-smooth) calc(var(--i)*0.2s);
         }
-        #svg-finance.animated .bar {
-            animation: barRise 1.5s var(--bezier-bounce) forwards;
-            opacity: 1;
-        }
-        #svg-finance.animated .bar-1 { animation-delay: 0.2s; }
-        #svg-finance.animated .bar-2 { animation-delay: 0.4s; }
-        #svg-finance.animated .bar-3 { animation-delay: 0.6s; }
-        @keyframes barRise {
-            from { transform: scaleY(0); opacity: 0; }
-            to { transform: scaleY(1); opacity: 1; }
-        }
+
         #svg-finance .line-chart {
             stroke-dasharray: 200;
             stroke-dashoffset: 200;
-            stroke-linecap: round;
+            animation: dashDraw 2s forwards var(--bezier-smooth) 0.5s;
         }
-        #svg-finance.animated .line-chart {
-            animation: drawLine 2s ease-out forwards 0.8s;
-        }
-        @keyframes drawLine {
-            to { stroke-dashoffset: 0; }
-        }
+
         #svg-finance circle {
             transform: scale(0);
-            transform-origin: center;
-        }
-        #svg-finance.animated circle {
-            animation: fadeInScale 0.5s ease-out forwards 2.5s; /* Point appears after line */
+            animation: circlePop 0.5s forwards var(--bezier-bounce) 2.5s;
         }
 
-        /* --- ChromaCart E-commerce SVG --- */
-        #svg-beauty { /* Renamed for clarity to match new project name */
-            filter: drop-shadow(0 0 10px rgba(128,0,255,0.7)); /* Purple glow for beauty */
-        }
-        #svg-beauty .lipstick-base {
-            transform-origin: bottom;
-            transform: scaleY(0);
-        }
-        #svg-beauty.animated .lipstick-base {
-            animation: popUp 0.8s var(--bezier-bounce) forwards;
-        }
-        #svg-beauty .lipstick-tip {
-            transform-origin: bottom;
-            transform: translateY(100%);
-        }
-        #svg-beauty.animated .lipstick-tip {
-            animation: slideInTip 0.8s var(--bezier-bounce) forwards 0.4s;
-        }
-        @keyframes popUp {
-            from { transform: scaleY(0); }
-            to { transform: scaleY(1); }
-        }
-        @keyframes slideInTip {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-        #svg-beauty path[fill="#1a2a3a"] { /* Small base shadow for lipstick */
-            transform-origin: center;
-            opacity: 0;
-        }
-        #svg-beauty.animated path[fill="#1a2a3a"] {
-            animation: fadeInScale 0.6s ease-out forwards 0.8s;
-        }
-
-        /* --- Sentinel Cyber-Threat Monitor SVG --- */
-        #svg-cyber {
-            filter: drop-shadow(0 0 10px rgba(0,192,255,0.7)); /* Blue glow for cyber */
-        }
         #svg-cyber .shield-path {
-            stroke-dasharray: 200;
-            stroke-dashoffset: 200;
-            stroke-linecap: round;
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            animation: dashDraw 2s forwards var(--bezier-smooth);
         }
-        #svg-cyber.animated .shield-path {
-            animation: drawShield 1.5s ease-out forwards;
-        }
-        @keyframes drawShield {
-            to { stroke-dashoffset: 0; }
-        }
+
         #svg-cyber .lock-body, #svg-cyber .lock-shackle {
-            transform-origin: center;
             opacity: 0;
             transform: scale(0.5);
+            animation: popIn 1s forwards var(--bezier-bounce) 1.5s;
         }
-        #svg-cyber.animated .lock-body {
-            animation: fadeInScale 0.8s ease-out forwards 0.5s;
+
+        #svg-beauty .lipstick-base, #svg-beauty .lipstick-tip {
+            transform-origin: bottom center;
+            transform: scaleY(0);
+            animation: slideUp 1.5s forwards var(--bezier-smooth);
         }
-        #svg-cyber.animated .lock-shackle {
-            animation: fadeInScale 0.8s ease-out forwards 0.7s;
+        #svg-beauty .lipstick-tip {
+            animation-delay: 0.5s;
         }
-        @keyframes fadeInScale {
+
+        @keyframes barRise {
+            to { transform: scaleY(1); }
+        }
+        @keyframes dashDraw {
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes circlePop {
+            to { transform: scale(1); }
+        }
+        @keyframes popIn {
             to { opacity: 1; transform: scale(1); }
         }
-
-        /* General keyframe for simple fade and scale used by multiple SVGs */
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes slideUp {
+            to { transform: scaleY(1); }
         }
 
 
-        /* --- Responsive Adjustments --- */
+        .project-content {
+            flex-grow: 1;
+            padding-bottom: 20px;
+        }
+
+        .project-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .project-content p {
+            font-size: 0.95rem;
+            color: var(--color-text-medium);
+            line-height: 1.5;
+        }
+
+        .project-button-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .project-button-area .button-primary {
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9rem;
+            box-shadow: none; /* Remove default shadow */
+            border-radius: 30px;
+        }
+        .project-button-area .button-primary:hover {
+            transform: none;
+            box-shadow: 0 0 15px var(--glow-light-alpha);
+        }
+
+
+        /* --- Skills Section --- */
+        .section-skills {
+            background: radial-gradient(circle at center, var(--color-bg-light) 0%, var(--color-bg-dark) 100%);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 10px var(--glow-dark-alpha);
+            transition: transform 0.3s var(--bezier-smooth), box-shadow 0.3s var(--bezier-smooth);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0; /* Hidden by default, animated by JS */
+            transform: translateY(30px);
+        }
+
+        .skill-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px var(--glow-light-alpha);
+        }
+
+        .skill-icon {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 15px var(--color-primary);
+            overflow: hidden;
+        }
+
+        .skill-icon svg {
+            width: 70%;
+            height: 70%;
+            display: block;
+        }
+
+        /* Generic Skill Icon Animations (for placeholders, real logos will have specific ones) */
+        .skill-icon svg .monitor-outline,
+        .skill-icon svg .monitor-stand,
+        .skill-icon svg .code-line-1,
+        .skill-icon svg .code-line-2,
+        .skill-icon svg .code-line-3,
+        .skill-icon svg .circle-draw,
+        .skill-icon svg .lock-body-skill,
+        .skill-icon svg .lock-shackle-skill,
+        .skill-icon svg .shield-path,
+        .skill-icon svg .gear-line-1,
+        .skill-icon svg .gear-line-2,
+        .skill-icon svg .gear-center {
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            animation: none; /* Reset, will be set by JS or more specific CSS */
+            animation-fill-mode: forwards;
+        }
+
+        .skill-card.animated .monitor-outline { animation: dashDraw 1.5s forwards ease-out 0.2s; }
+        .skill-card.animated .monitor-stand { animation: dashDraw 1.5s forwards ease-out 0.4s; }
+        .skill-card.animated .code-line-1 { animation: dashDraw 1.5s forwards ease-out 0.6s; }
+        .skill-card.animated .code-line-2 { animation: dashDraw 1.5s forwards ease-out 0.8s; }
+        .skill-card.animated .code-line-3 { animation: dashDraw 1.5s forwards ease-out 1.0s; }
+
+        .skill-card.animated .circle-draw { animation: dashDraw 1.5s forwards ease-out 0.2s; }
+        .skill-card.animated .lock-body-skill { animation: dashDraw 1.5s forwards ease-out 0.4s; }
+        .skill-card.animated .lock-shackle-skill { animation: dashDraw 1.5s forwards ease-out 0.6s; }
+
+        .skill-card.animated .shield-path { animation: dashDraw 1.5s forwards ease-out 0.2s; }
+        .skill-card.animated .gear-line-1 { animation: dashDraw 1.5s forwards ease-out 0.4s; }
+        .skill-card.animated .gear-line-2 { animation: dashDraw 1.5s forwards ease-out 0.6s; }
+        .skill-card.animated .gear-center { animation: dashDraw 1.5s forwards ease-out 0.8s; }
+
+
+        .skill-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            font-size: 0.9rem;
+            color: var(--color-text-medium);
+        }
+
+        /* --- Certifications Section --- */
+        .section-certifications {
+            background: linear-gradient(180deg, var(--color-bg-light) 0%, var(--color-bg-dark) 100%);
+        }
+
+        .certifications-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .certification-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 10px var(--glow-dark-alpha);
+            transition: transform 0.3s var(--bezier-smooth), box-shadow 0.3s var(--bezier-smooth);
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+            opacity: 0; /* Hidden by default, animated by JS */
+            transform: translateY(30px);
+        }
+        .certification-item.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .certification-item:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px var(--glow-light-alpha);
+        }
+
+        .certification-item h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .certification-item p {
+            font-size: 0.95rem;
+            color: var(--color-text-medium);
+            margin-bottom: 20px;
+        }
+
+        .credly-badge-embed {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* --- Contact Section --- */
+        .section-contact {
+            background: radial-gradient(circle at bottom right, var(--color-bg-gradient-start) 0%, var(--color-bg-dark) 80%);
+            padding-bottom: 150px; /* Space for floating button */
+        }
+
+        .contact-intro {
+            font-size: 1.2rem;
+            color: var(--color-text-light);
+            max-width: 800px;
+            margin-bottom: 60px;
+            line-height: 1.8;
+            opacity: 0; /* Hidden by default, animated by JS */
+            transform: translateY(20px);
+        }
+        .contact-intro.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow-dark-alpha);
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+            opacity: 0; /* Hidden by default, animated by JS */
+            transform: translateY(30px);
+        }
+        .form-container.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-container h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea {
+            width: calc(100% - 20px); /* Account for padding */
+            padding: 12px 10px;
+            background-color: rgba(44, 62, 80, 0.5); /* Slightly lighter than card bg */
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            color: var(--color-text-light);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="tel"]:focus,
+        .form-group textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px var(--glow-light-alpha);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-container .button-primary {
+            width: 100%;
+            margin-top: 20px;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* --- Floating Contact Button --- */
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 192, 255, 0.5);
+            transition: all 0.3s var(--bezier-smooth);
+            z-index: 990; /* Below welcome overlay, above content */
+            animation: floatButton 2.5s infinite ease-in-out; /* Continuous float animation */
+        }
+
+        .floating-button:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 192, 255, 0.7), 0 0 30px var(--color-secondary);
+        }
+
+        @keyframes floatButton {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .contact-dropdown-content {
+            position: fixed;
+            bottom: 100px; /* Above the button */
+            right: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4), 0 0 15px var(--glow-light-alpha);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 980;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            min-width: 250px;
+        }
+
+        .contact-dropdown-content.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--color-primary);
+            transform: translateX(5px);
+        }
+
+        .contact-link i {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+        }
+
+
+        /* --- Responsive Design --- */
         @media (max-width: 1024px) {
+            .main-header, .main-header.scrolled {
+                padding: 15px 30px;
+                height: 70px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+            .main-header.scrolled .logo {
+                font-size: 1.6rem;
+            }
+
+            .nav-menu {
+                gap: 20px;
+            }
+            .nav-menu li a {
+                font-size: 1rem;
+            }
+
             .section-base {
                 padding: 80px 30px;
             }
+
             .section-title {
                 font-size: 3rem;
+                margin-bottom: 40px;
             }
+
+            .avatar-container {
+                width: 180px;
+                height: 180px;
+            }
+
             .section-hero h1 {
                 font-size: 3.5rem;
             }
             .section-hero p {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
+
             .projects-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 30px;
             }
-            .project-card-wrapper {
-                max-width: 400px; /* Limit card width on larger tablets */
-                margin: 0 auto;
+
+            .skill-card, .certification-item, .form-container {
+                padding: 25px;
             }
         }
 
         @media (max-width: 768px) {
             .main-header {
                 flex-direction: column;
-                padding: 10px 20px;
                 height: auto;
+                padding: 15px 20px;
+                position: relative; /* Make header static on small screens */
+                background: var(--color-bg-dark); /* Solid background for mobile */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             }
             .main-header.scrolled {
+                top: 0;
                 height: auto;
-                padding: 10px 20px;
+                padding: 15px 20px;
+                position: fixed; /* Keep it fixed when scrolled on mobile too, but with full content */
             }
+
             .logo {
                 font-size: 1.8rem;
+                margin-bottom: 10px;
             }
             .main-header.scrolled .logo {
                 font-size: 1.6rem;
             }
+
             .nav-menu {
-                margin-top: 10px;
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 15px;
-            }
-            .nav-menu li {
-                margin: 5px 10px;
+                width: 100%;
             }
             .nav-menu li a {
-                font-size: 1rem;
+                font-size: 0.9rem;
+                padding: 5px 10px;
             }
 
-            .section-hero h1 {
-                font-size: 3rem;
+            .scroll-progress-bar {
+                top: 70px; /* Adjust for mobile header height */
             }
-            .section-hero p {
-                font-size: 1.1rem;
+            .main-header.scrolled + .scroll-progress-bar {
+                top: 60px; /* Adjust for scrolled mobile header height */
             }
+
+
+            .section-base {
+                padding: 60px 20px;
+            }
+
             .section-title {
                 font-size: 2.5rem;
+                margin-bottom: 30px;
             }
-            .projects-container {
-                grid-template-columns: 1fr;
-            }
-            .project-card-wrapper {
-                width: 95%;
-                margin: 0 auto;
-            }
-        }
 
-        @media (max-width: 480px) {
             #welcome-text {
                 font-size: 2.5rem;
             }
             #welcome-slogan {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
-            .section-base {
-                padding: 60px 20px;
-            }
-            .section-hero h1 {
-                font-size: 2.5rem;
-            }
-            .section-hero p {
-                font-size: 1rem;
-            }
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 30px;
-            }
+
             .avatar-container {
                 width: 150px;
                 height: 150px;
-                margin-bottom: 20px;
+            }
+
+            .section-hero h1 {
+                font-size: 2.8rem;
+            }
+            .section-hero p {
+                font-size: 1.1rem;
+            }
+
+            .projects-container {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+            }
+
+            .skill-card, .certification-item, .form-container {
+                padding: 20px;
+            }
+            .skill-icon {
+                width: 80px;
+                height: 80px;
+            }
+            .skill-card h3 {
+                font-size: 1.3rem;
+            }
+            .skill-card p {
+                font-size: 0.85rem;
+            }
+
+            .floating-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            .contact-dropdown-content {
+                bottom: 80px;
+                right: 20px;
+                min-width: 200px;
+                padding: 15px;
+                gap: 10px;
+            }
+            .contact-link {
+                font-size: 1rem;
+            }
+            .contact-link i {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            #welcome-text {
+                font-size: 2rem;
+                text-align: center;
+            }
+            #welcome-slogan {
+                font-size: 1rem;
+            }
+            .section-hero h1 {
+                font-size: 2.2rem;
+            }
+            .section-hero p {
+                font-size: 1rem;
             }
             .button-primary {
                 padding: 0.8rem 1.8rem;
                 font-size: 1rem;
             }
-            .project-content h3 {
-                font-size: 1.5rem;
+            .form-container {
+                padding: 25px 20px;
             }
-            .project-content p {
-                font-size: 0.9rem;
+            .form-group input, .form-group textarea {
+                padding: 10px;
             }
         }
 
-        /* Reduced motion accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-            .section-hero::before, .section-hero::after, #skills-bg, .section-certifications::before,
-            .project-image-container svg, .avatar-container { /* Disable specific complex animations */
-                animation: none !important;
-                transform: none !important;
-                filter: none !important;
-            }
-            .animate-on-scroll {
-                opacity: 1 !important;
-                transform: none !important;
-            }
-            #welcome-overlay {
-                display: none !important; /* Hide welcome overlay entirely */
-            }
-        }
     </style>
 </head>
 <body>
+
     <div id="welcome-overlay">
-        <h1 id="welcome-text">Welcome to my Portfolio</h1>
-        <p id="welcome-slogan">Where creativity meets code.</p>
+        <h1 id="welcome-text">Welcome to Jairo's Portfolio</h1>
+        <p id="welcome-slogan">Innovation Secured.</p>
+        <div class="loading-bar"></div>
     </div>
 
     <div class="scroll-progress-bar"></div>
@@ -1046,11 +1176,10 @@
             <div class="avatar-container">
                 <img src="A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Barrientos Avatar" id="my-avatar-img">
             </div>
-            <div class="hero-content">
-                <h1 id="hero-title" class="hero-text-fade">Jairo Barrientos</h1>
-                <p class="hero-text-fade delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
-                <p class="hero-text-fade delay-2">Crafting secure and innovative web experiences.</p>
-            </div>
+            <h1 id="hero-title" class="hero-text-fade">Jairo Lemuel Barrientos</h1>
+            <p class="hero-text-fade delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
+            <p class="hero-text-fade delay-2">Crafting secure and innovative web experiences.</p>
+            <a href="#projects" class="button-primary hero-text-fade delay-3">Explore My Work</a>
         </section>
 
         <section id="projects" class="section-projects section-base" aria-labelledby="projects-title">
@@ -1116,756 +1245,233 @@
                 </div>
             </div>
         </section>
+
+        <section id="skills" class="section-skills section-base animate-on-scroll" aria-labelledby="skills-title">
+            <h2 id="skills-title" class="section-title">My Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card animate-on-scroll">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="20" width="60" height="60" rx="10" stroke="#00C0FF" stroke-width="5" fill="none" class="monitor-outline"/>
+                            <line x1="30" y1="75" x2="70" y2="75" stroke="#00C0FF" stroke-width="3" stroke-linecap="round" class="monitor-stand"/>
+                            <line x1="25" y1="30" x2="75" y2="30" stroke="#8000FF" stroke-width="3" stroke-linecap="round" class="code-line-1"/>
+                            <line x1="25" y1="45" x2="65" y2="45" stroke="#8000FF" stroke-width="3" stroke-linecap="round" class="code-line-2"/>
+                            <line x1="25" y1="60" x2="55" y2="60" stroke="#8000FF" stroke-width="3" stroke-linecap="round" class="code-line-3"/>
+                        </svg>
+                    </div>
+                    <h3>Full Stack Web Development</h3>
+                    <p>Proficient in modern web technologies including HTML5, CSS3, JavaScript (React, Node.js), PHP, and database management (MySQL).</p>
+                </div>
+                <div class="skill-card animate-on-scroll">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="40" stroke="#8000FF" stroke-width="5" fill="none" class="circle-draw"/>
+                            <path d="M40 30 L60 30 C70 30 70 40 70 40 L70 70 C70 80 60 80 60 80 L40 80 C30 80 30 70 30 70 L30 40 C30 30 40 30 40 30 Z" fill="none" stroke="#8000FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="lock-body-skill"/>
+                            <path d="M35 45 C35 35 40 30 50 30 C60 30 65 35 65 45" fill="none" stroke="#8000FF" stroke-width="5" stroke-linecap="round" class="lock-shackle-skill"/>
+                        </svg>
+                    </div>
+                    <h3>Cybersecurity Associate</h3>
+                    <p>Skilled in network security, threat analysis, incident response, and implementing secure coding practices to protect applications.</p>
+                </div>
+                <div class="skill-card animate-on-scroll">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 5 L10 25 V75 L50 95 L90 75 V25 L50 5 Z" stroke="#00E5FF" stroke-width="5" fill="none" class="shield-path"/>
+                            <line x1="35" y1="50" x2="65" y2="50" stroke="#8000FF" stroke-width="3" stroke-linecap="round" class="gear-line-1"/>
+                            <line x1="50" y1="35" x2="50" y2="65" stroke="#8000FF" stroke-width="3" stroke-linecap="round" class="gear-line-2"/>
+                            <circle cx="50" cy="50" r="10" stroke="#00C0FF" stroke-width="3" fill="none" class="gear-center"/>
+                        </svg>
+                    </div>
+                    <h3>Problem Solving & Optimization</h3>
+                    <p>Adept at analyzing complex problems, designing efficient solutions, and optimizing application performance for scalability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="section-certifications section-base animate-on-scroll" aria-labelledby="certifications-title">
+            <h2 id="certifications-title" class="section-title">Certifications & Accolades</h2>
+            <div class="certifications-container">
+                <div class="certification-item animate-on-scroll">
+                    <h3>Cisco Certified CyberOps Associate</h3>
+                    <p>This certification validates a foundational understanding of cybersecurity operations, including security concepts, monitoring, analysis, and incident response.</p>
+                    <div class="credly-badge-embed">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div>
+                        <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+                    </div>
+                </div>
+                </div>
+        </section>
+
+        <section id="contact" class="section-contact section-base animate-on-scroll" aria-labelledby="contact-title">
+            <h2 id="contact-title" class="section-title">Get in Touch</h2>
+            <p class="contact-intro animate-on-scroll">I'm always open to new opportunities, collaborations, or simply a chat! Feel free to send me a message directly.</p>
+
+            <div class="form-container animate-on-scroll">
+                <h3>Send Me a Message</h3>
+                <form id="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" name="name" required placeholder="e.g., John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" name="_replyto" required placeholder="e.g., your.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Your Phone Number (Optional):</label>
+                        <input type="tel" id="phone" name="phone" placeholder="e.g., +1 555 123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="_subject" required placeholder="e.g., Project Inquiry">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message:</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project or inquiry..."></textarea>
+                    </div>
+                    <button type="submit" class="button-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
     </main>
 
-    <section id="skills" class="section-skills section-base animate-on-scroll" aria-labelledby="skills-title">
-        <h2 id="skills-title" class="section-title">My Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-card animate-on-scroll">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="40" stroke="#00C0FF" stroke-width="5" fill="none" class="circle-draw"/>
-                        <path d="M30 50 L45 65 L70 35" stroke="#00E5FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="check-mark"/>
-                    </svg>
-                </div>
-                <h3>Full Stack Web Development</h3>
-                <p>Proficient in modern web technologies including HTML5, CSS3, JavaScript (React, Node.js), PHP, and database management (MySQL).</p>
-            </div>
-            <div class="skill-card animate-on-scroll">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="40" stroke="#8000FF" stroke-width="5" fill="none" class="circle-draw"/>
-                        <path d="M40 30 L60 30 C70 30 70 40 70 40 L70 70 C70 80 60 80 60 80 L40 80 C30 80 30 70 30 70 L30 40 C30 30 40 30 40 30 Z" fill="none" stroke="#8000FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="lock-body-skill"/>
-                        <path d="M35 45 C35 35 40 30 50 30 C60 30 65 35 65 45" fill="none" stroke="#8000FF" stroke-width="5" stroke-linecap="round" class="lock-shackle-skill"/>
-                    </svg>
-                </div>
-                <h3>Cybersecurity Associate</h3>
-                <p>Skilled in network security, threat analysis, incident response, and implementing secure coding practices to protect applications.</p>
-            </div>
-            <div class="skill-card animate-on-scroll">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="20" width="60" height="60" rx="10" stroke="#00C0FF" stroke-width="5" fill="none" class="monitor-outline"/>
-                        <line x1="30" y1="75" x2="70" y2="75" stroke="#00C0FF" stroke-width="3" stroke-linecap="round" class="monitor-stand"/>
-                        <line x1="25" y1="30" x2="75" y2="30" stroke="#8000FF" stroke-width="3" stroke-linecap="round" class="code-line-1"/>
-                        <line x1="25" y1="45" x2="65" y2="45" stroke="#8000FF" stroke-width="3" stroke-linecap="round" class="code-line-2"/>
-                        <line x1="25" y1="60" x2="55" y2="60" stroke="#8000FF" stroke-width="3" stroke-linecap="round" class="code-line-3"/>
-                    </svg>
-                </div>
-                <h3>Problem Solving & Optimization</h3>
-                <p>Adept at analyzing complex problems, designing efficient solutions, and optimizing application performance for scalability.</p>
-            </div>
+    <div id="floating-contact-button" class="floating-button" title="Contact Me">
+        <i class="fas fa-comments"></i> </div>
+    <div id="contact-dropdown" class="contact-dropdown-content hidden">
         </div>
-    </section>
-
-    <section id="certifications" class="section-certifications section-base animate-on-scroll" aria-labelledby="certifications-title">
-        <h2 id="certifications-title" class="section-title">Certifications & Accolades</h2>
-        <div class="certifications-container">
-            <div class="certification-item animate-on-scroll">
-                <h3>Cisco Certified CyberOps Associate</h3>
-                <p>This certification validates a foundational understanding of cybersecurity operations, including security concepts, monitoring, analysis, and incident response.</p>
-                <div class="credly-badge-embed">
-                    <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div>
-                    <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-                </div>
-            </div>
-            </div>
-    </section>
-
-    <section id="contact" class="section-contact section-base animate-on-scroll" aria-labelledby="contact-title">
-        <h2 id="contact-title" class="section-title">Get in Touch</h2>
-        <p class="contact-intro animate-on-scroll">I'm always open to new opportunities, collaborations, or simply a chat! Feel free to reach out through any of the channels below.</p>
-
-        <button id="contact-me-button" class="button-primary animate-on-scroll">Contact Me</button>
-
-        <div id="contact-dropdown" class="contact-dropdown-content animate-on-scroll">
-            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" class="contact-link">
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>LinkedIn icon</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9.495h3.414v1.561h.045c.473-.895 1.632-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.747c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm-.006 12.705H2.368V9.495h2.969v12.957zM22.227 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.456c.98 0 1.773-.773 1.773-1.729V1.729C24 .774 23.207 0 22.227 0z"/></svg>
-                LinkedIn: Jairo Barrientos
-            </a>
-            <a href="https://wa.me/5493437457636" target="_blank" rel="noopener noreferrer" class="contact-link">
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>WhatsApp icon</title><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.47-.148-.669.149-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.13-.13.297-.344.446-.518.148-.172.198-.297.297-.495.099-.198.05-.371-.025-.519-.075-.149-.669-1.612-.916-2.206-.242-.579-.487-.5-.664-.51-.173-.007-.37-.007-.568-.007-.2 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.71.323 1.256.518 1.687.667.579.205 1.118.167 1.549.1.43-.067 1.256-.518 1.43-1.029.173-.51-.106-.792-.198-.941zm-3.35-7.204c-.007-.025-.018-.049-.025-.075-.025-.05-.049-.074-.074-.1-.049-.074-.099-.148-.148-.223-.099-.148-.198-.297-.297-.446-.149-.247-.297-.495-.495-.742-.148-.149-.297-.297-.446-.446-.223-.223-.47-.47-.717-.669-.272-.224-.546-.447-.843-.596-.297-.149-.644-.224-.966-.297l-.273-.075c-.347-.074-.693-.099-1.04-.099-.347 0-.693.024-1.04.099-.347.074-.669.199-.966.297-.297.099-.596.223-.843.372-.247.149-.495.297-.669.396-.173.124-.347.223-.495.372-.273.223-.446.47-.644.693-.198.223-.372.47-.519.717-.148.247-.247.495-.347.742-.099.247-.198.495-.297.742-.149.297-.297.619-.372.843-.074.223-.148.47-.173.669-.025.198-.025.371.025.495s.173.272.347.446c.173.173.347.347.495.446.149.099.297.173.446.297.149.124.297.247.446.372.223.173.446.322.669.47.223.149.47.322.717.446.297.149.596.273.843.372.247.099.519.198.767.247.297.05.596.074.916.074.322 0 .644-.025.966-.074.322-.05.619-.124.916-.198.297-.099.596-.247.843-.372.247-.124.47-.273.717-.446.247-.173.495-.347.669-.47.198-.124.372-.247.519-.372.148-.124.297-.272.446-.446.149-.149.297-.297.446-.495.149-.173.273-.371.372-.519.099-.148.148-.297.173-.47.025-.198.025-.371-.007-.495zM12 0C5.373 0 0 5.373 0 12c0 3.061 1.134 5.92 3.16 8.064L2.016 24l3.905-1.029C8.36 23.332 10.16 23.666 12 23.666c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-                WhatsApp: +54 9 3437 457636
-            </a>
-            <a href="mailto:barrientosjairolemuel@gmail.com" class="contact-link">
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Gmail icon</title><path d="M24 5.457v13.914c0 .267-.173.364-.407.246L12 12.793 0 19.617c-.234.118-.407.021-.407-.246V5.457c0-.264.292-.405.525-.21L12 11.205l11.883-5.958c.233-.195.525-.054.525.21zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z"/></svg>
-                Email: barrientosjairolemuel@gmail.com
-            </a>
-        </div>
-
-        <div class="form-container animate-on-scroll">
-            <h3>Send Me a Message</h3>
-            <form id="contact-form" action="https://formspree.io/f/your_form_id" method="POST"> <div class="form-group">
-                    <label for="name">Your Name:</label>
-                    <input type="text" id="name" name="name" required placeholder="e.g., John Doe">
-                </div>
-                <div class="form-group">
-                    <label for="email">Your Email:</label>
-                    <input type="email" id="email" name="email" required placeholder="e.g., john.doe@example.com">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Your Phone (Optional):</label>
-                    <input type="tel" id="phone" name="phone" placeholder="e.g., +1 555-123-4567">
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject / Reason for Contact:</label>
-                    <select id="subject" name="_subject">
-                        <option value="Job Opportunity">Job Opportunity</option>
-                        <option value="Project Collaboration">Project Collaboration</option>
-                        <option value="General Inquiry">General Inquiry</option>
-                        <option value="Feedback">Feedback</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Your Message:</label>
-                    <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project, idea, or question..."></textarea>
-                </div>
-                <button type="submit" class="button-primary">Send Message</button>
-            </form>
-            <p id="form-status" class="form-message"></p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; <span id="current-year"></span> Jairo Barrientos. All rights reserved.</p>
-            <p>"The limit is our imagination."</p>
-        </div>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>LinkedIn icon</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9.495h3.414v1.561h.045c.473-.895 1.632-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.747c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm-.006 12.705H2.368V9.495h2.969v12.957zM22.227 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.456c.98 0 1.773-.773 1.773-1.729V1.729C24 .774 23.207 0 22.227 0z"/></svg>
-            </a>
-            <a href="https://wa.me/5493437457636" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact">
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>WhatsApp icon</title><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.47-.148-.669.149-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.13-.13.297-.344.446-.518.148-.172.198-.297.297-.495.099-.198.05-.371-.025-.519-.075-.149-.669-1.612-.916-2.206-.242-.579-.487-.5-.664-.51-.173-.007-.37-.007-.568-.007-.2 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.71.323 1.256.518 1.687.667.579.205 1.118.167 1.549.1.43-.067 1.256-.518 1.43-1.029.173-.51-.106-.792-.198-.941zm-3.35-7.204c-.007-.025-.018-.049-.025-.075-.025-.05-.049-.074-.074-.1-.049-.074-.099-.148-.148-.223-.099-.148-.198-.297-.297-.446-.149-.247-.297-.495-.495-.742-.148-.149-.297-.297-.446-.446-.223-.223-.47-.47-.717-.669-.272-.224-.546-.447-.843-.596-.297-.149-.644-.224-.966-.297l-.273-.075c-.347-.074-.693-.099-1.04-.099-.347 0-.693.024-1.04.099-.347.074-.669.199-.966.297-.297.099-.596.223-.843.372-.247.149-.495.297-.669.396-.173.124-.347.223-.495.372-.273.223-.446.47-.644.693-.198.223-.372.47-.519.717-.148.247-.247.495-.347.742-.099.247-.198.495-.297.742-.149.297-.297.619-.372.843-.074.223-.148.47-.173.669-.025.198-.025.371.025.495s.173.272.347.446c.173.173.347.347.495.446.149.099.297.173.446.297.149.124.297.247.446.372.223.173.446.322.669.47.223.149.47.322.717.446.297.149.596.273.843.372.247.099.519.198.767.247.297.05.596.074.916.074.322 0 .644-.025.966-.074.322-.05.619-.124.916-.198.297-.099.596-.247.843-.372.247-.124.47-.273.717-.446.247-.173.495-.347.669-.47.198-.124.372-.247.519-.372.148-.124.297-.272.446-.446.149-.149.297-.297.446-.495.149-.173.273-.371.372-.519.099-.148.148-.297.173-.47.025-.198.025-.371-.007-.495zM12 0C5.373 0 0 5.373 0 12c0 3.061 1.134 5.92 3.16 8.064L2.016 24l3.905-1.029C8.36 23.332 10.16 23.666 12 23.666c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-            </a>
-            <a href="mailto:barrientosjairolemuel@gmail.com" aria-label="Email Contact">
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Gmail icon</title><path d="M24 5.457v13.914c0 .267-.173.364-.407.246L12 12.793 0 19.617c-.234.118-.407.021-.407-.246V5.457c0-.264.292-.405.525-.21L12 11.205l11.883-5.958c.233-.195.525-.054.525.21zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z"/></svg>
-            </a>
-            </div>
-    </footer>
 
     <script>
-        // --- General Utility Functions ---
-        function debounce(func, delay) {
-            let timeout;
-            return function(...args) {
-                const context = this;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), delay);
-            };
-        }
-
-        // --- Welcome Overlay Logic ---
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Welcome Overlay Logic ---
             const welcomeOverlay = document.getElementById('welcome-overlay');
             const welcomeText = document.getElementById('welcome-text');
             const welcomeSlogan = document.getElementById('welcome-slogan');
+            const loadingBar = document.querySelector('.loading-bar');
 
-            if (welcomeOverlay) {
-                setTimeout(() => {
-                    welcomeOverlay.classList.add('fade-out');
-                    // Remove from DOM after transition to prevent interaction
-                    welcomeOverlay.addEventListener('transitionend', () => {
-                        welcomeOverlay.remove();
-                        document.body.style.overflowY = 'auto'; // Re-enable scrolling
-                    }, { once: true });
-                }, 3000); // Overlay stays for 3 seconds
-            }
+            // Set a duration for the overlay
+            const overlayDuration = 3000; // 3 seconds
 
-            document.body.style.overflowY = 'hidden'; // Disable scrolling until overlay fades
-        });
+            setTimeout(() => {
+                welcomeOverlay.classList.add('hidden');
+            }, overlayDuration);
 
-
-        // --- Header Scroll Effect and Active Nav Link ---
-        const mainHeader = document.querySelector('.main-header');
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        const sections = document.querySelectorAll('section');
-
-        const updateHeaderAndNav = debounce(() => {
-            if (window.scrollY > 0) {
-                mainHeader.classList.add('scrolled');
-            } else {
-                mainHeader.classList.remove('scrolled');
-            }
-
-            let currentActiveSection = 'hero'; // Default to hero
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - mainHeader.offsetHeight; // Account for header height
-                const sectionBottom = sectionTop + section.offsetHeight;
-
-                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                    currentActiveSection = section.id;
+            // Optional: Remove overlay from DOM after animation to clear resources
+            welcomeOverlay.addEventListener('transitionend', () => {
+                if (welcomeOverlay.classList.contains('hidden')) {
+                    welcomeOverlay.remove();
                 }
             });
 
+
+            // --- Header Scroll and Progress Bar Logic ---
+            const mainHeader = document.querySelector('.main-header');
+            const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const sections = document.querySelectorAll('section');
+
+            function updateHeaderAndProgressBar() {
+                const scrollY = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollProgress = (scrollY / docHeight) * 100;
+
+                // Update Header
+                if (scrollY > 50) { // Adjust scroll threshold as needed
+                    mainHeader.classList.add('scrolled');
+                } else {
+                    mainHeader.classList.remove('scrolled');
+                }
+
+                // Update Scroll Progress Bar
+                scrollProgressBar.style.width = scrollProgress + '%';
+
+                // Update Active Nav Link
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - mainHeader.offsetHeight; // Adjust for fixed header
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    const id = section.getAttribute('id');
+
+                    if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateHeaderAndProgressBar);
+            // Initial call to set state on load
+            updateHeaderAndProgressBar();
+
+
+            // --- Smooth Scroll for Nav Links ---
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(currentActiveSection)) {
-                    link.classList.add('active');
-                }
-            });
-        }, 50); // Debounce for performance
-
-        window.addEventListener('scroll', updateHeaderAndNav);
-        document.addEventListener('DOMContentLoaded', updateHeaderAndNav); // Run on load for initial state
-
-
-        // --- Scroll Progress Bar ---
-        const scrollProgressBar = document.querySelector('.scroll-progress-bar');
-
-        const updateProgressBar = debounce(() => {
-            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-            const scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
-            scrollProgressBar.style.width = scrollPercent + '%';
-        }, 10); // More frequent updates for smooth progress bar
-
-        window.addEventListener('scroll', updateProgressBar);
-        document.addEventListener('DOMContentLoaded', updateProgressBar);
-
-
-        // --- Animate on Scroll (Intersection Observer) ---
-        const animateElements = document.querySelectorAll('.animate-on-scroll');
-
-        const observerOptions = {
-            root: null, // viewport
-            rootMargin: '0px',
-            threshold: 0.2 // Trigger when 20% of the element is visible
-        };
-
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    
-                    // Specific SVG animations for project cards
-                    const projectSvg = entry.target.querySelector('.project-image-container svg');
-                    if (projectSvg) {
-                        projectSvg.classList.add('animated');
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        // Calculate offset for fixed header
+                        const offset = mainHeader.offsetHeight;
+                        const targetPosition = targetSection.offsetTop - offset;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
                     }
-
-                    // Specific SVG animations for skill cards
-                    const skillSvg = entry.target.querySelector('.skill-icon svg');
-                    if (skillSvg) {
-                        skillSvg.classList.add('animated');
-                    }
-
-                    // For elements that only need to animate once
-                    observer.unobserve(entry.target);
-                }
+                });
             });
-        };
 
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-        animateElements.forEach(element => {
-            observer.observe(element);
+            // --- Animate on Scroll Logic (Intersection Observer) ---
+            const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the element must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        // For skill-card SVGs, trigger specific animations here if needed
+                        // (More complex SVG animations will be handled in Part 2)
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            animateOnScrollElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Specific animation for project SVGs when project-card-wrapper is animated
+            const projectCardWrappers = document.querySelectorAll('.project-card-wrapper');
+            const projectObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const svgElement = entry.target.querySelector('svg');
+                        if (svgElement) {
+                            // Re-trigger SVG animations by removing/adding classes or setting new ones
+                            // This part is more complex and will be elaborated in Part 2
+                            // For now, just ensure the card itself animates
+                        }
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            projectCardWrappers.forEach(card => {
+                projectObserver.observe(card);
+            });
+
         });
-
-
-        // --- Contact Me Button Dropdown ---
-        const contactButton = document.getElementById('contact-me-button');
-        const contactDropdown = document.getElementById('contact-dropdown');
-
-        if (contactButton && contactDropdown) {
-            contactButton.addEventListener('click', () => {
-                contactDropdown.classList.toggle('active');
-                contactButton.setAttribute('aria-expanded', contactDropdown.classList.contains('active'));
-            });
-
-            // Close dropdown if clicking outside
-            document.addEventListener('click', (event) => {
-                if (!contactButton.contains(event.target) && !contactDropdown.contains(event.target)) {
-                    contactDropdown.classList.remove('active');
-                    contactButton.setAttribute('aria-expanded', 'false');
-                }
-            });
-        }
-
-        // --- Contact Form Submission (Formspree/Netlify Forms) ---
-        const contactForm = document.getElementById('contact-form');
-        const formStatus = document.getElementById('form-status');
-
-        if (contactForm) {
-            contactForm.addEventListener('submit', async (event) => {
-                event.preventDefault(); // Prevent default form submission
-
-                formStatus.textContent = 'Sending...';
-                formStatus.style.color = '#00C0FF';
-
-                const formData = new FormData(contactForm);
-                try {
-                    const response = await fetch(contactForm.action, {
-                        method: contactForm.method,
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        formStatus.textContent = 'Message sent successfully! I will get back to you shortly.';
-                        formStatus.style.color = '#4CAF50'; // Green for success
-                        contactForm.reset(); // Clear the form
-                    } else {
-                        const data = await response.json();
-                        if (data.errors) {
-                            formStatus.textContent = data.errors.map(error => error.message).join(', ');
-                        } else {
-                            formStatus.textContent = 'Oops! There was an error sending your message.';
-                        }
-                        formStatus.style.color = '#F44336'; // Red for error
-                    }
-                } catch (error) {
-                    formStatus.textContent = 'Network error. Please try again later.';
-                    formStatus.style.color = '#F44336';
-                    console.error('Form submission error:', error);
-                }
-            });
-        }
-
-
-        // --- Dynamic Current Year for Footer ---
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
     </script>
 
-    <style>
-        /* --- Skill Section Styles --- */
-        .section-skills {
-            background: radial-gradient(circle at center, var(--color-bg-light) 0%, var(--color-bg-dark) 80%);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin-top: 50px;
-        }
-
-        .skill-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 8px rgba(0, 192, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--card-border);
-            transition: transform 0.3s var(--bezier-smooth), box-shadow 0.3s ease;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 10px 25px var(--glow-light-alpha), inset 0 0 12px rgba(0, 192, 255, 0.3);
-            border-color: rgba(0, 192, 255, 0.6);
-        }
-
-        .skill-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 8px var(--color-primary));
-        }
-
-        .skill-icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Skill SVG Animations */
-        .skill-icon svg .circle-draw,
-        .skill-icon svg .check-mark,
-        .skill-icon svg .lock-body-skill,
-        .skill-icon svg .lock-shackle-skill,
-        .skill-icon svg .monitor-outline,
-        .skill-icon svg .monitor-stand,
-        .skill-icon svg .code-line-1,
-        .skill-icon svg .code-line-2,
-        .skill-icon svg .code-line-3 {
-            stroke-dasharray: 200;
-            stroke-dashoffset: 200;
-        }
-
-        .skill-card.is-visible .skill-icon svg .circle-draw { animation: drawLine 1s ease-out forwards; }
-        .skill-card.is-visible .skill-icon svg .check-mark { animation: drawLine 1s ease-out forwards 0.5s; }
-
-        .skill-card.is-visible .skill-icon svg .lock-body-skill { animation: drawLine 1s ease-out forwards; }
-        .skill-card.is-visible .skill-icon svg .lock-shackle-skill { animation: drawLine 1s ease-out forwards 0.5s; }
-
-        .skill-card.is-visible .skill-icon svg .monitor-outline { animation: drawLine 1s ease-out forwards; }
-        .skill-card.is-visible .skill-icon svg .monitor-stand { animation: drawLine 0.5s ease-out forwards 0.8s; }
-        .skill-card.is-visible .skill-icon svg .code-line-1 { animation: drawLine 0.7s ease-out forwards 1.2s; }
-        .skill-card.is-visible .skill-icon svg .code-line-2 { animation: drawLine 0.7s ease-out forwards 1.4s; }
-        .skill-card.is-visible .skill-icon svg .code-line-3 { animation: drawLine 0.7s ease-out forwards 1.6s; }
-
-        @keyframes drawLine {
-            to { stroke-dashoffset: 0; }
-        }
-
-        .skill-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--color-primary-light);
-            text-shadow: none;
-        }
-
-        .skill-card p {
-            font-size: 0.95rem;
-            color: var(--color-text-medium);
-        }
-
-        /* --- Certifications Section Styles --- */
-        .section-certifications {
-            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-gradient-mid), var(--color-bg-dark));
-        }
-
-        .certifications-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 50px;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .certification-item {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 8px rgba(128, 0, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(128, 0, 255, 0.3);
-            transition: transform 0.3s var(--bezier-smooth), box-shadow 0.3s ease;
-            text-align: center;
-            max-width: 450px;
-            width: 100%;
-        }
-
-        .certification-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(128, 0, 255, 0.4), inset 0 0 12px rgba(128, 0, 255, 0.5);
-            border-color: rgba(128, 0, 255, 0.8);
-        }
-
-        .certification-item h3 {
-            font-size: 1.6rem;
-            color: var(--color-secondary); /* Purple for certifications */
-            margin-bottom: 15px;
-            text-shadow: none;
-        }
-
-        .certification-item p {
-            font-size: 1rem;
-            color: var(--color-text-medium);
-            margin-bottom: 25px;
-        }
-
-        .credly-badge-embed {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            min-height: 270px; /* Ensure space for the badge */
-        }
-
-        /* --- Contact Section Styles --- */
-        .section-contact {
-            background: radial-gradient(circle at bottom right, var(--color-bg-gradient-start) 0%, var(--color-bg-dark) 60%);
-            padding-bottom: var(--spacing-section); /* Extra padding for form */
-        }
-
-        .contact-intro {
-            font-size: 1.2rem;
-            color: var(--color-text-medium);
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-        }
-
-        #contact-me-button {
-            margin-bottom: 40px;
-        }
-
-        .contact-dropdown-content {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--card-border);
-            max-width: 400px;
-            width: 100%;
-            margin: 0 auto 60px auto;
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.5s var(--bezier-smooth);
-            transform: translateY(-20px);
-        }
-
-        .contact-dropdown-content.active {
-            opacity: 1;
-            max-height: 300px; /* Adjust based on content */
-            transform: translateY(0);
-            padding: 25px; /* Re-apply padding if max-height collapses it */
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 12px 0;
-            color: var(--color-text-light);
-            font-size: 1.1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: color 0.3s ease, transform 0.2s ease;
-        }
-
-        .contact-link:last-child {
-            border-bottom: none;
-        }
-
-        .contact-link:hover {
-            color: var(--color-primary-light);
-            transform: translateX(5px);
-            text-decoration: none;
-        }
-
-        .contact-link svg {
-            width: 24px;
-            height: 24px;
-            color: var(--color-primary);
-            transition: color 0.3s ease;
-        }
-
-        .contact-link:hover svg {
-            color: var(--color-primary-light);
-        }
-
-        /* --- Contact Form Styles --- */
-        .form-container {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--card-border);
-            max-width: 600px;
-            width: 100%;
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .form-container h3 {
-            font-size: 2rem;
-            color: var(--color-primary-light);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 1rem;
-            color: var(--color-text-light);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group input[type="tel"],
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            color: var(--color-text-light);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--color-text-dark);
-            opacity: 0.7;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--color-primary-light);
-            box-shadow: 0 0 15px rgba(0, 192, 255, 0.5);
-            background-color: rgba(0, 0, 0, 0.6);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-container .button-primary {
-            width: 100%;
-            margin-top: 20px;
-            padding: 15px 0;
-            font-size: 1.2rem;
-        }
-
-        .form-message {
-            margin-top: 20px;
-            font-size: 1rem;
-            text-align: center;
-            min-height: 20px; /* Prevent layout shift */
-        }
-
-
-        /* --- Footer Styles --- */
-        footer {
-            background: var(--color-bg-light);
-            padding: 30px 40px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--color-text-dark);
-            border-top: 1px solid rgba(0, 192, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .footer-content p {
-            margin: 0;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            color: var(--color-text-medium);
-            transition: color 0.3s ease, transform 0.2s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--color-primary-light);
-            transform: translateY(-3px);
-            text-decoration: none;
-        }
-
-        .social-links a svg {
-            width: 26px;
-            height: 26px;
-            transition: fill 0.3s ease;
-        }
-
-        .social-links a:hover svg {
-            fill: var(--color-primary);
-            filter: drop-shadow(0 0 8px var(--color-primary));
-        }
-
-        /* Responsive Adjustments for Part 2 */
-        @media (max-width: 1024px) {
-            .skills-grid {
-                gap: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-            .skill-card {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-            .contact-intro {
-                font-size: 1.1rem;
-            }
-            .form-container {
-                padding: 30px 25px;
-            }
-            .form-container h3 {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .skill-card {
-                padding: 20px;
-            }
-            .skill-card h3 {
-                font-size: 1.3rem;
-            }
-            .skill-icon {
-                width: 70px;
-                height: 70px;
-            }
-            .certification-item {
-                padding: 25px;
-                max-width: 95%;
-            }
-            .certification-item h3 {
-                font-size: 1.4rem;
-            }
-            .contact-intro {
-                font-size: 1rem;
-                margin-bottom: 30px;
-            }
-            #contact-me-button {
-                margin-bottom: 30px;
-            }
-            .contact-dropdown-content {
-                padding: 20px;
-            }
-            .contact-link {
-                font-size: 1rem;
-                padding: 10px 0;
-            }
-            .contact-link svg {
-                width: 22px;
-                height: 22px;
-            }
-            .form-container {
-                padding: 25px 20px;
-            }
-            .form-container h3 {
-                font-size: 1.6rem;
-            }
-            .form-group label {
-                font-size: 0.9rem;
-            }
-            .form-group input, .form-group select, .form-group textarea {
-                padding: 10px 12px;
-                font-size: 0.9rem;
-            }
-            .form-container .button-primary {
-                padding: 12px 0;
-                font-size: 1.1rem;
-            }
-            footer {
-                padding: 20px;
-            }
-            .social-links {
-                gap: 20px;
-            }
-            .social-links a svg {
-                width: 24px;
-                height: 24px;
-            }
-        }
-    </style>
 </body>
 </html>
