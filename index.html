@@ -9,12 +9,17 @@
     <meta name="author" content="Jairo Barrientos">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.yourportfolio.com/"> <meta property="og:title" content="Jairo Barrientos - Full Stack & Cybersecurity Portfolio">
+    <meta property="og:url" content="https://www.yourportfolio.com/">
+    <meta property="og:title" content="Jairo Barrientos - Full Stack & Cybersecurity Portfolio">
     <meta property="og:description" content="Crafting secure and innovative web experiences. Explore my projects, skills, and certifications.">
-    <meta property="og:image" content="https://www.yourportfolio.com/assets/images/og-image.jpg"> <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.yourportfolio.com/"> <meta property="twitter:title" content="Jairo Barrientos - Full Stack & Cybersecurity Portfolio">
+    <meta property="og:image" content="https://www.yourportfolio.com/assets/images/og-image.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.yourportfolio.com/">
+    <meta property="twitter:title" content="Jairo Barrientos - Full Stack & Cybersecurity Portfolio">
     <meta property="twitter:description" content="Crafting secure and innovative web experiences. Explore my projects, skills, and certifications.">
-    <meta property="twitter:image" content="https://www.yourportfolio.com/assets/images/twitter-image.jpg"> <link rel="icon" href="assets/favicon.ico" type="image/x-icon"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta property="twitter:image" content="https://www.yourportfolio.com/assets/images/twitter-image.jpg">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
@@ -103,195 +108,105 @@
             transform: translateY(0);
         }
 
- <style>
-    /* --- Variables CSS para personalización --- */
-    :root {
-        --color-bg-dark: #0A0F1A; /* Fondo oscuro espacial */
-        --color-primary: #00FFFF; /* Cian eléctrico vibrante para el brillo principal */
-        --color-primary-light: #66FFFF; /* Cian más claro para el halo */
-        --color-text-medium: #A0A9B8; /* Gris azulado para el texto secundario, legible */
-        --font-heading: 'Orbitron', sans-serif; /* Fuente impactante y futurista */
-        --font-body: 'Roboto', sans-serif; /* Fuente legible y limpia */
-    }
+        /* --- Welcome Overlay Specific Styles --- */
+        /* Variables CSS para personalización para el overlay */
+        :root {
+            --color-bg-dark-overlay: #0A0F1A; /* Fondo oscuro espacial para el overlay */
+            --color-primary-overlay: #00FFFF; /* Cian eléctrico vibrante para el brillo principal del overlay */
+            --color-primary-light-overlay: #66FFFF; /* Cian más claro para el halo del overlay */
+            --color-text-medium-overlay: #A0A9B8; /* Gris azulado para el texto secundario del overlay, legible */
+            --font-heading-overlay: 'Orbitron', sans-serif; /* Fuente impactante y futurista para el overlay */
+            --font-body-overlay: 'Roboto', sans-serif; /* Fuente legible y limpia para el overlay */
+        }
 
-    /* --- Contenedor Principal del Overlay --- */
-    #welcome-overlay-container {
-        position: fixed; /* Fija el overlay en la ventana de visualización */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--color-bg-dark); /* Color de fondo definido por la variable */
-        z-index: 9999; /* Asegura que cubra todo el contenido de la página */
-        display: flex; /* Utiliza Flexbox para centrar contenido */
-        justify-content: center; /* Centra horizontalmente el contenido hijo */
-        align-items: center; /* Centra verticalmente el contenido hijo */
-        flex-direction: column; /* Apila los elementos verticalmente (título, eslogan) */
-        pointer-events: none; /* Permite que los clics pasen a través del overlay una vez que se desvanece */
-        opacity: 1; /* Comienza completamente visible */
-        transition: opacity 1s ease-out; /* Suave transición al desvanecerse */
-        overflow: hidden; /* Evita barras de desplazamiento si las partículas se salen de la pantalla */
-    }
+        /* --- Contenedor Principal del Overlay --- */
+        #welcome-overlay-container {
+            position: fixed; /* Fija el overlay en la ventana de visualización */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg-dark-overlay); /* Color de fondo definido por la variable */
+            z-index: 9999; /* Asegura que cubra todo el contenido de la página */
+            display: flex; /* Utiliza Flexbox para centrar contenido */
+            justify-content: center; /* Centra horizontalmente el contenido hijo */
+            align-items: center; /* Centra verticalmente el contenido hijo */
+            flex-direction: column; /* Apila los elementos verticalmente (título, eslogan) */
+            pointer-events: none; /* Permite que los clics pasen a través del overlay una vez que se desvanece */
+            opacity: 1; /* Comienza completamente visible */
+            transition: opacity 1s ease-out; /* Suave transición al desvanecerse */
+            overflow: hidden; /* Evita barras de desplazamiento si las partículas se salen de la pantalla */
+        }
 
-    /* --- Contenedor para el Texto Principal y Partículas --- */
-    #welcome-text-container {
-        position: relative; /* Esencial para posicionar las partículas de forma absoluta dentro de él */
-        /* No se usa overflow: hidden aquí para permitir que las partículas se dispersen libremente */
-    }
+        /* --- Contenedor para el Texto Principal y Partículas --- */
+        #welcome-text-container {
+            position: relative; /* Esencial para posicionar las partículas de forma absoluta dentro de él */
+            /* No se usa overflow: hidden aquí para permitir que las partículas se dispersen librely */
+        }
 
-    /* --- Estilo del Título Principal --- */
-    #welcome-title {
-        font-family: var(--font-heading); /* Aplica la fuente futurista */
-        font-size: 4.5rem; /* Tamaño de fuente grande para impacto */
-        color: var(--color-primary); /* Color principal vibrante del texto */
-        /* Múltiples sombras para crear un efecto de "neón" o "glow" */
-        text-shadow: 
-            0 0 15px var(--color-primary), /* Sombra base */
-            0 0 30px var(--color-primary-light), /* Sombra media, más brillante */
-            0 0 60px var(--color-primary-light), /* Sombra extendida para el halo */
-            0 0 100px rgba(0, 255, 255, 0.5); /* Sombra muy difusa y semitransparente para un glow ambiental */
-        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-        opacity: 1; /* Comienza visible, se desvanece con JS */
-        transition: opacity 1s ease-in-out; /* Transición suave para su desaparición */
-        text-align: center; /* Centra el texto dentro de su propio contenedor */
-        line-height: 1; /* Ajusta la altura de línea para evitar espacio extra */
-        position: relative; /* Asegura que getBoundingClientRect funcione con precisión */
-    }
-
-    /* --- Estilo del Eslogan --- */
-    #welcome-slogan-animated {
-        font-family: var(--font-body); /* Aplica la fuente legible */
-        font-size: 1.6rem; /* Tamaño de fuente adecuado para una frase secundaria */
-        color: var(--color-text-medium); /* Color de texto más suave */
-        opacity: 0; /* Comienza oculto */
-        margin-top: 25px; /* Espacio entre el título y el eslogan */
-        text-align: center; /* **Crucial: Centra la frase "El límite es nuestra imaginación"** */
-        line-height: 1.4; /* Mejora la legibilidad del texto */
-        font-style: italic; /* Añade un toque estilístico distintivo */
-        transform: translateY(20px); /* Posición inicial para la animación de "subida" */
-        /* Transiciones para su aparición y movimiento */
-        transition: opacity 1s ease-in-out, transform 0.8s ease-out; 
-    }
-
-    /* --- Estilo de las Partículas --- */
-    .particle {
-        position: absolute; /* Posiciona las partículas de forma absoluta respecto a #welcome-text-container */
-        background-color: var(--color-primary); /* Color base de la partícula (azul vibrante) */
-        border-radius: 50%; /* Las hace perfectamente redondas */
-        opacity: 0; /* Comienza oculto */
-        pointer-events: none; /* Las partículas no interfieren con el puntero del ratón */
-        box-shadow: 0 0 5px var(--color-primary-light); /* Pequeño glow para cada partícula */
-    }
-
-    /* --- Media Queries para Responsividad --- */
-    @media (max-width: 768px) {
+        /* --- Estilo del Título Principal --- */
         #welcome-title {
-            font-size: 3rem; /* Reduce el tamaño del título en tabletas */
+            font-family: var(--font-heading-overlay); /* Aplica la fuente futurista */
+            font-size: 4.5rem; /* Tamaño de fuente grande para impacto */
+            color: var(--color-primary-overlay); /* Color principal vibrante del texto */
+            /* Múltiples sombras para crear un efecto de "neón" o "glow" */
+            text-shadow:
+                0 0 15px var(--color-primary-overlay), /* Sombra base */
+                0 0 30px var(--color-primary-light-overlay), /* Sombra media, más brillante */
+                0 0 60px var(--color-primary-light-overlay), /* Sombra extendida para el halo */
+                0 0 100px rgba(0, 255, 255, 0.5); /* Sombra muy difusa y semitransparente para un glow ambiental */
+            white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+            opacity: 1; /* Comienza visible, se desvanece con JS */
+            transition: opacity 1s ease-in-out; /* Transición suave para su desaparición */
+            text-align: center; /* Centra el texto dentro de su propio contenedor */
+            line-height: 1; /* Ajusta la altura de línea para evitar espacio extra */
+            position: relative; /* Asegura que getBoundingClientRect funcione con precisión */
         }
+
+        /* --- Estilo del Eslogan --- */
         #welcome-slogan-animated {
-            font-size: 1.2rem; /* Reduce el tamaño del eslogan en tabletas */
-        }
-    }
-
-    @media (max-width: 480px) {
-        #welcome-title {
-            font-size: 2.2rem; /* Reduce aún más el tamaño del título en móviles */
-        }
-        #welcome-slogan-animated {
-            font-size: 1rem; /* Reduce aún más el tamaño del eslogan en móviles */
-        }
-    }
-</style>
-
-<div id="welcome-overlay-container">
-    <div id="welcome-text-container">
-        <h1 id="welcome-title">Welcome to my Portfolio</h1>
-    </div>
-    <p id="welcome-slogan-animated">El límite es nuestra imaginación</p>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const welcomeOverlay = document.getElementById('welcome-overlay-container');
-        const welcomeTitle = document.getElementById('welcome-title');
-        const welcomeSlogan = document.getElementById('welcome-slogan-animated');
-        const textContainer = document.getElementById('welcome-text-container');
-
-        const numParticles = 180; // Incrementado para un efecto más denso y visual
-        const particlesArray = [];
-
-        // Inicializar las partículas y añadirlas al DOM
-        for (let i = 0; i < numParticles; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            const size = Math.random() * 5 + 1; // Tamaño aleatorio entre 1px y 6px
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            textContainer.appendChild(particle); // Se añaden al textContainer
-            particlesArray.push(particle);
+            font-family: var(--font-body-overlay); /* Aplica la fuente legible */
+            font-size: 1.6rem; /* Tamaño de fuente adecuado para una frase secundaria */
+            color: var(--color-text-medium-overlay); /* Color de texto más suave */
+            opacity: 0; /* Comienza oculto */
+            margin-top: 25px; /* Espacio entre el título y el eslogan */
+            text-align: center; /* **Crucial: Centra la frase "El límite es nuestra imaginación"** */
+            line-height: 1.4; /* Mejora la legibilidad del texto */
+            font-style: italic; /* Añade un toque estilístico distintivo */
+            transform: translateY(20px); /* Posición inicial para la animación de "subida" */
+            /* Transiciones para su aparición y movimiento */
+            transition: opacity 1s ease-in-out, transform 0.8s ease-out;
         }
 
-        // Función para ejecutar la secuencia de animaciones
-        function animateWelcomeScreen() {
-            // Recalcular el tamaño y posición del título por si la ventana se redimensionó
-            const titleRect = welcomeTitle.getBoundingClientRect();
-
-            particlesArray.forEach((particle, index) => {
-                // Generar un punto de inicio *dentro* de la caja del título para que parezca que emanan de él
-                const startX = (Math.random() * titleRect.width) - (titleRect.width / 2);
-                const startY = (Math.random() * titleRect.height) - (titleRect.height / 2);
-
-                // --- Lógica para la dirección de las partículas (más controlada) ---
-                // Queremos que se dispersen hacia afuera desde el centro del título.
-                // Usamos un ángulo aleatorio para que se muevan en todas direcciones.
-                const angle = Math.random() * Math.PI * 2; // Ángulo en radianes (0 a 360 grados)
-                const distance = window.innerWidth * 0.7 + Math.random() * window.innerWidth * 0.3; // Distancia de dispersión
-
-                const endX = startX + Math.cos(angle) * distance;
-                const endY = startY + Math.sin(angle) * distance;
-
-                const duration = 1800 + Math.random() * 1200; // Duración entre 1.8s y 3s
-                const delay = Math.random() * 400; // Delay aleatorio para un efecto escalonado
-
-                particle.animate([
-                    { transform: `translate(${startX}px, ${startY}px)`, opacity: 1 }, // Empiezan visibles en el texto
-                    { transform: `translate(${endX}px, ${endY}px)`, opacity: 0 } // Se mueven hacia afuera y se desvanecen
-                ], {
-                    duration: duration,
-                    delay: delay,
-                    easing: 'ease-out', // Suave desaceleración
-                    fill: 'forwards' // Mantiene el estado final (oculto)
-                });
-            });
-
-            // --- Control de Tiempos de las Animaciones ---
-
-            // 1. Desvanecer el título (después de un breve inicio de dispersión de partículas)
-            setTimeout(() => {
-                welcomeTitle.style.opacity = 0;
-            }, 600); // Título comienza a desvanecerse 0.6 segundos después del inicio
-
-            // 2. Mostrar el eslogan con animación de subida
-            setTimeout(() => {
-                welcomeSlogan.style.opacity = 1;
-                welcomeSlogan.style.transform = 'translateY(0)';
-            }, 1800); // El eslogan aparece 1.8 segundos después del inicio
-
-            // 3. Ocultar el overlay completo
-            // Calculamos un tiempo total que permita que la animación de partículas y el eslogan se completen
-            // (La partícula más larga dura hasta 3 segundos). Daremos un tiempo extra después de que el eslogan aparezca.
-            const totalAnimationDuration = 1800 + 1500; // 1.8s (eslogan aparece) + 1.5s (tiempo visible extra) = 3300ms
-            setTimeout(() => {
-                welcomeOverlay.style.opacity = 0; // Inicia la transición CSS de opacidad del overlay
-                setTimeout(() => {
-                    welcomeOverlay.style.display = 'none'; // Finalmente, lo quita del flujo del DOM
-                }, 1000); // Espera 1 segundo para que la transición de opacidad del overlay termine
-            }, totalAnimationDuration);
+        /* --- Estilo de las Partículas --- */
+        .particle {
+            position: absolute; /* Posiciona las partículas de forma absoluta respecto a #welcome-text-container */
+            background-color: var(--color-primary-overlay); /* Color base de la partícula (azul vibrante) */
+            border-radius: 50%; /* Las hace perfectamente redondas */
+            opacity: 0; /* Comienza oculto */
+            pointer-events: none; /* Las partículas no interfieren con el puntero del ratón */
+            box-shadow: 0 0 5px var(--color-primary-light-overlay); /* Pequeño glow para cada partícula */
         }
 
-        // Se ejecuta la función principal de animación poco después de que el DOM esté cargado
-        setTimeout(animateWelcomeScreen, 100);
-    });
+        /* --- Media Queries para Responsividad del Overlay --- */
+        @media (max-width: 768px) {
+            #welcome-title {
+                font-size: 3rem; /* Reduce el tamaño del título en tabletas */
+            }
+            #welcome-slogan-animated {
+                font-size: 1.2rem; /* Reduce el tamaño del eslogan en tabletas */
+            }
+        }
+
+        @media (max-width: 480px) {
+            #welcome-title {
+                font-size: 2.2rem; /* Reduce aún más el tamaño del título en móviles */
+            }
+            #welcome-slogan-animated {
+                font-size: 1rem; /* Reduce aún más el tamaño del eslogan en móviles */
+            }
+        }
+
         /* --- Scroll Progress Bar --- */
         .scroll-progress-bar {
             position: fixed;
@@ -378,6 +293,184 @@
         .nav-menu li a.active::after {
             width: 100%;
         }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-overlay-container">
+        <div id="welcome-text-container">
+            <h1 id="welcome-title">Welcome to my Portfolio</h1>
+        </div>
+        <p id="welcome-slogan-animated">El límite es nuestra imaginación</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const welcomeOverlay = document.getElementById('welcome-overlay-container');
+            const welcomeTitle = document.getElementById('welcome-title');
+            const welcomeSlogan = document.getElementById('welcome-slogan-animated');
+            const textContainer = document.getElementById('welcome-text-container');
+
+            const numParticles = 180; // Incrementado para un efecto más denso y visual
+            const particlesArray = [];
+
+            // Inicializar las partículas y añadirlas al DOM
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 5 + 1; // Tamaño aleatorio entre 1px y 6px
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                textContainer.appendChild(particle); // Se añaden al textContainer
+                particlesArray.push(particle);
+            }
+
+            // Función para ejecutar la secuencia de animaciones
+            function animateWelcomeScreen() {
+                // Recalcular el tamaño y posición del título por si la ventana se redimensionó
+                const titleRect = welcomeTitle.getBoundingClientRect();
+
+                particlesArray.forEach((particle, index) => {
+                    // Generar un punto de inicio *dentro* de la caja del título para que parezca que emanan de él
+                    const startX = (Math.random() * titleRect.width) - (titleRect.width / 2);
+                    const startY = (Math.random() * titleRect.height) - (titleRect.height / 2);
+
+                    // --- Lógica para la dirección de las partículas (más controlada) ---
+                    // Queremos que se dispersen hacia afuera desde el centro del título.
+                    // Usamos un ángulo aleatorio para que se muevan en todas direcciones.
+                    const angle = Math.random() * Math.PI * 2; // Ángulo en radianes (0 a 360 grados)
+                    const distance = window.innerWidth * 0.7 + Math.random() * window.innerWidth * 0.3; // Distancia de dispersión
+
+                    const endX = startX + Math.cos(angle) * distance;
+                    const endY = startY + Math.sin(angle) * distance;
+
+                    const duration = 1800 + Math.random() * 1200; // Duración entre 1.8s y 3s
+                    const delay = Math.random() * 400; // Delay aleatorio para un efecto escalonado
+
+                    particle.animate([
+                        { transform: `translate(${startX}px, ${startY}px)`, opacity: 1 }, // Empiezan visibles en el texto
+                        { transform: `translate(${endX}px, ${endY}px)`, opacity: 0 } // Se mueven hacia afuera y se desvanecen
+                    ], {
+                        duration: duration,
+                        delay: delay,
+                        easing: 'ease-out', // Suave desaceleración
+                        fill: 'forwards' // Mantiene el estado final (oculto)
+                    });
+                });
+
+                // --- Control de Tiempos de las Animaciones ---
+
+                // 1. Desvanecer el título (después de un breve inicio de dispersión de partículas)
+                setTimeout(() => {
+                    welcomeTitle.style.opacity = 0;
+                }, 600); // Título comienza a desvanecerse 0.6 seconds after start
+
+                // 2. Mostrar el eslogan con animación de subida
+                setTimeout(() => {
+                    welcomeSlogan.style.opacity = 1;
+                    welcomeSlogan.style.transform = 'translateY(0)';
+                }, 1800); // El eslogan aparece 1.8 seconds after start
+
+                // 3. Ocultar el overlay completo
+                // Calculamos un tiempo total que permita que la animación de partículas y el eslogan se completen
+                // (La partícula más larga dura hasta 3 segundos). Daremos un tiempo extra después de que el eslogan aparezca.
+                const totalAnimationDuration = 1800 + 1500; // 1.8s (eslogan appears) + 1.5s (extra visible time) = 3300ms
+                setTimeout(() => {
+                    welcomeOverlay.style.opacity = 0; // Inicia la transición CSS de opacidad del overlay
+                    setTimeout(() => {
+                        welcomeOverlay.style.display = 'none'; // Finalmente, lo quita del flujo del DOM
+                    }, 1000); // Espera 1 second para que la transición de opacidad del overlay termine
+                }, totalAnimationDuration);
+            }
+
+            // Se ejecuta la función principal de animación poco después de que el DOM esté cargado
+            setTimeout(animateWelcomeScreen, 100);
+        });
+
+        // JavaScript for Scroll Progress Bar and Header changes
+        document.addEventListener('scroll', () => {
+            const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+            const mainHeader = document.querySelector('.main-header');
+
+            const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (document.documentElement.scrollTop / totalHeight) * 100;
+            scrollProgressBar.style.width = `${scrolled}%`;
+
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+        });
+    </script>
+    <header class="main-header">
+        <div class="logo">Jairo</div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="scroll-progress-bar"></div>
+
+    <section id="home" style="min-height: 100vh; display: flex; justify-content: center; align-items: center; background-color: var(--color-bg-light);">
+        <h2 class="animate-on-scroll">Welcome to my Portfolio!</h2>
+    </section>
+    <section id="about" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+        <h2 class="animate-on-scroll">About Me</h2>
+    </section>
+    <section id="projects" style="min-height: 100vh; display: flex; justify-content: center; align-items: center; background-color: var(--color-bg-light);">
+        <h2 class="animate-on-scroll">My Projects</h2>
+    </section>
+    <section id="skills" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+        <h2 class="animate-on-scroll">My Skills</h2>
+    </section>
+    <section id="contact" style="min-height: 100vh; display: flex; justify-content: center; align-items: center; background-color: var(--color-bg-light);">
+        <h2 class="animate-on-scroll">Contact Me</h2>
+    </section>
+
+    <script>
+        // Intersection Observer for animate-on-scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Active navigation link on scroll (Optional, but common for portfolios)
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', navHighlighter);
+
+        function navHighlighter() {
+            let scrollY = window.scrollY;
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 100; // Offset for header height
+                let sectionId = current.getAttribute('id');
+
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    document.querySelector('.nav-menu li a[href*=' + sectionId + ']').classList.add('active');
+                } else {
+                    document.querySelector('.nav-menu li a[href*=' + sectionId + ']').classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
 
         /* --- Section Base Styles --- */
         .section-base {
