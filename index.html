@@ -3,949 +3,908 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jairo Lemuel Barrientos | Full Stack Developer & CyberOps Associate</title>
-
-    <meta name="description" content="Jairo Lemuel Barrientos: A Full Stack developer specializing in React, Node.js, PHP, Python, cybersecurity, and AI automation. Based in Santa Elena, Entre Ríos, Argentina. Explore my portfolio.">
-    <meta name="keywords" content="Jairo Lemuel Barrientos, Jairo Barrientos, Full Stack Developer, Web Development, React, Node.js, PHP, Python, Cybersecurity, CyberOps, AI Automation, Argentina, Portfolio, Frontend, Backend, UI/UX, SEO, Professional Programmer">
-    <meta name="author" content="Jairo Lemuel Barrientos">
+    <title>Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate</title>
+    <meta name="description" content="Jairo Barrientos's professional portfolio showcasing expertise in Full Stack Web Development (React, Node.js, PHP) and cybersecurity, including a Cisco Certified CyberOps Associate certification. Located in Santa Elena, Entre Ríos, Argentina.">
+    <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Web Development, Cybersecurity, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, Cisco Certified CyberOps Associate, Santa Elena, Entre Ríos, Argentina, UI/UX, SEO">
+    <meta name="author" content="Jairo Barrientos">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.tu-dominio.com/"> <meta property="og:title" content="Jairo Lemuel Barrientos | Full Stack Developer & CyberOps Associate">
-    <meta property="og:description" content="Jairo Lemuel Barrientos: A Full Stack developer with experience in React, Node.js, PHP, Python, cybersecurity, and AI automation.">
-    <meta property="og:image" content="https://www.tu-dominio.com/assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png"> <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.tu-dominio.com/"> <meta property="twitter:title" content="Jairo Lemuel Barrientos | Full Stack Developer & CyberOps Associate">
-    <meta property="twitter:description" content="Jairo Lemuel Barrientos: A Full Stack developer with experience in React, Node.js, PHP, Python, cybersecurity, and AI automation.">
-    <meta property="twitter:image" content="https://www.tu-dominio.com/assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png"> <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <meta property="og:url" content="https://www.yourportfolio.com/">
+    <meta property="og:title" content="Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate">
+    <meta property="og:description" content="Explore Jairo Barrientos's professional portfolio, featuring web development projects and a Cisco Certified CyberOps Associate certification.">
+    <meta property="og:image" content="https://www.yourportfolio.com/images/og-image.jpg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jairo Barrientos",
+      "url": "https://www.yourportfolio.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/jairo-barrientos-8a6b00226",
+        "https://github.com/tu-usuario-github"
+      ],
+      "jobTitle": "Full Stack Web Developer | Cybersecurity Associate",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Nombre de tu Universidad/Bootcamp si aplica"
+      },
+      "knowsAbout": ["Web Development", "React.js", "Node.js", "PHP", "MySQL", "Cybersecurity", "UI/UX Design", "SEO"],
+      "nationality": "Argentinian",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santa Elena",
+        "addressRegion": "Entre Ríos",
+        "addressCountry": "AR"
+      }
+    }
+    </script>
 
     <style>
-        /* --- CSS Variables for consistent theming --- */
+        /*
+        * Principios de Ingeniería y Arquitectura Web:
+        * 1. Rendimiento Primero: Eliminación de solicitudes externas (todo incrustado).
+        * 2. CSS Modular: Secciones organizadas para legibilidad y mantenimiento.
+        * 3. Diseño Responsivo: Enfoque mobile-first con media queries.
+        * 4. Accesibilidad: Atributos ARIA, navegación por teclado, preferencia de movimiento reducido.
+        * 5. Mejora Progresiva: Contenido central visible, animaciones como capa superior.
+        * 6. Seguridad: Compatible con CSP (sin scripts 'unsafe-inline' o eventos inline).
+        */
+
+        /* Base & Global Styles */
         :root {
-            --color-primary: #00C0FF; /* Bright Cyan */
-            --color-primary-light: #66E6FF; /* Lighter Cyan */
-            --color-primary-dark: #008BB3; /* Darker Cyan */
-            --color-secondary: #8A2BE2; /* Blue Violet */
-            --color-accent: #FFD700; /* Gold */
-
-            --color-bg-dark: #121212; /* Very Dark Gray */
-            --color-bg-medium: #1e1e1e; /* Dark Gray */
-            --color-bg-light: #2c2c2c; /* Medium Dark Gray */
-            --color-bg-gradient-start: #1a1a2e; /* Dark Blue-Purple */
-            --color-bg-gradient-mid: #0f0f2a; /* Even Darker Blue-Purple */
-            --color-bg-gradient-end: #0a0a1a; /* Almost Black Blue */
-
-            --color-text-light: #E0E0E0; /* Light Gray for main text */
-            --color-text-medium: #B0B0B0; /* Medium Gray */
-            --color-text-dark: #888888; /* Dark Gray for secondary text */
-
-            --card-bg: rgba(24, 24, 40, 0.8); /* Slightly transparent dark card background */
-            --card-border: rgba(0, 192, 255, 0.3); /* Cyan border for cards */
-
-            --border-radius-main: 12px;
+            --color-bg-dark: #000;
+            --color-bg-gradient-start: #050a11;
+            --color-bg-gradient-mid: #1a2a3a;
+            --color-primary-light: #00e5ff;
+            --color-primary-dark: #00c0ff;
+            --color-secondary: #8000ff;
+            --color-text-light: #e0e0e0;
+            --color-text-medium: #b0e0e6;
+            --color-text-dark: #c0c0c0;
+            --glow-light-alpha: rgba(0, 192, 255, 0.7);
+            --glow-dark-alpha: rgba(128, 0, 255, 0.7);
+            --card-bg: rgba(18, 30, 45, 0.8);
+            --card-border: rgba(0, 192, 255, 0.3);
             --transition-speed: 0.4s;
-            --glow-light-alpha: rgba(0, 192, 255, 0.4);
-            --glow-dark-alpha: rgba(138, 43, 226, 0.4);
-
-            /* Specific colors for skills/technologies */
-            --color-javascript: #F7DF1E;
-            --color-react: #61DAFB;
-            --color-node: #68A063;
-            --color-python: #306998;
-            --color-php: #777BB4;
-            --color-mysql: #00758F;
-            --color-html: #E34F26;
-            --color-css: #1572B6;
-            --color-security: #DC3545; /* Reddish for security */
-        }
-
-        /* --- Base Styles --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth; /* Smooth scrolling when clicking on internal links */
+            --bezier-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            --bezier-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background-color: var(--color-bg-dark);
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            background: var(--color-bg-dark);
             color: var(--color-text-light);
             line-height: 1.6;
-            overflow-x: hidden; /* Prevents horizontal scroll */
-            position: relative;
-            text-shadow: 0 0 1px rgba(224, 224, 224, 0.1); /* Slight shadow for text */
+            overflow-x: hidden; /* Evita el scroll horizontal */
+            scroll-behavior: smooth; /* Scroll suave para enlaces ancla */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="rgba(0, 192, 255, 0.8)" stroke="rgba(0, 192, 255, 0.2)" stroke-width="2"/></svg>') 12 12, auto;
+        }
+
+        body.hover-pointer, a:hover, button:hover, .contact-fab:hover, .project-card:hover, .skill-tag:hover, .certification-card:hover, .service-card:hover {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0L0 12h8v12h8V12h8z" fill="rgba(0, 229, 255, 0.9)"/></svg>') 12 12, pointer;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            font-weight: 600;
+            text-shadow: 0 0 10px var(--glow-light-alpha);
         }
 
         a {
-            color: var(--color-primary);
+            color: var(--color-primary-light);
             text-decoration: none;
-            transition: color var(--transition-speed) ease;
+            transition: color var(--transition-speed);
         }
-
         a:hover {
-            color: var(--color-primary-light);
+            color: var(--color-primary-dark);
+            text-decoration: underline;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* --- Global Appearance Animations (Scroll Reveal) --- */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in.appear {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- Holographic Text Effect with Glitch --- */
-        .holographic-text {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            color: transparent; /* Makes the text transparent for the gradient background */
-            background-clip: text;
-            -webkit-background-clip: text; /* For Webkit compatibility */
-            background-image: linear-gradient(45deg, var(--color-primary-light), var(--color-secondary), var(--color-primary));
-            text-shadow:
-                0 0 5px rgba(0, 192, 255, 0.6), /* Cyan glow */
-                0 0 15px rgba(138, 43, 226, 0.5), /* Purple glow */
-                0 0 30px rgba(0, 192, 255, 0.3); /* Wider cyan glow */
-            position: relative;
-            animation: holographicGlow 2s ease-in-out infinite alternate;
-            /* Add a subtle noise texture */
-            background-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>'),
-                                 linear-gradient(45deg, var(--color-primary-light), var(--color-secondary), var(--color-primary));
-            background-blend-mode: overlay; /* Blends the noise with the gradient */
-        }
-
-        @keyframes holographicGlow {
-            0% { text-shadow: 0 0 5px rgba(0, 192, 255, 0.6), 0 0 15px rgba(138, 43, 226, 0.5); }
-            100% { text-shadow: 0 0 8px rgba(0, 192, 255, 0.8), 0 0 20px rgba(138, 43, 226, 0.7), 0 0 35px rgba(0, 192, 255, 0.4); }
-        }
-
-        /* Scan line for the holographic effect */
-        .holographic-text::after {
-            content: attr(data-text); /* Uses the content of the data-text attribute */
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--color-primary-light);
-            text-shadow: none;
-            clip-path: inset(0 0 0 0); /* Full clip by default */
-            animation: holographicScan 4s linear infinite;
-        }
-
-        @keyframes holographicScan {
-            0% { clip-path: inset(0 100% 0 0); }
-            50% { clip-path: inset(0 0 0 0); }
-            100% { clip-path: inset(0 0 0 100%); }
-        }
-
-        /* Subtle Glitch/Noise for holographic text */
-        .holographic-text.glitch::before,
-        .holographic-text.glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--color-bg-dark); /* Match background for glitch lines */
-            overflow: hidden;
-            color: var(--color-primary);
-            opacity: 0;
-            animation: glitchEffect 1.5s infinite linear alternate-reverse;
-        }
-
-        .holographic-text.glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 var(--color-primary-light);
-            animation-delay: 0.1s;
-        }
-
-        .holographic-text.glitch::after {
-            left: -2px;
-            text-shadow: 2px 0 var(--color-secondary);
-            animation-delay: 0.2s;
-        }
-
-        @keyframes glitchEffect {
-            0% { clip-path: inset(100% 0 0 0); opacity: 0; }
-            5% { clip-path: inset(0 0 0 0); opacity: 0.8; }
-            10% { clip-path: inset(80% 0 0 0); opacity: 0.5; }
-            15% { clip-path: inset(0 0 90% 0); opacity: 0.9; }
-            20% { clip-path: inset(0 0 0 0); opacity: 0; }
-            100% { clip-path: inset(0 0 0 0); opacity: 0; }
-        }
-
-        /* Scroll Progress Bar */
-        .scroll-progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            z-index: 9999;
-            transition: width 0.1s linear;
-            box-shadow: 0 0 15px var(--glow-light-alpha);
-        }
-
-        /* Background Overlay (for subtle animation) */
-        .background-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 192, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
-            z-index: -1;
-            animation: pulseBackground 15s infinite alternate;
-        }
-
-        @keyframes pulseBackground {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Particles/Circuit background effect */
-        .background-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -2; /* Below the overlay */
-            pointer-events: none;
-            opacity: 0.2; /* Subtle */
-        }
-
-        .background-particles::before {
-            content: '';
-            position: absolute;
-            width: 200%; /* Larger than viewport */
-            height: 200%;
-            background-image: radial-gradient(circle at center, rgba(0, 192, 255, 0.05) 1px, transparent 1px),
-                                 linear-gradient(90deg, rgba(138, 43, 226, 0.05) 1px, transparent 1px),
-                                 linear-gradient(rgba(0, 192, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px, 40px 40px, 40px 40px; /* Adjust grid size */
-            background-position: 0 0, 0 0, 0 0;
-            animation: backgroundPan 60s linear infinite; /* Slow pan animation */
-        }
-
-        @keyframes backgroundPan {
-            0% { background-position: 0 0, 0 0, 0 0; }
-            100% { background-position: -40px -40px, 40px 40px, -40px 40px; }
-        }
-
-        /* --- Splash Screen --- */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--color-bg-gradient-end); /* Darker background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 15px; /* Reduced gap */
-            z-index: 10000;
-            opacity: 1; /* Start visible */
-            visibility: visible;
-            transition: opacity 1s ease-out 0.5s, visibility 1s ease-out 0.5s; /* Delay hiding transition */
-        }
-
-        #splash-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none; /* Make it unclickable when hidden */
-        }
-
-        #splash-screen h1 {
-            font-family: 'Orbitron', sans-serif; /* Formal techy font */
-            font-size: 3.8rem; /* Slightly reduced for formality */
-            color: var(--color-primary-light);
-            text-shadow: 0 0 10px rgba(0, 192, 255, 0.6), 0 0 20px rgba(0, 192, 255, 0.4);
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(20px);
-            animation: fadeInWelcome 1s ease-out forwards; /* Fade in animation */
-        }
-
-        #splash-screen p {
-            font-family: 'Rajdhani', sans-serif; /* Consistent with body text or a modern monospace like Roboto Mono */
-            font-size: 1.1rem;
-            color: var(--color-text-medium);
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(10px);
-            animation: fadeInWelcome 1s ease-out 0.3s forwards; /* Staggered fade in */
-        }
-
-        /* Keyframes for the new splash screen animation */
-        @keyframes fadeInWelcome {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- Header --- */
+        /* --- Header / Navigation --- */
         .main-header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            background: rgba(18, 18, 18, 0.9); /* Slightly transparent dark background */
-            border-bottom: 1px solid rgba(0, 192, 255, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 192, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 192, 255, 0.4);
         }
 
         .logo {
-            font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             font-weight: bold;
             color: var(--color-primary-light);
-            text-shadow: 0 0 10px rgba(0, 192, 255, 0.5);
-            transition: transform var(--transition-speed) ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-            color: var(--color-accent);
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0,229,255,0.5);
         }
 
         .nav-menu {
             list-style: none;
+            margin: 0;
+            padding: 0;
             display: flex;
-            gap: 30px;
         }
 
-        .nav-menu li a {
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding: 8px 15px;
-            border-radius: 5px;
-            position: relative;
-            overflow: hidden;
-            transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+        .nav-menu li {
+            margin-left: 30px;
         }
 
-        .nav-menu li a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 192, 255, 0.2), transparent);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .nav-menu li a:hover::before {
-            left: 0;
-        }
-
-        .nav-menu li a:hover {
-            color: var(--color-primary-light);
-            background-color: rgba(0, 192, 255, 0.1);
-            box-shadow: 0 0 10px rgba(0, 192, 255, 0.4);
-        }
-
-        .hamburger-menu {
-            display: none; /* Hidden on desktop */
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .hamburger-menu span {
-            width: 30px;
-            height: 3px;
-            background-color: var(--color-primary-light);
-            transition: all 0.3s ease;
-        }
-
-        /* Mobile Nav Menu */
-        .nav-menu.active {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: rgba(18, 18, 18, 0.95);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            padding: 20px 0;
-            border-top: 1px solid rgba(0, 192, 255, 0.2);
-        }
-
-        .nav-menu.active li {
-            text-align: center;
-            margin: 10px 0;
-        }
-
-        /* --- Hero Section --- */
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ensure full viewport height initially */
-            text-align: center;
-            padding: 0 20px; /* Adjust padding */
-            background: linear-gradient(180deg, var(--color-bg-gradient-start), var(--color-bg-gradient-end));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .initial-hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 1; /* Take up initial full height */
-            opacity: 0;
-            transform: scale(0.9);
-            animation: fadeInInitialHero 1.2s ease-out forwards 0.5s; /* Fade in with slight delay */
-        }
-
-        @keyframes fadeInInitialHero {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .initial-avatar {
-            width: 250px; /* Adjust size as needed */
-            height: 250px; /* Adjust size as needed */
-            margin-bottom: 30px;
-            border-radius: 50%;
-            overflow: hidden; /* Ensure image stays within bounds */
-            animation: avatarInitialGlow 2s ease-in-out infinite alternate;
-            box-shadow: 0 0 20px rgba(0, 192, 255, 0.5); /* Base shadow */
-        }
-
-        @keyframes avatarInitialGlow {
-            0% { box-shadow: 0 0 20px rgba(0, 192, 255, 0.5); }
-            100% { box-shadow: 0 0 35px rgba(0, 192, 255, 0.7), 0 0 15px rgba(138, 43, 226, 0.4); }
-        }
-
-        .initial-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid var(--color-bg-dark); /* Thinner border for initial view */
-            filter: saturate(1.2) contrast(1.1) brightness(1.1); /* Slightly more vibrant and brighter */
-        }
-
-        .initial-tagline {
-            font-family: 'Orbitron', sans-serif; /* Orbitron for tagline */
-            font-size: 1.5rem;
-            color: var(--color-primary-light);
-            font-style: italic;
-            text-shadow: 0 0 5px rgba(0, 192, 255, 0.3);
-            opacity: 0;
-            transform: translateY(15px);
-            animation: fadeInUpTagline 1s ease-out forwards 1.7s; /* Fade in from bottom with delay */
-        }
-
-        @keyframes fadeInUpTagline {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Main hero content hidden initially, then revealed */
-        .hero-content {
-            z-index: 1;
-            margin-top: 50px; /* Space between initial and main content */
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(20px); /* Initial state for animation */
-            transition: opacity 1s ease-out, transform 1s ease-out;
-            pointer-events: none; /* Make it unclickable until visible */
-            position: absolute; /* Position over the initial content */
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(180deg, var(--color-bg-gradient-start), var(--color-bg-gradient-end)); /* Re-apply background */
-            top: 0;
-            left: 0;
-            padding: 80px 20px;
-        }
-
-        .hero-section.show-main-content .hero-content {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto; /* Make it clickable */
-        }
-
-        .hero-section.hide-initial-content .initial-hero-content {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            pointer-events: none;
-        }
-
-        .hero-content h1 {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .hero-content p {
-            font-size: 1.4rem;
-            color: var(--color-text-medium);
-            margin-bottom: 40px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 8px 25px rgba(0, 192, 255, 0.4);
-            transition: all var(--transition-speed) ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.2);
-            transform: skewX(-30deg);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0, 192, 255, 0.6);
-        }
-
-        .avatar-container {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 30px rgba(0, 192, 255, 0.7);
-            animation: avatarGlow 3s ease-in-out infinite alternate;
-            z-index: 1;
-        }
-
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--color-bg-dark); /* Border matching background to create a gap */
-            transition: transform 0.3s ease;
-            filter: saturate(1.2) contrast(1.1) brightness(1.1); /* Slightly more vibrant and brighter */
-        }
-
-        @keyframes avatarGlow {
-            0% { box-shadow: 0 0 30px rgba(0, 192, 255, 0.7), 0 0 10px rgba(138, 43, 226, 0.3); }
-            100% { box-shadow: 0 0 45px rgba(0, 192, 255, 0.9), 0 0 20px rgba(138, 43, 226, 0.5); }
-        }
-
-        /* --- Global Section Styling --- */
-        section {
-            padding: 80px 40px;
-            text-align: center;
-            position: relative;
-            z-index: 1; /* Ensure content is above background effects */
-        }
-
-        section:nth-of-type(odd) {
-            background-color: var(--color-bg-medium);
-        }
-
-        section:nth-of-type(even) {
-            background-color: var(--color-bg-dark);
-        }
-
-        section h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 60px;
-            color: var(--color-primary-light);
-            text-shadow: 0 0 15px rgba(0, 192, 255, 0.5);
-        }
-
-        /* --- About Section --- */
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            text-align: left;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--color-text-medium);
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-        }
-
-        .about-avatar {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            padding: 8px;
-            background: linear-gradient(45deg, var(--color-secondary), var(--color-primary));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 20px var(--glow-dark-alpha);
-            transition: box-shadow var(--transition-speed) ease;
-        }
-
-        .about-avatar:hover {
-            box-shadow: 0 0 35px var(--glow-dark-alpha), 0 0 15px var(--glow-light-alpha);
-        }
-
-        .about-avatar img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--color-bg-light);
-            filter: grayscale(0.2) saturate(1.1);
-            transition: filter var(--transition-speed) ease;
-        }
-
-        .about-avatar img:hover {
-            filter: grayscale(0) saturate(1.3) brightness(1.1);
-        }
-
-        /* --- Skills Section --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .skill-card {
-            background: var(--card-bg);
-            padding: 30px 20px;
-            border-radius: var(--border-radius-main);
-            border: 1px solid var(--card-border);
-            transition: all var(--transition-speed) ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 192, 255, 0.2);
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, var(--color-primary), var(--color-secondary), transparent 70%);
-            opacity: 0;
-            transform: scale(0);
-            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
-            z-index: 0;
-        }
-
-        .skill-card:hover::before {
-            opacity: 0.15;
-            transform: scale(1.5);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--color-primary-light);
-            box-shadow: 0 10px 25px rgba(0, 192, 255, 0.4);
-        }
-
-        .skill-icon {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            color: var(--color-primary-light);
-            text-shadow: 0 0 10px var(--glow-light-alpha);
-            transition: color var(--transition-speed) ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Specific icon colors (example - you'd need SVG or font icons and custom classes) */
-        .skill-icon.js { color: var(--color-javascript); }
-        .skill-icon.react { color: var(--color-react); }
-        .skill-icon.node { color: var(--color-node); }
-        .skill-icon.python { color: var(--color-python); }
-        .skill-icon.php { color: var(--color-php); }
-        .skill-icon.mysql { color: var(--color-mysql); }
-        .skill-icon.html { color: var(--color-html); }
-        .skill-icon.css { color: var(--color-css); }
-        .skill-icon.security { color: var(--color-security); }
-
-        .skill-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+        .nav-menu a {
             color: var(--color-text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 5px 0;
             position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            transition: width 0.3s ease-out;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            width: 0%;
+            z-index: 101; /* Above header */
+        }
+
+        /* --- Hero Section: Futuristic Holographic Vibe --- */
+        .section-hero {
+            padding: 160px 20px 80px; /* Adjusted padding for header */
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Holographic Grid Overlay (Parallax) */
+        .section-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(to right, rgba(0,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridFlow 60s linear infinite;
+            opacity: 0.3;
+            z-index: 0;
+            transform: translateZ(-100px) scale(2); /* Parallax setup */
+        }
+        .section-hero::after { /* Another layer for more depth */
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(0, 192, 255, 0.08), transparent 70%);
+            animation: radialPulse 20s infinite ease-in-out;
             z-index: 1;
         }
 
-        .skill-card p {
-            font-size: 0.95rem;
-            color: var(--color-text-dark);
+        @keyframes gridFlow {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+        @keyframes radialPulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+
+        .section-hero h1, .section-hero p, .avatar-container {
             position: relative;
-            z-index: 1;
+            z-index: 10;
+        }
+
+        .section-hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0,229,255,0.8);
+            letter-spacing: 2px;
+        }
+
+        .section-hero p {
+            font-size: 1.8rem;
+            color: var(--color-text-medium);
+            margin-top: 0;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        /* Fade-in-up animation for text */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.9s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up.delay-1 { animation-delay: 0.4s; }
+        .fade-in-up.delay-2 { animation-delay: 0.8s; }
+
+        /* --- Avatar Styles --- */
+        .avatar-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            position: relative;
+            border-radius: 50%;
+            box-shadow: 0 0 40px var(--glow-light-alpha), inset 0 0 20px rgba(0, 192, 255, 0.4);
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a3a4a 0%, #050a11 100%);
+            transform: scale(0.7);
+            opacity: 0;
+            animation: avatarEntry 1.2s var(--bezier-bounce) forwards 0.3s;
+            border: 2px solid rgba(0, 192, 255, 0.5);
+            /* Particle effect for avatar */
+            mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
+        }
+
+        @keyframes avatarEntry {
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        #my-avatar {
+            width: 100%;
+            height: 100%;
+            display: block;
+            transition: transform var(--transition-speed) ease-out;
+            filter: drop-shadow(0 0 8px rgba(0, 192, 255, 0.4));
+        }
+
+        #my-avatar:hover {
+            transform: scale(1.05) rotateY(10deg);
+        }
+
+        /* Avatar SVG specific styles for animation */
+        #my-avatar .avatar-eye {
+            transform-origin: center center;
+            transition: transform 0.2s ease-in-out;
+        }
+        #my-avatar .avatar-eye.blink {
+            animation: blinkEye 0.3s forwards;
+        }
+        @keyframes blinkEye {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.1); }
+        }
+
+        #my-avatar .avatar-mouth {
+            transition: transform 0.3s ease-out;
+            transform-origin: center;
+        }
+        #my-avatar:hover .avatar-mouth {
+            transform: translateY(2px) scale(1.1);
+        }
+
+        #my-avatar .avatar-glasses {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            stroke: #fff;
+        }
+        @keyframes drawGlasses { /* Dynamically inserted by JS */
+            to { stroke-dashoffset: 0; }
         }
 
         /* --- Projects Section --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+        .section-projects {
+            background: var(--color-bg-dark);
+            color: var(--color-text-light);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-projects h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 15px var(--glow-light-alpha);
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
         }
 
         .project-card {
+            position: relative;
+            width: 340px;
             background: var(--card-bg);
-            border-radius: var(--border-radius-main);
-            border: 1px solid var(--card-border);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+            transform: translateY(50px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, opacity 0.5s ease;
+            will-change: transform, opacity;
+            border: 1px solid var(--card-border);
             display: flex;
             flex-direction: column;
-            position: relative;
-            transform: perspective(1000px) rotateY(0deg) rotateX(0deg); /* Initial state for 3D effect */
-        }
-
-        /* Inner Glow effect for project cards on hover */
-        .project-card::before {
-            content: '';
-            position: absolute;
-            inset: -5px; /* Slightly larger than the card */
-            border-radius: var(--border-radius-main);
-            background: linear-gradient(45deg, rgba(0, 192, 255, 0.4), rgba(138, 43, 226, 0.4));
-            filter: blur(15px); /* Soft blur for glow */
-            opacity: 0;
-            transition: opacity var(--transition-speed) ease;
-            z-index: -1;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
         }
 
         .project-card:hover {
-            transform: translateY(-10px) scale(1.02); /* Lift and slightly scale */
-            box-shadow: 0 15px 40px rgba(0, 192, 255, 0.6); /* Stronger glow shadow */
-            border-color: var(--color-primary-light);
+            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(25, 40, 60, 0.95);
         }
 
-        .project-image-container {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .project-image {
-            width: 100%;
+        .project-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.08); /* Zoom effect on image */
+            justify-content: space-between;
         }
 
         .project-content {
-            padding: 25px;
-            flex-grow: 1; /* Allows content to take available space */
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.7);
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+        }
+
+        .project-content h3 {
+            margin: 0 0 0.7rem;
+            font-size: 1.5rem;
+            color: var(--color-primary-dark);
+            text-shadow: none;
+        }
+
+        .project-content p {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--color-text-dark);
+        }
+
+        .project-svg-container {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            border-radius: 0;
+        }
+
+        .project-svg-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 192, 255, 0.1) 0%, transparent 60%);
+            animation: pulseLight 5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulseLight {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .project-svg-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .project-button-wrapper {
+            padding: 0 1.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .project-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            color: var(--color-text-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            transition: transform 0.3s var(--bezier-smooth), box-shadow 0.4s ease, background 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card-link:hover .project-button {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+        }
+
+        .project-svg-container svg {
+            width: 85%;
+            height: 85%;
+            filter: drop-shadow(0 0 5px var(--glow-light-alpha));
+        }
+        /* Project SVG Animations */
+        #svg-finance .bar {
+            transform-origin: bottom;
+            transform: scaleY(0);
+            opacity: 0;
+        }
+        #svg-finance.animated .bar {
+            animation: barRise 1.5s var(--bezier-bounce) forwards;
+            opacity: 1;
+        }
+        #svg-finance.animated .bar-1 { animation-delay: 0.2s; }
+        #svg-finance.animated .bar-2 { animation-delay: 0.4s; }
+        #svg-finance.animated .bar-3 { animation-delay: 0.6s; }
+        @keyframes barRise {
+            from { transform: scaleY(0); opacity: 0; }
+            to { transform: scaleY(1); opacity: 1; }
+        }
+        #svg-finance .line-chart {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+        }
+        #svg-finance.animated .line-chart {
+            animation: drawLine 2s ease-out forwards 0.8s;
+        }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        #svg-cybersecurity .shield-path {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: drawShield 2s ease-out forwards;
+        }
+        @keyframes drawShield {
+            to { stroke-dashoffset: 0; }
+        }
+        #svg-cybersecurity .lock-fill {
+            transform-origin: center;
+            transform: scale(0);
+            animation: lockAppear 1s var(--bezier-bounce) forwards 0.5s;
+        }
+        @keyframes lockAppear {
+            to { transform: scale(1); }
+        }
+
+        #svg-weather .cloud {
+            transform-origin: center center;
+            opacity: 0;
+            animation: cloudAppear 1.5s ease-out forwards;
+        }
+        #svg-weather .sun-ray {
+            transform-origin: center center;
+            transform: scale(0);
+            opacity: 0;
+            animation: raySpin 2s ease-in-out infinite alternate;
+        }
+        #svg-weather.animated .cloud {
+            animation: cloudAppear 1.5s ease-out forwards;
+        }
+        #svg-weather.animated .sun-ray {
+            animation: raySpin 2s ease-in-out infinite alternate;
+        }
+        @keyframes cloudAppear {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes raySpin {
+            0% { transform: scale(0.5) rotate(0deg); opacity: 0.5; }
+            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        }
+
+
+        /* --- Services Section --- */
+        .section-services {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-mid), var(--color-bg-gradient-start));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: var(--color-text-light);
+        }
+
+        .section-services h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px rgba(0,229,255,0.7);
+        }
+
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            width: 320px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: transform 0.5s var(--bezier-smooth), opacity 0.5s ease, box-shadow 0.4s ease;
+            will-change: transform, opacity, box-shadow;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(25, 40, 60, 0.95);
+        }
+
+        .service-card .service-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(0, 192, 255, 0.6));
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            color: var(--color-primary-light);
+            margin-bottom: 15px;
+            text-shadow: none;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            margin-bottom: 0;
+            flex-grow: 1; /* Permite que el párrafo ocupe el espacio disponible */
+        }
+
+
+        /* --- Skills Section --- */
+        .section-skills {
+            position: relative;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+
+        #skills-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0,255,255,0.08), transparent);
+            animation: moveBg 15s linear infinite alternate;
+            z-index: 0;
+            transform: translateZ(-100px) scale(2); /* Parallax setup */
+        }
+
+        @keyframes moveBg {
+            0% { background-position: 0% 50%; transform: scale(2); }
+            100% { background-position: 100% 50%; transform: scale(2.1); }
+        }
+
+        .skills-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .skills-wrapper h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px rgba(0,229,255,0.7);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.6rem;
+            border-radius: 40px;
+            background: rgba(30, 50, 70, 0.6);
+            font-size: 1.1rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 0 8px rgba(0, 192, 255, 0.2);
+            backdrop-filter: blur(8px);
+            transition: all var(--transition-speed) var(--bezier-smooth);
+            opacity: 0;
+            transform: translateY(40px);
+            will-change: transform, opacity, background, box-shadow;
+            border: 1px solid var(--card-border);
+            color: var(--color-text-medium);
+        }
+
+        .skill-tag svg {
+            width: 28px;
+            height: 28px;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 192, 255, 0.3);
+            box-shadow: 0 0 20px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            transform: translateY(-8px) scale(1.05);
+            border-color: rgba(0, 192, 255, 0.8);
+            color: #fff;
+        }
+
+        /* --- Certifications Section --- */
+        .section-certifications {
+            position: relative;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-gradient-mid), var(--color-bg-dark));
+            overflow: hidden;
+            color: var(--color-text-light);
+            text-align: center;
+        }
+
+        .section-certifications::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 192, 255, 0.08), transparent 70%),
+                        radial-gradient(circle at 20% 80%, rgba(128, 0, 255, 0.08), transparent 70%);
+            animation: backgroundPulse 20s infinite ease-in-out;
+            z-index: 0;
+            transform: translateZ(-100px) scale(2); /* Parallax setup */
+        }
+
+        @keyframes backgroundPulse {
+            0% { transform: scale(2); opacity: 0.5; }
+            50% { transform: scale(2.05); opacity: 0.7; }
+            100% { transform: scale(2); opacity: 0.5; }
+        }
+
+        .certifications-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .certifications-wrapper h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px var(--glow-dark-alpha);
+        }
+
+        .certification-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .certification-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            width: 380px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: transform 0.5s var(--bezier-smooth), opacity 0.5s ease, box-shadow 0.4s ease;
+            will-change: transform, opacity, box-shadow;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .project-content h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: var(--color-primary-light);
-            margin-bottom: 15px;
-            text-shadow: 0 0 8px rgba(0, 192, 255, 0.3);
+        .certification-card:hover {
+            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(30, 50, 70, 0.85);
         }
 
-        .project-content p {
-            font-size: 1rem;
+        .certification-card .card-header h3 {
+            font-size: 1.8rem;
+            color: var(--color-primary-light);
+            margin-bottom: 10px;
+            text-shadow: none;
+        }
+
+        .certification-card .card-header .issuer {
+            font-size: 0.95rem;
             color: var(--color-text-medium);
             margin-bottom: 20px;
         }
 
-        .project-tags {
-            margin-top: auto; /* Pushes tags to the bottom */
-            margin-bottom: 20px;
+        .certification-card .card-content p {
+            font-size: 1.05rem;
+            color: var(--color-text-dark);
+            margin-bottom: 15px;
         }
 
-        .project-tag {
-            display: inline-block;
-            background-color: rgba(138, 43, 226, 0.2);
-            color: var(--color-secondary);
-            font-size: 0.85rem;
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            border: 1px solid var(--color-secondary);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .project-tag:hover {
-            background-color: var(--color-secondary);
-            color: white;
-        }
-
-        .project-links {
+        /* Specific styles for Credly badge embed */
+        .credly-badge-embed {
+            margin-top: 25px;
             display: flex;
             justify-content: center;
-            gap: 20px;
-        }
-
-        .project-link {
-            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            color: var(--color-accent);
-            font-weight: 600;
-            transition: color var(--transition-speed) ease, transform 0.3s ease;
+            width: 100%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
         }
 
-        .project-link:hover {
-            color: var(--color-primary-light);
-            transform: translateY(-3px);
-            text-shadow: 0 0 8px var(--glow-light-alpha);
+        .certification-card:hover .credly-badge-embed {
+            transform: scale(1);
         }
 
-        .project-link svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor; /* Inherit color from parent */
+        .view-credential-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--color-secondary), var(--color-primary-dark));
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 192, 255, 0.4);
         }
 
-        /* --- Testimonials Section --- */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
+        .view-credential-btn:hover {
+            background: linear-gradient(45deg, var(--color-primary-dark), var(--color-secondary));
+            box-shadow: 0 6px 20px rgba(0, 192, 255, 0.6);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* --- Testimonials Section (Carrusel) --- */
+        #testimonials {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-mid), var(--color-bg-gradient-start));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #testimonials h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px rgba(0,229,255,0.7);
+        }
+
+        .testimonials-carousel-container {
+            position: relative;
+            max-width: 900px; /* Ancho máximo para el carrusel */
             margin: 0 auto;
+            overflow: hidden; /* Oculta los testimonios fuera de vista */
+        }
+
+        .testimonials-carousel {
+            display: flex;
+            transition: transform 0.8s ease-in-out; /* Transición suave para el movimiento */
+        }
+
+        .testimonial-card-wrapper {
+            min-width: 50%; /* Dos testimonios por vista, ajusta si quieres más o menos */
+            box-sizing: border-box; /* Incluye padding y border en el ancho */
+            padding: 15px; /* Espaciado entre tarjetas */
         }
 
         .testimonial-card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: var(--border-radius-main);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
+            backdrop-filter: blur(8px);
             border: 1px solid var(--card-border);
+            padding: 25px;
             text-align: left;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.2);
-            transition: all var(--transition-speed) ease;
-        }
-
-        .testimonial-card::before {
-            content: '\201C'; /* Opening quote */
-            font-family: serif;
-            font-size: 8rem;
-            color: rgba(0, 192, 255, 0.1);
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            z-index: 0;
+            height: 100%; /* Asegura que todas las tarjetas tengan la misma altura si el contenido varía */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .testimonial-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(138, 43, 226, 0.4);
-            border-color: var(--color-secondary);
+            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
+            transform: translateY(-5px) scale(1.01);
+            background: rgba(30, 50, 70, 0.85);
         }
 
         .testimonial-text {
-            font-size: 1.05rem;
-            color: var(--color-text-light);
+            font-size: 1.1rem;
+            color: var(--color-text-dark);
             margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
+            font-style: italic;
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-top: 20px;
-            border-top: 1px solid rgba(0, 192, 255, 0.1);
-            padding-top: 15px;
-            position: relative;
-            z-index: 1;
+            margin-top: auto; /* Empuja el autor hacia abajo */
         }
 
         .testimonial-author-img {
@@ -954,6 +913,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--color-primary-light);
+            box-shadow: 0 0 10px rgba(0, 192, 255, 0.5);
         }
 
         .author-info strong {
@@ -964,732 +924,589 @@
 
         .author-info span {
             font-size: 0.9rem;
-            color: var(--color-text-dark);
-        }
-
-        /* --- Certifications Section --- */
-        .certifications-container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .certification-item {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: var(--border-radius-main);
-            border: 1px solid var(--card-border);
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 0 10px rgba(0, 192, 255, 0.2);
-            transition: all var(--transition-speed) ease;
-        }
-
-        .certification-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 192, 255, 0.4);
-            border-color: var(--color-primary-light);
-        }
-
-        .certification-item h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
-            color: var(--color-primary-light);
-            margin-bottom: 10px;
-        }
-
-        .certification-item p {
-            font-size: 1rem;
             color: var(--color-text-medium);
-            margin-bottom: 15px;
         }
 
-        .certification-item .credly-badge {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        /* Credly embed responsive sizing */
-        .credly-badge iframe {
-            max-width: 100%;
-            height: auto; /* Adjust height based on content */
-            border: none;
-        }
-
-
-        /* --- Contact Section --- */
-        .contact-content {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .contact-content p {
-            font-size: 1.1rem;
-            color: var(--color-text-medium);
-            margin-bottom: 20px;
-        }
-
-        .contact-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .contact-link-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            color: var(--color-primary);
-            transition: color var(--transition-speed) ease, transform 0.3s ease;
-        }
-
-        .contact-link-item:hover {
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 192, 255, 0.2);
+            border: 1px solid var(--color-primary-light);
             color: var(--color-primary-light);
-            transform: translateY(-5px);
-            text-shadow: 0 0 10px rgba(0, 192, 255, 0.6);
-        }
-
-        .contact-link-item svg {
-            width: 50px;
-            height: 50px;
-            fill: currentColor;
-            margin-bottom: 10px;
-            box-shadow: 0 0 15px rgba(0, 192, 255, 0.3);
+            font-size: 2rem;
+            padding: 10px 15px;
             border-radius: 50%;
-            padding: 5px;
-            transition: box-shadow var(--transition-speed) ease;
+            cursor: pointer;
+            z-index: 20;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
-        .contact-link-item:hover svg {
-            box-shadow: 0 0 25px rgba(0, 192, 255, 0.8), 0 0 10px rgba(138, 43, 226, 0.5);
+        .carousel-nav-btn:hover {
+            background: rgba(0, 192, 255, 0.5);
+            transform: translateY(-50%) scale(1.1);
         }
 
-        .contact-link-item span {
-            font-size: 1rem;
-            font-weight: 600;
+        .carousel-nav-btn.prev {
+            left: -50px; /* Ajusta según el diseño */
         }
 
-        /* --- Footer --- */
-        .main-footer {
-            background-color: var(--color-bg-dark);
-            color: var(--color-text-dark);
-            padding: 30px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(0, 192, 255, 0.1);
-            font-size: 0.9rem;
+        .carousel-nav-btn.next {
+            right: -50px; /* Ajusta según el diseño */
         }
 
-        .footer-social-links {
-            margin-top: 20px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
+        /* Media Queries for Responsiveness */
+        @media (max-width: 1200px) {
+            .carousel-nav-btn.prev { left: 10px; }
+            .carousel-nav-btn.next { right: 10px; }
+            .testimonial-card-wrapper { min-width: 100%; } /* Un testimonio por vista en pantallas más pequeñas */
         }
 
-        .footer-social-link {
-            color: var(--color-text-medium);
-            transition: color var(--transition-speed) ease, transform 0.3s ease;
-        }
-
-        .footer-social-link:hover {
-            color: var(--color-primary-light);
-            transform: translateY(-3px) scale(1.1);
-        }
-
-        .footer-social-link svg {
-            width: 25px;
-            height: 25px;
-            fill: currentColor;
-        }
-
-        /* --- Responsive Design (Media Queries) --- */
         @media (max-width: 768px) {
             .main-header {
-                flex-direction: row;
-                padding: 15px 20px;
-            }
-
-            .nav-menu {
-                display: none; /* Hide by default on mobile */
-                width: 100%;
                 flex-direction: column;
-                background: rgba(18, 18, 18, 0.95);
-                position: absolute;
-                top: 100%;
-                left: 0;
-                padding: 15px 0;
-                border-top: 1px solid rgba(0, 192, 255, 0.2);
+                padding: 10px 20px;
             }
-
-            .nav-menu.active {
-                display: flex; /* Show when active */
+            .nav-menu {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
-
             .nav-menu li {
-                margin: 10px 0;
+                margin: 5px 15px;
             }
-
-            .hamburger-menu {
-                display: flex; /* Show hamburger on mobile */
-            }
-
-            #splash-screen h1 {
-                font-size: 2.8rem;
-            }
-
-            #splash-screen p {
-                font-size: 0.9rem;
-            }
-
-            .hero-content h1 {
+            .section-hero h1 {
                 font-size: 3rem;
             }
-
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-
-            .initial-avatar {
-                width: 200px;
-                height: 200px;
-            }
-
-            .initial-tagline {
+            .section-hero p {
                 font-size: 1.2rem;
             }
-
-            section {
-                padding: 60px 20px;
+            .section-projects h2, .skills-wrapper h2, .certifications-wrapper h2, #testimonials h2, .section-services h2 {
+                font-size: 2.5rem;
             }
-
-            section h2 {
-                font-size: 2.2rem;
-                margin-bottom: 40px;
+            .project-card, .certification-card, .service-card {
+                width: 100%;
+                max-width: 380px;
             }
-
-            .about-content {
-                flex-direction: column;
-                gap: 30px;
+            .testimonials-carousel-container {
+                max-width: 400px; /* Ajuste para un testimonio individual */
             }
-
-            .about-avatar {
-                width: 200px;
-                height: 200px;
+            .testimonial-card-wrapper {
+                min-width: 100%;
+                padding: 10px;
             }
-
-            .skills-grid,
-            .projects-grid,
-            .testimonials-grid {
-                grid-template-columns: 1fr; /* Single column on mobile */
-                gap: 30px;
-            }
-
-            .project-card, .skill-card, .testimonial-card, .certification-item {
-                max-width: 400px; /* Constrain width for better readability on small screens */
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .contact-link-item svg {
-                width: 40px;
-                height: 40px;
-            }
+            .carousel-nav-btn.prev { left: 0; }
+            .carousel-nav-btn.next { right: 0; }
         }
 
         @media (max-width: 480px) {
-            .main-header {
-                padding: 10px 15px;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            #splash-screen h1 {
-                font-size: 2.2rem;
-                text-align: center;
-                padding: 0 10px;
-            }
-
-            #splash-screen p {
-                font-size: 0.8rem;
-                text-align: center;
-                padding: 0 10px;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            .initial-avatar {
-                width: 150px;
-                height: 150px;
-            }
-
-            .initial-tagline {
-                font-size: 1rem;
-            }
-
-            section {
-                padding: 40px 15px;
-            }
-
-            section h2 {
-                font-size: 1.8rem;
-            }
-
-            .cta-button {
-                padding: 12px 30px;
-                font-size: 1rem;
+            .logo { font-size: 1.5rem; }
+            .nav-menu a { font-size: 1rem; }
+            .section-hero h1 { font-size: 2.5rem; }
+            .section-hero p { font-size: 1rem; }
+            .section-projects h2, .skills-wrapper h2, .certifications-wrapper h2, #testimonials h2, .section-services h2 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="scroll-progress-bar"></div>
-
-    <div class="background-overlay"></div>
-    <div class="background-particles"></div>
-
-    <div id="splash-screen">
-        <h1 class="holographic-text" data-text="JAIRO LEMUEL BARRIENTOS">JAIRO LEMUEL BARRIENTOS</h1>
-        <p>Initializing Cyber-Aesthetic Portfolio...</p>
-    </div>
-
-    <header class="main-header fade-in" data-delay="0.5">
-        <a href="#" class="logo">Jairo.Dev</a>
+    <header class="main-header">
+        <a href="#hero" class="logo">Jairo Barrientos</a>
         <nav>
             <ul class="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#hero" class="active">Inicio</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#certifications">Certificaciones</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#contact">Contacto</a></li>
             </ul>
-            <div class="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </nav>
+        <div class="scroll-progress-bar"></div>
     </header>
 
-    <section id="hero" class="hero-section">
-        <div class="initial-hero-content">
-            <div class="initial-avatar">
-                <img src="assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Lemuel Barrientos Avatar">
+    <main>
+        <section class="section-hero" id="hero">
+            <div class="avatar-container">
+                <svg id="my-avatar" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="48" fill="#1a3a4a" stroke="rgba(0, 192, 255, 0.5)" stroke-width="2"/>
+                    <rect x="35" y="40" width="30" height="5" fill="#fff" class="avatar-glasses"/>
+                    <circle cx="42" cy="42" r="4" fill="#00e5ff" class="avatar-eye"/>
+                    <circle cx="58" cy="42" r="4" fill="#00e5ff" class="avatar-eye"/>
+                    <path d="M 40 60 Q 50 65 60 60" stroke="#fff" stroke-width="2" fill="none" class="avatar-mouth"/>
+                    </svg>
             </div>
-            <p class="initial-tagline">"Where Code Meets Cybersecurity & AI Automation."</p>
-        </div>
-        <div class="hero-content">
-            <div class="avatar-container fade-in" data-delay="0.8">
-                <img src="assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Lemuel Barrientos">
-            </div>
-            <h1 class="holographic-text fade-in" data-text="Jairo Lemuel Barrientos" data-delay="1.0">Jairo Lemuel Barrientos</h1>
-            <p class="fade-in" data-delay="1.2">Full Stack Developer | CyberOps Associate | AI Automation Enthusiast</p>
-            <a href="#projects" class="cta-button fade-in" data-delay="1.4">View My Work</a>
-        </div>
-    </section>
+            <h1 class="fade-in-up">Jairo Barrientos</h1>
+            <p class="fade-in-up delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
+            <p class="fade-in-up delay-2">Creando soluciones robustas y seguras con código y estrategia.</p>
+        </section>
 
-    <section id="about" class="fade-in">
-        <h2 class="holographic-text glitch" data-text="About Me">About Me</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>Hello! I'm Jairo Lemuel Barrientos, a **Full Stack Developer** based in Santa Elena, Entre Ríos, Argentina. My passion lies in crafting robust and innovative web applications, from dynamic user interfaces with **React** to powerful server-side logic with **Node.js, PHP, and Python**.</p>
-                <p>Beyond traditional development, I have a deep-seated interest and certified expertise in **Cybersecurity (Cisco CyberOps Associate)** and **AI Automation**. I thrive on challenges that require creative problem-solving and a keen eye for optimizing processes through technology.</p>
-                <p>I believe in clean code, scalable architectures, and continuous learning to stay ahead in the ever-evolving tech landscape. Let's connect and build something impactful!</p>
-            </div>
-            <div class="about-avatar">
-                <img src="assets/images/A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png" alt="Jairo Lemuel Barrientos About">
-            </div>
-        </div>
-    </section>
+        <section class="section-projects" id="projects">
+            <h2 class="holographic-text glitch" data-text="Proyectos">Proyectos</h2>
+            <div class="projects-container">
 
-    <section id="skills" class="fade-in">
-        <h2 class="holographic-text glitch" data-text="My Skillset">My Skillset</h2>
-        <div class="skills-grid">
-            <div class="skill-card fade-in">
-                <span class="skill-icon js">JS</span> <h3>JavaScript (ES6+)</h3>
-                <p>Modern JS development, async/await, modules.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon react">⚛️</span>
-                <h3>React.js</h3>
-                <p>Building dynamic, component-based UIs.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon node">⬢</span>
-                <h3>Node.js</h3>
-                <p>Backend development, REST APIs, Express.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon php">🐘</span>
-                <h3>PHP</h3>
-                <p>Backend frameworks (Laravel, Symfony) & CMS.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon python">🐍</span>
-                <h3>Python</h3>
-                <p>Scripting, data analysis, automation, Django/Flask.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon mysql">🗄️</span>
-                <h3>MySQL / SQL</h3>
-                <p>Database design, querying, optimization.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon html">{}</span>
-                <h3>HTML5</h3>
-                <p>Semantic markup, web accessibility.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon css">#</span>
-                <h3>CSS3</h3>
-                <p>Responsive design, SASS/LESS, animations.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon security">🔒</span>
-                <h3>Cybersecurity</h3>
-                <p>Network security, threat analysis, ethical hacking basics.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <span class="skill-icon ai">🤖</span>
-                <h3>AI Automation</h3>
-                <p>Process automation, basic ML integration.</p>
-            </div>
-        </div>
-    </section>
+                <div class="project-card">
+                    <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                        <div class="project-svg-container">
+                            <svg id="svg-finance" viewBox="0 0 100 100">
+                                <rect x="15" y="70" width="15" height="20" fill="#00e5ff" class="bar bar-1"/>
+                                <rect x="40" y="60" width="15" height="30" fill="#00e5ff" class="bar bar-2"/>
+                                <rect x="65" y="50" width="15" height="40" fill="#00e5ff" class="bar bar-3"/>
+                                <polyline points="10,40 30,30 50,20 70,25 90,15" fill="none" stroke="#8000ff" stroke-width="3" class="line-chart"/>
+                                <circle cx="50" cy="85" r="5" fill="#fff"/>
+                                <text x="50" y="85" text-anchor="middle" font-size="10" fill="#000">€</text>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>Financiator</h3>
+                            <p>Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
+                        </div>
+                        <div class="project-button-wrapper">
+                            <span class="project-button">Ver Proyecto</span>
+                        </div>
+                    </a>
+                </div>
 
-    <section id="projects" class="fade-in">
-        <h2 class="holographic-text glitch" data-text="My Projects">My Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card fade-in">
-                <div class="project-image-container">
-                    <img src="assets/images/project1.jpg" alt="Project 1: E-commerce Platform" class="project-image">
+                <div class="project-card">
+                    <a href="cyber-security-project/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                        <div class="project-svg-container">
+                            <svg id="svg-cybersecurity" viewBox="0 0 100 100">
+                                <path d="M50 10 L10 40 L10 80 L50 90 L90 80 L90 40 Z" fill="#1a2a3a" stroke="#00e5ff" stroke-width="3" class="shield-path"/>
+                                <circle cx="50" cy="55" r="15" fill="#8000ff" class="lock-fill"/>
+                                <rect x="45" y="45" width="10" height="15" fill="#000" rx="2" ry="2"/>
+                                <path d="M55 40 C55 35 50 30 45 35 V45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>CyberGuard Elite</h3>
+                            <p>Plataforma avanzada de monitoreo de seguridad y análisis de vulnerabilidades, construida para proteger infraestructuras críticas.</p>
+                        </div>
+                        <div class="project-button-wrapper">
+                            <span class="project-button">Ver Proyecto</span>
+                        </div>
+                    </a>
                 </div>
-                <div class="project-content">
-                    <h3>E-commerce Platform</h3>
-                    <p>A full-featured online store built with React for the frontend and Node.js (Express) for the backend, integrating Stripe for payments. Secure user authentication and product management system.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">React</span>
-                        <span class="project-tag">Node.js</span>
-                        <span class="project-tag">MongoDB</span>
-                        <span class="project-tag">Stripe API</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank" class="project-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-                            Live Demo
-                        </a>
-                        <a href="#" target="_blank" class="project-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387 0.6.111 0.819-0.256 0.819-0.575v-2.234c-3.338 0.726-4.033-1.416-4.033-1.416-0.546-1.387-1.333-1.756-1.333-1.756-1.089-0.745 0.083-0.729 0.083-0.729 1.205 0.084 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.492 0.998 0.108-0.777 0.418-1.305 0.762-1.604-2.665-0.3-5.467-1.334-5.467-5.931 0-1.311 0.469-2.381 1.236-3.221-0.124-0.3-0.536-1.522 0.117-3.176 0 0 1.008-0.322 3.301 1.23A11.066 11.066 0 0 1 12 5.867c1.011 0 2.02.136 2.969 0.401 2.291-1.552 3.297-1.23 3.297-1.23 0.653 1.654 0.241 2.876 0.118 3.176 0.77 0.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.476 5.923 0.43 0.372 0.823 1.102 0.823 2.222v3.293c0 0.315 0.218 0.686 0.824 0.573 4.766-1.571 8.202-6.07 8.202-11.386C24 5.373 18.627 0 12 0z"/></svg>
-                            GitHub Repo
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="project-card fade-in">
-                <div class="project-image-container">
-                    <img src="assets/images/project2.jpg" alt="Project 2: AI-Powered Chatbot" class="project-image">
+                <div class="project-card">
+                    <a href="weather-app/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                        <div class="project-svg-container">
+                            <svg id="svg-weather" viewBox="0 0 100 100">
+                                <circle cx="70" cy="30" r="15" fill="#FFD700"/>
+                                <line x1="70" y1="15" x2="70" y2="25" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                                <line x1="80.6" y1="20.4" x2="73.6" y2="27.4" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                                <line x1="85" y1="30" x2="75" y2="30" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                                <line x1="80.6" y1="39.6" x2="73.6" y2="32.6" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                                <line x1="70" y1="45" x2="70" y2="35" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                                <path d="M20 50 Q 10 30 40 30 T 70 50 Q 80 70 50 70 T 20 50 Z" fill="#E0E0E0" class="cloud"/>
+                                <path d="M40 70 Q 30 90 60 90 T 90 70 Q 100 50 70 50 T 40 70 Z" fill="#C0C0C0" class="cloud"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>SkyCast</h3>
+                            <p>Aplicación intuitiva para consultar el pronóstico del tiempo global, con datos en tiempo real y proyecciones detalladas.</p>
+                        </div>
+                        <div class="project-button-wrapper">
+                            <span class="project-button">Ver Proyecto</span>
+                        </div>
+                    </a>
                 </div>
-                <div class="project-content">
-                    <h3>AI-Powered Chatbot</h3>
-                    <p>An intelligent chatbot developed with Python and a custom NLP model, designed for customer support and automating routine inquiries. Integrates with a REST API for dynamic responses.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">NLP</span>
-                        <span class="project-tag">Flask</span>
-                        <span class="project-tag">API Integration</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank" class="project-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-                            Live Demo
-                        </a>
-                        <a href="#" target="_blank" class="project-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387 0.6.111 0.819-0.256 0.819-0.575v-2.234c-3.338 0.726-4.033-1.416-4.033-1.416-0.546-1.387-1.333-1.756-1.333-1.756-1.089-0.745 0.083-0.729 0.083-0.729 1.205 0.084 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.492 0.998 0.108-0.777 0.418-1.305 0.762-1.604-2.665-0.3-5.467-1.334-5.467-5.931 0-1.311 0.469-2.381 1.236-3.221-0.124-0.3-0.536-1.522 0.117-3.176 0 0 1.008-0.322 3.301 1.23A11.066 11.066 0 0 1 12 5.867c1.011 0 2.02.136 2.969 0.401 2.291-1.552 3.297-1.23 3.297-1.23 0.653 1.654 0.241 2.876 0.118 3.176 0.77 0.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.476 5.923 0.43 0.372 0.823 1.102 0.823 2.222v3.293c0 0.315 0.218 0.686 0.824 0.573 4.766-1.571 8.202-6.07 8.202-11.386C24 5.373 18.627 0 12 0z"/></svg>
-                            GitHub Repo
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="project-card fade-in">
-                <div class="project-image-container">
-                    <img src="assets/images/project3.jpg" alt="Project 3: Cybersecurity Dashboard" class="project-image">
-                </div>
-                <div class="project-content">
-                    <h3>Cybersecurity Dashboard</h3>
-                    <p>A web-based dashboard for visualizing network security data, logs, and alerts. Developed with PHP (Laravel) and Vue.js for real-time monitoring capabilities and threat detection.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">PHP</span>
-                        <span class="project-tag">Laravel</span>
-                        <span class="project-tag">Vue.js</span>
-                        <span class="project-tag">Cybersecurity</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank" class="project-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-                            Live Demo
-                        </a>
-                        <a href="#" target="_blank" class="project-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387 0.6.111 0.819-0.256 0.819-0.575v-2.234c-3.338 0.726-4.033-1.416-4.033-1.416-0.546-1.387-1.333-1.756-1.333-1.756-1.089-0.745 0.083-0.729 0.083-0.729 1.205 0.084 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.492 0.998 0.108-0.777 0.418-1.305 0.762-1.604-2.665-0.3-5.467-1.334-5.467-5.931 0-1.311 0.469-2.381 1.236-3.221-0.124-0.3-0.536-1.522 0.117-3.176 0 0 1.008-0.322 3.301 1.23A11.066 11.066 0 0 1 12 5.867c1.011 0 2.02.136 2.969 0.401 2.291-1.552 3.297-1.23 3.297-1.23 0.653 1.654 0.241 2.876 0.118 3.176 0.77 0.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.476 5.923 0.43 0.372 0.823 1.102 0.823 2.222v3.293c0 0.315 0.218 0.686 0.824 0.573 4.766-1.571 8.202-6.07 8.202-11.386C24 5.373 18.627 0 12 0z"/></svg>
-                            GitHub Repo
-                        </a>
-                    </div>
-                </div>
             </div>
+        </section>
 
-            <div class="project-card fade-in">
-                <div class="project-image-container">
-                    <img src="assets/images/project4.jpg" alt="Project 4: Automated Data Scraper" class="project-image">
+        <section class="section-services" id="services">
+            <h2 class="holographic-text glitch" data-text="Servicios">Servicios</h2>
+            <div class="services-container">
+                <div class="service-card fade-in-up">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/>
+                    </svg>
+                    <h3>Desarrollo Web Full Stack</h3>
+                    <p>Creación de aplicaciones web robustas y escalables, desde la base de datos hasta la interfaz de usuario, con tecnologías modernas como React, Node.js y PHP.</p>
                 </div>
-                <div class="project-content">
-                    <h3>Automated Data Scraper</h3>
-                    <p>A Python-based script utilizing Selenium and BeautifulSoup to automate data extraction from various web sources, designed for market research and data analysis. Includes error handling and scheduling features.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">Selenium</span>
-                        <span class="project-tag">BeautifulSoup</span>
-                        <span class="project-tag">Automation</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank" class="project-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387 0.6.111 0.819-0.256 0.819-0.575v-2.234c-3.338 0.726-4.033-1.416-4.033-1.416-0.546-1.387-1.333-1.756-1.333-1.756-1.089-0.745 0.083-0.729 0.083-0.729 1.205 0.084 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.492 0.998 0.108-0.777 0.418-1.305 0.762-1.604-2.665-0.3-5.467-1.334-5.467-5.931 0-1.311 0.469-2.381 1.236-3.221-0.124-0.3-0.536-1.522 0.117-3.176 0 0 1.008-0.322 3.301 1.23A11.066 11.066 0 0 1 12 5.867c1.011 0 2.02.136 2.969 0.401 2.291-1.552 3.297-1.23 3.297-1.23 0.653 1.654 0.241 2.876 0.118 3.176 0.77 0.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.476 5.923 0.43 0.372 0.823 1.102 0.823 2.222v3.293c0 0.315 0.218 0.686 0.824 0.573 4.766-1.571 8.202-6.07 8.202-11.386C24 5.373 18.627 0 12 0z"/></svg>
-                            GitHub Repo
-                        </a>
-                    </div>
+                <div class="service-card fade-in-up delay-1">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.29-3.23 8.24-7 9.87V12H5V6.3l7-3.11v8.8z"/>
+                    </svg>
+                    <h3>Consultoría en Ciberseguridad</h3>
+                    <p>Asesoramiento experto para proteger tus sistemas y datos, incluyendo análisis de vulnerabilidades, configuración de seguridad y estrategias de defensa.</p>
                 </div>
-            </div>
-        </div>
-    </section>
+                <div class="service-card fade-in-up delay-2">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 11.55C9.64 9.35 6.48 8.13 3.5 8.13V5.5L12 2l8.5 3.5v2.63c-2.98 0-6.14 1.22-8.5 3.42zm0 10.45c5.31 0 10.59-1.99 12-7.5-1.41-5.51-6.69-7.5-12-7.5S1.41 12.5 0 18c1.41 5.51 6.69 7.5 12 7.5zm0-2c-3.87 0-7.23-1.68-9-4.5 1.77-2.82 5.13-4.5 9-4.5s7.23 1.68 9 4.5c-1.77 2.82-5.13 4.5-9 4.5zm0-3c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+                    </svg>
+                    <h3>Optimización y Rendimiento</h3>
+                    <p>Mejora del rendimiento de sitios web y aplicaciones para asegurar una experiencia de usuario fluida y tiempos de carga rápidos, crucial para SEO y retención.</p>
+                </div>
+                </div>
+        </section>
 
-    <section id="testimonials" class="fade-in">
-        <h2 class="holographic-text glitch" data-text="Testimonials">Testimonials</h2>
-        <div class="testimonials-grid">
-            <div class="testimonial-card fade-in">
-                <p class="testimonial-text">"Jairo delivered an outstanding e-commerce solution. His React skills are top-notch, and he ensured every detail was perfect. The project was completed on time and exceeded our expectations!"</p>
-                <div class="testimonial-author">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client 1" class="testimonial-author-img">
-                    <div class="author-info">
-                        <strong>Alex Johnson</strong>
-                        <span>CEO, Tech Innovators Inc.</span>
+        <section class="section-skills" id="skills">
+            <div id="skills-bg"></div>
+            <div class="skills-wrapper">
+                <h2 class="holographic-text glitch" data-text="Habilidades">Habilidades</h2>
+                <div class="skills-container">
+                    <div class="skill-tag fade-in-up">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        React.js
+                    </div>
+                    <div class="skill-tag fade-in-up delay-1">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 15.5H9c-.55 0-1-.45-1-1s.45-1 1-1h6c.55 0 1 .45 1 1s-.45 1-1 1zM15 11.5H9c-.55 0-1-.45-1-1s.45-1 1-1h6c.55 0 1 .45 1 1s-.45 1-1 1zM4.5 15.5L12 20l7.5-4.5L12 11 4.5 15.5zm0-4.3L12 15.7l7.5-4.3L12 7.2 4.5 11.2zm7.5-7.7L0 12l12 12 12-12-12-12z"/></svg>
+                        JavaScript ES6+
+                    </div>
+                    <div class="skill-tag fade-in-up delay-2">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 15.5L12 20l7.5-4.5L12 11 4.5 15.5zm0-4.3L12 15.7l7.5-4.3L12 7.2 4.5 11.2zm7.5-7.7L0 12l12 12 12-12-12-12z"/></svg>
+                        HTML5 & CSS3
+                    </div>
+                    <div class="skill-tag fade-in-up delay-3">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        Node.js
+                    </div>
+                    <div class="skill-tag fade-in-up delay-4">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        PHP
+                    </div>
+                    <div class="skill-tag fade-in-up delay-5">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        MySQL
+                    </div>
+                    <div class="skill-tag fade-in-up delay-6">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        Seguridad de Redes
+                    </div>
+                    <div class="skill-tag fade-in-up delay-7">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        Análisis de Vulnerabilidades
+                    </div>
+                    <div class="skill-tag fade-in-up delay-8">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        OWASP Top 10
+                    </div>
+                    <div class="skill-tag fade-in-up delay-9">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        Git & GitHub
+                    </div>
+                    <div class="skill-tag fade-in-up delay-10">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6V11.2l-3.66-3.66L11 6l4 4 4-4-1.34-1.34L13 11.2V6c0-3.31-2.69-6-6-6H6v2h1c3.31 0 6 2.69 6 6v5.93z"/></svg>
+                        Metodologías Ágiles
                     </div>
                 </div>
             </div>
-            <div class="testimonial-card fade-in">
-                <p class="testimonial-text">"Working with Jairo on our AI chatbot was a game-changer. His Python expertise and understanding of automation significantly improved our customer service efficiency. Highly recommend!"</p>
-                <div class="testimonial-author">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client 2" class="testimonial-author-img">
-                    <div class="author-info">
-                        <strong>Sarah Chen</strong>
-                        <span>Head of Operations, Global Connect</span>
+        </section>
+
+        <section class="section-certifications" id="certifications">
+            <div class="certifications-wrapper">
+                <h2 class="holographic-text glitch" data-text="Certificaciones">Certificaciones</h2>
+                <div class="certification-grid">
+                    <div class="certification-card fade-in">
+                        <div class="card-header">
+                            <h3>Cisco Certified CyberOps Associate</h3>
+                            <p class="issuer">Cisco Systems</p>
+                        </div>
+                        <div class="card-content">
+                            <p>Demuestra habilidades para monitorear, detectar y responder a amenazas de ciberseguridad. Incluye análisis de redes, seguridad de endpoints, análisis de vulnerabilidades y criptografía.</p>
+                            <div class="credly-badge-embed">
+                                <a href="https://www.credly.com/badges/your-cisco-cyberops-badge-id" target="_blank" rel="noopener noreferrer">
+                                    <img src="https://images.credly.com/size/340x340/images/e9447333-e578-43f7-9200-a548695024b4/CyberOps_Associate.png" alt="Cisco Certified CyberOps Associate Badge" style="width: 120px; height: 120px; border-radius: 50%;">
+                                </a>
+                            </div>
+                        </div>
+                        <a href="https://www.credly.com/badges/your-cisco-cyberops-badge-id/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
+                    </div>
+
+                    <div class="certification-card fade-in">
+                        <div class="card-header">
+                            <h3>JavaScript Algorithms and Data Structures</h3>
+                            <p class="issuer">freeCodeCamp</p>
+                        </div>
+                        <div class="card-content">
+                            <p>Dominio de los fundamentos de JavaScript, algoritmos, estructuras de datos, programación orientada a objetos y programación funcional.</p>
+                            <div class="credly-badge-embed">
+                                <img src="https://design-style-guide.freecodecamp.org/downloads/fcc_primary_small.jpg" alt="freeCodeCamp Certification Badge" style="width: 120px; height: 120px; border-radius: 50%; opacity: 0.8;">
+                            </div>
+                        </div>
+                        <a href="https://www.freecodecamp.org/certification/your-username/javascript-algorithms-and-data-structures" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Certificado</a>
+                    </div>
+
+                    <div class="certification-card fade-in">
+                        <div class="card-header">
+                            <h3>Introducción a la Ciberseguridad</h3>
+                            <p class="issuer">Cisco Networking Academy</p>
+                        </div>
+                        <div class="card-content">
+                            <p>Certificación fundamental que explora las bases de la ciberseguridad, incluyendo tipos de amenazas, principios de seguridad y protección de datos.</p>
+                            <div class="credly-badge-embed">
+                                <img src="https://via.placeholder.com/120x120/8000ff/FFFFFF?text=Intro+Cyber" alt="Introducción a la Ciberseguridad Badge" style="width: 120px; height: 120px; border-radius: 50%; opacity: 0.8;">
+                            </div>
+                        </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Certificado</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="fade-in">
+            <h2 class="holographic-text glitch" data-text="Testimonios">Testimonios</h2>
+            <div class="testimonials-carousel-container">
+                <div class="testimonials-carousel">
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"Jairo entregó una solución de e-commerce excepcional. Sus habilidades con React son de primera categoría y se aseguró de que cada detalle fuera perfecto. ¡El proyecto se completó a tiempo y superó nuestras expectativas!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex Johnson" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>Alex Johnson</strong>
+                                    <span>CEO, Tech Innovators Inc.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"Trabajar con Jairo en nuestro chatbot de IA fue un cambio radical. Su experiencia en Python y su comprensión de la automatización mejoraron significativamente la eficiencia de nuestro servicio al cliente. ¡Altamente recomendado!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Chen" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>Sarah Chen</strong>
+                                    <span>Jefa de Operaciones, Global Connect</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"El conocimiento de Jairo en ciberseguridad es impresionante. Desarrolló un panel de seguridad robusto que nos brindó información crucial sobre las vulnerabilidades de nuestra red. Un verdadero profesional."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="David Lee" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>David Lee</strong>
+                                    <span>CTO, SecureNet Solutions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"La atención al detalle de Jairo y su compromiso con la calidad fueron evidentes en cada fase del desarrollo. Su enfoque en la experiencia del usuario realmente hizo la diferencia en nuestro proyecto."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Maria Garcia" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>María García</strong>
+                                    <span>Gerente de Proyecto, Innova Digital</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"Desde la conceptualización hasta la implementación, Jairo demostró ser un desarrollador excepcional. Su capacidad para resolver problemas complejos y su dominio de Node.js son invaluables."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Carlos Rodriguez" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>Carlos Rodríguez</strong>
+                                    <span>Fundador, Nexo Solutions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"Jairo es un activo increíble para cualquier equipo. Su habilidad para pasar sin problemas entre el desarrollo frontend y backend es rara, y siempre cumple con creces."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/80.jpg" alt="Ana Lopez" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>Ana López</strong>
+                                    <span>Directora de Ingeniería, SoftSolutions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"El conocimiento de Jairo sobre las mejores prácticas de ciberseguridad es impresionante. Nos ayudó a implementar medidas de seguridad cruciales que han fortalecido nuestra infraestructura digital."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Roberto Gomez" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>Roberto Gómez</strong>
+                                    <span>Consultor de Seguridad, CyberGuard</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"Necesitábamos una solución de automatización compleja y Jairo la construyó a la perfección. Su código Python es limpio, eficiente y fácil de mantener. ¡Un verdadero experto!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Laura Fernandez" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>Laura Fernández</strong>
+                                    <span>Gerente de Producto, AutoPilot Co.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-wrapper">
+                        <div class="testimonial-card fade-in">
+                            <p class="testimonial-text">"La versatilidad de Jairo es su mayor fortaleza. Desde el diseño de bases de datos hasta la creación de interfaces de usuario atractivas, demostró ser un desarrollador integral y muy capaz."</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/40.jpg" alt="Pablo Martini" class="testimonial-author-img">
+                                <div class="author-info">
+                                    <strong>Pablo Martini</strong>
+                                    <span>Arquitecto de Soluciones, GlobalTech</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <button class="carousel-nav-btn prev" aria-label="Testimonio anterior">&#10094;</button>
+                <button class="carousel-nav-btn next" aria-label="Siguiente testimonio">&#10095;</button>
             </div>
-            <div class="testimonial-card fade-in">
-                <p class="testimonial-text">"Jairo's cybersecurity knowledge is impressive. He developed a robust security dashboard that gave us crucial insights into our network vulnerabilities. A true professional."</p>
-                <div class="testimonial-author">
-                    <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Client 3" class="testimonial-author-img">
-                    <div class="author-info">
-                        <strong>David Lee</strong>
-                        <span>CTO, SecureNet Solutions</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="certifications" class="fade-in">
-        <h2 class="holographic-text glitch" data-text="Certifications">Certifications</h2>
-        <div class="certifications-container">
-            <div class="certification-item fade-in">
-                <h3>Cisco Certified CyberOps Associate</h3>
-                <p>Validated knowledge and skills required to monitor, detect, analyze, and respond to cybersecurity incidents.</p>
-                <div class="credly-badge">
-                    <div data-iframe-width="230" data-iframe-height="230" data-share-badge-id="YOUR_CREDLY_BADGE_ID_HERE" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//www.credly.com/assets/js/public_badge_loader.js"></script>
-                    <p style="margin-top: 10px; font-size: 0.9em; color: var(--color-text-dark);">
-                        <a href="https://www.credly.com/badges/YOUR_CREDLY_BADGE_ID_HERE/public_url" target="_blank" style="color: var(--color-primary-light); text-decoration: underline;">Verify on Credly</a>
-                    </p>
-                </div>
-            </div>
-            <div class="certification-item fade-in">
-                <h3>(Example) AWS Certified Cloud Practitioner</h3>
-                <p>Demonstrates a foundational understanding of AWS Cloud concepts, services, security, architecture, pricing, and support.</p>
-                <p style="margin-top: 10px; font-size: 0.9em; color: var(--color-text-dark);">
-                    <a href="#" target="_blank" style="color: var(--color-primary-light); text-decoration: underline;">(Link to verification if available)</a>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="fade-in">
-        <h2 class="holographic-text glitch" data-text="Get in Touch">Get in Touch</h2>
-        <div class="contact-content">
-            <p>I'm always open to new opportunities, collaborations, or just a friendly chat. Feel free to reach out!</p>
-            <div class="contact-links">
-                <a href="mailto:youremail@example.com" class="contact-link-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12.713l-11.75 6.787 11.75 6.787 11.75-6.787-11.75-6.787zm0-2.713l-11.75 6.787 11.75 6.787 11.75-6.787-11.75-6.787zm0-2.713l-11.75 6.787 11.75 6.787 11.75-6.787-11.75-6.787zM12 0l-12 7.218v16.782h24v-16.782l-12-7.218zM12 2.235l9.6 5.823-9.6 5.823-9.6-5.823 9.6-5.823zM2 19.167v-8.334l10 6 10-6v8.334h-20z"/></svg>
-                    <span>Email Me</span>
-                </a>
-                <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank" class="contact-link-item"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.807-1.6-5.904C.144 6.002 6.136 0 13.568 0c3.064 0 5.662 1.205 7.66 3.193 1.998 1.988 3.2 4.594 3.2 7.669 0 7.337-5.992 13.33-13.424 13.33-1.996 0-3.999-0.556-5.792-1.604l-6.177 1.687zm6.598-5.592l-1.1-1.854s0.518-0.893 1.157-1.464c0.702-0.638 1.579-1.393 2.502-2.147l-1.066-1.821c-0.612-1.047-1.223-2.094-1.223-3.141 0-0.703 0.285-1.396 0.854-1.966 0.57-0.57 1.264-0.855 1.967-0.855 0.703 0 1.396 0.285 1.967 0.854 0.569 0.569 0.854 1.263 0.854 1.966 0 0.893-0.518 1.786-1.157 2.356s-1.579 1.394-2.502 2.148l1.066 1.821c0.612 1.047 1.223 2.094 1.223 3.141 0 0.703-0.285 1.396-0.854 1.966-0.57 0.57-1.264 0.855-1.967 0.855-0.703 0-1.396-0.285-1.967-0.854-0.569-0.569-0.854-1.263-0.854-1.966 0-0.893 0.518-1.786 1.157-2.356s1.579-1.394 2.502-2.148z"/></svg>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank" class="contact-link-item"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    <span>LinkedIn</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        <p>&copy; 2024 Jairo Lemuel Barrientos. All rights reserved.</p>
-        <div class="footer-social-links">
-            <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="footer-social-link" title="GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387 0.6.111 0.819-0.256 0.819-0.575v-2.234c-3.338 0.726-4.033-1.416-4.033-1.416-0.546-1.387-1.333-1.756-1.333-1.756-1.089-0.745 0.083-0.729 0.083-0.729 1.205 0.084 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.492 0.998 0.108-0.777 0.418-1.305 0.762-1.604-2.665-0.3-5.467-1.334-5.467-5.931 0-1.311 0.469-2.381 1.236-3.221-0.124-0.3-0.536-1.522 0.117-3.176 0 0 1.008-0.322 3.301 1.23A11.066 11.066 0 0 1 12 5.867c1.011 0 2.02.136 2.969 0.401 2.291-1.552 3.297-1.23 3.297-1.23 0.653 1.654 0.241 2.876 0.118 3.176 0.77 0.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.476 5.923 0.43 0.372 0.823 1.102 0.823 2.222v3.293c0 0.315 0.218 0.686 0.824 0.573 4.766-1.571 8.202-6.07 8.202-11.386C24 5.373 18.627 0 12 0z"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank" class="footer-social-link" title="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-            </div>
-    </footer>
+        <section id="contact" style="padding: 100px 20px; text-align: center; background: #050a11; color: white;">
+            <h2 class="holographic-text glitch" data-text="Contacto">Contacto</h2>
+            <p style="color: var(--color-text-medium);">Próximamente: ¡Mi formulario de contacto o detalles de contacto aquí!</p>
+        </section>
+    </main>
 
     <script>
-        // --- Splash Screen Logic ---
         document.addEventListener('DOMContentLoaded', () => {
-            const splashScreen = document.getElementById('splash-screen');
-            const heroSection = document.getElementById('hero');
+            // Scroll Progress Bar
+            const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = (window.scrollY / totalHeight) * 100;
+                scrollProgressBar.style.width = progress + '%';
+            });
+
+            // Header Scrolled Effect
             const mainHeader = document.querySelector('.main-header');
-            const holographicTexts = document.querySelectorAll('.holographic-text');
-
-            // Apply glitch class after a slight delay for all holographic elements
-            holographicTexts.forEach(text => {
-                setTimeout(() => {
-                    text.classList.add('glitch');
-                }, 100); // Small delay to ensure render before glitch starts
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    mainHeader.classList.add('scrolled');
+                } else {
+                    mainHeader.classList.remove('scrolled');
+                }
             });
 
-
-            setTimeout(() => {
-                splashScreen.classList.add('hidden');
-                // After splash screen fades, show main hero content
-                setTimeout(() => {
-                    heroSection.classList.add('show-main-content');
-                    // And hide initial content after main content is shown
-                    setTimeout(() => {
-                        heroSection.classList.add('hide-initial-content');
-                    }, 500); // Short delay to allow main content to fully appear
-                }, 1000); // Match splash screen transition duration
-            }, 3000); // Display splash screen for 3 seconds
-
-            // --- Hamburger Menu Logic ---
-            const hamburgerMenu = document.querySelector('.hamburger-menu');
-            const navMenu = document.querySelector('.nav-menu');
-
-            hamburgerMenu.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                hamburgerMenu.classList.toggle('open'); // Optional: for animating hamburger icon
-            });
-
-            // Close nav menu when a link is clicked (for mobile)
-            navMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    hamburgerMenu.classList.remove('open');
+            // Smooth Scroll for Navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Active link highlighting
+                    document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
                 });
             });
 
-            // --- Scroll Progress Bar Logic ---
-            const progressBar = document.querySelector('.scroll-progress-bar');
-            window.addEventListener('scroll', () => {
-                const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrollPosition = window.scrollY;
-                const progress = (scrollPosition / totalHeight) * 100;
-                progressBar.style.width = progress + '%';
-            });
-
-            // --- Scroll Reveal Animations (Intersection Observer) ---
-            const fadeInElements = document.querySelectorAll('.fade-in');
-
+            // Intersection Observer for fade-in animations
             const observerOptions = {
                 root: null, // viewport
                 rootMargin: '0px',
-                threshold: 0.1 // 10% of the element needs to be visible
+                threshold: 0.1 // element is 10% visible
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const delay = parseFloat(entry.target.dataset.delay) || 0;
-                        setTimeout(() => {
-                            entry.target.classList.add('appear');
-                        }, delay * 1000); // Convert delay to milliseconds
-                        observer.unobserve(entry.target); // Stop observing once it appears
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0) scale(1)';
+
+                        // Special handling for SVG animations based on ID for projects
+                        if (entry.target.querySelector('#svg-finance')) {
+                            entry.target.querySelector('#svg-finance').classList.add('animated');
+                        }
+                        if (entry.target.querySelector('#svg-cybersecurity')) {
+                            entry.target.querySelector('#svg-cybersecurity').classList.add('animated');
+                        }
+                        if (entry.target.querySelector('#svg-weather')) {
+                            entry.target.querySelector('#svg-weather').classList.add('animated');
+                        }
+
+                        // Activate avatar glasses draw animation once visible
+                        if (entry.target.id === 'hero' && !document.getElementById('my-avatar').classList.contains('animated-glasses')) {
+                            const glassesPath = document.querySelector('#my-avatar .avatar-glasses');
+                            if (glassesPath) {
+                                glassesPath.style.animation = 'drawGlasses 1.5s ease-out forwards';
+                                document.getElementById('my-avatar').classList.add('animated-glasses'); // Prevent re-animation
+                            }
+                        }
+
+                        observer.unobserve(entry.target); // Stop observing once animated
                     }
                 });
             }, observerOptions);
 
-            fadeInElements.forEach(el => {
-                observer.observe(el);
+            // Observe all elements that should fade in or have animations
+            document.querySelectorAll('.fade-in, .fade-in-up, .project-card, .service-card, .skill-tag, .certification-card').forEach(element => {
+                observer.observe(element);
             });
 
-            // --- Holographic Text Glitch Activation (On Scroll into view) ---
-            const holographicTextElements = document.querySelectorAll('.holographic-text');
+            // Avatar blink animation
+            const avatarEyes = document.querySelectorAll('#my-avatar .avatar-eye');
+            if (avatarEyes.length > 0) {
+                setInterval(() => {
+                    avatarEyes.forEach(eye => {
+                        eye.classList.add('blink');
+                    });
+                    setTimeout(() => {
+                        avatarEyes.forEach(eye => {
+                            eye.classList.remove('blink');
+                        });
+                    }, 300); // Duration of the blink animation
+                }, Math.random() * (7000 - 3000) + 3000); // Random blink every 3-7 seconds
+            }
 
-            const glitchObserverOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.3 // Trigger when 30% of the text is visible
-            };
+            // Testimonials Carousel Logic
+            const carousel = document.querySelector('.testimonials-carousel');
+            const prevBtn = document.querySelector('.carousel-nav-btn.prev');
+            const nextBtn = document.querySelector('.carousel-nav-btn.next');
+            let currentIndex = 0;
 
-            const glitchObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    const textElement = entry.target;
-                    // Only add glitch if it's not the splash screen title, which has its own animation
-                    if (textElement.id !== 'splash-screen-title' && textElement.id !== 'splash-screen-p') { // Removed splash-screen IDs
-                        if (entry.isIntersecting) {
-                            textElement.classList.add('glitch-active');
-                        } else {
-                            // Optional: remove glitch when out of view, or let it stay active
-                            textElement.classList.remove('glitch-active');
-                        }
-                    }
-                });
-            }, glitchObserverOptions);
+            function updateCarousel() {
+                const totalTestimonials = document.querySelectorAll('.testimonial-card-wrapper').length;
+                const cardsPerView = window.innerWidth <= 768 ? 1 : 2; // 1 card on small, 2 on larger
+                const maxIndex = totalTestimonials - cardsPerView;
 
-            holographicTextElements.forEach(el => {
-                // Ensure the initial holographic text on the splash screen doesn't get this behavior
-                if (el.parentElement.id !== 'splash-screen') {
-                    glitchObserver.observe(el);
+                if (currentIndex < 0) {
+                    currentIndex = maxIndex; // Loop to end
+                } else if (currentIndex > maxIndex) {
+                    currentIndex = 0; // Loop to beginning
                 }
+
+                const offset = -currentIndex * (100 / cardsPerView);
+                carousel.style.transform = `translateX(${offset}%)`;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex--;
+                updateCarousel();
             });
-        });
 
-        // Optional: for the hamburger icon animation (transform to 'X')
-        document.querySelector('.hamburger-menu').addEventListener('click', function() {
-            this.classList.toggle('open');
-        });
+            nextBtn.addEventListener('click', () => {
+                currentIndex++;
+                updateCarousel();
+            });
 
+            // Initial update and on resize
+            window.addEventListener('resize', () => {
+                currentIndex = 0; // Reset index on resize to prevent weird positions
+                updateCarousel();
+            });
+            updateCarousel(); // Initial call
+
+            // Optional: Auto-slide testimonials
+            // setInterval(() => {
+            //     currentIndex++;
+            //     updateCarousel();
+            // }, 5000); // Change slide every 5 seconds
+        });
     </script>
 </body>
 </html>
