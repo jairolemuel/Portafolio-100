@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jairo Barrientos - Full Stack Developer & Cybersecurity Associate Portfolio</title>
-    <meta name="description" content="Official portfolio of Jairo Barrientos, a Full Stack Web Developer and Cybersecurity Associate showcasing innovative projects, robust skills, and key certifications. Crafting secure and cutting-edge web experiences.">
-    <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Web Development, Cybersecurity, Portfolio, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, CyberOps, Software Engineer, Web Security, Frontend, Backend, Python, Communication, Teamwork, Problem Solving">
+    <meta name="description" content="Official portfolio of Jairo Barrientos, a passionate Full Stack Web Developer and Cybersecurity Associate showcasing innovative projects, robust skills, and key certifications. Crafting secure and cutting-edge web experiences with a focus on problem-solving and collaboration.">
+    <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Web Development, Cybersecurity, Portfolio, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, CyberOps, Software Engineer, Web Security, Frontend, Backend, Python, Communication, Teamwork, Problem Solving, Innovation, Futuristic">
     <meta name="author" content="Jairo Barrientos">
 
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -32,7 +32,7 @@
             --transition-speed: 0.3s ease;
             --scroll-bar-height: 5px;
 
-            /* NUEVO: Variables para efectos holográficos/glitch */
+            /* Variables for holographic/glitch effects */
             --glitch-offset: 3px;
             --glitch-color1: #00E5FF;
             --glitch-color2: #FF6B6B;
@@ -50,6 +50,7 @@
         }
 
         body {
+            position: relative; /* Needed for canvas fixed positioning */
             font-family: 'Poppins', sans-serif;
             background-color: var(--color-bg-dark);
             color: var(--color-text-primary);
@@ -69,6 +70,18 @@
 
         ul {
             list-style: none;
+        }
+
+        /* --- Holographic Background Canvas --- */
+        #holographic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Ensure it's behind all content */
+            pointer-events: none; /* Allow clicks/interactions on elements above it */
+            background-color: var(--color-bg-dark); /* Base color for the canvas background */
         }
 
         /* --- Utility Classes --- */
@@ -91,8 +104,8 @@
             transition: all var(--transition-speed);
             border: none;
             cursor: pointer;
-            position: relative; /* Para el efecto de brillo */
-            overflow: hidden; /* Para el efecto de brillo */
+            position: relative; /* For shine effect */
+            overflow: hidden; /* For shine effect */
         }
 
         .button-primary:hover {
@@ -101,7 +114,7 @@
             opacity: 0.9;
         }
 
-        /* Efecto de brillo para botones */
+        /* Shine effect for buttons */
         .button-primary::before {
             content: '';
             position: absolute;
@@ -121,37 +134,12 @@
         .section-base {
             padding: 100px 40px;
             text-align: center;
-            position: relative; /* Para efectos de fondo */
-            overflow: hidden; /* Para contener elementos de fondo */
+            position: relative; /* For z-index and content above canvas */
+            z-index: 1; /* Ensure content is above the canvas background */
+            background-color: transparent; /* Allow canvas background to show through */
         }
 
-        /* NUEVO: Efecto de cuadrícula de fondo */
-        .section-base::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(to right, rgba(0,229,255,0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(128,0,255,0.05) 1px, transparent 1px);
-            background-size: 40px 40px; /* Tamaño de la celda de la cuadrícula */
-            z-index: 0;
-            opacity: 0.3;
-            animation: gridPan 60s linear infinite; /* Animación de desplazamiento */
-        }
-
-        @keyframes gridPan {
-            0% { background-position: 0 0; }
-            100% { background-position: 4000px 4000px; } /* Desplazamiento grande */
-        }
-
-        /* Ajuste para que el contenido esté por encima de la cuadrícula */
-        .section-base > *:not(.section-title):not(.section-title::after) {
-            position: relative;
-            z-index: 1;
-        }
+        /* The grid background effect is now removed, replaced by the canvas */
 
         .section-title {
             font-family: 'Montserrat', sans-serif;
@@ -163,16 +151,16 @@
             position: relative;
             display: inline-block;
             padding-bottom: 10px;
-            z-index: 1; /* Para estar encima de la cuadrícula */
+            z-index: 1; /* To be above the canvas */
 
-            /* NUEVO: Efecto Glitch para títulos */
-            animation: glitchText 5s infinite linear alternate-reverse; /* Animación de glitch */
+            /* Glitch effect for titles */
+            animation: glitchText 5s infinite linear alternate-reverse; /* Glitch animation */
         }
 
-        /* Clones para el efecto glitch */
+        /* Clones for glitch effect */
         .section-title::before,
         .section-title::after {
-            content: attr(data-text); /* Toma el texto del título */
+            content: attr(data-text); /* Takes text from the title */
             position: absolute;
             top: 0;
             left: 0;
@@ -215,7 +203,7 @@
         }
 
 
-        .section-title::after { /* El after original del underline */
+        .section-title::after { /* Original underline after effect */
             content: '';
             position: absolute;
             left: 50%;
@@ -225,7 +213,7 @@
             height: 4px;
             background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
             border-radius: 2px;
-            z-index: 2; /* Para estar encima de los clones de glitch */
+            z-index: 2; /* To be above glitch clones */
         }
 
         /* --- Header --- */
@@ -341,7 +329,7 @@
         }
 
         #welcome-text {
-            font-family: 'Rajdhani', sans-serif; /* NUEVO: Tipografía futurista */
+            font-family: 'Rajdhani', sans-serif; /* Futuristic typography */
             font-size: 4.5rem;
             font-weight: 700;
             color: var(--color-accent-blue);
@@ -350,10 +338,10 @@
             transform: translateY(20px);
             animation: fadeInWelcome 1s forwards 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 
-            /* NUEVO: Efecto Glitch para Welcome Text */
+            /* Glitch effect for Welcome Text */
             position: relative;
             display: inline-block;
-            text-shadow: 0 0 10px rgba(0,229,255,0.7); /* Brillo inicial */
+            text-shadow: 0 0 10px rgba(0,229,255,0.7); /* Initial glow */
         }
         #welcome-text::before,
         #welcome-text::after {
@@ -450,7 +438,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-medium));
+            background: transparent; /* Allow canvas background to show */
             padding-top: 80px; /* Offset for fixed header */
         }
 
@@ -464,14 +452,14 @@
             margin-bottom: 30px;
             position: relative;
             animation: avatarPopIn 0.8s forwards;
-            background-image: url('A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png'); /* NUEVO: Avatar como fondo */
+            background-image: url('A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png'); /* Avatar as background */
             background-size: cover;
             background-position: center;
-            display: flex; /* Para centrar el img que ahora no es necesario pero bueno */
+            display: flex;
             justify-content: center;
             align-items: center;
         }
-        /* Oculta la imagen real, ya que usamos el background-image */
+        /* Hide the actual image, as we use background-image */
         #my-avatar-img {
             display: none;
         }
@@ -526,7 +514,7 @@
 
         /* --- Projects Section --- */
         .section-projects {
-            background-color: var(--color-bg-medium);
+            background-color: var(--color-bg-medium); /* Still use a solid color for sections */
         }
 
         .projects-container {
@@ -559,18 +547,18 @@
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
             height: 100%; /* Ensure cards are same height */
 
-            /* NUEVO: Borde brillante */
+            /* Glowing border */
             position: relative;
             border: 2px solid transparent;
-            background-clip: padding-box; /* Importante para que el border-image no afecte el fondo */
+            background-clip: padding-box; /* Important so border-image does not affect background */
         }
-        /* NUEVO: Efecto de borde brillante para tarjetas de proyecto */
+        /* Glowing border effect for project cards */
         .project-card-link::before {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: var(--border-radius);
-            padding: 2px; /* Grosor del borde */
+            padding: 2px; /* Border thickness */
             background: linear-gradient(45deg, var(--color-gradient-start), var(--color-gradient-end), var(--color-accent-purple));
             -webkit-mask:
                 linear-gradient(#fff 0 0) content-box,
@@ -578,7 +566,7 @@
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
-            z-index: 2; /* Para estar encima del contenido */
+            z-index: 2; /* To be above content */
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -610,8 +598,7 @@
             max-height: 150px;
         }
 
-        /* SVG Animations for Projects */
-        /* Estas animaciones se activarán con JavaScript cuando el elemento .animated esté presente */
+        /* SVG Animations for Projects (Controlled by CSS transitions via 'animated' class) */
         #svg-finance .bar {
             transform: scaleY(0);
             transform-origin: bottom;
@@ -643,7 +630,7 @@
         #svg-beauty .lipstick-base,
         #svg-beauty .lipstick-tip,
         #svg-beauty rect,
-        #svg-beauty path { /* Este selector puede necesitar ajuste si hay más paths/rects */
+        #svg-beauty path { /* This selector might need adjustment if there are more paths/rects */
             transform: translateY(20px);
             opacity: 0;
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
@@ -656,7 +643,7 @@
             padding: 25px;
             text-align: left;
             flex-grow: 1; /* Allows content to take available space */
-            position: relative; /* Para el brillo */
+            position: relative; /* For glow */
         }
 
         .project-content h3 {
@@ -683,7 +670,7 @@
             padding: 0.8rem 1.5rem;
             font-size: 0.9rem;
             margin-top: 10px;
-            box-shadow: none; /* Remove shadow to make it subtle */
+            box-shadow: none; /* Remove default shadow */
         }
 
         /* --- Skills Section --- */
@@ -712,12 +699,12 @@
             align-items: center;
             text-align: center;
 
-            /* NUEVO: Borde brillante */
+            /* Glowing border */
             position: relative;
             border: 2px solid transparent;
             background-clip: padding-box;
         }
-        /* NUEVO: Efecto de borde brillante para tarjetas de habilidad */
+        /* Glowing border effect for skill cards */
         .skill-card::before {
             content: '';
             position: absolute;
@@ -764,7 +751,7 @@
             height: 100%;
         }
 
-        /* SVG Animations for Skills (Ahora con transiciones CSS, activadas por JS) */
+        /* SVG Animations for Skills (Controlled by CSS transitions, activated by JS 'animated' class) */
         .skill-card .monitor-outline,
         .skill-card .monitor-stand,
         .skill-card .code-line-1,
@@ -776,12 +763,26 @@
         .skill-card .shield-path,
         .skill-card .gear-line-1,
         .skill-card .gear-line-2,
-        .skill-card .gear-center {
-            stroke-dasharray: 300; /* Valor grande para ocultar al inicio */
-            stroke-dashoffset: 300; /* Valor grande para ocultar al inicio */
-            transition: stroke-dashoffset 1s ease-out; /* Transición por defecto */
+        .skill-card .gear-center,
+        .skill-card .python-head,
+        .skill-card .python-body-1,
+        .skill-card .python-body-2,
+        .skill-card .python-eye,
+        .skill-card .wave-1,
+        .skill-card .wave-2,
+        .skill-card .bubble,
+        .skill-card .person-1,
+        .skill-card .person-2,
+        .skill-card .gear-team {
+            /* Initial state for elements that draw or appear */
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            transform: translateY(20px) scale(0.5); /* For elements that slide/pop in */
+            opacity: 0;
+            transition: all 1s ease-out; /* Default transition for these elements */
         }
 
+        /* Specific animations triggered when skill-card is animated */
         /* Full Stack Web Development */
         .skill-card.animated #svg-dev .monitor-outline { stroke-dashoffset: 0; transition-delay: 0.2s; }
         .skill-card.animated #svg-dev .monitor-stand { stroke-dashoffset: 0; transition-delay: 0.7s; }
@@ -794,27 +795,27 @@
         .skill-card.animated #svg-cyber-skill .lock-body-skill { stroke-dashoffset: 0; transition-delay: 0.5s; }
         .skill-card.animated #svg-cyber-skill .lock-shackle-skill { stroke-dashoffset: 0; transition-delay: 1s; }
 
+        /* Python Programming */
+        .skill-card.animated #svg-python .python-head { transform: translateY(0) scale(1); opacity: 1; transition-delay: 0.2s; }
+        .skill-card.animated #svg-python .python-body-1 { transform: translateY(0) scale(1); opacity: 1; transition-delay: 0.4s; }
+        .skill-card.animated #svg-python .python-body-2 { transform: translateY(0) scale(1); opacity: 1; transition-delay: 0.6s; }
+        .skill-card.animated #svg-python .python-eye { transform: scale(1); opacity: 1; transition-delay: 0.8s; }
+
+        /* Effective Communication */
+        .skill-card.animated #svg-comm .wave-1 { stroke-dashoffset: 0; transition-delay: 0.2s; }
+        .skill-card.animated #svg-comm .wave-2 { stroke-dashoffset: 0; transition-delay: 0.4s; }
+        .skill-card.animated #svg-comm .bubble { transform: scale(1); opacity: 1; transition-delay: 0.6s; }
+
+        /* Collaborative Teamwork */
+        .skill-card.animated #svg-team .person-1 { transform: translateY(0) scale(1); opacity: 1; transition-delay: 0.2s; }
+        .skill-card.animated #svg-team .person-2 { transform: translateY(0) scale(1); opacity: 1; transition-delay: 0.4s; }
+        .skill-card.animated #svg-team .gear-team { transform: rotate(0deg) scale(1); opacity: 1; transition-delay: 0.6s; }
+
         /* Problem Solving & Optimization */
         .skill-card.animated #svg-solve .shield-path { stroke-dashoffset: 0; transition-delay: 0.2s; }
         .skill-card.animated #svg-solve .gear-line-1 { stroke-dashoffset: 0; transition-delay: 0.7s; }
         .skill-card.animated #svg-solve .gear-line-2 { stroke-dashoffset: 0; transition-delay: 0.9s; }
         .skill-card.animated #svg-solve .gear-center { stroke-dashoffset: 0; transition-delay: 1.1s; }
-
-        /* NUEVO: Habilidad para Python */
-        .skill-card.animated #svg-python .python-head { transform: translateY(0); opacity: 1; transition-delay: 0.2s; }
-        .skill-card.animated #svg-python .python-body-1 { transform: translateY(0); opacity: 1; transition-delay: 0.4s; }
-        .skill-card.animated #svg-python .python-body-2 { transform: translateY(0); opacity: 1; transition-delay: 0.6s; }
-        .skill-card.animated #svg-python .python-eye { transform: scale(1); opacity: 1; transition-delay: 0.8s; }
-
-        /* NUEVO: Habilidad de Comunicación */
-        .skill-card.animated #svg-comm .wave-1 { stroke-dashoffset: 0; transition-delay: 0.2s; }
-        .skill-card.animated #svg-comm .wave-2 { stroke-dashoffset: 0; transition-delay: 0.4s; }
-        .skill-card.animated #svg-comm .bubble { transform: scale(1); opacity: 1; transition-delay: 0.6s; }
-
-        /* NUEVO: Habilidad de Trabajo en Equipo */
-        .skill-card.animated #svg-team .person-1 { transform: translateY(0); opacity: 1; transition-delay: 0.2s; }
-        .skill-card.animated #svg-team .person-2 { transform: translateY(0); opacity: 1; transition-delay: 0.4s; }
-        .skill-card.animated #svg-team .gear-team { transform: rotate(0deg); opacity: 1; transition-delay: 0.6s; }
 
 
         .skill-card h3 {
@@ -855,12 +856,12 @@
             transform: translateY(50px);
             opacity: 0;
 
-            /* NUEVO: Borde brillante */
+            /* Glowing border */
             position: relative;
             border: 2px solid transparent;
             background-clip: padding-box;
         }
-        /* NUEVO: Efecto de borde brillante para tarjetas de certificación */
+        /* Glowing border effect for certification cards */
         .certification-item::before {
             content: '';
             position: absolute;
@@ -948,12 +949,12 @@
             opacity: 0;
             transition: transform 0.6s ease-out, opacity 0.6s ease-out 0.2s; /* Slight delay */
 
-            /* NUEVO: Borde brillante */
+            /* Glowing border */
             position: relative;
             border: 2px solid transparent;
             background-clip: padding-box;
         }
-        /* NUEVO: Efecto de borde brillante para formulario */
+        /* Glowing border effect for form */
         .form-container::before {
             content: '';
             position: absolute;
@@ -1003,7 +1004,7 @@
 
         .form-group input,
         .form-group textarea,
-        .form-group select { /* NUEVO: Estilo para select */
+        .form-group select { /* Style for select */
             width: 100%;
             padding: 12px 15px;
             border: 1px solid var(--color-bg-medium);
@@ -1013,10 +1014,10 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
-            -webkit-appearance: none; /* Elimina estilos predeterminados de select en WebKit */
-            -moz-appearance: none;    /* Elimina estilos predeterminados de select en Mozilla */
-            appearance: none;         /* Elimina estilos predeterminados de select */
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300E5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); /* Flecha SVG */
+            -webkit-appearance: none; /* Removes default select styles in WebKit */
+            -moz-appearance: none;    /* Removes default select styles in Mozilla */
+            appearance: none;         /* Removes default select styles */
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300E5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); /* SVG arrow */
             background-repeat: no-repeat;
             background-position: right 15px center;
             background-size: 18px;
@@ -1117,6 +1118,34 @@
         .contact-link:hover i {
             color: var(--color-accent-blue);
         }
+
+        /* --- Footer --- */
+        .main-footer {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-secondary);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 229, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .footer-social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .footer-social-links a {
+            color: var(--color-text-secondary);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social-links a:hover {
+            color: var(--color-accent-blue);
+        }
+
 
         /* --- Responsive Design --- */
         @media (max-width: 1024px) {
@@ -1313,6 +1342,8 @@
 </head>
 <body>
 
+    <canvas id="holographic-background"></canvas>
+
     <div id="welcome-overlay">
         <h1 id="welcome-text" data-text="Welcome to Jairo's Portfolio">Welcome to Jairo's Portfolio</h1>
         <p id="welcome-slogan">Innovation Secured. The limit is our imagination.</p>
@@ -1339,8 +1370,8 @@
             <div class="avatar-container">
                 </div>
             <h1 id="hero-title" class="hero-text-fade">Jairo Lemuel Barrientos</h1>
-            <p class="hero-text-fade delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
-            <p class="hero-text-fade delay-2">Crafting secure and innovative web experiences.</p>
+            <p class="hero-text-fade delay-1">A passionate Full Stack Developer & Cybersecurity Associate.</p>
+            <p class="hero-text-fade delay-2">Crafting secure, innovative web experiences and always pushing the boundaries of what's possible.</p>
             <a href="#projects" class="button-primary hero-text-fade delay-3">Explore My Work</a>
         </section>
 
@@ -1409,7 +1440,8 @@
         </section>
 
         <section id="skills" class="section-skills section-base animate-on-scroll" aria-labelledby="skills-title">
-            <h2 id="skills-title" class="section-title" data-text="My Skills">My Skills</h2> <div class="skills-grid">
+            <h2 id="skills-title" class="section-title" data-text="My Skills">My Skills</h2>
+            <div class="skills-grid">
                 <div class="skill-card animate-on-scroll">
                     <div class="skill-icon">
                         <svg id="svg-dev" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1462,8 +1494,6 @@
                         <svg id="svg-team" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="30" cy="70" r="15" fill="#00E5FF" class="person-1" transform="translate(0, 20)" opacity="0"/>
                             <circle cx="70" cy="70" r="15" fill="#8000FF" class="person-2" transform="translate(0, 20)" opacity="0"/>
-                            <rect x="25" y="40" width="10" height="20" rx="3" fill="#00E5FF" class="person-1" transform="translate(0, 20)" opacity="0"/>
-                            <rect x="65" y="40" width="10" height="20" rx="3" fill="#8000FF" class="person-2" transform="translate(0, 20)" opacity="0"/>
                             <path d="M50 50 A20 20 0 1 0 50 50.1 Z" fill="#00C0FF" transform-origin="50 50" class="gear-team" opacity="0" transform="rotate(45)"/>
                             <path d="M50 50 L55 55 M50 50 L45 55 M50 50 L55 45 M50 50 L45 45" stroke="#FFF" stroke-width="2" class="gear-team" opacity="0" transform="rotate(45)"/>
                         </svg>
@@ -1545,14 +1575,22 @@
     <div id="contact-dropdown" class="contact-dropdown-content hidden">
         </div>
 
+    <footer class="main-footer">
+        <p>&copy; 2024 Jairo Lemuel Barrientos. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="mailto:barrientosjairolemuel@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- Welcome Overlay Logic ---
             const welcomeOverlay = document.getElementById('welcome-overlay');
             const welcomeText = document.getElementById('welcome-text');
             const welcomeSlogan = document.getElementById('welcome-slogan');
-            const loadingBar = document.querySelector('.loading-bar');
-
+            
             // Set a duration for the overlay
             const overlayDuration = 3000; // 3 seconds - adjust as needed
 
@@ -1642,8 +1680,14 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animated');
-                        // No need to manually trigger SVG animations here if they are CSS transitions
+                        // Trigger specific SVG animations here if they are CSS transitions
                         // controlled by the 'animated' class.
+                        // For project SVGs, explicitly add 'animated' class to the SVG itself
+                        // to trigger its internal CSS transitions.
+                        const svgElement = entry.target.querySelector('svg');
+                        if (svgElement) {
+                            svgElement.classList.add('animated');
+                        }
                         observer.unobserve(entry.target); // Stop observing once animated
                     }
                 });
@@ -1662,7 +1706,7 @@
                 { icon: 'fas fa-envelope', text: 'Email', link: 'mailto:barrientosjairolemuel@gmail.com' },
                 { icon: 'fab fa-whatsapp', text: 'WhatsApp', link: 'https://wa.me/5493437457636' },
                 { icon: 'fab fa-linkedin', text: 'LinkedIn', link: 'https://www.linkedin.com/in/jairo-barrientos-8a6b00226' }
-                // Puedes añadir más aquí, por ejemplo:
+                // You can add more here, for example:
                 // { icon: 'fab fa-github', text: 'GitHub', link: 'https://github.com/yourusername' }
             ];
 
@@ -1689,5 +1733,6 @@
             });
         });
     </script>
+    <script src="js/holographic-background.js"></script>
 </body>
 </html>
