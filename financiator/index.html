@@ -1,2055 +1,1891 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jairo Lemuel Barrientos - Full Stack Developer & Cybersecurity Associate Portfolio</title>
-    <meta name="description" content="Official portfolio of Jairo Lemuel Barrientos, a passionate Full Stack Web Developer and Cybersecurity Associate showcasing innovative projects, robust skills, and key certifications. Crafting secure and cutting-edge web experiences with a focus on AI, automation, problem-solving and collaboration.">
-    <meta name="keywords" content="Jairo Lemuel Barrientos, Full Stack Developer, Web Development, Cybersecurity, Portfolio, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, CyberOps, Software Engineer, Web Security, Frontend, Backend, Python, Communication, Teamwork, Problem Solving, Innovation, Artificial Intelligence, AI, Automation, Futuristic, Professional">
-    <meta name="author" content="Jairo Lemuel Barrientos">
-
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <style>
-        :root {
-            /* Professional Futuristic Color Palette */
-            --color-bg-dark: #0A1C2C;         /* Deep Midnight Blue */
-            --color-bg-medium: #122F42;       /* Dark Teal-Blue */
-            --color-bg-light: #1A3E50;        /* Muted Cyan-Blue */
-            --color-text-primary: #E0E0E0;    /* Light Grey for readability */
-            --color-text-secondary: #A0B0C0;  /* Muted Blue-Grey for secondary text */
-            --color-accent-blue: #00D0FF;     /* Bright Electric Blue (more vibrant) */
-            --color-accent-purple: #8A2BE2;   /* Royal Purple (deeper) */
-            --color-accent-orange: #FF5733;   /* Energetic Orange for alerts/highlights */
-            --color-gradient-start: #00D0FF;  /* For buttons & accents */
-            --color-gradient-end: #8A2BE2;    /* For buttons & accents */
-
-            --border-radius: 12px;
-            --shadow-light: 0 5px 20px rgba(0, 0, 0, 0.4);
-            --shadow-medium: 0 12px 35px rgba(0, 0, 0, 0.6);
-            --transition-speed: 0.4s ease-out;
-            --scroll-bar-height: 6px;
-
-            /* Glitch Effect Variables */
-            --glitch-offset: 2px; /* Subtle glitch offset */
-            --glitch-color1: #00D0FF; /* Electric Blue for glitch */
-            --glitch-color2: #FF5733; /* Orange for secondary glitch */
-        }
-
-        /* --- Base Styles --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            position: relative; /* Needed for canvas fixed positioning */
-            font-family: 'Poppins', sans-serif; /* Modern, readable font */
-            background-color: var(--color-bg-dark);
-            color: var(--color-text-primary);
-            line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll from any animations */
-            cursor: none; /* Hide default cursor */
-        }
-
-        a {
-            color: var(--color-accent-blue);
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-
-        a:hover {
-            color: var(--color-accent-purple);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- Custom Cursor --- */
-        .custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 25px; /* Size of the glow */
-            height: 25px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--color-accent-blue) 0%, rgba(0, 208, 255, 0) 70%);
-            pointer-events: none; /* Crucial: allows clicks on elements below */
-            transform: translate(-50%, -50%); /* Center the cursor */
-            transition: width 0.1s ease-out, height 0.1s ease-out, background 0.1s ease-out, transform 0.05s linear;
-            z-index: 9999; /* Always on top */
-            mix-blend-mode: screen; /* Blend with background for glowing effect */
-            opacity: 0.8;
-            filter: blur(5px); /* Soften the glow */
-        }
-
-        .custom-cursor.active {
-            width: 35px; /* Larger on hover */
-            height: 35px;
-            background: radial-gradient(circle, var(--color-accent-purple) 0%, rgba(138, 43, 226, 0) 70%);
-        }
-
-        /* --- Three.js Background Canvas (Z-index 0, behind content) --- */
-        #threejs-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* Ensure it's behind all content */
-            pointer-events: none; /* Allow clicks/interactions on elements above it */
-            background-color: var(--color-bg-dark); /* Base color for the canvas background */
-            opacity: 0; /* Initially hidden, will fade in with GSAP */
-            transition: opacity 1s ease-out;
-        }
-        #threejs-background.active-hero {
-            opacity: 1; /* Fade in when hero section is active */
-        }
-
-
-        /* --- Utility Classes --- */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 25px;
-        }
-
-        .button-primary {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
-            color: var(--color-text-primary);
-            padding: 1.2rem 2.8rem;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            box-shadow: var(--shadow-light);
-            transition: all var(--transition-speed);
-            border: none;
-            cursor: pointer;
-            position: relative; /* For shine effect */
-            overflow: hidden; /* For shine effect */
-            z-index: 1; /* Ensure button is above canvas if on same level */
-        }
-
-        .button-primary:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-medium);
-            opacity: 0.95;
-        }
-
-        /* Shine effect for buttons */
-        .button-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.25);
-            transform: skewX(-20deg);
-            transition: all 0.7s ease-out;
-        }
-
-        .button-primary:hover::before {
-            left: 100%;
-        }
-
-        .section-base {
-            padding: 120px 0;
-            text-align: center;
-            position: relative; /* For z-index and content above canvas */
-            z-index: 1; /* Ensure content is above the canvas background */
-            background-color: transparent; /* Allow canvas background to show through sections */
-        }
-        /* Specific section backgrounds to break up the flow */
-        .section-projects, .section-certifications, .section-ai-automation {
-            background-color: var(--color-bg-medium);
-            box-shadow: inset 0 8px 15px rgba(0,0,0,0.3), inset 0 -8px 15px rgba(0,0,0,0.3);
-        }
-        .section-skills, .section-contact {
-            background-color: var(--color-bg-dark);
-        }
-
-
-        .section-title {
-            font-family: 'Montserrat', sans-serif; /* Strong and modern font for titles */
-            font-size: 4.2rem;
-            font-weight: 700;
-            margin-bottom: 70px;
-            color: var(--color-accent-blue);
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-            z-index: 1; /* To be above the canvas */
-            letter-spacing: 1px;
-
-            /* Glitch effect for titles */
-            animation: glitchText 4s infinite linear alternate-reverse; /* Glitch animation */
-        }
-
-        /* Clones for glitch effect on titles */
-        .section-title::before,
-        .section-title::after {
-            content: attr(data-text); /* Takes text from the title's data-text attribute */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            text-shadow: none; /* Remove shadow from clones */
-        }
-
-        .section-title::before {
-            left: var(--glitch-offset);
-            color: var(--glitch-color1);
-            animation: glitchLeft 0.5s infinite alternate-reverse;
-        }
-
-        .section-title::after {
-            left: calc(var(--glitch-offset) * -1);
-            color: var(--glitch-color2);
-            animation: glitchRight 0.5s infinite alternate-reverse;
-        }
-
-        @keyframes glitchText {
-            0% { transform: translate(0, 0); }
-            20% { transform: translate(calc(var(--glitch-offset) * -1), var(--glitch-offset)); }
-            40% { transform: translate(var(--glitch-offset), calc(var(--glitch-offset) * -1)); }
-            60% { transform: translate(calc(var(--glitch-offset) * -1), 0); }
-            80% { transform: translate(0, var(--glitch-offset)); }
-            100% { transform: translate(var(--glitch-offset), calc(var(--glitch-offset) * -1)); }
-        }
-
-        @keyframes glitchLeft {
-            0% { transform: skewX(0deg); }
-            50% { transform: skewX(3deg); }
-            100% { transform: skewX(0deg); }
-        }
-
-        @keyframes glitchRight {
-            0% { transform: skewX(0deg); }
-            50% { transform: skewX(-3deg); }
-            100% { transform: skewX(0deg); }
-        }
-
-        /* Underline effect for titles */
-        .section-title::after { /* Original underline after effect, separate from glitch clones */
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 5px;
-            background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
-            border-radius: 3px;
-            z-index: 2; /* To be above glitch clones */
-        }
-
-        /* --- Header --- */
-        .main-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            height: 90px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(10, 28, 44, 0.95); /* Deep Midnight Blue with transparency */
-            transition: background var(--transition-speed), height var(--transition-speed), padding var(--transition-speed);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px); /* More pronounced frosted glass effect */
-        }
-
-        .main-header.scrolled {
-            height: 70px;
-            padding: 15px 40px;
-            background: var(--color-bg-dark); /* Solid background when scrolled */
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
-        }
-
-        .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--color-accent-blue);
-            transition: font-size var(--transition-speed), color var(--transition-speed);
-            cursor: pointer;
-            text-shadow: 0 0 10px rgba(0, 208, 255, 0.5);
-        }
-
-        .main-header.scrolled .logo {
-            font-size: 2.2rem;
-            color: var(--color-accent-purple);
-            text-shadow: 0 0 8px rgba(138, 43, 226, 0.6);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 35px;
-        }
-
-        .nav-menu li a {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            position: relative;
-            padding: 8px 0;
-            transition: color var(--transition-speed);
-            letter-spacing: 0.5px;
-        }
-
-        .nav-menu li a::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            width: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
-            border-radius: 2px;
-            transition: width var(--transition-speed);
-        }
-
-        .nav-menu li a:hover::after,
-        .nav-menu li a.active::after {
-            width: 100%;
-        }
-
-        .nav-menu li a:hover,
-        .nav-menu li a.active {
-            color: var(--color-accent-blue);
-            text-shadow: 0 0 5px rgba(0, 208, 255, 0.5);
-        }
-
-        /* --- Scroll Progress Bar --- */
-        .scroll-progress-bar {
-            position: fixed;
-            top: 90px; /* Aligns with header height */
-            left: 0;
-            height: var(--scroll-bar-height);
-            width: 0%;
-            background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
-            z-index: 999;
-            transition: top var(--transition-speed);
-        }
-
-        .main-header.scrolled + .scroll-progress-bar {
-            top: 70px; /* Adjust for scrolled header height */
-        }
-
-        /* --- Welcome Overlay --- */
-        #welcome-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--color-bg-dark);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000; /* Highest z-index to be on top initially */
-            opacity: 1; /* Starts opaque */
-        }
-
-        #welcome-text {
-            font-family: 'Rajdhani', sans-serif; /* Futuristic typography */
-            font-size: 5rem;
-            font-weight: 700;
-            color: var(--color-accent-blue);
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(0,208,255,0.8); /* Initial glow */
-            position: relative;
-            display: inline-block;
-            letter-spacing: 2px;
-            transform: translateY(20px); /* Initial position for animation */
-            opacity: 0; /* Initial opacity for animation */
-        }
-        /* Glitch clones for Welcome text */
-        #welcome-text::before, #welcome-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            text-shadow: none;
-            clip: rect(0, 9999px, 0, 0); /* Start clipped */
-            transform: translateX(0);
-        }
-        #welcome-text::before {
-            left: var(--glitch-offset);
-            color: var(--glitch-color1);
-            animation: welcomeGlitch 2s infinite linear alternate-reverse;
-            animation-delay: 1.5s; /* Starts after text fades in */
-        }
-        #welcome-text::after {
-            left: calc(var(--glitch-offset) * -1);
-            color: var(--glitch-color2);
-            animation: welcomeGlitch 2s infinite linear alternate-reverse;
-            animation-delay: 1.5s; /* Starts after text fades in */
-        }
-
-        @keyframes welcomeGlitch {
-            0% { clip: rect(calc(var(--glitch-offset) * 0)px, 9999px, calc(var(--glitch-offset) * 1)px, 0); transform: translateX(calc(var(--glitch-offset) * 0)px); }
-            10% { clip: rect(calc(var(--glitch-offset) * 2)px, 9999px, calc(var(--glitch-offset) * 3)px, 0); transform: translateX(calc(var(--glitch-offset) * -1)px); }
-            20% { clip: rect(calc(var(--glitch-offset) * 4)px, 9999px, calc(var(--glitch-offset) * 5)px, 0); transform: translateX(calc(var(--glitch-offset) * 1)px); }
-            30% { clip: rect(calc(var(--glitch-offset) * 6)px, 9999px, calc(var(--glitch-offset) * 7)px, 0); transform: translateX(calc(var(--glitch-offset) * -1)px); }
-            40% { clip: rect(calc(var(--glitch-offset) * 8)px, 9999px, calc(var(--glitch-offset) * 9)px, 0); transform: translateX(calc(var(--glitch-offset) * 0)px); }
-            50% { clip: rect(calc(var(--glitch-offset) * 10)px, 9999px, calc(var(--glitch-offset) * 11)px, 0); transform: translateX(calc(var(--glitch-offset) * 1)px); }
-            60% { clip: rect(calc(var(--glitch-offset) * 12)px, 9999px, calc(var(--glitch-offset) * 13)px, 0); transform: translateX(calc(var(--glitch-offset) * -1)px); }
-            70% { clip: rect(calc(var(--glitch-offset) * 14)px, 9999px, calc(var(--glitch-offset) * 15)px, 0); transform: translateX(calc(var(--glitch-offset) * 0)px); }
-            80% { clip: rect(calc(var(--glitch-offset) * 16)px, 9999px, calc(var(--glitch-offset) * 17)px, 0); transform: translateX(calc(var(--glitch-offset) * 1)px); }
-            90% { clip: rect(calc(var(--glitch-offset) * 18)px, 9999px, calc(var(--glitch-offset) * 19)px, 0); transform: translateX(calc(var(--glitch-offset) * -1)px); }
-            100% { clip: rect(calc(var(--glitch-offset) * 20)px, 9999px, calc(var(--glitch-offset) * 21)px, 0); transform: translateX(calc(var(--glitch-offset) * 0)px); }
-        }
-
-        #welcome-slogan {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            color: var(--color-text-secondary);
-            opacity: 0; /* Initial opacity for animation */
-            transform: translateY(20px); /* Initial position for animation */
-            letter-spacing: 0.5px;
-        }
-
-        /* --- Hero Section --- */
-        .section-hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: transparent; /* Allow canvas background to show */
-            padding-top: 90px; /* Offset for fixed header */
-        }
-
-        .avatar-container {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 6px solid var(--color-accent-blue);
-            box-shadow: var(--shadow-medium);
-            margin-bottom: 35px;
-            position: relative;
-            background-image: url('A2C8874B-5C6D-43B4-9C56-B2E8295A4A04.png'); /* Avatar as background */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* Subtle rotating glow */
-            animation: avatarGlow 4s infinite alternate ease-in-out;
-            transform: scale(0.8); /* GSAP will handle the pop-in */
-            opacity: 0;
-        }
-
-        @keyframes avatarGlow {
-            0% { border-color: var(--color-accent-blue); box-shadow: 0 0 25px rgba(0, 208, 255, 0.7); }
-            50% { border-color: var(--color-accent-purple); box-shadow: 0 0 35px rgba(138, 43, 226, 0.9); }
-            100% { border-color: var(--color-accent-blue); box-shadow: 0 0 25px rgba(0, 208, 255, 0.7); }
-        }
-
-        .section-hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 5rem;
-            font-weight: 700;
-            color: var(--color-accent-blue);
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.8);
-            letter-spacing: 1.5px;
-        }
-
-        .section-hero p {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 30px;
-            max-width: 900px;
-            line-height: 1.5;
-        }
-
-        /* --- Projects Section --- */
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .project-card-wrapper {
-            opacity: 0; /* Initial state for GSAP animation */
-            transform: translateY(50px);
-        }
-
-        .project-card-link {
-            display: flex;
-            flex-direction: column;
-            background-color: var(--color-bg-light);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            height: 100%; /* Ensure cards are same height */
-            position: relative;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            z-index: 1;
-        }
-        /* Glowing border effect for project cards */
-        .project-card-link::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--border-radius);
-            padding: 3px; /* Border thickness */
-            background: linear-gradient(45deg, var(--color-gradient-start), var(--color-gradient-end), var(--color-accent-purple));
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 2; /* To be above content */
-            opacity: 0;
-            transition: opacity 0.4s ease-out;
-        }
-
-        .project-card-link:hover::before {
-            opacity: 1;
-        }
-
-        .project-card-link:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .project-image-container {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(45deg, var(--color-bg-medium), var(--color-bg-light));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .project-image-container svg {
-            width: 80%;
-            height: 80%;
-            max-width: 180px;
-            max-height: 180px;
-        }
-
-        /* SVG Animations for Projects - Initial States (hidden/transformed) */
-        #svg-finance .bar, #svg-finance .line-chart { opacity: 0; transform: translateY(20px); }
-        #svg-cyber .shield-path, #svg-cyber .lock-body, #svg-cyber .lock-shackle { stroke-dasharray: 200; stroke-dashoffset: 200; }
-        #svg-beauty rect, #svg-beauty path { opacity: 0; transform: scale(0.8); }
-
-        /* SVG Animations for Projects - Animated States (via GSAP/ScrollTrigger) */
-        /* These will be handled by GSAP's .to() calls with specific delays */
-
-        .project-content {
-            padding: 30px;
-            text-align: left;
-            flex-grow: 1;
-        }
-
-        .project-content h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-            color: var(--color-accent-blue);
-            letter-spacing: 0.5px;
-        }
-
-        .project-content p {
-            font-size: 1rem;
-            color: var(--color-text-secondary);
-        }
-
-        .project-button-area {
-            padding: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .project-button-area .button-primary {
-            padding: 1rem 2rem;
-            font-size: 0.95rem;
-            margin-top: 10px;
-            box-shadow: none;
-        }
-
-        /* --- AI & Automation Section --- */
-        .section-ai-automation .ai-content {
-            max-width: 900px;
-            margin: 0 auto;
-            color: var(--color-text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        .section-ai-automation .ai-content h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            color: var(--color-accent-purple);
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-        .section-ai-automation .ai-content p {
-            margin-bottom: 20px;
-        }
-
-        /* --- Skills Section --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Smaller, more compact cards */
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .skill-card {
-            background-color: var(--color-bg-light);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            box-shadow: var(--shadow-light);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            opacity: 0; /* Initial state for GSAP animation */
-            transform: translateY(30px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            min-height: 200px; /* Ensure consistent height */
-
-            /* Glowing border */
-            position: relative;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            z-index: 1;
-        }
-        /* Glowing border effect for skill cards */
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--border-radius);
-            padding: 3px;
-            background: linear-gradient(45deg, var(--color-gradient-start), var(--color-gradient-end), var(--color-accent-purple));
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.4s ease-out;
-        }
-
-        .skill-card:hover::before {
-            opacity: 1;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .skill-icon {
-            width: 80px; /* Smaller icons */
-            height: 80px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .skill-icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* SVG Animations for Skills - Initial States (hidden/transformed) */
-        /* All SVG elements inside skill cards will start hidden/transformed.
-           GSAP will handle animating them into view. */
-        .skill-card svg path, .skill-card svg circle, .skill-card svg rect, .skill-card svg line, .skill-card svg polyline {
-            opacity: 0;
-            transform: scale(0.8) translateY(10px);
-            /* For stroke animations, set initial dash array/offset */
-            stroke-dasharray: 200; /* Arbitrary large value */
-            stroke-dashoffset: 200;
-        }
-
-        .skill-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.25rem; /* Smaller font for compact cards */
-            color: var(--color-accent-purple);
-            margin-bottom: 8px;
-        }
-
-        .skill-card p {
-            font-size: 0.9rem; /* Smaller font for compact cards */
-            color: var(--color-text-secondary);
-        }
-
-        /* --- Certifications Section --- */
-        .certifications-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .certification-item {
-            background-color: var(--color-bg-light);
-            border-radius: var(--border-radius);
-            padding: 35px;
-            box-shadow: var(--shadow-light);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            flex: 1;
-            min-width: 320px;
-            max-width: 480px;
-            opacity: 0; /* Initial state for GSAP animation */
-            transform: translateY(50px);
-
-            /* Glowing border */
-            position: relative;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            z-index: 1;
-        }
-        /* Glowing border effect for certification cards */
-        .certification-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--border-radius);
-            padding: 3px;
-            background: linear-gradient(45deg, var(--color-gradient-start), var(--color-gradient-end), var(--color-accent-purple));
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.4s ease-out;
-        }
-
-        .certification-item:hover::before {
-            opacity: 1;
-        }
-
-        .certification-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .certification-item h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.9rem;
-            color: var(--color-accent-blue);
-            margin-bottom: 18px;
-            letter-spacing: 0.3px;
-        }
-
-        .certification-item p {
-            font-size: 1.05rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 25px;
-        }
-
-        .credly-badge-embed {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-
-        /* --- Contact Section --- */
-        .contact-intro {
-            font-size: 1.15rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 50px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0; /* Initial state for GSAP animation */
-            transform: translateY(50px);
-        }
-
-        .form-container {
-            background-color: var(--color-bg-light);
-            border-radius: var(--border-radius);
-            padding: 50px;
-            box-shadow: var(--shadow-medium);
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-            opacity: 0; /* Initial state for GSAP animation */
-            transform: translateY(50px);
-
-            /* Glowing border */
-            position: relative;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            z-index: 1;
-        }
-        /* Glowing border effect for form */
-        .form-container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--border-radius);
-            padding: 3px;
-            background: linear-gradient(45deg, var(--color-gradient-start), var(--color-gradient-end), var(--color-accent-purple));
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.4s ease-out;
-        }
-
-        .form-container:hover::before {
-            opacity: 1;
-        }
-
-        .form-container h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            color: var(--color-accent-purple);
-            margin-bottom: 30px;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            font-size: 1.05rem;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 1px solid var(--color-bg-medium);
-            border-radius: var(--border-radius);
-            background-color: var(--color-bg-dark);
-            color: var(--color-text-primary);
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.05rem;
-            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300D0FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 18px center;
-            background-size: 20px;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: var(--color-accent-blue);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(0, 208, 255, 0.25);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .form-container button[type="submit"] {
-            width: 100%;
-            padding: 18px;
-            font-size: 1.2rem;
-            margin-top: 25px;
-        }
-
-        /* --- Floating Contact Button --- */
-        .floating-button {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: linear-gradient(45deg, var(--color-gradient-start), var(--color-gradient-end));
-            color: var(--color-text-primary);
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            box-shadow: var(--shadow-medium);
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            z-index: 1001; /* Above other content, below overlay */
-        }
-
-        .floating-button:hover {
-            transform: translateY(-8px) scale(1.15);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
-        }
-
-        .contact-dropdown-content {
-            position: fixed;
-            bottom: 115px; /* Above the button */
-            right: 40px;
-            background-color: var(--color-bg-light);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-medium);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            min-width: 280px;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(25px);
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        }
-
-        .contact-dropdown-content.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--color-text-primary);
-            font-size: 1.15rem;
-            padding: 10px 12px;
-            border-radius: 8px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        .contact-link:hover {
-            background-color: var(--color-bg-medium);
-            color: var(--color-accent-blue);
-        }
-
-        .contact-link i {
-            font-size: 1.6rem;
-            color: var(--color-accent-purple);
-            transition: color 0.2s ease;
-        }
-
-        .contact-link:hover i {
-            color: var(--color-accent-blue);
-        }
-
-        /* --- Footer --- */
-        .main-footer {
-            background-color: var(--color-bg-dark);
-            color: var(--color-text-secondary);
-            padding: 50px 25px;
-            text-align: center;
-            border-top: 1px solid rgba(0, 208, 255, 0.15);
-            font-size: 0.95rem;
-        }
-
-        .footer-social-links {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .footer-social-links a {
-            color: var(--color-text-secondary);
-            font-size: 1.8rem;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .footer-social-links a:hover {
-            color: var(--color-accent-blue);
-            transform: translateY(-3px) scale(1.1);
-        }
-
-
-        /* --- Responsive Design --- */
-        @media (max-width: 1024px) {
-            .main-header, .main-header.scrolled {
-                padding: 18px 30px;
-                height: 80px;
-            }
-
-            .logo {
-                font-size: 2.5rem;
-            }
-            .main-header.scrolled .logo {
-                font-size: 2rem;
-            }
-
-            .nav-menu {
-                gap: 25px;
-            }
-            .nav-menu li a {
-                font-size: 1.1rem;
-            }
-
-            .section-base {
-                padding: 100px 0;
-            }
-
-            .section-title {
-                font-size: 3.5rem;
-                margin-bottom: 50px;
-            }
-
-            .avatar-container {
-                width: 180px;
-                height: 180px;
-            }
-
-            .section-hero h1 {
-                font-size: 4rem;
-            }
-            .section-hero p {
-                font-size: 1.4rem;
-            }
-
-            .projects-container {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 40px;
-            }
-
-            .skill-card {
-                padding: 20px;
-                min-height: 180px;
-            }
-            .skill-icon {
-                width: 70px;
-                height: 70px;
-            }
-            .skill-card h3 {
-                font-size: 1.15rem;
-            }
-            .skill-card p {
-                font-size: 0.85rem;
-            }
-
-            .certification-item, .form-container {
-                padding: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column;
-                height: auto;
-                padding: 15px 20px;
-                position: relative; /* Make header static on small screens */
-                background: var(--color-bg-dark); /* Solid background for mobile */
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            }
-            .main-header.scrolled {
-                top: 0;
-                height: auto;
-                padding: 15px 20px;
-                position: fixed; /* Keep it fixed when scrolled on mobile too, but with full content */
-            }
-
-            .logo {
-                font-size: 2.2rem;
-                margin-bottom: 10px;
-            }
-            .main-header.scrolled .logo {
-                font-size: 1.8rem;
-            }
-
-            .nav-menu {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-                width: 100%;
-            }
-            .nav-menu li a {
-                font-size: 1rem;
-                padding: 5px 10px;
-            }
-
-            .scroll-progress-bar {
-                top: 70px; /* Adjust for mobile header height */
-            }
-            .main-header.scrolled + .scroll-progress-bar {
-                top: 60px; /* Adjust for scrolled mobile header height */
-            }
-
-
-            .section-base {
-                padding: 80px 0;
-            }
-
-            .section-title {
-                font-size: 3rem;
-                margin-bottom: 40px;
-            }
-
-            #welcome-text {
-                font-size: 3.5rem;
-            }
-            #welcome-slogan {
-                font-size: 1.4rem;
-            }
-
-            .avatar-container {
-                width: 160px;
-                height: 160px;
-            }
-
-            .section-hero h1 {
-                font-size: 3.5rem;
-            }
-            .section-hero p {
-                font-size: 1.2rem;
-            }
-
-            .projects-container {
-                grid-template-columns: 1fr; /* Single column on very small screens */
-            }
-
-            .skill-card {
-                min-height: 160px;
-                padding: 18px;
-            }
-            .skill-icon {
-                width: 60px;
-                height: 60px;
-            }
-            .skill-card h3 {
-                font-size: 1.05rem;
-            }
-            .skill-card p {
-                font-size: 0.8rem;
-            }
-
-            .floating-button {
-                width: 55px;
-                height: 55px;
-                font-size: 1.7rem;
-                bottom: 30px;
-                right: 30px;
-            }
-            .contact-dropdown-content {
-                bottom: 95px;
-                right: 30px;
-                min-width: 230px;
-                padding: 20px;
-                gap: 15px;
-            }
-            .contact-link {
-                font-size: 1.05rem;
-            }
-            .contact-link i {
-                font-size: 1.4rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .section-title {
-                font-size: 2.5rem;
-            }
-            #welcome-text {
-                font-size: 2.8rem;
-                text-align: center;
-            }
-            #welcome-slogan {
-                font-size: 1.1rem;
-            }
-            .section-hero h1 {
-                font-size: 2.8rem;
-            }
-            .section-hero p {
-                font-size: 1.05rem;
-            }
-            .button-primary {
-                padding: 1rem 2rem;
-                font-size: 1.05rem;
-            }
-            .form-container {
-                padding: 35px 25px;
-            }
-            .form-group input, .form-group textarea, .form-group select {
-                padding: 12px;
-            }
-            .skills-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 20px;
-            }
-            .skill-card {
-                padding: 15px;
-                min-height: 140px;
-            }
-            .skill-icon {
-                width: 50px;
-                height: 50px;
-            }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Financiator Pro - Elite Financial Analytics Suite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An advanced, enterprise-grade financial calculation and analytics suite for professionals, featuring live data and robust tools.">
+    <meta name="keywords" content="financial calculator, investment, loan, ROI, NPV, IRR, Monte Carlo, crypto, forex, financial analysis, enterprise finance, fintech, monetization">
+
+    <link rel="icon" href="/path/to/your/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/path/to/your/apple-touch-icon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+
+    <style>
+        /* CSS Variables for theming and consistency */
+        :root {
+            --color-primary: #007BFF; /* Vibrant Blue */
+            --color-secondary: #6c757d; /* Soft Gray */
+            --color-accent: #00f2f2; /* Bright Cyan for luxury details */
+            --color-background-dark: #101828; /* Very dark background for professionalism */
+            --color-background-light: #1D2B40; /* Slightly lighter panel background */
+            --color-text-light: #E0E7FF; /* Main text color */
+            --color-text-secondary: #A9B3C2; /* Secondary text color */
+            --color-border-subtle: rgba(255, 255, 255, 0.1);
+            --border-radius-main: 12px;
+            --box-shadow-deep: 0 8px 24px rgba(0, 0, 0, 0.5);
+            --transition-speed: 0.3s;
+            --font-size-base: 16px;
+        }
+
+        /* Global Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-background-dark);
+            color: var(--color-text-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: var(--font-size-base);
+            -webkit-font-smoothing: antialiased; /* Smoother text rendering */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-background-light); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+        /* Main Application Container */
+        #app-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 25px; /* Increased padding */
+            max-width: 1300px; /* Wider layout */
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Header Styling */
+        header {
+            padding: 25px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border-subtle);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 3.5em; /* Larger, more impactful title */
+            color: var(--color-accent);
+            text-shadow: 0 0 20px rgba(0, 242, 242, 0.7), 0 0 40px rgba(0, 242, 242, 0.3);
+            letter-spacing: 2px;
+            animation: fadeInScale 1.2s ease-out;
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px; /* More space between tabs */
+            margin-bottom: 50px;
+            background: var(--color-background-light);
+            border-radius: var(--border-radius-main);
+            box-shadow: var(--box-shadow-deep);
+            padding: 12px;
+            border: 1px solid var(--color-border-subtle);
+        }
+
+        nav .tab {
+            padding: 14px 22px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all var(--transition-speed) ease-in-out;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.15em;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        nav .tab:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px; /* Thicker underline */
+            background-color: var(--color-accent);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation */
+        }
+
+        nav .tab:hover:before {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        nav .tab:hover {
+            color: var(--color-primary);
+            text-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+            background: rgba(0, 123, 255, 0.08); /* Light highlight on hover */
+        }
+
+        nav .tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-accent);
+            background: rgba(0, 123, 255, 0.15);
+            box-shadow: inset 0 0 15px rgba(0, 123, 255, 0.4);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        nav .tab.active:before {
+            transform: scaleX(1);
+        }
+
+        /* Calculator Sections */
+        .calculator {
+            display: none;
+            background: var(--color-background-light);
+            border-radius: var(--border-radius-main);
+            box-shadow: var(--box-shadow-deep);
+            padding: 35px; /* More generous padding */
+            margin-bottom: 40px;
+            transition: transform var(--transition-speed) ease-out, opacity var(--transition-speed) ease-out;
+            opacity: 0;
+            transform: translateY(25px);
+            border: 1px solid var(--color-border-subtle);
+        }
+
+        .calculator.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .calculator h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em; /* Larger section titles */
+            color: var(--color-primary);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 12px;
+            text-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+        }
+        .calculator h2:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px; /* Wider underline */
+            height: 4px;
+            background: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        /* Input Group Styling */
+        .input-group {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 18px; /* More padding */
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: background var(--transition-speed), border var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid transparent;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative; /* For error messages */
+        }
+
+        .input-group:focus-within {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--color-accent);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 242, 242, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-text-secondary);
+            font-size: 0.98rem;
+            font-weight: 500;
+            letter-spacing: 0.6px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px; /* Larger padding */
+            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4); /* Darker input background */
+            color: var(--color-text-light);
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        select {
+            background: rgba(0, 0, 0, 0.4) url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23E0E7FF%22%20d%3D%22M2%200L0%202h4zm0%205L0%203h4z%22%2F%3E%3C%2Fsvg%3E') no-repeat right 15px center;
+            background-size: 10px 12px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .input-error-message {
+            color: #ff6347; /* Tomato red */
+            font-size: 0.85em;
+            margin-top: 5px;
+            position: absolute;
+            bottom: -20px; /* Position below input group */
+            left: 18px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            padding: 16px; /* Larger padding */
+            font-size: 1.25rem;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, var(--color-primary), #0056b3);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0, 123, 255, 0.5);
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        button:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 350%; /* Larger burst */
+            height: 350%;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+            transition: all 0.5s ease-out;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            z-index: -1;
+        }
+
+        button:hover:before {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.18; /* More visible burst */
+        }
+
+        button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.7);
+            background: linear-gradient(45deg, #0056b3, var(--color-primary));
+        }
+
+        button:active {
+            transform: translateY(-2px) scale(0.99);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+        }
+
+        button:disabled {
+            background: #4a4a4a;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            opacity: 0.6;
+        }
+        button:disabled:before {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+
+        /* Result Display */
+        .result {
+            margin-top: 25px;
+            font-weight: 600;
+            color: var(--color-accent);
+            font-size: 1.4em;
+            text-align: center;
+            background: rgba(0, 242, 242, 0.12);
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 242, 242, 0.4);
+            animation: fadeIn 0.6s ease-out;
+            box-shadow: 0 0 20px rgba(0, 242, 242, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .result.error {
+            color: #ff6347;
+            background: rgba(255, 99, 71, 0.15);
+            border-color: rgba(255, 99, 71, 0.5);
+            box-shadow: 0 0 20px rgba(255, 99, 71, 0.3);
+        }
+        .result:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 12px var(--color-accent);
+            border-radius: 10px;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .result.error:after {
+            box-shadow: inset 0 0 12px #ff6347;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: var(--border-radius-main);
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+            border: 1px solid var(--color-border-subtle);
+        }
+
+        th, td {
+            padding: 14px; /* More padding */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.98em;
+        }
+
+        th {
+            background: rgba(0, 123, 255, 0.25);
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.8px;
+            position: sticky;
+            top: 0; /* Sticky headers for scrollable tables */
+            z-index: 2;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.015);
+        }
+        tr:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transition: background 0.2s ease-in-out;
+        }
+
+        /* Chart Styling */
+        canvas {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: var(--border-radius-main);
+            padding: 20px; /* More padding around charts */
+            margin-top: 30px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            border: 1px solid var(--color-border-subtle);
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            margin-top: 50px;
+            border-top: 1px solid var(--color-border-subtle);
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* Background Animation */
+        .bg-anim {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            filter: blur(3px); /* Slightly more blur */
+            opacity: 0.7; /* More subtle */
+        }
+
+        .bg-anim div {
+            position: absolute;
+            width: 280px; /* Larger spheres */
+            height: 280px;
+            background: rgba(0, 242, 242, 0.04); /* Subtle cyan glow */
+            border-radius: 50%;
+            animation: float 50s linear infinite alternate; /* Slower, longer animation */
+            will-change: transform, opacity;
+            box-shadow: 0 0 50px rgba(0, 242, 242, 0.2); /* Subtle glow effect */
+        }
+
+        .bg-anim div:nth-child(1) { top: 75%; left: -15%; animation-duration: 45s; animation-delay: 0s; transform: scale(1.1); --dx: 40px; --dy: -50px; }
+        .bg-anim div:nth-child(2) { top: 15%; left: 85%; animation-duration: 50s; animation-delay: 5s; transform: scale(0.9); --dx: -35px; --dy: 45px; }
+        .bg-anim div:nth-child(3) { top: -25%; left: 35%; animation-duration: 40s; animation-delay: 10s; transform: scale(1.2); --dx: 50px; --dy: 30px; }
+        .bg-anim div:nth-child(4) { top: 45%; left: -25%; animation-duration: 55s; animation-delay: 15s; transform: scale(0.8); --dx: -40px; --dy: -40px; }
+        .bg-anim div:nth-child(5) { top: 95%; left: 70%; animation-duration: 60s; animation-delay: 20s; transform: scale(1.3); --dx: 30px; --dy: 60px; }
+        .bg-anim div:nth-child(6) { top: 0%; left: 10%; animation-duration: 38s; animation-delay: 25s; transform: scale(1.05); --dx: -20px; --dy: 25px; }
+        .bg-anim div:nth-child(7) { top: 60%; left: 100%; animation-duration: 42s; animation-delay: 30s; transform: scale(0.95); --dx: -50px; --dy: -30px; }
+
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(var(--s, 1)) rotate(0deg); }
+            50% { transform: translate(var(--dx, 20px), var(--dy, -20px)) scale(calc(var(--s, 1) * 1.05)) rotate(180deg); }
+            100% { transform: translate(0, 0) scale(var(--s, 1)) rotate(360deg); }
+        }
+
+        /* Ad Slot Styling */
+        .ad-slot {
+            margin: 30px auto;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px dashed var(--color-accent);
+            padding: 15px;
+            text-align: center;
+            color: var(--color-text-secondary);
+            font-style: italic;
+            border-radius: var(--border-radius-main);
+            max-width: 728px; /* Common ad unit size */
+            height: 90px; /* Typical banner height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            overflow: hidden; /* To contain actual ad content */
+            box-shadow: 0 0 15px rgba(0, 242, 242, 0.2);
+            transition: all 0.3s ease-out;
+        }
+        .ad-slot:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 242, 0.4);
+            transform: translateY(-2px);
+        }
+        /* Specific ad sizes if needed */
+        .ad-slot.square { width: 300px; height: 250px; }
+        .ad-slot.leaderboard { width: 728px; height: 90px; }
+
+        /* Small text for explanations */
+        .small-text {
+            color: var(--color-text-secondary);
+            font-size: 0.88em;
+            text-align: center;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 1024px) {
+            #app-container { padding: 20px; }
+            header h1 { font-size: 3em; }
+            nav { gap: 10px; padding: 10px; }
+            nav .tab { padding: 12px 18px; font-size: 1.05em; }
+            .calculator { padding: 30px; }
+            .calculator h2 { font-size: 2.2em; }
+            .input-group { padding: 15px; }
+            input, select, textarea { padding: 12px; font-size: 1.05rem; }
+            button { padding: 14px; font-size: 1.15rem; }
+            .result { font-size: 1.2em; padding: 15px; }
+            th, td { padding: 12px; font-size: 0.95em; }
+            .ad-slot.leaderboard { max-width: 468px; height: 60px; }
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5em; }
+            nav { flex-direction: column; gap: 8px; }
+            nav .tab { padding: 10px 15px; font-size: 1em; }
+            .calculator { padding: 25px; margin-bottom: 30px; }
+            .calculator h2 { font-size: 2em; }
+            .input-group { padding: 12px; margin-bottom: 18px; }
+            input, select, textarea { padding: 10px; font-size: 1em; }
+            button { padding: 12px; font-size: 1.05rem; }
+            .result { font-size: 1.1em; padding: 12px; }
+            th, td { padding: 10px; font-size: 0.9em; }
+            .ad-slot { max-width: 320px; height: 50px; }
+        }
+
+        @media (max-width: 480px) {
+            #app-container { padding: 15px; }
+            header h1 { font-size: 2em; letter-spacing: 1px; }
+            nav { padding: 8px; }
+            nav .tab { padding: 8px 12px; font-size: 0.9em; }
+            .calculator { padding: 18px; margin-bottom: 25px; }
+            .calculator h2 { font-size: 1.8em; }
+            .input-group { padding: 10px; margin-bottom: 15px; }
+            input, select, textarea { padding: 8px; font-size: 0.95em; }
+            button { padding: 10px; font-size: 1rem; }
+            .result { font-size: 1em; padding: 10px; }
+            th, td { padding: 8px; font-size: 0.8em; }
+            .ad-slot { margin: 20px auto; width: 100%; max-width: 300px; height: 50px; }
+        }
+    </style>
 </head>
 <body>
-
-    <div class="custom-cursor"></div>
-
-    <canvas id="threejs-background"></canvas>
-
-    <div id="welcome-overlay">
-        <h1 id="welcome-text" data-text="Welcome to Jairo Lemuel Barrientos' Portfolio">Welcome to Jairo Lemuel Barrientos' Portfolio</h1>
-        <p id="welcome-slogan">Innovation Secured. The limit is our imagination.</p>
-    </div>
-
-    <div class="scroll-progress-bar"></div>
-
-    <header class="main-header">
-        <div class="logo">Jairo Lemuel Barrientos</div>
-        <nav>
-            <ul class="nav-menu" role="menubar">
-                <li role="none"><a role="menuitem" href="#hero">Home</a></li>
-                <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
-                <li role="none"><a role="menuitem" href="#ai-automation">AI & Automation</a></li>
-                <li role="none"><a role="menuitem" href="#skills">Skills</a></li>
-                <li role="none"><a role="menuitem" href="#certifications">Certifications</a></li>
-                <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="hero" class="section-hero section-base" aria-labelledby="hero-title">
-            <div class="avatar-container">
-                </div>
-            <h1 id="hero-title">Jairo Lemuel Barrientos</h1>
-            <p>A passionate Full Stack Developer & Cybersecurity Associate.</p>
-            <p>Crafting secure, innovative web experiences and always pushing the boundaries of what's possible, with a focus on Artificial Intelligence and Automation.</p>
-            <a href="#projects" class="button-primary">Explore My Work</a>
-        </section>
-
-        <section id="projects" class="section-projects section-base" aria-labelledby="projects-title">
-            <h2 id="projects-title" class="section-title" data-text="My Projects">My Projects</h2>
-            <div class="container">
-                <div class="projects-container">
-                    <div class="project-card-wrapper">
-                        <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                            <div class="project-image-container">
-                                <svg id="svg-finance" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="15" y="60" width="15" height="25" rx="3" fill="#00D0FF" class="bar bar-1"/>
-                                    <rect x="40" y="45" width="15" height="40" rx="3" fill="#00A0E0" class="bar bar-2"/>
-                                    <rect x="65" y="30" width="15" height="55" rx="3" fill="#8A2BE2" class="bar bar-3"/>
-                                    <polyline points="10,20 30,40 50,25 70,35 90,15" stroke="#00D0FF" stroke-width="4" stroke-linecap="round" fill="none" class="line-chart"/>
-                                    <circle cx="90" cy="15" r="5" fill="#00D0FF"/>
-                                </svg>
-                            </div>
-                            <div class="project-content">
-                                <h3>Quantum Ledger: Financial Insights</h3>
-                                <p>An interactive financial calculator designed to help users efficiently manage their investments and loans.</p>
-                            </div>
-                            <div class="project-button-area">
-                                <span class="button-primary">View Project</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="project-card-wrapper">
-                        <a href="cyberguard/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                            <div class="project-image-container">
-                                <svg id="svg-cyber" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path class="shield-path" d="M50 5 L10 25 V75 L50 95 L90 75 V25 L50 5 Z" stroke="#00D0FF" stroke-width="5" fill="none" />
-                                    <circle class="lock-body" cx="50" cy="50" r="15" fill="#0A1C2C" stroke="#00A0E0" stroke-width="3"/>
-                                    <path class="lock-shackle" d="M50 35 V40 C42 40 35 47 35 55 H50" stroke="#8A2BE2" stroke-width="3" fill="none"/>
-                                </svg>
-                            </div>
-                            <div class="project-content">
-                                <h3>CypherGuard: Threat Intelligence Platform</h3>
-                                <p>A web application for visualizing network security data and identifying potential threats.</p>
-                            </div>
-                            <div class="project-button-area">
-                                <span class="button-primary">View Project</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="project-card-wrapper">
-                        <a href="ecommerce/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                            <div class="project-image-container">
-                                <svg id="svg-beauty" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="30" y="40" width="40" height="40" rx="5" fill="#00D0FF" class="lipstick-base"/>
-                                    <path d="M30 40 L70 40 L50 20 L30 40 Z" fill="#8A2BE2" class="lipstick-tip"/>
-                                    <path d="M25 80 H75 L70 90 H30 L25 80 Z" fill="#0A1C2C"/>
-                                </svg>
-                            </div>
-                            <div class="project-content">
-                                <h3>NexusMart: E-commerce Experience</h3>
-                                <p>A responsive e-commerce site with product listings, shopping cart functionality, and user authentication.</p>
-                            </div>
-                            <div class="project-button-area">
-                                <span class="button-primary">View Project</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="ai-automation" class="section-ai-automation section-base" aria-labelledby="ai-automation-title">
-            <h2 id="ai-automation-title" class="section-title" data-text="AI & Automation">Inteligencia Artificial & Automatización de Servicios</h2>
-            <div class="container ai-content">
-                <p>En el corazón de la innovación moderna, la Inteligencia Artificial y la Automatización de Servicios se presentan como pilares fundamentales para optimizar procesos, predecir tendencias y ofrecer experiencias personalizadas. Mi enfoque en este campo busca fusionar soluciones tecnológicas avanzadas con necesidades empresariales y de usuario, creando sistemas inteligentes que aprenden y evolucionan.</p>
-                <p>Exploro la implementación de algoritmos de machine learning y técnicas de automatización para transformar diversos sectores. Desde la optimización de flujos de trabajo hasta la creación de asistentes virtuales inteligentes, mi objetivo es desarrollar soluciones que no solo aumenten la eficiencia, sino que también abran nuevas avenidas para el crecimiento y la toma de decisiones basada en datos.</p>
-                <h3>Próximos Desarrollos e Ideas:</h3>
-                <ul>
-                    <li>**E-commerce + IA & Automatización:** Implementación de motores de recomendación inteligentes, automatización de inventario y optimización de precios dinámicos para plataformas de comercio electrónico.</li>
-                    <li>**Ventas + IA & Automatización:** Desarrollo de sistemas de CRM predictivos, automatización de seguimiento de clientes y análisis de sentimiento para potenciar estrategias de ventas.</li>
-                    <li>**Automatización de Ciberseguridad:** Herramientas de respuesta automática a incidentes (SOAR), detección de anomalías con ML y automatización de pruebas de penetración.</li>
-                    <li>**Asistentes Virtuales (Chatbots) Avanzados:** Creación de chatbots con procesamiento de lenguaje natural (NLP) para soporte al cliente, cualificación de leads y automatización de consultas.</li>
-                </ul>
-                <p>Esta sección está en constante evolución, con proyectos en desarrollo que buscan redefinir la interacción entre tecnología y servicio, siempre con la mira en la seguridad y la escalabilidad.</p>
-            </div>
-        </section>
-
-        <section id="skills" class="section-skills section-base" aria-labelledby="skills-title">
-            <h2 id="skills-title" class="section-title" data-text="My Skills">My Skills</h2>
-            <div class="container">
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M25 15 L75 15 L85 25 L85 85 L75 95 L25 95 L15 85 L15 25 L25 15 Z" fill="#E44D26"/>
-                                <path d="M50 25 L50 85 L65 85 L66 80 L70 80 L71 75 L73 70 L73 65 L73 60 L73 55 L70 50 L65 45 L60 40 L55 35 L50 30 Z" fill="#F16529"/>
-                                <path d="M50 25 L50 45 L35 45 L34 50 L32 55 L30 60 L28 65 L27 70 L26 75 L25 80 L24 85 L25 85 L30 85 L35 85 L40 85 L45 85 L50 85 L50 25 Z" fill="#E44D26"/>
-                            </svg>
-                        </div>
-                        <h3>HTML5</h3>
-                        <p>Semantic structuring and accessible web content.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="15" y="15" width="70" height="70" rx="10" fill="#264DE4"/>
-                                <path d="M35 25 L65 25 L65 30 L40 30 L40 40 L60 40 L60 45 L40 45 L40 55 L65 55 L65 60 L35 60 L35 25 Z" fill="#FFF"/>
-                            </svg>
-                        </div>
-                        <h3>CSS3</h3>
-                        <p>Modern styling, responsive design, and animations.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 15 L80 15 L85 20 L85 80 L80 85 L20 85 L15 80 L15 20 L20 15 Z" fill="#F7DF1E"/>
-                                <text x="50%" y="60%" text-anchor="middle" font-family="Arial, sans-serif" font-size="45" fill="#323330" font-weight="bold">JS</text>
-                            </svg>
-                        </div>
-                        <h3>JavaScript</h3>
-                        <p>Dynamic web applications and interactive UIs.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="15" y="15" width="70" height="70" rx="10" fill="#61DAFB"/>
-                                <path d="M50 25 L65 40 L50 55 L35 40 L50 25 Z" fill="#282C34"/>
-                                <path d="M50 55 L65 70 L50 85 L35 70 L50 55 Z" fill="#282C34"/>
-                            </svg>
-                        </div>
-                        <h3>React.js</h3>
-                        <p>Component-based UI development for SPAs.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 20 L80 20 L80 80 L20 80 L20 20 Z" fill="#8CC84B"/>
-                                <text x="50%" y="60%" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" fill="#3C3C3C" font-weight="bold">Node</text>
-                            </svg>
-                        </div>
-                        <h3>Node.js</h3>
-                        <p>Scalable backend services and APIs.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="15" y="15" width="70" height="70" rx="10" fill="#777BB4"/>
-                                <path d="M50 25 C60 25 70 35 70 45 C70 55 60 65 50 65 C40 65 30 55 30 45 C30 35 40 25 50 25 Z" fill="#FFF"/>
-                            </svg>
-                        </div>
-                        <h3>PHP</h3>
-                        <p>Server-side scripting and web development.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="35" fill="#00758F"/>
-                                <path d="M50 20 C60 20 70 30 70 40 C70 50 60 60 50 60 C40 60 30 50 30 40 C30 30 40 20 50 20 Z" fill="#FFF"/>
-                            </svg>
-                        </div>
-                        <h3>MySQL</h3>
-                        <p>Database design and management for web apps.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M25 50 C25 35 35 25 50 25 C65 25 75 35 75 50 C75 65 65 75 50 75 C35 75 25 65 25 50 Z" fill="#306998" class="python-bg"/>
-                                <circle cx="40" cy="40" r="5" fill="#FFD43B" class="python-eye-1"/>
-                                <circle cx="60" cy="60" r="5" fill="#FFD43B" class="python-eye-2"/>
-                                <rect x="30" y="55" width="40" height="10" rx="5" fill="#FFD43B" class="python-body-1"/>
-                                <rect x="40" y="65" width="20" height="10" rx="5" fill="#306998" class="python-body-2"/>
-                            </svg>
-                        </div>
-                        <h3>Python</h3>
-                        <p>Scripting, data analysis, and automation.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="40" stroke="#00D0FF" stroke-width="5" fill="none" class="circle-draw"/>
-                                <path d="M40 30 L60 30 C70 30 70 40 70 40 L70 70 C70 80 60 80 60 80 L40 80 C30 80 30 70 30 70 L30 40 C30 30 40 30 40 30 Z" fill="none" stroke="#00D0FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="lock-body-skill"/>
-                                <path d="M35 45 C35 35 40 30 50 30 C60 30 65 35 65 45" fill="none" stroke="#8A2BE2" stroke-width="5" stroke-linecap="round" class="lock-shackle-skill"/>
-                            </svg>
-                        </div>
-                        <h3>Cybersecurity</h3>
-                        <p>Network security, threat analysis, incident response.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 50 Q30 30 50 30 T80 50" stroke="#00D0FF" stroke-width="4" stroke-linecap="round" fill="none" class="wave-1"/>
-                                <path d="M25 65 Q35 45 55 45 T85 65" stroke="#8A2BE2" stroke-width="4" stroke-linecap="round" fill="none" class="wave-2"/>
-                                <circle cx="70" cy="35" r="8" fill="#FF5733" class="bubble"/>
-                            </svg>
-                        </div>
-                        <h3>Communication</h3>
-                        <p>Articulate technical concepts effectively.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="30" cy="70" r="15" fill="#00D0FF" class="person-1"/>
-                                <circle cx="70" cy="70" r="15" fill="#8A2BE2" class="person-2"/>
-                                <path d="M50 50 A20 20 0 1 0 50 50.1 Z" fill="#00A0E0" transform-origin="50 50" class="gear-team"/>
-                                <path d="M50 50 L55 55 M50 50 L45 55 M50 50 L55 45 M50 50 L45 45" stroke="#FFF" stroke-width="2" class="gear-lines"/>
-                            </svg>
-                        </div>
-                        <h3>Teamwork</h3>
-                        <p>Collaborative and contributes positively to teams.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M50 5 L10 25 V75 L50 95 L90 75 V25 L50 5 Z" stroke="#00D0FF" stroke-width="5" fill="none" class="shield-path"/>
-                                <line x1="35" y1="50" x2="65" y2="50" stroke="#8A2BE2" stroke-width="3" stroke-linecap="round" class="gear-line-1"/>
-                                <line x1="50" y1="35" x2="50" y2="65" stroke="#8A2BE2" stroke-width="3" stroke-linecap="round" class="gear-line-2"/>
-                                <circle cx="50" cy="50" r="10" stroke="#00A0E0" stroke-width="3" fill="none" class="gear-center"/>
-                            </svg>
-                        </div>
-                        <h3>Problem Solving</h3>
-                        <p>Analyzes complex problems, designs efficient solutions.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="certifications" class="section-certifications section-base" aria-labelledby="certifications-title">
-            <h2 id="certifications-title" class="section-title" data-text="Certifications & Accolades">Certifications & Accolades</h2>
-            <div class="container">
-                <div class="certifications-container">
-                    <div class="certification-item">
-                        <h3>Cisco Certified CyberOps Associate</h3>
-                        <p>This certification validates a foundational understanding of cybersecurity operations, including security concepts, monitoring, analysis, and incident response.</p>
-                        <div class="credly-badge-embed">
-                            <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section-contact section-base" aria-labelledby="contact-title">
-            <h2 id="contact-title" class="section-title" data-text="Get in Touch">Get in Touch</h2>
-            <div class="container">
-                <p class="contact-intro">I'm always open to new opportunities, collaborations, or simply a chat! Feel free to send me a message directly, or connect through my social channels.</p>
-
-                <div class="form-container">
-                    <h3>Send Me a Message</h3>
-                    <form id="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name:</label>
-                            <input type="text" id="name" name="name" required placeholder="e.g., John Doe">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Your Email:</label>
-                            <input type="email" id="email" name="_replyto" required placeholder="e.g., your.email@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Your Phone Number (Optional):</label>
-                            <input type="tel" id="phone" name="phone" placeholder="e.g., +1 555 123 4567">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Reason for Contact:</label>
-                            <select id="subject" name="_subject" required>
-                                <option value="" disabled selected>Select a reason</option>
-                                <option value="Job Opportunity">Job Opportunity</option>
-                                <option value="Project Collaboration">Project Collaboration</option>
-                                <option value="General Inquiry">General Inquiry</option>
-                                <option value="Feedback/Suggestions">Feedback/Suggestions</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Your Message:</label>
-                            <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or inquiry..."></textarea>
-                        </div>
-                        <button type="submit" class="button-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="floating-contact-button" class="floating-button" title="Contact Me">
-        <i class="fas fa-comments"></i>
-    </div>
-    <div id="contact-dropdown" class="contact-dropdown-content hidden">
-        </div>
-
-    <footer class="main-footer">
-        <p>&copy; 2024 Jairo Lemuel Barrientos. All rights reserved.</p>
-        <div class="footer-social-links">
-            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/your-github-username" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="mailto:barrientosjairolemuel@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-    </footer>
-
-    <script>
-        // Ensure GSAP and ScrollTrigger are registered
-        gsap.registerPlugin(ScrollTrigger);
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Custom Cursor Logic ---
-            const customCursor = document.querySelector('.custom-cursor');
-            document.addEventListener('mousemove', (e) => {
-                gsap.to(customCursor, {
-                    x: e.clientX,
-                    y: e.clientY,
-                    duration: 0.05, // Make it very responsive
-                    ease: 'Power1.easeOut'
-                });
-            });
-
-            document.querySelectorAll('a, button, .project-card-link, .skill-card, .certification-item, .floating-button').forEach(el => {
-                el.addEventListener('mouseenter', () => customCursor.classList.add('active'));
-                el.addEventListener('mouseleave', () => customCursor.classList.remove('active'));
-            });
-
-
-            // --- Welcome Overlay Logic ---
-            const welcomeOverlay = document.getElementById('welcome-overlay');
-            const welcomeText = document.getElementById('welcome-text');
-            const welcomeSlogan = document.getElementById('welcome-slogan');
-            
-            // GSAP Welcome Animation
-            const tlWelcome = gsap.timeline({
-                onComplete: () => {
-                    gsap.to(welcomeOverlay, {
-                        opacity: 0,
-                        duration: 1,
-                        ease: "power2.out",
-                        onComplete: () => welcomeOverlay.remove() // Remove from DOM after fading out
-                    });
-                }
-            });
-
-            tlWelcome.to(welcomeText, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" })
-                     .to(welcomeSlogan, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "-=0.5")
-                     .to(welcomeText, { textShadow: "0 0 5px rgba(0,208,255,0.2)", duration: 0.5 }, "+=1.5"); // Glitch starts, fade out after this duration
-
-
-            // --- Header Scroll and Progress Bar Logic ---
-            const mainHeader = document.querySelector('.main-header');
-            const scrollProgressBar = document.querySelector('.scroll-progress-bar');
-            const navLinks = document.querySelectorAll('.nav-menu a');
-            const sections = document.querySelectorAll('section');
-
-            function updateHeaderAndProgressBar() {
-                const scrollY = window.scrollY;
-                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrollProgress = (scrollY / docHeight) * 100;
-
-                if (scrollY > 80) { // Adjust scroll threshold as needed
-                    mainHeader.classList.add('scrolled');
-                } else {
-                    mainHeader.classList.remove('scrolled');
-                }
-                scrollProgressBar.style.width = scrollProgress + '%';
-
-                sections.forEach(section => {
-                    if (section) {
-                        const sectionTop = section.offsetTop - mainHeader.offsetHeight - 50; // Add buffer
-                        const sectionBottom = sectionTop + section.offsetHeight;
-                        const id = section.getAttribute('id');
-
-                        if (scrollY >= sectionTop && scrollY < sectionBottom) {
-                            navLinks.forEach(link => {
-                                link.classList.remove('active');
-                                if (link.getAttribute('href') === `#${id}`) {
-                                    link.classList.add('active');
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-            window.addEventListener('scroll', updateHeaderAndProgressBar);
-            updateHeaderAndProgressBar(); // Initial call
-
-
-            // --- Smooth Scroll for Nav Links ---
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        const offset = mainHeader.offsetHeight;
-                        const targetPosition = targetSection.offsetTop - offset;
-                        gsap.to(window, {
-                            duration: 1.2,
-                            scrollTo: {
-                                y: targetPosition,
-                                autoKill: true
-                            },
-                            ease: "power2.inOut"
-                        });
-                    }
-                });
-            });
-
-
-            // --- GSAP ScrollTrigger Animations for Sections and Elements ---
-
-            // Hero section elements fade-in
-            gsap.from(".avatar-container", { duration: 1.5, opacity: 0, scale: 0.8, ease: "back.out(1.7)", delay: 3.5 }); // After welcome overlay
-            gsap.from("#hero-title", { duration: 1.2, opacity: 0, y: 50, ease: "power2.out", delay: 3.8 });
-            gsap.from(".section-hero p:nth-of-type(1)", { duration: 1.2, opacity: 0, y: 50, ease: "power2.out", delay: 4.1 });
-            gsap.from(".section-hero p:nth-of-type(2)", { duration: 1.2, opacity: 0, y: 50, ease: "power2.out", delay: 4.4 });
-            gsap.from(".section-hero .button-primary", { duration: 1.2, opacity: 0, y: 50, ease: "power2.out", delay: 4.7 });
-
-            // Animate section titles and their content
-            const animateSection = (sectionId, contentSelector, staggerAmount = 0.2) => {
-                const section = document.getElementById(sectionId);
-                if (!section) return;
-
-                const title = section.querySelector('.section-title');
-                const contentElements = section.querySelectorAll(contentSelector);
-                const button = section.querySelector('.button-primary'); // For sections with a main button
-
-                gsap.from(title, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%", // When 80% of the section is in view
-                        toggleActions: "play none none none",
-                    },
-                    opacity: 0,
-                    y: 70,
-                    scale: 0.9,
-                    duration: 1.2,
-                    ease: "power3.out"
-                });
-
-                gsap.from(contentElements, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 70%", // Slightly after title
-                        toggleActions: "play none none none",
-                    },
-                    opacity: 0,
-                    y: 50,
-                    stagger: staggerAmount,
-                    duration: 1,
-                    ease: "power2.out"
-                });
-
-                if (button) {
-                    gsap.from(button, {
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 60%", // After content
-                            toggleActions: "play none none none",
-                        },
-                        opacity: 0,
-                        y: 30,
-                        duration: 1,
-                        ease: "power2.out",
-                        delay: contentElements.length * staggerAmount // Delay based on content stagger
-                    });
-                }
-            };
-
-            animateSection('projects', '.project-card-wrapper');
-            animateSection('ai-automation', '.ai-content > *:not(.section-title)', 0.15); // Stagger for AI content
-            animateSection('skills', '.skill-card', 0.08); // Smaller stagger for more cards
-            animateSection('certifications', '.certification-item');
-            animateSection('contact', '.contact-intro, .form-container', 0.2);
-
-
-            // --- Specific Project SVG Animations (triggered by ScrollTrigger) ---
-            const animateProjectSVG = (svgId, elementsToAnimate) => {
-                const svg = document.getElementById(svgId);
-                if (!svg) return;
-
-                const parentCard = svg.closest('.project-card-wrapper');
-                if (!parentCard) return;
-
-                ScrollTrigger.create({
-                    trigger: parentCard,
-                    start: "top 75%",
-                    toggleActions: "play none none none",
-                    onEnter: () => {
-                        const tl = gsap.timeline();
-                        elementsToAnimate.forEach((el, index) => {
-                            if (el.type === 'opacity_y') {
-                                tl.to(svg.querySelectorAll(el.selector), {
-                                    opacity: 1,
-                                    y: 0,
-                                    duration: el.duration,
-                                    ease: "back.out(1.2)",
-                                }, el.delay);
-                            } else if (el.type === 'stroke_draw') {
-                                tl.to(svg.querySelectorAll(el.selector), {
-                                    strokeDashoffset: 0,
-                                    duration: el.duration,
-                                    ease: "power1.inOut",
-                                }, el.delay);
-                            } else if (el.type === 'scale') {
-                                tl.to(svg.querySelectorAll(el.selector), {
-                                    opacity: 1,
-                                    scale: 1,
-                                    duration: el.duration,
-                                    ease: "back.out(1.2)",
-                                }, el.delay);
-                            }
-                        });
-                    }
-                });
-            };
-
-            // Define animations for each project SVG
-            animateProjectSVG('svg-finance', [
-                { selector: '.bar-1', type: 'opacity_y', duration: 0.8, delay: 0.2 },
-                { selector: '.bar-2', type: 'opacity_y', duration: 0.8, delay: 0.4 },
-                { selector: '.bar-3', type: 'opacity_y', duration: 0.8, delay: 0.6 },
-                { selector: '.line-chart, #svg-finance circle', type: 'opacity_y', duration: 1, delay: 0.8 },
-            ]);
-
-            animateProjectSVG('svg-cyber', [
-                { selector: '.shield-path', type: 'stroke_draw', duration: 1.5, delay: 0.2 },
-                { selector: '.lock-body', type: 'stroke_draw', duration: 1, delay: 0.8 },
-                { selector: '.lock-shackle', type: 'stroke_draw', duration: 1, delay: 1.2 },
-            ]);
-
-            animateProjectSVG('svg-beauty', [
-                { selector: '.lipstick-base', type: 'scale', duration: 0.8, delay: 0.2 },
-                { selector: '.lipstick-tip', type: 'scale', duration: 0.8, delay: 0.5 },
-            ]);
-
-
-            // --- Specific Skill SVG Animations (triggered by ScrollTrigger) ---
-            const animateSkillSVG = (skillCardId, elementsToAnimate) => {
-                const skillCard = document.getElementById(skillCardId);
-                if (!skillCard) return;
-
-                ScrollTrigger.create({
-                    trigger: skillCard,
-                    start: "top 80%",
-                    toggleActions: "play none none none",
-                    onEnter: () => {
-                        const tl = gsap.timeline();
-                        elementsToAnimate.forEach((el, index) => {
-                            if (el.type === 'opacity_y') {
-                                tl.to(skillCard.querySelectorAll(el.selector), {
-                                    opacity: 1,
-                                    y: 0,
-                                    duration: el.duration,
-                                    ease: "back.out(1.2)",
-                                }, el.delay);
-                            } else if (el.type === 'stroke_draw') {
-                                tl.to(skillCard.querySelectorAll(el.selector), {
-                                    strokeDashoffset: 0,
-                                    opacity: 1, // Ensure visibility after drawing
-                                    duration: el.duration,
-                                    ease: "power1.inOut",
-                                }, el.delay);
-                            } else if (el.type === 'scale') {
-                                tl.to(skillCard.querySelectorAll(el.selector), {
-                                    opacity: 1,
-                                    scale: 1,
-                                    duration: el.duration,
-                                    ease: "back.out(1.2)",
-                                }, el.delay);
-                            } else if (el.type === 'rotate') { // For gear rotation
-                                tl.to(skillCard.querySelectorAll(el.selector), {
-                                    opacity: 1,
-                                    scale: 1,
-                                    rotation: el.rotation,
-                                    duration: el.duration,
-                                    ease: "back.out(1.2)",
-                                }, el.delay);
-                            }
-                        });
-                    }
-                });
-            };
-
-            // Define animations for each skill SVG
-            animateSkillSVG('skills .skill-card:nth-child(1)', [ // HTML5
-                { selector: 'path:nth-child(1)', type: 'scale', duration: 0.6, delay: 0.1 },
-                { selector: 'path:nth-child(2)', type: 'scale', duration: 0.6, delay: 0.3 },
-                { selector: 'path:nth-child(3)', type: 'scale', duration: 0.6, delay: 0.5 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(2)', [ // CSS3
-                { selector: 'rect', type: 'scale', duration: 0.8, delay: 0.1 },
-                { selector: 'path', type: 'opacity_y', duration: 0.8, delay: 0.4 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(3)', [ // JavaScript
-                { selector: 'path', type: 'scale', duration: 0.8, delay: 0.1 },
-                { selector: 'text', type: 'scale', duration: 0.8, delay: 0.4 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(4)', [ // React.js
-                { selector: 'rect', type: 'scale', duration: 0.8, delay: 0.1 },
-                { selector: 'path:nth-child(2)', type: 'scale', duration: 0.8, delay: 0.4 },
-                { selector: 'path:nth-child(3)', type: 'scale', duration: 0.8, delay: 0.6 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(5)', [ // Node.js
-                { selector: 'rect', type: 'scale', duration: 0.8, delay: 0.1 },
-                { selector: 'text', type: 'scale', duration: 0.8, delay: 0.4 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(6)', [ // PHP
-                { selector: 'rect', type: 'scale', duration: 0.8, delay: 0.1 },
-                { selector: 'path', type: 'scale', duration: 0.8, delay: 0.4 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(7)', [ // MySQL
-                { selector: 'circle', type: 'scale', duration: 0.8, delay: 0.1 },
-                { selector: 'path', type: 'scale', duration: 0.8, delay: 0.4 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(8)', [ // Python
-                { selector: '.python-bg', type: 'scale', duration: 0.8, delay: 0.1 },
-                { selector: '.python-eye-1, .python-eye-2', type: 'scale', duration: 0.6, delay: 0.4 },
-                { selector: '.python-body-1', type: 'scale', duration: 0.6, delay: 0.6 },
-                { selector: '.python-body-2', type: 'scale', duration: 0.6, delay: 0.8 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(9)', [ // Cybersecurity
-                { selector: '.circle-draw', type: 'stroke_draw', duration: 1.2, delay: 0.1 },
-                { selector: '.lock-body-skill', type: 'stroke_draw', duration: 1, delay: 0.5 },
-                { selector: '.lock-shackle-skill', type: 'stroke_draw', duration: 1, delay: 0.9 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(10)', [ // Communication
-                { selector: '.wave-1', type: 'stroke_draw', duration: 1, delay: 0.1 },
-                { selector: '.wave-2', type: 'stroke_draw', duration: 1, delay: 0.4 },
-                { selector: '.bubble', type: 'scale', duration: 0.6, delay: 0.8 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(11)', [ // Teamwork
-                { selector: '.person-1', type: 'scale', duration: 0.6, delay: 0.1 },
-                { selector: '.person-2', type: 'scale', duration: 0.6, delay: 0.3 },
-                { selector: '.gear-team', type: 'rotate', rotation: 360, duration: 1.5, delay: 0.5 }, // Rotate gear
-                { selector: '.gear-lines', type: 'scale', duration: 0.6, delay: 0.8 },
-            ]);
-            animateSkillSVG('skills .skill-card:nth-child(12)', [ // Problem Solving
-                { selector: '.shield-path', type: 'stroke_draw', duration: 1.2, delay: 0.1 },
-                { selector: '.gear-line-1', type: 'stroke_draw', duration: 0.8, delay: 0.5 },
-                { selector: '.gear-line-2', type: 'stroke_draw', duration: 0.8, delay: 0.7 },
-                { selector: '.gear-center', type: 'scale', duration: 0.6, delay: 0.9 },
-            ]);
-
-
-            // --- Floating Contact Button & Dropdown Logic ---
-            const floatingButton = document.getElementById('floating-contact-button');
-            const contactDropdown = document.getElementById('contact-dropdown');
-
-            const contactInfo = [
-                { icon: 'fas fa-envelope', text: 'Email', link: 'mailto:barrientosjairolemuel@gmail.com' },
-                { icon: 'fab fa-whatsapp', text: 'WhatsApp', link: 'https://wa.me/5493437457636' },
-                { icon: 'fab fa-linkedin', text: 'LinkedIn', link: 'https://www.linkedin.com/in/jairo-barrientos-8a6b00226' },
-                { icon: 'fab fa-github', text: 'GitHub', link: 'https://github.com/your-github-username' } // Ensure you update this link
-            ];
-
-            contactInfo.forEach(info => {
-                const linkElement = document.createElement('a');
-                linkElement.href = info.link;
-                linkElement.target = '_blank';
-                linkElement.rel = 'noopener noreferrer';
-                linkElement.classList.add('contact-link');
-                linkElement.innerHTML = `<i class="${info.icon}"></i> <span>${info.text}</span>`;
-                contactDropdown.appendChild(linkElement);
-            });
-
-            floatingButton.addEventListener('click', () => {
-                contactDropdown.classList.toggle('visible');
-            });
-
-            document.addEventListener('click', (event) => {
-                if (!floatingButton.contains(event.target) && !contactDropdown.contains(event.target)) {
-                    contactDropdown.classList.remove('visible');
-                }
-            });
-
-
-            // --- Three.js Background Logic (Hero Section Only) ---
-            const threeJsCanvas = document.getElementById('threejs-background');
-            const heroSection = document.getElementById('hero');
-
-            let scene, camera, renderer, particles, particleMaterial, particleCount = 1000;
-            let mouseX = 0, mouseY = 0;
-
-            function initThreeJS() {
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                renderer = new THREE.WebGLRenderer({ canvas: threeJsCanvas, antialias: true, alpha: true });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(window.devicePixelRatio);
-
-                // Particles (subtle, abstract dots, not the old "random dots" type)
-                const geometry = new THREE.BufferGeometry();
-                const positions = [];
-                const colors = []; // For gradient-like colors
-
-                const color1 = new THREE.Color(0x00D0FF); // Electric Blue
-                const color2 = new THREE.Color(0x8A2BE2); // Royal Purple
-
-                for (let i = 0; i < particleCount; i++) {
-                    // Random positions within a cube
-                    positions.push(
-                        (Math.random() - 0.5) * 500, // x
-                        (Math.random() - 0.5) * 500, // y
-                        (Math.random() - 0.5) * 500  // z
-                    );
-                    
-                    // Mix colors for a gradient effect
-                    const mixColor = new THREE.Color().lerpColors(color1, color2, Math.random());
-                    colors.push(mixColor.r, mixColor.g, mixColor.b);
-                }
-
-                geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-                geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
-                particleMaterial = new THREE.PointsMaterial({
-                    size: 1.5, // Small particles
-                    vertexColors: true,
-                    transparent: true,
-                    opacity: 0.6,
-                    blending: THREE.AdditiveBlending // For glowing effect
-                });
-
-                particles = new THREE.Points(geometry, particleMaterial);
-                scene.add(particles);
-
-                camera.position.z = 200;
-
-                // Add subtle ambient light
-                const ambientLight = new THREE.AmbientLight(0x404040, 2); // soft white light
-                scene.add(ambientLight);
-
-                // Add directional light for more defined shapes if you add them later
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-                directionalLight.position.set(0, 1, 1).normalize();
-                scene.add(directionalLight);
-            }
-
-            function animateThreeJS() {
-                requestAnimationFrame(animateThreeJS);
-
-                // Simple rotation for the particles to show depth
-                particles.rotation.x += 0.0005;
-                particles.rotation.y += 0.0007;
-
-                // Mouse influence (subtle)
-                particles.rotation.y += (mouseX * 0.00005);
-                particles.rotation.x += (mouseY * 0.00005);
-
-                renderer.render(scene, camera);
-            }
-
-            function onWindowResizeThreeJS() {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-
-            window.addEventListener('resize', onWindowResizeThreeJS);
-
-            // Activate Three.js when the hero section is in view
-            ScrollTrigger.create({
-                trigger: heroSection,
-                start: "top bottom", // when the top of the hero section hits the bottom of the viewport
-                end: "bottom top",   // when the bottom of the hero section leaves the top of the viewport
-                onEnter: () => {
-                    if (!renderer) { // Initialize only once
-                        initThreeJS();
-                        animateThreeJS();
-                    }
-                    threeJsCanvas.classList.add('active-hero');
-                },
-                onLeaveBack: () => threeJsCanvas.classList.remove('active-hero'),
-                onLeave: () => threeJsCanvas.classList.remove('active-hero')
-            });
-
-            // Handle mouse movement for Three.js (only if Three.js is active)
-            document.addEventListener('mousemove', (event) => {
-                if (threeJsCanvas.classList.contains('active-hero')) {
-                    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-                }
-            });
-
-        });
-    </script>
+    <div class="bg-anim">
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <div id="app-container">
+        <header>
+            <h1>Financiator Pro</h1>
+        </header>
+
+        <nav>
+            <div class="tab active" data-target="compound">Compound Interest</div>
+            <div class="tab" data-target="loan">Loan Payment</div>
+            <div class="tab" data-target="custom">Custom Expression</div>
+            <div class="tab" data-target="roi">ROI</div>
+            <div class="tab" data-target="npv">NPV & IRR</div>
+            <div class="tab" data-target="amort">Amortization</div>
+            <div class="tab" data-target="stats">Statistics & Chart</div>
+            <div class="tab" data-target="crypto">Crypto (Live)</div>
+            <div class="tab" data-target="fx">Currency Converter</div>
+            <div class="tab" data-target="wasm">WASM Demo</div>
+            <div class="tab" data-target="sim">Monte Carlo Sim.</div>
+            <div class="tab" data-target="premium">Premium Features</div> </nav>
+
+        <main class="content">
+            <div class="ad-slot leaderboard" id="ad-top-banner">
+                <p>Advertisement Space - FinTech Services / Investment Opportunities</p>
+                </div>
+
+            <section class="calculator active" id="compound" data-calculator-id="compound">
+                <h2>Compound Interest</h2>
+                <div class="input-group">
+                    <label for="cc-principal">Initial Principal ($)</label>
+                    <input type="number" id="cc-principal" placeholder="e.g., 10000" value="10000" min="0">
+                    <div class="input-error-message" id="cc-principal-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="cc-rate">Annual Rate (%)</label>
+                    <input type="number" id="cc-rate" placeholder="e.g., 5" value="5" min="0" step="0.1">
+                    <div class="input-error-message" id="cc-rate-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="cc-years">Years</label>
+                    <input type="number" id="cc-years" placeholder="e.g., 10" value="10" min="1">
+                    <div class="input-error-message" id="cc-years-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="cc-frequency">Compounding Frequency</label>
+                    <select id="cc-frequency">
+                        <option value="1">Annually</option>
+                        <option value="2">Semi-annually</option>
+                        <option value="4">Quarterly</option>
+                        <option value="12" selected>Monthly</option>
+                        <option value="365">Daily</option>
+                    </select>
+                </div>
+                <button onclick="calcCompound()">Calculate Compound Interest</button>
+                <div class="result" id="cc-result"></div>
+            </section>
+
+            <section class="calculator" id="loan" data-calculator-id="loan">
+                <h2>Monthly Loan Payment</h2>
+                <div class="input-group">
+                    <label for="loan-amount">Loan Amount ($)</label>
+                    <input type="number" id="loan-amount" placeholder="e.g., 100000" value="100000" min="0">
+                    <div class="input-error-message" id="loan-amount-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="loan-rate">Annual Rate (%)</label>
+                    <input type="number" id="loan-rate" placeholder="e.g., 6" value="6" min="0" step="0.1">
+                    <div class="input-error-message" id="loan-rate-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="loan-years">Term (Years)</label>
+                    <input type="number" id="loan-years" placeholder="e.g., 5" value="5" min="1">
+                    <div class="input-error-message" id="loan-years-error"></div>
+                </div>
+                <button onclick="calcLoan()">Calculate Monthly Payment</button>
+                <div class="result" id="loan-result"></div>
+            </section>
+
+            <section class="calculator" id="custom" data-calculator-id="custom">
+                <h2>Evaluate Custom Mathematical Expression</h2>
+                <div class="input-group">
+                    <label for="custom-expression">Enter your formula:</label>
+                    <input type="text" id="custom-expression" placeholder="e.g., (1000 + 50) * 1.25 + Math.sqrt(144)" value="(1000 + 50) * 1.25 + Math.sqrt(144)">
+                    <div class="input-error-message" id="custom-expression-error"></div>
+                </div>
+                <p class="small-text">You can use `Math.pow()`, `Math.sqrt()`, `Math.log()`, `+`, `-`, `*`, `/`, `()` etc.</p>
+                <button onclick="calcCustom()">Evaluate Expression</button>
+                <div class="result" id="custom-result"></div>
+            </section>
+
+            <section class="calculator" id="roi" data-calculator-id="roi">
+                <h2>Return on Investment (ROI)</h2>
+                <div class="input-group">
+                    <label for="roi-invest">Initial Investment ($)</label>
+                    <input type="number" id="roi-invest" placeholder="e.g., 10000" value="10000" min="0">
+                    <div class="input-error-message" id="roi-invest-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="roi-gain">Net Profit/Loss ($)</label>
+                    <input type="number" id="roi-gain" placeholder="e.g., 2000" value="2000">
+                    <div class="input-error-message" id="roi-gain-error"></div>
+                </div>
+                <button onclick="calcROI()">Calculate ROI</button>
+                <div class="result" id="roi-result"></div>
+            </section>
+
+            <section class="calculator" id="npv" data-calculator-id="npv">
+                <h2>Net Present Value (NPV) & Internal Rate of Return (IRR)</h2>
+                <p class="small-text">Analyze project profitability and efficiency.</p>
+                <div class="input-group">
+                    <label for="npv-initial-investment">Initial Investment (CF0) ($)</label>
+                    <input type="number" id="npv-initial-investment" placeholder="e.g., -100000" value="-100000" step="any">
+                    <div class="input-error-message" id="npv-initial-investment-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="npv-cash-flows">Annual Cash Flows (comma-separated, e.g., 30000, 40000, 50000)</label>
+                    <textarea id="npv-cash-flows" rows="3" placeholder="e.g., 30000, 40000, 50000, 20000">30000, 40000, 50000, 20000</textarea>
+                    <div class="input-error-message" id="npv-cash-flows-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="npv-discount-rate">Annual Discount Rate (%)</label>
+                    <input type="number" id="npv-discount-rate" placeholder="e.g., 10" value="10" min="0" step="0.1">
+                    <div class="input-error-message" id="npv-discount-rate-error"></div>
+                </div>
+                <button onclick="calcNPV_IRR()">Calculate NPV & IRR</button>
+                <div class="result" id="npv-irr-result"></div>
+                <canvas id="npv-chart"></canvas>
+            </section>
+
+            <section class="calculator" id="amort" data-calculator-id="amort">
+                <h2>Loan Amortization Schedule</h2>
+                <p class="small-text">Detailed breakdown of principal and interest payments over time.</p>
+                <div class="input-group">
+                    <label for="am-amount">Loan Amount ($)</label>
+                    <input type="number" id="am-amount" placeholder="e.g., 50000" value="50000" min="0">
+                    <div class="input-error-message" id="am-amount-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="am-rate">Annual Rate (%)</label>
+                    <input type="number" id="am-rate" placeholder="e.g., 5" value="5" min="0" step="0.1">
+                    <div class="input-error-message" id="am-rate-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="am-years">Term (Years)</label>
+                    <input type="number" id="am-years" placeholder="e.g., 3" value="3" min="1">
+                    <div class="input-error-message" id="am-years-error"></div>
+                </div>
+                <button onclick="genAmort()">Generate Amortization Table</button>
+                <div id="amort-table-container" style="max-height: 400px; overflow-y: auto; margin-top: 25px;">
+                    <div id="amort-table"></div>
+                </div>
+                <canvas id="amort-chart"></canvas>
+            </section>
+
+            <section class="calculator" id="stats" data-calculator-id="stats">
+                <h2>Statistical Analysis & Data Visualization</h2>
+                <p class="small-text">Understand your financial data distribution.</p>
+                <div class="input-group">
+                    <label for="stats-labels">Category Labels (comma-separated, e.g., Income, Fixed Costs, Investments)</label>
+                    <textarea id="stats-labels" rows="2" placeholder="e.g., Income, Fixed Costs, Investments, Savings">Income, Fixed Costs, Investments, Savings</textarea>
+                    <div class="input-error-message" id="stats-labels-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="stats-values">Numerical Values (comma-separated, e.g., 5000, 2500, 1000, 1500)</label>
+                    <textarea id="stats-values" rows="2" placeholder="e.g., 5000, 2500, 1000, 1500">5000, 2500, 1000, 1500</textarea>
+                    <div class="input-error-message" id="stats-values-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="stats-chart-type">Chart Type</label>
+                    <select id="stats-chart-type">
+                        <option value="pie">Pie Chart</option>
+                        <option value="bar">Bar Chart</option>
+                        <option value="doughnut">Doughnut Chart</option>
+                    </select>
+                </div>
+                <button onclick="drawStats()">Generate Analysis & Chart</button>
+                <div class="result" id="stats-summary"></div>
+                <canvas id="stats-chart"></canvas>
+            </section>
+
+            <section class="calculator" id="crypto" data-calculator-id="crypto">
+                <h2>Live Cryptocurrency Prices</h2>
+                <p class="small-text">Powered by CoinGecko API.</p>
+                <button onclick="fetchCrypto()">Load Live Crypto Data</button>
+                <div class="result" id="crypto-result"></div>
+                <canvas id="crypto-chart"></canvas>
+            </section>
+
+            <section class="calculator" id="fx" data-calculator-id="fx">
+                <h2>Advanced Currency Converter</h2>
+                <p class="small-text">Real-time exchange rates (Powered by exchangerate.host).</p>
+                <div class="input-group">
+                    <label for="fx-amount">Amount</label>
+                    <input type="number" id="fx-amount" value="100" min="0" step="any">
+                    <div class="input-error-message" id="fx-amount-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="fx-from">Convert From</label>
+                    <select id="fx-from">
+                        <option value="USD">USD - United States Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CHF">CHF - Swiss Franc</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="BRL">BRL - Brazilian Real</option>
+                        <option value="ARS" selected>ARS - Argentine Peso</option>
+                        </select>
+                </div>
+                <div class="input-group">
+                    <label for="fx-to">Convert To</label>
+                    <select id="fx-to">
+                        <option value="USD" selected>USD - United States Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CHF">CHF - Swiss Franc</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="BRL">BRL - Brazilian Real</option>
+                        <option value="ARS">ARS - Argentine Peso</option>
+                        </select>
+                </div>
+                <button onclick="convertFX()">Convert Currency</button>
+                <div class="result" id="fx-result"></div>
+            </section>
+
+            <section class="calculator" id="wasm" data-calculator-id="wasm">
+                <h2>WebAssembly (WASM) Calculation Demo</h2>
+                <p class="small-text">Demonstrates near-native performance for intensive numerical operations.</p>
+                <div class="input-group">
+                    <label for="wasm-base">Base Number</label>
+                    <input type="number" id="wasm-base" value="2" min="0">
+                    <div class="input-error-message" id="wasm-base-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="wasm-exp">Exponent</label>
+                    <input type="number" id="wasm-exp" value="30" min="0">
+                    <div class="input-error-message" id="wasm-exp-error"></div>
+                </div>
+                <button onclick="calcWasm()">Calculate Power (via WASM)</button>
+                <div class="result" id="wasm-result"></div>
+            </section>
+
+            <section class="calculator" id="sim" data-calculator-id="sim">
+                <h2>Monte Carlo Portfolio Simulation</h2>
+                <p class="small-text">Estimate future investment performance under various risk scenarios.</p>
+                <div class="input-group">
+                    <label for="sim-initial-capital">Initial Capital ($)</label>
+                    <input type="number" id="sim-initial-capital" placeholder="e.g., 100000" value="100000" min="0">
+                    <div class="input-error-message" id="sim-initial-capital-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="sim-avg-return">Annual Avg. Return (%)</label>
+                    <input type="number" id="sim-avg-return" placeholder="e.g., 8" value="8" step="0.1">
+                    <div class="input-error-message" id="sim-avg-return-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="sim-std-dev">Annual Std. Deviation (%) (Volatility)</label>
+                    <input type="number" id="sim-std-dev" placeholder="e.g., 15" value="15" step="0.1">
+                    <div class="input-error-message" id="sim-std-dev-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="sim-years">Simulation Years</label>
+                    <input type="number" id="sim-years" placeholder="e.g., 20" value="20" min="1">
+                    <div class="input-error-message" id="sim-years-error"></div>
+                </div>
+                <div class="input-group">
+                    <label for="sim-runs">Number of Simulations</label>
+                    <input type="number" id="sim-runs" placeholder="e.g., 1000" value="1000" min="100" max="10000" step="100">
+                    <div class="input-error-message" id="sim-runs-error"></div>
+                </div>
+                <button onclick="runMonteCarlo()">Execute Monte Carlo Simulation</button>
+                <div class="result" id="sim-result"></div>
+                <canvas id="sim-chart"></canvas>
+            </section>
+
+            <section class="calculator" id="premium" data-calculator-id="premium">
+                <h2>Unlock Premium Financial Tools</h2>
+                <p class="small-text">Upgrade your experience for advanced insights and exclusive features.</p>
+                <ul style="list-style: none; padding: 0; margin-top: 25px;">
+                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
+                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">📈</span>
+                        <div>
+                            <strong>Advanced Reporting & Export:</strong> Generate detailed PDF/Excel reports of all calculations, amortization schedules, and simulation results.
+                        </div>
+                    </li>
+                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
+                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">💾</span>
+                        <div>
+                            <strong>Save & Load Scenarios:</strong> Store multiple calculation scenarios and portfolio simulations in your secure cloud profile for future reference.
+                        </div>
+                    </li>
+                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
+                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">📊</span>
+                        <div>
+                            <strong>Customizable Dashboards:</strong> Create personalized financial dashboards with key metrics from your calculations.
+                        </div>
+                    </li>
+                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
+                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">🔒</span>
+                        <div>
+                            <strong>Ad-Free Experience:</strong> Enjoy uninterrupted financial analysis without advertisements.
+                        </div>
+                    </li>
+                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
+                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">📞</span>
+                        <div>
+                            <strong>Priority Support:</strong> Direct access to our expert support team for any queries or technical assistance.
+                        </div>
+                    </li>
+                </ul>
+                <button onclick="redirectToSubscription()">View Premium Plans</button>
+            </section>
+
+            <div class="ad-slot leaderboard" id="ad-bottom-banner">
+                <p>Advertisement Space - Financial Software / Consulting</p>
+                </div>
+
+        </main>
+
+        <footer>
+            &copy; 2025 Financiator Pro – Powered by cutting-edge financial analytics.
+            <div class="small-text" style="margin-top: 10px;">
+                Proudly serving professionals globally. Data accuracy and security are our top priorities.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Register Chart.js Datalabels Plugin globally
+        Chart.register(ChartDataLabels);
+
+        // --- Data Engineering & DOM Management ---
+        const DOM = {
+            tabs: document.querySelectorAll('.tab'),
+            calculators: document.querySelectorAll('.calculator'),
+            
+            // Centralized error message elements
+            errorMessages: {},
+
+            // Input and result elements
+            // Each input is associated with its error message div
+            inputs: {
+                ccPrincipal: { element: document.getElementById('cc-principal'), error: document.getElementById('cc-principal-error') },
+                ccRate: { element: document.getElementById('cc-rate'), error: document.getElementById('cc-rate-error') },
+                ccYears: { element: document.getElementById('cc-years'), error: document.getElementById('cc-years-error') },
+                ccFrequency: { element: document.getElementById('cc-frequency') },
+                ccResult: { element: document.getElementById('cc-result') },
+
+                loanAmount: { element: document.getElementById('loan-amount'), error: document.getElementById('loan-amount-error') },
+                loanRate: { element: document.getElementById('loan-rate'), error: document.getElementById('loan-rate-error') },
+                loanYears: { element: document.getElementById('loan-years'), error: document.getElementById('loan-years-error') },
+                loanResult: { element: document.getElementById('loan-result') },
+
+                customExpression: { element: document.getElementById('custom-expression'), error: document.getElementById('custom-expression-error') },
+                customResult: { element: document.getElementById('custom-result') },
+
+                roiInvest: { element: document.getElementById('roi-invest'), error: document.getElementById('roi-invest-error') },
+                roiGain: { element: document.getElementById('roi-gain'), error: document.getElementById('roi-gain-error') },
+                roiResult: { element: document.getElementById('roi-result') },
+
+                npvInitialInvestment: { element: document.getElementById('npv-initial-investment'), error: document.getElementById('npv-initial-investment-error') },
+                npvCashFlows: { element: document.getElementById('npv-cash-flows'), error: document.getElementById('npv-cash-flows-error') },
+                npvDiscountRate: { element: document.getElementById('npv-discount-rate'), error: document.getElementById('npv-discount-rate-error') },
+                npvIrrResult: { element: document.getElementById('npv-irr-result') },
+                npvChartCtx: document.getElementById('npv-chart').getContext('2d'),
+
+                amAmount: { element: document.getElementById('am-amount'), error: document.getElementById('am-amount-error') },
+                amRate: { element: document.getElementById('am-rate'), error: document.getElementById('am-rate-error') },
+                amYears: { element: document.getElementById('am-years'), error: document.getElementById('am-years-error') },
+                amortTable: { element: document.getElementById('amort-table') },
+                amortChartCtx: document.getElementById('amort-chart').getContext('2d'),
+
+                statsLabels: { element: document.getElementById('stats-labels'), error: document.getElementById('stats-labels-error') },
+                statsValues: { element: document.getElementById('stats-values'), error: document.getElementById('stats-values-error') },
+                statsChartType: { element: document.getElementById('stats-chart-type') },
+                statsSummary: { element: document.getElementById('stats-summary') },
+                statsChartCtx: document.getElementById('stats-chart').getContext('2d'),
+
+                cryptoResult: { element: document.getElementById('crypto-result') },
+                cryptoChartCtx: document.getElementById('crypto-chart').getContext('2d'),
+
+                fxAmount: { element: document.getElementById('fx-amount'), error: document.getElementById('fx-amount-error') },
+                fxFrom: { element: document.getElementById('fx-from') },
+                fxTo: { element: document.getElementById('fx-to') },
+                fxResult: { element: document.getElementById('fx-result') },
+
+                wasmBase: { element: document.getElementById('wasm-base'), error: document.getElementById('wasm-base-error') },
+                wasmExp: { element: document.getElementById('wasm-exp'), error: document.getElementById('wasm-exp-error') },
+                wasmResult: { element: document.getElementById('wasm-result') },
+
+                simInitialCapital: { element: document.getElementById('sim-initial-capital'), error: document.getElementById('sim-initial-capital-error') },
+                simAvgReturn: { element: document.getElementById('sim-avg-return'), error: document.getElementById('sim-avg-return-error') },
+                simStdDev: { element: document.getElementById('sim-std-dev'), error: document.getElementById('sim-std-dev-error') },
+                simYears: { element: document.getElementById('sim-years'), error: document.getElementById('sim-years-error') },
+                simRuns: { element: document.getElementById('sim-runs'), error: document.getElementById('sim-runs-error') },
+                simResult: { element: document.getElementById('sim-result') },
+                simChartCtx: document.getElementById('sim-chart').getContext('2d'),
+            }
+        };
+
+        let currentCharts = {}; // Stores Chart.js instances for proper destruction
+
+        // --- General Utilities ---
+
+        // Helper to get CSS variable values
+        const varStyle = (name) => getComputedStyle(document.documentElement).getPropertyValue(name);
+
+        // Formats currency consistently
+        const formatCurrency = (value, currency = 'USD') => {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency,
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(value);
+        };
+
+        // Formats percentages consistently
+        const formatPercentage = (value) => {
+            return new Intl.NumberFormat('en-US', {
+                style: 'percent',
+                minimumFractionDigits: 1,
+                maximumFractionDigits: 2
+            }).format(value / 100);
+        };
+
+        // Displays results or errors, with animation
+        const displayResult = (element, message, isError = false) => {
+            element.classList.remove('error');
+            element.classList.toggle('error', isError);
+            element.innerHTML = message; // Use innerHTML for potential line breaks or bolding
+            element.style.animation = 'none'; // Reset animation
+            void element.offsetWidth; // Trigger reflow
+            element.style.animation = 'fadeIn 0.6s ease-out';
+        };
+
+        // Input Validation with error message display
+        const validateInput = (inputObj, min, max = Infinity, errorMessage) => {
+            const element = inputObj.element;
+            const errorDiv = inputObj.error;
+            const value = parseFloat(element.value);
+
+            if (isNaN(value) || value < min || value > max) {
+                element.style.borderColor = '#ff6347'; // Red border for error
+                if (errorDiv) {
+                    errorDiv.textContent = errorMessage;
+                }
+                return null;
+            } else {
+                element.style.borderColor = ''; // Reset border
+                if (errorDiv) {
+                    errorDiv.textContent = ''; // Clear error message
+                }
+                return value;
+            }
+        };
+
+        // --- Navigation & UI Handlers ---
+
+        DOM.tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and calculators
+                DOM.tabs.forEach(t => t.classList.remove('active'));
+                DOM.calculators.forEach(s => s.classList.remove('active'));
+
+                // Add active class to clicked tab and its target calculator
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.target).classList.add('active');
+
+                // Destroy all existing Chart.js instances to prevent conflicts/memory leaks
+                for (const chartId in currentCharts) {
+                    if (currentCharts[chartId]) {
+                        currentCharts[chartId].destroy();
+                        currentCharts[chartId] = null;
+                    }
+                }
+
+                // If ads are integrated, ensure they are re-initialized or refreshed
+                // refreshAds(); // Call a function to refresh ads if using a dynamic ad platform
+            });
+        });
+
+        // Placeholder for ad refresh logic (would interact with ad network SDK)
+        const refreshAds = () => {
+            console.log('Refreshing ads...');
+            // In a real scenario, this would trigger calls to the ad network's API
+            // For AdSense, it might involve pushing commands to `adsbygoogle` array
+            // (window.adsbygoogle = window.adsbygoogle || []).push({});
+            // Or re-initializing ad units in specific divs.
+        };
+
+        // --- Calculator Logic ---
+
+        // 1. Compound Interest
+        function calcCompound() {
+            const P = validateInput(DOM.inputs.ccPrincipal, 0, Infinity, 'Enter a non-negative principal.');
+            const r_annual = validateInput(DOM.inputs.ccRate, 0, Infinity, 'Enter a non-negative annual rate.') / 100;
+            const t = validateInput(DOM.inputs.ccYears, 1, Infinity, 'Enter at least 1 year.');
+            const n = parseInt(DOM.inputs.ccFrequency.element.value);
+
+            if (P === null || r_annual === null || t === null || isNaN(n)) {
+                displayResult(DOM.inputs.ccResult.element, 'Please correct the input errors.', true);
+                return;
+            }
+
+            const r_period = r_annual / n;
+            const total_periods = t * n;
+
+            if (total_periods === 0) {
+                displayResult(DOM.inputs.ccResult.element, 'Years and/or frequency cannot be zero.', true);
+                return;
+            }
+
+            const A = P * Math.pow(1 + r_period, total_periods);
+            const interestEarned = A - P;
+
+            displayResult(DOM.inputs.ccResult.element,
+                `Final Amount: <strong>${formatCurrency(A)}</strong><br>Interest Earned: ${formatCurrency(interestEarned)}`
+            );
+        }
+
+        // 2. Loan Payment
+        function calcLoan() {
+            const L = validateInput(DOM.inputs.loanAmount, 0, Infinity, 'Enter a non-negative loan amount.');
+            const r_annual = validateInput(DOM.inputs.loanRate, 0, Infinity, 'Enter a non-negative annual rate.');
+            const years = validateInput(DOM.inputs.loanYears, 1, Infinity, 'Enter at least 1 year.');
+
+            if (L === null || r_annual === null || years === null) {
+                displayResult(DOM.inputs.loanResult.element, 'Please correct the input errors.', true);
+                return;
+            }
+
+            const r_monthly = (r_annual / 100) / 12;
+            const n_months = years * 12;
+
+            if (n_months === 0) {
+                displayResult(DOM.inputs.loanResult.element, 'Term cannot be zero.', true);
+                return;
+            }
+
+            let M;
+            if (r_monthly === 0) {
+                M = L / n_months;
+            } else {
+                M = (L * r_monthly) / (1 - Math.pow(1 + r_monthly, -n_months));
+            }
+
+            const totalPaid = M * n_months;
+            const totalInterest = totalPaid - L;
+
+            displayResult(DOM.inputs.loanResult.element,
+                `Monthly Payment: <strong>${formatCurrency(M)}</strong><br>Total Paid: ${formatCurrency(totalPaid)}<br>Total Interest: ${formatCurrency(totalInterest)}`
+            );
+        }
+
+        // 3. Custom Expression
+        function calcCustom() {
+            const expression = DOM.inputs.customExpression.element.value;
+            // Basic sanitization for client-side evaluation.
+            // For a real enterprise app, *never* execute user input directly like this on the backend.
+            // Use a dedicated, secure math expression parser library.
+            const safeExpression = expression.replace(/[^0-9+\-*/(). Math]/g, ''); // Allow basic math and 'Math.'
+
+            if (safeExpression.trim() === '') {
+                displayResult(DOM.inputs.customResult.element, 'Expression cannot be empty.', true);
+                return;
+            }
+
+            try {
+                // Using new Function() is dangerous with untrusted input in production.
+                // This is for demonstration only in this embedded context.
+                const result = new Function('return ' + safeExpression)();
+                if (typeof result === 'number' && !isNaN(result)) {
+                    displayResult(DOM.inputs.customResult.element, `Result: <strong>${result.toFixed(4)}</strong>`);
+                } else {
+                    displayResult(DOM.inputs.customResult.element, 'Invalid expression or non-numeric result.', true);
+                }
+            } catch (e) {
+                displayResult(DOM.inputs.customResult.element, `Error in expression: ${e.message}`, true);
+            }
+        }
+
+        // 4. ROI
+        function calcROI() {
+            const inv = validateInput(DOM.inputs.roiInvest, 0, Infinity, 'Enter a non-negative initial investment.');
+            const gain = validateInput(DOM.inputs.roiGain, -Infinity, Infinity, 'Enter a valid net profit/loss.');
+
+            if (inv === null || gain === null) {
+                displayResult(DOM.inputs.roiResult.element, 'Please correct the input errors.', true);
+                return;
+            }
+            if (inv === 0) {
+                displayResult(DOM.inputs.roiResult.element, 'Initial investment cannot be zero for ROI calculation.', true);
+                return;
+            }
+
+            const roi = (gain / inv) * 100;
+            displayResult(DOM.inputs.roiResult.element, `ROI: <strong>${roi.toFixed(2)}%</strong>`);
+        }
+
+        // 5. NPV & IRR
+        let npvChartInstance;
+        function calcNPV_IRR() {
+            const initialInvestment = validateInput(DOM.inputs.npvInitialInvestment, -Infinity, Infinity, 'Enter a valid initial investment.');
+            const cashFlowsStr = DOM.inputs.npvCashFlows.element.value;
+            const discountRate = validateInput(DOM.inputs.npvDiscountRate, 0, Infinity, 'Enter a non-negative discount rate.');
+
+            if (initialInvestment === null || cashFlowsStr === null || discountRate === null) {
+                displayResult(DOM.inputs.npvIrrResult.element, 'Please correct the input errors.', true);
+                return;
+            }
+
+            const cashFlows = cashFlowsStr.split(',').map(Number).filter(n => !isNaN(n));
+            if (cashFlows.length === 0) {
+                displayResult(DOM.inputs.npvIrrResult.element, 'Please enter at least one cash flow.', true);
+                return;
+            }
+
+            // Calculate NPV
+            const calculateNPV = (rate, flows, initialInv) => {
+                let currentNPV = initialInv;
+                flows.forEach((cf, i) => {
+                    currentNPV += cf / Math.pow(1 + (rate / 100), i + 1);
+                });
+                return currentNPV;
+            };
+
+            const npv = calculateNPV(discountRate, cashFlows, initialInvestment);
+
+            // Calculate IRR (using Newton-Raphson method for approximation)
+            const findIRR = (flows, initialInv) => {
+                let irrGuess = 0.1; // Initial guess for IRR (10%)
+                const maxIterations = 1000;
+                const tolerance = 1e-6;
+
+                for (let i = 0; i < maxIterations; i++) {
+                    const npvAtGuess = calculateNPV(irrGuess * 100, flows, initialInv);
+                    // Derivative of NPV for Newton-Raphson
+                    const derivative = flows.reduce((sum, cf, j) => {
+                        const denominator = Math.pow(1 + irrGuess, j + 2);
+                        return sum - (cf * (j + 1)) / denominator;
+                    }, 0);
+
+                    if (Math.abs(derivative) < tolerance) break; // Avoid division by zero or very small numbers
+
+                    const nextGuess = irrGuess - npvAtGuess / derivative;
+                    if (Math.abs(nextGuess - irrGuess) < tolerance) {
+                        return nextGuess;
+                    }
+                    irrGuess = nextGuess;
+                }
+                return NaN; // Could not converge
+            };
+
+            const irr = findIRR(cashFlows, initialInvestment);
+
+            displayResult(DOM.inputs.npvIrrResult.element,
+                `NPV: <strong>${formatCurrency(npv)}</strong><br>IRR: ${isNaN(irr) ? 'N/A' : formatPercentage(irr * 100)}`
+            );
+
+            // Charting NPV vs. Discount Rate
+            if (npvChartInstance) npvChartInstance.destroy();
+            const rates = Array.from({length: 31}, (_, i) => (i * 0.01) - 0.15); // -15% to 15% range for more context
+            const npvValues = rates.map(rate => calculateNPV(rate * 100, cashFlows, initialInvestment));
+
+            npvChartInstance = new Chart(DOM.inputs.npvChartCtx, {
+                type: 'line',
+                data: {
+                    labels: rates.map(r => formatPercentage(r * 100)),
+                    datasets: [{
+                        label: 'Net Present Value',
+                        data: npvValues,
+                        borderColor: varStyle('--color-accent'),
+                        backgroundColor: 'rgba(0, 242, 242, 0.2)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: varStyle('--color-primary'),
+                        pointBorderColor: varStyle('--color-background-light')
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: varStyle('--color-text-light'), font: { size: 14 } } },
+                        tooltip: { callbacks: { label: (context) => `NPV: ${formatCurrency(context.parsed.y)}` } },
+                        datalabels: { display: false } // No datalabels for line chart
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Discount Rate', color: varStyle('--color-text-secondary') },
+                            ticks: { color: varStyle('--color-text-secondary'), autoSkip: true, maxRotation: 45, minRotation: 45 },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        y: {
+                            title: { display: true, text: 'NPV ($)', color: varStyle('--color-text-secondary') },
+                            ticks: { color: varStyle('--color-text-secondary') },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        }
+                    }
+                }
+            });
+            currentCharts.npvChart = npvChartInstance;
+        }
+
+
+        // 6. Amortization Schedule
+        let amortChartInstance;
+        function genAmort() {
+            const A = validateInput(DOM.inputs.amAmount, 0, Infinity, 'Enter a non-negative loan amount.');
+            const annual_rate = validateInput(DOM.inputs.amRate, 0, Infinity, 'Enter a non-negative annual rate.');
+            const years = validateInput(DOM.inputs.amYears, 1, Infinity, 'Enter at least 1 year.');
+
+            if (A === null || annual_rate === null || years === null) {
+                displayResult(DOM.inputs.amortTable.element, '<div class="result error">Please correct the input errors.</div>', true);
+                return;
+            }
+
+            const r_monthly = (annual_rate / 100) / 12;
+            const n_months = years * 12;
+
+            if (n_months === 0) {
+                 displayResult(DOM.inputs.amortTable.element, '<div class="result error">Term cannot be zero.</div>', true);
+                 return;
+            }
+
+            let M;
+            if (r_monthly === 0) {
+                M = A / n_months;
+            } else {
+                M = (A * r_monthly) / (1 - Math.pow(1 + r_monthly, -n_months));
+            }
+
+            let html = '<table><thead><tr><th>Month</th><th>Monthly Payment</th><th>Interest Paid</th><th>Principal Paid</th><th>Remaining Balance</th></tr></thead><tbody>';
+            let balance = A;
+            const principalPayments = [];
+            const interestPayments = [];
+            const labels = [];
+            let totalInterestPaid = 0;
+            let totalPrincipalPaid = 0;
+
+            for (let i = 1; i <= n_months; i++) {
+                const interest = balance * r_monthly;
+                let principal = M - interest;
+
+                // Adjust last payment to zero out balance
+                if (i === n_months) {
+                    principal = balance;
+                    M = balance + interest; // Adjust final payment amount
+                }
+
+                balance -= principal;
+                totalInterestPaid += interest;
+                totalPrincipalPaid += principal;
+
+                principalPayments.push(principal);
+                interestPayments.push(interest);
+                labels.push(`Month ${i}`);
+
+                html += `<tr>
+                            <td>${i}</td>
+                            <td>${formatCurrency(M)}</td>
+                            <td>${formatCurrency(interest)}</td>
+                            <td>${formatCurrency(principal)}</td>
+                            <td>${formatCurrency(balance)}</td>
+                        </tr>`;
+            }
+            html += `<tr>
+                        <td colspan="2"><strong>Totals</strong></td>
+                        <td><strong>${formatCurrency(totalInterestPaid)}</strong></td>
+                        <td><strong>${formatCurrency(totalPrincipalPaid)}</strong></td>
+                        <td>${formatCurrency(0)}</td>
+                    </tr>`;
+            html += '</tbody></table>';
+            DOM.inputs.amortTable.element.innerHTML = html;
+
+            // Charting amortization breakdown
+            if (amortChartInstance) amortChartInstance.destroy();
+            amortChartInstance = new Chart(DOM.inputs.amortChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: labels.filter((_,i) => i % Math.ceil(n_months / 12) === 0), // Show labels yearly to avoid clutter
+                    datasets: [
+                        {
+                            label: 'Principal Paid',
+                            data: principalPayments.filter((_,i) => i % Math.ceil(n_months / 12) === 0),
+                            backgroundColor: varStyle('--color-primary'),
+                            stack: 'payments'
+                        },
+                        {
+                            label: 'Interest Paid',
+                            data: interestPayments.filter((_,i) => i % Math.ceil(n_months / 12) === 0),
+                            backgroundColor: varStyle('--color-accent'),
+                            stack: 'payments'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: varStyle('--color-text-light'), font: { size: 14 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`
+                            }
+                        },
+                        datalabels: { // Show data labels on bars
+                            color: varStyle('--color-text-light'),
+                            font: { size: 10, weight: 'bold' },
+                            formatter: (value) => value > (M/5) ? formatCurrency(value, '') : '', // Only show for larger segments
+                            display: (context) => context.dataset.data[context.dataIndex] > M / 5 // Only display if significant value
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Month', color: varStyle('--color-text-secondary') },
+                            ticks: { color: varStyle('--color-text-secondary') },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Amount ($)', color: varStyle('--color-text-secondary') },
+                            ticks: { color: varStyle('--color-text-secondary') },
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            stacked: true
+                        }
+                    }
+                }
+            });
+            currentCharts.amortChart = amortChartInstance;
+        }
+
+        // 7. Statistics & Chart.js
+        let statsChartInstance;
+        function drawStats() {
+            const labels = DOM.inputs.statsLabels.element.value.split(',').map(s => s.trim()).filter(s => s !== '');
+            const values = DOM.inputs.statsValues.element.value.split(',').map(Number).filter(v => !isNaN(v));
+            const chartType = DOM.inputs.statsChartType.element.value;
+
+            if (labels.length === 0 || values.length === 0 || labels.length !== values.length) {
+                displayResult(DOM.inputs.statsSummary.element, 'Please enter valid labels and values, and ensure they match in number.', true);
+                return;
+            }
+
+            const total = values.reduce((a, b) => a + b, 0);
+            if (total === 0 && (chartType === 'pie' || chartType === 'doughnut')) {
+                displayResult(DOM.inputs.statsSummary.element, 'Total value cannot be zero for Pie/Doughnut charts.', true);
+                return;
+            }
+
+            // Calculate advanced statistics
+            const mean = total / values.length;
+            const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / values.length;
+            const stdDev = Math.sqrt(variance);
+            const minVal = Math.min(...values);
+            const maxVal = Math.max(...values);
+
+            let summaryHtml = `
+                <p><strong>Total Sum:</strong> ${formatCurrency(total)}</p>
+                <p><strong>Average:</strong> ${formatCurrency(mean)}</p>
+                <p><strong>Standard Deviation:</strong> ${stdDev.toFixed(2)}</p>
+                <p><strong>Minimum Value:</strong> ${formatCurrency(minVal)}</p>
+                <p><strong>Maximum Value:</strong> ${formatCurrency(maxVal)}</p>
+                <p><strong>Distribution:</strong> ${values.map((v, i) => `${labels[i]}: ${formatPercentage((v / total) * 100)}`).join(' | ')}</p>
+            `;
+            displayResult(DOM.inputs.statsSummary.element, summaryHtml);
+
+            // Destroy previous chart if exists
+            if (statsChartInstance) statsChartInstance.destroy();
+
+            statsChartInstance = new Chart(DOM.inputs.statsChartCtx, {
+                type: chartType,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: [
+                            'rgba(0, 123, 255, 0.7)',    // Primary Blue
+                            'rgba(0, 242, 242, 0.7)',    // Accent Cyan
+                            'rgba(255, 193, 7, 0.7)',    // Yellow
+                            'rgba(220, 53, 69, 0.7)',    // Red
+                            'rgba(23, 162, 184, 0.7)',   // Teal
+                            'rgba(108, 117, 125, 0.7)',  // Secondary Gray
+                            'rgba(153, 102, 255, 0.7)',  // Purple
+                            'rgba(255, 159, 64, 0.7)'    // Orange
+                        ],
+                        borderColor: varStyle('--color-background-dark'),
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: varStyle('--color-text-light'),
+                                font: { size: 14 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== undefined) { // For bar chart
+                                        label += formatCurrency(context.parsed.y);
+                                    } else if (context.parsed) { // For pie/doughnut chart
+                                        label += formatCurrency(context.parsed);
+                                    }
+                                    if (chartType === 'pie' || chartType === 'doughnut') {
+                                        const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
+                                        const percentage = (context.parsed / total * 100).toFixed(1);
+                                        label += ` (${percentage}%)`;
+                                    }
+                                    return label;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            color: varStyle('--color-background-dark'), // Dark text for labels on colorful charts
+                            font: { weight: 'bold', size: 12 },
+                            formatter: (value, context) => {
+                                if (chartType === 'pie' || chartType === 'doughnut') {
+                                    const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
+                                    const percentage = (value / total * 100).toFixed(1);
+                                    return `${percentage}%`;
+                                }
+                                return formatCurrency(value, ''); // Only value for bar chart
+                            },
+                            textShadow: { // Add subtle shadow for readability on dark backgrounds
+                                blur: 3,
+                                color: 'rgba(255,255,255,0.5)'
+                            }
+                        }
+                    },
+                    scales: (chartType === 'bar') ? {
+                        x: {
+                            ticks: { color: varStyle('--color-text-secondary') },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        y: {
+                            ticks: { color: varStyle('--color-text-secondary') },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        }
+                    } : {}
+                }
+            });
+            currentCharts.statsChart = statsChartInstance;
+        }
+
+        // 8. Crypto API & Chart.js
+        let cryptoChartInstance;
+        async function fetchCrypto() {
+            displayResult(DOM.inputs.cryptoResult.element, 'Loading live cryptocurrency prices...', false);
+            try {
+                // In a production environment, this request should go to your backend service
+                // Your backend would then securely call CoinGecko API and return data
+                // const response = await fetch('/api/crypto/prices');
+                const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,cardano,solana,dogecoin,ripple,litecoin,polkadot&vs_currencies=usd');
+                
+                if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+                const data = await response.json();
+
+                const cryptoData = [
+                    { id: 'bitcoin', name: 'Bitcoin' },
+                    { id: 'ethereum', name: 'Ethereum' },
+                    { id: 'cardano', name: 'Cardano' },
+                    { id: 'solana', name: 'Solana' },
+                    { id: 'dogecoin', name: 'Dogecoin' },
+                    { id: 'ripple', name: 'XRP' },
+                    { id: 'litecoin', name: 'Litecoin' },
+                    { id: 'polkadot', name: 'Polkadot' }
+                ];
+
+                const labels = [];
+                const prices = [];
+                const displayMessages = [];
+
+                cryptoData.forEach(crypto => {
+                    if (data[crypto.id] && data[crypto.id].usd) {
+                        labels.push(crypto.name);
+                        prices.push(data[crypto.id].usd);
+                        displayMessages.push(`${crypto.name}: <strong>${formatCurrency(data[crypto.id].usd)}</strong>`);
+                    }
+                });
+
+                if (prices.length === 0) {
+                    displayResult(DOM.inputs.cryptoResult.element, 'Could not load cryptocurrency data or no prices found.', true);
+                    return;
+                }
+
+                displayResult(DOM.inputs.cryptoResult.element, displayMessages.join(' | '));
+
+                // Destroy previous chart if exists
+                if (cryptoChartInstance) cryptoChartInstance.destroy();
+
+                cryptoChartInstance = new Chart(DOM.inputs.cryptoChartCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: prices,
+                            backgroundColor: [
+                                '#f7931a', // Bitcoin
+                                '#627eea', // Ethereum
+                                '#3cc48a', // Cardano
+                                '#9945FF', // Solana
+                                '#CB2D03', // Dogecoin
+                                '#23292F', // XRP
+                                '#BFBFBF', // Litecoin
+                                '#E6007A'  // Polkadot
+                            ],
+                            borderColor: varStyle('--color-background-dark'),
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    color: varStyle('--color-text-light'),
+                                    font: { size: 14 }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed) {
+                                            label += formatCurrency(context.parsed);
+                                            const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
+                                            const percentage = (context.parsed / total * 100).toFixed(1);
+                                            label += ` (${percentage}%)`;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                color: varStyle('--color-background-dark'),
+                                font: { weight: 'bold', size: 12 },
+                                formatter: (value, context) => {
+                                    const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
+                                    const percentage = (value / total * 100).toFixed(1);
+                                    if (percentage > 5) return `${percentage}%`; // Only show if segment is large enough
+                                    return '';
+                                },
+                                textShadow: {
+                                    blur: 3,
+                                    color: 'rgba(255,255,255,0.5)'
+                                }
+                            }
+                        }
+                    }
+                });
+                currentCharts.cryptoChart = cryptoChartInstance;
+            } catch (error) {
+                console.error('Error fetching crypto data:', error);
+                displayResult(DOM.inputs.cryptoResult.element, `Error loading crypto data. Please try again later. Details: ${error.message}`, true);
+            }
+        }
+
+        // 9. Currency Converter (exchangerate.host)
+        async function convertFX() {
+            const amount = validateInput(DOM.inputs.fxAmount, 0, Infinity, 'Enter a non-negative amount.');
+            const fromCurrency = DOM.inputs.fxFrom.element.value;
+            const toCurrency = DOM.inputs.fxTo.element.value;
+
+            if (amount === null) {
+                displayResult(DOM.inputs.fxResult.element, 'Please correct the input error.', true);
+                return;
+            }
+            if (fromCurrency === toCurrency) {
+                displayResult(DOM.inputs.fxResult.element, 'Cannot convert to the same currency.', true);
+                return;
+            }
+
+            displayResult(DOM.inputs.fxResult.element, 'Performing conversion...', false);
+
+            try {
+                // In production, this would go through your backend for API key security
+                // const response = await fetch(`/api/fx/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amount}`);
+                const response = await fetch(`https://api.exchangerate.host/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amount}`);
+                
+                if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+                const data = await response.json();
+
+                if (data.success && data.result !== undefined) {
+                    displayResult(DOM.inputs.fxResult.element,
+                        `${formatCurrency(amount, fromCurrency)} = <strong>${formatCurrency(data.result, toCurrency)}</strong>`
+                    );
+                } else {
+                    displayResult(DOM.inputs.fxResult.element, `Conversion error: ${data.error ? data.error.info : 'Unknown error'}`, true);
+                }
+            } catch (error) {
+                console.error('Error fetching exchange rate:', error);
+                displayResult(DOM.inputs.fxResult.element, `Error connecting to currency service. Please try again. Details: ${error.message}`, true);
+            }
+        }
+
+        // 10. WASM Demo (Placeholder for real WASM module)
+        // In a real application, you would compile a C/C++/Rust function (e.g., for complex math, encryption)
+        // to a .wasm file, load it, and call its exported functions.
+        // For demonstration, this is a dummy WASM module that just exports a simple function.
+        // The actual `pow` calculation here will be a JavaScript fallback for realism without a real WASM binary.
+
+        // Minimal WASM binary for `(module (func (export "pow")))` (no actual logic)
+        // For a real `pow` function, the binary would be much larger and contain compiled code.
+        const wasmCode = Uint8Array.from(atob('AGFzbQEAAAABAGAAAQJgAn9_AX8DBAMBAAcGAQFwb3cwAAcGAQtwb3dfcmVhbDAACgkBAQEACwkCAQACAwsCAAEABAACAAwBAQABAQ0BAAELCwIBAAE='), c=>c.charCodeAt(0));
+        let wasmInstance;
+
+        WebAssembly.instantiate(wasmCode)
+            .then(wm => {
+                wasmInstance = wm.instance;
+                console.log('WASM module loaded successfully (placeholder).');
+                // In a real scenario, you'd check for `wasmInstance.exports.yourFunctionName`
+                // For this example, we will just use Math.pow for the actual calc.
+            })
+            .catch(error => {
+                console.error('Error loading WASM module:', error);
+                displayResult(DOM.inputs.wasmResult.element, 'Error: WASM module failed to load. Check console.', true);
+            });
+
+        function calcWasm() {
+            const base = validateInput(DOM.inputs.wasmBase, 0, Infinity, 'Enter a non-negative base.');
+            const exponent = validateInput(DOM.inputs.wasmExp, 0, Infinity, 'Enter a non-negative exponent.');
+
+            if (base === null || exponent === null) {
+                displayResult(DOM.inputs.wasmResult.element, 'Please correct the input errors.', true);
+                return;
+            }
+
+            if (!wasmInstance) {
+                displayResult(DOM.inputs.wasmResult.element, 'WASM module not loaded. Using JavaScript fallback...', false);
+                const jsResult = Math.pow(base, exponent);
+                displayResult(DOM.inputs.wasmResult.element, `JS Fallback: ${base}^${exponent} = <strong>${jsResult}</strong>`);
+                return;
+            }
+
+            // Simulate WASM calculation - replace with actual WASM export call if available
+            // e.g., const result = wasmInstance.exports.pow(base, exponent);
+            const simulatedWasmResult = Math.pow(base, exponent); // Using JS for demo realism
+
+            displayResult(DOM.inputs.wasmResult.element, `WASM Calculation: ${base}^${exponent} = <strong>${simulatedWasmResult}</strong>`);
+        }
+
+        // 11. Monte Carlo Simulation
+        let simChartInstance;
+        function runMonteCarlo() {
+            const initialCapital = validateInput(DOM.inputs.simInitialCapital, 0, Infinity, 'Enter non-negative initial capital.');
+            const avgReturn = validateInput(DOM.inputs.simAvgReturn, -100, Infinity, 'Enter a valid average return.');
+            const stdDev = validateInput(DOM.inputs.simStdDev, 0, Infinity, 'Enter non-negative standard deviation.');
+            const years = validateInput(DOM.inputs.simYears, 1, Infinity, 'Enter at least 1 year.');
+            const numRuns = validateInput(DOM.inputs.simRuns, 100, 10000, 'Runs between 100 and 10000.');
+
+            if (initialCapital === null || avgReturn === null || stdDev === null || years === null || numRuns === null) {
+                displayResult(DOM.inputs.simResult.element, 'Please correct the input errors.', true);
+                return;
+            }
+
+            displayResult(DOM.inputs.simResult.element, '<lottie-player src="https://assets2.lottiefiles.com/packages/lf20_c0x8a3.json" background="transparent" speed="1" style="width: 50px; height: 50px; margin: auto;" loop autoplay></lottie-player><br>Running simulations...', false);
+
+            // Offload heavy computation to a Web Worker or Backend for real enterprise apps
+            // For this demo, run directly in main thread for simplicity.
+            setTimeout(() => { // Simulate async computation
+                const dailyReturn = avgReturn / 25200; // 252 trading days per year
+                const dailyStdDev = stdDev / Math.sqrt(252) / 100;
+
+                const finalPortfolios = [];
+                let maxPortfolio = initialCapital;
+                let minPortfolio = initialCapital;
+
+                for (let i = 0; i < numRuns; i++) {
+                    let currentCapital = initialCapital;
+                    for (let j = 0; j < years * 252; j++) {
+                        const randomFactor = gaussianRandom() * dailyStdDev + dailyReturn;
+                        currentCapital *= (1 + randomFactor);
+                    }
+                    finalPortfolios.push(currentCapital);
+                    if (currentCapital > maxPortfolio) maxPortfolio = currentCapital;
+                    if (currentCapital < minPortfolio) minPortfolio = currentCapital;
+                }
+
+                finalPortfolios.sort((a, b) => a - b);
+
+                const meanPortfolio = finalPortfolios.reduce((a,b)=>a+b)/numRuns;
+                const medianPortfolio = finalPortfolios[Math.floor(numRuns * 0.50)];
+                const percentile10 = finalPortfolios[Math.floor(numRuns * 0.10)];
+                const percentile90 = finalPortfolios[Math.floor(numRuns * 0.90)];
+
+                displayResult(DOM.inputs.simResult.element,
+                    `<h4>Simulation Results (${numRuns} Runs over ${years} Years):</h4>` +
+                    `<p><strong>Average Final Capital:</strong> ${formatCurrency(meanPortfolio)}</p>` +
+                    `<p><strong>Median (50th Percentile):</strong> ${formatCurrency(medianPortfolio)}</p>` +
+                    `<p><strong>10th Percentile (Worst Case):</strong> ${formatCurrency(percentile10)}</p>` +
+                    `<p><strong>90th Percentile (Best Case):</strong> ${formatCurrency(percentile90)}</p>`
+                );
+
+                // Charting distribution of final portfolio values (Histogram)
+                if (simChartInstance) simChartInstance.destroy();
+
+                const numBins = 20;
+                const binSize = (maxPortfolio - minPortfolio) / numBins;
+                const bins = Array(numBins).fill(0);
+                const binLabels = [];
+
+                for (let i = 0; i < numBins; i++) {
+                    const lowerBound = minPortfolio + i * binSize;
+                    const upperBound = lowerBound + binSize;
+                    binLabels.push(`${formatCurrency(lowerBound, '').split('.')[0]}-${formatCurrency(upperBound, '').split('.')[0]}`); // Shorter labels for readability
+                }
+
+                finalPortfolios.forEach(val => {
+                    const binIndex = Math.min(Math.floor((val - minPortfolio) / binSize), numBins - 1);
+                    bins[binIndex]++;
+                });
+
+                simChartInstance = new Chart(DOM.inputs.simChartCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: binLabels,
+                        datasets: [{
+                            label: 'Frequency of Final Capital',
+                            data: bins,
+                            backgroundColor: varStyle('--color-primary'),
+                            borderColor: varStyle('--color-background-dark'),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { labels: { color: varStyle('--color-text-light'), font: { size: 14 } } },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `Occurrences: ${context.parsed.y}`
+                                }
+                            },
+                            datalabels: { display: false }
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'Final Capital ($)', color: varStyle('--color-text-secondary') },
+                                ticks: { color: varStyle('--color-text-secondary'), autoSkip: true, maxRotation: 45, minRotation: 45 },
+                                grid: { color: 'rgba(255,255,255,0.1)' }
+                            },
+                            y: {
+                                title: { display: true, text: 'Number of Simulations', color: varStyle('--color-text-secondary') },
+                                ticks: { color: varStyle('--color-text-secondary') },
+                                grid: { color: 'rgba(255,255,255,0.1)' }
+                            }
+                        }
+                    }
+                });
+                currentCharts.simChart = simChartInstance;
+            }, 100); // Simulate network/computation delay
+        }
+
+        // Function to generate a random number from a standard normal distribution (Box-Muller transform)
+        function gaussianRandom() {
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random(); // Converting [0,1) to (0,1)
+            while (v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+        }
+
+        // 12. Premium Features & Monetization
+        function redirectToSubscription() {
+            alert('Redirecting to Financiator Pro Premium Subscription Page! (This would be a real payment gateway in production)');
+            // In a real application:
+            // window.location.href = 'https://your-premium-subscription-page.com';
+        }
+
+
+        // --- Initial Application Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Activate the first tab and its content by default
+            DOM.tabs[0].classList.add('active');
+            DOM.calculators[0].classList.add('active');
+
+            // Set up initial Chart.js defaults for better aesthetics
+            Chart.defaults.color = varStyle('--color-text-light');
+            Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.2)';
+            Chart.defaults.font.family = 'Inter';
+            Chart.defaults.font.size = 13;
+            Chart.defaults.plugins.tooltip.backgroundColor = varStyle('--color-background-dark');
+            Chart.defaults.plugins.tooltip.borderColor = varStyle('--color-accent');
+            Chart.defaults.plugins.tooltip.borderWidth = 1;
+            Chart.defaults.plugins.tooltip.bodyColor = varStyle('--color-text-light');
+            Chart.defaults.plugins.tooltip.titleColor = varStyle('--color-primary');
+
+            // Trigger initial calculations for a live feel on load
+            calcCompound();
+            // Optional: Auto-load crypto data if desired, but can be heavy
+            // fetchCrypto();
+        });
+
+        // Function to handle Google AdSense dynamic loading
+        // In a real scenario, you'd ensure ads load when sections become visible
+        // or based on user interaction, adhering to AdSense policies.
+        function loadAdSenseAds() {
+            if (typeof window.adsbygoogle !== 'undefined') {
+                // Find all ad slots and push them to the adsbygoogle array
+                document.querySelectorAll('.adsbygoogle').forEach(adSlot => {
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                });
+            }
+        }
+
+        // Call this on DOMContentLoaded or after a short delay
+        // to give the ad script time to load
+        setTimeout(loadAdSenseAds, 1000); // Delay by 1 second
+    </script>
 </body>
 </html>
