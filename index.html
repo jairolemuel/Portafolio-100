@@ -1011,7 +1011,7 @@
     </style>
 </head>
 <body>
-  <style>
+<style>
     /* Variables de color (asegúrate de que estas o equivalentes existan en tu :root global) */
     :root {
         --whatsapp-color: #25D366;
@@ -1065,38 +1065,40 @@
         border-radius: 50%; /* Asegura que la imagen sea redonda */
     }
 
-    /* Estilos para la nubecita SVG */
+    /* --- NUEVOS ESTILOS PARA LA NUBECITA SVG --- */
     .fab-tooltip-svg-container {
         position: absolute;
-        bottom: 100%; /* Posiciona arriba del botón */
-        right: 50%;
-        transform: translateX(50%) translateY(10px); /* Ajuste inicial para animación */
+        bottom: 100%; /* Posiciona la parte inferior del contenedor SVG al 100% de la altura del padre (justo encima) */
+        left: 50%; /* Centra horizontalmente en el botón */
+        transform: translateX(-50%) translateY(10px); /* Ajusta para centrar y animar la entrada */
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
         pointer-events: none; /* Para que no bloquee el clic en el FAB */
         width: 120px; /* Ancho de la burbuja */
-        height: auto; /* Altura auto para el contenido */
-        filter: drop-shadow(0 0 8px var(--glow-light-alpha)); /* Brillo para la burbuja */
+        height: 40px; /* Altura de la burbuja para el viewBox del SVG */
+        z-index: 10; /* Asegura que esté sobre el avatar */
+        /* Añade un filtro de sombra para un efecto de brillo neón sutil */
+        filter: drop-shadow(0 0 8px var(--glow-light-alpha));
     }
 
     .contact-fab-button:hover .fab-tooltip-svg-container {
         opacity: 1;
         visibility: visible;
-        transform: translateX(50%) translateY(-10px); /* Se mueve hacia arriba */
+        transform: translateX(-50%) translateY(-10px); /* Se mueve hacia arriba y se muestra */
         animation: fab-tooltip-bob 1.5s infinite ease-in-out; /* Animación de flotar */
     }
 
     /* Animación de "bob" para la nubecita */
     @keyframes fab-tooltip-bob {
-        0% { transform: translateX(50%) translateY(-10px); }
-        50% { transform: translateX(50%) translateY(-15px); }
-        100% { transform: translateX(50%) translateY(-10px); }
+        0% { transform: translateX(-50%) translateY(-10px); }
+        50% { transform: translateX(-50%) translateY(-15px); }
+        100% { transform: translateX(-50%) translateY(-10px); }
     }
 
     .fab-tooltip-svg {
         width: 100%;
-        height: auto;
+        height: 100%;
     }
 
     .fab-tooltip-svg .bubble-path {
@@ -1110,9 +1112,11 @@
         font-size: 14px;
         font-weight: 600;
         fill: var(--color-primary-light); /* Color del texto */
-        text-anchor: middle;
-        dominant-baseline: middle;
+        text-anchor: middle; /* Centra el texto horizontalmente */
+        dominant-baseline: middle; /* Centra el texto verticalmente (más efectivo en SVG) */
     }
+    /* --- FIN NUEVOS ESTILOS PARA LA NUBECITA SVG --- */
+
 
     .contact-fab-options {
         position: absolute;
@@ -1199,13 +1203,17 @@
             height: 60px;
             border-width: 2px;
         }
+        /* Ajustes de responsive para la nubecita SVG */
         .fab-tooltip-svg-container {
             width: 100px; /* Ancho más pequeño para móvil */
-            font-size: 12px;
-            transform: translateX(50%) translateY(5px);
+            height: 35px; /* Altura ajustada */
+            transform: translateX(-50%) translateY(5px);
         }
         .contact-fab-button:hover .fab-tooltip-svg-container {
-            transform: translateX(50%) translateY(-5px);
+            transform: translateX(-50%) translateY(-5px);
+        }
+        .fab-tooltip-svg .bubble-text {
+            font-size: 12px; /* Tamaño de fuente más pequeño en móvil */
         }
         .contact-fab-options {
             bottom: 75px;
@@ -1233,7 +1241,7 @@
                 <text class="bubble-text" x="60" y="17">Contáctame</text>
             </svg>
         </div>
-    </div>
+        </div>
     <div class="contact-fab-options" id="contactFabOptions">
         <a href="mailto:barrientosjairolemuel@gmail.com" target="_blank" rel="noopener noreferrer">
             <svg class="contact-icon" viewBox="0 0 24 24">
@@ -1258,6 +1266,69 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contactFabBtn = document.getElementById('contactFabBtn');
+        const contactFabOptions = document.getElementById('contactFabOptions');
+        // Actualizamos la referencia para usar el nuevo contenedor SVG de la nubecita
+        const fabTooltipSvgContainer = document.getElementById('fabTooltipSvgContainer'); 
+
+        if (contactFabBtn && contactFabOptions && fabTooltipSvgContainer) {
+            // Controlar el despliegue/ocultamiento de las opciones al hacer clic en el botón principal (tu avatar)
+            contactFabBtn.addEventListener('click', (event) => {
+                event.stopPropagation(); 
+                contactFabOptions.classList.toggle('open');
+                
+                // Si las opciones se abren, ocultamos y detenemos la animación de la nubecita
+                if (contactFabOptions.classList.contains('open')) {
+                    fabTooltipSvgContainer.style.opacity = '0';
+                    fabTooltipSvgContainer.style.visibility = 'hidden';
+                    fabTooltipSvgContainer.style.transform = 'translateX(-50%) translateY(10px)'; // Vuelve a la posición inicial (oculta)
+                    fabTooltipSvgContainer.style.animation = 'none'; // Detener la animación
+                }
+            });
+
+            // Cierra las opciones si se hace clic en cualquier lugar fuera del FAB o sus opciones
+            document.addEventListener('click', (event) => {
+                if (!contactFabBtn.contains(event.target) && !contactFabOptions.contains(event.target)) {
+                    contactFabOptions.classList.remove('open');
+                }
+            });
+
+            // Muestra la "nubecita" de "Contáctame" al pasar el mouse por encima del botón
+            contactFabBtn.addEventListener('mouseenter', () => {
+                // Solo muestra la nubecita si las opciones NO están abiertas
+                if (!contactFabOptions.classList.contains('open')) {
+                    fabTooltipSvgContainer.style.opacity = '1';
+                    fabTooltipSvgContainer.style.visibility = 'visible';
+                    fabTooltipSvgContainer.style.transform = 'translateX(-50%) translateY(-10px)'; // Posición final de animación
+                    fabTooltipSvgContainer.style.animation = 'fab-tooltip-bob 1.5s infinite ease-in-out'; // Iniciar animación
+                }
+            });
+
+            // Oculta la "nubecita" al quitar el mouse del botón
+            contactFabBtn.addEventListener('mouseleave', () => {
+                // Solo ocultar si las opciones NO están abiertas para evitar parpadeo y comportamiento no deseado
+                if (!contactFabOptions.classList.contains('open')) {
+                    fabTooltipSvgContainer.style.opacity = '0';
+                    fabTooltipSvgContainer.style.visibility = 'hidden';
+                    fabTooltipSvgContainer.style.transform = 'translateX(-50%) translateY(10px)'; // Vuelve a la posición inicial (oculta)
+                    fabTooltipSvgContainer.style.animation = 'none'; // Detener la animación
+                }
+            });
+            
+            // Cuando las opciones se cierran (por clic fuera), asegurarse de que la nubecita pueda volver a aparecer al hover
+            contactFabOptions.addEventListener('transitionend', () => {
+                // Si las opciones se acaban de cerrar (ya no tienen la clase 'open'), y el mouse está sobre el FAB, volvemos a mostrar la nubecita
+                if (!contactFabOptions.classList.contains('open') && contactFabBtn.matches(':hover')) {
+                     fabTooltipSvgContainer.style.opacity = '1';
+                     fabTooltipSvgContainer.style.visibility = 'visible';
+                     fabTooltipSvgContainer.style.transform = 'translateX(-50%) translateY(-10px)';
+                     fabTooltipSvgContainer.style.animation = 'fab-tooltip-bob 1.5s infinite ease-in-out';
+                }
+            });
+        }
+    });
+</script>
     document.addEventListener('DOMContentLoaded', () => {
         const contactFabContainer = document.getElementById('contact-fab-container');
         const contactFabBtn = document.getElementById('contactFabBtn');
