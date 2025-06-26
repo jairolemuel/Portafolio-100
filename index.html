@@ -1742,7 +1742,7 @@
                 <button class="carousel-nav-btn prev" aria-label="Testimonio anterior">&#10094;</button>
                 <button class="carousel-nav-btn next" aria-label="Siguiente testimonio">&#10095;</button>
             </div>
-       <section id="contact" style="padding: 100px 20px; text-align: center; background: #050a11; color: white;">
+      <section id="contact" style="padding: 100px 20px; text-align: center; background: #050a11; color: white;">
     <h2 class="holographic-text glitch" data-text="Contacto">Contacto</h2>
     <p style="color: var(--color-text-medium);">
         Próximamente: ¡Mi formulario de contacto o detalles de contacto aquí!
@@ -1795,6 +1795,7 @@
 
     <style>
         /* Variables de color (asegúrate de que estas o equivalentes existan en tu :root global) */
+        /* Si ya tienes estas variables definidas globalmente, puedes eliminar este bloque :root {} */
         :root {
             --whatsapp-color: #25D366;
             --linkedin-color: #0A66C2;
@@ -1821,9 +1822,8 @@
             flex-direction: column;
             gap: 10px;
             border: 1px solid var(--color-secondary);
-            /* Importante para este caso */
-            width: 220px; 
-            box-sizing: border-box; /* Incluye padding en el ancho */
+            width: 220px;
+            box-sizing: border-box; /* Incluye padding y border en el ancho total */
         }
 
         .contact-fab-options a {
@@ -1840,6 +1840,7 @@
             overflow: hidden;
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(0, 192, 255, 0.1);
+            box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
         }
 
         .contact-fab-options a:hover {
@@ -1855,6 +1856,8 @@
             margin-right: 12px;
             fill: currentColor;
             transition: fill 0.3s ease, filter 0.3s ease;
+            /* Si los íconos aún se ven cortados, puedes probar con un pequeño padding aquí: */
+            /* padding: 2px; */
         }
 
         .contact-fab-options a[href*="mailto"] {
@@ -1874,15 +1877,15 @@
         /* Estilos específicos para las opciones de contacto en la sección de Contacto (despliegue) */
         .contact-section-options {
             position: absolute;
-            top: calc(100% + 15px); /* Posicionado 15px debajo del botón */
-            left: 50%; /* Centrado horizontalmente */
-            transform: translateX(-50%) scaleY(0); /* Inicia aplastado verticalmente */
-            transform-origin: top center; /* Se despliega desde arriba hacia abajo */
-            z-index: 50; /* Para que esté por encima de otros elementos de la sección */
+            top: calc(100% + 25px); /* AJUSTE CLAVE: Aumentado de 15px a 25px para bajarlo más */
+            left: 50%;
+            transform: translateX(-50%) scaleY(0);
+            transform-origin: top center;
+            z-index: 50;
         }
 
         .contact-section-options.open {
-            transform: translateX(-50%) scaleY(1); /* Se despliega a su altura completa */
+            transform: translateX(-50%) scaleY(1);
             opacity: 1;
             visibility: visible;
         }
@@ -1890,7 +1893,8 @@
         /* Media Queries para Responsividad */
         @media (max-width: 768px) {
             .contact-section-options {
-                width: 190px; /* Ancho ajustado para móvil */
+                width: 190px;
+                max-width: 90%; /* Para pantallas muy pequeñas, que no desborde */
             }
             .contact-fab-options a {
                 font-size: 1rem;
@@ -1899,10 +1903,35 @@
             .contact-fab-options a .contact-icon {
                 width: 20px;
                 height: 20px;
+                min-width: 20px;
                 margin-right: 10px;
             }
         }
     </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactSectionBtn = document.getElementById('contact-section-btn');
+            const contactSectionOptions = document.getElementById('contactSectionOptions');
+
+            if (contactSectionBtn && contactSectionOptions) {
+                contactSectionBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    contactSectionOptions.classList.toggle('open');
+                });
+
+                // Cierra las opciones si se hace clic fuera del botón o de las opciones
+                document.addEventListener('click', (event) => {
+                    if (!contactSectionBtn.contains(event.target) && !contactSectionOptions.contains(event.target)) {
+                        if (contactSectionOptions.classList.contains('open')) {
+                            contactSectionOptions.classList.remove('open');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</section>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
