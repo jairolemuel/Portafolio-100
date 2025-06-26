@@ -1761,12 +1761,12 @@
                 background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
                 color: #fff;
                 cursor: pointer;
-                transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.3s ease; /* Añadido filter para glow */
+                transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.3s ease;
                 box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-                display: flex; /* Para alinear texto y flecha */
+                display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 10px; /* Espacio entre texto y flecha */
+                gap: 10px;
             "
             aria-label="Contáctame ahora"
         >
@@ -1774,7 +1774,7 @@
             <span id="contact-arrow-icon" style="
                 display: flex;
                 align-items: center;
-                transition: transform 0.3s ease; /* Transición para la rotación de la flecha */
+                transition: transform 0.3s ease;
             ">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -1782,38 +1782,17 @@
             </span>
         </button>
 
-        <div id="contactSectionOptions" style="
-            position: absolute;
-            top: calc(100% + 20px); /* Ajuste para que se despliegue debajo del botón */
-            left: 50%;
-            transform: translateX(-50%) scaleY(0); /* Inicialmente oculto y aplastado */
-            transform-origin: top center;
-            opacity: 0;
-            visibility: hidden;
-            transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
-            background: rgba(18, 30, 45, 0.9); /* Fondo similar a card-bg */
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-secondary);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 220px;
-            box-sizing: border-box; /* Incluye padding en el ancho */
-            z-index: 50; /* Para que aparezca por encima de otros elementos */
-        ">
+        <div id="contactSectionOptions">
             <a class="contact-option-item" href="mailto:barrientosjairolemuel@gmail.com" target="_blank" rel="noopener noreferrer" style="
                 display: flex;
                 align-items: center;
                 padding: 10px 15px;
-                color: var(--gmail-color); /* Usar variable de color */
+                color: var(--gmail-color);
                 font-size: 1.1rem;
                 text-decoration: none;
                 border-radius: 10px;
                 background: rgba(0, 0, 0, 0.3);
-                transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease; /* Agregado opacity */
-                opacity: 0; /* Inicialmente oculto para animación escalonada */
-                transform: translateY(10px); /* Ligeramente desplazado para animación */
+                transition: background-color 0.3s ease; /* Sólo estilos que NO animan con .open */
             ">
                 <svg style="width: 24px; height: 24px; margin-right: 12px; fill: currentColor;" viewBox="0 0 24 24">
                     <path d="M22 4H2C0.9 4 0 4.9 0 6V18C0 19.1 0.9 20 2 20H22C23.1 20 24 19.1 24 18V6C24 4.9 23.1 4 22 4ZM22 8L12 15L2 8V6L12 13L22 6V8Z"/>
@@ -1824,14 +1803,12 @@
                 display: flex;
                 align-items: center;
                 padding: 10px 15px;
-                color: var(--whatsapp-color); /* Usar variable de color */
+                color: var(--whatsapp-color);
                 font-size: 1.1rem;
                 text-decoration: none;
                 border-radius: 10px;
                 background: rgba(0, 0, 0, 0.3);
-                transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-                opacity: 0;
-                transform: translateY(10px);
+                transition: background-color 0.3s ease;
             ">
                 <svg style="width: 24px; height: 24px; margin-right: 12px; fill: currentColor;" viewBox="0 0 24 24">
                     <path d="M12 2C6.477 2 2 6.477 2 12C2 17.025 4.862 20.25 9 21.5V18.17C7.625 17.5 7 16.5 7 16C7 14.895 7.9 14 9 14C9.5 14 10 14.25 10.5 14.75L12 16.25L13.5 14.75C14 14.25 14.5 14 15 14C16.1 14 17 14.895 17 16C17 16.5 16.375 17.5 15 18.17V21.5C19.138 20.25 22 17.025 22 12C22 6.477 17.523 2 12 2ZM17 12C16.448 12 16 11.552 16 11C16 10.448 16.448 10 17 10C17.552 10 18 10.448 18 11C18 11.552 17.552 12 17 12ZM7 11C7 11.552 7.448 12 8 12C8.552 12 9 11.552 9 11C9 10.448 8.552 10 8 10C7.448 10 7 10.448 7 11Z"/>
@@ -1847,9 +1824,7 @@
                 text-decoration: none;
                 border-radius: 10px;
                 background: rgba(0, 0, 0, 0.3);
-                transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-                opacity: 0;
-                transform: translateY(10px);
+                transition: background-color 0.3s ease;
             ">
                 <svg style="width: 24px; height: 24px; margin-right: 12px; fill: currentColor;" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.568c0-1.328-.027-3.047-1.852-3.047c-1.853 0-2.136 1.445-2.136 2.956v5.659H9.157V9.725h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.27 2.378 4.27 7.288v6.78Z"/>
@@ -1871,46 +1846,80 @@
             --card-bg: rgba(18, 30, 45, 0.8);
             --color-text-medium: #b0b0b0;
             --glow-color: #00f0ff; /* Color para el efecto de brillo del botón */
+            /* Definición de la función de timing de rebote */
+            --spring-easing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* ESTILOS BASE Y CERRADO PARA contactSectionOptions (AHORA EN BLOQUE CSS) */
+        #contactSectionOptions {
+            position: absolute;
+            top: calc(100% + 20px);
+            left: 50%;
+            transform: translateX(-50%) scaleY(0); /* Cerrado y aplastado */
+            transform-origin: top center;
+            opacity: 0;
+            visibility: hidden;
+            /* Transición para el contenedor principal */
+            transition: transform 0.4s var(--spring-easing), opacity 0.4s ease, visibility 0.4s ease;
+
+            background: rgba(18, 30, 45, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-secondary);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 220px;
+            box-sizing: border-box;
+            z-index: 50;
+        }
+
+        /* ESTILOS ABIERTO PARA contactSectionOptions */
+        #contactSectionOptions.open {
+            transform: translateX(-50%) scaleY(1); /* Se expande al abrir */
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Efecto de brillo para el botón al pasar el mouse */
         #contact-section-btn:hover {
             filter: drop-shadow(0 0 10px var(--glow-color));
-            transform: translateY(-2px); /* Pequeño levantamiento al pasar el mouse */
-        }
-
-        /* Clase para el estado "abierto" del menú de opciones */
-        #contactSectionOptions.open {
-            transform: translateX(-50%) scaleY(1); /* Despliega a su altura completa */
-            opacity: 1;
-            visibility: visible;
+            transform: translateY(-2px);
         }
 
         /* Animación de la flecha en el botón */
         #contact-section-btn.open #contact-arrow-icon {
-            transform: rotate(180deg); /* Rota la flecha 180 grados cuando el menú está abierto */
+            transform: rotate(180deg);
         }
 
         /* Animación escalonada de los elementos del menú cuando se abre */
+        /* Propiedades que SÍ cambian con la animación y deben estar aquí */
+        .contact-option-item {
+            opacity: 0; /* Inicialmente oculto para animación escalonada */
+            transform: translateY(10px); /* Ligeramente desplazado para animación */
+            transition: background-color 0.3s ease, transform 0.3s var(--spring-easing), opacity 0.3s ease;
+        }
+
         #contactSectionOptions.open .contact-option-item {
             opacity: 1;
             transform: translateY(0);
         }
 
+        /* Retardos para la animación escalonada */
         #contactSectionOptions.open .contact-option-item:nth-child(1) {
-            transition-delay: 0.1s; /* Retraso para el primer elemento */
+            transition-delay: 0.1s;
         }
         #contactSectionOptions.open .contact-option-item:nth-child(2) {
-            transition-delay: 0.2s; /* Retraso para el segundo elemento */
+            transition-delay: 0.2s;
         }
         #contactSectionOptions.open .contact-option-item:nth-child(3) {
-            transition-delay: 0.3s; /* Retraso para el tercer elemento */
+            transition-delay: 0.3s;
         }
 
-        /* Estilos básicos para hover en los enlaces, ahora embebidos */
+        /* Estilos básicos para hover en los enlaces */
         #contactSectionOptions a:hover {
             background-color: rgba(0, 192, 255, 0.15) !important;
-            transform: translateX(-5px) !important; /* Mantiene el efecto de desplazamiento lateral */
+            transform: translateX(-5px) !important;
         }
         #contactSectionOptions a svg {
             fill: currentColor;
@@ -1939,14 +1948,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const contactSectionBtn = document.getElementById('contact-section-btn');
             const contactSectionOptions = document.getElementById('contactSectionOptions');
-            const contactArrowIcon = document.getElementById('contact-arrow-icon'); // Referencia al ícono de la flecha
+            const contactArrowIcon = document.getElementById('contact-arrow-icon');
 
             if (contactSectionBtn && contactSectionOptions && contactArrowIcon) {
                 // Manejador de clic para el botón
                 contactSectionBtn.addEventListener('click', (event) => {
                     event.stopPropagation();
-                    const isOpen = contactSectionOptions.classList.toggle('open'); // Toggle de la clase en el menú
-                    contactSectionBtn.classList.toggle('open', isOpen); // Añade/remueve 'open' al botón
+                    const isOpen = contactSectionOptions.classList.toggle('open');
+                    contactSectionBtn.classList.toggle('open', isOpen);
                 });
 
                 // Manejador de clic en el documento para cerrar el menú si se hace clic fuera
@@ -1954,7 +1963,7 @@
                     if (!contactSectionBtn.contains(event.target) && !contactSectionOptions.contains(event.target)) {
                         if (contactSectionOptions.classList.contains('open')) {
                             contactSectionOptions.classList.remove('open');
-                            contactSectionBtn.classList.remove('open'); // También remueve 'open' del botón
+                            contactSectionBtn.classList.remove('open');
                         }
                     }
                 });
