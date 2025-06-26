@@ -1744,21 +1744,16 @@
             </div>
         </section>
 
-        <!-- ==============================
-             Sección de Contacto (completa e integrada)
-             ============================== -->
         <section id="contact" style="padding: 100px 20px; text-align: center; background: #050a11; color: white;">
-            <h2 class="holographic-text glitch" data-text="Contacto">Contacto</h2>
-            <p style="color: var(--color-text-medium);">
-                Próximamente: ¡Mi formulario de contacto o detalles de contacto aquí!
-            </p>
+    <h2 class="holographic-text glitch" data-text="Contacto">Contacto</h2>
+    <p style="color: var(--color-text-medium);">
+        Próximamente: ¡Mi formulario de contacto o detalles de contacto aquí!
+    </p>
 
-            <!-- Botón integrado -->
-            <button
-              id="contact-btn"
-              class="fade-in-up"
-              style="
-                margin-top: 30px;
+    <div style="position: relative; display: inline-block; margin-top: 30px;">
+        <button
+            id="contact-section-btn"  class="fade-in-up"
+            style="
                 padding: 0.75rem 1.5rem;
                 font-family: 'Orbitron', sans-serif;
                 font-size: 1rem;
@@ -1770,13 +1765,35 @@
                 cursor: pointer;
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
                 box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-              "
-              aria-label="Contáctame ahora"
-            >
-              Contáctame ahora
-            </button>
-        </section>
-    </main>
+            "
+            aria-label="Contáctame ahora"
+        >
+            Contáctame ahora
+        </button>
+
+        <div class="contact-fab-options contact-section-options" id="contactSectionOptions">
+            <a href="mailto:barrientosjairolemuel@gmail.com" target="_blank" rel="noopener noreferrer">
+                <svg class="contact-icon" viewBox="0 0 24 24">
+                    <path d="M22 4H2C0.9 4 0 4.9 0 6V18C0 19.1 0.9 20 2 20H22C23.1 20 24 19.1 24 18V6C24 4.9 23.1 4 22 4ZM22 8L12 15L2 8V6L12 13L22 6V8Z"/>
+                </svg>
+                Email
+            </a>
+            <a href="https://wa.me/5493437457636?text=Hola%20Jairo,%20te%20contacto%20desde%20tu%20portafolio." target="_blank" rel="noopener noreferrer">
+                <svg class="contact-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.477 2 2 6.477 2 12C2 17.025 4.862 20.25 9 21.5V18.17C7.625 17.5 7 16.5 7 16C7 14.895 7.9 14 9 14C9.5 14 10 14.25 10.5 14.75L12 16.25L13.5 14.75C14 14.25 14.5 14 15 14C16.1 14 17 14.895 17 16C17 16.5 16.375 17.5 15 18.17V21.5C19.138 20.25 22 17.025 22 12C22 6.477 17.523 2 12 2ZM17 12C16.448 12 16 11.552 16 11C16 10.448 16.448 10 17 10C17.552 10 18 10.448 18 11C18 11.552 17.552 12 17 12ZM7 11C7 11.552 7.448 12 8 12C8.552 12 9 11.552 9 11C9 10.448 8.552 10 8 10C7.448 10 7 10.448 7 11Z"/>
+                </svg>
+                WhatsApp
+            </a>
+            <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer">
+                <svg class="contact-icon" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.568c0-1.328-.027-3.047-1.852-3.047c-1.853 0-2.136 1.445-2.136 2.956v5.659H9.157V9.725h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.27 2.378 4.27 7.288v6.78Z"/>
+                    <path d="M3.555 7.411a3.864 3.864 0 0 1-.035-.765c0-.756.24-1.428.72-1.921c.475-.492 1.139-.739 1.99-.739c.849 0 1.503.247 1.956.739c.454.493.682 1.165.682 1.951a2.896 2.896 0 0 1-.72 1.936c-.48.473-1.144.71-1.99.71c-.85-.001-1.504-.238-1.957-.71c-.454-.492-.681-1.163-.681-1.936ZM5.447 20.452H1.895V9.725h3.552v10.727Z"/>
+                </svg>
+                LinkedIn
+            </a>
+        </div>
+    </div>
+</section>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
