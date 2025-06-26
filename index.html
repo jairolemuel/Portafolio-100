@@ -1742,9 +1742,7 @@
                 <button class="carousel-nav-btn prev" aria-label="Testimonio anterior">&#10094;</button>
                 <button class="carousel-nav-btn next" aria-label="Siguiente testimonio">&#10095;</button>
             </div>
-        </section>
-
-        <section id="contact" style="padding: 100px 20px; text-align: center; background: #050a11; color: white;">
+       <section id="contact" style="padding: 100px 20px; text-align: center; background: #050a11; color: white;">
     <h2 class="holographic-text glitch" data-text="Contacto">Contacto</h2>
     <p style="color: var(--color-text-medium);">
         Próximamente: ¡Mi formulario de contacto o detalles de contacto aquí!
@@ -1752,10 +1750,11 @@
 
     <div style="position: relative; display: inline-block; margin-top: 30px;">
         <button
-            id="contact-section-btn"  class="fade-in-up"
+            id="contact-section-btn"
+            class="fade-in-up"
             style="
                 padding: 0.75rem 1.5rem;
-                font-family: 'Orbitron', sans-serif;
+                font-family: 'Orbitron', sans-serif; /* Asegúrate de que esta fuente esté cargada */
                 font-size: 1rem;
                 text-transform: uppercase;
                 border: none;
@@ -1793,6 +1792,140 @@
             </a>
         </div>
     </div>
+
+    <style>
+        /* Variables de color (asegúrate de que estas o equivalentes existan en tu :root global) */
+        :root {
+            --whatsapp-color: #25D366;
+            --linkedin-color: #0A66C2;
+            --gmail-color: #EA4335;
+            --color-primary-light: #00e5ff; /* Color principal claro para efectos neón */
+            --color-secondary: #8000ff; /* Color secundario para efectos neón */
+            --card-bg: rgba(18, 30, 45, 0.8); /* Fondo de tarjetas/elementos superpuestos */
+            --bezier-smooth: cubic-bezier(0.4, 0, 0.2, 1); /* Curva de animación suave */
+            --color-text-light: #e0e0e0; /* Color de texto claro */
+            --glow-light-alpha: rgba(0, 192, 255, 0.7); /* Brillo para elementos claros */
+            --color-text-medium: #b0b0b0; /* Un color de texto gris medio, usado en tu <p> */
+        }
+
+        /* Estilos generales para las opciones de contacto (reutilizados del FAB) */
+        .contact-fab-options {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 25px var(--color-secondary);
+            padding: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.4s var(--bezier-smooth), opacity 0.4s ease, visibility 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border: 1px solid var(--color-secondary);
+            /* Importante para este caso */
+            width: 220px; 
+            box-sizing: border-box; /* Incluye padding en el ancho */
+        }
+
+        .contact-fab-options a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--color-text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 192, 255, 0.1);
+        }
+
+        .contact-fab-options a:hover {
+            transform: translateX(-5px);
+            background-color: rgba(0, 192, 255, 0.15);
+            box-shadow: 0 0 15px rgba(0, 192, 255, 0.4);
+        }
+
+        .contact-fab-options a .contact-icon {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            margin-right: 12px;
+            fill: currentColor;
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+
+        .contact-fab-options a[href*="mailto"] {
+            color: var(--gmail-color);
+        }
+        .contact-fab-options a[href*="whatsapp"] {
+            color: var(--whatsapp-color);
+        }
+        .contact-fab-options a[href*="linkedin"] {
+            color: var(--linkedin-color);
+        }
+
+        .contact-fab-options a:hover .contact-icon {
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        /* Estilos específicos para las opciones de contacto en la sección de Contacto (despliegue) */
+        .contact-section-options {
+            position: absolute;
+            top: calc(100% + 15px); /* Posicionado 15px debajo del botón */
+            left: 50%; /* Centrado horizontalmente */
+            transform: translateX(-50%) scaleY(0); /* Inicia aplastado verticalmente */
+            transform-origin: top center; /* Se despliega desde arriba hacia abajo */
+            z-index: 50; /* Para que esté por encima de otros elementos de la sección */
+        }
+
+        .contact-section-options.open {
+            transform: translateX(-50%) scaleY(1); /* Se despliega a su altura completa */
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Media Queries para Responsividad */
+        @media (max-width: 768px) {
+            .contact-section-options {
+                width: 190px; /* Ancho ajustado para móvil */
+            }
+            .contact-fab-options a {
+                font-size: 1rem;
+                padding: 10px 12px;
+            }
+            .contact-fab-options a .contact-icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactSectionBtn = document.getElementById('contact-section-btn');
+            const contactSectionOptions = document.getElementById('contactSectionOptions');
+
+            if (contactSectionBtn && contactSectionOptions) {
+                contactSectionBtn.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Evita que el clic se propague y cierre el menú inmediatamente
+                    contactSectionOptions.classList.toggle('open');
+                });
+
+                // Cierra las opciones si se hace clic fuera del botón o de las opciones
+                document.addEventListener('click', (event) => {
+                    if (!contactSectionBtn.contains(event.target) && !contactSectionOptions.contains(event.target)) {
+                        if (contactSectionOptions.classList.contains('open')) {
+                            contactSectionOptions.classList.remove('open');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </section>
 
     <script>
