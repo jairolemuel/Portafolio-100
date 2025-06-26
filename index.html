@@ -1065,31 +1065,62 @@
         border-radius: 50%; /* Asegura que la imagen sea redonda */
     }
 
-    /* --- ESTILOS PARA LA NUBECITA SVG --- */
+    /* --- ESTILOS PARA LA NUBECITA SVG AUTOMÁTICA --- */
     .fab-tooltip-svg-container {
         position: absolute;
         bottom: 100%; /* Posiciona la parte inferior del contenedor SVG al 100% de la altura del padre (justo encima) */
         left: 50%; /* Centra horizontalmente en el botón */
-        transform: translateX(-50%) translateY(10px); /* Ajusta para centrar y animar la entrada */
+        transform: translateX(-50%) translateY(10px); /* Posición inicial, oculta y un poco más baja */
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
         pointer-events: none; /* Para que no bloquee el clic en el FAB */
         width: 120px; /* Ancho de la burbuja */
         height: 40px; /* Altura de la burbuja para el viewBox del SVG */
         z-index: 10; /* Asegura que esté sobre el avatar */
-        /* Añade un filtro de sombra para un efecto de brillo neón sutil */
-        filter: drop-shadow(0 0 8px var(--glow-light-alpha));
+        /* Eliminamos la transición general y el brillo inicial, se controlará por animaciones */
     }
 
-    .contact-fab-button:hover .fab-tooltip-svg-container {
-        opacity: 1;
+    .fab-tooltip-svg-container.show {
+        animation: fab-tooltip-show 0.5s ease-out forwards, fab-tooltip-bob 1.5s infinite ease-in-out 0.5s; /* Entra y luego bobea */
         visibility: visible;
-        transform: translateX(-50%) translateY(-10px); /* Se mueve hacia arriba y se muestra */
-        animation: fab-tooltip-bob 1.5s infinite ease-in-out; /* Animación de flotar */
+        pointer-events: auto; /* Habilita eventos mientras está visible, si fuera necesario interactuar con ella */
     }
 
-    /* Animación de "bob" para la nubecita */
+    .fab-tooltip-svg-container.hide {
+        animation: fab-tooltip-hide 0.5s ease-in forwards; /* Sale */
+        pointer-events: none;
+    }
+    
+    /* Animación de entrada */
+    @keyframes fab-tooltip-show {
+        0% {
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px);
+            filter: drop-shadow(0 0 0px var(--glow-light-alpha)); /* Sin brillo al inicio */
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+            filter: drop-shadow(0 0 8px var(--glow-light-alpha)); /* Brillo al final */
+        }
+    }
+
+    /* Animación de salida */
+    @keyframes fab-tooltip-hide {
+        0% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+            filter: drop-shadow(0 0 8px var(--glow-light-alpha));
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px);
+            filter: drop-shadow(0 0 0px var(--glow-light-alpha));
+            visibility: hidden; /* Asegura que desaparece al final */
+        }
+    }
+
+    /* Animación de "bob" (flotar) que se aplica después de la entrada */
     @keyframes fab-tooltip-bob {
         0% { transform: translateX(-50%) translateY(-10px); }
         50% { transform: translateX(-50%) translateY(-15px); }
@@ -1115,7 +1146,7 @@
         text-anchor: middle; /* Centra el texto horizontalmente */
         dominant-baseline: middle; /* Centra el texto verticalmente (más efectivo en SVG) */
     }
-    /* --- FIN ESTILOS PARA LA NUBECITA SVG --- */
+    /* --- FIN ESTILOS PARA LA NUBECITA SVG AUTOMÁTICA --- */
 
 
     .contact-fab-options {
@@ -1207,10 +1238,6 @@
         .fab-tooltip-svg-container {
             width: 100px; /* Ancho más pequeño para móvil */
             height: 35px; /* Altura ajustada */
-            transform: translateX(-50%) translateY(5px);
-        }
-        .contact-fab-button:hover .fab-tooltip-svg-container {
-            transform: translateX(-50%) translateY(-5px);
         }
         .fab-tooltip-svg .bubble-text {
             font-size: 12px; /* Tamaño de fuente más pequeño en móvil */
@@ -1239,7 +1266,7 @@
         <div class="fab-tooltip-svg-container" id="fabTooltipSvgContainer">
             <svg class="fab-tooltip-svg" viewBox="0 0 120 40">
                 <path class="bubble-path" d="M10 5 Q10 0 15 0 H105 Q110 0 110 5 V28 Q110 33 105 33 H70 L60 38 L50 33 H15 Q10 33 10 28 V5 Z"/>
-                <text class="bubble-text" x="60" y="17">Contáctame</text>
+                <text class="bubble-text" x="60" y="17">¡Contáctame!</text>
             </svg>
         </div>
         </div>
@@ -1272,55 +1299,91 @@
         const contactFabOptions = document.getElementById('contactFabOptions');
         const fabTooltipSvgContainer = document.getElementById('fabTooltipSvgContainer'); 
 
+        let tooltipTimeout; // Para el temporizador de ocultar
+        let tooltipInterval; // Para el temporizador de repetición
+
+        // Función para mostrar la nubecita
+        function showTooltip() {
+            // Solo muestra la nubecita si las opciones de contacto no están abiertas
+            if (!contactFabOptions.classList.contains('open')) {
+                fabTooltipSvgContainer.classList.remove('hide');
+                fabTooltipSvgContainer.classList.add('show');
+                
+                // Ocultar la nubecita después de 10 segundos
+                clearTimeout(tooltipTimeout); // Limpiar cualquier temporizador previo
+                tooltipTimeout = setTimeout(() => {
+                    hideTooltip();
+                }, 10000); // 10 segundos
+            }
+        }
+
+        // Función para ocultar la nubecita
+        function hideTooltip() {
+            fabTooltipSvgContainer.classList.remove('show');
+            fabTooltipSvgContainer.classList.add('hide');
+        }
+
         if (contactFabBtn && contactFabOptions && fabTooltipSvgContainer) {
-            // Controlar el despliegue/ocultamiento de las opciones al hacer clic en el botón principal (tu avatar)
+            // Al cargar la página, la nubecita aparece después de un breve retraso inicial
+            setTimeout(() => {
+                showTooltip();
+            }, 1000); // Aparece 1 segundo después de cargar
+
+            // Iniciar el ciclo de aparición/desaparición
+            // La nubecita estará visible por 10s, oculta por 0.5s (salida) + 4.5s (espera) = 5s.
+            // Entonces el ciclo completo es 10s (visible) + 5s (oculta) = 15s
+            tooltipInterval = setInterval(() => {
+                // Antes de mostrar, verificamos si las opciones no están abiertas.
+                // Si están abiertas, el ciclo se pausará hasta que se cierren.
+                if (!contactFabOptions.classList.contains('open')) {
+                    showTooltip();
+                }
+            }, 15000); // Repetir cada 15 segundos (10s visible + 5s oculto)
+
+
+            // Manejador de clic para mostrar/ocultar las opciones de contacto
             contactFabBtn.addEventListener('click', (event) => {
                 event.stopPropagation(); 
                 contactFabOptions.classList.toggle('open');
                 
-                // Si las opciones se abren, ocultamos y detenemos la animación de la nubecita
+                // Si las opciones se abren, ocultamos la nubecita y reiniciamos sus temporizadores
                 if (contactFabOptions.classList.contains('open')) {
-                    fabTooltipSvgContainer.style.opacity = '0';
-                    fabTooltipSvgContainer.style.visibility = 'hidden';
-                    fabTooltipSvgContainer.style.transform = 'translateX(-50%) translateY(10px)'; 
-                    fabTooltipSvgContainer.style.animation = 'none'; 
+                    clearTimeout(tooltipTimeout);
+                    clearInterval(tooltipInterval); // Detener el ciclo automático
+                    hideTooltip(); // Asegurarnos de que se oculte
+                } else {
+                    // Si las opciones se cierran, podemos reiniciar el ciclo de la nubecita
+                    // Damos un pequeño respiro antes de que vuelva a aparecer
+                    setTimeout(() => {
+                        showTooltip(); // Mostrar la nubecita inmediatamente después de cerrar el menú
+                        // Reiniciar el intervalo para el siguiente ciclo completo
+                        clearInterval(tooltipInterval); // Limpiar el previo para evitar duplicados
+                        tooltipInterval = setInterval(() => {
+                            if (!contactFabOptions.classList.contains('open')) {
+                                showTooltip();
+                            }
+                        }, 15000);
+                    }, 500); // Esperar 0.5 segundos antes de mostrarla de nuevo
                 }
             });
 
             // Cierra las opciones si se hace clic en cualquier lugar fuera del FAB o sus opciones
             document.addEventListener('click', (event) => {
                 if (!contactFabBtn.contains(event.target) && !contactFabOptions.contains(event.target)) {
-                    contactFabOptions.classList.remove('open');
-                }
-            });
-
-            // Muestra la "nubecita" de "Contáctame" al pasar el mouse por encima del botón
-            contactFabBtn.addEventListener('mouseenter', () => {
-                if (!contactFabOptions.classList.contains('open')) {
-                    fabTooltipSvgContainer.style.opacity = '1';
-                    fabTooltipSvgContainer.style.visibility = 'visible';
-                    fabTooltipSvgContainer.style.transform = 'translateX(-50%) translateY(-10px)'; 
-                    fabTooltipSvgContainer.style.animation = 'fab-tooltip-bob 1.5s infinite ease-in-out'; 
-                }
-            });
-
-            // Oculta la "nubecita" al quitar el mouse del botón
-            contactFabBtn.addEventListener('mouseleave', () => {
-                if (!contactFabOptions.classList.contains('open')) {
-                    fabTooltipSvgContainer.style.opacity = '0';
-                    fabTooltipSvgContainer.style.visibility = 'hidden';
-                    fabTooltipSvgContainer.style.transform = 'translateX(-50%) translateY(10px)'; 
-                    fabTooltipSvgContainer.style.animation = 'none'; 
-                }
-            });
-            
-            // Cuando las opciones se cierran (por clic fuera), asegurarse de que la nubecita pueda volver a aparecer al hover
-            contactFabOptions.addEventListener('transitionend', () => {
-                if (!contactFabOptions.classList.contains('open') && contactFabBtn.matches(':hover')) {
-                     fabTooltipSvgContainer.style.opacity = '1';
-                     fabTooltipSvgContainer.style.visibility = 'visible';
-                     fabTooltipSvgContainer.style.transform = 'translateX(-50%) translateY(-10px)';
-                     fabTooltipSvgContainer.style.animation = 'fab-tooltip-bob 1.5s infinite ease-in-out';
+                    // Solo si estaban abiertas, las cerramos
+                    if (contactFabOptions.classList.contains('open')) {
+                        contactFabOptions.classList.remove('open');
+                        // Reiniciar el ciclo de la nubecita después de cerrar el menú
+                        setTimeout(() => {
+                            showTooltip(); 
+                            clearInterval(tooltipInterval); 
+                            tooltipInterval = setInterval(() => {
+                                if (!contactFabOptions.classList.contains('open')) {
+                                    showTooltip();
+                                }
+                            }, 15000);
+                        }, 500); 
+                    }
                 }
             });
         }
