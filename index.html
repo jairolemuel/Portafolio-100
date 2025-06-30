@@ -7,6 +7,8 @@
     <meta name="description" content="Professional portfolio of Jairo Lemuel Barrientos showcasing expertise in Full Stack Development and Cybersecurity">
     <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Cybersecurity, React, Node.js, Web Development">
     <meta name="author" content="Jairo Lemuel Barrientos">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base & Global Styles */
         :root {
@@ -20,6 +22,8 @@
             --transition-speed: 0.3s;
             --bezier-smooth: cubic-bezier(0.645, 0.045, 0.355, 1);
             --header-height: 80px;
+            --max-width: 1200px;
+            --border-radius: 4px;
         }
 
         * {
@@ -28,13 +32,35 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
             background-color: var(--color-dark);
             color: var(--color-text);
             line-height: 1.6;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+        }
+
+        /* Accessibility improvements */
+        a:focus,
+        button:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 3px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         /* Particle.js Canvas Background */
@@ -58,7 +84,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 50px;
+            padding: 0 5%;
             z-index: 100;
             transition: all var(--transition-speed) var(--bezier-smooth);
             backdrop-filter: blur(10px);
@@ -94,7 +120,7 @@
         }
 
         .nav-item {
-            margin-left: 30px;
+            margin-left: 2rem;
         }
 
         .nav-link {
@@ -103,7 +129,7 @@
             font-weight: 500;
             text-decoration: none;
             transition: all var(--transition-speed) var(--bezier-smooth);
-            padding: 10px 0;
+            padding: 0.5rem 0;
             position: relative;
         }
 
@@ -125,7 +151,27 @@
 
         .nav-link span {
             color: var(--color-accent);
-            margin-right: 5px;
+            margin-right: 0.3rem;
+            font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .resume-btn {
+            color: var(--color-accent);
+            background-color: transparent;
+            border: 1px solid var(--color-accent);
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1.5rem;
+            margin-left: 2rem;
+            font-size: 1rem;
+            font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+            transition: all var(--transition-speed) var(--bezier-smooth);
+            cursor: pointer;
+        }
+
+        .resume-btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
         }
 
         .mobile-menu-btn {
@@ -136,12 +182,79 @@
             font-size: 1.8rem;
             cursor: pointer;
             z-index: 101;
+            padding: 0.5rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--color-dark);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform var(--transition-speed) var(--bezier-smooth);
+            padding: var(--header-height) 0;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-list {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-nav-item {
+            margin: 2rem 0;
+        }
+
+        .mobile-nav-link {
+            color: var(--color-text);
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--color-accent);
+        }
+
+        .mobile-nav-link span {
+            color: var(--color-accent);
+            margin-right: 0.5rem;
+        }
+
+        .mobile-resume-btn {
+            color: var(--color-accent);
+            background-color: transparent;
+            border: 1px solid var(--color-accent);
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+            transition: all var(--transition-speed);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .mobile-resume-btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
         }
 
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            padding: 0 20px;
+            padding: 0 5%;
             display: flex;
             align-items: center;
             position: relative;
@@ -149,23 +262,23 @@
         }
 
         .hero-content {
-            max-width: 1000px;
+            max-width: var(--max-width);
             margin: 0 auto;
             width: 100%;
-            padding: 100px 0;
+            padding: 5rem 0;
         }
 
         .hero-subtitle {
             color: var(--color-accent);
             font-size: 1.2rem;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
             font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
         }
 
         .hero-title {
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 700;
-            margin: 0 0 20px;
+            margin: 0 0 1.5rem;
             color: var(--color-light);
             line-height: 1.1;
         }
@@ -174,7 +287,7 @@
             font-size: clamp(1rem, 3vw, 1.3rem);
             max-width: 600px;
             color: var(--color-text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 3rem;
         }
 
         .hero-btn {
@@ -182,7 +295,7 @@
             color: var(--color-accent);
             background-color: transparent;
             border: 1px solid var(--color-accent);
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             padding: 1rem 1.75rem;
             font-size: 1rem;
             font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
@@ -190,7 +303,7 @@
             text-decoration: none;
             cursor: pointer;
             transition: all var(--transition-speed) var(--bezier-smooth);
-            margin-top: 20px;
+            margin-top: 1.5rem;
         }
 
         .hero-btn:hover {
@@ -249,7 +362,7 @@
 
         @media (max-width: 768px) {
             .header {
-                padding: 0 25px;
+                padding: 0 5%;
             }
 
             .nav {
@@ -261,17 +374,17 @@
             }
 
             .hero-content {
-                padding: 80px 0;
+                padding: 4rem 0;
                 text-align: center;
             }
 
             .hero-description {
-                margin: 0 auto 40px;
+                margin: 0 auto 3rem;
             }
 
             .avatar-container {
                 position: relative;
-                margin: 50px auto 0;
+                margin: 3rem auto 0;
                 right: auto;
                 bottom: auto;
                 width: 250px;
@@ -292,31 +405,51 @@
                 width: 200px;
                 height: 200px;
             }
+
+            .mobile-nav-link {
+                font-size: 1.2rem;
+            }
+
+            .mobile-resume-btn {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Particle.js Background -->
-    <div id="particles-js"></div>
+    <div id="particles-js" aria-hidden="true"></div>
 
     <!-- Professional Header -->
     <header class="header">
-        <a href="#" class="logo">JLB</a>
-        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+        <a href="#" class="logo" aria-label="Home">JLB</a>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
             <i class="fas fa-bars"></i>
         </button>
-        <nav class="nav">
+        <nav class="nav" aria-label="Main navigation">
             <ul class="nav-list">
                 <li class="nav-item"><a href="#about" class="nav-link"><span>01.</span> About</a></li>
                 <li class="nav-item"><a href="#experience" class="nav-link"><span>02.</span> Experience</a></li>
                 <li class="nav-item"><a href="#work" class="nav-link"><span>03.</span> Work</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link"><span>04.</span> Contact</a></li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link resume-btn">Resume</a>
+                    <button class="resume-btn">Resume</button>
                 </li>
             </ul>
         </nav>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item"><a href="#about" class="mobile-nav-link"><span>01.</span> About</a></li>
+            <li class="mobile-nav-item"><a href="#experience" class="mobile-nav-link"><span>02.</span> Experience</a></li>
+            <li class="mobile-nav-item"><a href="#work" class="mobile-nav-link"><span>03.</span> Work</a></li>
+            <li class="mobile-nav-item"><a href="#contact" class="mobile-nav-link"><span>04.</span> Contact</a></li>
+        </ul>
+        <a href="#" class="mobile-resume-btn">Resume</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -334,7 +467,7 @@
 
         <!-- Interactive Avatar -->
         <div class="avatar-container">
-            <svg class="avatar" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <svg class="avatar" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <!-- Face -->
                 <circle cx="100" cy="100" r="90" fill="#FFDBAC" />
                 
@@ -361,7 +494,7 @@
     </section>
 
     <script>
-        // Particle.js Configuration
+        // Wait for DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Header scroll effect
             const header = document.querySelector('.header');
@@ -373,162 +506,208 @@
                 }
             });
 
-            // Avatar interaction
-            const avatar = document.querySelector('.avatar-container');
-            const eyes = document.querySelectorAll('.avatar-eye');
-            const mouth = document.querySelector('.avatar-mouth');
-
-            // Eye follow cursor effect
-            document.addEventListener('mousemove', (e) => {
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-                
-                const rect = avatar.getBoundingClientRect();
-                const avatarX = rect.left + rect.width / 2;
-                const avatarY = rect.top + rect.height / 2;
-                
-                const angleX = (mouseY - avatarY) / 20;
-                const angleY = (mouseX - avatarX) / 20;
-                
-                eyes.forEach(eye => {
-                    eye.setAttribute('cy', 80 + angleX);
-                    eye.setAttribute('cx', parseFloat(eye.getAttribute('cx')) + angleY / 2);
-                });
-            });
-
-            // Blinking animation
-            setInterval(() => {
-                eyes.forEach(eye => {
-                    eye.style.ry = '2';
-                    setTimeout(() => {
-                        eye.style.ry = '12';
-                    }, 100);
-                });
-            }, 3000);
-
-            // Smile on hover
-            avatar.addEventListener('mouseenter', () => {
-                mouth.setAttribute('d', 'M70 130 Q100 150 130 130');
-            });
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
             
-            avatar.addEventListener('mouseleave', () => {
-                mouth.setAttribute('d', 'M70 130 Q100 140 130 130');
+            mobileMenuBtn.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('active');
+                
+                // Toggle icon between bars and times
+                const icon = this.querySelector('i');
+                if (isExpanded) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
             });
 
-            // Load particles.js
-            const particlesConfig = {
-                particles: {
-                    number: {
-                        value: 80,
-                        density: {
-                            enable: true,
-                            value_area: 800
-                        }
-                    },
-                    color: {
-                        value: "#64ffda"
-                    },
-                    shape: {
-                        type: "circle",
-                        stroke: {
-                            width: 0,
-                            color: "#000000"
-                        },
-                        polygon: {
-                            nb_sides: 5
-                        }
-                    },
-                    opacity: {
-                        value: 0.5,
-                        random: false,
-                        anim: {
-                            enable: false,
-                            speed: 1,
-                            opacity_min: 0.1,
-                            sync: false
-                        }
-                    },
-                    size: {
-                        value: 3,
-                        random: true,
-                        anim: {
-                            enable: false,
-                            speed: 40,
-                            size_min: 0.1,
-                            sync: false
-                        }
-                    },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: "#64ffda",
-                        opacity: 0.2,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 2,
-                        direction: "none",
-                        random: false,
-                        straight: false,
-                        out_mode: "out",
-                        bounce: false,
-                        attract: {
-                            enable: false,
-                            rotateX: 600,
-                            rotateY: 1200
-                        }
-                    }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: {
-                            enable: true,
-                            mode: "grab"
-                        },
-                        onclick: {
-                            enable: true,
-                            mode: "push"
-                        },
-                        resize: true
-                    },
-                    modes: {
-                        grab: {
-                            distance: 140,
-                            line_linked: {
-                                opacity: 0.5
+            // Close mobile menu when clicking on a link
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                });
+            });
+
+            // Avatar interaction
+            const avatarContainer = document.querySelector('.avatar-container');
+            if (avatarContainer) {
+                const avatar = document.querySelector('.avatar');
+                const eyes = document.querySelectorAll('.avatar-eye');
+                const mouth = document.querySelector('.avatar-mouth');
+                
+                // Only add interaction if elements exist
+                if (eyes.length && mouth) {
+                    // Eye follow cursor effect
+                    document.addEventListener('mousemove', (e) => {
+                        const mouseX = e.clientX;
+                        const mouseY = e.clientY;
+                        
+                        const rect = avatarContainer.getBoundingClientRect();
+                        const avatarX = rect.left + rect.width / 2;
+                        const avatarY = rect.top + rect.height / 2;
+                        
+                        const angleX = (mouseY - avatarY) / 20;
+                        const angleY = (mouseX - avatarX) / 20;
+                        
+                        eyes.forEach(eye => {
+                            const originalCy = eye.getAttribute('data-original-cy') || 80;
+                            const originalCx = eye.getAttribute('data-original-cx') || 
+                                (eye.getAttribute('cx') === '65' ? 65 : 135);
+                            
+                            // Save original positions if not already saved
+                            if (!eye.hasAttribute('data-original-cy')) {
+                                eye.setAttribute('data-original-cy', originalCy);
+                                eye.setAttribute('data-original-cx', originalCx);
                             }
-                        },
-                        bubble: {
-                            distance: 400,
-                            size: 40,
-                            duration: 2,
-                            opacity: 8,
-                            speed: 3
-                        },
-                        repulse: {
-                            distance: 200,
-                            duration: 0.4
-                        },
-                        push: {
-                            particles_nb: 4
-                        },
-                        remove: {
-                            particles_nb: 2
-                        }
+                            
+                            eye.setAttribute('cy', parseFloat(originalCy) + angleX);
+                            eye.setAttribute('cx', parseFloat(originalCx) + angleY / 2);
+                        });
+                    });
+
+                    // Blinking animation
+                    function blinkEyes() {
+                        eyes.forEach(eye => {
+                            const originalRy = eye.getAttribute('data-original-ry') || 12;
+                            
+                            // Save original ry if not already saved
+                            if (!eye.hasAttribute('data-original-ry')) {
+                                eye.setAttribute('data-original-ry', originalRy);
+                            }
+                            
+                            eye.setAttribute('ry', '2');
+                            setTimeout(() => {
+                                eye.setAttribute('ry', originalRy);
+                            }, 100);
+                        });
                     }
-                },
-                retina_detect: true
-            };
+                    
+                    // Initial blink after 1 second
+                    setTimeout(blinkEyes, 1000);
+                    
+                    // Regular blinking
+                    setInterval(blinkEyes, 3000);
+
+                    // Smile on hover
+                    avatarContainer.addEventListener('mouseenter', () => {
+                        mouth.setAttribute('d', 'M70 130 Q100 150 130 130');
+                    });
+                    
+                    avatarContainer.addEventListener('mouseleave', () => {
+                        mouth.setAttribute('d', 'M70 130 Q100 140 130 130');
+                    });
+                }
+            }
 
             // Load particles.js script dynamically
-            const particlesScript = document.createElement('script');
-            particlesScript.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-            particlesScript.onload = function() {
-                particlesJS('particles-js', particlesConfig);
-            };
-            document.head.appendChild(particlesScript);
+            function loadParticlesJS() {
+                return new Promise((resolve) => {
+                    if (typeof particlesJS === 'function') {
+                        resolve();
+                        return;
+                    }
+                    
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+                    script.onload = resolve;
+                    document.head.appendChild(script);
+                });
+            }
+
+            // Initialize particles.js with configuration
+            function initParticles() {
+                loadParticlesJS().then(() => {
+                    particlesJS('particles-js', {
+                        particles: {
+                            number: {
+                                value: 80,
+                                density: {
+                                    enable: true,
+                                    value_area: 800
+                                }
+                            },
+                            color: {
+                                value: "#64ffda"
+                            },
+                            shape: {
+                                type: "circle",
+                                stroke: {
+                                    width: 0,
+                                    color: "#000000"
+                                }
+                            },
+                            opacity: {
+                                value: 0.5,
+                                random: false,
+                                anim: {
+                                    enable: false
+                                }
+                            },
+                            size: {
+                                value: 3,
+                                random: true,
+                                anim: {
+                                    enable: false
+                                }
+                            },
+                            line_linked: {
+                                enable: true,
+                                distance: 150,
+                                color: "#64ffda",
+                                opacity: 0.2,
+                                width: 1
+                            },
+                            move: {
+                                enable: true,
+                                speed: 2,
+                                direction: "none",
+                                random: false,
+                                straight: false,
+                                out_mode: "out",
+                                bounce: false
+                            }
+                        },
+                        interactivity: {
+                            detect_on: "window",
+                            events: {
+                                onhover: {
+                                    enable: true,
+                                    mode: "grab"
+                                },
+                                onclick: {
+                                    enable: true,
+                                    mode: "push"
+                                },
+                                resize: true
+                            },
+                            modes: {
+                                grab: {
+                                    distance: 140,
+                                    line_linked: {
+                                        opacity: 0.5
+                                    }
+                                },
+                                push: {
+                                    particles_nb: 4
+                                }
+                            }
+                        },
+                        retina_detect: true
+                    });
+                });
+            }
+
+            // Initialize particles after a short delay to prioritize content loading
+            setTimeout(initParticles, 500);
         });
     </script>
         /* --- Projects Section --- */
