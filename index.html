@@ -183,160 +183,56 @@
             z-index: 101; /* Above header */
         }
 
-        /* --- Hero Section: Futuristic Holographic Vibe --- */
-        .section-hero {
-            padding: 160px 20px 80px; /* Adjusted padding for header */
-            text-align: center;
-            background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-start));
-            color: white;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+        <!-- --------------------------- -->
+<!-- AVATARES PARA DIFERENTES PLATAFORMAS -->
+<!-- --------------------------- -->
 
-        /* Holographic Grid Overlay (Parallax) */
-        .section-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(to right, rgba(0,255,255,0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,255,255,0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridFlow 60s linear infinite;
-            opacity: 0.3;
-            z-index: 0;
-            transform: translateZ(-100px) scale(2); /* Parallax setup */
-        }
-        .section-hero::after { /* Another layer for more depth */
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 70% 30%, rgba(0, 192, 255, 0.08), transparent 70%);
-            animation: radialPulse 20s infinite ease-in-out;
-            z-index: 1;
-        }
+<!-- Avatar Futurista - Midjourney v6 -->
+<div class="prompt-box">
+  <h3>Midjourney v6 (Vector/SVG animable)</h3>
+  <pre>A symmetrical futuristic avatar, neon-accented cyberpunk armor, glowing circuit patterns on face, holographic HUD elements, flat vector style with crisp edges, vibrant gradients, no shading, pure 2D illustration --v 6 --style raw --ar 1:1 --stylize 300</pre>
+</div>
 
-        @keyframes gridFlow {
-            from { background-position: 0 0; }
-            to { background-position: 100% 100%; }
-        }
-        @keyframes radialPulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 0.5; }
-        }
+<!-- Avatar Futurista - DALL·E 3 -->
+<div class="prompt-box">
+  <h3>DALL·E 3 (PNG transparente)</h3>
+  <pre>Futuristic robot avatar in isometric view, glowing blue eyes, geometric design, clean lines, SVG-friendly, transparent background, digital art, 8k detail --ar 1:1</pre>
+</div>
 
+<!-- --------------------------- -->
+<!-- FONDOS ESPACIALES -->
+<!-- --------------------------- -->
 
-        .section-hero h1, .section-hero p, .avatar-container {
-            position: relative;
-            z-index: 10;
-        }
+<!-- Fondo 3D Animable -->
+<div class="prompt-box">
+  <h3>Fondo Espacial (After Effects/WebGL)</h3>
+  <pre>A 3D rendered planet with volumetric clouds, asteroid ring, parallax starfield with twinkling lights, purple nebula glow, ultra-detailed, cinematic lighting, seamless loop animation potential --ar 16:9 --chaos 20</pre>
+</div>
 
-        .section-hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 0.8rem;
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(0,229,255,0.8);
-            letter-spacing: 2px;
-        }
-
-        .section-hero p {
-            font-size: 1.8rem;
-            color: var(--color-text-medium);
-            margin-top: 0;
-            letter-spacing: 1px;
-            line-height: 1.4;
-        }
-
-        /* Fade-in-up animation for text */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.9s forwards;
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in-up.delay-1 { animation-delay: 0.4s; }
-        .fade-in-up.delay-2 { animation-delay: 0.8s; }
-
-        /* --- Avatar Styles --- */
-        .avatar-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 40px;
-            position: relative;
-            border-radius: 50%;
-            box-shadow: 0 0 40px var(--glow-light-alpha), inset 0 0 20px rgba(0, 192, 255, 0.4);
-            overflow: hidden;
-            background: radial-gradient(circle at center, #1a3a4a 0%, #050a11 100%);
-            transform: scale(0.7);
-            opacity: 0;
-            animation: avatarEntry 1.2s var(--bezier-bounce) forwards 0.3s;
-            border: 2px solid rgba(0, 192, 255, 0.5);
-            /* Particle effect for avatar */
-            mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle at center, white 50%, transparent 100%);
-        }
-
-        @keyframes avatarEntry {
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        #my-avatar {
-            width: 100%;
-            height: 100%;
-            display: block;
-            transition: transform var(--transition-speed) ease-out;
-            filter: drop-shadow(0 0 8px rgba(0, 192, 255, 0.4));
-        }
-
-        #my-avatar:hover {
-            transform: scale(1.05) rotateY(10deg);
-        }
-
-        /* Avatar SVG specific styles for animation */
-        #my-avatar .avatar-eye {
-            transform-origin: center center;
-            transition: transform 0.2s ease-in-out;
-        }
-        #my-avatar .avatar-eye.blink {
-            animation: blinkEye 0.3s forwards;
-        }
-        @keyframes blinkEye {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(0.1); }
-        }
-
-        #my-avatar .avatar-mouth {
-            transition: transform 0.3s ease-out;
-            transform-origin: center;
-        }
-        #my-avatar:hover .avatar-mouth {
-            transform: translateY(2px) scale(1.1);
-        }
-
-        #my-avatar .avatar-glasses {
-            stroke-dasharray: 100;
-            stroke-dashoffset: 100;
-            stroke: #fff;
-        }
-        @keyframes drawGlasses { /* Dynamically inserted by JS */
-            to { stroke-dashoffset: 0; }
-        }
+<!-- Fondo Low Poly -->
+<div class="prompt-box">
+  <h3>Fondo Low Poly (Videojuegos)</h3>
+  <pre>Low poly space scene with geometric planets, flat shaded asteroids, vibrant color palette, unity engine style, isometric perspective, optimized for 3D engine --ar 16:9</pre>
+</div>
+ <style>
+  .prompt-box {
+    background: #1e1e2e;
+    border-left: 4px solid #7d64ff;
+    padding: 12px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Courier New', monospace;
+  }
+  .prompt-box h3 {
+    color: #a5b4fc;
+    margin-top: 0;
+  }
+  .prompt-box pre {
+    color: #f8f8f2;
+    white-space: pre-wrap;
+    margin-bottom: 0;
+  }
+</style>       
 
         /* --- Projects Section --- */
         .section-projects {
