@@ -10,8 +10,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base & Global Styles */
+        /* CSS Variables - Complete Set */
         :root {
+            /* Colors */
             --color-primary: #00c6ff;
             --color-secondary: #0072ff;
             --color-dark: #0a192f;
@@ -19,13 +20,31 @@
             --color-accent: #64ffda;
             --color-text: #ccd6f6;
             --color-text-secondary: #8892b0;
-            --transition-speed: 0.3s;
-            --bezier-smooth: cubic-bezier(0.645, 0.045, 0.355, 1);
+            --color-bg-dark: #020c1b;
+            --color-bg-gradient-start: #050a11;
+            --color-bg-gradient-mid: #1a2a3a;
+            --color-primary-light: #00e5ff;
+            --color-primary-dark: #00c0ff;
+            --color-text-light: #e0e0e0;
+            --color-text-medium: #b0e0e6;
+            --color-text-dark: #c0c0c0;
+            --glow-light-alpha: rgba(0, 192, 255, 0.7);
+            --glow-dark-alpha: rgba(128, 0, 255, 0.7);
+            --card-bg: rgba(18, 30, 45, 0.8);
+            --card-border: rgba(0, 192, 255, 0.3);
+            
+            /* Sizing & Spacing */
             --header-height: 80px;
             --max-width: 1200px;
             --border-radius: 4px;
+            
+            /* Animation */
+            --transition-speed: 0.3s;
+            --bezier-smooth: cubic-bezier(0.645, 0.045, 0.355, 1);
+            --bezier-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -44,7 +63,7 @@
             overflow-x: hidden;
         }
 
-        /* Accessibility improvements */
+        /* Accessibility */
         a:focus,
         button:focus {
             outline: 2px solid var(--color-accent);
@@ -63,7 +82,7 @@
             border-width: 0;
         }
 
-        /* Particle.js Canvas Background */
+        /* Particle Background */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -71,10 +90,10 @@
             top: 0;
             left: 0;
             z-index: -1;
-            background-color: var(--color-dark);
+            background-color: var(--color-bg-dark);
         }
 
-        /* Professional Header */
+        /* Header Styles */
         .header {
             position: fixed;
             top: 0;
@@ -97,18 +116,7 @@
             background-color: rgba(10, 25, 47, 0.95);
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--color-accent);
-            text-decoration: none;
-            transition: all var(--transition-speed) var(--bezier-smooth);
-        }
-
-        .logo:hover {
-            transform: translateY(-2px);
-        }
-
+        /* Navigation Styles */
         .nav {
             display: flex;
             align-items: center;
@@ -156,24 +164,31 @@
             font-size: 0.9rem;
         }
 
-        .resume-btn {
+        /* Button Styles */
+        .btn {
+            display: inline-block;
             color: var(--color-accent);
             background-color: transparent;
             border: 1px solid var(--color-accent);
             border-radius: var(--border-radius);
             padding: 0.75rem 1.5rem;
-            margin-left: 2rem;
             font-size: 1rem;
             font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
             transition: all var(--transition-speed) var(--bezier-smooth);
             cursor: pointer;
+            text-decoration: none;
         }
 
-        .resume-btn:hover {
+        .btn:hover {
             background-color: rgba(100, 255, 218, 0.1);
             transform: translateY(-3px);
         }
 
+        .btn-resume {
+            margin-left: 2rem;
+        }
+
+        /* Mobile Menu Styles */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -185,7 +200,6 @@
             padding: 0.5rem;
         }
 
-        /* Mobile Menu */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -233,25 +247,7 @@
             margin-right: 0.5rem;
         }
 
-        .mobile-resume-btn {
-            color: var(--color-accent);
-            background-color: transparent;
-            border: 1px solid var(--color-accent);
-            border-radius: var(--border-radius);
-            padding: 1rem 2rem;
-            margin-top: 2rem;
-            font-size: 1.2rem;
-            font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-            transition: all var(--transition-speed);
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .mobile-resume-btn:hover {
-            background-color: rgba(100, 255, 218, 0.1);
-        }
-
-        /* Hero Section */
+        /* Hero Section Styles */
         .hero {
             min-height: 100vh;
             padding: 0 5%;
@@ -283,35 +279,14 @@
             line-height: 1.1;
         }
 
-        .hero-description {
+        .hero-text {
             font-size: clamp(1rem, 3vw, 1.3rem);
             max-width: 600px;
             color: var(--color-text-secondary);
             margin-bottom: 3rem;
         }
 
-        .hero-btn {
-            display: inline-block;
-            color: var(--color-accent);
-            background-color: transparent;
-            border: 1px solid var(--color-accent);
-            border-radius: var(--border-radius);
-            padding: 1rem 1.75rem;
-            font-size: 1rem;
-            font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-            line-height: 1;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all var(--transition-speed) var(--bezier-smooth);
-            margin-top: 1.5rem;
-        }
-
-        .hero-btn:hover {
-            background-color: rgba(100, 255, 218, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Interactive Avatar */
+        /* Avatar Styles */
         .avatar-container {
             position: absolute;
             right: 10%;
@@ -342,16 +317,7 @@
             transform: scale(1.1);
         }
 
-        /* Avatar Facial Features for Interaction */
-        .avatar-eye {
-            transition: all 0.3s ease;
-        }
-
-        .avatar-mouth {
-            transition: all 0.3s ease;
-        }
-
-        /* Responsive Design */
+        /* Responsive Styles */
         @media (max-width: 1080px) {
             .avatar-container {
                 width: 300px;
@@ -378,7 +344,7 @@
                 text-align: center;
             }
 
-            .hero-description {
+            .hero-text {
                 margin: 0 auto 3rem;
             }
 
@@ -409,19 +375,14 @@
             .mobile-nav-link {
                 font-size: 1.2rem;
             }
-
-            .mobile-resume-btn {
-                font-size: 1rem;
-                padding: 0.8rem 1.5rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Particle.js Background -->
+    <!-- Particle Background -->
     <div id="particles-js" aria-hidden="true"></div>
 
-    <!-- Professional Header -->
+    <!-- Header -->
     <header class="header">
         <a href="#" class="logo" aria-label="Home">JLB</a>
         <button class="mobile-menu-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
@@ -434,7 +395,7 @@
                 <li class="nav-item"><a href="#work" class="nav-link"><span>03.</span> Work</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link"><span>04.</span> Contact</a></li>
                 <li class="nav-item">
-                    <button class="resume-btn">Resume</button>
+                    <a href="/resume.pdf" class="btn btn-resume" download="Jairo_Barrientos_Resume.pdf">Resume</a>
                 </li>
             </ul>
         </nav>
@@ -448,7 +409,7 @@
             <li class="mobile-nav-item"><a href="#work" class="mobile-nav-link"><span>03.</span> Work</a></li>
             <li class="mobile-nav-item"><a href="#contact" class="mobile-nav-link"><span>04.</span> Contact</a></li>
         </ul>
-        <a href="#" class="mobile-resume-btn">Resume</a>
+        <a href="/resume.pdf" class="btn" download="Jairo_Barrientos_Resume.pdf">Download Resume</a>
     </div>
 
     <!-- Hero Section -->
@@ -457,12 +418,12 @@
             <h2 class="hero-subtitle">Hi, my name is</h2>
             <h1 class="hero-title">Jairo Lemuel Barrientos.</h1>
             <h2 class="hero-title" style="color: var(--color-text-secondary)">I build things for the web.</h2>
-            <p class="hero-description">
+            <p class="hero-text">
                 I'm a full-stack developer specializing in building (and occasionally designing)
                 exceptional digital experiences. Currently focused on building accessible,
                 human-centered products with cybersecurity in mind.
             </p>
-            <a href="#work" class="hero-btn">Check out my work!</a>
+            <a href="#work" class="btn">Check out my work!</a>
         </div>
 
         <!-- Interactive Avatar -->
@@ -491,6 +452,23 @@
                 <line x1="90" y1="80" x2="110" y2="80" stroke="#0a192f" stroke-width="2" />
             </svg>
         </div>
+    </section>
+
+    <!-- Placeholder Sections -->
+    <section id="about" class="section" style="min-height: 100vh; padding-top: var(--header-height);">
+        <!-- About section content will go here -->
+    </section>
+
+    <section id="experience" class="section" style="min-height: 100vh;">
+        <!-- Experience section content will go here -->
+    </section>
+
+    <section id="work" class="section" style="min-height: 100vh;">
+        <!-- Work section content will go here -->
+    </section>
+
+    <section id="contact" class="section" style="min-height: 100vh;">
+        <!-- Contact section content will go here -->
     </section>
 
     <script>
