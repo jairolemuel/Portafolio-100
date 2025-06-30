@@ -3,237 +3,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate</title>
-    <meta name="description" content="Jairo Barrientos's professional portfolio showcasing expertise in Full Stack Web Development (React, Node.js, PHP) and cybersecurity, including a Cisco Certified CyberOps Associate certification. Located in Santa Elena, Entre Ríos, Argentina.">
-    <meta name="keywords" content="Jairo Barrientos, Full Stack Developer, Web Development, Cybersecurity, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, Cisco Certified CyberOps Associate, Santa Elena, Entre Ríos, Argentina, UI/UX, SEO">
-    <meta name="author" content="Jairo Barrientos">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.yourportfolio.com/">
-    <meta property="og:title" content="Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate">
-    <meta property="og:description" content="Explore Jairo Barrientos's professional portfolio, featuring web development projects and a Cisco Certified CyberOps Associate certification.">
-    <meta property="og:image" content="https://www.yourportfolio.com/images/og-image.jpg">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Jairo Barrientos",
-      "url": "https://www.yourportfolio.com",
-      "sameAs": [
-        "https://www.linkedin.com/in/jairo-barrientos-8a6b00226",
-        "https://github.com/tu-usuario-github"
-      ],
-      "jobTitle": "Full Stack Web Developer | Cybersecurity Associate",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance"
-      },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Nombre de tu Universidad/Bootcamp si aplica"
-      },
-      "knowsAbout": ["Web Development", "React.js", "Node.js", "PHP", "MySQL", "Cybersecurity", "UI/UX Design", "SEO"],
-      "nationality": "Argentinian",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santa Elena",
-        "addressRegion": "Entre Ríos",
-        "addressCountry": "AR"
-      }
-    }
-    </script>
-
+    <title>AI Prompt Showcase | Jairo Barrientos - Full Stack Developer</title>
     <style>
-        /*
-        * Principios de Ingeniería y Arquitectura Web:
-        * 1. Rendimiento Primero: Eliminación de solicitudes externas (todo incrustado).
-        * 2. CSS Modular: Secciones organizadas para legibilidad y mantenimiento.
-        * 3. Diseño Responsivo: Enfoque mobile-first con media queries.
-        * 4. Accesibilidad: Atributos ARIA, navegación por teclado, preferencia de movimiento reducido.
-        * 5. Mejora Progresiva: Contenido central visible, animaciones como capa superior.
-        * 6. Seguridad: Compatible con CSP (sin scripts 'unsafe-inline' o eventos inline).
-        */
-
-        /* Base & Global Styles */
+        /* ===== Base Styles ===== */
         :root {
-            --color-bg-dark: #000;
-            --color-bg-gradient-start: #050a11;
-            --color-bg-gradient-mid: #1a2a3a;
-            --color-primary-light: #00e5ff;
-            --color-primary-dark: #00c0ff;
-            --color-secondary: #8000ff;
-            --color-text-light: #e0e0e0;
-            --color-text-medium: #b0e0e6;
-            --color-text-dark: #c0c0c0;
-            --glow-light-alpha: rgba(0, 192, 255, 0.7);
-            --glow-dark-alpha: rgba(128, 0, 255, 0.7);
-            --card-bg: rgba(18, 30, 45, 0.8);
-            --card-border: rgba(0, 192, 255, 0.3);
-            --transition-speed: 0.4s;
-            --bezier-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            --bezier-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --primary-accent: #00e5ff;
+            --secondary-accent: #8000ff;
+            --dark-bg: #050a11;
+            --card-bg: rgba(18, 30, 45, 0.85);
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0e0e6;
+            --border-radius: 8px;
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --glow-effect: 0 0 15px rgba(0, 229, 255, 0.5);
         }
 
-        body {
-            font-family: 'Segoe UI', 'Roboto', sans-serif;
-            margin: 0;
-            background: var(--color-bg-dark);
-            color: var(--color-text-light);
-            line-height: 1.6;
-            overflow-x: hidden; /* Evita el scroll horizontal */
-            scroll-behavior: smooth; /* Scroll suave para enlaces ancla */
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="rgba(0, 192, 255, 0.8)" stroke="rgba(0, 192, 255, 0.2)" stroke-width="2"/></svg>') 12 12, auto;
+        /* ===== Section Container ===== */
+        .prompts-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        body.hover-pointer, a:hover, button:hover, .contact-fab:hover, .project-card:hover, .skill-tag:hover, .certification-card:hover, .service-card:hover {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0L0 12h8v12h8V12h8z" fill="rgba(0, 229, 255, 0.9)"/></svg>') 12 12, pointer;
+        .prompts-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, 
+                        rgba(0, 229, 255, 0.05) 0%, 
+                        rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
         }
 
-        h1, h2, h3 {
-            margin-top: 0;
-            font-weight: 600;
-            text-shadow: 0 0 10px var(--glow-light-alpha);
-        }
-
-        a {
-            color: var(--color-primary-light);
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-        a:hover {
-            color: var(--color-primary-dark);
-            text-decoration: underline;
-        }
-
-        /* --- Header / Navigation --- */
-        .main-header {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 15px 30px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 192, 255, 0.2);
-            transition: background 0.3s ease;
-        }
-
-        .main-header.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 4px 15px rgba(0, 192, 255, 0.4);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--color-primary-light);
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(0,229,255,0.5);
-        }
-
-        .nav-menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        .nav-menu li {
-            margin-left: 30px;
-        }
-
-        .nav-menu a {
-            color: var(--color-text-light);
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 5px 0;
+        /* ===== Section Header ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
             position: relative;
         }
 
-        .nav-menu a::after {
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-accent);
+            margin-bottom: 1rem;
+            text-shadow: var(--glow-effect);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
             content: '';
             position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            transition: width 0.3s ease-out;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                          var(--primary-accent), 
+                          var(--secondary-accent));
+            border-radius: 3px;
         }
 
-        .nav-menu a:hover::after,
-        .nav-menu a.active::after {
-            width: 100%;
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        .scroll-progress-bar {
-            position: fixed;
+        /* ===== Prompt Cards ===== */
+        .prompts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .prompt-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0, 192, 255, 0.15);
+            overflow: hidden;
+            transition: transform var(--transition-smooth), 
+                        box-shadow var(--transition-smooth);
+            position: relative;
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(0, 229, 255, 0.3);
+        }
+
+        .prompt-card::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            width: 0%;
-            z-index: 101; /* Above header */
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                      var(--primary-accent), 
+                      var(--secondary-accent));
         }
 
-        <!-- --------------------------- -->
-<!-- AVATARES PARA DIFERENTES PLATAFORMAS -->
-<!-- --------------------------- -->
+        /* ===== Card Header ===== */
+        .prompt-header {
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid rgba(0, 192, 255, 0.1);
+        }
 
-<!-- Avatar Futurista - Midjourney v6 -->
-<div class="prompt-box">
-  <h3>Midjourney v6 (Vector/SVG animable)</h3>
-  <pre>A symmetrical futuristic avatar, neon-accented cyberpunk armor, glowing circuit patterns on face, holographic HUD elements, flat vector style with crisp edges, vibrant gradients, no shading, pure 2D illustration --v 6 --style raw --ar 1:1 --stylize 300</pre>
-</div>
+        .prompt-platform {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
 
-<!-- Avatar Futurista - DALL·E 3 -->
-<div class="prompt-box">
-  <h3>DALL·E 3 (PNG transparente)</h3>
-  <pre>Futuristic robot avatar in isometric view, glowing blue eyes, geometric design, clean lines, SVG-friendly, transparent background, digital art, 8k detail --ar 1:1</pre>
-</div>
+        .platform-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.7));
+        }
 
-<!-- --------------------------- -->
-<!-- FONDOS ESPACIALES -->
-<!-- --------------------------- -->
+        .platform-name {
+            font-weight: 600;
+            color: var(--primary-accent);
+            font-size: 1.1rem;
+        }
 
-<!-- Fondo 3D Animable -->
-<div class="prompt-box">
-  <h3>Fondo Espacial (After Effects/WebGL)</h3>
-  <pre>A 3D rendered planet with volumetric clouds, asteroid ring, parallax starfield with twinkling lights, purple nebula glow, ultra-detailed, cinematic lighting, seamless loop animation potential --ar 16:9 --chaos 20</pre>
-</div>
+        .prompt-type {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
 
-<!-- Fondo Low Poly -->
-<div class="prompt-box">
-  <h3>Fondo Low Poly (Videojuegos)</h3>
-  <pre>Low poly space scene with geometric planets, flat shaded asteroids, vibrant color palette, unity engine style, isometric perspective, optimized for 3D engine --ar 16:9</pre>
-</div>
- <style>
-  .prompt-box {
-    background: #1e1e2e;
-    border-left: 4px solid #7d64ff;
-    padding: 12px;
-    margin: 16px 0;
-    border-radius: 0 8px 8px 0;
-    font-family: 'Courier New', monospace;
-  }
-  .prompt-box h3 {
-    color: #a5b4fc;
-    margin-top: 0;
-  }
-  .prompt-box pre {
-    color: #f8f8f2;
-    white-space: pre-wrap;
-    margin-bottom: 0;
-  }
-</style>       
+        /* ===== Prompt Content ===== */
+        .prompt-content {
+            padding: 1.5rem;
+        }
 
+        .prompt-text {
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--text-primary);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary-accent);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            tab-size: 2;
+        }
+
+        /* ===== Card Footer ===== */
+        .prompt-footer {
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, 
+                      var(--primary-accent), 
+                      var(--secondary-accent));
+            color: black;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform var(--transition-fast), 
+                        opacity var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copy-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .prompt-params {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .param-tag {
+            background: rgba(128, 0, 255, 0.15);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(128, 0, 255, 0.3);
+        }
+
+        /* ===== Responsive Adjustments ===== */
+        @media (max-width: 768px) {
+            .prompts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .prompt-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .prompt-params {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* ===== Animation Effects ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .prompt-card {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .prompt-card:nth-child(1) { animation-delay: 0.1s; }
+        .prompt-card:nth-child(2) { animation-delay: 0.2s; }
+        .prompt-card:nth-child(3) { animation-delay: 0.3s; }
+        .prompt-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <section class="prompts-section" aria-labelledby="prompts-section-title">
+        <div class="section-header">
+            <h2 id="prompts-section-title" class="section-title">AI Prompt Showcase</h2>
+            <p class="section-subtitle">Professionally crafted prompts for various AI platforms demonstrating my expertise in prompt engineering and AI integration.</p>
+        </div>
+
+        <div class="prompts-container">
+            <!-- Midjourney Prompt Card -->
+            <article class="prompt-card" aria-labelledby="midjourney-prompt-title">
+                <div class="prompt-header">
+                    <div class="prompt-platform">
+                        <svg class="platform-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/>
+                            <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="currentColor"/>
+                        </svg>
+                        <span class="platform-name">Midjourney</span>
+                    </div>
+                    <span class="prompt-type">Vector/SVG Avatar</span>
+                </div>
+                <div class="prompt-content">
+                    <pre class="prompt-text" id="midjourney-prompt"><code>A symmetrical futuristic avatar, neon-accented cyberpunk armor, 
+glowing circuit patterns on face, holographic HUD elements, 
+flat vector style with crisp edges, vibrant gradients, 
+no shading, pure 2D illustration 
+--v 6 --style raw --ar 1:1 --stylize 300</code></pre>
+                </div>
+                <div class="prompt-footer">
+                    <button class="copy-btn" data-target="midjourney-prompt" aria-label="Copy Midjourney prompt to clipboard">
+                        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                    <div class="prompt-params">
+                        <span class="param-tag">--v 6</span>
+                        <span class="param-tag">--style raw</span>
+                        <span class="param-tag">--ar 1:1</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- DALL-E Prompt Card -->
+            <article class="prompt-card" aria-labelledby="dalle-prompt-title">
+                <div class="prompt-header">
+                    <div class="prompt-platform">
+                        <svg class="platform-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z" fill="currentColor"/>
+                            <path d="M8.5 15H10v-5H7v1.5h1.5zM16.5 12.75L14 15h-1.75l2.25-3-2.25-3H14l2.5 2.25V9h1.5v6h-1.5z" fill="currentColor"/>
+                        </svg>
+                        <span class="platform-name">DALL·E 3</span>
+                    </div>
+                    <span class="prompt-type">Transparent PNG</span>
+                </div>
+                <div class="prompt-content">
+                    <pre class="prompt-text" id="dalle-prompt"><code>Futuristic robot avatar in isometric view, 
+glowing blue eyes, geometric design, clean lines, 
+SVG-friendly, transparent background, digital art, 
+8k detail --ar 1:1</code></pre>
+                </div>
+                <div class="prompt-footer">
+                    <button class="copy-btn" data-target="dalle-prompt" aria-label="Copy DALL-E prompt to clipboard">
+                        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                    <div class="prompt-params">
+                        <span class="param-tag">--ar 1:1</span>
+                        <span class="param-tag">8k detail</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Space Background Prompt Card -->
+            <article class="prompt-card" aria-labelledby="space-prompt-title">
+                <div class="prompt-header">
+                    <div class="prompt-platform">
+                        <svg class="platform-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/>
+                            <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="currentColor"/>
+                        </svg>
+                        <span class="platform-name">Midjourney</span>
+                    </div>
+                    <span class="prompt-type">3D Space Background</span>
+                </div>
+                <div class="prompt-content">
+                    <pre class="prompt-text" id="space-prompt"><code>A 3D rendered planet with volumetric clouds, 
+asteroid ring, parallax starfield with twinkling lights, 
+purple nebula glow, ultra-detailed, cinematic lighting, 
+seamless loop animation potential 
+--ar 16:9 --chaos 20</code></pre>
+                </div>
+                <div class="prompt-footer">
+                    <button class="copy-btn" data-target="space-prompt" aria-label="Copy space background prompt to clipboard">
+                        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                    <div class="prompt-params">
+                        <span class="param-tag">--ar 16:9</span>
+                        <span class="param-tag">--chaos 20</span>
+                        <span class="param-tag">3D render</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Low Poly Prompt Card -->
+            <article class="prompt-card" aria-labelledby="lowpoly-prompt-title">
+                <div class="prompt-header">
+                    <div class="prompt-platform">
+                        <svg class="platform-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/>
+                            <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="currentColor"/>
+                        </svg>
+                        <span class="platform-name">Midjourney</span>
+                    </div>
+                    <span class="prompt-type">Low Poly Scene</span>
+                </div>
+                <div class="prompt-content">
+                    <pre class="prompt-text" id="lowpoly-prompt"><code>Low poly space scene with geometric planets, 
+flat shaded asteroids, vibrant color palette, 
+unity engine style, isometric perspective, 
+optimized for 3D engine --ar 16:9</code></pre>
+                </div>
+                <div class="prompt-footer">
+                    <button class="copy-btn" data-target="lowpoly-prompt" aria-label="Copy low poly prompt to clipboard">
+                        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                    <div class="prompt-params">
+                        <span class="param-tag">--ar 16:9</span>
+                        <span class="param-tag">low poly</span>
+                        <span class="param-tag">game ready</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <script>
+        // Enhanced copy functionality with feedback
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                const targetId = e.currentTarget.getAttribute('data-target');
+                const promptElement = document.getElementById(targetId);
+                const promptText = promptElement.textContent;
+                
+                try {
+                    await navigator.clipboard.writeText(promptText);
+                    
+                    // Visual feedback
+                    const originalText = e.currentTarget.innerHTML;
+                    e.currentTarget.innerHTML = `
+                        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Copied!
+                    `;
+                    
+                    // Revert after 2 seconds
+                    setTimeout(() => {
+                        e.currentTarget.innerHTML = originalText;
+                    }, 2000);
+                    
+                    // Pulse animation
+                    e.currentTarget.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                    }, 200);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = promptText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        alert('Prompt copied to clipboard!');
+                    } catch (err) {
+                        alert('Failed to copy prompt. Please try again.');
+                    }
+                    document.body.removeChild(textArea);
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const promptCards = document.querySelectorAll('.prompt-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        promptCards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>       
+    
         /* --- Projects Section --- */
         .section-projects {
             background: var(--color-bg-dark);
