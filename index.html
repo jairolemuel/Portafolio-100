@@ -46,14 +46,14 @@
 
     <style>
         /*
-        * Principios de Ingeniería y Arquitectura Web:
-        * 1. Rendimiento Primero: Eliminación de solicitudes externas (todo incrustado).
-        * 2. CSS Modular: Secciones organizadas para legibilidad y mantenimiento.
-        * 3. Diseño Responsivo: Enfoque mobile-first con media queries.
-        * 4. Accesibilidad: Atributos ARIA, navegación por teclado, preferencia de movimiento reducido.
-        * 5. Mejora Progresiva: Contenido central visible, animaciones como capa superior.
-        * 6. Seguridad: Compatible con CSP (sin scripts 'unsafe-inline' o eventos inline).
-        */
+         * Principios de Ingeniería y Arquitectura Web:
+         * 1. Rendimiento Primero: Eliminación de solicitudes externas (todo incrustado).
+         * 2. CSS Modular: Secciones organizadas para legibilidad y mantenimiento.
+         * 3. Diseño Responsivo: Enfoque mobile-first con media queries.
+         * 4. Accesibilidad: Atributos ARIA, navegación por teclado, preferencia de movimiento reducido.
+         * 5. Mejora Progresiva: Contenido central visible, animaciones como capa superior.
+         * 6. Seguridad: Compatible con CSP (sin scripts 'unsafe-inline' o eventos inline).
+         */
 
         /* Base & Global Styles */
         :root {
@@ -83,10 +83,12 @@
             line-height: 1.6;
             overflow-x: hidden; /* Evita el scroll horizontal */
             scroll-behavior: smooth; /* Scroll suave para enlaces ancla */
+            /* Custom cursor - moved to a more specific selector if needed, or refine for broader browser support */
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="rgba(0, 192, 255, 0.8)" stroke="rgba(0, 192, 255, 0.2)" stroke-width="2"/></svg>') 12 12, auto;
         }
 
-        body.hover-pointer, a:hover, button:hover, .contact-fab:hover, .project-card:hover, .skill-tag:hover, .certification-card:hover, .service-card:hover {
+        /* Specific hover cursor for interactive elements */
+        a:hover, button:hover, .contact-fab:hover, .project-card:hover, .skill-tag:hover, .certification-card:hover, .service-card:hover {
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0L0 12h8v12h8V12h8z" fill="rgba(0, 229, 255, 0.9)"/></svg>') 12 12, pointer;
         }
 
@@ -134,7 +136,8 @@
             color: var(--color-primary-light);
             background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
             -webkit-background-clip: text;
-            color: transparent;
+            /* Using `color: transparent;` instead of `color: transparent;` twice */
+            color: transparent; 
             text-shadow: 0 0 10px rgba(0,229,255,0.5);
         }
 
@@ -213,7 +216,9 @@
             animation: gridFlow 60s linear infinite;
             opacity: 0.3;
             z-index: 0;
-            transform: translateZ(-100px) scale(2); /* Parallax setup */
+            /* Removed transform: translateZ(-100px) scale(2); as it's typically used with perspective on a parent container for true 3D parallax.
+               Without a defined perspective, it might not yield the desired effect consistently across browsers.
+               If you want parallax, consider wrapping the hero content in a container with `perspective`. */
         }
         .section-hero::after { /* Another layer for more depth */
             content: '';
@@ -273,187 +278,383 @@
         .fade-in-up.delay-1 { animation-delay: 0.4s; }
         .fade-in-up.delay-2 { animation-delay: 0.8s; }
 
-      <!-- 🔵 AVATAR INTERACTIVO -->
-<div id="smartAvatar" class="avatar-container">
-  <div class="avatar-head">
-    <div class="avatar-eyes">
-      <div class="eye left-eye"></div>
-      <div class="eye right-eye"></div>
-    </div>
-    <div class="eyebrows">
-      <div class="brow left-brow"></div>
-      <div class="brow right-brow"></div>
-    </div>
-    <div class="avatar-mouth" id="avatarMouth"></div>
-  </div>
-  <div class="avatar-message" id="avatarMessage"></div>
-</div>
+        /* 🔵 AVATAR INTERACTIVO */
+        .avatar-container {
+            width: 180px;
+            height: 220px;
+            background: #fff7ea;
+            border-radius: 20px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            margin-top: 40px; /* Added margin for spacing */
+        }
 
-<style>
-  .avatar-container {
-    width: 180px;
-    height: 220px;
-    background: #fff7ea;
-    border-radius: 20px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.1);
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    font-family: 'Arial Rounded MT Bold', sans-serif;
-  }
+        .avatar-container:hover {
+            transform: scale(1.03);
+        }
 
-  .avatar-container:hover {
-    transform: scale(1.03);
-  }
+        .avatar-head {
+            position: relative;
+            margin: 20px auto 10px;
+            width: 100px;
+            height: 100px;
+            background: #ffcc70;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 4px #fff;
+        }
 
-  .avatar-head {
-    position: relative;
-    margin: 20px auto 10px;
-    width: 100px;
-    height: 100px;
-    background: #ffcc70;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 4px #fff;
-  }
+        .avatar-eyes {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            display: flex;
+            gap: 40px;
+        }
 
-  .avatar-eyes {
-    position: absolute;
-    top: 30px;
-    left: 20px;
-    display: flex;
-    gap: 40px;
-  }
+        .eye {
+            width: 12px;
+            height: 12px;
+            background: #000;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
 
-  .eye {
-    width: 12px;
-    height: 12px;
-    background: #000;
-    border-radius: 50%;
-    transition: transform 0.2s ease;
-  }
+        .eyebrows {
+            position: absolute;
+            top: 15px;
+            left: 18px;
+            display: flex;
+            gap: 40px;
+        }
 
-  .eyebrows {
-    position: absolute;
-    top: 15px;
-    left: 18px;
-    display: flex;
-    gap: 40px;
-  }
+        .brow {
+            width: 20px;
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
 
-  .brow {
-    width: 20px;
-    height: 4px;
-    background: #444;
-    border-radius: 2px;
-    transition: transform 0.3s ease;
-  }
+        .avatar-mouth {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 10px;
+            background: #222;
+            border-radius: 0 0 50px 50px;
+            transition: all 0.3s ease;
+        }
 
-  .avatar-mouth {
-    position: absolute;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 10px;
-    background: #222;
-    border-radius: 0 0 50px 50px;
-    transition: all 0.3s ease;
-  }
+        .avatar-message {
+            margin-top: 5px;
+            font-size: 15px;
+            color: #333;
+            min-height: 24px;
+        }
 
-  .avatar-message {
-    margin-top: 5px;
-    font-size: 15px;
-    color: #333;
-    min-height: 24px;
-  }
-</style>
+        /* --- Projects Section --- */
+        .section-projects {
+            background: var(--color-bg-dark);
+            color: var(--color-text-light);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-<script>
-  const avatar = document.getElementById('smartAvatar');
-  const eyes = avatar.querySelectorAll('.eye');
-  const brows = avatar.querySelectorAll('.brow');
-  const mouth = document.getElementById('avatarMouth');
-  const msg = document.getElementById('avatarMessage');
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                padding: 10px 20px;
+            }
 
-  let blinkInterval = setInterval(blinkEyes, randomTime());
+            .logo {
+                margin-bottom: 10px;
+            }
 
-  avatar.addEventListener('mouseenter', () => {
-    liftBrows();
-    smile();
-    msg.textContent = '¡Qué bueno verte!';
-  });
+            .nav-menu {
+                flex-direction: column;
+                margin-top: 10px;
+            }
 
-  avatar.addEventListener('mouseleave', () => {
-    resetBrows();
-    neutralMouth();
-    msg.textContent = '';
-  });
+            .nav-menu li {
+                margin: 5px 0;
+            }
 
-  avatar.addEventListener('click', () => {
-    msg.textContent = '¡Hola humano! 😄';
-    widenEyes();
-    openMouth();
-    setTimeout(() => {
-      msg.textContent = '';
-      resetEyes();
-      neutralMouth();
-    }, 2000);
-  });
+            .section-hero h1 {
+                font-size: 3rem;
+            }
 
-  function blinkEyes() {
-    eyes.forEach(eye => eye.style.transform = 'scaleY(0.1)');
-    setTimeout(() => {
-      eyes.forEach(eye => eye.style.transform = 'scaleY(1)');
-    }, 120);
-    clearInterval(blinkInterval);
-    blinkInterval = setInterval(blinkEyes, randomTime());
-  }
+            .section-hero p {
+                font-size: 1.2rem;
+            }
 
-  function randomTime() {
-    return Math.random() * 3000 + 2000;
-  }
+            .avatar-container {
+                width: 150px;
+                height: 180px;
+            }
 
-  function liftBrows() {
-    brows.forEach(b => b.style.transform = 'translateY(-4px) rotate(-5deg)');
-  }
+            .avatar-head {
+                width: 80px;
+                height: 80px;
+            }
 
-  function resetBrows() {
-    brows.forEach(b => b.style.transform = 'translateY(0) rotate(0)');
-  }
+            .avatar-eyes {
+                top: 25px;
+                left: 15px;
+                gap: 30px;
+            }
 
-  function smile() {
-    mouth.style.height = '8px';
-    mouth.style.width = '40px';
-    mouth.style.borderRadius = '0 0 30px 30px';
-    mouth.style.background = '#2c3e50';
-  }
+            .eye {
+                width: 10px;
+                height: 10px;
+            }
 
-  function openMouth() {
-    mouth.style.height = '20px';
-    mouth.style.width = '30px';
-    mouth.style.background = '#e63946';
-    mouth.style.borderRadius = '50%';
-  }
+            .eyebrows {
+                top: 10px;
+                left: 13px;
+                gap: 30px;
+            }
 
-  function neutralMouth() {
-    mouth.style.height = '10px';
-    mouth.style.width = '30px';
-    mouth.style.background = '#222';
-    mouth.style.borderRadius = '0 0 50px 50px';
-  }
+            .brow {
+                width: 15px;
+                height: 3px;
+            }
 
-  function widenEyes() {
-    eyes.forEach(eye => eye.style.transform = 'scale(1.5)');
-  }
+            .avatar-mouth {
+                bottom: 20px;
+                width: 25px;
+                height: 8px;
+            }
+        }
 
-  function resetEyes() {
-    eyes.forEach(eye => eye.style.transform = 'scale(1)');
-  }
-</script>
- 
+        @media (max-width: 480px) {
+            .main-header {
+                padding: 10px;
+            }
 
+            .nav-menu a {
+                font-size: 1rem;
+            }
+
+            .section-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="logo">Jairo Barrientos</div>
+        <nav class="main-nav" aria-label="Main navigation">
+            <ul class="nav-menu">
+                <li><a href="#hero" class="active">Inicio</a></li>
+                <li><a href="#about">Sobre Mí</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="scroll-progress-bar"></div>
+
+    <main>
+        <section id="hero" class="section-hero" role="region" aria-labelledby="hero-title">
+            <h1 id="hero-title" class="fade-in-up">¡Hola! Soy Jairo Barrientos</h1>
+            <p class="fade-in-up delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
+            <div id="smartAvatar" class="avatar-container fade-in-up delay-2" aria-label="Interactive Avatar">
+                <div class="avatar-head">
+                    <div class="avatar-eyes">
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+                    </div>
+                    <div class="eyebrows">
+                        <div class="brow left-brow"></div>
+                        <div class="brow right-brow"></div>
+                    </div>
+                    <div class="avatar-mouth" id="avatarMouth"></div>
+                </div>
+                <div class="avatar-message" id="avatarMessage" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section id="about" class="section-about">
+            <h2>Sobre Mí</h2>
+            <p>Aquí irá tu descripción sobre quién eres y tu trayectoria profesional.</p>
+        </section>
+
+        <section id="skills" class="section-skills">
+            <h2>Habilidades</h2>
+            <p>Aquí podrás listar tus habilidades técnicas y blandas.</p>
+        </section>
+
+        <section id="projects" class="section-projects">
+            <h2>Proyectos</h2>
+            <p>Aquí se mostrarán tus proyectos destacados.</p>
+            </section>
+
+        <section id="contact" class="section-contact">
+            <h2>Contacto</h2>
+            <p>Aquí se incluirá tu información de contacto y un formulario.</p>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Remove active class from all and add to clicked
+                document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Header scroll effect
+        const header = document.querySelector('.main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll progress bar
+        const progressBar = document.querySelector('.scroll-progress-bar');
+        window.addEventListener('scroll', () => {
+            const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (window.scrollY / totalHeight) * 100;
+            progressBar.style.width = scrollProgress + '%';
+        });
+
+        // Interactive Avatar Logic
+        const avatar = document.getElementById('smartAvatar');
+        const eyes = avatar.querySelectorAll('.eye');
+        const brows = avatar.querySelectorAll('.brow');
+        const mouth = document.getElementById('avatarMouth');
+        const msg = document.getElementById('avatarMessage');
+
+        let blinkInterval = setInterval(blinkEyes, randomTime());
+
+        avatar.addEventListener('mouseenter', () => {
+            liftBrows();
+            smile();
+            msg.textContent = '¡Qué bueno verte!';
+            clearInterval(blinkInterval); // Stop blinking on hover
+        });
+
+        avatar.addEventListener('mouseleave', () => {
+            resetBrows();
+            neutralMouth();
+            msg.textContent = '';
+            blinkInterval = setInterval(blinkEyes, randomTime()); // Resume blinking
+        });
+
+        avatar.addEventListener('click', () => {
+            msg.textContent = '¡Hola humano! 😄';
+            widenEyes();
+            openMouth();
+            clearInterval(blinkInterval); // Stop blinking on click
+            setTimeout(() => {
+                msg.textContent = '';
+                resetEyes();
+                neutralMouth();
+                blinkInterval = setInterval(blinkEyes, randomTime()); // Resume blinking after message
+            }, 2000);
+        });
+
+        function blinkEyes() {
+            eyes.forEach(eye => eye.style.transform = 'scaleY(0.1)');
+            setTimeout(() => {
+                eyes.forEach(eye => eye.style.transform = 'scaleY(1)');
+            }, 120);
+        }
+
+        function randomTime() {
+            return Math.random() * 3000 + 2000;
+        }
+
+        function liftBrows() {
+            brows.forEach(b => b.style.transform = 'translateY(-4px) rotate(-5deg)');
+        }
+
+        function resetBrows() {
+            brows.forEach(b => b.style.transform = 'translateY(0) rotate(0)');
+        }
+
+        function smile() {
+            mouth.style.height = '8px';
+            mouth.style.width = '40px';
+            mouth.style.borderRadius = '0 0 30px 30px';
+            mouth.style.background = '#2c3e50';
+        }
+
+        function openMouth() {
+            mouth.style.height = '20px';
+            mouth.style.width = '30px';
+            mouth.style.background = '#e63946';
+            mouth.style.borderRadius = '50%';
+        }
+
+        function neutralMouth() {
+            mouth.style.height = '10px';
+            mouth.style.width = '30px';
+            mouth.style.background = '#222';
+            mouth.style.borderRadius = '0 0 50px 50px';
+        }
+
+        function widenEyes() {
+            eyes.forEach(eye => eye.style.transform = 'scale(1.5)');
+        }
+
+        function resetEyes() {
+            eyes.forEach(eye => eye.style.transform = 'scale(1)');
+        }
+
+        // Initialize active nav link based on current section (optional, for page load)
+        window.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+
+            function updateActiveNavLink() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - header.offsetHeight; // Adjust for fixed header
+                    if (scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveNavLink);
+            updateActiveNavLink(); // Call on load to set initial active link
+        });
+    </script>
         /* --- Projects Section --- */
         .section-projects {
             background: var(--color-bg-dark);
