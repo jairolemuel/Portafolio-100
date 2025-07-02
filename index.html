@@ -1340,13 +1340,12 @@
                         </div>
                     </a>
                 </div>
-
-                ```html
+                
 <div class="project-card">
   <a href="/ai-agent-security/index.html" class="project-link">
     <div class="project-svg-container">
-      <svg id="svg-cybersecurity" viewBox="0 0 100 100">
-        <!-- Escudo -->
+      <svg id="svg-cybersecurity" viewBox="0 0 100 100" aria-hidden="true" role="img" aria-labelledby="cybersecurity-title">
+        <title id="cybersecurity-title">Cybersecurity Shield and Lock Icon</title>
         <path
           class="shield-path"
           d="M50 10 L10 40 L10 80 L50 90 L90 80 L90 40 Z"
@@ -1354,32 +1353,31 @@
           stroke="#00e5ff"
           stroke-width="3"
         />
-        <!-- Círculo interior -->
-        <circle
-          class="lock-fill"
-          cx="50"
-          cy="55"
-          r="15"
-          fill="#8000ff"
-        />
-        <!-- Cuerpo del candado -->
-        <rect
-          x="45"
-          y="45"
-          width="10"
-          height="15"
-          rx="2"
-          ry="2"
-          fill="#000"
-        />
-        <!-- Arco del candado -->
-        <path
-          d="M55 40 C55 35 50 30 45 35 V45"
-          fill="none"
-          stroke="#000"
-          stroke-width="5"
-          stroke-linecap="round"
-        />
+        <g class="lock-icon">
+          <circle
+            class="lock-fill"
+            cx="50"
+            cy="55"
+            r="15"
+            fill="#8000ff"
+          />
+          <rect
+            x="45"
+            y="45"
+            width="10"
+            height="15"
+            rx="2"
+            ry="2"
+            fill="#000"
+          />
+          <path
+            d="M55 40 C55 35 50 30 45 35 V45"
+            fill="none"
+            stroke="#000"
+            stroke-width="5"
+            stroke-linecap="round"
+          />
+        </g>
       </svg>
     </div>
     <div class="project-content">
