@@ -1,1891 +1,819 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Financiator Pro - Elite Financial Analytics Suite</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="An advanced, enterprise-grade financial calculation and analytics suite for professionals, featuring live data and robust tools.">
-    <meta name="keywords" content="financial calculator, investment, loan, ROI, NPV, IRR, Monte Carlo, crypto, forex, financial analysis, enterprise finance, fintech, monetization">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financiator Pro - Calculadora Financiera en Tiempo Real</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link rel="icon" href="/path/to/your/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="/path/to/your/apple-touch-icon.png">
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-    
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            position: relative;
+        }
 
-    <style>
-        /* CSS Variables for theming and consistency */
-        :root {
-            --color-primary: #007BFF; /* Vibrant Blue */
-            --color-secondary: #6c757d; /* Soft Gray */
-            --color-accent: #00f2f2; /* Bright Cyan for luxury details */
-            --color-background-dark: #101828; /* Very dark background for professionalism */
-            --color-background-light: #1D2B40; /* Slightly lighter panel background */
-            --color-text-light: #E0E7FF; /* Main text color */
-            --color-text-secondary: #A9B3C2; /* Secondary text color */
-            --color-border-subtle: rgba(255, 255, 255, 0.1);
-            --border-radius-main: 12px;
-            --box-shadow-deep: 0 8px 24px rgba(0, 0, 0, 0.5);
-            --transition-speed: 0.3s;
-            --font-size-base: 16px;
-        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
 
-        /* Global Reset and Base Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--color-background-dark);
-            color: var(--color-text-light);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-size: var(--font-size-base);
-            -webkit-font-smoothing: antialiased; /* Smoother text rendering */
-        }
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--color-background-light); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+        .live-data-banner {
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
 
-        /* Main Application Container */
-        #app-container {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            padding: 25px; /* Increased padding */
-            max-width: 1300px; /* Wider layout */
-            margin: 0 auto;
-            width: 100%;
-        }
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
 
-        /* Header Styling */
-        header {
-            padding: 25px 0;
-            text-align: center;
-            border-bottom: 1px solid var(--color-border-subtle);
-            margin-bottom: 40px;
-            position: relative;
-        }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
 
-        header h1 {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            font-size: 3.5em; /* Larger, more impactful title */
-            color: var(--color-accent);
-            text-shadow: 0 0 20px rgba(0, 242, 242, 0.7), 0 0 40px rgba(0, 242, 242, 0.3);
-            letter-spacing: 2px;
-            animation: fadeInScale 1.2s ease-out;
-        }
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
 
-        /* Navigation Bar */
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px; /* More space between tabs */
-            margin-bottom: 50px;
-            background: var(--color-background-light);
-            border-radius: var(--border-radius-main);
-            box-shadow: var(--box-shadow-deep);
-            padding: 12px;
-            border: 1px solid var(--color-border-subtle);
-        }
+        .ticker-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
 
-        nav .tab {
-            padding: 14px 22px;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all var(--transition-speed) ease-in-out;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            font-size: 1.15em;
-            color: var(--color-text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.9px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-        }
+        .ticker-content {
+            display: flex;
+            animation: scroll 45s linear infinite;
+            white-space: nowrap;
+            gap: 40px;
+        }
 
-        nav .tab:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px; /* Thicker underline */
-            background-color: var(--color-accent);
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation */
-        }
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
 
-        nav .tab:hover:before {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
 
-        nav .tab:hover {
-            color: var(--color-primary);
-            text-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
-            background: rgba(0, 123, 255, 0.08); /* Light highlight on hover */
-        }
+        .nav-container {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
 
-        nav .tab.active {
-            color: var(--color-primary);
-            border-bottom-color: var(--color-accent);
-            background: rgba(0, 123, 255, 0.15);
-            box-shadow: inset 0 0 15px rgba(0, 123, 255, 0.4);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        nav .tab.active:before {
-            transform: scaleX(1);
-        }
+        .nav-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+        }
 
-        /* Calculator Sections */
-        .calculator {
-            display: none;
-            background: var(--color-background-light);
-            border-radius: var(--border-radius-main);
-            box-shadow: var(--box-shadow-deep);
-            padding: 35px; /* More generous padding */
-            margin-bottom: 40px;
-            transition: transform var(--transition-speed) ease-out, opacity var(--transition-speed) ease-out;
-            opacity: 0;
-            transform: translateY(25px);
-            border: 1px solid var(--color-border-subtle);
-        }
+        .nav-tab {
+            padding: 12px 16px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+        }
 
-        .calculator.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateY(-2px);
+        }
 
-        .calculator h2 {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            font-size: 2.5em; /* Larger section titles */
-            color: var(--color-primary);
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-            padding-bottom: 12px;
-            text-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
-        }
-        .calculator h2:after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            width: 80px; /* Wider underline */
-            height: 4px;
-            background: var(--color-accent);
-            border-radius: 2px;
-        }
+        .nav-tab.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
 
-        /* Input Group Styling */
-        .input-group {
-            background: rgba(255, 255, 255, 0.06);
-            padding: 18px; /* More padding */
-            border-radius: 10px;
-            margin-bottom: 20px;
-            transition: background var(--transition-speed), border var(--transition-speed), box-shadow var(--transition-speed);
-            border: 1px solid transparent;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
-            position: relative; /* For error messages */
-        }
+        .calculator-section {
+            display: none;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-        .input-group:focus-within {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: var(--color-accent);
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 242, 242, 0.3);
-        }
+        .calculator-section.active {
+            display: block;
+            animation: slideIn 0.6s ease-out;
+        }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--color-text-secondary);
-            font-size: 0.98rem;
-            font-weight: 500;
-            letter-spacing: 0.6px;
-        }
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
 
-        input, select, textarea {
-            width: 100%;
-            padding: 14px; /* Larger padding */
-            font-size: 1.1rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.4); /* Darker input background */
-            color: var(--color-text-light);
-            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
-            -webkit-appearance: none;
-            appearance: none;
-        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #1e40af;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 700;
+        }
 
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
-            outline: none;
-        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
 
-        select {
-            background: rgba(0, 0, 0, 0.4) url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23E0E7FF%22%20d%3D%22M2%200L0%202h4zm0%205L0%203h4z%22%2F%3E%3C%2Fsvg%3E') no-repeat right 15px center;
-            background-size: 10px 12px;
-        }
+        .metric-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-        textarea {
-            resize: vertical;
-            min-height: 70px;
-        }
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4, #10b981);
+        }
 
-        .input-error-message {
-            color: #ff6347; /* Tomato red */
-            font-size: 0.85em;
-            margin-top: 5px;
-            position: absolute;
-            bottom: -20px; /* Position below input group */
-            left: 18px;
-            animation: fadeIn 0.3s ease-out;
-        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: #3b82f6;
+        }
 
-        /* Button Styling */
-        button {
-            width: 100%;
-            padding: 16px; /* Larger padding */
-            font-size: 1.25rem;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(45deg, var(--color-primary), #0056b3);
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 6px 18px rgba(0, 123, 255, 0.5);
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-        button:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 350%; /* Larger burst */
-            height: 350%;
-            background-color: var(--color-accent);
-            border-radius: 50%;
-            transition: all 0.5s ease-out;
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0;
-            z-index: -1;
-        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
 
-        button:hover:before {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.18; /* More visible burst */
-        }
+        .metric-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-        button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.7);
-            background: linear-gradient(45deg, #0056b3, var(--color-primary));
-        }
+        .metric-change {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
 
-        button:active {
-            transform: translateY(-2px) scale(0.99);
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
-        }
+        .metric-change.positive {
+            color: #065f46;
+            background: #d1fae5;
+        }
 
-        button:disabled {
-            background: #4a4a4a;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-            opacity: 0.6;
-        }
-        button:disabled:before {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0;
-        }
+        .metric-change.negative {
+            color: #991b1b;
+            background: #fee2e2;
+        }
 
-        /* Result Display */
-        .result {
-            margin-top: 25px;
-            font-weight: 600;
-            color: var(--color-accent);
-            font-size: 1.4em;
-            text-align: center;
-            background: rgba(0, 242, 242, 0.12);
-            padding: 18px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 242, 242, 0.4);
-            animation: fadeIn 0.6s ease-out;
-            box-shadow: 0 0 20px rgba(0, 242, 242, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        .result.error {
-            color: #ff6347;
-            background: rgba(255, 99, 71, 0.15);
-            border-color: rgba(255, 99, 71, 0.5);
-            box-shadow: 0 0 20px rgba(255, 99, 71, 0.3);
-        }
-        .result:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            box-shadow: inset 0 0 12px var(--color-accent);
-            border-radius: 10px;
-            pointer-events: none;
-            opacity: 0.7;
-        }
-        .result.error:after {
-            box-shadow: inset 0 0 12px #ff6347;
-        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
 
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: var(--border-radius-main);
-            overflow: hidden;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
-            border: 1px solid var(--color-border-subtle);
-        }
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-        th, td {
-            padding: 14px; /* More padding */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            font-size: 0.98em;
-        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #ffffff;
+            font-family: inherit;
+        }
 
-        th {
-            background: rgba(0, 123, 255, 0.25);
-            color: var(--color-primary);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-family: 'Rajdhani', sans-serif;
-            letter-spacing: 0.8px;
-            position: sticky;
-            top: 0; /* Sticky headers for scrollable tables */
-            z-index: 2;
-        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
 
-        tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.015);
-        }
-        tr:hover {
-            background: rgba(255, 255, 255, 0.07);
-            transition: background 0.2s ease-in-out;
-        }
+        .currency-selector {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
 
-        /* Chart Styling */
-        canvas {
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: var(--border-radius-main);
-            padding: 20px; /* More padding around charts */
-            margin-top: 30px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-            border: 1px solid var(--color-border-subtle);
-        }
+        .currency-selector select {
+            min-width: 100px;
+        }
 
-        /* Footer Styling */
-        footer {
-            text-align: center;
-            padding: 25px;
-            font-size: 0.95rem;
-            color: var(--color-text-secondary);
-            margin-top: 50px;
-            border-top: 1px solid var(--color-border-subtle);
-            background: rgba(0,0,0,0.1);
-        }
+        .live-price {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #0c4a6e;
+            font-weight: 600;
+            min-width: 120px;
+            text-align: center;
+        }
 
-        /* Background Animation */
-        .bg-anim {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-            filter: blur(3px); /* Slightly more blur */
-            opacity: 0.7; /* More subtle */
-        }
+        .btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            min-width: 180px;
+        }
 
-        .bg-anim div {
-            position: absolute;
-            width: 280px; /* Larger spheres */
-            height: 280px;
-            background: rgba(0, 242, 242, 0.04); /* Subtle cyan glow */
-            border-radius: 50%;
-            animation: float 50s linear infinite alternate; /* Slower, longer animation */
-            will-change: transform, opacity;
-            box-shadow: 0 0 50px rgba(0, 242, 242, 0.2); /* Subtle glow effect */
-        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+        }
 
-        .bg-anim div:nth-child(1) { top: 75%; left: -15%; animation-duration: 45s; animation-delay: 0s; transform: scale(1.1); --dx: 40px; --dy: -50px; }
-        .bg-anim div:nth-child(2) { top: 15%; left: 85%; animation-duration: 50s; animation-delay: 5s; transform: scale(0.9); --dx: -35px; --dy: 45px; }
-        .bg-anim div:nth-child(3) { top: -25%; left: 35%; animation-duration: 40s; animation-delay: 10s; transform: scale(1.2); --dx: 50px; --dy: 30px; }
-        .bg-anim div:nth-child(4) { top: 45%; left: -25%; animation-duration: 55s; animation-delay: 15s; transform: scale(0.8); --dx: -40px; --dy: -40px; }
-        .bg-anim div:nth-child(5) { top: 95%; left: 70%; animation-duration: 60s; animation-delay: 20s; transform: scale(1.3); --dx: 30px; --dy: 60px; }
-        .bg-anim div:nth-child(6) { top: 0%; left: 10%; animation-duration: 38s; animation-delay: 25s; transform: scale(1.05); --dx: -20px; --dy: 25px; }
-        .bg-anim div:nth-child(7) { top: 60%; left: 100%; animation-duration: 42s; animation-delay: 30s; transform: scale(0.95); --dx: -50px; --dy: -30px; }
+        .btn-secondary {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
 
+        .btn-secondary:hover {
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
+        }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(var(--s, 1)) rotate(0deg); }
-            50% { transform: translate(var(--dx, 20px), var(--dy, -20px)) scale(calc(var(--s, 1) * 1.05)) rotate(180deg); }
-            100% { transform: translate(0, 0) scale(var(--s, 1)) rotate(360deg); }
-        }
+        .results-panel {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 25px;
+            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.3);
+        }
 
-        /* Ad Slot Styling */
-        .ad-slot {
-            margin: 30px auto;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px dashed var(--color-accent);
-            padding: 15px;
-            text-align: center;
-            color: var(--color-text-secondary);
-            font-style: italic;
-            border-radius: var(--border-radius-main);
-            max-width: 728px; /* Common ad unit size */
-            height: 90px; /* Typical banner height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9em;
-            overflow: hidden; /* To contain actual ad content */
-            box-shadow: 0 0 15px rgba(0, 242, 242, 0.2);
-            transition: all 0.3s ease-out;
-        }
-        .ad-slot:hover {
-            box-shadow: 0 0 25px rgba(0, 242, 242, 0.4);
-            transform: translateY(-2px);
-        }
-        /* Specific ad sizes if needed */
-        .ad-slot.square { width: 300px; height: 250px; }
-        .ad-slot.leaderboard { width: 728px; height: 90px; }
+        .results-panel h3 {
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
 
-        /* Small text for explanations */
-        .small-text {
-            color: var(--color-text-secondary);
-            font-size: 0.88em;
-            text-align: center;
-            margin-top: -10px;
-            margin-bottom: 15px;
-        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
 
-        /* Media Queries for Responsiveness */
-        @media (max-width: 1024px) {
-            #app-container { padding: 20px; }
-            header h1 { font-size: 3em; }
-            nav { gap: 10px; padding: 10px; }
-            nav .tab { padding: 12px 18px; font-size: 1.05em; }
-            .calculator { padding: 30px; }
-            .calculator h2 { font-size: 2.2em; }
-            .input-group { padding: 15px; }
-            input, select, textarea { padding: 12px; font-size: 1.05rem; }
-            button { padding: 14px; font-size: 1.15rem; }
-            .result { font-size: 1.2em; padding: 15px; }
-            th, td { padding: 12px; font-size: 0.95em; }
-            .ad-slot.leaderboard { max-width: 468px; height: 60px; }
-        }
+        .result-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.5em; }
-            nav { flex-direction: column; gap: 8px; }
-            nav .tab { padding: 10px 15px; font-size: 1em; }
-            .calculator { padding: 25px; margin-bottom: 30px; }
-            .calculator h2 { font-size: 2em; }
-            .input-group { padding: 12px; margin-bottom: 18px; }
-            input, select, textarea { padding: 10px; font-size: 1em; }
-            button { padding: 12px; font-size: 1.05rem; }
-            .result { font-size: 1.1em; padding: 12px; }
-            th, td { padding: 10px; font-size: 0.9em; }
-            .ad-slot { max-width: 320px; height: 50px; }
-        }
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-        @media (max-width: 480px) {
-            #app-container { padding: 15px; }
-            header h1 { font-size: 2em; letter-spacing: 1px; }
-            nav { padding: 8px; }
-            nav .tab { padding: 8px 12px; font-size: 0.9em; }
-            .calculator { padding: 18px; margin-bottom: 25px; }
-            .calculator h2 { font-size: 1.8em; }
-            .input-group { padding: 10px; margin-bottom: 15px; }
-            input, select, textarea { padding: 8px; font-size: 0.95em; }
-            button { padding: 10px; font-size: 1rem; }
-            .result { font-size: 1em; padding: 10px; }
-            th, td { padding: 8px; font-size: 0.8em; }
-            .ad-slot { margin: 20px auto; width: 100%; max-width: 300px; height: 50px; }
-        }
-    </style>
+        .result-value {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .basic-calc {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .calc-display {
+            grid-column: 1 / -1;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: right;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e40af;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-family: 'Courier New', monospace;
+        }
+
+        .calc-btn {
+            aspect-ratio: 1;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            color: #374151;
+        }
+
+        .calc-btn:hover {
+            background: #f3f4f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .calc-btn.operator {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .calc-btn.equals {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-color: #10b981;
+        }
+
+        .calc-btn.clear {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border-color: #ef4444;
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            margin-top: 50px;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .dashboard-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .basic-calc {
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="bg-anim">
-        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-    </div>
-
-    <div id="app-container">
-        <header>
-            <h1>Financiator Pro</h1>
-        </header>
-
-        <nav>
-            <div class="tab active" data-target="compound">Compound Interest</div>
-            <div class="tab" data-target="loan">Loan Payment</div>
-            <div class="tab" data-target="custom">Custom Expression</div>
-            <div class="tab" data-target="roi">ROI</div>
-            <div class="tab" data-target="npv">NPV & IRR</div>
-            <div class="tab" data-target="amort">Amortization</div>
-            <div class="tab" data-target="stats">Statistics & Chart</div>
-            <div class="tab" data-target="crypto">Crypto (Live)</div>
-            <div class="tab" data-target="fx">Currency Converter</div>
-            <div class="tab" data-target="wasm">WASM Demo</div>
-            <div class="tab" data-target="sim">Monte Carlo Sim.</div>
-            <div class="tab" data-target="premium">Premium Features</div> </nav>
-
-        <main class="content">
-            <div class="ad-slot leaderboard" id="ad-top-banner">
-                <p>Advertisement Space - FinTech Services / Investment Opportunities</p>
-                </div>
-
-            <section class="calculator active" id="compound" data-calculator-id="compound">
-                <h2>Compound Interest</h2>
-                <div class="input-group">
-                    <label for="cc-principal">Initial Principal ($)</label>
-                    <input type="number" id="cc-principal" placeholder="e.g., 10000" value="10000" min="0">
-                    <div class="input-error-message" id="cc-principal-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="cc-rate">Annual Rate (%)</label>
-                    <input type="number" id="cc-rate" placeholder="e.g., 5" value="5" min="0" step="0.1">
-                    <div class="input-error-message" id="cc-rate-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="cc-years">Years</label>
-                    <input type="number" id="cc-years" placeholder="e.g., 10" value="10" min="1">
-                    <div class="input-error-message" id="cc-years-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="cc-frequency">Compounding Frequency</label>
-                    <select id="cc-frequency">
-                        <option value="1">Annually</option>
-                        <option value="2">Semi-annually</option>
-                        <option value="4">Quarterly</option>
-                        <option value="12" selected>Monthly</option>
-                        <option value="365">Daily</option>
-                    </select>
-                </div>
-                <button onclick="calcCompound()">Calculate Compound Interest</button>
-                <div class="result" id="cc-result"></div>
-            </section>
-
-            <section class="calculator" id="loan" data-calculator-id="loan">
-                <h2>Monthly Loan Payment</h2>
-                <div class="input-group">
-                    <label for="loan-amount">Loan Amount ($)</label>
-                    <input type="number" id="loan-amount" placeholder="e.g., 100000" value="100000" min="0">
-                    <div class="input-error-message" id="loan-amount-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="loan-rate">Annual Rate (%)</label>
-                    <input type="number" id="loan-rate" placeholder="e.g., 6" value="6" min="0" step="0.1">
-                    <div class="input-error-message" id="loan-rate-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="loan-years">Term (Years)</label>
-                    <input type="number" id="loan-years" placeholder="e.g., 5" value="5" min="1">
-                    <div class="input-error-message" id="loan-years-error"></div>
-                </div>
-                <button onclick="calcLoan()">Calculate Monthly Payment</button>
-                <div class="result" id="loan-result"></div>
-            </section>
-
-            <section class="calculator" id="custom" data-calculator-id="custom">
-                <h2>Evaluate Custom Mathematical Expression</h2>
-                <div class="input-group">
-                    <label for="custom-expression">Enter your formula:</label>
-                    <input type="text" id="custom-expression" placeholder="e.g., (1000 + 50) * 1.25 + Math.sqrt(144)" value="(1000 + 50) * 1.25 + Math.sqrt(144)">
-                    <div class="input-error-message" id="custom-expression-error"></div>
-                </div>
-                <p class="small-text">You can use `Math.pow()`, `Math.sqrt()`, `Math.log()`, `+`, `-`, `*`, `/`, `()` etc.</p>
-                <button onclick="calcCustom()">Evaluate Expression</button>
-                <div class="result" id="custom-result"></div>
-            </section>
-
-            <section class="calculator" id="roi" data-calculator-id="roi">
-                <h2>Return on Investment (ROI)</h2>
-                <div class="input-group">
-                    <label for="roi-invest">Initial Investment ($)</label>
-                    <input type="number" id="roi-invest" placeholder="e.g., 10000" value="10000" min="0">
-                    <div class="input-error-message" id="roi-invest-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="roi-gain">Net Profit/Loss ($)</label>
-                    <input type="number" id="roi-gain" placeholder="e.g., 2000" value="2000">
-                    <div class="input-error-message" id="roi-gain-error"></div>
-                </div>
-                <button onclick="calcROI()">Calculate ROI</button>
-                <div class="result" id="roi-result"></div>
-            </section>
-
-            <section class="calculator" id="npv" data-calculator-id="npv">
-                <h2>Net Present Value (NPV) & Internal Rate of Return (IRR)</h2>
-                <p class="small-text">Analyze project profitability and efficiency.</p>
-                <div class="input-group">
-                    <label for="npv-initial-investment">Initial Investment (CF0) ($)</label>
-                    <input type="number" id="npv-initial-investment" placeholder="e.g., -100000" value="-100000" step="any">
-                    <div class="input-error-message" id="npv-initial-investment-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="npv-cash-flows">Annual Cash Flows (comma-separated, e.g., 30000, 40000, 50000)</label>
-                    <textarea id="npv-cash-flows" rows="3" placeholder="e.g., 30000, 40000, 50000, 20000">30000, 40000, 50000, 20000</textarea>
-                    <div class="input-error-message" id="npv-cash-flows-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="npv-discount-rate">Annual Discount Rate (%)</label>
-                    <input type="number" id="npv-discount-rate" placeholder="e.g., 10" value="10" min="0" step="0.1">
-                    <div class="input-error-message" id="npv-discount-rate-error"></div>
-                </div>
-                <button onclick="calcNPV_IRR()">Calculate NPV & IRR</button>
-                <div class="result" id="npv-irr-result"></div>
-                <canvas id="npv-chart"></canvas>
-            </section>
-
-            <section class="calculator" id="amort" data-calculator-id="amort">
-                <h2>Loan Amortization Schedule</h2>
-                <p class="small-text">Detailed breakdown of principal and interest payments over time.</p>
-                <div class="input-group">
-                    <label for="am-amount">Loan Amount ($)</label>
-                    <input type="number" id="am-amount" placeholder="e.g., 50000" value="50000" min="0">
-                    <div class="input-error-message" id="am-amount-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="am-rate">Annual Rate (%)</label>
-                    <input type="number" id="am-rate" placeholder="e.g., 5" value="5" min="0" step="0.1">
-                    <div class="input-error-message" id="am-rate-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="am-years">Term (Years)</label>
-                    <input type="number" id="am-years" placeholder="e.g., 3" value="3" min="1">
-                    <div class="input-error-message" id="am-years-error"></div>
-                </div>
-                <button onclick="genAmort()">Generate Amortization Table</button>
-                <div id="amort-table-container" style="max-height: 400px; overflow-y: auto; margin-top: 25px;">
-                    <div id="amort-table"></div>
-                </div>
-                <canvas id="amort-chart"></canvas>
-            </section>
-
-            <section class="calculator" id="stats" data-calculator-id="stats">
-                <h2>Statistical Analysis & Data Visualization</h2>
-                <p class="small-text">Understand your financial data distribution.</p>
-                <div class="input-group">
-                    <label for="stats-labels">Category Labels (comma-separated, e.g., Income, Fixed Costs, Investments)</label>
-                    <textarea id="stats-labels" rows="2" placeholder="e.g., Income, Fixed Costs, Investments, Savings">Income, Fixed Costs, Investments, Savings</textarea>
-                    <div class="input-error-message" id="stats-labels-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="stats-values">Numerical Values (comma-separated, e.g., 5000, 2500, 1000, 1500)</label>
-                    <textarea id="stats-values" rows="2" placeholder="e.g., 5000, 2500, 1000, 1500">5000, 2500, 1000, 1500</textarea>
-                    <div class="input-error-message" id="stats-values-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="stats-chart-type">Chart Type</label>
-                    <select id="stats-chart-type">
-                        <option value="pie">Pie Chart</option>
-                        <option value="bar">Bar Chart</option>
-                        <option value="doughnut">Doughnut Chart</option>
-                    </select>
-                </div>
-                <button onclick="drawStats()">Generate Analysis & Chart</button>
-                <div class="result" id="stats-summary"></div>
-                <canvas id="stats-chart"></canvas>
-            </section>
-
-            <section class="calculator" id="crypto" data-calculator-id="crypto">
-                <h2>Live Cryptocurrency Prices</h2>
-                <p class="small-text">Powered by CoinGecko API.</p>
-                <button onclick="fetchCrypto()">Load Live Crypto Data</button>
-                <div class="result" id="crypto-result"></div>
-                <canvas id="crypto-chart"></canvas>
-            </section>
-
-            <section class="calculator" id="fx" data-calculator-id="fx">
-                <h2>Advanced Currency Converter</h2>
-                <p class="small-text">Real-time exchange rates (Powered by exchangerate.host).</p>
-                <div class="input-group">
-                    <label for="fx-amount">Amount</label>
-                    <input type="number" id="fx-amount" value="100" min="0" step="any">
-                    <div class="input-error-message" id="fx-amount-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="fx-from">Convert From</label>
-                    <select id="fx-from">
-                        <option value="USD">USD - United States Dollar</option>
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="GBP">GBP - British Pound</option>
-                        <option value="JPY">JPY - Japanese Yen</option>
-                        <option value="CAD">CAD - Canadian Dollar</option>
-                        <option value="AUD">AUD - Australian Dollar</option>
-                        <option value="CHF">CHF - Swiss Franc</option>
-                        <option value="CNY">CNY - Chinese Yuan</option>
-                        <option value="BRL">BRL - Brazilian Real</option>
-                        <option value="ARS" selected>ARS - Argentine Peso</option>
-                        </select>
-                </div>
-                <div class="input-group">
-                    <label for="fx-to">Convert To</label>
-                    <select id="fx-to">
-                        <option value="USD" selected>USD - United States Dollar</option>
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="GBP">GBP - British Pound</option>
-                        <option value="JPY">JPY - Japanese Yen</option>
-                        <option value="CAD">CAD - Canadian Dollar</option>
-                        <option value="AUD">AUD - Australian Dollar</option>
-                        <option value="CHF">CHF - Swiss Franc</option>
-                        <option value="CNY">CNY - Chinese Yuan</option>
-                        <option value="BRL">BRL - Brazilian Real</option>
-                        <option value="ARS">ARS - Argentine Peso</option>
-                        </select>
-                </div>
-                <button onclick="convertFX()">Convert Currency</button>
-                <div class="result" id="fx-result"></div>
-            </section>
-
-            <section class="calculator" id="wasm" data-calculator-id="wasm">
-                <h2>WebAssembly (WASM) Calculation Demo</h2>
-                <p class="small-text">Demonstrates near-native performance for intensive numerical operations.</p>
-                <div class="input-group">
-                    <label for="wasm-base">Base Number</label>
-                    <input type="number" id="wasm-base" value="2" min="0">
-                    <div class="input-error-message" id="wasm-base-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="wasm-exp">Exponent</label>
-                    <input type="number" id="wasm-exp" value="30" min="0">
-                    <div class="input-error-message" id="wasm-exp-error"></div>
-                </div>
-                <button onclick="calcWasm()">Calculate Power (via WASM)</button>
-                <div class="result" id="wasm-result"></div>
-            </section>
-
-            <section class="calculator" id="sim" data-calculator-id="sim">
-                <h2>Monte Carlo Portfolio Simulation</h2>
-                <p class="small-text">Estimate future investment performance under various risk scenarios.</p>
-                <div class="input-group">
-                    <label for="sim-initial-capital">Initial Capital ($)</label>
-                    <input type="number" id="sim-initial-capital" placeholder="e.g., 100000" value="100000" min="0">
-                    <div class="input-error-message" id="sim-initial-capital-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="sim-avg-return">Annual Avg. Return (%)</label>
-                    <input type="number" id="sim-avg-return" placeholder="e.g., 8" value="8" step="0.1">
-                    <div class="input-error-message" id="sim-avg-return-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="sim-std-dev">Annual Std. Deviation (%) (Volatility)</label>
-                    <input type="number" id="sim-std-dev" placeholder="e.g., 15" value="15" step="0.1">
-                    <div class="input-error-message" id="sim-std-dev-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="sim-years">Simulation Years</label>
-                    <input type="number" id="sim-years" placeholder="e.g., 20" value="20" min="1">
-                    <div class="input-error-message" id="sim-years-error"></div>
-                </div>
-                <div class="input-group">
-                    <label for="sim-runs">Number of Simulations</label>
-                    <input type="number" id="sim-runs" placeholder="e.g., 1000" value="1000" min="100" max="10000" step="100">
-                    <div class="input-error-message" id="sim-runs-error"></div>
-                </div>
-                <button onclick="runMonteCarlo()">Execute Monte Carlo Simulation</button>
-                <div class="result" id="sim-result"></div>
-                <canvas id="sim-chart"></canvas>
-            </section>
-
-            <section class="calculator" id="premium" data-calculator-id="premium">
-                <h2>Unlock Premium Financial Tools</h2>
-                <p class="small-text">Upgrade your experience for advanced insights and exclusive features.</p>
-                <ul style="list-style: none; padding: 0; margin-top: 25px;">
-                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
-                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">📈</span>
-                        <div>
-                            <strong>Advanced Reporting & Export:</strong> Generate detailed PDF/Excel reports of all calculations, amortization schedules, and simulation results.
-                        </div>
-                    </li>
-                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
-                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">💾</span>
-                        <div>
-                            <strong>Save & Load Scenarios:</strong> Store multiple calculation scenarios and portfolio simulations in your secure cloud profile for future reference.
-                        </div>
-                    </li>
-                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
-                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">📊</span>
-                        <div>
-                            <strong>Customizable Dashboards:</strong> Create personalized financial dashboards with key metrics from your calculations.
-                        </div>
-                    </li>
-                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
-                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">🔒</span>
-                        <div>
-                            <strong>Ad-Free Experience:</strong> Enjoy uninterrupted financial analysis without advertisements.
-                        </div>
-                    </li>
-                    <li style="background: rgba(0, 123, 255, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--color-primary); display: flex; align-items: center;">
-                        <span style="font-size: 1.5em; margin-right: 15px; color: var(--color-accent);">📞</span>
-                        <div>
-                            <strong>Priority Support:</strong> Direct access to our expert support team for any queries or technical assistance.
-                        </div>
-                    </li>
-                </ul>
-                <button onclick="redirectToSubscription()">View Premium Plans</button>
-            </section>
-
-            <div class="ad-slot leaderboard" id="ad-bottom-banner">
-                <p>Advertisement Space - Financial Software / Consulting</p>
-                </div>
-
-        </main>
-
-        <footer>
-            &copy; 2025 Financiator Pro – Powered by cutting-edge financial analytics.
-            <div class="small-text" style="margin-top: 10px;">
-                Proudly serving professionals globally. Data accuracy and security are our top priorities.
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // Register Chart.js Datalabels Plugin globally
-        Chart.register(ChartDataLabels);
-
-        // --- Data Engineering & DOM Management ---
-        const DOM = {
-            tabs: document.querySelectorAll('.tab'),
-            calculators: document.querySelectorAll('.calculator'),
-            
-            // Centralized error message elements
-            errorMessages: {},
-
-            // Input and result elements
-            // Each input is associated with its error message div
-            inputs: {
-                ccPrincipal: { element: document.getElementById('cc-principal'), error: document.getElementById('cc-principal-error') },
-                ccRate: { element: document.getElementById('cc-rate'), error: document.getElementById('cc-rate-error') },
-                ccYears: { element: document.getElementById('cc-years'), error: document.getElementById('cc-years-error') },
-                ccFrequency: { element: document.getElementById('cc-frequency') },
-                ccResult: { element: document.getElementById('cc-result') },
-
-                loanAmount: { element: document.getElementById('loan-amount'), error: document.getElementById('loan-amount-error') },
-                loanRate: { element: document.getElementById('loan-rate'), error: document.getElementById('loan-rate-error') },
-                loanYears: { element: document.getElementById('loan-years'), error: document.getElementById('loan-years-error') },
-                loanResult: { element: document.getElementById('loan-result') },
-
-                customExpression: { element: document.getElementById('custom-expression'), error: document.getElementById('custom-expression-error') },
-                customResult: { element: document.getElementById('custom-result') },
-
-                roiInvest: { element: document.getElementById('roi-invest'), error: document.getElementById('roi-invest-error') },
-                roiGain: { element: document.getElementById('roi-gain'), error: document.getElementById('roi-gain-error') },
-                roiResult: { element: document.getElementById('roi-result') },
-
-                npvInitialInvestment: { element: document.getElementById('npv-initial-investment'), error: document.getElementById('npv-initial-investment-error') },
-                npvCashFlows: { element: document.getElementById('npv-cash-flows'), error: document.getElementById('npv-cash-flows-error') },
-                npvDiscountRate: { element: document.getElementById('npv-discount-rate'), error: document.getElementById('npv-discount-rate-error') },
-                npvIrrResult: { element: document.getElementById('npv-irr-result') },
-                npvChartCtx: document.getElementById('npv-chart').getContext('2d'),
-
-                amAmount: { element: document.getElementById('am-amount'), error: document.getElementById('am-amount-error') },
-                amRate: { element: document.getElementById('am-rate'), error: document.getElementById('am-rate-error') },
-                amYears: { element: document.getElementById('am-years'), error: document.getElementById('am-years-error') },
-                amortTable: { element: document.getElementById('amort-table') },
-                amortChartCtx: document.getElementById('amort-chart').getContext('2d'),
-
-                statsLabels: { element: document.getElementById('stats-labels'), error: document.getElementById('stats-labels-error') },
-                statsValues: { element: document.getElementById('stats-values'), error: document.getElementById('stats-values-error') },
-                statsChartType: { element: document.getElementById('stats-chart-type') },
-                statsSummary: { element: document.getElementById('stats-summary') },
-                statsChartCtx: document.getElementById('stats-chart').getContext('2d'),
-
-                cryptoResult: { element: document.getElementById('crypto-result') },
-                cryptoChartCtx: document.getElementById('crypto-chart').getContext('2d'),
-
-                fxAmount: { element: document.getElementById('fx-amount'), error: document.getElementById('fx-amount-error') },
-                fxFrom: { element: document.getElementById('fx-from') },
-                fxTo: { element: document.getElementById('fx-to') },
-                fxResult: { element: document.getElementById('fx-result') },
-
-                wasmBase: { element: document.getElementById('wasm-base'), error: document.getElementById('wasm-base-error') },
-                wasmExp: { element: document.getElementById('wasm-exp'), error: document.getElementById('wasm-exp-error') },
-                wasmResult: { element: document.getElementById('wasm-result') },
-
-                simInitialCapital: { element: document.getElementById('sim-initial-capital'), error: document.getElementById('sim-initial-capital-error') },
-                simAvgReturn: { element: document.getElementById('sim-avg-return'), error: document.getElementById('sim-avg-return-error') },
-                simStdDev: { element: document.getElementById('sim-std-dev'), error: document.getElementById('sim-std-dev-error') },
-                simYears: { element: document.getElementById('sim-years'), error: document.getElementById('sim-years-error') },
-                simRuns: { element: document.getElementById('sim-runs'), error: document.getElementById('sim-runs-error') },
-                simResult: { element: document.getElementById('sim-result') },
-                simChartCtx: document.getElementById('sim-chart').getContext('2d'),
-            }
-        };
-
-        let currentCharts = {}; // Stores Chart.js instances for proper destruction
-
-        // --- General Utilities ---
-
-        // Helper to get CSS variable values
-        const varStyle = (name) => getComputedStyle(document.documentElement).getPropertyValue(name);
-
-        // Formats currency consistently
-        const formatCurrency = (value, currency = 'USD') => {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: currency,
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).format(value);
-        };
-
-        // Formats percentages consistently
-        const formatPercentage = (value) => {
-            return new Intl.NumberFormat('en-US', {
-                style: 'percent',
-                minimumFractionDigits: 1,
-                maximumFractionDigits: 2
-            }).format(value / 100);
-        };
-
-        // Displays results or errors, with animation
-        const displayResult = (element, message, isError = false) => {
-            element.classList.remove('error');
-            element.classList.toggle('error', isError);
-            element.innerHTML = message; // Use innerHTML for potential line breaks or bolding
-            element.style.animation = 'none'; // Reset animation
-            void element.offsetWidth; // Trigger reflow
-            element.style.animation = 'fadeIn 0.6s ease-out';
-        };
-
-        // Input Validation with error message display
-        const validateInput = (inputObj, min, max = Infinity, errorMessage) => {
-            const element = inputObj.element;
-            const errorDiv = inputObj.error;
-            const value = parseFloat(element.value);
-
-            if (isNaN(value) || value < min || value > max) {
-                element.style.borderColor = '#ff6347'; // Red border for error
-                if (errorDiv) {
-                    errorDiv.textContent = errorMessage;
-                }
-                return null;
-            } else {
-                element.style.borderColor = ''; // Reset border
-                if (errorDiv) {
-                    errorDiv.textContent = ''; // Clear error message
-                }
-                return value;
-            }
-        };
-
-        // --- Navigation & UI Handlers ---
-
-        DOM.tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and calculators
-                DOM.tabs.forEach(t => t.classList.remove('active'));
-                DOM.calculators.forEach(s => s.classList.remove('active'));
-
-                // Add active class to clicked tab and its target calculator
-                tab.classList.add('active');
-                document.getElementById(tab.dataset.target).classList.add('active');
-
-                // Destroy all existing Chart.js instances to prevent conflicts/memory leaks
-                for (const chartId in currentCharts) {
-                    if (currentCharts[chartId]) {
-                        currentCharts[chartId].destroy();
-                        currentCharts[chartId] = null;
-                    }
-                }
-
-                // If ads are integrated, ensure they are re-initialized or refreshed
-                // refreshAds(); // Call a function to refresh ads if using a dynamic ad platform
-            });
-        });
-
-        // Placeholder for ad refresh logic (would interact with ad network SDK)
-        const refreshAds = () => {
-            console.log('Refreshing ads...');
-            // In a real scenario, this would trigger calls to the ad network's API
-            // For AdSense, it might involve pushing commands to `adsbygoogle` array
-            // (window.adsbygoogle = window.adsbygoogle || []).push({});
-            // Or re-initializing ad units in specific divs.
-        };
-
-        // --- Calculator Logic ---
-
-        // 1. Compound Interest
-        function calcCompound() {
-            const P = validateInput(DOM.inputs.ccPrincipal, 0, Infinity, 'Enter a non-negative principal.');
-            const r_annual = validateInput(DOM.inputs.ccRate, 0, Infinity, 'Enter a non-negative annual rate.') / 100;
-            const t = validateInput(DOM.inputs.ccYears, 1, Infinity, 'Enter at least 1 year.');
-            const n = parseInt(DOM.inputs.ccFrequency.element.value);
-
-            if (P === null || r_annual === null || t === null || isNaN(n)) {
-                displayResult(DOM.inputs.ccResult.element, 'Please correct the input errors.', true);
-                return;
-            }
-
-            const r_period = r_annual / n;
-            const total_periods = t * n;
-
-            if (total_periods === 0) {
-                displayResult(DOM.inputs.ccResult.element, 'Years and/or frequency cannot be zero.', true);
-                return;
-            }
-
-            const A = P * Math.pow(1 + r_period, total_periods);
-            const interestEarned = A - P;
-
-            displayResult(DOM.inputs.ccResult.element,
-                `Final Amount: <strong>${formatCurrency(A)}</strong><br>Interest Earned: ${formatCurrency(interestEarned)}`
-            );
-        }
-
-        // 2. Loan Payment
-        function calcLoan() {
-            const L = validateInput(DOM.inputs.loanAmount, 0, Infinity, 'Enter a non-negative loan amount.');
-            const r_annual = validateInput(DOM.inputs.loanRate, 0, Infinity, 'Enter a non-negative annual rate.');
-            const years = validateInput(DOM.inputs.loanYears, 1, Infinity, 'Enter at least 1 year.');
-
-            if (L === null || r_annual === null || years === null) {
-                displayResult(DOM.inputs.loanResult.element, 'Please correct the input errors.', true);
-                return;
-            }
-
-            const r_monthly = (r_annual / 100) / 12;
-            const n_months = years * 12;
-
-            if (n_months === 0) {
-                displayResult(DOM.inputs.loanResult.element, 'Term cannot be zero.', true);
-                return;
-            }
-
-            let M;
-            if (r_monthly === 0) {
-                M = L / n_months;
-            } else {
-                M = (L * r_monthly) / (1 - Math.pow(1 + r_monthly, -n_months));
-            }
-
-            const totalPaid = M * n_months;
-            const totalInterest = totalPaid - L;
-
-            displayResult(DOM.inputs.loanResult.element,
-                `Monthly Payment: <strong>${formatCurrency(M)}</strong><br>Total Paid: ${formatCurrency(totalPaid)}<br>Total Interest: ${formatCurrency(totalInterest)}`
-            );
-        }
-
-        // 3. Custom Expression
-        function calcCustom() {
-            const expression = DOM.inputs.customExpression.element.value;
-            // Basic sanitization for client-side evaluation.
-            // For a real enterprise app, *never* execute user input directly like this on the backend.
-            // Use a dedicated, secure math expression parser library.
-            const safeExpression = expression.replace(/[^0-9+\-*/(). Math]/g, ''); // Allow basic math and 'Math.'
-
-            if (safeExpression.trim() === '') {
-                displayResult(DOM.inputs.customResult.element, 'Expression cannot be empty.', true);
-                return;
-            }
-
-            try {
-                // Using new Function() is dangerous with untrusted input in production.
-                // This is for demonstration only in this embedded context.
-                const result = new Function('return ' + safeExpression)();
-                if (typeof result === 'number' && !isNaN(result)) {
-                    displayResult(DOM.inputs.customResult.element, `Result: <strong>${result.toFixed(4)}</strong>`);
-                } else {
-                    displayResult(DOM.inputs.customResult.element, 'Invalid expression or non-numeric result.', true);
-                }
-            } catch (e) {
-                displayResult(DOM.inputs.customResult.element, `Error in expression: ${e.message}`, true);
-            }
-        }
-
-        // 4. ROI
-        function calcROI() {
-            const inv = validateInput(DOM.inputs.roiInvest, 0, Infinity, 'Enter a non-negative initial investment.');
-            const gain = validateInput(DOM.inputs.roiGain, -Infinity, Infinity, 'Enter a valid net profit/loss.');
-
-            if (inv === null || gain === null) {
-                displayResult(DOM.inputs.roiResult.element, 'Please correct the input errors.', true);
-                return;
-            }
-            if (inv === 0) {
-                displayResult(DOM.inputs.roiResult.element, 'Initial investment cannot be zero for ROI calculation.', true);
-                return;
-            }
-
-            const roi = (gain / inv) * 100;
-            displayResult(DOM.inputs.roiResult.element, `ROI: <strong>${roi.toFixed(2)}%</strong>`);
-        }
-
-        // 5. NPV & IRR
-        let npvChartInstance;
-        function calcNPV_IRR() {
-            const initialInvestment = validateInput(DOM.inputs.npvInitialInvestment, -Infinity, Infinity, 'Enter a valid initial investment.');
-            const cashFlowsStr = DOM.inputs.npvCashFlows.element.value;
-            const discountRate = validateInput(DOM.inputs.npvDiscountRate, 0, Infinity, 'Enter a non-negative discount rate.');
-
-            if (initialInvestment === null || cashFlowsStr === null || discountRate === null) {
-                displayResult(DOM.inputs.npvIrrResult.element, 'Please correct the input errors.', true);
-                return;
-            }
-
-            const cashFlows = cashFlowsStr.split(',').map(Number).filter(n => !isNaN(n));
-            if (cashFlows.length === 0) {
-                displayResult(DOM.inputs.npvIrrResult.element, 'Please enter at least one cash flow.', true);
-                return;
-            }
-
-            // Calculate NPV
-            const calculateNPV = (rate, flows, initialInv) => {
-                let currentNPV = initialInv;
-                flows.forEach((cf, i) => {
-                    currentNPV += cf / Math.pow(1 + (rate / 100), i + 1);
-                });
-                return currentNPV;
-            };
-
-            const npv = calculateNPV(discountRate, cashFlows, initialInvestment);
-
-            // Calculate IRR (using Newton-Raphson method for approximation)
-            const findIRR = (flows, initialInv) => {
-                let irrGuess = 0.1; // Initial guess for IRR (10%)
-                const maxIterations = 1000;
-                const tolerance = 1e-6;
-
-                for (let i = 0; i < maxIterations; i++) {
-                    const npvAtGuess = calculateNPV(irrGuess * 100, flows, initialInv);
-                    // Derivative of NPV for Newton-Raphson
-                    const derivative = flows.reduce((sum, cf, j) => {
-                        const denominator = Math.pow(1 + irrGuess, j + 2);
-                        return sum - (cf * (j + 1)) / denominator;
-                    }, 0);
-
-                    if (Math.abs(derivative) < tolerance) break; // Avoid division by zero or very small numbers
-
-                    const nextGuess = irrGuess - npvAtGuess / derivative;
-                    if (Math.abs(nextGuess - irrGuess) < tolerance) {
-                        return nextGuess;
-                    }
-                    irrGuess = nextGuess;
-                }
-                return NaN; // Could not converge
-            };
-
-            const irr = findIRR(cashFlows, initialInvestment);
-
-            displayResult(DOM.inputs.npvIrrResult.element,
-                `NPV: <strong>${formatCurrency(npv)}</strong><br>IRR: ${isNaN(irr) ? 'N/A' : formatPercentage(irr * 100)}`
-            );
-
-            // Charting NPV vs. Discount Rate
-            if (npvChartInstance) npvChartInstance.destroy();
-            const rates = Array.from({length: 31}, (_, i) => (i * 0.01) - 0.15); // -15% to 15% range for more context
-            const npvValues = rates.map(rate => calculateNPV(rate * 100, cashFlows, initialInvestment));
-
-            npvChartInstance = new Chart(DOM.inputs.npvChartCtx, {
-                type: 'line',
-                data: {
-                    labels: rates.map(r => formatPercentage(r * 100)),
-                    datasets: [{
-                        label: 'Net Present Value',
-                        data: npvValues,
-                        borderColor: varStyle('--color-accent'),
-                        backgroundColor: 'rgba(0, 242, 242, 0.2)',
-                        fill: true,
-                        tension: 0.3,
-                        pointBackgroundColor: varStyle('--color-primary'),
-                        pointBorderColor: varStyle('--color-background-light')
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { labels: { color: varStyle('--color-text-light'), font: { size: 14 } } },
-                        tooltip: { callbacks: { label: (context) => `NPV: ${formatCurrency(context.parsed.y)}` } },
-                        datalabels: { display: false } // No datalabels for line chart
-                    },
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Discount Rate', color: varStyle('--color-text-secondary') },
-                            ticks: { color: varStyle('--color-text-secondary'), autoSkip: true, maxRotation: 45, minRotation: 45 },
-                            grid: { color: 'rgba(255,255,255,0.1)' }
-                        },
-                        y: {
-                            title: { display: true, text: 'NPV ($)', color: varStyle('--color-text-secondary') },
-                            ticks: { color: varStyle('--color-text-secondary') },
-                            grid: { color: 'rgba(255,255,255,0.1)' }
-                        }
-                    }
-                }
-            });
-            currentCharts.npvChart = npvChartInstance;
-        }
-
-
-        // 6. Amortization Schedule
-        let amortChartInstance;
-        function genAmort() {
-            const A = validateInput(DOM.inputs.amAmount, 0, Infinity, 'Enter a non-negative loan amount.');
-            const annual_rate = validateInput(DOM.inputs.amRate, 0, Infinity, 'Enter a non-negative annual rate.');
-            const years = validateInput(DOM.inputs.amYears, 1, Infinity, 'Enter at least 1 year.');
-
-            if (A === null || annual_rate === null || years === null) {
-                displayResult(DOM.inputs.amortTable.element, '<div class="result error">Please correct the input errors.</div>', true);
-                return;
-            }
-
-            const r_monthly = (annual_rate / 100) / 12;
-            const n_months = years * 12;
-
-            if (n_months === 0) {
-                 displayResult(DOM.inputs.amortTable.element, '<div class="result error">Term cannot be zero.</div>', true);
-                 return;
-            }
-
-            let M;
-            if (r_monthly === 0) {
-                M = A / n_months;
-            } else {
-                M = (A * r_monthly) / (1 - Math.pow(1 + r_monthly, -n_months));
-            }
-
-            let html = '<table><thead><tr><th>Month</th><th>Monthly Payment</th><th>Interest Paid</th><th>Principal Paid</th><th>Remaining Balance</th></tr></thead><tbody>';
-            let balance = A;
-            const principalPayments = [];
-            const interestPayments = [];
-            const labels = [];
-            let totalInterestPaid = 0;
-            let totalPrincipalPaid = 0;
-
-            for (let i = 1; i <= n_months; i++) {
-                const interest = balance * r_monthly;
-                let principal = M - interest;
-
-                // Adjust last payment to zero out balance
-                if (i === n_months) {
-                    principal = balance;
-                    M = balance + interest; // Adjust final payment amount
-                }
-
-                balance -= principal;
-                totalInterestPaid += interest;
-                totalPrincipalPaid += principal;
-
-                principalPayments.push(principal);
-                interestPayments.push(interest);
-                labels.push(`Month ${i}`);
-
-                html += `<tr>
-                            <td>${i}</td>
-                            <td>${formatCurrency(M)}</td>
-                            <td>${formatCurrency(interest)}</td>
-                            <td>${formatCurrency(principal)}</td>
-                            <td>${formatCurrency(balance)}</td>
-                        </tr>`;
-            }
-            html += `<tr>
-                        <td colspan="2"><strong>Totals</strong></td>
-                        <td><strong>${formatCurrency(totalInterestPaid)}</strong></td>
-                        <td><strong>${formatCurrency(totalPrincipalPaid)}</strong></td>
-                        <td>${formatCurrency(0)}</td>
-                    </tr>`;
-            html += '</tbody></table>';
-            DOM.inputs.amortTable.element.innerHTML = html;
-
-            // Charting amortization breakdown
-            if (amortChartInstance) amortChartInstance.destroy();
-            amortChartInstance = new Chart(DOM.inputs.amortChartCtx, {
-                type: 'bar',
-                data: {
-                    labels: labels.filter((_,i) => i % Math.ceil(n_months / 12) === 0), // Show labels yearly to avoid clutter
-                    datasets: [
-                        {
-                            label: 'Principal Paid',
-                            data: principalPayments.filter((_,i) => i % Math.ceil(n_months / 12) === 0),
-                            backgroundColor: varStyle('--color-primary'),
-                            stack: 'payments'
-                        },
-                        {
-                            label: 'Interest Paid',
-                            data: interestPayments.filter((_,i) => i % Math.ceil(n_months / 12) === 0),
-                            backgroundColor: varStyle('--color-accent'),
-                            stack: 'payments'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { labels: { color: varStyle('--color-text-light'), font: { size: 14 } } },
-                        tooltip: {
-                            callbacks: {
-                                label: (context) => `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`
-                            }
-                        },
-                        datalabels: { // Show data labels on bars
-                            color: varStyle('--color-text-light'),
-                            font: { size: 10, weight: 'bold' },
-                            formatter: (value) => value > (M/5) ? formatCurrency(value, '') : '', // Only show for larger segments
-                            display: (context) => context.dataset.data[context.dataIndex] > M / 5 // Only display if significant value
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Month', color: varStyle('--color-text-secondary') },
-                            ticks: { color: varStyle('--color-text-secondary') },
-                            grid: { color: 'rgba(255,255,255,0.1)' }
-                        },
-                        y: {
-                            title: { display: true, text: 'Amount ($)', color: varStyle('--color-text-secondary') },
-                            ticks: { color: varStyle('--color-text-secondary') },
-                            grid: { color: 'rgba(255,255,255,0.1)' },
-                            stacked: true
-                        }
-                    }
-                }
-            });
-            currentCharts.amortChart = amortChartInstance;
-        }
-
-        // 7. Statistics & Chart.js
-        let statsChartInstance;
-        function drawStats() {
-            const labels = DOM.inputs.statsLabels.element.value.split(',').map(s => s.trim()).filter(s => s !== '');
-            const values = DOM.inputs.statsValues.element.value.split(',').map(Number).filter(v => !isNaN(v));
-            const chartType = DOM.inputs.statsChartType.element.value;
-
-            if (labels.length === 0 || values.length === 0 || labels.length !== values.length) {
-                displayResult(DOM.inputs.statsSummary.element, 'Please enter valid labels and values, and ensure they match in number.', true);
-                return;
-            }
-
-            const total = values.reduce((a, b) => a + b, 0);
-            if (total === 0 && (chartType === 'pie' || chartType === 'doughnut')) {
-                displayResult(DOM.inputs.statsSummary.element, 'Total value cannot be zero for Pie/Doughnut charts.', true);
-                return;
-            }
-
-            // Calculate advanced statistics
-            const mean = total / values.length;
-            const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / values.length;
-            const stdDev = Math.sqrt(variance);
-            const minVal = Math.min(...values);
-            const maxVal = Math.max(...values);
-
-            let summaryHtml = `
-                <p><strong>Total Sum:</strong> ${formatCurrency(total)}</p>
-                <p><strong>Average:</strong> ${formatCurrency(mean)}</p>
-                <p><strong>Standard Deviation:</strong> ${stdDev.toFixed(2)}</p>
-                <p><strong>Minimum Value:</strong> ${formatCurrency(minVal)}</p>
-                <p><strong>Maximum Value:</strong> ${formatCurrency(maxVal)}</p>
-                <p><strong>Distribution:</strong> ${values.map((v, i) => `${labels[i]}: ${formatPercentage((v / total) * 100)}`).join(' | ')}</p>
-            `;
-            displayResult(DOM.inputs.statsSummary.element, summaryHtml);
-
-            // Destroy previous chart if exists
-            if (statsChartInstance) statsChartInstance.destroy();
-
-            statsChartInstance = new Chart(DOM.inputs.statsChartCtx, {
-                type: chartType,
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: values,
-                        backgroundColor: [
-                            'rgba(0, 123, 255, 0.7)',    // Primary Blue
-                            'rgba(0, 242, 242, 0.7)',    // Accent Cyan
-                            'rgba(255, 193, 7, 0.7)',    // Yellow
-                            'rgba(220, 53, 69, 0.7)',    // Red
-                            'rgba(23, 162, 184, 0.7)',   // Teal
-                            'rgba(108, 117, 125, 0.7)',  // Secondary Gray
-                            'rgba(153, 102, 255, 0.7)',  // Purple
-                            'rgba(255, 159, 64, 0.7)'    // Orange
-                        ],
-                        borderColor: varStyle('--color-background-dark'),
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                color: varStyle('--color-text-light'),
-                                font: { size: 14 }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.y !== undefined) { // For bar chart
-                                        label += formatCurrency(context.parsed.y);
-                                    } else if (context.parsed) { // For pie/doughnut chart
-                                        label += formatCurrency(context.parsed);
-                                    }
-                                    if (chartType === 'pie' || chartType === 'doughnut') {
-                                        const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
-                                        const percentage = (context.parsed / total * 100).toFixed(1);
-                                        label += ` (${percentage}%)`;
-                                    }
-                                    return label;
-                                }
-                            }
-                        },
-                        datalabels: {
-                            color: varStyle('--color-background-dark'), // Dark text for labels on colorful charts
-                            font: { weight: 'bold', size: 12 },
-                            formatter: (value, context) => {
-                                if (chartType === 'pie' || chartType === 'doughnut') {
-                                    const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
-                                    const percentage = (value / total * 100).toFixed(1);
-                                    return `${percentage}%`;
-                                }
-                                return formatCurrency(value, ''); // Only value for bar chart
-                            },
-                            textShadow: { // Add subtle shadow for readability on dark backgrounds
-                                blur: 3,
-                                color: 'rgba(255,255,255,0.5)'
-                            }
-                        }
-                    },
-                    scales: (chartType === 'bar') ? {
-                        x: {
-                            ticks: { color: varStyle('--color-text-secondary') },
-                            grid: { color: 'rgba(255,255,255,0.1)' }
-                        },
-                        y: {
-                            ticks: { color: varStyle('--color-text-secondary') },
-                            grid: { color: 'rgba(255,255,255,0.1)' }
-                        }
-                    } : {}
-                }
-            });
-            currentCharts.statsChart = statsChartInstance;
-        }
-
-        // 8. Crypto API & Chart.js
-        let cryptoChartInstance;
-        async function fetchCrypto() {
-            displayResult(DOM.inputs.cryptoResult.element, 'Loading live cryptocurrency prices...', false);
-            try {
-                // In a production environment, this request should go to your backend service
-                // Your backend would then securely call CoinGecko API and return data
-                // const response = await fetch('/api/crypto/prices');
-                const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,cardano,solana,dogecoin,ripple,litecoin,polkadot&vs_currencies=usd');
-                
-                if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
-                const data = await response.json();
-
-                const cryptoData = [
-                    { id: 'bitcoin', name: 'Bitcoin' },
-                    { id: 'ethereum', name: 'Ethereum' },
-                    { id: 'cardano', name: 'Cardano' },
-                    { id: 'solana', name: 'Solana' },
-                    { id: 'dogecoin', name: 'Dogecoin' },
-                    { id: 'ripple', name: 'XRP' },
-                    { id: 'litecoin', name: 'Litecoin' },
-                    { id: 'polkadot', name: 'Polkadot' }
-                ];
-
-                const labels = [];
-                const prices = [];
-                const displayMessages = [];
-
-                cryptoData.forEach(crypto => {
-                    if (data[crypto.id] && data[crypto.id].usd) {
-                        labels.push(crypto.name);
-                        prices.push(data[crypto.id].usd);
-                        displayMessages.push(`${crypto.name}: <strong>${formatCurrency(data[crypto.id].usd)}</strong>`);
-                    }
-                });
-
-                if (prices.length === 0) {
-                    displayResult(DOM.inputs.cryptoResult.element, 'Could not load cryptocurrency data or no prices found.', true);
-                    return;
-                }
-
-                displayResult(DOM.inputs.cryptoResult.element, displayMessages.join(' | '));
-
-                // Destroy previous chart if exists
-                if (cryptoChartInstance) cryptoChartInstance.destroy();
-
-                cryptoChartInstance = new Chart(DOM.inputs.cryptoChartCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            data: prices,
-                            backgroundColor: [
-                                '#f7931a', // Bitcoin
-                                '#627eea', // Ethereum
-                                '#3cc48a', // Cardano
-                                '#9945FF', // Solana
-                                '#CB2D03', // Dogecoin
-                                '#23292F', // XRP
-                                '#BFBFBF', // Litecoin
-                                '#E6007A'  // Polkadot
-                            ],
-                            borderColor: varStyle('--color-background-dark'),
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'right',
-                                labels: {
-                                    color: varStyle('--color-text-light'),
-                                    font: { size: 14 }
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        if (context.parsed) {
-                                            label += formatCurrency(context.parsed);
-                                            const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
-                                            const percentage = (context.parsed / total * 100).toFixed(1);
-                                            label += ` (${percentage}%)`;
-                                        }
-                                        return label;
-                                    }
-                                }
-                            },
-                            datalabels: {
-                                color: varStyle('--color-background-dark'),
-                                font: { weight: 'bold', size: 12 },
-                                formatter: (value, context) => {
-                                    const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
-                                    const percentage = (value / total * 100).toFixed(1);
-                                    if (percentage > 5) return `${percentage}%`; // Only show if segment is large enough
-                                    return '';
-                                },
-                                textShadow: {
-                                    blur: 3,
-                                    color: 'rgba(255,255,255,0.5)'
-                                }
-                            }
-                        }
-                    }
-                });
-                currentCharts.cryptoChart = cryptoChartInstance;
-            } catch (error) {
-                console.error('Error fetching crypto data:', error);
-                displayResult(DOM.inputs.cryptoResult.element, `Error loading crypto data. Please try again later. Details: ${error.message}`, true);
-            }
-        }
-
-        // 9. Currency Converter (exchangerate.host)
-        async function convertFX() {
-            const amount = validateInput(DOM.inputs.fxAmount, 0, Infinity, 'Enter a non-negative amount.');
-            const fromCurrency = DOM.inputs.fxFrom.element.value;
-            const toCurrency = DOM.inputs.fxTo.element.value;
-
-            if (amount === null) {
-                displayResult(DOM.inputs.fxResult.element, 'Please correct the input error.', true);
-                return;
-            }
-            if (fromCurrency === toCurrency) {
-                displayResult(DOM.inputs.fxResult.element, 'Cannot convert to the same currency.', true);
-                return;
-            }
-
-            displayResult(DOM.inputs.fxResult.element, 'Performing conversion...', false);
-
-            try {
-                // In production, this would go through your backend for API key security
-                // const response = await fetch(`/api/fx/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amount}`);
-                const response = await fetch(`https://api.exchangerate.host/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amount}`);
-                
-                if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
-                const data = await response.json();
-
-                if (data.success && data.result !== undefined) {
-                    displayResult(DOM.inputs.fxResult.element,
-                        `${formatCurrency(amount, fromCurrency)} = <strong>${formatCurrency(data.result, toCurrency)}</strong>`
-                    );
-                } else {
-                    displayResult(DOM.inputs.fxResult.element, `Conversion error: ${data.error ? data.error.info : 'Unknown error'}`, true);
-                }
-            } catch (error) {
-                console.error('Error fetching exchange rate:', error);
-                displayResult(DOM.inputs.fxResult.element, `Error connecting to currency service. Please try again. Details: ${error.message}`, true);
-            }
-        }
-
-        // 10. WASM Demo (Placeholder for real WASM module)
-        // In a real application, you would compile a C/C++/Rust function (e.g., for complex math, encryption)
-        // to a .wasm file, load it, and call its exported functions.
-        // For demonstration, this is a dummy WASM module that just exports a simple function.
-        // The actual `pow` calculation here will be a JavaScript fallback for realism without a real WASM binary.
-
-        // Minimal WASM binary for `(module (func (export "pow")))` (no actual logic)
-        // For a real `pow` function, the binary would be much larger and contain compiled code.
-        const wasmCode = Uint8Array.from(atob('AGFzbQEAAAABAGAAAQJgAn9_AX8DBAMBAAcGAQFwb3cwAAcGAQtwb3dfcmVhbDAACgkBAQEACwkCAQACAwsCAAEABAACAAwBAQABAQ0BAAELCwIBAAE='), c=>c.charCodeAt(0));
-        let wasmInstance;
-
-        WebAssembly.instantiate(wasmCode)
-            .then(wm => {
-                wasmInstance = wm.instance;
-                console.log('WASM module loaded successfully (placeholder).');
-                // In a real scenario, you'd check for `wasmInstance.exports.yourFunctionName`
-                // For this example, we will just use Math.pow for the actual calc.
-            })
-            .catch(error => {
-                console.error('Error loading WASM module:', error);
-                displayResult(DOM.inputs.wasmResult.element, 'Error: WASM module failed to load. Check console.', true);
-            });
-
-        function calcWasm() {
-            const base = validateInput(DOM.inputs.wasmBase, 0, Infinity, 'Enter a non-negative base.');
-            const exponent = validateInput(DOM.inputs.wasmExp, 0, Infinity, 'Enter a non-negative exponent.');
-
-            if (base === null || exponent === null) {
-                displayResult(DOM.inputs.wasmResult.element, 'Please correct the input errors.', true);
-                return;
-            }
-
-            if (!wasmInstance) {
-                displayResult(DOM.inputs.wasmResult.element, 'WASM module not loaded. Using JavaScript fallback...', false);
-                const jsResult = Math.pow(base, exponent);
-                displayResult(DOM.inputs.wasmResult.element, `JS Fallback: ${base}^${exponent} = <strong>${jsResult}</strong>`);
-                return;
-            }
-
-            // Simulate WASM calculation - replace with actual WASM export call if available
-            // e.g., const result = wasmInstance.exports.pow(base, exponent);
-            const simulatedWasmResult = Math.pow(base, exponent); // Using JS for demo realism
-
-            displayResult(DOM.inputs.wasmResult.element, `WASM Calculation: ${base}^${exponent} = <strong>${simulatedWasmResult}</strong>`);
-        }
-
-        // 11. Monte Carlo Simulation
-        let simChartInstance;
-        function runMonteCarlo() {
-            const initialCapital = validateInput(DOM.inputs.simInitialCapital, 0, Infinity, 'Enter non-negative initial capital.');
-            const avgReturn = validateInput(DOM.inputs.simAvgReturn, -100, Infinity, 'Enter a valid average return.');
-            const stdDev = validateInput(DOM.inputs.simStdDev, 0, Infinity, 'Enter non-negative standard deviation.');
-            const years = validateInput(DOM.inputs.simYears, 1, Infinity, 'Enter at least 1 year.');
-            const numRuns = validateInput(DOM.inputs.simRuns, 100, 10000, 'Runs between 100 and 10000.');
-
-            if (initialCapital === null || avgReturn === null || stdDev === null || years === null || numRuns === null) {
-                displayResult(DOM.inputs.simResult.element, 'Please correct the input errors.', true);
-                return;
-            }
-
-            displayResult(DOM.inputs.simResult.element, '<lottie-player src="https://assets2.lottiefiles.com/packages/lf20_c0x8a3.json" background="transparent" speed="1" style="width: 50px; height: 50px; margin: auto;" loop autoplay></lottie-player><br>Running simulations...', false);
-
-            // Offload heavy computation to a Web Worker or Backend for real enterprise apps
-            // For this demo, run directly in main thread for simplicity.
-            setTimeout(() => { // Simulate async computation
-                const dailyReturn = avgReturn / 25200; // 252 trading days per year
-                const dailyStdDev = stdDev / Math.sqrt(252) / 100;
-
-                const finalPortfolios = [];
-                let maxPortfolio = initialCapital;
-                let minPortfolio = initialCapital;
-
-                for (let i = 0; i < numRuns; i++) {
-                    let currentCapital = initialCapital;
-                    for (let j = 0; j < years * 252; j++) {
-                        const randomFactor = gaussianRandom() * dailyStdDev + dailyReturn;
-                        currentCapital *= (1 + randomFactor);
-                    }
-                    finalPortfolios.push(currentCapital);
-                    if (currentCapital > maxPortfolio) maxPortfolio = currentCapital;
-                    if (currentCapital < minPortfolio) minPortfolio = currentCapital;
-                }
-
-                finalPortfolios.sort((a, b) => a - b);
-
-                const meanPortfolio = finalPortfolios.reduce((a,b)=>a+b)/numRuns;
-                const medianPortfolio = finalPortfolios[Math.floor(numRuns * 0.50)];
-                const percentile10 = finalPortfolios[Math.floor(numRuns * 0.10)];
-                const percentile90 = finalPortfolios[Math.floor(numRuns * 0.90)];
-
-                displayResult(DOM.inputs.simResult.element,
-                    `<h4>Simulation Results (${numRuns} Runs over ${years} Years):</h4>` +
-                    `<p><strong>Average Final Capital:</strong> ${formatCurrency(meanPortfolio)}</p>` +
-                    `<p><strong>Median (50th Percentile):</strong> ${formatCurrency(medianPortfolio)}</p>` +
-                    `<p><strong>10th Percentile (Worst Case):</strong> ${formatCurrency(percentile10)}</p>` +
-                    `<p><strong>90th Percentile (Best Case):</strong> ${formatCurrency(percentile90)}</p>`
-                );
-
-                // Charting distribution of final portfolio values (Histogram)
-                if (simChartInstance) simChartInstance.destroy();
-
-                const numBins = 20;
-                const binSize = (maxPortfolio - minPortfolio) / numBins;
-                const bins = Array(numBins).fill(0);
-                const binLabels = [];
-
-                for (let i = 0; i < numBins; i++) {
-                    const lowerBound = minPortfolio + i * binSize;
-                    const upperBound = lowerBound + binSize;
-                    binLabels.push(`${formatCurrency(lowerBound, '').split('.')[0]}-${formatCurrency(upperBound, '').split('.')[0]}`); // Shorter labels for readability
-                }
-
-                finalPortfolios.forEach(val => {
-                    const binIndex = Math.min(Math.floor((val - minPortfolio) / binSize), numBins - 1);
-                    bins[binIndex]++;
-                });
-
-                simChartInstance = new Chart(DOM.inputs.simChartCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: binLabels,
-                        datasets: [{
-                            label: 'Frequency of Final Capital',
-                            data: bins,
-                            backgroundColor: varStyle('--color-primary'),
-                            borderColor: varStyle('--color-background-dark'),
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { labels: { color: varStyle('--color-text-light'), font: { size: 14 } } },
-                            tooltip: {
-                                callbacks: {
-                                    label: (context) => `Occurrences: ${context.parsed.y}`
-                                }
-                            },
-                            datalabels: { display: false }
-                        },
-                        scales: {
-                            x: {
-                                title: { display: true, text: 'Final Capital ($)', color: varStyle('--color-text-secondary') },
-                                ticks: { color: varStyle('--color-text-secondary'), autoSkip: true, maxRotation: 45, minRotation: 45 },
-                                grid: { color: 'rgba(255,255,255,0.1)' }
-                            },
-                            y: {
-                                title: { display: true, text: 'Number of Simulations', color: varStyle('--color-text-secondary') },
-                                ticks: { color: varStyle('--color-text-secondary') },
-                                grid: { color: 'rgba(255,255,255,0.1)' }
-                            }
-                        }
-                    }
-                });
-                currentCharts.simChart = simChartInstance;
-            }, 100); // Simulate network/computation delay
-        }
-
-        // Function to generate a random number from a standard normal distribution (Box-Muller transform)
-        function gaussianRandom() {
-            let u = 0, v = 0;
-            while (u === 0) u = Math.random(); // Converting [0,1) to (0,1)
-            while (v === 0) v = Math.random();
-            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-        }
-
-        // 12. Premium Features & Monetization
-        function redirectToSubscription() {
-            alert('Redirecting to Financiator Pro Premium Subscription Page! (This would be a real payment gateway in production)');
-            // In a real application:
-            // window.location.href = 'https://your-premium-subscription-page.com';
-        }
-
-
-        // --- Initial Application Setup ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Activate the first tab and its content by default
-            DOM.tabs[0].classList.add('active');
-            DOM.calculators[0].classList.add('active');
-
-            // Set up initial Chart.js defaults for better aesthetics
-            Chart.defaults.color = varStyle('--color-text-light');
-            Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.2)';
-            Chart.defaults.font.family = 'Inter';
-            Chart.defaults.font.size = 13;
-            Chart.defaults.plugins.tooltip.backgroundColor = varStyle('--color-background-dark');
-            Chart.defaults.plugins.tooltip.borderColor = varStyle('--color-accent');
-            Chart.defaults.plugins.tooltip.borderWidth = 1;
-            Chart.defaults.plugins.tooltip.bodyColor = varStyle('--color-text-light');
-            Chart.defaults.plugins.tooltip.titleColor = varStyle('--color-primary');
-
-            // Trigger initial calculations for a live feel on load
-            calcCompound();
-            // Optional: Auto-load crypto data if desired, but can be heavy
-            // fetchCrypto();
-        });
-
-        // Function to handle Google AdSense dynamic loading
-        // In a real scenario, you'd ensure ads load when sections become visible
-        // or based on user interaction, adhering to AdSense policies.
-        function loadAdSenseAds() {
-            if (typeof window.adsbygoogle !== 'undefined') {
-                // Find all ad slots and push them to the adsbygoogle array
-                document.querySelectorAll('.adsbygoogle').forEach(adSlot => {
-                    (window.adsbygoogle = window.adsbygoogle || []).push({});
-                });
-            }
-        }
-
-        // Call this on DOMContentLoaded or after a short delay
-        // to give the ad script time to load
-        setTimeout(loadAdSenseAds, 1000); // Delay by 1 second
-    </script>
-</body>
-</html>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-chart-line"></i> Financiator Pro</h1>
+            <p>Calculadora Financiera Avanzada con Datos en Tiempo Real</p>
+        </header>
+
+        <!-- Live Data Banner -->
+        <div class="live-data-banner">
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                <span><strong>DATOS EN VIVO</strong> - Actualización cada 30 segundos</span>
+            </div>
+            <div class="ticker-wrapper">
+                <div class="ticker-content" id="liveTicker">
+                    <div class="ticker-item">
+                        <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
+                        <span id="btc-price">BTC: Cargando...</span>
+                    </div>
+                    <div class="ticker-item">
+                        <i class="fab fa-ethereum" style="color: #627eea;"></i>
+                        <span id="eth-price">ETH: Cargando...</span>
+                    </div>
+                    <div class="ticker-item">
+                        <i class="fas fa-dollar-sign" style="color: #22c55e;"></i>
+                        <span id="usd-ars">USD/ARS: Cargando...</span>
+                    </div>
+                    <div class="ticker-item">
+                        <i class="fas fa-percentage" style="color: #ef4444;"></i>
+                        <span id="inflation-arg">Inflación ARG: Cargando...</span>
+                    </div>
+                    <div class="ticker-item">
+                        <i class="fas fa-chart-area" style="color: #3b82f6;"></i>
+                        <span id="sp500">S&P 500: Cargando...</span>
+                    </div>
+                    <div class="ticker-item">
+                        <i class="fas fa-oil-can" style="color: #000000;"></i>
+                        <span id="oil-price">Petróleo: Cargando...</span>
+                    </div>
+                    <div class="ticker-item">
+                        <i class="fas fa-coins" style="color: #ffd700;"></i>
+                        <span id="gold-price">Oro: Cargando...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </button>
+                <button class="nav-tab" data-section="basic">
+                    <i class="fas fa-calculator"></i>
+                    Calculadora
+                </button>
+                <button class="nav-tab" data-section="crypto">
+                    <i class="fab fa-bitcoin"></i>
+                    Crypto
+                </button>
+                <button class="nav-tab" data-section="forex">
+                    <i class="fas fa-exchange-alt"></i>
+                    Divisas
+                </button>
+                <button class="nav-tab" data-section="inflation">
+                    <i class="fas fa-chart-line"></i>
+                    Inflación
+                </button>
+                <button class="nav-tab" data-section="interest">
+                    <i class="fas fa-percentage"></i>
+                    Interés
+                </button>
+                <button class="nav-tab" data-section="loans">
+                    <i class="fas fa-money-bill-wave"></i>
+                    Préstamos
+                </button>
+                <button class="nav-tab" data-section="investment">
+                    <i class="fas fa-chart-pie"></i>
+                    Inversión
+                </button>
+                <button class="nav-tab" data-section="stocks">
+                    <i class="fas fa-chart-bar"></i>
+                    Acciones
+                    <span class="premium-badge">Pro</span>
+                </button>
+                <button class="nav-tab" data-section="commodities">
+                    <i class="fas fa-seedling"></i>
+                    Commodities
+                    <span class="premium-badge">Pro</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div class="calculator-section active" id="dashboard">
+            <h2 class="section-title">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard Financiero en Tiempo Real
+            </h2>
+            
+            <div class="dashboard-grid">
+                <!-- Bitcoin -->
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fab fa-bitcoin"></i>
+                    </div>
+                    <div class="metric-value" id="dash-btc-price">$0</div>
+                    <div class="metric-label">Bitcoin (BTC)</div>
+                    <div class="metric-change" id="dash-btc-change">+0.00%</div>
+                </div>
+
+                <!-- Ethereum -->
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fab fa-ethereum"></i>
+                    </div>
+                    <div class="metric-value" id="dash-eth-price">$0</div>
+                    <div class="metric-label">Ethereum (ETH)</div>
+                    <div class="metric-change" id="dash-eth-change">+0.00%</div>
+                </div>
+
+                <!-- USD/ARS -->
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="metric-value" id="dash-usd-ars">$0</div>
+                    <div class="metric-label">USD/ARS</div>
+                    <div class="metric-change" id="dash-usd-change">+0.00%</div>
+                </div>
+
+                <!-- Inflación Argentina -->
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="metric-value" id="dash-inflation">0%</div>
+                    <div class="metric-label">Inflación ARG (Anual)</div>
+                    <div class="metric-change" id="dash-inflation-change">Mensual: 0%</div>
+                </div>
+
+                <!-- S&P 500 -->
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <div class="metric-value" id="dash-sp500">0</div>
+                    <div class="metric-label">S&P 500</div>
+                    <div class="metric-change" id="dash-sp500-change">+0.00%</div>
+                </div>
+
+                <!-- Oro -->
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="metric-value" id="dash-gold">$0</div>
+                    <div class="metric-label">Oro (oz)</div>
+                    <div class="metric-change" id="dash-gold-change">+0.00%</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="dashboardChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Calculadora Básica -->
+        <div class="calculator-section" id="basic">
+            <h2 class="section-title">
+                <i class="fas fa-calculator"></i>
+                Calculadora Básica
+            </h2>
+            <div class="basic-calc">
+                <div class="calc-display" id="display">0</div>
+                <button class="calc-btn clear" onclick="clearDisplay()">C</button>
+                <button class="calc-btn" onclick="deleteLast()">⌫</button>
+                <button class="calc-btn" onclick="appendToDisplay('/')" title="Dividir">÷</button>
+                <button class="calc-btn operator" onclick="appendToDisplay('*')" title="Multiplicar">×</button>
+                
+                <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
+                <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
+                <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
+                <button class="calc-btn operator" onclick="appendToDisplay('-')">-</button>
+                
+                <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
+                <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
+                <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
+                <button class="calc-btn operator" onclick="appendToDisplay('+')">+</button>
+                
+                <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
+                <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
+                <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
+                <button class="calc-btn equals" onclick="calculate()" style="grid-row: span 2;">=</button>
+                
+                <button class="calc-btn" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
+                <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
+            </div>
+        </div>
+
+        <!-- Crypto Calculator -->
+        <div class="calculator-section" id="crypto">
+            <h2 class="section-title">
+                <i class="fab fa-bitcoin"></i>
+                Calculadora de Criptomonedas
+            </h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-coins"></i> Cantidad</label>
+                    <input type="number" id="cryptoAmount" placeholder="1" step="0.00000001">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-list"></i> Criptomoneda</label>
+                    <div class="currency-selector">
+                        <select id="cryptoCurrency">
+                            <option value="bitcoin">Bitcoin (BTC)</option>
+                            <option value="ethereum">Ethereum (ETH)</option>
+                            <option value="binancecoin">Binance Coin (BNB)</option>
+                            <option value="cardano">Cardano (ADA)</option>
+                            <option value="solana">Solana (SOL)</option>
+                            <option value="polkadot">Polkadot (DOT)</option>
+                        </select>
+                        <div class="live-price" id="cryptoCurrentPrice">$0</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-money-bill"></i> Convertir a</label>
+                    <select id="targetCurrency">
+                        <option value="usd">USD</option>
+                        <option value="ars">ARS</option>
+                        <option value="eur">EUR</option>
+                        <option value="btc">BTC</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" onclick="calculateCrypto()">
+                <i class="fas fa-sync"></i>
+                Calcular Valor
+            </button>
+            <div class="results-panel" id="cryptoResults" style="display: none;">
+                <h3><i class="fas fa-coins"></i> Resultado de Conversión</h3>
+                <div class="result-grid" id="cryptoResultsContent"></div>
+            </div>
+        </div>
+
+        <!-- Forex Calculator -->
+        <div class="calculator-section" id="forex">
+            <h2 class="section-title">
+                <i class="fas fa-exchange-alt"></i>
+                Conversor de Divisas
+            </h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-dollar-sign"></i> Cantidad</label>
+                    <input type="number" id="forexAmount" placeholder="1000" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-flag"></i> Desde</label>
+                    <div class="currency-selector">
+                        <select id="fromCurrency">
+                            <option value="USD">USD - Dólar</option>
+                            <option value="ARS">ARS - Peso Argentino</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - Libra</option>
+                            <option value="JPY">JPY - Japonese Yen</option>
