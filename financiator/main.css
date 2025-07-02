@@ -1,0 +1,591 @@
+/* --- 1. Variables CSS (Custom Properties) --- */
+/* Son la base para la consistencia y la fácil gestión de la paleta y el espaciado. */
+:root {
+    /* Colores */
+    --color-primary: #0A2342; /* Azul marino oscuro para fondo, headers, etc. */
+    --color-secondary: #003366; /* Azul medio para elementos secundarios, hover */
+    --color-accent-positive: #00C851; /* Verde brillante para ganancias, éxito */
+    --color-accent-negative: #FF4444; /* Rojo para pérdidas, alertas */
+    --color-text-dark: #333333; /* Texto principal oscuro */
+    --color-text-light: #F0F0F0; /* Texto claro para fondos oscuros */
+    --color-text-secondary: #666666; /* Texto secundario, descripciones */
+    --color-background-light: #FFFFFF; /* Fondo principal claro */
+    --color-background-dark: #1A1A1A; /* Fondo oscuro opcional para secciones */
+    --color-border-light: #E0E0E0; /* Borde claro y sutil */
+    --color-border-dark: #444444; /* Borde oscuro para modo oscuro o elementos específicos */
+    --color-hover-bg: rgba(0, 51, 102, 0.05); /* Fondo sutil para hover */
+    --color-focus-outline: #007bff; /* Color para outline de foco accesible */
+
+    /* Tipografía */
+    --font-family-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-family-heading: 'Montserrat', 'Segoe UI', sans-serif;
+    --font-size-base: 1rem; /* 16px por defecto */
+    --font-size-sm: 0.875rem; /* 14px */
+    --font-size-lg: 1.125rem; /* 18px */
+    --font-size-h1: 2.5rem; /* 40px */
+    --font-size-h2: 2rem; /* 32px */
+    --font-size-h3: 1.75rem; /* 28px */
+    --font-size-h4: 1.5rem; /* 24px */
+    --line-height-body: 1.6;
+    --line-height-heading: 1.2;
+    --letter-spacing-heading: -0.02em; /* Ligero ajuste para títulos */
+
+    /* Espaciado (basado en múltiplos de 8px) */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+
+    /* Bordes y Sombras */
+    --border-radius-sm: 4px; /* Bordes ligeramente redondeados */
+    --border-radius-md: 8px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra muy sutil */
+    --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra para elevar elementos */
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra para modales, pop-ups */
+
+    /* Transiciones */
+    --transition-speed: 0.25s;
+    --transition-ease: ease-in-out;
+}
+
+/* --- 2. Reset Básico y Estilos Globales --- */
+/* Normalize o un reset ligero para asegurar consistencia entre navegadores. */
+*, *::before, *::after {
+    box-sizing: border-box; /* Incluye padding y border en el tamaño del elemento */
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Desplazamiento suave para anclas */
+}
+
+body {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-body);
+    color: var(--color-text-dark);
+    background-color: var(--color-background-light);
+    -webkit-font-smoothing: antialiased; /* Suavizado de fuentes en WebKit */
+    -moz-osx-font-smoothing: grayscale; /* Suavizado de fuentes en Firefox */
+}
+
+/* Enlaces */
+a {
+    color: var(--color-secondary);
+    text-decoration: none; /* Por defecto sin subrayado */
+    transition: color var(--transition-speed) var(--transition-ease);
+
+    &:hover {
+        color: var(--color-primary); /* Color más oscuro al pasar el ratón */
+        text-decoration: underline; /* Subrayado al pasar el ratón para indicar interactividad */
+    }
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    color: var(--color-primary);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-heading);
+    margin-bottom: var(--space-md);
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4 { font-size: var(--font-size-h4); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+/* Párrafos */
+p {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+}
+
+/* Listas */
+ul, ol {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-lg); /* Indentación para las listas */
+}
+
+li {
+    margin-bottom: var(--space-sm);
+}
+
+/* Imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Elimina espacio extra debajo de las imágenes */
+}
+
+/* Botones genéricos (serán sobreescritos por clases específicas) */
+button {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-speed) var(--transition-ease);
+}
+
+
+/* --- 3. Utilidades y Componentes Generales --- */
+
+/* Contenedor principal para centrar el contenido */
+.container {
+    max-width: 1200px; /* Ancho máximo para el contenido */
+    margin: 0 auto; /* Centrar el contenedor */
+    padding: 0 var(--space-md); /* Padding lateral para pantallas más pequeñas */
+}
+
+/* Secciones */
+.section {
+    padding: var(--space-xxl) 0; /* Padding vertical para secciones */
+}
+
+/* Flexbox utilities */
+.d-flex { display: flex; }
+.align-items-center { align-items: center; }
+.justify-content-center { justify-content: center; }
+.justify-content-between { justify-content: space-between; }
+.flex-column { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+
+/* Grid utilities (si usas CSS Grid) */
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); } /* Ejemplo */
+.grid-gap-md { gap: var(--space-md); } /* Espaciado entre elementos de la grilla */
+
+/* Texto utilidades */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-success { color: var(--color-accent-positive); }
+.text-danger { color: var(--color-accent-negative); }
+.text-muted { color: var(--color-text-secondary); }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+
+/* Sombras */
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+
+/* Bordes */
+.border { border: 1px solid var(--color-border-light); }
+.border-rounded { border-radius: var(--border-radius-sm); }
+
+/* --- 4. Componentes UI Específicos para un Entorno Financiero --- */
+
+/* Botones */
+.btn {
+    display: inline-flex; /* Permite alinear contenido y iconos dentro */
+    align-items: center;
+    justify-content: center;
+    min-width: 120px; /* Ancho mínimo para botones */
+    min-height: 44px; /* Altura mínima táctil y visual */
+    padding: var(--space-sm) var(--space-lg);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-speed) var(--transition-ease);
+
+    &:focus {
+        outline: 2px solid var(--color-focus-outline);
+        outline-offset: 2px;
+    }
+}
+
+.btn-primary {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-secondary);
+
+    &:hover {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        transform: translateY(-1px); /* Ligero efecto de elevación */
+        box-shadow: var(--shadow-sm);
+    }
+    &:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-secondary);
+    border: 1px solid var(--color-secondary);
+
+    &:hover {
+        background-color: var(--color-hover-bg);
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+}
+
+.btn-accent-positive {
+    background-color: var(--color-accent-positive);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-accent-positive);
+
+    &:hover {
+        background-color: darken(var(--color-accent-positive), 10%); /* Asumiendo preprocesador o color oscuro manual */
+        border-color: darken(var(--color-accent-positive), 10%);
+    }
+}
+
+/* Campos de Formulario (Input, Textarea, Select) */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--space-sm);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-body);
+    color: var(--color-text-dark);
+    background-color: var(--color-background-light);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--border-radius-sm);
+    transition: border-color var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
+    -webkit-appearance: none; /* Eliminar estilos nativos en WebKit */
+    -moz-appearance: none; /* Eliminar estilos nativos en Mozilla */
+    appearance: none;
+
+    &:focus {
+        border-color: var(--color-secondary);
+        box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1); /* Sombra de foco suave */
+        outline: none; /* Eliminar outline nativo */
+    }
+
+    &:disabled {
+        background-color: #F8F8F8;
+        cursor: not-allowed;
+    }
+}
+
+/* Mensajes de error en formularios */
+.form-error {
+    color: var(--color-accent-negative);
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-xs);
+}
+
+/* Tarjetas (Cards) para mostrar información o datos */
+.card {
+    background-color: var(--color-background-light);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    border: 1px solid var(--color-border-light); /* Borde sutil para definirla */
+}
+
+.card-header {
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.card-title {
+    font-size: var(--font-size-h4);
+    margin-bottom: 0; /* Reset para que no herede el margen de h4 */
+}
+
+/* Tablas de Datos (Crucial en Finanzas) */
+.data-table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina espacio entre celdas */
+    margin-bottom: var(--space-lg);
+    font-size: var(--font-size-sm);
+}
+
+.data-table th, .data-table td {
+    padding: var(--space-md) var(--space-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.data-table th {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: var(--font-size-sm);
+    white-space: nowrap; /* Evita que los encabezados se rompan */
+}
+
+.data-table tbody tr {
+    transition: background-color var(--transition-speed) var(--transition-ease);
+}
+
+.data-table tbody tr:hover {
+    background-color: var(--color-hover-bg); /* Resaltar filas al pasar el ratón */
+}
+
+.data-table tbody tr:last-child {
+    border-bottom: none; /* No hay borde en la última fila */
+}
+
+/* Badge (para estados, valores pequeños) */
+.badge {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.75rem; /* 12px */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.badge-success {
+    background-color: var(--color-accent-positive);
+    color: var(--color-text-light);
+}
+
+.badge-danger {
+    background-color: var(--color-accent-negative);
+    color: var(--color-text-light);
+}
+
+.badge-info {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+}
+
+/* Navegación y Header (ejemplo básico) */
+.header {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: var(--space-md) 0;
+    box-shadow: var(--shadow-md);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-h3);
+    color: var(--color-text-light);
+    font-weight: 700;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.nav-item a {
+    color: var(--color-text-light);
+    font-weight: 500;
+    padding: var(--space-sm) 0;
+    position: relative; /* Para el underline animado */
+
+    &:hover {
+        color: #FFFFFF;
+        text-decoration: none; /* Eliminar subrayado por defecto */
+    }
+
+    /* Subrayado animado */
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #FFFFFF;
+        transition: width var(--transition-speed) var(--transition-ease);
+    }
+
+    &:hover::after,
+    &.active::after { /* Clase 'active' para la página actual */
+        width: 100%;
+    }
+}
+
+
+/* --- 5. Media Queries para Responsividad (Mobile First) --- */
+
+/* Teléfonos pequeños (ajustes para tamaños de texto si es necesario) */
+@media (max-width: 576px) {
+    :root {
+        --font-size-h1: 2rem;
+        --font-size-h2: 1.75rem;
+    }
+
+    .container {
+        padding: 0 var(--space-sm);
+    }
+
+    .section {
+        padding: var(--space-xl) 0;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        gap: var(--space-md);
+        width: 100%;
+        margin-top: var(--space-md);
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-item a {
+        display: block; /* Para que ocupen todo el ancho y sean más fáciles de tocar */
+        padding: var(--space-sm) 0;
+        text-align: center;
+    }
+
+    .data-table {
+        /* Para tablas en móviles, a veces es mejor que se desplacen horizontalmente */
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap; /* Evita saltos de línea dentro de las celdas */
+    }
+    .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr {
+        display: block; /* Cada fila, celda, etc. como un bloque para scroll */
+    }
+    /* Opcional: Rotar encabezados de tabla para verlos mejor en móvil */
+    .data-table th {
+        transform: rotate(90deg); /* O algún otro truco de visualización */
+        transform-origin: left top;
+        white-space: nowrap;
+        padding-top: var(--space-xxl); /* Espacio para el texto rotado */
+    }
+}
+
+/* Tablets y pantallas medianas */
+@media (min-width: 577px) and (max-width: 992px) {
+    :root {
+        --font-size-h1: 2.25rem;
+        --font-size-h2: 1.875rem;
+    }
+
+    .container {
+        padding: 0 var(--space-lg);
+    }
+}
+
+/* Escritorio y pantallas grandes */
+@media (min-width: 993px) {
+    .container {
+        padding: 0 var(--space-xl);
+    }
+}
+
+/* --- 6. Modo Oscuro (Opcional, pero muy recomendado para Finanzas/Crypto) --- */
+/* Si tu aplicación soporta un modo oscuro. Se puede activar con una clase en <body> */
+body.dark-mode {
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+
+    .header {
+        background-color: #000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #FFFFFF; /* Blanco puro para títulos en oscuro */
+    }
+
+    p {
+        color: var(--color-text-light);
+    }
+
+    a {
+        color: #A0C0FF; /* Un azul más claro para enlaces en oscuro */
+        &:hover {
+            color: #C0DFFF;
+        }
+    }
+
+    .card {
+        background-color: #222222;
+        border-color: var(--color-border-dark);
+        box-shadow: var(--shadow-md);
+    }
+
+    .card-header {
+        border-bottom-color: var(--color-border-dark);
+    }
+
+    .form-control {
+        background-color: #2C2C2C;
+        color: var(--color-text-light);
+        border-color: var(--color-border-dark);
+
+        &:focus {
+            border-color: #80BFFF;
+            box-shadow: 0 0 0 3px rgba(128, 191, 255, 0.2);
+        }
+    }
+
+    .data-table th {
+        background-color: #000;
+        color: #FFFFFF;
+    }
+
+    .data-table tbody tr {
+        color: var(--color-text-light);
+    }
+
+    .data-table tbody tr:hover {
+        background-color: #2A2A2A;
+    }
+
+    .data-table th, .data-table td {
+        border-bottom-color: var(--color-border-dark);
+    }
+
+    .btn-primary {
+        background-color: var(--color-secondary);
+        border-color: var(--color-secondary);
+        &:hover {
+            background-color: lighten(var(--color-secondary), 10%); /* O un color más claro definido */
+            border-color: lighten(var(--color-secondary), 10%);
+        }
+    }
+
+    .btn-secondary {
+        color: #A0C0FF;
+        border-color: #A0C0FF;
+        &:hover {
+            background-color: rgba(128, 191, 255, 0.1);
+            color: #C0DFFF;
+            border-color: #C0DFFF;
+        }
+    }
+}
