@@ -1,5 +1,5 @@
-/* --- Variables CSS Globales (Custom Properties) --- */
-/* Son excelentes para la consistencia y la facilidad de mantenimiento de tu tema. */
+/* --- 1. Global CSS Variables (Custom Properties) --- */
+/* Estas variables son excelentes para la consistencia y la facilidad de mantenimiento de tu tema. */
 :root {
     /* Paleta de colores */
     --primary-color: #4A90E2;          /* Azul vibrante para elementos principales */
@@ -9,6 +9,10 @@
     --accent-color: #28A745;           /* Verde para éxito/positivo */
     --danger-color: #DC3545;           /* Rojo para errores/negativo */
     --warning-color: #FFC107;          /* Amarillo para advertencias */
+
+    /* Valores RGB para sombras transparentes (necesarios para las llamadas rgba()) */
+    --primary-color-rgb: 74, 144, 226;
+    --warning-color-rgb: 255, 193, 7;
 
     /* Colores de fondo */
     --background-color-light: #F8F9FA; /* Fondo general claro */
@@ -28,30 +32,44 @@
     --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.06); /* Sombra interna para profundidad */
 
     /* Espaciado */
-    --padding-sm: 10px;
-    --padding-md: 15px;
-    --padding-lg: 20px;
-    --margin-sm: 10px;
-    --margin-md: 15px;
-    --margin-lg: 20px;
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px; /* Añadido para gaps más grandes */
 
     /* Fuentes */
     --font-family-body: 'Inter', sans-serif;
     --font-family-heading: 'Montserrat', sans-serif;
-    --font-size-base: 16px;
+    --font-size-base: 16px; /* Tamaño de fuente base */
+    --font-size-sm: 0.9em;
+    --font-size-md: 1.1em;
+    --font-size-lg: 1.4em;
+    --font-size-xl: 1.8em;
+    --font-size-xxl: 2.5em;
 
     /* Transiciones y animaciones */
     --transition-speed-fast: 0.2s;
     --transition-speed-normal: 0.3s;
     --transition-speed-slow: 0.4s;
     --bezier-ease: cubic-bezier(0.4, 0, 0.2, 1); /* Curva de aceleración estándar para UI */
+
+    /* Radio de bordes */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
 }
 
-/* --- Base Styles --- */
+/* --- 2. Base & Reset Styles --- */
+/* box-sizing universal y resets básicos para consistencia entre navegadores. */
 *, *::before, *::after {
     box-sizing: border-box; /* Incluye padding y borde en el tamaño total del elemento */
     margin: 0;
     padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Desplazamiento suave para enlaces ancla */
 }
 
 body {
@@ -64,45 +82,58 @@ body {
     justify-content: center;
     align-items: flex-start; /* Alinea al inicio, no al centro vertical */
     min-height: 100vh;
-    padding: var(--padding-lg);
+    padding: var(--spacing-lg); /* Usando nueva variable de espaciado */
 }
 
+/* --- 3. Componentes de Layout (Maquetación) --- */
+/* Estilos para la estructura general de la página y sistemas de grilla. */
 .container {
     background-color: var(--card-background);
-    border-radius: 12px;
+    border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-medium);
-    padding: var(--padding-lg) * 2; /* Más padding para el contenedor principal */
+    padding: calc(var(--spacing-lg) * 2); /* Más padding para el contenedor principal */
     max-width: 1200px; /* Ancho máximo para pantallas grandes */
     width: 100%;
-    margin-top: var(--margin-lg); /* Espacio arriba */
+    margin-top: var(--spacing-lg); /* Espacio desde la parte superior */
     animation: fadeInScale 0.6s var(--bezier-ease) forwards; /* Animación de entrada general */
 }
 
-/* --- Animación de entrada para el contenedor general --- */
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.95) translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+.form-grid, .dashboard-grid, .news-container, .results-grid {
+    display: grid;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
-/* --- Typography --- */
+.form-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas */
+}
+
+.dashboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.news-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.results-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* --- 4. Tipografía --- */
+/* Define estilos para encabezados, párrafos, enlaces y listas. */
 h1, h2, h3, h4 {
     font-family: var(--font-family-heading);
     color: var(--text-color-primary);
-    margin-bottom: var(--margin-md);
+    margin-bottom: var(--spacing-md);
     letter-spacing: -0.5px; /* Ligeramente más ajustado para títulos */
 }
 
 h1 {
-    font-size: 2.5em; /* Mayor tamaño para el título principal */
+    font-size: var(--font-size-xxl); /* Mayor tamaño para el título principal */
     color: var(--primary-color);
     text-align: center;
-    margin-bottom: var(--margin-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 h1 i {
@@ -110,22 +141,22 @@ h1 i {
 }
 
 h2 {
-    font-size: 1.8em;
-    margin-top: var(--margin-lg);
+    font-size: var(--font-size-xl);
+    margin-top: var(--spacing-lg);
     border-bottom: 2px solid var(--border-color-light);
-    padding-bottom: var(--padding-sm);
+    padding-bottom: var(--spacing-sm);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-sm);
 }
 
 h3 {
-    font-size: 1.4em;
+    font-size: var(--font-size-lg);
     color: var(--primary-color-dark);
 }
 
 p {
-    margin-bottom: var(--margin-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 a {
@@ -143,27 +174,29 @@ ul {
     list-style-type: none; /* Elimina viñetas por defecto */
 }
 
+/* --- 5. UI Components --- */
+/* Estilos individuales para elementos de UI reutilizables como encabezado, banners, pestañas, botones, etc. */
 
-/* --- Header --- */
+/* Encabezado */
 .header {
     text-align: center;
-    padding-bottom: var(--padding-lg);
+    padding-bottom: var(--spacing-lg);
     border-bottom: 1px solid var(--border-color-light);
-    margin-bottom: var(--margin-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .header p {
-    font-size: 1.1em;
+    font-size: var(--font-size-md);
     color: var(--text-color-secondary);
 }
 
-/* --- Live Data Banner (Ticker) --- */
+/* Banner de Datos en Vivo (Ticker) */
 .live-data-banner {
     background-color: var(--header-background); /* Fondo oscuro como el header */
     color: var(--text-color-light);
-    padding: var(--padding-sm) var(--padding-md);
-    border-radius: 8px;
-    margin-bottom: var(--margin-lg);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-lg);
     display: flex;
     align-items: center;
     overflow: hidden; /* Oculta el contenido que se desborda para el efecto ticker */
@@ -174,14 +207,14 @@ ul {
 .live-indicator {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: var(--spacing-xs);
     background-color: var(--danger-color); /* Color rojo para LIVE */
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
     font-weight: bold;
-    font-size: 0.9em;
+    font-size: var(--font-size-sm);
     flex-shrink: 0; /* Evita que el indicador se encoja */
-    margin-right: 15px; /* Espacio antes del ticker */
+    margin-right: var(--spacing-md); /* Espacio antes del ticker */
 }
 
 .live-dot {
@@ -192,18 +225,12 @@ ul {
     animation: pulse 1.5s infinite ease-out; /* Animación de pulsación */
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.2); opacity: 0.7; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
 .ticker-wrapper {
     flex-grow: 1;
     white-space: nowrap; /* Mantiene los items en una sola línea */
     overflow: hidden;
     position: relative;
-    padding-left: var(--padding-md); /* Espacio para que los items entren y salgan */
+    padding-left: var(--spacing-md); /* Espacio para que los items entren y salgan */
 }
 
 .ticker-content {
@@ -221,22 +248,16 @@ ul {
 }
 
 .ticker-item i {
-    margin-right: 8px;
-    font-size: 1.1em;
+    margin-right: var(--spacing-sm);
+    font-size: var(--font-size-md);
 }
 
-@keyframes ticker-scroll {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); } /* Desplaza todo el contenido hacia la izquierda */
-}
-
-
-/* --- Navigation Tabs --- */
+/* Pestañas de Navegación */
 .nav-container {
-    margin-bottom: var(--margin-lg);
+    margin-bottom: var(--spacing-lg);
     background-color: var(--background-color-medium);
-    border-radius: 8px;
-    padding: var(--padding-sm);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-sm);
     box-shadow: var(--shadow-inset); /* Sombra interna para dar profundidad */
     overflow-x: auto; /* Permite el scroll horizontal en pantallas pequeñas */
     -webkit-overflow-scrolling: touch; /* Suaviza el scroll en iOS */
@@ -245,8 +266,8 @@ ul {
 .nav-tabs {
     display: flex;
     justify-content: flex-start; /* Alinea los tabs a la izquierda, permite scroll */
-    gap: 8px; /* Espacio entre los botones */
-    padding: var(--padding-sm) 0;
+    gap: var(--spacing-sm); /* Espacio entre los botones */
+    padding: var(--spacing-sm) 0;
     min-width: max-content; /* Asegura que la barra de tabs no se encoja */
 }
 
@@ -255,8 +276,8 @@ ul {
     background-color: var(--card-background);
     color: var(--text-color-secondary);
     border: none;
-    padding: var(--padding-sm) var(--padding-md);
-    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
     cursor: pointer;
     font-size: 0.95em;
     font-weight: 600;
@@ -266,7 +287,7 @@ ul {
                 box-shadow var(--transition-speed-fast) var(--bezier-ease); /* Transiciones para hover/active */
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-sm);
     position: relative; /* Para el ripple effect */
     overflow: hidden; /* Para contener el ripple */
 }
@@ -295,22 +316,22 @@ ul {
     font-size: 0.7em;
     font-weight: 700;
     padding: 3px 6px;
-    border-radius: 4px;
-    margin-left: 8px;
+    border-radius: var(--border-radius-sm);
+    margin-left: var(--spacing-sm);
     vertical-align: middle;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    animation: pulse-glow 2s infinite ease-in-out; /* Animación de brillo */
 }
 
-
-/* --- General Section Styles --- */
+/* Estilos de Sección General (para áreas de contenido dinámico) */
 .calculator-section {
-    display: none; /* Oculto por defecto */
-    padding: var(--padding-lg);
+    display: none; /* Oculto por defecto, mostrado por JS */
+    padding: var(--spacing-lg);
     background-color: var(--card-background);
-    border-radius: 12px;
+    border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-light);
-    margin-top: var(--margin-lg);
+    margin-top: var(--spacing-lg);
     opacity: 0; /* Para transiciones de fade */
     transform: translateY(20px); /* Para la animación de entrada */
     transition: opacity var(--transition-speed-slow) var(--bezier-ease),
@@ -324,34 +345,15 @@ ul {
     animation: fadeInScaleUp 0.5s var(--bezier-ease) forwards; /* Animación de entrada */
 }
 
-/* Animaciones para el cambio de sección (JS añade/quita estas clases) */
-@keyframes fadeInScaleUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* --- Form Elements and Grid --- */
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas */
-    gap: var(--margin-md);
-    margin-bottom: var(--margin-lg);
-}
-
+/* Elementos de Formulario */
 .form-group {
-    margin-bottom: var(--margin-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 .form-group label {
     display: block;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: var(--spacing-sm); /* Usando variable de espaciado */
     color: var(--text-color-secondary);
     font-size: 0.95em;
 }
@@ -365,9 +367,9 @@ input[type="text"],
 input[type="number"],
 select {
     width: 100%;
-    padding: var(--padding-sm);
+    padding: var(--spacing-sm);
     border: 1px solid var(--border-color-light);
-    border-radius: 6px;
+    border-radius: var(--border-radius-sm);
     font-size: var(--font-size-base);
     color: var(--text-color-primary);
     background-color: var(--background-color-light);
@@ -380,16 +382,13 @@ input[type="text"]:focus,
 input[type="number"]:focus,
 select:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 74, 144, 226), 0.2); /* Sombra suave para foco */
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2); /* Sombra suave para foco */
 }
-
-/* Para la variable CSS RGB, podrías necesitar JS para obtenerla si no la defines así: */
-/* :root { --primary-color-rgb: 74, 144, 226; } */
 
 .currency-selector {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-sm);
 }
 
 .currency-selector select {
@@ -399,24 +398,24 @@ select:focus {
 .live-price {
     font-weight: 700;
     color: var(--primary-color);
-    font-size: 0.9em;
+    font-size: var(--font-size-sm);
     flex-shrink: 0;
     min-width: 70px; /* Evita que el precio se deforme */
     text-align: right;
 }
 
-/* --- Buttons --- */
+/* Botones */
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-sm);
     background-color: var(--primary-color);
     color: var(--text-color-light);
-    padding: var(--padding-md) var(--padding-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
     border: none;
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: var(--font-size-md);
     font-weight: 700;
     transition: background-color var(--transition-speed-normal) var(--bezier-ease),
                 transform var(--transition-speed-normal) var(--bezier-ease),
@@ -439,7 +438,7 @@ select:focus {
     box-shadow: var(--shadow-light), var(--shadow-inset); /* Combina sombra exterior e interior para efecto de "hundido" */
 }
 
-/* Ripple Effect CSS (Referencia de JS) */
+/* Efecto Ripple (componente CSS, JS lo inicia) */
 .ripple {
     position: absolute;
     border-radius: 50%;
@@ -449,25 +448,12 @@ select:focus {
     pointer-events: none; /* Permite que el click "pase" a los elementos de abajo */
 }
 
-@keyframes ripple-animation {
-    to {
-        transform: scale(4); /* Escalar a un tamaño grande para cubrir el botón */
-        opacity: 0;
-    }
-}
-
-/* --- Dashboard Section --- */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: var(--margin-md);
-    margin-bottom: var(--margin-lg);
-}
-
-.metric-card {
+/* Tarjetas de Métricas (Dashboard), Tarjetas de Características (Pro), Artículos de Noticias y Educación */
+/* Se agrupan porque comparten estilos base de tarjeta. */
+.metric-card, .feature-card, .news-article, .education-article {
     background-color: var(--card-background);
-    border-radius: 10px;
-    padding: var(--padding-md);
+    border-radius: var(--border-radius-md); /* Usando variable para consistencia */
+    padding: var(--spacing-md);
     text-align: center;
     box-shadow: var(--shadow-light);
     transition: transform var(--transition-speed-fast) var(--bezier-ease),
@@ -476,30 +462,32 @@ select:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative; /* Necesario para efectos de hover/active */
+    overflow: hidden; /* Asegura que las sombras no se desborden */
 }
 
-.metric-card:hover {
+.metric-card:hover, .feature-card:hover, .news-article:hover, .education-article:hover {
     transform: translateY(-5px); /* Efecto de levitación */
     box-shadow: var(--shadow-medium); /* Sombra más grande al pasar el mouse */
 }
 
 .metric-icon {
-    font-size: 2.5em;
+    font-size: var(--font-size-xxl);
     color: var(--primary-color);
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm);
 }
 
 .metric-value {
-    font-size: 1.8em;
+    font-size: var(--font-size-xl);
     font-weight: 700;
     color: var(--text-color-primary);
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-xs);
 }
 
 .metric-label {
-    font-size: 0.9em;
+    font-size: var(--font-size-sm);
     color: var(--text-color-secondary);
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-xs);
 }
 
 .metric-change {
@@ -508,22 +496,21 @@ select:focus {
     color: var(--accent-color); /* Verde para cambios positivos */
 }
 
-/* Adjust for negative changes in JS */
+/* Ajuste para cambios negativos en JS */
 .metric-change.negative {
     color: var(--danger-color); /* Rojo para cambios negativos */
 }
 
-
-/* --- Basic Calculator --- */
+/* Calculadora Básica */
 .basic-calc {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--margin-sm);
+    gap: var(--spacing-sm);
     max-width: 400px; /* Ancho fijo para la calculadora */
     margin: 0 auto; /* Centrar */
     background-color: var(--background-color-medium);
-    padding: var(--padding-md);
-    border-radius: 10px;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-inset); /* Sombra interna para dar un look más de dispositivo */
 }
 
@@ -531,11 +518,11 @@ select:focus {
     grid-column: 1 / -1; /* Ocupa todas las columnas */
     background-color: var(--header-background); /* Fondo oscuro para la pantalla */
     color: var(--text-color-light);
-    font-size: 2.5em;
-    padding: var(--padding-sm);
-    border-radius: 8px;
+    font-size: var(--font-size-xxl);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-md);
     text-align: right;
-    margin-bottom: var(--margin-sm);
+    margin-bottom: var(--spacing-sm);
     overflow: hidden; /* Para que los números largos no se desborden */
     text-overflow: ellipsis; /* Añade puntos suspensivos si se desborda */
     min-height: 60px; /* Altura mínima para el display */
@@ -549,9 +536,9 @@ select:focus {
     background-color: var(--card-background);
     color: var(--text-color-primary);
     border: none;
-    padding: var(--padding-md);
-    font-size: 1.4em;
-    border-radius: 8px;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-lg);
+    border-radius: var(--border-radius-md);
     cursor: pointer;
     transition: background-color var(--transition-speed-fast) var(--bezier-ease),
                 transform var(--transition-speed-fast) var(--bezier-ease),
@@ -586,7 +573,7 @@ select:focus {
 }
 
 .calc-btn.clear:hover {
-    background-color: #C82333;
+    background-color: #C82333; /* Rojo más oscuro */
 }
 
 .calc-btn.equals {
@@ -595,17 +582,17 @@ select:focus {
 }
 
 .calc-btn.equals:hover {
-    background-color: #218838;
+    background-color: #218838; /* Verde más oscuro */
 }
 
-/* --- Results Panel --- */
+/* Panel de Resultados */
 .results-panel {
     background-color: var(--background-color-medium);
-    border-radius: 10px;
-    padding: var(--padding-lg);
-    margin-top: var(--margin-lg);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
     box-shadow: var(--shadow-inset);
-    display: none; /* Se activa con JS */
+    display: none; /* Activado por JS */
     opacity: 0; /* Para la animación de entrada */
     transform: translateY(20px); /* Para la animación de entrada */
     animation-duration: 0.5s;
@@ -614,20 +601,14 @@ select:focus {
 }
 
 .results-panel h3 {
-    margin-bottom: var(--margin-md);
+    margin-bottom: var(--spacing-md);
     color: var(--primary-color-dark);
-}
-
-.result-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--margin-sm);
 }
 
 .result-item {
     background-color: var(--card-background);
-    padding: var(--padding-sm);
-    border-radius: 8px;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-md);
     border: 1px solid var(--border-color-light);
     display: flex;
     justify-content: space-between;
@@ -645,46 +626,28 @@ select:focus {
     font-weight: 700;
 }
 
-/* Animaciones para los resultados */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.results-panel.fade-in-up {
-    animation-name: fadeInUp;
-}
-
-
-/* --- Chart Container --- */
+/* Contenedor de Gráficos */
 .chart-container {
     position: relative;
     height: 300px; /* Altura fija para los gráficos */
     width: 100%;
-    margin-top: var(--margin-lg);
+    margin-top: var(--spacing-lg);
     background-color: var(--card-background);
-    padding: var(--padding-md);
-    border-radius: 10px;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-light);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-/* --- Amortization Schedule (Loans) --- */
+/* Tabla de Amortización (Préstamos) */
 .amortization-schedule {
-    margin-top: var(--margin-lg);
+    margin-top: var(--spacing-lg);
 }
 
 .amortization-schedule h4 {
-    margin-bottom: var(--margin-sm);
+    margin-bottom: var(--spacing-sm);
     color: var(--primary-color-dark);
     text-align: center;
 }
@@ -692,9 +655,9 @@ select:focus {
 #amortizationTable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: var(--margin-md);
+    margin-top: var(--spacing-md);
     box-shadow: var(--shadow-light);
-    border-radius: 10px;
+    border-radius: var(--border-radius-md);
     overflow: hidden; /* Para que los bordes redondeados afecten la tabla */
 }
 
@@ -705,7 +668,7 @@ select:focus {
 
 #amortizationTable th,
 #amortizationTable td {
-    padding: var(--padding-sm);
+    padding: var(--spacing-sm);
     text-align: left;
     border-bottom: 1px solid var(--border-color-light);
 }
@@ -719,26 +682,12 @@ select:focus {
     transition: background-color var(--transition-speed-fast) ease;
 }
 
-
-/* --- Premium Badge --- */
-.premium-badge {
-    animation: pulse-glow 2s infinite ease-in-out; /* Animación de brillo */
-}
-
-@keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(var(--warning-color-rgb, 255, 193, 7), 0.7); }
-    50% { box-shadow: 0 0 0 8px rgba(var(--warning-color-rgb, 255, 193, 7), 0); }
-    100% { box-shadow: 0 0 0 0 rgba(var(--warning-color-rgb, 255, 193, 7), 0.7); }
-}
-/* Asegúrate de definir --warning-color-rgb en :root si no lo haces con JS */
-
-
-/* --- News & Investment Tips Section --- */
+/* Sección de Noticias y Consejos de Inversión */
 .news-filters {
     display: flex;
     flex-wrap: wrap; /* Permite que los elementos salten de línea */
-    gap: var(--margin-md);
-    margin-bottom: var(--margin-lg);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
     align-items: flex-end; /* Alinea los items en la parte inferior */
 }
 
@@ -748,33 +697,16 @@ select:focus {
     margin-bottom: 0; /* Elimina el margin-bottom extra */
 }
 
-.news-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--margin-md);
-    margin-bottom: var(--margin-lg);
-}
-
 .news-article {
-    background-color: var(--card-background);
-    border-radius: 10px;
-    padding: var(--padding-md);
-    box-shadow: var(--shadow-light);
-    transition: transform var(--transition-speed-fast) var(--bezier-ease),
-                box-shadow var(--transition-speed-fast) var(--bezier-ease);
+    /* Estilos base compartidos con .metric-card, .feature-card, .education-article */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Empuja el footer o fuente al final */
 }
 
-.news-article:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-medium);
-}
-
 .news-title {
-    font-size: 1.1em;
-    margin-bottom: 8px;
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-sm);
     font-weight: 600;
     line-height: 1.3;
 }
@@ -793,29 +725,29 @@ select:focus {
 .news-source {
     font-size: 0.8em;
     color: var(--text-color-secondary);
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm);
 }
 
 .news-summary {
-    font-size: 0.9em;
+    font-size: var(--font-size-sm);
     color: var(--text-color-primary);
     flex-grow: 1; /* Permite que el summary ocupe el espacio restante */
 }
 
 .tips-section {
     background-color: var(--background-color-medium);
-    border-radius: 10px;
-    padding: var(--padding-lg);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
     box-shadow: var(--shadow-inset);
 }
 
 .tips-section ul {
     list-style-type: disc; /* Vuelve a poner viñetas para la lista de tips */
-    padding-left: var(--padding-lg);
+    padding-left: var(--spacing-lg);
 }
 
 .tips-section ul li {
-    margin-bottom: 8px;
+    margin-bottom: var(--spacing-sm);
     font-size: 0.95em;
     color: var(--text-color-secondary);
 }
@@ -824,18 +756,17 @@ select:focus {
     color: var(--text-color-primary);
 }
 
-
-/* --- Financial Education Section --- */
+/* Sección de Educación Financiera */
 .education-content {
-    margin-bottom: var(--margin-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .education-category-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: var(--margin-lg);
-    padding-bottom: 8px; /* Espacio para la sombra */
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm); /* Espacio para la sombra */
     border-bottom: 1px solid var(--border-color-light); /* Separador visual */
 }
 
@@ -865,66 +796,107 @@ select:focus {
 }
 
 .education-category-btn.active:hover {
-     background-color: var(--primary-color-dark);
+    background-color: var(--primary-color-dark);
 }
 
 .education-articles-container {
     display: flex; /* Oculta y muestra con JS */
     flex-direction: column;
-    gap: var(--margin-md);
+    gap: var(--spacing-md);
 }
 
 .education-article {
-    background-color: var(--card-background);
-    border-radius: 10px;
-    padding: var(--padding-lg);
-    box-shadow: var(--shadow-light);
-    transition: transform var(--transition-speed-fast) var(--bezier-ease),
-                box-shadow var(--transition-speed-fast) var(--bezier-ease);
+    /* Estilos base compartidos con .metric-card, .feature-card, .news-article */
     border-left: 5px solid var(--primary-color); /* Borde de acento */
 }
 
-.education-article:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-medium);
-}
-
 .education-article h3 {
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm);
     color: var(--primary-color-dark);
 }
 
 .education-article p {
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm);
     color: var(--text-color-primary);
 }
 
 .education-article ul {
     list-style-type: disc;
-    padding-left: var(--padding-lg);
+    padding-left: var(--spacing-lg);
     color: var(--text-color-secondary);
 }
 
 .education-article ul li {
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-xs);
 }
 
-
-/* --- Footer --- */
+/* Pie de Página */
 .footer {
     text-align: center;
-    margin-top: var(--margin-lg) * 2; /* Más espacio arriba */
-    padding-top: var(--padding-lg);
+    margin-top: calc(var(--spacing-lg) * 2); /* Más espacio arriba */
+    padding-top: var(--spacing-lg);
     border-top: 1px solid var(--border-color-light);
     color: var(--text-color-secondary);
-    font-size: 0.9em;
+    font-size: var(--font-size-sm);
 }
 
+/* --- 6. Animaciones --- */
+/* Definiciones de keyframes para varios efectos. */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
 
-/* --- Responsive Design (Media Queries) --- */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes ticker-scroll {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); } /* Desplaza todo el contenido hacia la izquierda */
+}
+
+@keyframes fadeInScaleUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(var(--warning-color-rgb), 0.7); }
+    50% { box-shadow: 0 0 0 8px rgba(var(--warning-color-rgb), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--warning-color-rgb), 0.7); }
+}
+
+/* --- 7. Diseño Responsivo (Media Queries) --- */
+/* Ajustes para diferentes tamaños de pantalla, organizados de mayor a menor. */
 @media (max-width: 992px) {
     .container {
-        padding: var(--padding-lg);
+        padding: var(--spacing-lg);
     }
     .form-grid {
         grid-template-columns: 1fr; /* Una columna en pantallas medianas/pequeñas */
@@ -946,7 +918,7 @@ select:focus {
     }
     .nav-tab {
         font-size: 0.85em;
-        padding: var(--padding-sm);
+        padding: var(--spacing-sm);
     }
     .metric-value {
         font-size: 1.5em;
@@ -961,8 +933,8 @@ select:focus {
 
 @media (max-width: 576px) {
     .container {
-        padding: var(--padding-md);
-        margin-top: var(--margin-md);
+        padding: var(--spacing-md);
+        margin-top: var(--spacing-md);
     }
     .header h1 {
         font-size: 1.8em;
@@ -975,7 +947,7 @@ select:focus {
         align-items: flex-start;
     }
     .live-indicator {
-        margin-bottom: 10px;
+        margin-bottom: var(--spacing-sm);
         margin-right: 0;
     }
     .ticker-wrapper {
@@ -984,23 +956,23 @@ select:focus {
         text-align: center; /* Centra el ticker si no hay espacio para scroll */
     }
     .nav-tabs {
-        gap: 5px;
-        padding: var(--padding-sm) 0;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-sm) 0;
     }
     .nav-tab {
         padding: 8px 12px;
         font-size: 0.8em;
-        gap: 5px;
+        gap: var(--spacing-xs);
     }
     .btn {
         font-size: 1em;
-        padding: var(--padding-sm) var(--padding-md);
+        padding: var(--spacing-sm) var(--spacing-md);
     }
     .form-group label {
         font-size: 0.85em;
     }
     .results-panel {
-        padding: var(--padding-md);
+        padding: var(--spacing-md);
     }
     .amortization-schedule h4 {
         font-size: 1.2em;
