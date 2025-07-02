@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financiator Pro - Real-time Financial Calculator</title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/w//ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
@@ -109,6 +109,10 @@
                 <button class="nav-tab" data-section="news">
                     <i class="far fa-newspaper"></i>
                     News & Tips
+                </button>
+                <button class="nav-tab" data-section="education">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
                 </button>
             </div>
         </div>
@@ -579,7 +583,7 @@
             </div>
             <div class="news-container" id="newsFeed">
                 <p class="loading-message">Loading news... Please wait.</p>
-                </div>
+            </div>
             <div class="tips-section">
                 <h3><i class="fas fa-lightbulb"></i> Quick Investment Tips</h3>
                 <ul id="investmentTips">
@@ -590,6 +594,60 @@
                     <li>**Think long-term:** Avoid impulsive decisions based on short-term market fluctuations.</li>
                     <li>**Consider professional advice:** A financial advisor can help tailor strategies to your goals.</li>
                 </ul>
+            </div>
+        </div>
+
+        <div class="calculator-section" id="education">
+            <h2 class="section-title">
+                <i class="fas fa-graduation-cap"></i>
+                Financial Education Center
+            </h2>
+            <div class="education-content">
+                <div class="education-category-nav">
+                    <button class="education-category-btn active" data-category="basics">Financial Basics</button>
+                    <button class="education-category-btn" data-category="investing">Investing Principles</button>
+                    <button class="education-category-btn" data-category="debt">Debt Management</button>
+                    <button class="education-category-btn" data-category="crypto-basics">Crypto Explained</button>
+                </div>
+
+                <div class="education-articles-container" id="educationArticles">
+                    <div class="education-article" data-category="basics">
+                        <h3>What is Compound Interest?</h3>
+                        <p>Compound interest is the interest on a loan or deposit calculated based on both the initial principal and the accumulated interest from previous periods. It's often called "interest on interest," and it can make a sum grow at a faster rate than simple interest, which is calculated only on the principal amount. This is a powerful concept for long-term savings and investments.</p>
+                        <p><strong>Example:</strong> If you invest $1000 at 5% annual interest compounded annually, after one year you have $1050. The next year, the 5% interest is calculated on $1050, not just $1000.</p>
+                    </div>
+                    <div class="education-article" data-category="basics" style="display: none;">
+                        <h3>Understanding Inflation</h3>
+                        <p>Inflation refers to the rate at which the general level of prices for goods and services is rising, and subsequently, purchasing power is falling. Central banks typically aim to keep inflation in check to ensure economic stability. High inflation can erode the value of your savings over time.</p>
+                        <p><strong>Key Takeaway:</strong> To maintain purchasing power, your investments need to grow faster than the rate of inflation.</p>
+                    </div>
+                    <div class="education-article" data-category="investing" style="display: none;">
+                        <h3>The Power of Diversification</h3>
+                        <p>Diversification is a strategy employed to minimize risk by investing in a variety of assets. The rationale behind this technique is that a portfolio constructed of different kinds of assets will, on average, yield higher long-term returns and lower the risk of any individual holding or security.</p>
+                        <p><strong>How to Diversify:</strong> Spread your investments across different asset classes (stocks, bonds, real estate, crypto), industries, and geographies.</p>
+                    </div>
+                    <div class="education-article" data-category="investing" style="display: none;">
+                        <h3>What are ETFs?</h3>
+                        <p>An Exchange Traded Fund (ETF) is a type of investment fund that is traded on stock exchanges, much like stocks. ETFs hold assets such as stocks, commodities, or bonds, and generally, operate with an arbitrage mechanism designed to keep their trading price close to their net asset value. They offer diversification and are usually lower cost than traditional mutual funds.</p>
+                    </div>
+                    <div class="education-article" data-category="debt" style="display: none;">
+                        <h3>Strategies for Debt Repayment</h3>
+                        <p>Managing debt effectively is crucial for financial health. Two popular strategies include the **Debt Snowball Method** and the **Debt Avalanche Method**.</p>
+                        <ul>
+                            <li>**Snowball:** Pay off the smallest debt first, then roll that payment into the next smallest. Focuses on psychological wins.</li>
+                            <li>**Avalanche:** Pay off the debt with the highest interest rate first. Saves more money in interest over time.</li>
+                        </ul>
+                    </div>
+                     <div class="education-article" data-category="crypto-basics" style="display: none;">
+                        <h3>Introduction to Blockchain Technology</h3>
+                        <p>Blockchain is a distributed ledger technology (DLT) that underlies cryptocurrencies like Bitcoin. It's a decentralized and immutable record of transactions, maintained by a network of computers. Each "block" contains a timestamp and transactional data, and once completed, is linked to the previous block, forming a chain.</p>
+                        <p><strong>Why it matters:</strong> Blockchain offers transparency, security, and resistance to tampering, revolutionizing how digital information and assets can be managed.</p>
+                    </div>
+                     <div class="education-article" data-category="crypto-basics" style="display: none;">
+                        <h3>What is Bitcoin Mining?</h3>
+                        <p>Bitcoin mining is the process by which new bitcoins are introduced into circulation. It's also how new transactions are verified by the network and added to the blockchain. Miners use powerful computers to solve complex computational puzzles. The first miner to solve the puzzle adds the next block to the blockchain and is rewarded with a set amount of new bitcoins and transaction fees.</p>
+                    </div>
+                    </div>
             </div>
         </div>
 
