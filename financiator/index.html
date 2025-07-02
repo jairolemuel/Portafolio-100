@@ -817,3 +817,1062 @@
                             <option value="EUR">EUR - Euro</option>
                             <option value="GBP">GBP - Libra</option>
                             <option value="JPY">JPY - Japonese Yen</option>
+        </select>
+                        <div class="live-price" id="toCurrencyPrice">$0</div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" onclick="calculateForex()">
+                <i class="fas fa-sync"></i>
+                Convertir Divisa
+            </button>
+            <div class="results-panel" id="forexResults" style="display: none;">
+                <h3><i class="fas fa-exchange-alt"></i> Resultado de Conversión</h3>
+                <div class="result-grid" id="forexResultsContent"></div>
+            </div>
+        </div>
+
+                <div class="calculator-section" id="inflation">
+            <h2 class="section-title">
+                <i class="fas fa-chart-line"></i>
+                Calculadora de Inflación
+            </h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-money-bill-wave"></i> Monto Inicial</label>
+                    <input type="number" id="initialAmountInflation" placeholder="10000" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-percentage"></i> Tasa de Inflación Anual (%)</label>
+                    <input type="number" id="inflationRate" placeholder="50" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Años</label>
+                    <input type="number" id="inflationYears" placeholder="1" step="1">
+                </div>
+            </div>
+            <button class="btn" onclick="calculateInflation()">
+                <i class="fas fa-chart-line"></i>
+                Calcular Inflación
+            </button>
+            <div class="results-panel" id="inflationResults" style="display: none;">
+                <h3><i class="fas fa-chart-line"></i> Impacto de la Inflación</h3>
+                <div class="result-grid" id="inflationResultsContent"></div>
+            </div>
+        </div>
+
+                <div class="calculator-section" id="interest">
+            <h2 class="section-title">
+                <i class="fas fa-percentage"></i>
+                Calculadora de Intereses
+            </h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-dollar-sign"></i> Principal</label>
+                    <input type="number" id="principal" placeholder="10000" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-percentage"></i> Tasa de Interés Anual (%)</label>
+                    <input type="number" id="interestRate" placeholder="5" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Período (Años)</label>
+                    <input type="number" id="interestYears" placeholder="10" step="1">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-money-check"></i> Tipo de Interés</label>
+                    <select id="interestType">
+                        <option value="simple">Simple</option>
+                        <option value="compound">Compuesto Anual</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" onclick="calculateInterest()">
+                <i class="fas fa-calculator"></i>
+                Calcular Interés
+            </button>
+            <div class="results-panel" id="interestResults" style="display: none;">
+                <h3><i class="fas fa-percentage"></i> Resultados de Interés</h3>
+                <div class="result-grid" id="interestResultsContent"></div>
+                <div class="chart-container">
+                    <canvas id="interestChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+                <div class="calculator-section" id="loans">
+            <h2 class="section-title">
+                <i class="fas fa-money-bill-wave"></i>
+                Calculadora de Préstamos
+            </h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-dollar-sign"></i> Monto del Préstamo</label>
+                    <input type="number" id="loanAmount" placeholder="100000" step="100">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-percentage"></i> Tasa de Interés Anual (%)</label>
+                    <input type="number" id="loanInterestRate" placeholder="7" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Plazo (Años)</label>
+                    <input type="number" id="loanYears" placeholder="30" step="1">
+                </div>
+            </div>
+            <button class="btn" onclick="calculateLoan()">
+                <i class="fas fa-calculator"></i>
+                Calcular Préstamo
+            </button>
+            <div class="results-panel" id="loanResults" style="display: none;">
+                <h3><i class="fas fa-money-bill-wave"></i> Resumen del Préstamo</h3>
+                <div class="result-grid" id="loanResultsContent"></div>
+                <div class="chart-container">
+                    <canvas id="loanChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+                <div class="calculator-section" id="investment">
+            <h2 class="section-title">
+                <i class="fas fa-chart-pie"></i>
+                Calculadora de Inversiones
+            </h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-dollar-sign"></i> Monto Inicial</label>
+                    <input type="number" id="initialInvestment" placeholder="5000" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-dollar-sign"></i> Contribución Mensual</label>
+                    <input type="number" id="monthlyContribution" placeholder="100" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-percentage"></i> Tasa de Retorno Anual Esperada (%)</label>
+                    <input type="number" id="returnRate" placeholder="8" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Período (Años)</label>
+                    <input type="number" id="investmentYears" placeholder="20" step="1">
+                </div>
+            </div>
+            <button class="btn" onclick="calculateInvestment()">
+                <i class="fas fa-chart-pie"></i>
+                Calcular Inversión
+            </button>
+            <div class="results-panel" id="investmentResults" style="display: none;">
+                <h3><i class="fas fa-chart-pie"></i> Proyección de Inversión</h3>
+                <div class="result-grid" id="investmentResultsContent"></div>
+                <div class="chart-container">
+                    <canvas id="investmentChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+                <div class="calculator-section" id="stocks">
+            <h2 class="section-title">
+                <i class="fas fa-chart-bar"></i>
+                Calculadora de Acciones <span class="premium-badge">Pro</span>
+            </h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #6b7280;">Esta función está disponible en la versión Financiator Pro.</p>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-building"></i> Símbolo de Ticker</label>
+                    <input type="text" id="stockSymbol" placeholder="AAPL" disabled>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-sort-numeric-up"></i> Cantidad de Acciones</label>
+                    <input type="number" id="stockQuantity" placeholder="10" step="1" disabled>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-dollar-sign"></i> Precio de Compra</label>
+                    <input type="number" id="stockBuyPrice" placeholder="150.00" step="0.01" disabled>
+                </div>
+            </div>
+            <button class="btn btn-secondary" disabled>
+                <i class="fas fa-lock"></i>
+                Desbloquear Pro
+            </button>
+        </div>
+
+                <div class="calculator-section" id="commodities">
+            <h2 class="section-title">
+                <i class="fas fa-seedling"></i>
+                Calculadora de Commodities <span class="premium-badge">Pro</span>
+            </h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #6b7280;">Esta función está disponible en la versión Financiator Pro.</p>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-box-open"></i> Commodity</label>
+                    <select id="commodityType" disabled>
+                        <option value="gold">Oro</option>
+                        <option value="silver">Plata</option>
+                        <option value="oil">Petróleo</option>
+                        <option value="naturalGas">Gas Natural</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-weight-hanging"></i> Cantidad (unidades)</label>
+                    <input type="number" id="commodityQuantity" placeholder="10" step="0.01" disabled>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-dollar-sign"></i> Precio Actual</label>
+                    <input type="number" id="commodityCurrentPrice" placeholder="1800.00" step="0.01" disabled>
+                </div>
+            </div>
+            <button class="btn btn-secondary" disabled>
+                <i class="fas fa-lock"></i>
+                Desbloquear Pro
+            </button>
+        </div>
+
+    </div>
+
+        <footer class="footer">
+        <p>&copy; 2025 Financiator Pro. Todos los derechos reservados.</p>
+        <p>Datos financieros proporcionados por fuentes externas y pueden tener retrasos. Consulta a un profesional financiero antes de tomar decisiones de inversión.</p>
+    </footer>
+
+    <script>
+        // Global state and constants
+        const API_KEY_COINGECKO = 'YOUR_COINGECKO_API_KEY'; // Replace with your actual CoinGecko API key
+        const API_KEY_EXCHANGERATE = 'YOUR_EXCHANGERATE_API_KEY'; // Replace with your actual ExchangeRate-API key
+        const API_KEY_ALPHAVANTAGE = 'YOUR_ALPHAVANTAGE_API_KEY'; // Replace with your actual Alpha Vantage API key
+
+        let currentRates = {
+            bitcoin: 0,
+            ethereum: 0,
+            usd_ars: 0,
+            sp500: 0,
+            gold: 0,
+            oil: 0
+        };
+
+        let dashboardChartInstance = null;
+        let interestChartInstance = null;
+        let loanChartInstance = null;
+        let investmentChartInstance = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavTabs();
+            fetchAllLivePrices();
+            setInterval(fetchAllLivePrices, 30000); // Update every 30 seconds
+            setupInputListeners();
+            initializeDashboardChart();
+        });
+
+        function setupNavTabs() {
+            const navTabs = document.querySelectorAll('.nav-tab');
+            const sections = document.querySelectorAll('.calculator-section');
+
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    const targetSectionId = tab.dataset.section;
+                    document.getElementById(targetSectionId).classList.add('active');
+
+                    // Re-render charts if the section contains one
+                    if (targetSectionId === 'interest' && interestChartInstance) {
+                        interestChartInstance.resize();
+                    } else if (targetSectionId === 'loan' && loanChartInstance) {
+                        loanChartInstance.resize();
+                    } else if (targetSectionId === 'investment' && investmentChartInstance) {
+                        investmentChartInstance.resize();
+                    } else if (targetSectionId === 'dashboard' && dashboardChartInstance) {
+                        dashboardChartInstance.resize();
+                    }
+                });
+            });
+        }
+
+        function setupInputListeners() {
+            document.getElementById('cryptoCurrency').addEventListener('change', updateCryptoCurrentPrice);
+            document.getElementById('fromCurrency').addEventListener('change', updateFromCurrencyPrice);
+        }
+
+        // --- Live Data Fetching ---
+
+        async function fetchAllLivePrices() {
+            console.log('Fetching live prices...');
+            // Reset ticker content to force animation
+            const tickerContent = document.getElementById('liveTicker');
+            tickerContent.style.animation = 'none';
+            void tickerContent.offsetWidth; // Trigger reflow
+            tickerContent.style.animation = null;
+
+            await Promise.all([
+                fetchCryptoPrices(),
+                fetchForexRates(),
+                fetchInflationData(),
+                fetchSP500(),
+                fetchCommodityPrices()
+            ]);
+            updateDashboardMetrics();
+            updateCryptoCurrentPrice();
+            updateFromCurrencyPrice();
+        }
+
+        async function fetchCryptoPrices() {
+            try {
+                // Using CoinGecko API for cryptocurrency prices
+                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true&x_cg_demo_api_key=${API_KEY_COINGECKO}`);
+                const data = await response.json();
+
+                if (data.bitcoin && data.ethereum) {
+                    currentRates.bitcoin = data.bitcoin.usd;
+                    currentRates.ethereum = data.ethereum.usd;
+                    const btcChange = data.bitcoin.usd_24hr_change ? data.bitcoin.usd_24hr_change.toFixed(2) : '0.00';
+                    const ethChange = data.ethereum.usd_24hr_change ? data.ethereum.usd_24hr_change.toFixed(2) : '0.00';
+
+                    document.getElementById('btc-price').textContent = `BTC: $${currentRates.bitcoin.toLocaleString()}`;
+                    document.getElementById('eth-price').textContent = `ETH: $${currentRates.ethereum.toLocaleString()}`;
+                    updateMetricCard('dash-btc', currentRates.bitcoin, btcChange);
+                    updateMetricCard('dash-eth', currentRates.ethereum, ethChange);
+                }
+            } catch (error) {
+                console.error('Error fetching crypto prices:', error);
+                document.getElementById('btc-price').textContent = 'BTC: Error';
+                document.getElementById('eth-price').textContent = 'ETH: Error';
+                updateMetricCard('dash-btc', 'N/A', 'N/A');
+                updateMetricCard('dash-eth', 'N/A', 'N/A');
+            }
+        }
+
+        async function fetchForexRates() {
+            try {
+                // Using ExchangeRate-API for forex rates (free plan has rate limits and only USD base)
+                const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY_EXCHANGERATE}/latest/USD`);
+                const data = await response.json();
+
+                if (data.result === 'success' && data.conversion_rates.ARS) {
+                    currentRates.usd_ars = data.conversion_rates.ARS;
+                    document.getElementById('usd-ars').textContent = `USD/ARS: ${currentRates.usd_ars.toFixed(2)}`;
+                    // For change, we'd need historical data, which is beyond a simple free API call
+                    updateMetricCard('dash-usd', currentRates.usd_ars.toFixed(2), 'N/A', true);
+                }
+            } catch (error) {
+                console.error('Error fetching forex rates:', error);
+                document.getElementById('usd-ars').textContent = 'USD/ARS: Error';
+                updateMetricCard('dash-usd', 'N/A', 'N/A');
+            }
+        }
+
+        async function fetchInflationData() {
+            try {
+                // Placeholder for Argentina inflation data - typically this comes from a national statistics agency or a specialized data provider.
+                // For demonstration, we'll use a mock value.
+                const annualInflation = 276.4; // Example: Annual inflation for Argentina (as of recent data)
+                const monthlyInflation = 4.2; // Example: Monthly inflation for Argentina
+
+                document.getElementById('inflation-arg').textContent = `Inflación ARG: ${annualInflation}%`;
+                updateMetricCard('dash-inflation', `${annualInflation}%`, `Mensual: ${monthlyInflation}%`, false);
+            } catch (error) {
+                console.error('Error fetching inflation data:', error);
+                document.getElementById('inflation-arg').textContent = 'Inflación ARG: Error';
+                updateMetricCard('dash-inflation', 'N/A', 'N/A');
+            }
+        }
+
+        async function fetchSP500() {
+            try {
+                // Using Alpha Vantage for S&P 500 (API key needed for real-time/frequent data)
+                const response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=SPY&apikey=${API_KEY_ALPHAVANTAGE}`);
+                const data = await response.json();
+
+                if (data['Global Quote'] && data['Global Quote']['05. price']) {
+                    const price = parseFloat(data['Global Quote']['05. price']).toFixed(2);
+                    const change = parseFloat(data['Global Quote']['10. change percent']).toFixed(2);
+                    currentRates.sp500 = price;
+
+                    document.getElementById('sp500').textContent = `S&P 500: ${price}`;
+                    updateMetricCard('dash-sp500', price, `${change}%`);
+                } else {
+                    throw new Error('Invalid S&P 500 data from API');
+                }
+            } catch (error) {
+                console.error('Error fetching S&P 500 data:', error);
+                document.getElementById('sp500').textContent = 'S&P 500: Error';
+                updateMetricCard('dash-sp500', 'N/A', 'N/A');
+            }
+        }
+
+        async function fetchCommodityPrices() {
+            try {
+                // Using Alpha Vantage for Gold (GC=F) and Crude Oil (CL=F)
+                const [goldResponse, oilResponse] = await Promise.all([
+                    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GC=F&apikey=${API_KEY_ALPHAVANTAGE}`),
+                    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=CL=F&apikey=${API_KEY_ALPHAVANTAGE}`)
+                ]);
+
+                const goldData = await goldResponse.json();
+                const oilData = await oilResponse.json();
+
+                if (goldData['Global Quote'] && goldData['Global Quote']['05. price']) {
+                    const goldPrice = parseFloat(goldData['Global Quote']['05. price']).toFixed(2);
+                    const goldChange = parseFloat(goldData['Global Quote']['10. change percent']).toFixed(2);
+                    currentRates.gold = goldPrice;
+                    document.getElementById('gold-price').textContent = `Oro: $${goldPrice}`;
+                    updateMetricCard('dash-gold', `$${goldPrice}`, `${goldChange}%`);
+                } else {
+                    throw new Error('Invalid Gold data from API');
+                }
+
+                if (oilData['Global Quote'] && oilData['Global Quote']['05. price']) {
+                    const oilPrice = parseFloat(oilData['Global Quote']['05. price']).toFixed(2);
+                    const oilChange = parseFloat(oilData['Global Quote']['10. change percent']).toFixed(2);
+                    currentRates.oil = oilPrice;
+                    document.getElementById('oil-price').textContent = `Petróleo: $${oilPrice}`;
+                } else {
+                    throw new Error('Invalid Oil data from API');
+                }
+
+            } catch (error) {
+                console.error('Error fetching commodity prices:', error);
+                document.getElementById('gold-price').textContent = 'Oro: Error';
+                document.getElementById('oil-price').textContent = 'Petróleo: Error';
+                updateMetricCard('dash-gold', 'N/A', 'N/A');
+            }
+        }
+
+        function updateDashboardMetrics() {
+            // This function is now mostly handled by `fetchCryptoPrices`, `fetchForexRates`, etc.
+            // It's kept for any general dashboard updates or if some metrics are static.
+            if (dashboardChartInstance) {
+                updateDashboardChart();
+            }
+        }
+
+        function updateMetricCard(idPrefix, value, change, isCurrency = true) {
+            const valueElement = document.getElementById(`${idPrefix}-price`);
+            const changeElement = document.getElementById(`${idPrefix}-change`);
+
+            if (valueElement) {
+                valueElement.textContent = isCurrency ? `$${value.toLocaleString()}` : value;
+            }
+            if (changeElement) {
+                changeElement.textContent = change;
+                changeElement.className = 'metric-change'; // Reset classes
+                if (change !== 'N/A') {
+                    if (parseFloat(change) > 0) {
+                        changeElement.classList.add('positive');
+                    } else if (parseFloat(change) < 0) {
+                        changeElement.classList.add('negative');
+                    }
+                }
+            }
+        }
+
+        // --- Basic Calculator Functions ---
+        let currentInput = '0';
+        let operator = null;
+        let previousInput = '';
+        let resetDisplay = false;
+
+        function updateDisplay() {
+            document.getElementById('display').innerText = currentInput;
+        }
+
+        function appendToDisplay(value) {
+            if (currentInput === '0' || resetDisplay) {
+                currentInput = value;
+                resetDisplay = false;
+            } else {
+                currentInput += value;
+            }
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            operator = null;
+            previousInput = '';
+            resetDisplay = false;
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            currentInput = currentInput.slice(0, -1);
+            if (currentInput === '') {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                currentInput = eval(currentInput).toString();
+                updateDisplay();
+                resetDisplay = true;
+            } catch (e) {
+                currentInput = 'Error';
+                updateDisplay();
+                resetDisplay = true;
+            }
+        }
+
+        // --- Crypto Calculator Functions ---
+
+        async function updateCryptoCurrentPrice() {
+            const crypto = document.getElementById('cryptoCurrency').value;
+            try {
+                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=usd&x_cg_demo_api_key=${API_KEY_COINGECKO}`);
+                const data = await response.json();
+                const price = data[crypto].usd;
+                document.getElementById('cryptoCurrentPrice').textContent = `$${price.toLocaleString()}`;
+            } catch (error) {
+                console.error('Error fetching crypto current price:', error);
+                document.getElementById('cryptoCurrentPrice').textContent = 'Error';
+            }
+        }
+
+        async function calculateCrypto() {
+            const amount = parseFloat(document.getElementById('cryptoAmount').value);
+            const crypto = document.getElementById('cryptoCurrency').value;
+            const target = document.getElementById('targetCurrency').value;
+            const resultsDiv = document.getElementById('cryptoResultsContent');
+            document.getElementById('cryptoResults').style.display = 'block';
+            resultsDiv.innerHTML = '<div class="loading"></div> Calculando...';
+
+            if (isNaN(amount) || amount <= 0) {
+                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Cantidad inválida</div></div>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=${target},usd&x_cg_demo_api_key=${API_KEY_COINGECKO}`);
+                const data = await response.json();
+
+                let convertedValue = 0;
+                let displayTarget = target.toUpperCase();
+                let exchangeRate = 1;
+
+                if (target === 'btc' && crypto !== 'bitcoin') {
+                    const cryptoPriceInUsd = data[crypto].usd;
+                    const btcPriceInUsd = currentRates.bitcoin;
+                    if (btcPriceInUsd > 0) {
+                        convertedValue = (amount * cryptoPriceInUsd) / btcPriceInUsd;
+                        exchangeRate = cryptoPriceInUsd / btcPriceInUsd;
+                    } else {
+                        throw new Error('Bitcoin price not available for conversion.');
+                    }
+                } else if (crypto === target) {
+                    convertedValue = amount;
+                } else if (data[crypto] && data[crypto][target]) {
+                    convertedValue = amount * data[crypto][target];
+                    exchangeRate = data[crypto][target];
+                } else if (target === 'ars' && data[crypto] && data[crypto]['usd']) {
+                    if (currentRates.usd_ars > 0) {
+                        convertedValue = amount * data[crypto].usd * currentRates.usd_ars;
+                        exchangeRate = data[crypto].usd * currentRates.usd_ars;
+                    } else {
+                        throw new Error('USD/ARS exchange rate not available.');
+                    }
+                } else {
+                    throw new Error('Conversion not supported or data unavailable.');
+                }
+
+                resultsDiv.innerHTML = `
+                    <div class="result-item">
+                        <div class="result-label">Valor Convertido</div>
+                        <div class="result-value">${convertedValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })} ${displayTarget.toUpperCase()}</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Tasa de Cambio</div>
+                        <div class="result-value">1 ${crypto.toUpperCase()} = ${exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })} ${displayTarget.toUpperCase()}</div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error calculating crypto:', error);
+                resultsDiv.innerHTML = `<div class="result-item"><div class="result-label">Error</div><div class="result-value">${error.message || 'Error en la conversión'}</div></div>`;
+            }
+        }
+
+        // --- Forex Calculator Functions ---
+
+        async function updateFromCurrencyPrice() {
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const priceDisplay = document.getElementById('fromCurrencyPrice');
+
+            if (fromCurrency === 'USD') {
+                priceDisplay.textContent = `$1 USD`;
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY_EXCHANGERATE}/latest/${fromCurrency}`);
+                const data = await response.json();
+
+                if (data.result === 'success' && data.conversion_rates.USD) {
+                    priceDisplay.textContent = `1 ${fromCurrency} = $${data.conversion_rates.USD.toFixed(4)} USD`;
+                } else {
+                    throw new Error('Could not fetch rate for selected currency.');
+                }
+            } catch (error) {
+                console.error('Error updating from currency price:', error);
+                priceDisplay.textContent = 'Error';
+            }
+        }
+
+        async function calculateForex() {
+            const amount = parseFloat(document.getElementById('forexAmount').value);
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+            const resultsDiv = document.getElementById('forexResultsContent');
+            document.getElementById('forexResults').style.display = 'block';
+            resultsDiv.innerHTML = '<div class="loading"></div> Calculando...';
+
+            if (isNaN(amount) || amount <= 0) {
+                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Cantidad inválida</div></div>';
+                return;
+            }
+
+            if (fromCurrency === toCurrency) {
+                resultsDiv.innerHTML = `
+                    <div class="result-item">
+                        <div class="result-label">Valor Convertido</div>
+                        <div class="result-value">${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${toCurrency}</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Tasa de Cambio</div>
+                        <div class="result-value">1 ${fromCurrency} = 1 ${toCurrency}</div>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY_EXCHANGERATE}/pair/${fromCurrency}/${toCurrency}`);
+                const data = await response.json();
+
+                if (data.result === 'success' && data.conversion_rate) {
+                    const convertedValue = amount * data.conversion_rate;
+                    resultsDiv.innerHTML = `
+                        <div class="result-item">
+                            <div class="result-label">Valor Convertido</div>
+                            <div class="result-value">${convertedValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })} ${toCurrency}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Tasa de Cambio</div>
+                            <div class="result-value">1 ${fromCurrency} = ${data.conversion_rate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })} ${toCurrency}</div>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(data.error_type || 'Error en la conversión de divisas');
+                }
+            } catch (error) {
+                console.error('Error calculating forex:', error);
+                resultsDiv.innerHTML = `<div class="result-item"><div class="result-label">Error</div><div class="result-value">${error.message || 'No se pudo obtener la tasa de cambio.'}</div></div>`;
+            }
+        }
+
+        // --- Inflation Calculator Functions ---
+        function calculateInflation() {
+            const initialAmount = parseFloat(document.getElementById('initialAmountInflation').value);
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+            const years = parseInt(document.getElementById('inflationYears').value);
+            const resultsDiv = document.getElementById('inflationResultsContent');
+            document.getElementById('inflationResults').style.display = 'block';
+
+            if (isNaN(initialAmount) || isNaN(inflationRate) || isNaN(years) || initialAmount <= 0 || years <= 0) {
+                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Ingrese valores válidos</div></div>';
+                return;
+            }
+
+            const futureValue = initialAmount * Math.pow((1 - inflationRate), years);
+            const purchasingPowerLoss = initialAmount - futureValue;
+
+            resultsDiv.innerHTML = `
+                <div class="result-item">
+                    <div class="result-label">Valor Equivalente Futuro</div>
+                    <div class="result-value">$${futureValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Pérdida de Poder Adquisitivo</div>
+                    <div class="result-value">$${purchasingPowerLoss.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+            `;
+        }
+
+        // --- Interest Calculator Functions ---
+        function calculateInterest() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const years = parseInt(document.getElementById('interestYears').value);
+            const interestType = document.getElementById('interestType').value;
+            const resultsDiv = document.getElementById('interestResultsContent');
+            document.getElementById('interestResults').style.display = 'block';
+
+            if (isNaN(principal) || isNaN(annualRate) || isNaN(years) || principal <= 0 || years <= 0) {
+                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Ingrese valores válidos</div></div>';
+                return;
+            }
+
+            let finalAmount;
+            let totalInterest;
+            const dataPoints = [];
+
+            if (interestType === 'simple') {
+                totalInterest = principal * annualRate * years;
+                finalAmount = principal + totalInterest;
+                for (let i = 0; i <= years; i++) {
+                    dataPoints.push({ year: i, amount: principal + (principal * annualRate * i) });
+                }
+            } else { // compound
+                finalAmount = principal * Math.pow((1 + annualRate), years);
+                totalInterest = finalAmount - principal;
+                for (let i = 0; i <= years; i++) {
+                    dataPoints.push({ year: i, amount: principal * Math.pow((1 + annualRate), i) });
+                }
+            }
+
+            resultsDiv.innerHTML = `
+                <div class="result-item">
+                    <div class="result-label">Monto Final</div>
+                    <div class="result-value">$${finalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Intereses Totales</div>
+                    <div class="result-value">$${totalInterest.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+            `;
+
+            renderInterestChart(dataPoints);
+        }
+
+        function renderInterestChart(dataPoints) {
+            const ctx = document.getElementById('interestChart').getContext('2d');
+            if (interestChartInstance) {
+                interestChartInstance.destroy();
+            }
+            interestChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dataPoints.map(p => `Año ${p.year}`),
+                    datasets: [{
+                        label: 'Valor del Capital',
+                        data: dataPoints.map(p => p.amount),
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Crecimiento del Capital a lo Largo del Tiempo',
+                            color: '#333'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Valor: $${context.parsed.y.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Monto ($)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return `$${value.toLocaleString()}`;
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Año'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Loan Calculator Functions ---
+        function calculateLoan() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const annualInterestRate = parseFloat(document.getElementById('loanInterestRate').value) / 100;
+            const loanYears = parseInt(document.getElementById('loanYears').value);
+            const resultsDiv = document.getElementById('loanResultsContent');
+            document.getElementById('loanResults').style.display = 'block';
+
+            if (isNaN(loanAmount) || isNaN(annualInterestRate) || isNaN(loanYears) || loanAmount <= 0 || loanYears <= 0) {
+                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Ingrese valores válidos</div></div>';
+                return;
+            }
+
+            const monthlyInterestRate = annualInterestRate / 12;
+            const numberOfPayments = loanYears * 12;
+
+            let monthlyPayment;
+            if (annualInterestRate === 0) {
+                monthlyPayment = loanAmount / numberOfPayments;
+            } else {
+                monthlyPayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+            }
+            const totalPayments = monthlyPayment * numberOfPayments;
+            const totalInterestPaid = totalPayments - loanAmount;
+
+            resultsDiv.innerHTML = `
+                <div class="result-item">
+                    <div class="result-label">Pago Mensual</div>
+                    <div class="result-value">$${monthlyPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Pagado</div>
+                    <div class="result-value">$${totalPayments.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Intereses Totales Pagados</div>
+                    <div class="result-value">$${totalInterestPaid.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+            `;
+
+            renderLoanChart(loanAmount, totalInterestPaid);
+        }
+
+        function renderLoanChart(principal, interest) {
+            const ctx = document.getElementById('loanChart').getContext('2d');
+            if (loanChartInstance) {
+                loanChartInstance.destroy();
+            }
+            loanChartInstance = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Monto Principal', 'Intereses Totales'],
+                    datasets: [{
+                        data: [principal, interest],
+                        backgroundColor: ['#3b82f6', '#f59e0b'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Distribución del Pago del Préstamo',
+                            color: '#333'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += `$${context.parsed.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Investment Calculator Functions ---
+        function calculateInvestment() {
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value);
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            const annualReturnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+            const investmentYears = parseInt(document.getElementById('investmentYears').value);
+            const resultsDiv = document.getElementById('investmentResultsContent');
+            document.getElementById('investmentResults').style.display = 'block';
+
+            if (isNaN(initialInvestment) || isNaN(monthlyContribution) || isNaN(annualReturnRate) || isNaN(investmentYears) || initialInvestment < 0 || investmentYears <= 0) {
+                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Ingrese valores válidos</div></div>';
+                return;
+            }
+
+            const monthlyRate = annualReturnRate / 12;
+            const totalMonths = investmentYears * 12;
+
+            let futureValue = initialInvestment;
+            const dataPoints = [{ month: 0, value: initialInvestment }];
+
+            for (let i = 1; i <= totalMonths; i++) {
+                futureValue = (futureValue * (1 + monthlyRate)) + monthlyContribution;
+                dataPoints.push({ month: i, value: futureValue });
+            }
+
+            const totalInvested = initialInvestment + (monthlyContribution * totalMonths);
+            const totalGains = futureValue - totalInvested;
+
+            resultsDiv.innerHTML = `
+                <div class="result-item">
+                    <div class="result-label">Valor Futuro de la Inversión</div>
+                    <div class="result-value">$${futureValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Capital Total Invertido</div>
+                    <div class="result-value">$${totalInvested.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Ganancias Totales</div>
+                    <div class="result-value">$${totalGains.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                </div>
+            `;
+
+            renderInvestmentChart(dataPoints);
+        }
+
+        function renderInvestmentChart(dataPoints) {
+            const ctx = document.getElementById('investmentChart').getContext('2d');
+            if (investmentChartInstance) {
+                investmentChartInstance.destroy();
+            }
+            investmentChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dataPoints.map(p => `Mes ${p.month}`),
+                    datasets: [{
+                        label: 'Valor de la Inversión',
+                        data: dataPoints.map(p => p.value),
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Proyección del Valor de la Inversión',
+                            color: '#333'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Valor: $${context.parsed.y.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Monto ($)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return `$${value.toLocaleString()}`;
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Mes'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Dashboard Chart (Example) ---
+        function initializeDashboardChart() {
+            const ctx = document.getElementById('dashboardChart').getContext('2d');
+            dashboardChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Bitcoin', 'Ethereum', 'USD/ARS', 'S&P 500', 'Oro'],
+                    datasets: [{
+                        label: 'Valores Actuales',
+                        data: [
+                            currentRates.bitcoin,
+                            currentRates.ethereum,
+                            currentRates.usd_ars,
+                            currentRates.sp500,
+                            currentRates.gold
+                        ],
+                        backgroundColor: [
+                            'rgba(247, 147, 26, 0.7)', // Bitcoin
+                            'rgba(98, 126, 234, 0.7)', // Ethereum
+                            'rgba(34, 197, 94, 0.7)',  // USD/ARS
+                            'rgba(59, 130, 246, 0.7)', // S&P 500
+                            'rgba(255, 215, 0, 0.7)'  // Gold
+                        ],
+                        borderColor: [
+                            '#f7931a',
+                            '#627eea',
+                            '#22c55e',
+                            '#3b82f6',
+                            '#ffd700'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Comparación de Activos Actuales',
+                            color: '#333'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: $${context.parsed.y.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false, // Crypto and S&P 500 won't start at zero
+                            title: {
+                                display: true,
+                                text: 'Valor'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return `$${value.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateDashboardChart() {
+            if (dashboardChartInstance) {
+                dashboardChartInstance.data.datasets[0].data = [
+                    currentRates.bitcoin,
+                    currentRates.ethereum,
+                    currentRates.usd_ars,
+                    currentRates.sp500,
+                    currentRates.gold
+                ];
+                dashboardChartInstance.update();
+            }
+        }
+
+    </script>
+</body>
+</html>
