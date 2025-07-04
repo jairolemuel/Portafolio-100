@@ -3,52 +3,1003 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financiator Pro - Real-time Financial Calculator</title>
-<meta charset="UTF-8">  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Financiator App</title> <link rel="stylesheet" href="financiator/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <title>Financiator Pro - Elite Financial Insights & Calculators (DEMO)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/MotionPathPlugin.min.js"></script>
+    <style>
+        /* General Styles */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #ffffff;
+            --border-light: #e2e8f0;
+            --card-bg-blur: rgba(255,255,255,0.98);
+            --glass-border: rgba(255,255,255,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* SVG Background Animation */
+        .svg-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .svg-background svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .flow-path {
+            fill: none;
+            stroke-width: 2;
+            stroke-dasharray: 10 5;
+            opacity: 0.1;
+            animation: dashFlow 30s linear infinite;
+        }
+
+        .flow-path.one { stroke: url(#gradient1); animation-duration: 40s; }
+        .flow-path.two { stroke: url(#gradient2); animation-duration: 35s; animation-delay: -5s; }
+        .flow-path.three { stroke: url(#gradient3); animation-duration: 45s; animation-delay: -10s; }
+        .flow-path.four { stroke: url(#gradient4); animation-duration: 50s; animation-delay: -15s; }
+
+
+        @keyframes dashFlow {
+            from { stroke-dashoffset: 1000; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            position: relative;
+            padding-top: 50px;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(255,215,0,0.4)); }
+            to { filter: drop-shadow(0 0 30px rgba(255,215,0,0.8)); }
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .header .demo-badge {
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: -10px;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* Live Data Banner */
+        .live-data-banner {
+            background: rgba(0,0,0,0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .live-data-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 14px;
+            height: 14px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00ff88;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.3); }
+        }
+
+        .ticker-wrapper {
+            overflow: hidden;
+            position: relative;
+            mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+        }
+
+        .ticker-content {
+            display: flex;
+            animation: scroll 60s linear infinite;
+            white-space: nowrap;
+            gap: 50px;
+            padding-right: 50px; /* To prevent abrupt end of animation */
+        }
+        .ticker-content.paused {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ticker-item:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Navigation Tabs */
+        .nav-container {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 25px;
+            padding: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .nav-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+        }
+
+        .nav-tab {
+            padding: 15px 20px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .nav-tab.active {
+            background: var(--secondary-gradient);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Calculator Sections */
+        .calculator-section {
+            display: none;
+            background: var(--card-bg-blur);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd700, #4ecdc4, #45b7d1);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .calculator-section.active {
+            display: block;
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 35px;
+            color: var(--text-dark);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        /* Dashboard Metrics */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f8fafc 100%);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b, #ffd700);
+            border-radius: 25px;
+            z-index: -1;
+            margin: -3px;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .metric-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .metric-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-change {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .metric-change.positive {
+            color: #065f46;
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+        }
+
+        .metric-change.negative {
+            color: #991b1b;
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+        }
+
+        /* Form Elements */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 18px 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+            font-family: inherit;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input::placeholder {
+            color: #a0aec0;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 6px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .currency-selector {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .currency-selector select {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .live-price {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 18px 20px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            min-width: 160px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 18px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            min-width: 250px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-gradient);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Results Panel */
+        .results-panel {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 40px;
+            border-radius: 30px;
+            margin-top: 40px;
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        .results-panel h3 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .result-item {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .result-item:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-5px);
+        }
+
+        .result-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-weight: 800;
+            font-size: 2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Charts */
+        .chart-container {
+            background: var(--bg-light);
+            border-radius: 25px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            min-height: 400px; /* Ensure chart visibility */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b, #ffd700);
+            border-radius: 25px;
+            z-index: -1;
+            margin: -3px;
+        }
+
+        .chart-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .chart-canvas {
+            flex-grow: 1;
+        }
+
+        /* Basic Calculator */
+        .basic-calc {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+            background: var(--card-bg-blur);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 1px solid var(--glass-border);
+        }
+
+        .calc-display {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border: 3px solid #cbd5e0;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: right;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .calc-btn {
+            aspect-ratio: 1;
+            border: 3px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calc-btn:hover {
+            background: #f7fafc;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .calc-btn.operator {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        .calc-btn.operator:hover {
+            box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .calc-btn.equals {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border-color: #48bb78;
+        }
+        .calc-btn.equals:hover {
+            box-shadow: 0 12px 25px rgba(72, 187, 120, 0.4);
+        }
+
+        .calc-btn.clear {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            color: white;
+            border-color: #f56565;
+        }
+        .calc-btn.clear:hover {
+            box-shadow: 0 12px 25px rgba(245, 101, 101, 0.4);
+        }
+
+        /* Stats Grid - For generic charts/data visualization */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-light);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            border-radius: 25px;
+            z-index: -1;
+            margin: -3px;
+        }
+
+        .stat-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-top: 60px;
+            padding: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #ffb347;
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .header h1 {
+                font-size: 3.2rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .dashboard-grid, .form-grid, .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .dashboard-grid, .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-tab {
+                font-size: 0.85rem;
+                padding: 12px 15px;
+            }
+
+            .calculator-section {
+                padding: 25px;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+            .metric-label {
+                font-size: 0.9rem;
+            }
+            .metric-icon {
+                font-size: 2.8rem;
+            }
+
+            .form-group label {
+                font-size: 1rem;
+            }
+            .form-group input,
+            .form-group select {
+                padding: 15px 18px;
+                font-size: 1rem;
+            }
+            .live-price {
+                padding: 15px 18px;
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 18px 30px;
+                font-size: 1.1rem;
+                min-width: unset;
+                width: 100%;
+            }
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .results-panel {
+                padding: 30px;
+            }
+            .results-panel h3 {
+                font-size: 1.8rem;
+            }
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            .basic-calc {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 320px;
+                padding: 20px;
+            }
+            .calc-btn {
+                font-size: 1.3rem;
+            }
+            .calc-display {
+                font-size: 2rem;
+                min-height: 70px;
+                padding: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="svg-background">
+        <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#8d5ee3" />
+                    <stop offset="100%" stop-color="#667eea" />
+                </linearGradient>
+                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#4ecdc4" />
+                    <stop offset="100%" stop-color="#45b7d1" />
+                </linearGradient>
+                <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ff6b6b" />
+                    <stop offset="100%" stop-color="#ffd700" />
+                </linearGradient>
+                <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#a7f3d0" />
+                    <stop offset="100%" stop-color="#22c55e" />
+                </linearGradient>
+            </defs>
+            <path class="flow-path one" d="M 0 50 C 200 0, 400 100, 600 50 S 800 0, 1000 50" />
+            <path class="flow-path two" d="M 0 150 C 150 200, 300 100, 500 150 S 750 220, 1000 150" />
+            <path class="flow-path three" d="M 0 250 C 250 300, 500 200, 750 250 S 900 320, 1000 250" />
+            <path class="flow-path four" d="M 0 350 C 100 400, 300 300, 500 350 S 700 420, 1000 350" />
+            <path class="flow-path one" d="M 0 450 C 200 400, 400 500, 600 450 S 800 400, 1000 450" />
+            <path class="flow-path two" d="M 0 550 C 150 600, 300 500, 500 550 S 750 620, 1000 550" />
+        </svg>
+    </div>
+
     <div class="container">
         <header class="header">
-            <h1><i class="fas fa-chart-line"></i> Financiator Pro</h1>
-            <p>Advanced Financial Calculator with Real-time Data</p>
+            <h1><i class="fas fa-chart-line"></i> Financiator Pro <span class="demo-badge">DEMO</span></h1>
+            <p>Your Elite Platform for Advanced Financial Insights & Calculations</p>
         </header>
 
         <div class="live-data-banner">
             <div class="live-indicator">
                 <div class="live-dot"></div>
-                <span><strong>LIVE DATA</strong> - Updates every 30 seconds</span>
+                <span><strong>LIVE DATA</strong> - Auto-refresh every 30 seconds</span>
             </div>
             <div class="ticker-wrapper">
                 <div class="ticker-content" id="liveTicker">
                     <div class="ticker-item">
                         <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
-                        <span id="btc-price">BTC: Loading...</span>
+                        <span id="btc-price">BTC: $LOADING...</span>
                     </div>
                     <div class="ticker-item">
                         <i class="fab fa-ethereum" style="color: #627eea;"></i>
-                        <span id="eth-price">ETH: Loading...</span>
+                        <span id="eth-price">ETH: $LOADING...</span>
                     </div>
                     <div class="ticker-item">
                         <i class="fas fa-dollar-sign" style="color: #22c55e;"></i>
-                        <span id="usd-ars">USD/ARS: Loading...</span>
+                        <span id="usd-eur">USD/EUR: LOADING...</span>
                     </div>
                     <div class="ticker-item">
                         <i class="fas fa-percentage" style="color: #ef4444;"></i>
-                        <span id="inflation-arg">ARG Inflation: Loading...</span>
+                        <span id="us-inflation">US CPI: LOADING...</span>
                     </div>
                     <div class="ticker-item">
                         <i class="fas fa-chart-area" style="color: #3b82f6;"></i>
-                        <span id="sp500">S&P 500: Loading...</span>
+                        <span id="sp500">S&P 500: LOADING...</span>
                     </div>
-                    <div class="ticker-item">
+                     <div class="ticker-item">
                         <i class="fas fa-oil-can" style="color: #000000;"></i>
-                        <span id="oil-price">Oil: Loading...</span>
+                        <span id="oil-price">WTI Oil: LOADING...</span>
                     </div>
                     <div class="ticker-item">
                         <i class="fas fa-coins" style="color: #ffd700;"></i>
-                        <span id="gold-price">Gold: Loading...</span>
+                        <span id="gold-price">Gold (XAU): LOADING...</span>
                     </div>
                 </div>
             </div>
@@ -57,54 +1008,28 @@
         <div class="nav-container">
             <div class="nav-tabs">
                 <button class="nav-tab active" data-section="dashboard">
-                    <i class="fas fa-tachometer-alt"></i>
-                    Dashboard
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
                 </button>
                 <button class="nav-tab" data-section="basic">
-                    <i class="fas fa-calculator"></i>
-                    Calculator
+                    <i class="fas fa-calculator"></i> Basic Calc
                 </button>
                 <button class="nav-tab" data-section="crypto">
-                    <i class="fab fa-bitcoin"></i>
-                    Crypto
+                    <i class="fab fa-bitcoin"></i> Crypto Price
                 </button>
                 <button class="nav-tab" data-section="forex">
-                    <i class="fas fa-exchange-alt"></i>
-                    Forex
+                    <i class="fas fa-exchange-alt"></i> Forex Convert
                 </button>
                 <button class="nav-tab" data-section="inflation">
-                    <i class="fas fa-chart-line"></i>
-                    Inflation
+                    <i class="fas fa-chart-line"></i> Inflation Adj.
                 </button>
                 <button class="nav-tab" data-section="interest">
-                    <i class="fas fa-percentage"></i>
-                    Interest
+                    <i class="fas fa-percentage"></i> Compound Int.
                 </button>
                 <button class="nav-tab" data-section="loans">
-                    <i class="fas fa-money-bill-wave"></i>
-                    Loans
+                    <i class="fas fa-money-bill-wave"></i> Loan Calc
                 </button>
                 <button class="nav-tab" data-section="investment">
-                    <i class="fas fa-chart-pie"></i>
-                    Investment
-                </button>
-                <button class="nav-tab" data-section="stocks">
-                    <i class="fas fa-chart-bar"></i>
-                    Stocks
-                    <span class="premium-badge">Pro</span>
-                </button>
-                <button class="nav-tab" data-section="commodities">
-                    <i class="fas fa-seedling"></i>
-                    Commodities
-                    <span class="premium-badge">Pro</span>
-                </button>
-                <button class="nav-tab" data-section="news">
-                    <i class="far fa-newspaper"></i>
-                    News & Tips
-                </button>
-                <button class="nav-tab" data-section="education">
-                    <i class="fas fa-graduation-cap"></i>
-                    Education
+                    <i class="fas fa-chart-pie"></i> Investment Return
                 </button>
             </div>
         </div>
@@ -112,541 +1037,1778 @@
         <div class="calculator-section active" id="dashboard">
             <h2 class="section-title">
                 <i class="fas fa-tachometer-alt"></i>
-                Real-time Financial Dashboard
+                Advanced Financial Dashboard
             </h2>
-            
+
             <div class="dashboard-grid">
                 <div class="metric-card">
                     <div class="metric-icon">
                         <i class="fab fa-bitcoin"></i>
                     </div>
-                    <div class="metric-value" id="dash-btc-price">$0</div>
+                    <div class="metric-value" id="dash-btc-price">$LOADING...</div>
                     <div class="metric-label">Bitcoin (BTC)</div>
-                    <div class="metric-change" id="dash-btc-change">+0.00%</div>
+                    <div class="metric-change" id="dash-btc-change">Loading...</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-icon">
                         <i class="fab fa-ethereum"></i>
                     </div>
-                    <div class="metric-value" id="dash-eth-price">$0</div>
+                    <div class="metric-value" id="dash-eth-price">$LOADING...</div>
                     <div class="metric-label">Ethereum (ETH)</div>
-                    <div class="metric-change" id="dash-eth-change">+0.00%</div>
+                    <div class="metric-change" id="dash-eth-change">Loading...</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-icon">
                         <i class="fas fa-dollar-sign"></i>
                     </div>
-                    <div class="metric-value" id="dash-usd-ars">$0</div>
-                    <div class="metric-label">USD/ARS</div>
-                    <div class="metric-change" id="dash-usd-change">+0.00%</div>
+                    <div class="metric-value" id="dash-usd-eur">LOADING...</div>
+                    <div class="metric-label">USD/EUR Exchange</div>
+                    <div class="metric-change" id="dash-usd-eur-change">Loading...</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-icon">
                         <i class="fas fa-percentage"></i>
                     </div>
-                    <div class="metric-value" id="dash-inflation">0%</div>
-                    <div class="metric-label">ARG Inflation (Annual)</div>
-                    <div class="metric-change" id="dash-inflation-change">Monthly: 0%</div>
+                    <div class="metric-value" id="dash-us-inflation">LOADING...</div>
+                    <div class="metric-label">US CPI (YoY)</div>
+                    <div class="metric-change" id="dash-us-inflation-change">Loading...</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-icon">
                         <i class="fas fa-chart-area"></i>
                     </div>
-                    <div class="metric-value" id="dash-sp500">0</div>
+                    <div class="metric-value" id="dash-sp500-val">LOADING...</div>
                     <div class="metric-label">S&P 500</div>
-                    <div class="metric-change" id="dash-sp500-change">+0.00%</div>
+                    <div class="metric-change" id="dash-sp500-change">Loading...</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-icon">
                         <i class="fas fa-coins"></i>
                     </div>
-                    <div class="metric-value" id="dash-gold">$0</div>
-                    <div class="metric-label">Gold (oz)</div>
-                    <div class="metric-change" id="dash-gold-change">+0.00%</div>
+                    <div class="metric-value" id="dash-gold-val">$LOADING...</div>
+                    <div class="metric-label">Gold (XAU)</div>
+                    <div class="metric-change" id="dash-gold-change">Loading...</div>
                 </div>
             </div>
 
-            <div class="chart-container">
-                <canvas id="dashboardChart" width="400" height="200"></canvas>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Cryptocurrency Market Cap Trend</h4>
+                    <div class="chart-container">
+                        <canvas id="cryptoMarketCapChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h4>Historical Exchange Rates (USD/EUR)</h4>
+                    <div class="chart-container">
+                        <canvas id="forexHistoricalChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+                 <div class="stat-card">
+                    <h4>S&P 500 Performance (1 Year)</h4>
+                    <div class="chart-container">
+                        <canvas id="sp500PerformanceChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+                 <div class="stat-card">
+                    <h4>Inflation Rate Over Time</h4>
+                    <div class="chart-container">
+                        <canvas id="inflationRateChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="calculator-section" id="basic">
-            <h2 class="section-title">
-                <i class="fas fa-calculator"></i>
-                Basic Calculator
-            </h2>
+            <h2 class="section-title"><i class="fas fa-calculator"></i> Basic Calculator</h2>
             <div class="basic-calc">
-                <div class="calc-display" id="display">0</div>
-                <button class="calc-btn clear" onclick="clearDisplay()">C</button>
-                <button class="calc-btn" onclick="deleteLast()">⌫</button>
-                <button class="calc-btn" onclick="appendToDisplay('/')" title="Divide">÷</button>
-                <button class="calc-btn operator" onclick="appendToDisplay('*')" title="Multiply">×</button>
-                
-                <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
-                <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
-                <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
-                <button class="calc-btn operator" onclick="appendToDisplay('-')">-</button>
-                
-                <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
-                <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
-                <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
-                <button class="calc-btn operator" onclick="appendToDisplay('+')">+</button>
-                
-                <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
-                <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
-                <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
-                <button class="calc-btn equals" onclick="calculate()" style="grid-row: span 2;">=</button>
-                
-                <button class="calc-btn" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
-                <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
+                <div class="calc-display" id="calcDisplay">0</div>
+                <button class="calc-btn clear" data-action="clear">AC</button>
+                <button class="calc-btn operator" data-action="negate">+/-</button>
+                <button class="calc-btn operator" data-action="percent">%</button>
+                <button class="calc-btn operator" data-action="divide">/</button>
+                <button class="calc-btn" data-value="7">7</button>
+                <button class="calc-btn" data-value="8">8</button>
+                <button class="calc-btn" data-value="9">9</button>
+                <button class="calc-btn operator" data-action="multiply">*</button>
+                <button class="calc-btn" data-value="4">4</button>
+                <button class="calc-btn" data-value="5">5</button>
+                <button class="calc-btn" data-value="6">6</button>
+                <button class="calc-btn operator" data-action="subtract">-</button>
+                <button class="calc-btn" data-value="1">1</button>
+                <button class="calc-btn" data-value="2">2</button>
+                <button class="calc-btn" data-value="3">3</button>
+                <button class="calc-btn operator" data-action="add">+</button>
+                <button class="calc-btn" data-value="0" style="grid-column: span 2;">0</button>
+                <button class="calc-btn" data-value=".">.</button>
+                <button class="calc-btn equals" data-action="equals">=</button>
             </div>
         </div>
 
         <div class="calculator-section" id="crypto">
-            <h2 class="section-title">
-                <i class="fab fa-bitcoin"></i>
-                Cryptocurrency Calculator
-            </h2>
+            <h2 class="section-title"><i class="fab fa-bitcoin"></i> Real-time Cryptocurrency Prices</h2>
             <div class="form-grid">
                 <div class="form-group">
-                    <label><i class="fas fa-coins"></i> Amount</label>
-                    <input type="number" id="cryptoAmount" placeholder="1" step="0.00000001">
+                    <label for="cryptoSelect"><i class="fas fa-coins"></i> Select Cryptocurrency</label>
+                    <select id="cryptoSelect">
+                        <option value="bitcoin">Bitcoin (BTC)</option>
+                        <option value="ethereum">Ethereum (ETH)</option>
+                        <option value="ripple">XRP (XRP)</option>
+                        <option value="litecoin">Litecoin (LTC)</option>
+                        <option value="cardano">Cardano (ADA)</option>
+                        <option value="solana">Solana (SOL)</option>
+                        <option value="dogecoin">Dogecoin (DOGE)</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-list"></i> Cryptocurrency</label>
-                    <div class="currency-selector">
-                        <select id="cryptoCurrency">
-                            <option value="bitcoin">Bitcoin (BTC)</option>
-                            <option value="ethereum">Ethereum (ETH)</option>
-                            <option value="binancecoin">Binance Coin (BNB)</option>
-                            <option value="cardano">Cardano (ADA)</option>
-                            <option value="solana">Solana (SOL)</option>
-                            <option value="polkadot">Polkadot (DOT)</option>
-                        </select>
-                        <div class="live-price" id="cryptoCurrentPrice">$0</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-money-bill"></i> Convert To</label>
-                    <select id="targetCurrency">
-                        <option value="usd">USD</option>
-                        <option value="ars">ARS</option>
-                        <option value="eur">EUR</option>
-                        <option value="btc">BTC</option>
+                    <label for="fiatSelect"><i class="fas fa-money-bill-wave"></i> Select Fiat Currency</label>
+                    <select id="fiatSelect">
+                        <option value="usd">US Dollar (USD)</option>
+                        <option value="eur">Euro (EUR)</option>
+                        <option value="gbp">British Pound (GBP)</option>
+                        <option value="jpy">Japanese Yen (JPY)</option>
+                        <option value="ars">Argentine Peso (ARS)</option>
                     </select>
                 </div>
             </div>
-            <button class="btn" onclick="calculateCrypto()">
-                <i class="fas fa-sync"></i>
-                Calculate Value
-            </button>
-            <div class="results-panel" id="cryptoResults" style="display: none;">
-                <h3><i class="fas fa-coins"></i> Conversion Result</h3>
-                <div class="result-grid" id="cryptoResultsContent"></div>
+            <div class="btn-group">
+                <button class="btn" id="getCryptoPriceBtn"><i class="fas fa-search-dollar"></i> Get Live Price</button>
+            </div>
+            <div class="results-panel" id="cryptoResults">
+                <h3><i class="fas fa-chart-line"></i> Crypto Price Overview</h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Current Price</div>
+                        <div class="result-value" id="currentCryptoPrice">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">24h Change</div>
+                        <div class="result-value" id="crypto24hChange">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Market Cap</div>
+                        <div class="result-value" id="cryptoMarketCap">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">24h Volume</div>
+                        <div class="result-value" id="crypto24hVolume">--</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h4 class="chart-title">Historical Price Trend (Past 30 Days)</h4>
+                    <canvas id="cryptoPriceChart" class="chart-canvas"></canvas>
+                </div>
             </div>
         </div>
 
         <div class="calculator-section" id="forex">
-            <h2 class="section-title">
-                <i class="fas fa-exchange-alt"></i>
-                Currency Converter
-            </h2>
+            <h2 class="section-title"><i class="fas fa-exchange-alt"></i> Live Forex Converter</h2>
             <div class="form-grid">
                 <div class="form-group">
-                    <label><i class="fas fa-dollar-sign"></i> Amount</label>
-                    <input type="number" id="forexAmount" placeholder="1000" step="0.01">
+                    <label for="forexAmount"><i class="fas fa-money-bill-wave"></i> Amount</label>
+                    <input type="number" id="forexAmount" placeholder="Enter amount" value="100">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-flag"></i> From Currency</label>
-                    <div class="currency-selector">
-                        <select id="fromCurrency">
-                            <option value="USD">USD - United States Dollar</option>
-                            <option value="ARS">ARS - Argentine Peso</option>
-                            <option value="EUR">EUR - Euro</option>
-                            <option value="GBP">GBP - British Pound</option>
-                            <option value="JPY">JPY - Japanese Yen</option>
-                        </select>
-                        </div>
+                    <label for="fromCurrency"><i class="fas fa-arrow-alt-circle-up"></i> From Currency</label>
+                    <select id="fromCurrency">
+                        <option value="USD">US Dollar (USD)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                        <option value="GBP">British Pound (GBP)</option>
+                        <option value="JPY">Japanese Yen (JPY)</option>
+                        <option value="CAD">Canadian Dollar (CAD)</option>
+                        <option value="AUD">Australian Dollar (AUD)</option>
+                        <option value="CHF">Swiss Franc (CHF)</option>
+                        <option value="CNY">Chinese Yuan (CNY)</option>
+                        <option value="ARS">Argentine Peso (ARS)</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-flag"></i> To Currency</label>
-                    <div class="currency-selector">
-                        <select id="toCurrency">
-                            <option value="ARS">ARS - Argentine Peso</option>
-                            <option value="USD">USD - United States Dollar</option>
-                            <option value="EUR">EUR - Euro</option>
-                            <option value="GBP">GBP - British Pound</option>
-                            <option value="JPY">JPY - Japanese Yen</option>
-                        </select>
-                        <div class="live-price" id="toCurrencyPrice">$0</div> </div>
+                    <label for="toCurrency"><i class="fas fa-arrow-alt-circle-down"></i> To Currency</label>
+                    <select id="toCurrency">
+                        <option value="EUR">Euro (EUR)</option>
+                        <option value="USD">US Dollar (USD)</option>
+                        <option value="GBP">British Pound (GBP)</option>
+                        <option value="JPY">Japanese Yen (JPY)</option>
+                        <option value="CAD">Canadian Dollar (CAD)</option>
+                        <option value="AUD">Australian Dollar (AUD)</option>
+                        <option value="CHF">Swiss Franc (CHF)</option>
+                        <option value="CNY">Chinese Yuan (CNY)</option>
+                        <option value="ARS">Argentine Peso (ARS)</option>
+                    </select>
                 </div>
             </div>
-            <button class="btn" onclick="calculateForex()">
-                <i class="fas fa-sync"></i>
-                Convert Currency
-            </button>
-            <div class="results-panel" id="forexResults" style="display: none;">
-                <h3><i class="fas fa-exchange-alt"></i> Conversion Result</h3>
-                <div class="result-grid" id="forexResultsContent"></div>
+            <div class="btn-group">
+                <button class="btn" id="convertForexBtn"><i class="fas fa-sync-alt"></i> Convert Currency</button>
+            </div>
+            <div class="results-panel" id="forexResults">
+                <h3><i class="fas fa-hand-holding-usd"></i> Conversion Result</h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Converted Amount</div>
+                        <div class="result-value" id="convertedAmount">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Exchange Rate</div>
+                        <div class="result-value" id="exchangeRate">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Last Updated</div>
+                        <div class="result-value" id="forexLastUpdated">--</div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="calculator-section" id="inflation">
-            <h2 class="section-title">
-                <i class="fas fa-chart-line"></i>
-                Inflation Calculator
-            </h2>
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> Inflation Adjustment Calculator</h2>
             <div class="form-grid">
                 <div class="form-group">
-                    <label><i class="fas fa-money-bill-wave"></i> Initial Amount</label>
-                    <input type="number" id="initialAmountInflation" placeholder="10000" step="0.01">
+                    <label for="initialAmount"><i class="fas fa-dollar-sign"></i> Initial Amount</label>
+                    <input type="number" id="initialAmount" placeholder="e.g., 1000" value="1000">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Years</label>
-                    <input type="number" id="yearsInflation" placeholder="5" min="1">
+                    <label for="initialYear"><i class="fas fa-calendar-alt"></i> Initial Year</label>
+                    <input type="number" id="initialYear" placeholder="e.g., 2000" value="2000">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-percentage"></i> Annual Inflation Rate (%)</label>
-                    <input type="number" id="inflationRate" placeholder="30" step="0.01">
+                    <label for="targetYear"><i class="fas fa-calendar-check"></i> Target Year</label>
+                    <input type="number" id="targetYear" placeholder="e.g., 2023" value="2023">
                 </div>
-                <div class="form-group">
-                    <label><i class="fas fa-globe"></i> Country (for historical data)</label>
-                    <select id="countryInflation">
-                        <option value="ARG">Argentina (ARS)</option>
-                        <option value="USA">United States (USD)</option>
-                        <option value="EUR">Eurozone (EUR)</option>
-                        <option value="GBR">United Kingdom (GBP)</option>
+                 <div class="form-group">
+                    <label for="countrySelect"><i class="fas fa-globe"></i> Select Country (CPI)</label>
+                    <select id="countrySelect">
+                         <option value="US">United States</option>
+                        <option value="AR">Argentina</option>
+                        <option value="BR">Brazil</option>
+                        <option value="CA">Canada</option>
+                        <option value="FR">France</option>
+                        <option value="DE">Germany</option>
+                        <option value="IN">India</option>
+                        <option value="JP">Japan</option>
+                        <option value="MX">Mexico</option>
+                        <option value="GB">United Kingdom</option>
                         </select>
                 </div>
             </div>
-            <button class="btn" onclick="calculateInflation()">
-                <i class="fas fa-chart-line"></i>
-                Calculate Inflation
-            </button>
-            <div class="results-panel" id="inflationResults" style="display: none;">
-                <h3><i class="fas fa-chart-line"></i> Inflation Impact</h3>
-                <div class="result-grid" id="inflationResultsContent"></div>
+            <div class="btn-group">
+                <button class="btn" id="calculateInflationBtn"><i class="fas fa-sync-alt"></i> Calculate Inflation Adjusted Value</button>
+            </div>
+            <div class="results-panel" id="inflationResults">
+                <h3><i class="fas fa-search-dollar"></i> Adjusted Value</h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Adjusted Value</div>
+                        <div class="result-value" id="adjustedValue">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Cumulative Inflation</div>
+                        <div class="result-value" id="cumulativeInflation">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Inflation Rate (Avg/Yr)</div>
+                        <div class="result-value" id="averageInflationRate">--</div>
+                    </div>
+                </div>
                 <div class="chart-container">
-                    <canvas id="inflationChart" width="400" height="200"></canvas>
+                    <h4 class="chart-title">Inflation Impact Over Time</h4>
+                    <canvas id="inflationImpactChart" class="chart-canvas"></canvas>
                 </div>
             </div>
         </div>
 
         <div class="calculator-section" id="interest">
-            <h2 class="section-title">
-                <i class="fas fa-percentage"></i>
-                Interest Calculator
-            </h2>
+            <h2 class="section-title"><i class="fas fa-percentage"></i> Compound Interest Calculator</h2>
             <div class="form-grid">
                 <div class="form-group">
-                    <label><i class="fas fa-coins"></i> Principal Amount</label>
-                    <input type="number" id="principalInterest" placeholder="10000" step="0.01">
+                    <label for="principal"><i class="fas fa-hand-holding-usd"></i> Principal Amount</label>
+                    <input type="number" id="principal" placeholder="e.g., 10000" value="10000">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-percentage"></i> Annual Interest Rate (%)</label>
-                    <input type="number" id="rateInterest" placeholder="5" step="0.01">
+                    <label for="interestRate"><i class="fas fa-percent"></i> Annual Interest Rate (%)</label>
+                    <input type="number" id="interestRate" placeholder="e.g., 5" value="5">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Time Period</label>
-                    <input type="number" id="timeInterest" placeholder="3">
-                    <select id="timeUnitInterest">
-                        <option value="years">Years</option>
-                        <option value="months">Months</option>
-                        <option value="days">Days</option>
-                    </select>
+                    <label for="years"><i class="fas fa-calendar-alt"></i> Number of Years</label>
+                    <input type="number" id="years" placeholder="e.g., 10" value="10">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-calculator"></i> Compounding Frequency</label>
+                    <label for="compoundFrequency"><i class="fas fa-sync"></i> Compounding Frequency</label>
                     <select id="compoundFrequency">
-                        <option value="annually">Annually</option>
-                        <option value="semiannually">Semi-annually</option>
-                        <option value="quarterly">Quarterly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="daily">Daily</option>
+                        <option value="1">Annually</option>
+                        <option value="2">Semi-Annually</option>
+                        <option value="4">Quarterly</option>
+                        <option value="12">Monthly</option>
+                        <option value="365">Daily</option>
                     </select>
                 </div>
             </div>
-            <button class="btn" onclick="calculateInterest()">
-                <i class="fas fa-percentage"></i>
-                Calculate Interest
-            </button>
-            <div class="results-panel" id="interestResults" style="display: none;">
-                <h3><i class="fas fa-percentage"></i> Interest Calculation</h3>
-                <div class="result-grid" id="interestResultsContent"></div>
+            <div class="btn-group">
+                <button class="btn" id="calculateInterestBtn"><i class="fas fa-calculator"></i> Calculate Interest</button>
+            </div>
+            <div class="results-panel" id="interestResults">
+                <h3><i class="fas fa-piggy-bank"></i> Investment Growth Summary</h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Future Value</div>
+                        <div class="result-value" id="futureValue">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Interest Earned</div>
+                        <div class="result-value" id="totalInterest">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Annual Growth Rate</div>
+                        <div class="result-value" id="annualGrowthRate">--</div>
+                    </div>
+                </div>
                 <div class="chart-container">
-                    <canvas id="interestChart" width="400" height="200"></canvas>
+                    <h4 class="chart-title">Compound Interest Growth Over Time</h4>
+                    <canvas id="compoundInterestChart" class="chart-canvas"></canvas>
                 </div>
             </div>
         </div>
 
         <div class="calculator-section" id="loans">
-            <h2 class="section-title">
-                <i class="fas fa-money-bill-wave"></i>
-                Loan Calculator
-            </h2>
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> Loan Amortization Calculator</h2>
             <div class="form-grid">
                 <div class="form-group">
-                    <label><i class="fas fa-coins"></i> Loan Amount</label>
-                    <input type="number" id="loanAmount" placeholder="100000" step="0.01">
+                    <label for="loanAmount"><i class="fas fa-dollar-sign"></i> Loan Amount</label>
+                    <input type="number" id="loanAmount" placeholder="e.g., 100000" value="100000">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-percentage"></i> Annual Interest Rate (%)</label>
-                    <input type="number" id="loanInterestRate" placeholder="10" step="0.01">
+                    <label for="loanInterestRate"><i class="fas fa-percent"></i> Annual Interest Rate (%)</label>
+                    <input type="number" id="loanInterestRate" placeholder="e.g., 5" value="5">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Loan Term (Years)</label>
-                    <input type="number" id="loanTermYears" placeholder="15" min="1">
+                    <label for="loanTerm"><i class="fas fa-calendar-alt"></i> Loan Term (Years)</label>
+                    <input type="number" id="loanTerm" placeholder="e.g., 30" value="30">
                 </div>
             </div>
-            <button class="btn" onclick="calculateLoan()">
-                <i class="fas fa-calculator"></i>
-                Calculate Loan
-            </button>
-            <div class="results-panel" id="loanResults" style="display: none;">
-                <h3><i class="fas fa-money-bill-wave"></i> Loan Details</h3>
-                <div class="result-grid" id="loanResultsContent"></div>
-                <div class="chart-container">
-                    <canvas id="loanChart" width="400" height="200"></canvas>
+            <div class="btn-group">
+                <button class="btn" id="calculateLoanBtn"><i class="fas fa-calculator"></i> Calculate Loan</button>
+            </div>
+            <div class="results-panel" id="loanResults">
+                <h3><i class="fas fa-file-invoice-dollar"></i> Loan Payment Details</h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Monthly Payment</div>
+                        <div class="result-value" id="monthlyPayment">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Interest Paid</div>
+                        <div class="result-value" id="totalInterestPaid">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Payment</div>
+                        <div class="result-value" id="totalLoanPayment">--</div>
+                    </div>
                 </div>
-                <div class="amortization-schedule">
-                    <h4>Amortization Schedule</h4>
-                    <table id="amortizationTable">
-                        <thead>
-                            <tr>
-                                <th>Month</th>
-                                <th>Payment</th>
-                                <th>Principal</th>
-                                <th>Interest</th>
-                                <th>Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            </tbody>
-                    </table>
+                <div class="chart-container">
+                    <h4 class="chart-title">Loan Amortization Schedule (Interest vs. Principal)</h4>
+                    <canvas id="loanAmortizationChart" class="chart-canvas"></canvas>
                 </div>
             </div>
         </div>
 
         <div class="calculator-section" id="investment">
-            <h2 class="section-title">
-                <i class="fas fa-chart-pie"></i>
-                Investment Calculator
-            </h2>
+            <h2 class="section-title"><i class="fas fa-chart-pie"></i> Investment Return Calculator</h2>
             <div class="form-grid">
                 <div class="form-group">
-                    <label><i class="fas fa-hand-holding-usd"></i> Initial Investment</label>
-                    <input type="number" id="initialInvestment" placeholder="5000" step="0.01">
+                    <label for="initialInvestment"><i class="fas fa-dollar-sign"></i> Initial Investment</label>
+                    <input type="number" id="initialInvestment" placeholder="e.g., 5000" value="5000">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-plus-circle"></i> Monthly Contribution</label>
-                    <input type="number" id="monthlyContribution" placeholder="100" step="0.01">
+                    <label for="monthlyContribution"><i class="fas fa-money-check-alt"></i> Monthly Contribution</label>
+                    <input type="number" id="monthlyContribution" placeholder="e.g., 100" value="100">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-percentage"></i> Annual Growth Rate (%)</label>
-                    <input type="number" id="investmentRate" placeholder="8" step="0.01">
+                    <label for="annualReturnRate"><i class="fas fa-percent"></i> Annual Return Rate (%)</label>
+                    <input type="number" id="annualReturnRate" placeholder="e.g., 8" value="8">
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Investment Period (Years)</label>
-                    <input type="number" id="investmentYears" placeholder="20" min="1">
+                    <label for="investmentYears"><i class="fas fa-calendar-alt"></i> Investment Period (Years)</label>
+                    <input type="number" id="investmentYears" placeholder="e.g., 20" value="20">
                 </div>
             </div>
-            <button class="btn" onclick="calculateInvestment()">
-                <i class="fas fa-chart-pie"></i>
-                Calculate Investment
-            </button>
-            <div class="results-panel" id="investmentResults" style="display: none;">
-                <h3><i class="fas fa-chart-pie"></i> Investment Growth</h3>
-                <div class="result-grid" id="investmentResultsContent"></div>
+            <div class="btn-group">
+                <button class="btn" id="calculateInvestmentBtn"><i class="fas fa-chart-line"></i> Calculate Returns</button>
+            </div>
+            <div class="results-panel" id="investmentResults">
+                <h3><i class="fas fa-wallet"></i> Investment Portfolio Projections</h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Total Invested</div>
+                        <div class="result-value" id="totalInvested">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Value</div>
+                        <div class="result-value" id="totalInvestmentValue">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Gains</div>
+                        <div class="result-value" id="totalInvestmentGains">--</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Annualized Return</div>
+                        <div class="result-value" id="annualizedInvestmentReturn">--</div>
+                    </div>
+                </div>
                 <div class="chart-container">
-                    <canvas id="investmentChart" width="400" height="200"></canvas>
+                    <h4 class="chart-title">Investment Growth: Contributions vs. Gains</h4>
+                    <canvas id="investmentGrowthChart" class="chart-canvas"></canvas>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="calculator-section" id="stocks">
-            <h2 class="section-title">
-                <i class="fas fa-chart-bar"></i>
-                Stocks Analysis <span class="premium-badge">Pro Feature</span>
-            </h2>
-            <p class="premium-message">This feature provides real-time stock data and advanced analytics for Financiator Pro subscribers.</p>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-tag"></i> Stock Symbol</label>
-                    <input type="text" id="stockSymbol" placeholder="AAPL" list="stockSymbols">
-                    <datalist id="stockSymbols">
-                        </datalist>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Data Range</label>
-                    <select id="stockRange">
-                        <option value="1mo">1 Month</option>
-                        <option value="3mo">3 Months</option>
-                        <option value="6mo">6 Months</option>
-                        <option value="1yr">1 Year</option>
-                        <option value="5yr">5 Years</option>
-                        <option value="max">Max</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn" onclick="fetchStockData()">
-                <i class="fas fa-search"></i>
-                Get Stock Data
-            </button>
-            <div class="results-panel" id="stockResults" style="display: none;">
-                <h3><i class="fas fa-chart-bar"></i> Stock Performance</h3>
-                <div class="result-grid" id="stockResultsContent"></div>
-                <div class="chart-container">
-                    <canvas id="stockChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-        </div>
+    <footer class="footer">
+        <p>&copy; 2025 Financiator Pro. All rights reserved. This is a **DEMO** application for demonstration purposes only. Data may be simulated or from public APIs and should not be used for financial decisions.</p>
+        <p>Powered by <a href="https://www.coingecko.com/" target="_blank">CoinGecko API</a>, <a href="https://www.exchangerate-api.com/" target="_blank">ExchangeRate-API</a>, <a href="https://fred.stlouisfed.org/" target="_blank">FRED API</a>, <a href="https://polygon.io/" target="_blank">Polygon.io API</a> and <a href="https://greensock.com/gsap/" target="_blank">GSAP</a>.</p>
+    </footer>
 
-        <div class="calculator-section" id="commodities">
-            <h2 class="section-title">
-                <i class="fas fa-seedling"></i>
-                Commodities Market <span class="premium-badge">Pro Feature</span>
-            </h2>
-            <p class="premium-message">Explore real-time prices and trends for various commodities with Financiator Pro.</p>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-box"></i> Commodity</label>
-                    <select id="commodityType">
-                        <option value="gold">Gold</option>
-                        <option value="silver">Silver</option>
-                        <option value="platinum">Platinum</option>
-                        <option value="oil">Crude Oil (WTI)</option>
-                        <option value="natural_gas">Natural Gas</option>
-                        <option value="wheat">Wheat</option>
-                        <option value="corn">Corn</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Data Range</label>
-                    <select id="commodityRange">
-                        <option value="1mo">1 Month</option>
-                        <option value="3mo">3 Months</option>
-                        <option value="6mo">6 Months</option>
-                        <option value="1yr">1 Year</option>
-                        <option value="5yr">5 Years</option>
-                        <option value="max">Max</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn" onclick="fetchCommodityData()">
-                <i class="fas fa-search"></i>
-                Get Commodity Data
-            </button>
-            <div class="results-panel" id="commoditiesResults" style="display: none;">
-                <h3><i class="fas fa-seedling"></i> Commodity Prices</h3>
-                <div class="result-grid" id="commoditiesResultsContent"></div>
-                <div class="chart-container">
-                    <canvas id="commoditiesChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-        </div>
+    <script>
+        // --- API Keys (Replace with your actual keys for production) ---
+        // For a full-fledged production app, you'd want to proxy these through a backend
+        // to prevent exposing them client-side. For this demo, direct use is acceptable.
+        const COINGECKO_API_BASE = 'https://api.coingecko.com/api/v3';
+        const EXCHANGERATE_API_KEY = 'YOUR_EXCHANGERATE_API_KEY'; // Get yours at https://www.exchangerate-api.com/
+        const FRED_API_KEY = 'YOUR_FRED_API_KEY'; // Get yours at https://fred.stlouisfed.org/docs/api/api_key.html
+        const POLYGON_API_KEY = 'YOUR_POLYGON_API_KEY'; // Get yours at https://polygon.io/
+        const ALPHAVANTAGE_API_KEY = 'YOUR_ALPHAVANTAGE_API_KEY'; // Used for inflation by country, if FRED doesn't cover all. Get at https://www.alphavantage.co/
 
-        <div class="calculator-section" id="news">
-            <h2 class="section-title">
-                <i class="far fa-newspaper"></i>
-                Financial News & Investment Tips
-            </h2>
-            <div class="news-filters">
-                <div class="form-group">
-                    <label for="newsCategory"><i class="fas fa-filter"></i> Category:</label>
-                    <select id="newsCategory">
-                        <option value="cryptocurrency">Cryptocurrency</option>
-                        <option value="investing">Investing</option>
-                        <option value="forex">Forex</option>
-                        <option value="stocks">Stocks</option>
-                        <option value="economy">Economy</option>
-                        <option value="all">All</option>
-                    </select>
-                </div>
-                <button class="btn" onclick="fetchNews()">
-                    <i class="fas fa-sync-alt"></i>
-                    Refresh News
-                </button>
-            </div>
-            <div class="news-container" id="newsFeed">
-                <p class="loading-message">Loading news... Please wait.</p>
-            </div>
-            <div class="tips-section">
-                <h3><i class="fas fa-lightbulb"></i> Quick Investment Tips</h3>
-                <ul id="investmentTips">
-                    <li>**Diversify your portfolio:** Don't put all your eggs in one basket.</li>
-                    <li>**Invest regularly:** Consistent contributions often outperform lump sums over time.</li>
-                    <li>**Understand your risk tolerance:** Only invest what you can afford to lose.</li>
-                    <li>**Stay informed:** Keep up with market trends and economic news.</li>
-                    <li>**Think long-term:** Avoid impulsive decisions based on short-term market fluctuations.</li>
-                    <li>**Consider professional advice:** A financial advisor can help tailor strategies to your goals.</li>
-                </ul>
-            </div>
-        </div>
+        // Helper to format currency
+        const formatCurrency = (amount, currency = 'USD', locale = 'en-US') => {
+            return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(amount);
+        };
 
-        <div class="calculator-section" id="education">
-            <h2 class="section-title">
-                <i class="fas fa-graduation-cap"></i>
-                Financial Education Center
-            </h2>
-            <div class="education-content">
-                <div class="education-category-nav">
-                    <button class="education-category-btn active" data-category="basics">Financial Basics</button>
-                    <button class="education-category-btn" data-category="investing">Investing Principles</button>
-                    <button class="education-category-btn" data-category="debt">Debt Management</button>
-                    <button class="education-category-btn" data-category="crypto-basics">Crypto Explained</button>
-                </div>
+        // Helper to format percentage
+        const formatPercentage = (value, decimals = 2) => {
+            return `${value.toFixed(decimals)}%`;
+        };
 
-                <div class="education-articles-container" id="educationArticles">
-                    <div class="education-article" data-category="basics">
-                        <h3>What is Compound Interest?</h3>
-                        <p>Compound interest is the interest on a loan or deposit calculated based on both the initial principal and the accumulated interest from previous periods. It's often called "interest on interest," and it can make a sum grow at a faster rate than simple interest, which is calculated only on the principal amount. This is a powerful concept for long-term savings and investments.</p>
-                        <p><strong>Example:</strong> If you invest $1000 at 5% annual interest compounded annually, after one year you have $1050. The next year, the 5% interest is calculated on $1050, not just $1000.</p>
-                    </div>
-                    <div class="education-article" data-category="basics" style="display: none;">
-                        <h3>Understanding Inflation</h3>
-                        <p>Inflation refers to the rate at which the general level of prices for goods and services is rising, and subsequently, purchasing power is falling. Central banks typically aim to keep inflation in check to ensure economic stability. High inflation can erode the value of your savings over time.</p>
-                        <p><strong>Key Takeaway:</strong> To maintain purchasing power, your investments need to grow faster than the rate of inflation.</p>
-                    </div>
-                    <div class="education-article" data-category="investing" style="display: none;">
-                        <h3>The Power of Diversification</h3>
-                        <p>Diversification is a strategy employed to minimize risk by investing in a variety of assets. The rationale behind this technique is that a portfolio constructed of different kinds of assets will, on average, yield higher long-term returns and lower the risk of any individual holding or security.</p>
-                        <p><strong>How to Diversify:</strong> Spread your investments across different asset classes (stocks, bonds, real estate, crypto), industries, and geographies.</p>
-                    </div>
-                    <div class="education-article" data-category="investing" style="display: none;">
-                        <h3>What are ETFs?</h3>
-                        <p>An Exchange Traded Fund (ETF) is a type of investment fund that is traded on stock exchanges, much like stocks. ETFs hold assets such as stocks, commodities, or bonds, and generally, operate with an arbitrage mechanism designed to keep their trading price close to their net asset value. They offer diversification and are usually lower cost than traditional mutual funds.</p>
-                    </div>
-                    <div class="education-article" data-category="debt" style="display: none;">
-                        <h3>Strategies for Debt Repayment</h3>
-                        <p>Managing debt effectively is crucial for financial health. Two popular strategies include the **Debt Snowball Method** and the **Debt Avalanche Method**.</p>
-                        <ul>
-                            <li>**Snowball:** Pay off the smallest debt first, then roll that payment into the next smallest. Focuses on psychological wins.</li>
-                            <li>**Avalanche:** Pay off the debt with the highest interest rate first. Saves more money in interest over time.</li>
-                        </ul>
-                    </div>
-                     <div class="education-article" data-category="crypto-basics" style="display: none;">
-                        <h3>Introduction to Blockchain Technology</h3>
-                        <p>Blockchain is a distributed ledger technology (DLT) that underlies cryptocurrencies like Bitcoin. It's a decentralized and immutable record of transactions, maintained by a network of computers. Each "block" contains a timestamp and transactional data, and once completed, is linked to the previous block, forming a chain.</p>
-                        <p><strong>Why it matters:</strong> Blockchain offers transparency, security, and resistance to tampering, revolutionizing how digital information and assets can be managed.</p>
-                    </div>
-                     <div class="education-article" data-category="crypto-basics" style="display: none;">
-                        <h3>What is Bitcoin Mining?</h3>
-                        <p>Bitcoin mining is the process by which new bitcoins are introduced into circulation. It's also how new transactions are verified by the network and added to the blockchain. Miners use powerful computers to solve complex computational puzzles. The first miner to solve the puzzle adds the next block to the blockchain and is rewarded with a set amount of new bitcoins and transaction fees.</p>
-                    </div>
-                    </div>
-            </div>
-        </div>
+        // --- Navigation Logic ---
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
 
-        <footer class="footer">
-            <p>&copy; 2025 Financiator Pro. All rights reserved. Market data and news provided by CoinGecko and other sources.</p>
-        </footer>
-    </div> <script src="./financiator/main.js"></script>
+                document.querySelectorAll('.calculator-section').forEach(section => section.classList.remove('active'));
+                const targetSectionId = this.dataset.section;
+                document.getElementById(targetSectionId).classList.add('active');
 
+                // Trigger chart resize/update if active section has a chart
+                setTimeout(() => {
+                    if (window.cryptoPriceChartInstance) window.cryptoPriceChartInstance.resize();
+                    if (window.compoundInterestChartInstance) window.compoundInterestChartInstance.resize();
+                    if (window.loanAmortizationChartInstance) window.loanAmortizationChartInstance.resize();
+                    if (window.investmentGrowthChartInstance) window.investmentGrowthChartInstance.resize();
+                    if (window.cryptoMarketCapChartInstance) window.cryptoMarketCapChartInstance.resize();
+                    if (window.forexHistoricalChartInstance) window.forexHistoricalChartInstance.resize();
+                    if (window.sp500PerformanceChartInstance) window.sp500PerformanceChartInstance.resize();
+                    if (window.inflationRateChartInstance) window.inflationRateChartInstance.resize();
+                    if (window.inflationImpactChartInstance) window.inflationImpactChartInstance.resize();
+
+                    // Specific chart initializations for sections that become active
+                    if (targetSectionId === 'crypto' && !window.cryptoPriceChartInstance) {
+                        initializeCryptoPriceChart();
+                    }
+                     if (targetSectionId === 'interest' && !window.compoundInterestChartInstance) {
+                        initializeCompoundInterestChart();
+                    }
+                    if (targetSectionId === 'loans' && !window.loanAmortizationChartInstance) {
+                        initializeLoanAmortizationChart();
+                    }
+                    if (targetSectionId === 'investment' && !window.investmentGrowthChartInstance) {
+                        initializeInvestmentGrowthChart();
+                    }
+                    if (targetSectionId === 'inflation' && !window.inflationImpactChartInstance) {
+                        initializeInflationImpactChart();
+                    }
+
+                }, 500); // Small delay to allow CSS animation to complete
+            });
+        });
+
+        // --- GSAP Animations (for subtle effects) ---
+        gsap.registerPlugin(MotionPathPlugin);
+
+        // Animate the header on load
+        gsap.from(".header h1", { opacity: 0, y: -50, duration: 1, ease: "bounce.out" });
+        gsap.from(".header p", { opacity: 0, y: 20, duration: 1, delay: 0.5, ease: "power2.out" });
+        gsap.from(".nav-container", { opacity: 0, y: 50, duration: 1, delay: 0.8, ease: "power2.out" });
+        gsap.from(".live-data-banner", { opacity: 0, scale: 0.9, duration: 1, delay: 0.2, ease: "back.out(1.7)" });
+
+        // Pause ticker on hover
+        document.getElementById('liveTicker').addEventListener('mouseenter', () => {
+            gsap.to('#liveTicker', { animationPlayState: 'paused', duration: 0.2 });
+        });
+        document.getElementById('liveTicker').addEventListener('mouseleave', () => {
+            gsap.to('#liveTicker', { animationPlayState: 'running', duration: 0.2 });
+        });
+
+        // --- Live Data Ticker & Dashboard Metrics Update ---
+        const updateLiveDataAndDashboard = async () => {
+            try {
+                // Fetch Crypto Prices (CoinGecko)
+                const cryptoResponse = await fetch(`${COINGECKO_API_BASE}/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true`);
+                const cryptoData = await cryptoResponse.json();
+
+                if (cryptoData.bitcoin) {
+                    document.getElementById('btc-price').textContent = `BTC: ${formatCurrency(cryptoData.bitcoin.usd)} (${formatPercentage(cryptoData.bitcoin.usd_24h_change)})`;
+                    document.getElementById('dash-btc-price').textContent = formatCurrency(cryptoData.bitcoin.usd);
+                    const btcChangeElem = document.getElementById('dash-btc-change');
+                    btcChangeElem.textContent = `${formatPercentage(cryptoData.bitcoin.usd_24h_change)} (24h)`;
+                    btcChangeElem.className = `metric-change ${cryptoData.bitcoin.usd_24h_change >= 0 ? 'positive' : 'negative'}`;
+                }
+                if (cryptoData.ethereum) {
+                    document.getElementById('eth-price').textContent = `ETH: ${formatCurrency(cryptoData.ethereum.usd)} (${formatPercentage(cryptoData.ethereum.usd_24h_change)})`;
+                    document.getElementById('dash-eth-price').textContent = formatCurrency(cryptoData.ethereum.usd);
+                    const ethChangeElem = document.getElementById('dash-eth-change');
+                    ethChangeElem.textContent = `${formatPercentage(cryptoData.ethereum.usd_24h_change)} (24h)`;
+                    ethChangeElem.className = `metric-change ${cryptoData.ethereum.usd_24h_change >= 0 ? 'positive' : 'negative'}`;
+                }
+
+                // Fetch Exchange Rates (ExchangeRate-API)
+                // Using USD as base for simplicity in ticker, could be configured
+                const forexResponse = await fetch(`https://v6.exchangerate-api.com/v6/${EXCHANGERATE_API_KEY}/latest/USD`);
+                const forexData = await forexResponse.json();
+
+                if (forexData.conversion_rates) {
+                    const usdEurRate = forexData.conversion_rates.EUR.toFixed(4);
+                    const usdArsRate = forexData.conversion_rates.ARS ? forexData.conversion_rates.ARS.toFixed(2) : 'N/A'; // Assuming ARS exists or mock
+                    document.getElementById('usd-eur').textContent = `USD/EUR: ${usdEurRate}`;
+                    document.getElementById('dash-usd-eur').textContent = usdEurRate;
+                    // Mocking change for dashboard, as API doesn't provide it
+                    const usdEurChange = (Math.random() * 0.5 - 0.25).toFixed(2); // Random +/- 0.25%
+                    const usdEurChangeElem = document.getElementById('dash-usd-eur-change');
+                    usdEurChangeElem.textContent = `${usdEurChange}% (Today)`;
+                    usdEurChangeElem.className = `metric-change ${usdEurChange >= 0 ? 'positive' : 'negative'}`;
+                }
+
+                // Fetch US Inflation Data (FRED API)
+                // CPIAUCSL: Consumer Price Index for All Urban Consumers: All Items in U.S. City Average (FRED Series ID)
+                const cpiResponse = await fetch(`https://api.stlouisfed.org/fred/series/observations?series_id=CPIAUCSL&api_key=${FRED_API_KEY}&file_type=json&observation_start=2024-01-01&sort_order=desc&limit=2`);
+                const cpiData = await cpiResponse.json();
+
+                if (cpiData.observations && cpiData.observations.length >= 2) {
+                    const latestCPI = parseFloat(cpiData.observations[0].value);
+                    const previousCPI = parseFloat(cpiData.observations[1].value);
+                    const monthlyChange = ((latestCPI - previousCPI) / previousCPI) * 100;
+
+                    // For annual inflation (YoY), we need data from 12 months ago.
+                    // This is simplified for demo; a real implementation would fetch more data.
+                    const oneYearAgoCPIResponse = await fetch(`https://api.stlouisfed.org/fred/series/observations?series_id=CPIAUCSL&api_key=${FRED_API_KEY}&file_type=json&observation_start=2024-06-01&sort_order=desc&limit=1`); // Adjust date for 12 months prior to current date
+                    const oneYearAgoCPIData = await oneYearAgoCPIResponse.json();
+
+                     if (oneYearAgoCPIData.observations && oneYearAgoCPIData.observations.length > 0) {
+                        const cpiOneYearAgo = parseFloat(oneYearAgoCPIData.observations[0].value);
+                        const annualInflation = ((latestCPI - cpiOneYearAgo) / cpiOneYearAgo) * 100;
+
+                        document.getElementById('us-inflation').textContent = `US CPI: ${annualInflation.toFixed(2)}% (YoY)`;
+                        document.getElementById('dash-us-inflation').textContent = `${annualInflation.toFixed(2)}%`;
+                        const inflationChangeElem = document.getElementById('dash-us-inflation-change');
+                        inflationChangeElem.textContent = `Monthly: ${monthlyChange.toFixed(2)}%`;
+                        inflationChangeElem.className = `metric-change ${monthlyChange >= 0 ? 'negative' : 'positive'}`; // Inflation typically bad, so positive change is "negative" context
+                     } else {
+                        console.warn("Could not fetch 1-year ago CPI data.");
+                        document.getElementById('us-inflation').textContent = `US CPI: N/A`;
+                        document.getElementById('dash-us-inflation').textContent = `N/A`;
+                        document.getElementById('dash-us-inflation-change').textContent = `N/A`;
+                     }
+
+                } else {
+                    console.warn("FRED API: Not enough CPI data for calculation.");
+                    document.getElementById('us-inflation').textContent = `US CPI: N/A`;
+                    document.getElementById('dash-us-inflation').textContent = `N/A`;
+                    document.getElementById('dash-us-inflation-change').textContent = `N/A`;
+                }
+
+                // Fetch S&P 500 and Gold Prices (Polygon.io for stocks, or Gold API)
+                // For a true demo, you'd integrate live stock data. For simplicity, mocking for now.
+                // Polygon.io has free tier for historical data (daily bars), live requires subscription.
+                // Gold price API: api.metalpriceapi.com is an option (free tier available) or a crypto exchange for PAXG etc.
+                // Let's mock these for now to keep the demo working without multiple API keys if user doesn't have them all.
+
+                const mockSP500Price = (4500 + Math.random() * 200).toFixed(2);
+                const mockSP500Change = (Math.random() * 1.5 - 0.75).toFixed(2); // +/- 0.75%
+                document.getElementById('sp500').textContent = `S&P 500: ${mockSP500Price} (${mockSP500Change}%)`;
+                document.getElementById('dash-sp500-val').textContent = mockSP500Price;
+                const sp500ChangeElem = document.getElementById('dash-sp500-change');
+                sp500ChangeElem.textContent = `${mockSP500Change}% (Today)`;
+                sp500ChangeElem.className = `metric-change ${mockSP500Change >= 0 ? 'positive' : 'negative'}`;
+
+                const mockOilPrice = (75 + Math.random() * 10).toFixed(2);
+                const mockOilChange = (Math.random() * 1 - 0.5).toFixed(2); // +/- 0.5%
+                document.getElementById('oil-price').textContent = `WTI Oil: $${mockOilPrice} (${mockOilChange}%)`;
+
+
+                const mockGoldPrice = (2000 + Math.random() * 100).toFixed(2);
+                const mockGoldChange = (Math.random() * 0.8 - 0.4).toFixed(2); // +/- 0.4%
+                document.getElementById('gold-price').textContent = `Gold: $${mockGoldPrice} (${mockGoldChange}%)`;
+                document.getElementById('dash-gold-val').textContent = `$${mockGoldPrice}`;
+                const goldChangeElem = document.getElementById('dash-gold-change');
+                goldChangeElem.textContent = `${mockGoldChange}% (Today)`;
+                goldChangeElem.className = `metric-change ${mockGoldChange >= 0 ? 'positive' : 'negative'}`;
+
+
+            } catch (error) {
+                console.error("Error fetching live data:", error);
+                // Fallback to static text or error message
+                document.getElementById('btc-price').textContent = `BTC: Data N/A`;
+                document.getElementById('eth-price').textContent = `ETH: Data N/A`;
+                document.getElementById('usd-eur').textContent = `USD/EUR: Data N/A`;
+                document.getElementById('us-inflation').textContent = `US CPI: Data N/A`;
+                document.getElementById('sp500').textContent = `S&P 500: Data N/A`;
+                document.getElementById('oil-price').textContent = `WTI Oil: Data N/A`;
+                document.getElementById('gold-price').textContent = `Gold: Data N/A`;
+
+                document.getElementById('dash-btc-price').textContent = `$N/A`;
+                document.getElementById('dash-btc-change').textContent = `N/A`;
+                document.getElementById('dash-btc-change').className = `metric-change`;
+                document.getElementById('dash-eth-price').textContent = `$N/A`;
+                document.getElementById('dash-eth-change').textContent = `N/A`;
+                document.getElementById('dash-eth-change').className = `metric-change`;
+                document.getElementById('dash-usd-eur').textContent = `N/A`;
+                document.getElementById('dash-usd-eur-change').textContent = `N/A`;
+                document.getElementById('dash-usd-eur-change').className = `metric-change`;
+                document.getElementById('dash-us-inflation').textContent = `N/A`;
+                document.getElementById('dash-us-inflation-change').textContent = `N/A`;
+                document.getElementById('dash-us-inflation-change').className = `metric-change`;
+                document.getElementById('dash-sp500-val').textContent = `N/A`;
+                document.getElementById('dash-sp500-change').textContent = `N/A`;
+                document.getElementById('dash-sp500-change').className = `metric-change`;
+                document.getElementById('dash-gold-val').textContent = `$N/A`;
+                document.getElementById('dash-gold-change').textContent = `N/A`;
+                document.getElementById('dash-gold-change').className = `metric-change`;
+            }
+        };
+
+        // Initial call and set interval for live data
+        updateLiveDataAndDashboard();
+        setInterval(updateLiveDataAndDashboard, 30000); // Update every 30 seconds
+
+        // --- Chart Initializations (for Dashboard) ---
+        let cryptoMarketCapChartInstance;
+        let forexHistoricalChartInstance;
+        let sp500PerformanceChartInstance;
+        let inflationRateChartInstance;
+
+        const initializeDashboardCharts = () => {
+            const ctxCrypto = document.getElementById('cryptoMarketCapChart').getContext('2d');
+            cryptoMarketCapChartInstance = new Chart(ctxCrypto, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], // Placeholder dates
+                    datasets: [{
+                        label: 'Total Crypto Market Cap (Trillion USD)',
+                        data: [1.2, 1.5, 1.3, 1.7, 1.6, 1.9, 2.1], // Mock data
+                        borderColor: '#4ecdc4',
+                        backgroundColor: 'rgba(78, 205, 196, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#4ecdc4'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        },
+                        title: {
+                            display: false,
+                            text: 'Cryptocurrency Market Cap Trend'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return '$' + value + 'T';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const ctxForex = document.getElementById('forexHistoricalChart').getContext('2d');
+            forexHistoricalChartInstance = new Chart(ctxForex, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], // Placeholder dates
+                    datasets: [{
+                        label: 'USD to EUR Rate',
+                        data: [0.92, 0.91, 0.93, 0.90, 0.94, 0.93, 0.95], // Mock data
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                     responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        },
+                        title: {
+                            display: false,
+                            text: 'Historical Exchange Rates (USD/EUR)'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return value.toFixed(2);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const ctxSP500 = document.getElementById('sp500PerformanceChart').getContext('2d');
+            sp500PerformanceChartInstance = new Chart(ctxSP500, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'S&P 500 Monthly Change (%)',
+                        data: [0.8, -0.3, 1.2, 0.5, -0.1, 0.9, 0.7],
+                        backgroundColor: (context) => {
+                            const value = context.parsed.y;
+                            if (value >= 0) {
+                                return 'rgba(76, 175, 80, 0.7)'; // Green for positive
+                            } else {
+                                return 'rgba(244, 67, 54, 0.7)'; // Red for negative
+                            }
+                        },
+                        borderColor: (context) => {
+                            const value = context.parsed.y;
+                            if (value >= 0) {
+                                return 'rgb(76, 175, 80)';
+                            } else {
+                                return 'rgb(244, 67, 54)';
+                            }
+                        },
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        },
+                        title: {
+                            display: false,
+                            text: 'S&P 500 Performance (Monthly)'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const ctxInflation = document.getElementById('inflationRateChart').getContext('2d');
+            inflationRateChartInstance = new Chart(ctxInflation, {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'], // Placeholder years
+                    datasets: [{
+                        label: 'Global Average Inflation Rate (%)',
+                        data: [2.0, 3.5, 7.0, 5.0, 3.2], // Mock data
+                        borderColor: '#ff6b6b',
+                        backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#ff6b6b'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        },
+                        title: {
+                            display: false,
+                            text: 'Inflation Rate Over Time'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+        initializeDashboardCharts(); // Initialize dashboard charts on load
+
+
+        // --- Basic Calculator Logic ---
+        const calcDisplay = document.getElementById('calcDisplay');
+        let currentInput = '0';
+        let operator = null;
+        let prevInput = null;
+        let waitingForNewInput = false;
+
+        document.querySelectorAll('.basic-calc .calc-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const value = e.target.dataset.value;
+                const action = e.target.dataset.action;
+
+                if (value) {
+                    if (waitingForNewInput) {
+                        currentInput = value === '.' ? '0.' : value;
+                        waitingForNewInput = false;
+                    } else if (currentInput === '0' && value !== '.') {
+                        currentInput = value;
+                    } else if (value === '.' && currentInput.includes('.')) {
+                        return; // Prevent multiple decimals
+                    } else {
+                        currentInput += value;
+                    }
+                    calcDisplay.textContent = currentInput;
+                } else if (action) {
+                    if (action === 'clear') {
+                        currentInput = '0';
+                        operator = null;
+                        prevInput = null;
+                        waitingForNewInput = false;
+                        calcDisplay.textContent = currentInput;
+                    } else if (action === 'negate') {
+                        currentInput = (parseFloat(currentInput) * -1).toString();
+                        calcDisplay.textContent = currentInput;
+                    } else if (action === 'percent') {
+                        currentInput = (parseFloat(currentInput) / 100).toString();
+                        calcDisplay.textContent = currentInput;
+                    } else if (action === 'equals') {
+                        if (operator && prevInput !== null) {
+                            currentInput = operate(prevInput, currentInput, operator).toString();
+                            calcDisplay.textContent = currentInput;
+                            operator = null;
+                            prevInput = null;
+                            waitingForNewInput = true;
+                        }
+                    } else { // Operator (+, -, *, /)
+                        if (prevInput === null) {
+                            prevInput = currentInput;
+                        } else if (!waitingForNewInput) {
+                            prevInput = operate(prevInput, currentInput, operator).toString();
+                        }
+                        operator = action;
+                        waitingForNewInput = true;
+                        calcDisplay.textContent = prevInput; // Show previous result
+                    }
+                }
+                 gsap.to(e.target, {scale: 0.9, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.out"});
+            });
+        });
+
+        const operate = (a, b, op) => {
+            a = parseFloat(a);
+            b = parseFloat(b);
+            if (op === 'add') return a + b;
+            if (op === 'subtract') return a - b;
+            if (op === 'multiply') return a * b;
+            if (op === 'divide') {
+                if (b === 0) {
+                    alert("Cannot divide by zero!");
+                    return 'Error';
+                }
+                return a / b;
+            }
+            return b;
+        };
+
+
+        // --- Crypto Price Section Logic (CoinGecko API) ---
+        let cryptoPriceChartInstance;
+
+        const initializeCryptoPriceChart = () => {
+            const ctx = document.getElementById('cryptoPriceChart').getContext('2d');
+            cryptoPriceChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [], // Dates will go here
+                    datasets: [{
+                        label: 'Price (USD)',
+                        data: [], // Prices will go here
+                        borderColor: '#4ecdc4',
+                        backgroundColor: 'rgba(78, 205, 196, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 2,
+                        pointBackgroundColor: '#4ecdc4'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        },
+                        title: {
+                            display: false,
+                            text: 'Historical Price Trend (Past 30 Days)'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${formatCurrency(context.raw, document.getElementById('fiatSelect').value.toUpperCase())}`;
+                                },
+                                title: function(context) {
+                                    return new Date(context[0].label).toLocaleDateString();
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'day'
+                            },
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return formatCurrency(value, document.getElementById('fiatSelect').value.toUpperCase(), 'en-US', false);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        document.getElementById('getCryptoPriceBtn').addEventListener('click', async () => {
+            const cryptoId = document.getElementById('cryptoSelect').value;
+            const fiatCurrency = document.getElementById('fiatSelect').value;
+
+            document.getElementById('currentCryptoPrice').innerHTML = '<span class="loading"></span>';
+            document.getElementById('crypto24hChange').innerHTML = '<span class="loading"></span>';
+            document.getElementById('cryptoMarketCap').innerHTML = '<span class="loading"></span>';
+            document.getElementById('crypto24hVolume').innerHTML = '<span class="loading"></span>';
+
+
+            try {
+                // Fetch current data
+                const currentDataResponse = await fetch(`${COINGECKO_API_BASE}/simple/price?ids=${cryptoId}&vs_currencies=${fiatCurrency}&include_24hr_change=true&include_market_cap=true&include_24hr_vol=true`);
+                const currentData = await currentDataResponse.json();
+
+                if (currentData[cryptoId]) {
+                    const price = currentData[cryptoId][fiatCurrency];
+                    const change24h = currentData[cryptoId][`${fiatCurrency}_24h_change`];
+                    const marketCap = currentData[cryptoId][`${fiatCurrency}_market_cap`];
+                    const volume24h = currentData[cryptoId][`${fiatCurrency}_24h_vol`];
+
+                    document.getElementById('currentCryptoPrice').textContent = formatCurrency(price, fiatCurrency.toUpperCase());
+                    const changeElem = document.getElementById('crypto24hChange');
+                    changeElem.textContent = formatPercentage(change24h);
+                    changeElem.className = `result-value ${change24h >= 0 ? 'positive' : 'negative'}`; // Apply class for color
+                    document.getElementById('cryptoMarketCap').textContent = formatCurrency(marketCap, fiatCurrency.toUpperCase());
+                    document.getElementById('crypto24hVolume').textContent = formatCurrency(volume24h, fiatCurrency.toUpperCase());
+                } else {
+                    throw new Error('Crypto data not found.');
+                }
+
+                // Fetch historical data (30 days)
+                const historicalDataResponse = await fetch(`${COINGECKO_API_BASE}/coins/${cryptoId}/market_chart?vs_currency=${fiatCurrency}&days=30`);
+                const historicalData = await historicalDataResponse.json();
+
+                if (historicalData.prices) {
+                    const labels = historicalData.prices.map(item => new Date(item[0]));
+                    const prices = historicalData.prices.map(item => item[1]);
+
+                    if (!cryptoPriceChartInstance) {
+                        initializeCryptoPriceChart();
+                    }
+                    cryptoPriceChartInstance.data.labels = labels;
+                    cryptoPriceChartInstance.data.datasets[0].data = prices;
+                    cryptoPriceChartInstance.data.datasets[0].label = `Price (${fiatCurrency.toUpperCase()})`;
+                    cryptoPriceChartInstance.options.scales.y.ticks.callback = function(value) {
+                         return formatCurrency(value, fiatCurrency.toUpperCase(), 'en-US', false);
+                    }
+                    cryptoPriceChartInstance.update();
+                } else {
+                    throw new Error('Historical crypto data not found.');
+                }
+                 gsap.from("#cryptoResults", {opacity: 0, y: 30, duration: 0.6, ease: "power3.out"});
+
+            } catch (error) {
+                console.error('Error fetching cryptocurrency data:', error);
+                document.getElementById('currentCryptoPrice').textContent = 'Error';
+                document.getElementById('crypto24hChange').textContent = 'Error';
+                document.getElementById('cryptoMarketCap').textContent = 'Error';
+                document.getElementById('crypto24hVolume').textContent = 'Error';
+                if (cryptoPriceChartInstance) {
+                    cryptoPriceChartInstance.data.labels = [];
+                    cryptoPriceChartInstance.data.datasets[0].data = [];
+                    cryptoPriceChartInstance.update();
+                }
+            }
+        });
+
+
+        // --- Forex Converter Logic (ExchangeRate-API) ---
+        document.getElementById('convertForexBtn').addEventListener('click', async () => {
+            const amount = parseFloat(document.getElementById('forexAmount').value);
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount.');
+                return;
+            }
+
+            document.getElementById('convertedAmount').innerHTML = '<span class="loading"></span>';
+            document.getElementById('exchangeRate').innerHTML = '<span class="loading"></span>';
+            document.getElementById('forexLastUpdated').innerHTML = '<span class="loading"></span>';
+
+            try {
+                const response = await fetch(`https://v6.exchangerate-api.com/v6/${EXCHANGERATE_API_KEY}/pair/${fromCurrency}/${toCurrency}/${amount}`);
+                const data = await response.json();
+
+                if (data.result === 'success') {
+                    document.getElementById('convertedAmount').textContent = formatCurrency(data.conversion_result, toCurrency);
+                    document.getElementById('exchangeRate').textContent = `${data.conversion_rate.toFixed(4)}`;
+                    document.getElementById('forexLastUpdated').textContent = new Date(data.time_last_update_utc).toLocaleString();
+                } else {
+                    throw new Error(data['error-type'] || 'Failed to fetch conversion rate.');
+                }
+                gsap.from("#forexResults", {opacity: 0, y: 30, duration: 0.6, ease: "power3.out"});
+
+            } catch (error) {
+                console.error('Error fetching forex data:', error);
+                document.getElementById('convertedAmount').textContent = 'Error';
+                document.getElementById('exchangeRate').textContent = 'Error';
+                document.getElementById('forexLastUpdated').textContent = 'Error';
+                alert('Failed to convert currency. Please check your API key and input. Error: ' + error.message);
+            }
+        });
+
+
+        // --- Inflation Adjustment Logic (FRED API, or AlphaVantage as fallback) ---
+        let inflationImpactChartInstance;
+
+        const initializeInflationImpactChart = () => {
+            const ctx = document.getElementById('inflationImpactChart').getContext('2d');
+            inflationImpactChartInstance = new Chart(ctx, {
+                type: 'bar', // Can be changed to 'line' or 'bar' based on preference
+                data: {
+                    labels: [], // Years
+                    datasets: [
+                        {
+                            label: 'Original Value',
+                            data: [],
+                            backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                            borderColor: '#667eea',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Adjusted for Inflation',
+                            data: [],
+                            backgroundColor: 'rgba(78, 205, 196, 0.7)',
+                            borderColor: '#4ecdc4',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${formatCurrency(context.raw, 'USD')}`; // Assume USD for display
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555',
+                                autoSkip: true,
+                                maxTicksLimit: 10
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return formatCurrency(value, 'USD', 'en-US', false);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        const getCPIFred = async (countryCode, year) => {
+            // FRED API series IDs for CPI (example, may need more research for comprehensive list per country)
+            const cpiSeries = {
+                'US': 'CPIAUCSL', // Consumer Price Index for All Urban Consumers: All Items in U.S. City Average
+                'AR': 'IPCGRALSA', // Argentina: Consumer Price Index: All Items: Total
+                'BR': 'CPGRLBRZA', // Brazil: Consumer Price Index: All Items: Total
+                'CA': 'CPALTT01CAM659N', // Canada: Consumer Price Index, All-items, annual percentage change
+                'FR': 'CPALTT01FRP659N', // France: Consumer Price Index, All-items, annual percentage change
+                'DE': 'CPALTT01DEM659N', // Germany: Consumer Price Index, All-items, annual percentage change
+                'IN': 'CPGRLEASINA', // India: Consumer Price Index, All-items, annual percentage change
+                'JP': 'CPALTT01JPM659N', // Japan: Consumer Price Index, All-items, annual percentage change
+                'MX': 'CPALTT01MXM659N', // Mexico: Consumer Price Index, All-items, annual percentage change
+                'GB': 'CPALTT01GBM659N' // United Kingdom: Consumer Price Index, All-items, annual percentage change
+            };
+
+            const seriesId = cpiSeries[countryCode];
+            if (!seriesId) {
+                console.warn(`No FRED CPI series ID for country code: ${countryCode}`);
+                return null;
+            }
+
+            const startDate = `${year}-01-01`;
+            const endDate = `${year}-12-31`; // Fetch for the whole year to get average or annual data
+
+            try {
+                // FRED API often gives monthly data. We want the annual average or last value of the year.
+                // For simplicity, let's try to get the last available observation for the year.
+                const response = await fetch(`https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${FRED_API_KEY}&file_type=json&observation_start=${startDate}&observation_end=${endDate}&sort_order=desc&limit=1`);
+                const data = await response.json();
+
+                if (data.observations && data.observations.length > 0) {
+                    return parseFloat(data.observations[0].value);
+                } else {
+                    console.warn(`No FRED CPI data found for ${countryCode} in ${year}.`);
+                    return null;
+                }
+            } catch (error) {
+                console.error(`Error fetching CPI from FRED for ${countryCode}, ${year}:`, error);
+                return null;
+            }
+        };
+
+        document.getElementById('calculateInflationBtn').addEventListener('click', async () => {
+            const initialAmount = parseFloat(document.getElementById('initialAmount').value);
+            const initialYear = parseInt(document.getElementById('initialYear').value);
+            const targetYear = parseInt(document.getElementById('targetYear').value);
+            const countryCode = document.getElementById('countrySelect').value;
+
+            if (isNaN(initialAmount) || initialAmount <= 0 || isNaN(initialYear) || isNaN(targetYear) || initialYear >= targetYear) {
+                alert('Please enter valid amounts and years. Target year must be after initial year.');
+                return;
+            }
+
+            document.getElementById('adjustedValue').innerHTML = '<span class="loading"></span>';
+            document.getElementById('cumulativeInflation').innerHTML = '<span class="loading"></span>';
+            document.getElementById('averageInflationRate').innerHTML = '<span class="loading"></span>';
+
+            const cpiValues = {};
+            let yearsToFetch = [];
+            for (let y = initialYear; y <= targetYear; y++) {
+                yearsToFetch.push(y);
+            }
+
+            const fetchPromises = yearsToFetch.map(year => getCPIFred(countryCode, year));
+            const fetchedCPIs = await Promise.all(fetchPromises);
+
+            let hasError = false;
+            for (let i = 0; i < yearsToFetch.length; i++) {
+                if (fetchedCPIs[i] === null) {
+                    alert(`Could not retrieve CPI data for ${countryCode} in year ${yearsToFetch[i]}. Please try a different country or year range, or ensure your FRED API key is valid.`);
+                    hasError = true;
+                    break;
+                }
+                cpiValues[yearsToFetch[i]] = fetchedCPIs[i];
+            }
+
+            if (hasError) {
+                document.getElementById('adjustedValue').textContent = 'Error';
+                document.getElementById('cumulativeInflation').textContent = 'Error';
+                document.getElementById('averageInflationRate').textContent = 'Error';
+                if (inflationImpactChartInstance) {
+                    inflationImpactChartInstance.data.labels = [];
+                    inflationImpactChartInstance.data.datasets[0].data = [];
+                    inflationImpactChartInstance.data.datasets[1].data = [];
+                    inflationImpactChartInstance.update();
+                }
+                return;
+            }
+
+            const cpiInitial = cpiValues[initialYear];
+            const cpiTarget = cpiValues[targetYear];
+
+            if (cpiInitial === null || cpiTarget === null || cpiInitial === 0) {
+                 alert('Insufficient CPI data for the selected period. Please check the years and country.');
+                document.getElementById('adjustedValue').textContent = 'Error';
+                document.getElementById('cumulativeInflation').textContent = 'Error';
+                document.getElementById('averageInflationRate').textContent = 'Error';
+                if (inflationImpactChartInstance) {
+                    inflationImpactChartInstance.data.labels = [];
+                    inflationImpactChartInstance.data.datasets[0].data = [];
+                    inflationImpactChartInstance.data.datasets[1].data = [];
+                    inflationImpactChartInstance.update();
+                }
+                return;
+            }
+
+            const inflationFactor = cpiTarget / cpiInitial;
+            const adjustedValue = initialAmount * inflationFactor;
+            const cumulativeInflation = (inflationFactor - 1) * 100;
+            const numYears = targetYear - initialYear;
+            const averageInflationRate = numYears > 0 ? (Math.pow(inflationFactor, 1 / numYears) - 1) * 100 : 0;
+
+            document.getElementById('adjustedValue').textContent = formatCurrency(adjustedValue, 'USD'); // Assuming USD context
+            document.getElementById('cumulativeInflation').textContent = `${cumulativeInflation.toFixed(2)}%`;
+            document.getElementById('averageInflationRate').textContent = `${averageInflationRate.toFixed(2)}%`;
+
+            // Chart Data
+            const chartLabels = [];
+            const originalValues = [];
+            const adjustedValues = [];
+            let currentAdjustedValue = initialAmount;
+
+            for (let y = initialYear; y <= targetYear; y++) {
+                chartLabels.push(y.toString());
+                originalValues.push(initialAmount);
+                if (y === initialYear) {
+                    adjustedValues.push(initialAmount);
+                } else {
+                    const prevCPI = cpiValues[y - 1];
+                    const currentCPI = cpiValues[y];
+                    if (prevCPI && currentCPI && prevCPI !== 0) {
+                        currentAdjustedValue *= (currentCPI / prevCPI);
+                    }
+                    adjustedValues.push(currentAdjustedValue);
+                }
+            }
+
+            if (!inflationImpactChartInstance) {
+                initializeInflationImpactChart();
+            }
+            inflationImpactChartInstance.data.labels = chartLabels;
+            inflationImpactChartInstance.data.datasets[0].data = originalValues;
+            inflationImpactChartInstance.data.datasets[1].data = adjustedValues;
+            inflationImpactChartInstance.update();
+            gsap.from("#inflationResults", {opacity: 0, y: 30, duration: 0.6, ease: "power3.out"});
+
+        });
+
+        // --- Compound Interest Logic ---
+        let compoundInterestChartInstance;
+
+        const initializeCompoundInterestChart = () => {
+            const ctx = document.getElementById('compoundInterestChart').getContext('2d');
+            compoundInterestChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [], // Years
+                    datasets: [{
+                        label: 'Future Value',
+                        data: [],
+                        borderColor: '#4ecdc4',
+                        backgroundColor: 'rgba(78, 205, 196, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#4ecdc4'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return formatCurrency(value, 'USD', 'en-US', false);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        document.getElementById('calculateInterestBtn').addEventListener('click', () => {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const years = parseInt(document.getElementById('years').value);
+            const frequency = parseInt(document.getElementById('compoundFrequency').value);
+
+            if (isNaN(principal) || isNaN(annualRate) || isNaN(years) || principal <= 0 || annualRate < 0 || years <= 0) {
+                alert('Please enter valid positive numbers for all fields.');
+                return;
+            }
+
+            document.getElementById('futureValue').innerHTML = '<span class="loading"></span>';
+            document.getElementById('totalInterest').innerHTML = '<span class="loading"></span>';
+            document.getElementById('annualGrowthRate').innerHTML = '<span class="loading"></span>';
+
+            let futureValue = principal * Math.pow((1 + annualRate / frequency), (frequency * years));
+            let totalInterest = futureValue - principal;
+            let annualGrowthRate = ((futureValue / principal) ** (1 / years) - 1) * 100;
+
+
+            document.getElementById('futureValue').textContent = formatCurrency(futureValue);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('annualGrowthRate').textContent = formatPercentage(annualGrowthRate);
+
+            // Chart data
+            const labels = [];
+            const data = [];
+            let currentAmount = principal;
+            for (let i = 0; i <= years; i++) {
+                labels.push(`Year ${i}`);
+                if (i === 0) {
+                    data.push(principal);
+                } else {
+                    currentAmount = principal * Math.pow((1 + annualRate / frequency), (frequency * i));
+                    data.push(currentAmount);
+                }
+            }
+
+            if (!compoundInterestChartInstance) {
+                initializeCompoundInterestChart();
+            }
+            compoundInterestChartInstance.data.labels = labels;
+            compoundInterestChartInstance.data.datasets[0].data = data;
+            compoundInterestChartInstance.update();
+            gsap.from("#interestResults", {opacity: 0, y: 30, duration: 0.6, ease: "power3.out"});
+        });
+
+
+        // --- Loan Calculator Logic ---
+        let loanAmortizationChartInstance;
+
+        const initializeLoanAmortizationChart = () => {
+            const ctx = document.getElementById('loanAmortizationChart').getContext('2d');
+            loanAmortizationChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [], // Months
+                    datasets: [
+                        {
+                            label: 'Principal Paid',
+                            data: [],
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Interest Paid',
+                            data: [],
+                            borderColor: '#ff6b6b',
+                            backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${formatCurrency(context.raw, 'USD')}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555',
+                                autoSkip: true,
+                                maxTicksLimit: 10
+                            }
+                        },
+                        y: {
+                            stacked: true, // Stack principal and interest for total payment visualization
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return formatCurrency(value, 'USD', 'en-US', false);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        document.getElementById('calculateLoanBtn').addEventListener('click', () => {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const annualRate = parseFloat(document.getElementById('loanInterestRate').value) / 100;
+            const loanTermYears = parseInt(document.getElementById('loanTerm').value);
+
+            if (isNaN(loanAmount) || isNaN(annualRate) || isNaN(loanTermYears) || loanAmount <= 0 || annualRate < 0 || loanTermYears <= 0) {
+                alert('Please enter valid positive numbers for all loan fields.');
+                return;
+            }
+
+            document.getElementById('monthlyPayment').innerHTML = '<span class="loading"></span>';
+            document.getElementById('totalInterestPaid').innerHTML = '<span class="loading"></span>';
+            document.getElementById('totalLoanPayment').innerHTML = '<span class="loading"></span>';
+
+            const monthlyRate = annualRate / 12;
+            const numberOfPayments = loanTermYears * 12;
+
+            let monthlyPayment;
+            if (monthlyRate === 0) { // Handle 0% interest
+                monthlyPayment = loanAmount / numberOfPayments;
+            } else {
+                monthlyPayment = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -numberOfPayments));
+            }
+
+            let totalPayment = monthlyPayment * numberOfPayments;
+            let totalInterestPaid = totalPayment - loanAmount;
+
+            document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+            document.getElementById('totalInterestPaid').textContent = formatCurrency(totalInterestPaid);
+            document.getElementById('totalLoanPayment').textContent = formatCurrency(totalPayment);
+
+            // Chart data for amortization schedule
+            const labels = [];
+            const principalData = [];
+            const interestData = [];
+            let remainingBalance = loanAmount;
+            let cumulativePrincipalPaid = 0;
+            let cumulativeInterestPaid = 0;
+
+            for (let i = 1; i <= numberOfPayments; i++) {
+                const interestPayment = remainingBalance * monthlyRate;
+                const principalPayment = monthlyPayment - interestPayment;
+
+                remainingBalance -= principalPayment;
+                cumulativePrincipalPaid += principalPayment;
+                cumulativeInterestPaid += interestPayment;
+
+                labels.push(`Month ${i}`);
+                principalData.push(cumulativePrincipalPaid);
+                interestData.push(cumulativeInterestPaid);
+            }
+
+            if (!loanAmortizationChartInstance) {
+                initializeLoanAmortizationChart();
+            }
+            loanAmortizationChartInstance.data.labels = labels;
+            loanAmortizationChartInstance.data.datasets[0].data = principalData;
+            loanAmortizationChartInstance.data.datasets[1].data = interestData;
+            loanAmortizationChartInstance.update();
+            gsap.from("#loanResults", {opacity: 0, y: 30, duration: 0.6, ease: "power3.out"});
+        });
+
+
+        // --- Investment Return Logic ---
+        let investmentGrowthChartInstance;
+
+        const initializeInvestmentGrowthChart = () => {
+            const ctx = document.getElementById('investmentGrowthChart').getContext('2d');
+            investmentGrowthChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [], // Years
+                    datasets: [
+                        {
+                            label: 'Total Contributions',
+                            data: [],
+                            borderColor: '#764ba2',
+                            backgroundColor: 'rgba(118, 75, 162, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Total Value (Contributions + Gains)',
+                            data: [],
+                            borderColor: '#4ecdc4',
+                            backgroundColor: 'rgba(78, 205, 196, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#333'
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${formatCurrency(context.raw, 'USD')}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#555'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: '#555',
+                                callback: function(value) {
+                                    return formatCurrency(value, 'USD', 'en-US', false);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        document.getElementById('calculateInvestmentBtn').addEventListener('click', () => {
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value);
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            const annualReturnRate = parseFloat(document.getElementById('annualReturnRate').value) / 100;
+            const investmentYears = parseInt(document.getElementById('investmentYears').value);
+
+            if (isNaN(initialInvestment) || isNaN(monthlyContribution) || isNaN(annualReturnRate) || isNaN(investmentYears) ||
+                initialInvestment < 0 || monthlyContribution < 0 || annualReturnRate < 0 || investmentYears <= 0) {
+                alert('Please enter valid non-negative numbers for investment calculations. Years must be positive.');
+                return;
+            }
+
+            document.getElementById('totalInvested').innerHTML = '<span class="loading"></span>';
+            document.getElementById('totalInvestmentValue').innerHTML = '<span class="loading"></span>';
+            document.getElementById('totalInvestmentGains').innerHTML = '<span class="loading"></span>';
+            document.getElementById('annualizedInvestmentReturn').innerHTML = '<span class="loading"></span>';
+
+
+            const monthlyRate = annualReturnRate / 12;
+            const totalMonths = investmentYears * 12;
+
+            let totalValue = initialInvestment;
+            let totalContributions = initialInvestment;
+
+            const labels = ['Year 0'];
+            const contributionsData = [initialInvestment];
+            const totalValueData = [initialInvestment];
+
+            for (let i = 1; i <= totalMonths; i++) {
+                totalValue = totalValue * (1 + monthlyRate) + monthlyContribution;
+                totalContributions += monthlyContribution;
+
+                if (i % 12 === 0) { // Every year
+                    labels.push(`Year ${i / 12}`);
+                    contributionsData.push(totalContributions);
+                    totalValueData.push(totalValue);
+                }
+            }
+
+            const totalGains = totalValue - totalContributions;
+            const annualizedReturn = ((totalValue / initialInvestment) ** (1 / investmentYears) - 1) * 100;
+
+            document.getElementById('totalInvested').textContent = formatCurrency(totalContributions);
+            document.getElementById('totalInvestmentValue').textContent = formatCurrency(totalValue);
+            document.getElementById('totalInvestmentGains').textContent = formatCurrency(totalGains);
+            document.getElementById('annualizedInvestmentReturn').textContent = formatPercentage(annualizedReturn);
+
+
+            if (!investmentGrowthChartInstance) {
+                initializeInvestmentGrowthChart();
+            }
+            investmentGrowthChartInstance.data.labels = labels;
+            investmentGrowthChartInstance.data.datasets[0].data = contributionsData;
+            investmentGrowthChartInstance.data.datasets[1].data = totalValueData;
+            investmentGrowthChartInstance.update();
+            gsap.from("#investmentResults", {opacity: 0, y: 30, duration: 0.6, ease: "power3.out"});
+        });
+
+
+        // Initial calls for sections that might be active on load (e.g., Dashboard)
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ensure charts are initialized for the default active dashboard
+            initializeDashboardCharts();
+        });
+
+    </script>
 </body>
 </html>
