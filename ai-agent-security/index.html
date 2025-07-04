@@ -1,21 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financiator Pro - Calculadora Financiera en Tiempo Real</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="financiator/main.css">
-    <script src="./financiator/main.js"></script>
+    <title>NEXUS AI Security Agent</title>
     <style>
         * {
             margin: 0;
@@ -24,1865 +12,1168 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
-            min-height: 100vh;
-            color: #333;
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
             overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            color: white;
             position: relative;
         }
 
-        .header::before {
-            content: '';
+        /* Background Particle Animations */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
             position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            width: 2px;
+            height: 2px;
+            background: #00ff00;
             border-radius: 50%;
-            z-index: -1;
+            animation: particleMove 10s linear infinite;
         }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        @keyframes particleMove {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
         }
 
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
+        /* Animated Data Lines */
+        .data-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
         }
 
-        .live-data-banner {
-            background: rgba(0,0,0,0.2);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 30px;
-            color: white;
+        .data-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            animation: dataFlow 3s linear infinite;
+        }
+
+        @keyframes dataFlow {
+            0% {
+                width: 0%;
+                left: 0;
+            }
+            50% {
+                width: 100%;
+                left: 0;
+            }
+            100% {
+                width: 0%;
+                left: 100%;
+            }
+        }
+
+        /* Red Alert Mode */
+        body.red-alert {
+            animation: redAlertFlash 0.5s infinite alternate;
+        }
+
+        @keyframes redAlertFlash {
+            0%, 100% { background: #0a0a0a; }
+            50% { background: #4a0000; }
+        }
+
+        body.red-alert * {
+            color: #ff3333 !important;
+            border-color: #ff3333 !important;
+            text-shadow: 0 0 5px #ff0000;
+            filter: saturate(1.5);
+        }
+        
+        body.red-alert .header h1 {
+            animation: glitchEffect 0.3s infinite alternate;
+        }
+
+        @keyframes glitchEffect {
+            0% { transform: translate(0); text-shadow: 0 0 5px #ff0000; }
+            20% { transform: translate(-2px, 2px); text-shadow: 0 0 8px #ff0000, 0 0 12px #ff0000; }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); text-shadow: 0 0 8px #ff0000; }
+            100% { transform: translate(0); text-shadow: 0 0 5px #ff0000; }
+        }
+
+        /* Main Container */
+        .main-container {
             position: relative;
-            overflow: hidden;
+            z-index: 10;
+            min-height: 100vh;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 20px;
         }
 
-        .live-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #ef4444;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-
-        .ticker-wrapper {
-            overflow: hidden;
-            position: relative;
-        }
-
-        .ticker-content {
-            display: flex;
-            animation: scroll 45s linear infinite;
-            white-space: nowrap;
-            gap: 40px;
-        }
-
-        .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 15px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            background: rgba(0, 255, 255, 0.1);
             backdrop-filter: blur(10px);
         }
 
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .header h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px #00ffff;
+            margin-bottom: 10px;
+            animation: titleGlow 2s ease-in-out infinite alternate;
         }
 
-        .nav-container {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px #00ffff; }
+            100% { text-shadow: 0 0 40px #00ffff, 0 0 60px #00ffff; }
         }
 
-        .nav-tabs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 8px;
-        }
-
-        .nav-tab {
-            padding: 12px 16px;
-            text-align: center;
-            background: transparent;
-            border: none;
-            color: rgba(255,255,255,0.7);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
+        .status-bar {
             display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
+            margin: 5px;
         }
 
-        .nav-tab:hover {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            transform: translateY(-2px);
+        .status-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #00ff00;
         }
 
-        .nav-tab.active {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: white;
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        /* Left Panel */
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .calculator-section {
-            display: none;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            position: relative;
+        /* Console */
+        .console {
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            background: rgba(0, 255, 0, 0.05);
+            height: 300px;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .calculator-section.active {
-            display: block;
-            animation: slideIn 0.6s ease-out;
+        .console h3 {
+            margin-bottom: 15px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .console-output {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .console-line {
+            margin-bottom: 5px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Scanner */
+        .scanner {
+            border: 2px solid #ff6b00;
+            border-radius: 10px;
+            padding: 20px;
+            background: rgba(255, 107, 0, 0.05);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .scanner h3 {
+            margin-bottom: 15px;
+            color: #ff6b00;
+            text-shadow: 0 0 10px #ff6b00;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #00ffff);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .scan-results {
+            margin-top: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        /* Right Panel */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* AI Chat */
+        .ai-chat {
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+            padding: 20px;
+            background: rgba(255, 0, 255, 0.05);
+            backdrop-filter: blur(5px);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ai-chat h3 {
+            margin-bottom: 15px;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .chat-message.user {
+            background: rgba(0, 255, 0, 0.2);
+            text-align: right;
+        }
+
+        .chat-message.ai {
+            background: rgba(255, 0, 255, 0.2);
+            text-align: left;
         }
 
         @keyframes slideIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px) scale(0.95);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-            }
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 25px;
-            color: #1e40af;
-            text-align: center;
+        .chat-input {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            font-weight: 700;
+            gap: 10px;
         }
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #ff00ff;
+            border-radius: 5px;
+            color: #ff00ff;
+            font-family: 'Courier New', monospace;
         }
 
-        .metric-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
+        .chat-input input:focus {
+            outline: none;
+            box-shadow: 0 0 10px #ff00ff;
+        }
+
+        /* Visual Spectrum */
+        .spectrum {
+            border: 2px solid #00ff00;
+            border-radius: 10px;
             padding: 20px;
+            background: rgba(0, 255, 0, 0.05);
+            backdrop-filter: blur(5px);
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .spectrum h3 {
+            margin-bottom: 15px;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .spectrum-bars {
+            display: flex;
+            justify-content: space-around;
+            align-items: end;
+            height: 100px;
+            margin-top: 20px;
+        }
+
+        .spectrum-bar {
+            width: 8px;
+            background: linear-gradient(to top, #00ff00, #00ffff);
+            border-radius: 4px;
+            transition: height 0.2s ease;
+        }
+
+        /* Controls */
+        .controls {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: 2px solid #00ffff;
+            border-radius: 25px;
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            cursor: pointer;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
             overflow: hidden;
         }
 
-        .metric-card::before {
+        .btn::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #06b6d4, #10b981);
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
         }
 
-        .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border-color: #3b82f6;
+        .btn:hover::before {
+            left: 100%;
         }
 
-        .metric-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .btn.danger {
+            border-color: #ff0000;
+            color: #ff0000;
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        .btn.danger:hover {
+            border-color: #ff6666;
+            color: #ff6666;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .btn.success {
+            border-color: #00ff00;
+            color: #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .btn.success:hover {
+            border-color: #66ff66;
+            color: #66ff66;
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .btn.btn-listening {
+            border-color: #ff00ff; /* Color to indicate active state */
+            color: #ff00ff;
+            box-shadow: 0 0 15px #ff00ff;
+            animation: pulseListening 1.5s infinite; /* Pulse animation */
+        }
+
+        @keyframes pulseListening {
+            0% { box-shadow: 0 0 15px #ff00ff; }
+            50% { box-shadow: 0 0 25px #ff00ff, 0 0 35px #ff00ff; }
+            100% { box-shadow: 0 0 15px #ff00ff; }
+        }
+
+
+        /* Additional Metrics */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.05);
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .metric-value {
             font-size: 2rem;
-            font-weight: 700;
-            color: #1e40af;
-            margin-bottom: 8px;
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 5px;
         }
 
         .metric-label {
             font-size: 0.9rem;
-            color: #64748b;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #888;
         }
 
-        .metric-change {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 8px;
-            padding: 4px 8px;
-            border-radius: 8px;
-        }
-
-        .metric-change.positive {
-            color: #065f46;
-            background: #d1fae5;
-        }
-
-        .metric-change.negative {
-            color: #991b1b;
-            background: #fee2e2;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #374151;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 14px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #ffffff;
-            font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        .currency-selector {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .currency-selector select {
-            min-width: 100px;
-        }
-
-        .live-price {
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            color: #0c4a6e;
-            font-weight: 600;
-            min-width: 120px;
-            text-align: center;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            min-width: 180px;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        }
-
-        .btn-secondary:hover {
-            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
-        }
-
-        .results-panel {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            margin-top: 25px;
-            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.3);
-        }
-
-        .results-panel h3 {
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        .result-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .result-item {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .result-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .result-value {
-            font-weight: 700;
-            font-size: 1.4rem;
-        }
-
-        .chart-container {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            margin-top: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .basic-calc {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .calc-display {
-            grid-column: 1 / -1;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: right;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1e40af;
-            min-height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            font-family: 'Courier New', monospace;
-        }
-
-        .calc-btn {
-            aspect-ratio: 1;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: #ffffff;
-            color: #374151;
-        }
-
-        .calc-btn:hover {
-            background: #f3f4f6;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .calc-btn.operator {
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .calc-btn.equals {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            border-color: #10b981;
-        }
-
-        .calc-btn.clear {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            border-color: #ef4444;
-        }
-
-        .premium-badge {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-left: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .footer {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-            margin-top: 50px;
-            padding: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #ffffff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 10px;
             }
             
             .header h1 {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
             }
             
-            .dashboard-grid,
-            .form-grid {
-                grid-template-columns: 1fr;
+            .status-bar {
+                flex-direction: column;
+                gap: 10px;
             }
             
-            .nav-tabs {
-                grid-template-columns: repeat(2, 1fr);
+            .controls {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .basic-calc {
+            .btn {
+                width: 100%;
                 max-width: 300px;
             }
+        }
+
+        /* Typing animations */
+        .typing-indicator {
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Panel hover effects */
+        .console:hover, .scanner:hover, .ai-chat:hover, .spectrum:hover, .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1><i class="fas fa-chart-line"></i> Financiator Pro</h1>
-            <p>Calculadora Financiera Avanzada con Datos en Tiempo Real</p>
-        </header>
+    <div class="particle-container" id="particles"></div>
+    <div class="data-lines" id="dataLines"></div>
 
-        <!-- Live Data Banner -->
-        <div class="live-data-banner">
-            <div class="live-indicator">
-                <div class="live-dot"></div>
-                <span><strong>DATOS EN VIVO</strong> - Actualización cada 30 segundos</span>
-            </div>
-            <div class="ticker-wrapper">
-                <div class="ticker-content" id="liveTicker">
-                    <div class="ticker-item">
-                        <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
-                        <span id="btc-price">BTC: Cargando...</span>
-                    </div>
-                    <div class="ticker-item">
-                        <i class="fab fa-ethereum" style="color: #627eea;"></i>
-                        <span id="eth-price">ETH: Cargando...</span>
-                    </div>
-                    <div class="ticker-item">
-                        <i class="fas fa-dollar-sign" style="color: #22c55e;"></i>
-                        <span id="usd-ars">USD/ARS: Cargando...</span>
-                    </div>
-                    <div class="ticker-item">
-                        <i class="fas fa-percentage" style="color: #ef4444;"></i>
-                        <span id="inflation-arg">Inflación ARG: Cargando...</span>
-                    </div>
-                    <div class="ticker-item">
-                        <i class="fas fa-chart-area" style="color: #3b82f6;"></i>
-                        <span id="sp500">S&P 500: Cargando...</span>
-                    </div>
-                    <div class="ticker-item">
-                        <i class="fas fa-oil-can" style="color: #000000;"></i>
-                        <span id="oil-price">Petróleo: Cargando...</span>
-                    </div>
-                    <div class="ticker-item">
-                        <i class="fas fa-coins" style="color: #ffd700;"></i>
-                        <span id="gold-price">Oro: Cargando...</span>
-                    </div>
+    <div class="main-container">
+        <div class="header">
+            <h1>NEXUS AI Security Agent</h1>
+            <div class="status-bar">
+                <div class="status-item">
+                    <div class="status-value" id="cpuUsage">0%</div>
+                    <div>CPU</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value" id="memoryUsage">0%</div>
+                    <div>RAM</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value" id="networkActivity">0 KB/s</div>
+                    <div>NETWORK</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value" id="threatsBlocked">0</div>
+                    <div>THREATS</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value" id="currentTime">00:00:00</div>
+                    <div>TIME</div>
                 </div>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="nav-container">
-            <div class="nav-tabs">
-                <button class="nav-tab active" data-section="dashboard">
-                    <i class="fas fa-tachometer-alt"></i>
-                    Dashboard
-                </button>
-                <button class="nav-tab" data-section="basic">
-                    <i class="fas fa-calculator"></i>
-                    Calculadora
-                </button>
-                <button class="nav-tab" data-section="crypto">
-                    <i class="fab fa-bitcoin"></i>
-                    Crypto
-                </button>
-                <button class="nav-tab" data-section="forex">
-                    <i class="fas fa-exchange-alt"></i>
-                    Divisas
-                </button>
-                <button class="nav-tab" data-section="inflation">
-                    <i class="fas fa-chart-line"></i>
-                    Inflación
-                </button>
-                <button class="nav-tab" data-section="interest">
-                    <i class="fas fa-percentage"></i>
-                    Interés
-                </button>
-                <button class="nav-tab" data-section="loans">
-                    <i class="fas fa-money-bill-wave"></i>
-                    Préstamos
-                </button>
-                <button class="nav-tab" data-section="investment">
-                    <i class="fas fa-chart-pie"></i>
-                    Inversión
-                </button>
-                <button class="nav-tab" data-section="stocks">
-                    <i class="fas fa-chart-bar"></i>
-                    Acciones
-                    <span class="premium-badge">Pro</span>
-                </button>
-                <button class="nav-tab" data-section="commodities">
-                    <i class="fas fa-seedling"></i>
-                    Commodities
-                    <span class="premium-badge">Pro</span>
-                </button>
+        <div class="left-panel">
+            <div class="console">
+                <h3>🖥️ SECURITY TERMINAL</h3>
+                <div class="console-output" id="consoleOutput"></div>
+            </div>
+
+            <div class="scanner">
+                <h3>🔍 ACTIVE SCANNER</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="scanProgress"></div>
+                </div>
+                <div id="scanStatus">Initializing scan...</div>
+                <div class="scan-results" id="scanResults"></div>
+            </div>
+
+            <div class="spectrum">
+                <h3>📊 NETWORK ACTIVITY</h3>
+                <div class="spectrum-bars" id="spectrumBars"></div>
             </div>
         </div>
 
-        <!-- Dashboard Section -->
-        <div class="calculator-section active" id="dashboard">
-            <h2 class="section-title">
-                <i class="fas fa-tachometer-alt"></i>
-                Dashboard Financiero en Tiempo Real
-            </h2>
+        <div class="right-panel">
+            <div class="ai-chat">
+                <h3>🤖 AI ASSISTANT</h3>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Type a command..." maxlength="100">
+                    <button class="btn" onclick="sendMessage()">SEND</button>
+                </div>
+            </div>
+
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-value" id="keystrokeSpeed">0</div>
+                    <div class="metric-label">WPM</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="concentrationLevel">0%</div>
+                    <div class="metric-label">CONCENTRATION</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="firewallLevel">100%</div>
+                    <div class="metric-label">FIREWALL</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn success" onclick="boostFirewall()">🛡️ BOOST FIREWALL</button>
+            <button class="btn" onclick="startScan()">🔍 SCAN</button>
+            <button class="btn" onclick="toggleVoiceRecognition()">🎤 VOICE</button>
+            <button class="btn danger" onclick="clearHistory()">🗑️ CLEAR</button>
+            <button class="btn danger" onclick="triggerRedAlert()">🚨 RED ALERT</button>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let isVoiceActive = false;
+        let redAlertActive = false;
+        let scanProgress = 0;
+        let firewallLevel = 100;
+        let threatsBlocked = 0;
+        let keystrokeCount = 0;
+        let keystrokeStartTime = Date.now();
+        let chatHistory = [];
+        let systemLogs = [];
+        let recognition; // Global variable for SpeechRecognition object
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved data on startup
+            loadHistory(); 
+            updateSystemStats(); // To display loaded threat count
+            document.getElementById('firewallLevel').textContent = `${firewallLevel}%`;
+
+            initializeParticles();
+            initializeDataLines();
+            initializeSpectrum();
+            startSystemMonitoring();
+            startAutoScan();
+            initializeChat();
+            setupKeystrokeTracking();
+        });
+
+        // Create animated particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Create data lines
+        function initializeDataLines() {
+            const container = document.getElementById('dataLines');
+            for (let i = 0; i < 10; i++) {
+                const line = document.createElement('div');
+                line.className = 'data-line';
+                line.style.top = Math.random() * 100 + '%';
+                line.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(line);
+            }
+        }
+
+        // Initialize visual spectrum
+        function initializeSpectrum() {
+            const container = document.getElementById('spectrumBars');
+            for (let i = 0; i < 20; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'spectrum-bar';
+                bar.style.height = '10px';
+                container.appendChild(bar);
+            }
+            animateSpectrum();
+        }
+
+        // Animate spectrum
+        function animateSpectrum() {
+            const bars = document.querySelectorAll('.spectrum-bar');
+            bars.forEach(bar => {
+                const height = Math.random() * 80 + 20;
+                bar.style.height = height + 'px';
+            });
+            setTimeout(animateSpectrum, 200);
+        }
+
+        // System Monitoring
+        function startSystemMonitoring() {
+            setInterval(() => {
+                updateSystemStats();
+                updateClock();
+                // Simulate concentration level (random for demo)
+                document.getElementById('concentrationLevel').textContent = `${Math.floor(Math.random() * 40 + 60)}%`;
+            }, 1000);
+        }
+
+        function updateSystemStats() {
+            document.getElementById('cpuUsage').textContent = Math.floor(Math.random() * 100) + '%';
+            document.getElementById('memoryUsage').textContent = Math.floor(Math.random() * 100) + '%';
+            document.getElementById('networkActivity').textContent = Math.floor(Math.random() * 1000) + ' KB/s';
+            document.getElementById('threatsBlocked').textContent = threatsBlocked;
+            document.getElementById('firewallLevel').textContent = `${firewallLevel}%`; // Ensure firewall level updates
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {hour12: false});
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        // Console System
+        function addConsoleLog(message, type = 'info') {
+            const consoleOutput = document.getElementById('consoleOutput');
+            const line = document.createElement('div');
+            line.className = 'console-line';
             
-            <div class="dashboard-grid">
-                <!-- Bitcoin -->
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fab fa-bitcoin"></i>
-                    </div>
-                    <div class="metric-value" id="dash-btc-price">$0</div>
-                    <div class="metric-label">Bitcoin (BTC)</div>
-                    <div class="metric-change" id="dash-btc-change">+0.00%</div>
-                </div>
+            const timestamp = new Date().toLocaleTimeString('en-US', {hour12: false});
+            let prefix = '';
+            let color = '';
 
-                <!-- Ethereum -->
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fab fa-ethereum"></i>
-                    </div>
-                    <div class="metric-value" id="dash-eth-price">$0</div>
-                    <div class="metric-label">Ethereum (ETH)</div>
-                    <div class="metric-change" id="dash-eth-change">+0.00%</div>
-                </div>
+            if (type === 'error') {
+                prefix = '[ERROR]';
+                color = '#ff3333';
+            } else if (type === 'warning') {
+                prefix = '[WARN]';
+                color = '#ff6b00';
+            } else {
+                prefix = '[INFO]';
+                color = '#00ffff';
+            }
+            
+            line.innerHTML = `<span style="color: #666;">[${timestamp}]</span> <span style="color: ${color};">${prefix}</span> ${message}`;
+            consoleOutput.appendChild(line);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            
+            // Keep only the last 50 visual lines
+            if (consoleOutput.children.length > 50) {
+                consoleOutput.removeChild(consoleOutput.firstChild);
+            }
 
-                <!-- USD/ARS -->
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <div class="metric-value" id="dash-usd-ars">$0</div>
-                    <div class="metric-label">USD/ARS</div>
-                    <div class="metric-change" id="dash-usd-change">+0.00%</div>
-                </div>
+            // Save to logs (for persistence)
+            systemLogs.push({timestamp: new Date().toISOString(), type: type, message: message});
+            if (systemLogs.length > 100) { // Limit the number of saved logs
+                systemLogs.shift();
+            }
+            saveHistory();
+        }
 
-                <!-- Inflación Argentina -->
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-percentage"></i>
-                    </div>
-                    <div class="metric-value" id="dash-inflation">0%</div>
-                    <div class="metric-label">Inflación ARG (Anual)</div>
-                    <div class="metric-change" id="dash-inflation-change">Mensual: 0%</div>
-                </div>
+        // Auto Scan
+        function startAutoScan() {
+            setInterval(() => {
+                if (Math.random() < 0.3) { // 30% chance every 5 seconds
+                    detectThreat();
+                }
+            }, 5000);
+            
+            // Initial scan and welcome messages
+            setTimeout(() => {
+                addConsoleLog('NEXUS Security System initialized.');
+                addConsoleLog('Scanner active - Monitoring for threats...');
+                addConsoleLog('Firewall online - Protection Level: MAXIMUM');
+                addAIMessage('🤖 NEXUS AI activated. How can I assist you?'); // Initial AI message
+            }, 1000);
+        }
 
-                <!-- S&P 500 -->
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-chart-area"></i>
-                    </div>
-                    <div class="metric-value" id="dash-sp500">0</div>
-                    <div class="metric-label">S&P 500</div>
-                    <div class="metric-change" id="dash-sp500-change">+0.00%</div>
-                </div>
+        function detectThreat() {
+            const threats = [
+                'Unauthorized access attempt from IP 192.168.1.100',
+                'Malware detected: Trojan.GenKryptik.xyz',
+                'Suspicious activity on port 8080',
+                'Brute force attempt blocked',
+                'Phishing detected in incoming email',
+                'Unauthorized database connection',
+                'Port scan detected',
+                'Ransomware successfully blocked',
+                'DDoS attack detected and mitigated',
+                'Vulnerability in web module exploited, patch applied'
+            ];
+            
+            const threat = threats[Math.floor(Math.random() * threats.length)];
+            addConsoleLog(`🚨 THREAT DETECTED: ${threat}`, 'warning');
+            threatsBlocked++;
+            
+            // Chance of red alert
+            if (Math.random() < 0.15) { // Increase probability for demonstration
+                triggerRedAlert();
+            }
+        }
 
-                <!-- Oro -->
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <div class="metric-value" id="dash-gold">$0</div>
-                    <div class="metric-label">Oro (oz)</div>
-                    <div class="metric-change" id="dash-gold-change">+0.00%</div>
-                </div>
-            </div>
-
-            <div class="chart-container">
-                <canvas id="dashboardChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-
-        <!-- Calculadora Básica -->
-        <div class="calculator-section" id="basic">
-            <h2 class="section-title">
-                <i class="fas fa-calculator"></i>
-                Calculadora Básica
-            </h2>
-            <div class="basic-calc">
-                <div class="calc-display" id="display">0</div>
-                <button class="calc-btn clear" onclick="clearDisplay()">C</button>
-                <button class="calc-btn" onclick="deleteLast()">⌫</button>
-                <button class="calc-btn" onclick="appendToDisplay('/')" title="Dividir">÷</button>
-                <button class="calc-btn operator" onclick="appendToDisplay('*')" title="Multiplicar">×</button>
+        // Manual Scan
+        function startScan() {
+            if (scanProgress > 0 && scanProgress < 100) {
+                addConsoleLog('Scan in progress. Please wait for the current scan to finish.', 'warning');
+                return;
+            }
+            addConsoleLog('Initiating manual system scan...', 'info');
+            scanProgress = 0;
+            const progressBar = document.getElementById('scanProgress');
+            const status = document.getElementById('scanStatus');
+            const results = document.getElementById('scanResults');
+            
+            status.textContent = 'Scanning system...';
+            results.innerHTML = '';
+            
+            const scanInterval = setInterval(() => {
+                scanProgress += Math.random() * 10;
+                progressBar.style.width = Math.min(scanProgress, 100) + '%';
                 
-                <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
-                <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
-                <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
-                <button class="calc-btn operator" onclick="appendToDisplay('-')">-</button>
+                if (scanProgress >= 100) {
+                    clearInterval(scanInterval);
+                    completeScan();
+                }
+            }, 150); // Make it a bit faster
+        }
+
+        function completeScan() {
+            const status = document.getElementById('scanStatus');
+            const results = document.getElementById('scanResults');
+            
+            status.textContent = 'Scan Completed';
+            
+            const scanResults = [
+                '✅ 0 critical threats detected',
+                `🔍 ${Math.floor(Math.random() * 1000) + 500} files scanned`,
+                '🛡️ Firewall functioning correctly',
+                '🔒 Encryption system active',
+                '📊 Network traffic: Normal',
+                '⚡ System performance: Optimal',
+                '🌐 All connections secure'
+            ];
+            
+            results.innerHTML = scanResults.map(result => `<div>${result}</div>`).join('');
+            addConsoleLog('Complete system scan finished - No threats detected', 'success');
+            scanProgress = 0; // Reset progress
+        }
+
+        // AI Chat
+        function initializeChat() {
+            const chatInput = document.getElementById('chatInput');
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            // Display chat history on load
+            const chatMessagesElem = document.getElementById('chatMessages');
+            chatHistory.forEach(msg => {
+                if (msg.type === 'user') {
+                    _addUserMessageRaw(msg.message);
+                } else {
+                    _addAIMessageRaw(msg.message);
+                }
+            });
+            chatMessagesElem.scrollTop = chatMessagesElem.scrollHeight; // Scroll to bottom
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addUserMessage(message);
+                input.value = '';
                 
-                <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
-                <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
-                <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
-                <button class="calc-btn operator" onclick="appendToDisplay('+')">+</button>
+                // Simulate AI response
+                setTimeout(() => {
+                    const response = generateAIResponse(message);
+                    addAIMessage(response);
+                }, 1000);
+            }
+        }
+
+        function addUserMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message user';
+            messageDiv.innerHTML = `<strong>User:</strong> ${message}`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Save to history
+            chatHistory.push({type: 'user', message: message, timestamp: Date.now()});
+            saveHistory();
+        }
+
+        // RAW version for loading from localStorage without typing animation or re-saving
+        function _addUserMessageRaw(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message user';
+            messageDiv.innerHTML = `<strong>User:</strong> ${message}`;
+            chatMessages.appendChild(messageDiv);
+        }
+
+        function addAIMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message ai';
+            // Add a temporary typing indicator
+            messageDiv.innerHTML = `<strong>NEXUS:</strong> <span class="typing-indicator">█</span>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulate typing time
+            let i = 0;
+            const typingSpeed = 30; // ms per character
+            const displayMessage = () => {
+                if (i < message.length) {
+                    messageDiv.innerHTML = `<strong>NEXUS:</strong> ${message.substring(0, i+1)}<span class="typing-indicator">█</span>`;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    i++;
+                    setTimeout(displayMessage, typingSpeed);
+                } else {
+                    messageDiv.innerHTML = `<strong>NEXUS:</strong> ${message}`; // Remove indicator when finished
+                    chatHistory.push({type: 'ai', message: message, timestamp: Date.now()});
+                    saveHistory();
+                }
+            };
+            setTimeout(displayMessage, 500); // Small delay before "typing" starts
+        }
+
+        // RAW version for loading from localStorage without typing animation or re-saving
+        function _addAIMessageRaw(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message ai';
+            messageDiv.innerHTML = `<strong>NEXUS:</strong> ${message}`;
+            chatMessages.appendChild(messageDiv);
+        }
+
+
+        function generateAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('status') || lowerMessage.includes('system status')) {
+                return `🔍 System operating at ${Math.floor(Math.random() * 20 + 80)}%. Firewall active. ${threatsBlocked} threats blocked today.`;
+            }
+            
+            if (lowerMessage.includes('scan system') || lowerMessage.includes('start scan')) {
+                startScan();
+                return '🔍 Initiating full system scan...';
+            }
+            
+            if (lowerMessage.includes('firewall') || lowerMessage.includes('protection level')) {
+                return `🛡️ Firewall operating at ${firewallLevel}%. Active protection against ${Math.floor(Math.random() * 1000 + 5000)} threat types.`;
+            }
+            
+            if (lowerMessage.includes('threat') || lowerMessage.includes('danger')) {
+                return `⚠️ Current threat level: ${Math.random() < 0.7 ? 'LOW' : 'MEDIUM'}. System monitoring ${Math.floor(Math.random() * 50 + 100)} active connections.`;
+            }
+            
+            if (lowerMessage.includes('help') || lowerMessage.includes('commands')) {
+                return '🤖 Available commands: "system status", "scan system", "firewall", "threats", "clear history", "red alert". How can I assist?';
+            }
+            
+            if (lowerMessage.includes('clear') || lowerMessage.includes('delete')) {
+                return '🗑️ Do you confirm clearing the history? Use the "CLEAR" button to proceed, or you can confirm with "yes, clear".';
+            }
+
+            if (lowerMessage.includes('yes, clear') || lowerMessage.includes('confirm clear')) {
+                clearHistory();
+                return '🗑️ History and logs successfully deleted.';
+            }
+
+            if (lowerMessage.includes('red alert') || lowerMessage.includes('emergency')) {
+                triggerRedAlert();
+                return '🚨 RED ALERT ACTIVATED! Preparing critical defenses.';
+            }
+            
+            // Generic responses
+            const responses = [
+                '🔒 Analyzing request... Security protocol activated.',
+                '⚡ Processing command through advanced neural matrix.',
+                '🛡️ Verifying security clearances... Access granted.',
+                '📊 Querying threat database... Information updated.',
+                '🤖 Command recognized. Executing response protocol.',
+                '🔍 Scanning context of query... Optimized response.'
+            ];
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Voice Recognition
+        function toggleVoiceRecognition() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('Your browser does not support voice recognition. Please use Chrome for this feature.');
+                return;
+            }
+            
+            if (isVoiceActive) {
+                stopVoiceRecognition();
+            } else {
+                startVoiceRecognition();
+            }
+        }
+
+        function startVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition(); // Assign to global variable
+            
+            recognition.lang = 'en-US'; // Set language to English
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            recognition.onstart = function() {
+                isVoiceActive = true;
+                addConsoleLog('🎤 Voice recognition ACTIVE. Speak now.');
+                const voiceButton = document.querySelector('.btn[onclick="toggleVoiceRecognition()"]');
+                if (voiceButton) { // Ensure button exists
+                    voiceButton.textContent = '🎤 LISTENING...';
+                    voiceButton.classList.add('btn-listening');
+                }
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                addConsoleLog(`🎤 Voice command received: "${transcript}"`);
+                document.getElementById('chatInput').value = transcript;
+                sendMessage(); // Send the command to chat for AI processing.
+
+                // Add logic for direct voice commands
+                const lowerTranscript = transcript.toLowerCase();
+                if (lowerTranscript.includes('scan system') || lowerTranscript.includes('start scan')) {
+                    startScan();
+                    addAIMessage('Order received: Initiating security scan...');
+                } else if (lowerTranscript.includes('maximize firewall') || lowerTranscript.includes('activate protection')) {
+                    boostFirewall();
+                    addAIMessage('Firewall reinforced. Protection at maximum.');
+                } else if (lowerTranscript.includes('red alert') || lowerTranscript.includes('emergency mode')) {
+                    triggerRedAlert();
+                    addAIMessage('RED ALERT ACTIVATED! Preparing critical defenses.');
+                } else if (lowerTranscript.includes('clear console') || lowerTranscript.includes('delete logs') || lowerTranscript.includes('clear all')) {
+                    clearHistory(); 
+                    addAIMessage('History and console logs deleted.');
+                } else {
+                    // If not a direct command, AI will respond via sendMessage()
+                }
+            };
+
+            recognition.onerror = function(event) {
+                addConsoleLog(`❌ Voice recognition error: ${event.error}`, 'error');
+                stopVoiceRecognition();
+            };
+
+            recognition.onend = function() {
+                stopVoiceRecognition();
+            };
+
+            try {
+                recognition.start();
+            } catch (e) {
+                addConsoleLog('🎤 Voice recognition is already active or there was a problem starting it.', 'error');
+                stopVoiceRecognition(); // Ensure visual state resets
+            }
+        }
+
+        function stopVoiceRecognition() {
+            if (recognition && isVoiceActive) { // Ensure there's an active instance
+                recognition.stop();
+            }
+            isVoiceActive = false;
+            addConsoleLog('🎤 Voice recognition DEACTIVATED.');
+            const voiceButton = document.querySelector('.btn[onclick="toggleVoiceRecognition()"]');
+            if (voiceButton) {
+                voiceButton.textContent = '🎤 VOICE';
+                voiceButton.classList.remove('btn-listening');
+            }
+        }
+
+        // Keystroke tracking for WPM
+        function setupKeystrokeTracking() {
+            document.addEventListener('keydown', () => {
+                keystrokeCount++;
+            });
+            setInterval(updateKeystrokeSpeed, 5000); // Update WPM every 5 seconds
+        }
+
+        function updateKeystrokeSpeed() {
+            const elapsedTime = (Date.now() - keystrokeStartTime) / 1000 / 60; // in minutes
+            if (elapsedTime > 0) {
+                const wpm = Math.round(keystrokeCount / 5 / elapsedTime); // 5 characters per word
+                document.getElementById('keystrokeSpeed').textContent = wpm;
+            } else {
+                document.getElementById('keystrokeSpeed').textContent = 0;
+            }
+            keystrokeCount = 0; // Reset for the next interval
+            keystrokeStartTime = Date.now();
+        }
+
+        // Control Functions
+        function boostFirewall() {
+            firewallLevel = 100;
+            document.getElementById('firewallLevel').textContent = `${firewallLevel}%`;
+            addConsoleLog('🛡️ Firewall boosted to 100%. Optimal protection level.', 'success');
+            addAIMessage('Firewall reinforced. Protection at maximum. All security protocols are active.');
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear **ALL** chat history and console logs? This action is irreversible.')) {
+                chatHistory = [];
+                systemLogs = [];
+                threatsBlocked = 0;
+                localStorage.removeItem('nexusChatHistory');
+                localStorage.removeItem('nexusSystemLogs');
+                localStorage.removeItem('nexusThreatsBlocked');
                 
-                <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
-                <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
-                <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
-                <button class="calc-btn equals" onclick="calculate()" style="grid-row: span 2;">=</button>
-                
-                <button class="calc-btn" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
-                <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
-            </div>
-        </div>
-
-        <!-- Crypto Calculator -->
-        <div class="calculator-section" id="crypto">
-            <h2 class="section-title">
-                <i class="fab fa-bitcoin"></i>
-                Calculadora de Criptomonedas
-            </h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-coins"></i> Cantidad</label>
-                    <input type="number" id="cryptoAmount" placeholder="1" step="0.00000001">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-list"></i> Criptomoneda</label>
-                    <div class="currency-selector">
-                        <select id="cryptoCurrency">
-                            <option value="bitcoin">Bitcoin (BTC)</option>
-                            <option value="ethereum">Ethereum (ETH)</option>
-                            <option value="binancecoin">Binance Coin (BNB)</option>
-                            <option value="cardano">Cardano (ADA)</option>
-                            <option value="solana">Solana (SOL)</option>
-                            <option value="polkadot">Polkadot (DOT)</option>
-                        </select>
-                        <div class="live-price" id="cryptoCurrentPrice">$0</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-money-bill"></i> Convertir a</label>
-                    <select id="targetCurrency">
-                        <option value="usd">USD</option>
-                        <option value="ars">ARS</option>
-                        <option value="eur">EUR</option>
-                        <option value="btc">BTC</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn" onclick="calculateCrypto()">
-                <i class="fas fa-sync"></i>
-                Calcular Valor
-            </button>
-            <div class="results-panel" id="cryptoResults" style="display: none;">
-                <h3><i class="fas fa-coins"></i> Resultado de Conversión</h3>
-                <div class="result-grid" id="cryptoResultsContent"></div>
-            </div>
-        </div>
-
-        <!-- Forex Calculator -->
-        <div class="calculator-section" id="forex">
-            <h2 class="section-title">
-                <i class="fas fa-exchange-alt"></i>
-                Conversor de Divisas
-            </h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-dollar-sign"></i> Cantidad</label>
-                    <input type="number" id="forexAmount" placeholder="1000" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-flag"></i> Desde</label>
-                    <div class="currency-selector">
-                        <select id="fromCurrency">
-                            <option value="USD">USD - Dólar</option>
-                            <option value="ARS">ARS - Peso Argentino</option>
-                            <option value="EUR">EUR - Euro</option>
-                            <option value="GBP">GBP - Libra</option>
-                            <option value="JPY">JPY - Japonese Yen</option>
-        </select>
-                        <div class="live-price" id="toCurrencyPrice">$0</div>
-                    </div>
-                </div>
-            </div>
-            <button class="btn" onclick="calculateForex()">
-                <i class="fas fa-sync"></i>
-                Convertir Divisa
-            </button>
-            <div class="results-panel" id="forexResults" style="display: none;">
-                <h3><i class="fas fa-exchange-alt"></i> Resultado de Conversión</h3>
-                <div class="result-grid" id="forexResultsContent"></div>
-            </div>
-        </div>
-
-                <div class="calculator-section" id="inflation">
-            <h2 class="section-title">
-                <i class="fas fa-chart-line"></i>
-                Calculadora de Inflación
-            </h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-money-bill-wave"></i> Monto Inicial</label>
-                    <input type="number" id="initialAmountInflation" placeholder="10000" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-percentage"></i> Tasa de Inflación Anual (%)</label>
-                    <input type="number" id="inflationRate" placeholder="50" step="0.1">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Años</label>
-                    <input type="number" id="inflationYears" placeholder="1" step="1">
-                </div>
-            </div>
-            <button class="btn" onclick="calculateInflation()">
-                <i class="fas fa-chart-line"></i>
-                Calcular Inflación
-            </button>
-            <div class="results-panel" id="inflationResults" style="display: none;">
-                <h3><i class="fas fa-chart-line"></i> Impacto de la Inflación</h3>
-                <div class="result-grid" id="inflationResultsContent"></div>
-            </div>
-        </div>
-
-                <div class="calculator-section" id="interest">
-            <h2 class="section-title">
-                <i class="fas fa-percentage"></i>
-                Calculadora de Intereses
-            </h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-dollar-sign"></i> Principal</label>
-                    <input type="number" id="principal" placeholder="10000" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-percentage"></i> Tasa de Interés Anual (%)</label>
-                    <input type="number" id="interestRate" placeholder="5" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Período (Años)</label>
-                    <input type="number" id="interestYears" placeholder="10" step="1">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-money-check"></i> Tipo de Interés</label>
-                    <select id="interestType">
-                        <option value="simple">Simple</option>
-                        <option value="compound">Compuesto Anual</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn" onclick="calculateInterest()">
-                <i class="fas fa-calculator"></i>
-                Calcular Interés
-            </button>
-            <div class="results-panel" id="interestResults" style="display: none;">
-                <h3><i class="fas fa-percentage"></i> Resultados de Interés</h3>
-                <div class="result-grid" id="interestResultsContent"></div>
-                <div class="chart-container">
-                    <canvas id="interestChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-                <div class="calculator-section" id="loans">
-            <h2 class="section-title">
-                <i class="fas fa-money-bill-wave"></i>
-                Calculadora de Préstamos
-            </h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-dollar-sign"></i> Monto del Préstamo</label>
-                    <input type="number" id="loanAmount" placeholder="100000" step="100">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-percentage"></i> Tasa de Interés Anual (%)</label>
-                    <input type="number" id="loanInterestRate" placeholder="7" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Plazo (Años)</label>
-                    <input type="number" id="loanYears" placeholder="30" step="1">
-                </div>
-            </div>
-            <button class="btn" onclick="calculateLoan()">
-                <i class="fas fa-calculator"></i>
-                Calcular Préstamo
-            </button>
-            <div class="results-panel" id="loanResults" style="display: none;">
-                <h3><i class="fas fa-money-bill-wave"></i> Resumen del Préstamo</h3>
-                <div class="result-grid" id="loanResultsContent"></div>
-                <div class="chart-container">
-                    <canvas id="loanChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-                <div class="calculator-section" id="investment">
-            <h2 class="section-title">
-                <i class="fas fa-chart-pie"></i>
-                Calculadora de Inversiones
-            </h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-dollar-sign"></i> Monto Inicial</label>
-                    <input type="number" id="initialInvestment" placeholder="5000" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-dollar-sign"></i> Contribución Mensual</label>
-                    <input type="number" id="monthlyContribution" placeholder="100" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-percentage"></i> Tasa de Retorno Anual Esperada (%)</label>
-                    <input type="number" id="returnRate" placeholder="8" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> Período (Años)</label>
-                    <input type="number" id="investmentYears" placeholder="20" step="1">
-                </div>
-            </div>
-            <button class="btn" onclick="calculateInvestment()">
-                <i class="fas fa-chart-pie"></i>
-                Calcular Inversión
-            </button>
-            <div class="results-panel" id="investmentResults" style="display: none;">
-                <h3><i class="fas fa-chart-pie"></i> Proyección de Inversión</h3>
-                <div class="result-grid" id="investmentResultsContent"></div>
-                <div class="chart-container">
-                    <canvas id="investmentChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-                <div class="calculator-section" id="stocks">
-            <h2 class="section-title">
-                <i class="fas fa-chart-bar"></i>
-                Calculadora de Acciones <span class="premium-badge">Pro</span>
-            </h2>
-            <p style="text-align: center; margin-bottom: 20px; color: #6b7280;">Esta función está disponible en la versión Financiator Pro.</p>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-building"></i> Símbolo de Ticker</label>
-                    <input type="text" id="stockSymbol" placeholder="AAPL" disabled>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-sort-numeric-up"></i> Cantidad de Acciones</label>
-                    <input type="number" id="stockQuantity" placeholder="10" step="1" disabled>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-dollar-sign"></i> Precio de Compra</label>
-                    <input type="number" id="stockBuyPrice" placeholder="150.00" step="0.01" disabled>
-                </div>
-            </div>
-            <button class="btn btn-secondary" disabled>
-                <i class="fas fa-lock"></i>
-                Desbloquear Pro
-            </button>
-        </div>
-
-                <div class="calculator-section" id="commodities">
-            <h2 class="section-title">
-                <i class="fas fa-seedling"></i>
-                Calculadora de Commodities <span class="premium-badge">Pro</span>
-            </h2>
-            <p style="text-align: center; margin-bottom: 20px; color: #6b7280;">Esta función está disponible en la versión Financiator Pro.</p>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-box-open"></i> Commodity</label>
-                    <select id="commodityType" disabled>
-                        <option value="gold">Oro</option>
-                        <option value="silver">Plata</option>
-                        <option value="oil">Petróleo</option>
-                        <option value="naturalGas">Gas Natural</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-weight-hanging"></i> Cantidad (unidades)</label>
-                    <input type="number" id="commodityQuantity" placeholder="10" step="0.01" disabled>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-dollar-sign"></i> Precio Actual</label>
-                    <input type="number" id="commodityCurrentPrice" placeholder="1800.00" step="0.01" disabled>
-                </div>
-            </div>
-            <button class="btn btn-secondary" disabled>
-                <i class="fas fa-lock"></i>
-                Desbloquear Pro
-            </button>
-        </div>
-
-    </div>
-
-        <footer class="footer">
-        <p>&copy; 2025 Financiator Pro. Todos los derechos reservados.</p>
-        <p>Datos financieros proporcionados por fuentes externas y pueden tener retrasos. Consulta a un profesional financiero antes de tomar decisiones de inversión.</p>
-    </footer>
-
-    <script>
-        // Global state and constants
-        const API_KEY_COINGECKO = 'YOUR_COINGECKO_API_KEY'; // Replace with your actual CoinGecko API key
-        const API_KEY_EXCHANGERATE = 'YOUR_EXCHANGERATE_API_KEY'; // Replace with your actual ExchangeRate-API key
-        const API_KEY_ALPHAVANTAGE = 'YOUR_ALPHAVANTAGE_API_KEY'; // Replace with your actual Alpha Vantage API key
-
-        let currentRates = {
-            bitcoin: 0,
-            ethereum: 0,
-            usd_ars: 0,
-            sp500: 0,
-            gold: 0,
-            oil: 0
-        };
-
-        let dashboardChartInstance = null;
-        let interestChartInstance = null;
-        let loanChartInstance = null;
-        let investmentChartInstance = null;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            setupNavTabs();
-            fetchAllLivePrices();
-            setInterval(fetchAllLivePrices, 30000); // Update every 30 seconds
-            setupInputListeners();
-            initializeDashboardChart();
-        });
-
-        function setupNavTabs() {
-            const navTabs = document.querySelectorAll('.nav-tab');
-            const sections = document.querySelectorAll('.calculator-section');
-
-            navTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    navTabs.forEach(t => t.classList.remove('active'));
-                    sections.forEach(s => s.classList.remove('active'));
-
-                    tab.classList.add('active');
-                    const targetSectionId = tab.dataset.section;
-                    document.getElementById(targetSectionId).classList.add('active');
-
-                    // Re-render charts if the section contains one
-                    if (targetSectionId === 'interest' && interestChartInstance) {
-                        interestChartInstance.resize();
-                    } else if (targetSectionId === 'loan' && loanChartInstance) {
-                        loanChartInstance.resize();
-                    } else if (targetSectionId === 'investment' && investmentChartInstance) {
-                        investmentChartInstance.resize();
-                    } else if (targetSectionId === 'dashboard' && dashboardChartInstance) {
-                        dashboardChartInstance.resize();
-                    }
-                });
-            });
-        }
-
-        function setupInputListeners() {
-            document.getElementById('cryptoCurrency').addEventListener('change', updateCryptoCurrentPrice);
-            document.getElementById('fromCurrency').addEventListener('change', updateFromCurrencyPrice);
-        }
-
-        // --- Live Data Fetching ---
-
-        async function fetchAllLivePrices() {
-            console.log('Fetching live prices...');
-            // Reset ticker content to force animation
-            const tickerContent = document.getElementById('liveTicker');
-            tickerContent.style.animation = 'none';
-            void tickerContent.offsetWidth; // Trigger reflow
-            tickerContent.style.animation = null;
-
-            await Promise.all([
-                fetchCryptoPrices(),
-                fetchForexRates(),
-                fetchInflationData(),
-                fetchSP500(),
-                fetchCommodityPrices()
-            ]);
-            updateDashboardMetrics();
-            updateCryptoCurrentPrice();
-            updateFromCurrencyPrice();
-        }
-
-        async function fetchCryptoPrices() {
-            try {
-                // Using CoinGecko API for cryptocurrency prices
-                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true&x_cg_demo_api_key=${API_KEY_COINGECKO}`);
-                const data = await response.json();
-
-                if (data.bitcoin && data.ethereum) {
-                    currentRates.bitcoin = data.bitcoin.usd;
-                    currentRates.ethereum = data.ethereum.usd;
-                    const btcChange = data.bitcoin.usd_24hr_change ? data.bitcoin.usd_24hr_change.toFixed(2) : '0.00';
-                    const ethChange = data.ethereum.usd_24hr_change ? data.ethereum.usd_24hr_change.toFixed(2) : '0.00';
-
-                    document.getElementById('btc-price').textContent = `BTC: $${currentRates.bitcoin.toLocaleString()}`;
-                    document.getElementById('eth-price').textContent = `ETH: $${currentRates.ethereum.toLocaleString()}`;
-                    updateMetricCard('dash-btc', currentRates.bitcoin, btcChange);
-                    updateMetricCard('dash-eth', currentRates.ethereum, ethChange);
-                }
-            } catch (error) {
-                console.error('Error fetching crypto prices:', error);
-                document.getElementById('btc-price').textContent = 'BTC: Error';
-                document.getElementById('eth-price').textContent = 'ETH: Error';
-                updateMetricCard('dash-btc', 'N/A', 'N/A');
-                updateMetricCard('dash-eth', 'N/A', 'N/A');
-            }
-        }
-
-        async function fetchForexRates() {
-            try {
-                // Using ExchangeRate-API for forex rates (free plan has rate limits and only USD base)
-                const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY_EXCHANGERATE}/latest/USD`);
-                const data = await response.json();
-
-                if (data.result === 'success' && data.conversion_rates.ARS) {
-                    currentRates.usd_ars = data.conversion_rates.ARS;
-                    document.getElementById('usd-ars').textContent = `USD/ARS: ${currentRates.usd_ars.toFixed(2)}`;
-                    // For change, we'd need historical data, which is beyond a simple free API call
-                    updateMetricCard('dash-usd', currentRates.usd_ars.toFixed(2), 'N/A', true);
-                }
-            } catch (error) {
-                console.error('Error fetching forex rates:', error);
-                document.getElementById('usd-ars').textContent = 'USD/ARS: Error';
-                updateMetricCard('dash-usd', 'N/A', 'N/A');
-            }
-        }
-
-        async function fetchInflationData() {
-            try {
-                // Placeholder for Argentina inflation data - typically this comes from a national statistics agency or a specialized data provider.
-                // For demonstration, we'll use a mock value.
-                const annualInflation = 276.4; // Example: Annual inflation for Argentina (as of recent data)
-                const monthlyInflation = 4.2; // Example: Monthly inflation for Argentina
-
-                document.getElementById('inflation-arg').textContent = `Inflación ARG: ${annualInflation}%`;
-                updateMetricCard('dash-inflation', `${annualInflation}%`, `Mensual: ${monthlyInflation}%`, false);
-            } catch (error) {
-                console.error('Error fetching inflation data:', error);
-                document.getElementById('inflation-arg').textContent = 'Inflación ARG: Error';
-                updateMetricCard('dash-inflation', 'N/A', 'N/A');
-            }
-        }
-
-        async function fetchSP500() {
-            try {
-                // Using Alpha Vantage for S&P 500 (API key needed for real-time/frequent data)
-                const response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=SPY&apikey=${API_KEY_ALPHAVANTAGE}`);
-                const data = await response.json();
-
-                if (data['Global Quote'] && data['Global Quote']['05. price']) {
-                    const price = parseFloat(data['Global Quote']['05. price']).toFixed(2);
-                    const change = parseFloat(data['Global Quote']['10. change percent']).toFixed(2);
-                    currentRates.sp500 = price;
-
-                    document.getElementById('sp500').textContent = `S&P 500: ${price}`;
-                    updateMetricCard('dash-sp500', price, `${change}%`);
-                } else {
-                    throw new Error('Invalid S&P 500 data from API');
-                }
-            } catch (error) {
-                console.error('Error fetching S&P 500 data:', error);
-                document.getElementById('sp500').textContent = 'S&P 500: Error';
-                updateMetricCard('dash-sp500', 'N/A', 'N/A');
-            }
-        }
-
-        async function fetchCommodityPrices() {
-            try {
-                // Using Alpha Vantage for Gold (GC=F) and Crude Oil (CL=F)
-                const [goldResponse, oilResponse] = await Promise.all([
-                    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GC=F&apikey=${API_KEY_ALPHAVANTAGE}`),
-                    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=CL=F&apikey=${API_KEY_ALPHAVANTAGE}`)
-                ]);
-
-                const goldData = await goldResponse.json();
-                const oilData = await oilResponse.json();
-
-                if (goldData['Global Quote'] && goldData['Global Quote']['05. price']) {
-                    const goldPrice = parseFloat(goldData['Global Quote']['05. price']).toFixed(2);
-                    const goldChange = parseFloat(goldData['Global Quote']['10. change percent']).toFixed(2);
-                    currentRates.gold = goldPrice;
-                    document.getElementById('gold-price').textContent = `Oro: $${goldPrice}`;
-                    updateMetricCard('dash-gold', `$${goldPrice}`, `${goldChange}%`);
-                } else {
-                    throw new Error('Invalid Gold data from API');
-                }
-
-                if (oilData['Global Quote'] && oilData['Global Quote']['05. price']) {
-                    const oilPrice = parseFloat(oilData['Global Quote']['05. price']).toFixed(2);
-                    const oilChange = parseFloat(oilData['Global Quote']['10. change percent']).toFixed(2);
-                    currentRates.oil = oilPrice;
-                    document.getElementById('oil-price').textContent = `Petróleo: $${oilPrice}`;
-                } else {
-                    throw new Error('Invalid Oil data from API');
-                }
-
-            } catch (error) {
-                console.error('Error fetching commodity prices:', error);
-                document.getElementById('gold-price').textContent = 'Oro: Error';
-                document.getElementById('oil-price').textContent = 'Petróleo: Error';
-                updateMetricCard('dash-gold', 'N/A', 'N/A');
-            }
-        }
-
-        function updateDashboardMetrics() {
-            // This function is now mostly handled by `fetchCryptoPrices`, `fetchForexRates`, etc.
-            // It's kept for any general dashboard updates or if some metrics are static.
-            if (dashboardChartInstance) {
-                updateDashboardChart();
-            }
-        }
-
-        function updateMetricCard(idPrefix, value, change, isCurrency = true) {
-            const valueElement = document.getElementById(`${idPrefix}-price`);
-            const changeElement = document.getElementById(`${idPrefix}-change`);
-
-            if (valueElement) {
-                valueElement.textContent = isCurrency ? `$${value.toLocaleString()}` : value;
-            }
-            if (changeElement) {
-                changeElement.textContent = change;
-                changeElement.className = 'metric-change'; // Reset classes
-                if (change !== 'N/A') {
-                    if (parseFloat(change) > 0) {
-                        changeElement.classList.add('positive');
-                    } else if (parseFloat(change) < 0) {
-                        changeElement.classList.add('negative');
-                    }
-                }
-            }
-        }
-
-        // --- Basic Calculator Functions ---
-        let currentInput = '0';
-        let operator = null;
-        let previousInput = '';
-        let resetDisplay = false;
-
-        function updateDisplay() {
-            document.getElementById('display').innerText = currentInput;
-        }
-
-        function appendToDisplay(value) {
-            if (currentInput === '0' || resetDisplay) {
-                currentInput = value;
-                resetDisplay = false;
-            } else {
-                currentInput += value;
-            }
-            updateDisplay();
-        }
-
-        function clearDisplay() {
-            currentInput = '0';
-            operator = null;
-            previousInput = '';
-            resetDisplay = false;
-            updateDisplay();
-        }
-
-        function deleteLast() {
-            currentInput = currentInput.slice(0, -1);
-            if (currentInput === '') {
-                currentInput = '0';
-            }
-            updateDisplay();
-        }
-
-        function calculate() {
-            try {
-                currentInput = eval(currentInput).toString();
-                updateDisplay();
-                resetDisplay = true;
-            } catch (e) {
-                currentInput = 'Error';
-                updateDisplay();
-                resetDisplay = true;
-            }
-        }
-
-        // --- Crypto Calculator Functions ---
-
-        async function updateCryptoCurrentPrice() {
-            const crypto = document.getElementById('cryptoCurrency').value;
-            try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=usd&x_cg_demo_api_key=${API_KEY_COINGECKO}`);
-                const data = await response.json();
-                const price = data[crypto].usd;
-                document.getElementById('cryptoCurrentPrice').textContent = `$${price.toLocaleString()}`;
-            } catch (error) {
-                console.error('Error fetching crypto current price:', error);
-                document.getElementById('cryptoCurrentPrice').textContent = 'Error';
-            }
-        }
-
-        async function calculateCrypto() {
-            const amount = parseFloat(document.getElementById('cryptoAmount').value);
-            const crypto = document.getElementById('cryptoCurrency').value;
-            const target = document.getElementById('targetCurrency').value;
-            const resultsDiv = document.getElementById('cryptoResultsContent');
-            document.getElementById('cryptoResults').style.display = 'block';
-            resultsDiv.innerHTML = '<div class="loading"></div> Calculando...';
-
-            if (isNaN(amount) || amount <= 0) {
-                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Cantidad inválida</div></div>';
-                return;
-            }
-
-            try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=${target},usd&x_cg_demo_api_key=${API_KEY_COINGECKO}`);
-                const data = await response.json();
-
-                let convertedValue = 0;
-                let displayTarget = target.toUpperCase();
-                let exchangeRate = 1;
-
-                if (target === 'btc' && crypto !== 'bitcoin') {
-                    const cryptoPriceInUsd = data[crypto].usd;
-                    const btcPriceInUsd = currentRates.bitcoin;
-                    if (btcPriceInUsd > 0) {
-                        convertedValue = (amount * cryptoPriceInUsd) / btcPriceInUsd;
-                        exchangeRate = cryptoPriceInUsd / btcPriceInUsd;
-                    } else {
-                        throw new Error('Bitcoin price not available for conversion.');
-                    }
-                } else if (crypto === target) {
-                    convertedValue = amount;
-                } else if (data[crypto] && data[crypto][target]) {
-                    convertedValue = amount * data[crypto][target];
-                    exchangeRate = data[crypto][target];
-                } else if (target === 'ars' && data[crypto] && data[crypto]['usd']) {
-                    if (currentRates.usd_ars > 0) {
-                        convertedValue = amount * data[crypto].usd * currentRates.usd_ars;
-                        exchangeRate = data[crypto].usd * currentRates.usd_ars;
-                    } else {
-                        throw new Error('USD/ARS exchange rate not available.');
-                    }
-                } else {
-                    throw new Error('Conversion not supported or data unavailable.');
-                }
-
-                resultsDiv.innerHTML = `
-                    <div class="result-item">
-                        <div class="result-label">Valor Convertido</div>
-                        <div class="result-value">${convertedValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })} ${displayTarget.toUpperCase()}</div>
-                    </div>
-                    <div class="result-item">
-                        <div class="result-label">Tasa de Cambio</div>
-                        <div class="result-value">1 ${crypto.toUpperCase()} = ${exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })} ${displayTarget.toUpperCase()}</div>
-                    </div>
-                `;
-            } catch (error) {
-                console.error('Error calculating crypto:', error);
-                resultsDiv.innerHTML = `<div class="result-item"><div class="result-label">Error</div><div class="result-value">${error.message || 'Error en la conversión'}</div></div>`;
-            }
-        }
-
-        // --- Forex Calculator Functions ---
-
-        async function updateFromCurrencyPrice() {
-            const fromCurrency = document.getElementById('fromCurrency').value;
-            const priceDisplay = document.getElementById('fromCurrencyPrice');
-
-            if (fromCurrency === 'USD') {
-                priceDisplay.textContent = `$1 USD`;
-                return;
-            }
-
-            try {
-                const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY_EXCHANGERATE}/latest/${fromCurrency}`);
-                const data = await response.json();
-
-                if (data.result === 'success' && data.conversion_rates.USD) {
-                    priceDisplay.textContent = `1 ${fromCurrency} = $${data.conversion_rates.USD.toFixed(4)} USD`;
-                } else {
-                    throw new Error('Could not fetch rate for selected currency.');
-                }
-            } catch (error) {
-                console.error('Error updating from currency price:', error);
-                priceDisplay.textContent = 'Error';
-            }
-        }
-
-        async function calculateForex() {
-            const amount = parseFloat(document.getElementById('forexAmount').value);
-            const fromCurrency = document.getElementById('fromCurrency').value;
-            const toCurrency = document.getElementById('toCurrency').value;
-            const resultsDiv = document.getElementById('forexResultsContent');
-            document.getElementById('forexResults').style.display = 'block';
-            resultsDiv.innerHTML = '<div class="loading"></div> Calculando...';
-
-            if (isNaN(amount) || amount <= 0) {
-                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Cantidad inválida</div></div>';
-                return;
-            }
-
-            if (fromCurrency === toCurrency) {
-                resultsDiv.innerHTML = `
-                    <div class="result-item">
-                        <div class="result-label">Valor Convertido</div>
-                        <div class="result-value">${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${toCurrency}</div>
-                    </div>
-                    <div class="result-item">
-                        <div class="result-label">Tasa de Cambio</div>
-                        <div class="result-value">1 ${fromCurrency} = 1 ${toCurrency}</div>
-                    </div>
-                `;
-                return;
-            }
-
-            try {
-                const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY_EXCHANGERATE}/pair/${fromCurrency}/${toCurrency}`);
-                const data = await response.json();
-
-                if (data.result === 'success' && data.conversion_rate) {
-                    const convertedValue = amount * data.conversion_rate;
-                    resultsDiv.innerHTML = `
-                        <div class="result-item">
-                            <div class="result-label">Valor Convertido</div>
-                            <div class="result-value">${convertedValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })} ${toCurrency}</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-label">Tasa de Cambio</div>
-                            <div class="result-value">1 ${fromCurrency} = ${data.conversion_rate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })} ${toCurrency}</div>
-                        </div>
-                    `;
-                } else {
-                    throw new Error(data.error_type || 'Error en la conversión de divisas');
-                }
-            } catch (error) {
-                console.error('Error calculating forex:', error);
-                resultsDiv.innerHTML = `<div class="result-item"><div class="result-label">Error</div><div class="result-value">${error.message || 'No se pudo obtener la tasa de cambio.'}</div></div>`;
-            }
-        }
-
-        // --- Inflation Calculator Functions ---
-        function calculateInflation() {
-            const initialAmount = parseFloat(document.getElementById('initialAmountInflation').value);
-            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
-            const years = parseInt(document.getElementById('inflationYears').value);
-            const resultsDiv = document.getElementById('inflationResultsContent');
-            document.getElementById('inflationResults').style.display = 'block';
-
-            if (isNaN(initialAmount) || isNaN(inflationRate) || isNaN(years) || initialAmount <= 0 || years <= 0) {
-                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Ingrese valores válidos</div></div>';
-                return;
-            }
-
-            const futureValue = initialAmount * Math.pow((1 - inflationRate), years);
-            const purchasingPowerLoss = initialAmount - futureValue;
-
-            resultsDiv.innerHTML = `
-                <div class="result-item">
-                    <div class="result-label">Valor Equivalente Futuro</div>
-                    <div class="result-value">$${futureValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">Pérdida de Poder Adquisitivo</div>
-                    <div class="result-value">$${purchasingPowerLoss.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-            `;
-        }
-
-        // --- Interest Calculator Functions ---
-        function calculateInterest() {
-            const principal = parseFloat(document.getElementById('principal').value);
-            const annualRate = parseFloat(document.getElementById('interestRate').value) / 100;
-            const years = parseInt(document.getElementById('interestYears').value);
-            const interestType = document.getElementById('interestType').value;
-            const resultsDiv = document.getElementById('interestResultsContent');
-            document.getElementById('interestResults').style.display = 'block';
-
-            if (isNaN(principal) || isNaN(annualRate) || isNaN(years) || principal <= 0 || years <= 0) {
-                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Ingrese valores válidos</div></div>';
-                return;
-            }
-
-            let finalAmount;
-            let totalInterest;
-            const dataPoints = [];
-
-            if (interestType === 'simple') {
-                totalInterest = principal * annualRate * years;
-                finalAmount = principal + totalInterest;
-                for (let i = 0; i <= years; i++) {
-                    dataPoints.push({ year: i, amount: principal + (principal * annualRate * i) });
-                }
-            } else { // compound
-                finalAmount = principal * Math.pow((1 + annualRate), years);
-                totalInterest = finalAmount - principal;
-                for (let i = 0; i <= years; i++) {
-                    dataPoints.push({ year: i, amount: principal * Math.pow((1 + annualRate), i) });
-                }
-            }
-
-            resultsDiv.innerHTML = `
-                <div class="result-item">
-                    <div class="result-label">Monto Final</div>
-                    <div class="result-value">$${finalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">Intereses Totales</div>
-                    <div class="result-value">$${totalInterest.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-            `;
-
-            renderInterestChart(dataPoints);
-        }
-
-        function renderInterestChart(dataPoints) {
-            const ctx = document.getElementById('interestChart').getContext('2d');
-            if (interestChartInstance) {
-                interestChartInstance.destroy();
-            }
-            interestChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: dataPoints.map(p => `Año ${p.year}`),
-                    datasets: [{
-                        label: 'Valor del Capital',
-                        data: dataPoints.map(p => p.amount),
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Crecimiento del Capital a lo Largo del Tiempo',
-                            color: '#333'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `Valor: $${context.parsed.y.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Monto ($)'
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return `$${value.toLocaleString()}`;
-                                }
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Año'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // --- Loan Calculator Functions ---
-        function calculateLoan() {
-            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
-            const annualInterestRate = parseFloat(document.getElementById('loanInterestRate').value) / 100;
-            const loanYears = parseInt(document.getElementById('loanYears').value);
-            const resultsDiv = document.getElementById('loanResultsContent');
-            document.getElementById('loanResults').style.display = 'block';
-
-            if (isNaN(loanAmount) || isNaN(annualInterestRate) || isNaN(loanYears) || loanAmount <= 0 || loanYears <= 0) {
-                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Ingrese valores válidos</div></div>';
-                return;
-            }
-
-            const monthlyInterestRate = annualInterestRate / 12;
-            const numberOfPayments = loanYears * 12;
-
-            let monthlyPayment;
-            if (annualInterestRate === 0) {
-                monthlyPayment = loanAmount / numberOfPayments;
-            } else {
-                monthlyPayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
-            }
-            const totalPayments = monthlyPayment * numberOfPayments;
-            const totalInterestPaid = totalPayments - loanAmount;
-
-            resultsDiv.innerHTML = `
-                <div class="result-item">
-                    <div class="result-label">Pago Mensual</div>
-                    <div class="result-value">$${monthlyPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">Total Pagado</div>
-                    <div class="result-value">$${totalPayments.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">Intereses Totales Pagados</div>
-                    <div class="result-value">$${totalInterestPaid.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-            `;
-
-            renderLoanChart(loanAmount, totalInterestPaid);
-        }
-
-        function renderLoanChart(principal, interest) {
-            const ctx = document.getElementById('loanChart').getContext('2d');
-            if (loanChartInstance) {
-                loanChartInstance.destroy();
-            }
-            loanChartInstance = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Monto Principal', 'Intereses Totales'],
-                    datasets: [{
-                        data: [principal, interest],
-                        backgroundColor: ['#3b82f6', '#f59e0b'],
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Distribución del Pago del Préstamo',
-                            color: '#333'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    label += `$${context.parsed.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // --- Investment Calculator Functions ---
-        function calculateInvestment() {
-            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value);
-            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
-            const annualReturnRate = parseFloat(document.getElementById('returnRate').value) / 100;
-            const investmentYears = parseInt(document.getElementById('investmentYears').value);
-            const resultsDiv = document.getElementById('investmentResultsContent');
-            document.getElementById('investmentResults').style.display = 'block';
-
-            if (isNaN(initialInvestment) || isNaN(monthlyContribution) || isNaN(annualReturnRate) || isNaN(investmentYears) || initialInvestment < 0 || investmentYears <= 0) {
-                resultsDiv.innerHTML = '<div class="result-item"><div class="result-label">Error</div><div class="result-value">Ingrese valores válidos</div></div>';
-                return;
-            }
-
-            const monthlyRate = annualReturnRate / 12;
-            const totalMonths = investmentYears * 12;
-
-            let futureValue = initialInvestment;
-            const dataPoints = [{ month: 0, value: initialInvestment }];
-
-            for (let i = 1; i <= totalMonths; i++) {
-                futureValue = (futureValue * (1 + monthlyRate)) + monthlyContribution;
-                dataPoints.push({ month: i, value: futureValue });
-            }
-
-            const totalInvested = initialInvestment + (monthlyContribution * totalMonths);
-            const totalGains = futureValue - totalInvested;
-
-            resultsDiv.innerHTML = `
-                <div class="result-item">
-                    <div class="result-label">Valor Futuro de la Inversión</div>
-                    <div class="result-value">$${futureValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">Capital Total Invertido</div>
-                    <div class="result-value">$${totalInvested.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">Ganancias Totales</div>
-                    <div class="result-value">$${totalGains.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                </div>
-            `;
-
-            renderInvestmentChart(dataPoints);
-        }
-
-        function renderInvestmentChart(dataPoints) {
-            const ctx = document.getElementById('investmentChart').getContext('2d');
-            if (investmentChartInstance) {
-                investmentChartInstance.destroy();
-            }
-            investmentChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: dataPoints.map(p => `Mes ${p.month}`),
-                    datasets: [{
-                        label: 'Valor de la Inversión',
-                        data: dataPoints.map(p => p.value),
-                        borderColor: '#10b981',
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Proyección del Valor de la Inversión',
-                            color: '#333'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `Valor: $${context.parsed.y.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Monto ($)'
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return `$${value.toLocaleString()}`;
-                                }
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Mes'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // --- Dashboard Chart (Example) ---
-        function initializeDashboardChart() {
-            const ctx = document.getElementById('dashboardChart').getContext('2d');
-            dashboardChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Bitcoin', 'Ethereum', 'USD/ARS', 'S&P 500', 'Oro'],
-                    datasets: [{
-                        label: 'Valores Actuales',
-                        data: [
-                            currentRates.bitcoin,
-                            currentRates.ethereum,
-                            currentRates.usd_ars,
-                            currentRates.sp500,
-                            currentRates.gold
-                        ],
-                        backgroundColor: [
-                            'rgba(247, 147, 26, 0.7)', // Bitcoin
-                            'rgba(98, 126, 234, 0.7)', // Ethereum
-                            'rgba(34, 197, 94, 0.7)',  // USD/ARS
-                            'rgba(59, 130, 246, 0.7)', // S&P 500
-                            'rgba(255, 215, 0, 0.7)'  // Gold
-                        ],
-                        borderColor: [
-                            '#f7931a',
-                            '#627eea',
-                            '#22c55e',
-                            '#3b82f6',
-                            '#ffd700'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Comparación de Activos Actuales',
-                            color: '#333'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: $${context.parsed.y.toLocaleString()}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: false, // Crypto and S&P 500 won't start at zero
-                            title: {
-                                display: true,
-                                text: 'Valor'
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return `$${value.toLocaleString()}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        function updateDashboardChart() {
-            if (dashboardChartInstance) {
-                dashboardChartInstance.data.datasets[0].data = [
-                    currentRates.bitcoin,
-                    currentRates.ethereum,
-                    currentRates.usd_ars,
-                    currentRates.sp500,
-                    currentRates.gold
-                ];
-                dashboardChartInstance.update();
-            }
-        }
-
-    </script>
+                document.getElementById('chatMessages').innerHTML = ''; // Clear visually
+                document.getElementById('consoleOutput').innerHTML = ''; // Clear visually
+                addConsoleLog('🗑️ All history and logs have been cleared from the system.', 'info');
+                addAIMessage('Operation history cleared. Resetting systems.');
+                updateSystemStats(); // Update threat counter
+            }
+        }
+
+        function triggerRedAlert() {
+            redAlertActive = !redAlertActive;
+            const body = document.body;
+            body.classList.toggle('red-alert', redAlertActive);
+
+            if (redAlertActive) {
+                addConsoleLog('🚨 CRITICAL WARNING! RED ALERT MODE ACTIVATED. Imminent threat detected.', 'error');
+                // You can add a sound here if you have one:
+                // new Audio('path/to/alarm.mp3').play(); 
+                addAIMessage('RED ALERT ACTIVATED! Preparing critical defenses. Tracing intrusion origin...');
+            } else {
+                addConsoleLog('✅ Red Alert Mode DEACTIVATED. Normalizing security systems.', 'info');
+                addAIMessage('Red Alert Mode deactivated. Threat contained. Systems returning to normal.');
+            }
+
+            // Automatically deactivate after a time if not manually reactivated
+            if (redAlertActive) {
+                setTimeout(() => {
+                    if (redAlertActive) { // Only deactivates if still active
+                        triggerRedAlert(); // Call it again to deactivate
+                    }
+                }, 15000); // Deactivates after 15 seconds if no new threats or intervention
+            }
+        }
+
+        // Data persistence with localStorage
+        function loadHistory() {
+            const savedChat = localStorage.getItem('nexusChatHistory');
+            const savedLogs = localStorage.getItem('nexusSystemLogs');
+            const savedThreats = localStorage.getItem('nexusThreatsBlocked');
+
+            if (savedChat) {
+                chatHistory = JSON.parse(savedChat);
+            }
+            if (savedLogs) {
+                systemLogs = JSON.parse(savedLogs);
+                const consoleOutput = document.getElementById('consoleOutput');
+                // Load only the last 50 to avoid overcrowding
+                systemLogs.slice(-50).forEach(log => {
+                    const line = document.createElement('div');
+                    line.className = 'console-line';
+                    let color = '';
+                    if (log.type === 'error') color = '#ff3333';
+                    else if (log.type === 'warning') color = '#ff6b00';
+                    else color = '#00ffff';
+                    line.innerHTML = `<span style="color: #666;">[${new Date(log.timestamp).toLocaleTimeString('en-US', {hour12: false})}]</span> <span style="color: ${color};">[${log.type.toUpperCase()}]</span> ${log.message}`;
+                    consoleOutput.appendChild(line);
+                });
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            }
+            if (savedThreats) {
+                threatsBlocked = parseInt(savedThreats);
+            }
+        }
+
+        function saveHistory() {
+            localStorage.setItem('nexusChatHistory', JSON.stringify(chatHistory));
+            localStorage.setItem('nexusSystemLogs', JSON.stringify(systemLogs));
+            localStorage.setItem('nexusThreatsBlocked', threatsBlocked.toString());
+        }
+
+    </script>
 </body>
 </html>
