@@ -14,7 +14,6 @@
     <meta property="og:description" content="Explore Jairo Barrientos's professional portfolio, featuring web development projects and a Cisco Certified CyberOps Associate certification.">
     <meta property="og:image" content="https://www.yourportfolio.com/images/og-image.jpg">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -1341,58 +1340,27 @@
                         </div>
                     </a>
                 </div>
-                
-<div class="project-card">
-  <a href="ai-agent-security/index.html" class="project-link">
-    <div class="project-svg-container">
-      <svg id="svg-cybersecurity" viewBox="0 0 100 100" aria-hidden="true" role="img" aria-labelledby="cybersecurity-title">
-        <title id="cybersecurity-title">Cybersecurity Shield and Lock Icon</title>
-        <path
-          class="shield-path"
-          d="M50 10 L10 40 L10 80 L50 90 L90 80 L90 40 Z"
-          fill="#1a2a3a"
-          stroke="#00e5ff"
-          stroke-width="3"
-        />
-        <g class="lock-icon">
-          <circle
-            class="lock-fill"
-            cx="50"
-            cy="55"
-            r="15"
-            fill="#8000ff"
-          />
-          <rect
-            x="45"
-            y="45"
-            width="10"
-            height="15"
-            rx="2"
-            ry="2"
-            fill="#000"
-          />
-          <path
-            d="M55 40 C55 35 50 30 45 35 V45"
-            fill="none"
-            stroke="#000"
-            stroke-width="5"
-            stroke-linecap="round"
-          />
-        </g>
-      </svg>
-    </div>
-    <div class="project-content">
-      <h3>AI‑Agent Security Dashboard</h3>
-      <p>
-        Plataforma avanzada de monitoreo de seguridad y análisis de
-        vulnerabilidades, construida para proteger infraestructuras críticas.
-      </p>
-    </div>
-    <div class="project-button-wrapper">
-      <span class="project-button">Ver Proyecto</span>
-    </div>
-  </a>
-</div>
+
+                <div class="project-card">
+                    <a href="cyber-security-project/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
+                        <div class="project-svg-container">
+                            <svg id="svg-cybersecurity" viewBox="0 0 100 100">
+                                <path d="M50 10 L10 40 L10 80 L50 90 L90 80 L90 40 Z" fill="#1a2a3a" stroke="#00e5ff" stroke-width="3" class="shield-path"/>
+                                <circle cx="50" cy="55" r="15" fill="#8000ff" class="lock-fill"/>
+                                <rect x="45" y="45" width="10" height="15" fill="#000" rx="2" ry="2"/>
+                                <path d="M55 40 C55 35 50 30 45 35 V45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="project-content">
+                            <h3>CyberGuard Elite</h3>
+                            <p>Plataforma avanzada de monitoreo de seguridad y análisis de vulnerabilidades, construida para proteger infraestructuras críticas.</p>
+                        </div>
+                        <div class="project-button-wrapper">
+                            <span class="project-button">Ver Proyecto</span>
+                        </div>
+                    </a>
+                </div>
+
                 <div class="project-card">
                     <a href="weather-app/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
                         <div class="project-svg-container">
@@ -1670,302 +1638,122 @@
             </div>
         </section>
 
-     <section id="contact-button-section">
-    <style>
-        /* Variables de color para un azul eléctrico consistente */
-        :root {
-            --electric-blue: #00bfff; /* Azul eléctrico base */
-            --dark-electric-blue: #007bff; /* Tono más oscuro para degradados */
-            --light-electric-blue: #87cefa; /* Tono más claro para brillos */
-            --shadow-color: rgba(0, 191, 255, 0.4); /* Sombra con color del botón */
-        }
+        <!-- ==============================
+             Sección de Contacto (completa e integrada)
+             ============================== -->
+        <section id="contact" style="padding: 100px 20px; text-align: center; background: #050a11; color: white;">
+            <h2 class="holographic-text glitch" data-text="Contacto">Contacto</h2>
+            <p style="color: var(--color-text-medium);">
+                Próximamente: ¡Mi formulario de contacto o detalles de contacto aquí!
+            </p>
 
-        /* Estilos base para el contenedor del widget de contacto */
-        /* Puedes ajustar el margen o la posición de este contenedor según el diseño de tu portafolio. */
-        /* Ejemplo: margin: 50px auto; para centrarlo horizontalmente con algo de espacio superior. */
-        .contact-widget-container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            perspective: 1200px; /* Para posibles efectos 3D futuros */
-        }
-
-        /* --- Estilos del Botón "Contact Me" --- */
-        .contact-button {
-            background: linear-gradient(145deg, var(--electric-blue), var(--dark-electric-blue));
-            color: white;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 50px; /* Bordes bien redondeados */
-            font-size: 1.4em;
-            font-weight: 600;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden; /* **Clave para el efecto de llenado líquido** */
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición suave para hover/clic */
-            box-shadow: 0 8px 20px var(--shadow-color); /* Sombra llamativa */
-            outline: none; /* Elimina el contorno azul al enfocar en algunos navegadores */
-            z-index: 20; /* Asegura que el botón esté por encima del contenido y partículas */
-            letter-spacing: 0.5px;
-            text-transform: uppercase; /* Texto en mayúsculas */
-        }
-
-        /* Efecto de "halo" o "borde" al pasar el ratón por encima */
-        .contact-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.1); /* Ligero brillo transparente */
-            transform: scale(0);
-            opacity: 0;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-            z-index: -1; /* Detrás del texto del botón */
-        }
-
-        .contact-button:hover::before {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        /* --- Efecto Líquido (se llena desde abajo) --- */
-        .contact-button::after {
-            content: '';
-            position: absolute;
-            bottom: 0; /* Empieza desde la parte inferior del botón */
-            left: 0;
-            width: 100%;
-            height: 0; /* Inicialmente no visible */
-            background: rgba(255, 255, 255, 0.2); /* Color del "líquido" (blanco semitransparente) */
-            border-radius: 50px;
-            transition: height 0.7s cubic-bezier(0.19, 1, 0.22, 1); /* Animación fluida de llenado */
-            z-index: -1; /* Detrás del texto del botón */
-        }
-
-        /* Cuando el botón tiene la clase 'filled', el líquido sube */
-        .contact-button.filled::after {
-            height: 100%; /* El líquido llena completamente el botón */
-        }
-
-        /* --- Efecto de Brillo/Partículas al hacer clic --- */
-        .particle {
-            position: absolute;
-            background-color: var(--light-electric-blue); /* Color del brillo */
-            border-radius: 50%; /* Forma circular */
-            opacity: 0; /* Inicialmente invisible */
-            animation: sparkle 0.8s forwards; /* Animación de destello */
-            pointer-events: none; /* No interactuable con el ratón */
-            z-index: 25; /* Siempre por encima del botón y el panel de contacto */
-        }
-
-        /* Keyframes para la animación de las partículas */
-        @keyframes sparkle {
-            0% {
-                transform: translate(0, 0) scale(0); /* Empieza pequeño en el centro */
-                opacity: 0;
-            }
-            20% {
-                opacity: 1; /* Se vuelve visible rápidamente */
-            }
-            100% {
-                transform: translate(var(--x), var(--y)) scale(1); /* Se dispersa y crece */
-                opacity: 0; /* Se desvanece al final */
-            }
-        }
-
-        /* --- Contenedor de Información de Contacto --- */
-        .contact-info-panel {
-            background: white;
-            padding: 30px;
-            border-radius: 20px; /* Bordes suaves para el panel */
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Sombra elegante */
-            position: absolute;
-            top: 100%; /* Posiciona el panel justo debajo del botón */
-            margin-top: 30px; /* Espacio entre el botón y el panel */
-            width: 90%; /* Se adapta al ancho del contenedor padre */
-            max-width: 400px; /* Ancho máximo para una buena legibilidad */
-            opacity: 0; /* Inicialmente invisible */
-            transform: translateY(-20px) scale(0.8); /* Empieza ligeramente elevado y encogido */
-            pointer-events: none; /* Inactivo cuando no está visible */
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Transición con efecto de rebote */
-            z-index: 10; /* Por debajo del botón, pero por encima de otros contenidos */
-        }
-
-        /* Cuando el panel tiene la clase 'visible', se despliega */
-        .contact-info-panel.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1); /* Se despliega a su tamaño y posición normales */
-            pointer-events: auto; /* Se vuelve interactivo */
-        }
-
-        /* Estilos para el título del panel de contacto */
-        .contact-info-panel h3 {
-            color: var(--dark-electric-blue);
-            margin-top: 0;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.6em;
-            border-bottom: 2px solid var(--electric-blue); /* Línea decorativa */
-            padding-bottom: 10px;
-        }
-
-        /* Estilos para cada línea de información de contacto */
-        .contact-info-panel p {
-            margin: 12px 0;
-            color: #444;
-            line-height: 1.5;
-            display: flex;
-            align-items: center;
-            font-size: 1.05em;
-        }
-
-        .contact-info-panel p strong {
-            color: #333;
-            min-width: 90px; /* Asegura alineación vertical de etiquetas */
-            margin-right: 10px;
-        }
-
-        .contact-info-panel a {
-            color: var(--dark-electric-blue);
-            text-decoration: none;
-            word-break: break-all; /* Evita desbordamiento con URLs largas */
-            transition: color 0.2s ease;
-        }
-
-        .contact-info-panel a:hover {
-            color: var(--electric-blue);
-            text-decoration: underline;
-        }
-
-        /* Estilos para los íconos (requiere Font Awesome 5 Free en tu <head>) */
-        /* Asegúrate de tener esta línea en tu <head>: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> */
-        .contact-info-panel p::before {
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            margin-right: 10px;
-            color: var(--electric-blue);
-            font-size: 1.1em;
-            min-width: 20px;
-            text-align: center;
-        }
-        .contact-info-panel p:nth-child(2)::before { content: "\f007"; } /* Icono de usuario */
-        .contact-info-panel p:nth-child(3)::before { content: "\f0e0"; } /* Icono de sobre (email) */
-        .contact-info-panel p:nth-child(4)::before { content: "\f232"; } /* Icono de WhatsApp */
-        .contact-info-panel p:nth-child(5)::before { content: "\f08c"; } /* Icono de LinkedIn */
-
-        /* Media Queries para responsividad en pantallas pequeñas */
-        @media (max-width: 600px) {
-            .contact-button {
-                padding: 15px 30px;
-                font-size: 1.2em;
-            }
-            .contact-info-panel {
-                width: 95%;
-                margin-top: 20px;
-                padding: 20px;
-            }
-            .contact-info-panel h3 {
-                font-size: 1.4em;
-            }
-            .contact-info-panel p {
-                font-size: 0.95em;
-                flex-direction: column; /* Apila etiquetas y contenido para mejor lectura */
-                align-items: flex-start;
-            }
-            .contact-info-panel p strong {
-                margin-bottom: 5px;
-            }
-        }
-    </style>
-
-    <div class="contact-widget-container">
-        <button class="contact-button" id="contactBtn">
-            Contact Me
-        </button>
-
-        <div class="contact-info-panel" id="contactInfoPanel">
-            <h3>Contact Information</h3>
-            <p><strong>Full Name:</strong> Jairo Lemuel Barrientos</p>
-            <p><strong>Email:</strong> <a href="mailto:barrientosjairolemuel@gmail.com">barrientosjairolemuel@gmail.com</a></p>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/5493437457636" target="_blank" rel="noopener noreferrer">Send Message</a></p>
-            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jairo-barrientos-8a6b00226" target="_blank" rel="noopener noreferrer">My LinkedIn Profile</a></p>
-        </div>
-    </div>
+            <!-- Botón integrado -->
+            <button
+              id="contact-btn"
+              class="fade-in-up"
+              style="
+                margin-top: 30px;
+                padding: 0.75rem 1.5rem;
+                font-family: 'Orbitron', sans-serif;
+                font-size: 1rem;
+                text-transform: uppercase;
+                border: none;
+                border-radius: 0.5rem;
+                background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+                color: #fff;
+                cursor: pointer;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+              "
+              aria-label="Contáctame ahora"
+            >
+              Contáctame ahora
+            </button>
+        </section>
+    </main>
 
     <script>
-        // Este script se ejecutará una vez que el DOM esté completamente cargado.
         document.addEventListener('DOMContentLoaded', () => {
-            const contactBtn = document.getElementById('contactBtn');
-            const contactInfoPanel = document.getElementById('contactInfoPanel');
-            const contactWidgetContainer = document.querySelector('.contact-widget-container');
+            // Scroll Progress Bar
+            const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = (window.scrollY / totalHeight) * 100;
+                scrollProgressBar.style.width = progress + '%';
+            });
 
-            // Maneja el clic en el botón de contacto
-            contactBtn.addEventListener('click', (event) => {
-                event.stopPropagation(); // Evita que el evento de clic se propague al documento (para el cierre al hacer clic fuera)
-
-                // Si el panel ya está visible, lo cerramos. Si no, lo abrimos.
-                if (contactInfoPanel.classList.contains('visible')) {
-                    contactBtn.classList.remove('filled'); // Quita el efecto de llenado
-                    // Pequeño retraso para que la animación de "rebote" al cerrar sea visible antes de quitar la clase 'visible'
-                    setTimeout(() => {
-                        contactInfoPanel.classList.remove('visible');
-                    }, 300); 
+            // Header Scrolled Effect
+            const mainHeader = document.querySelector('.main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    mainHeader.classList.add('scrolled');
                 } else {
-                    // Si el panel no está visible, lo desplegamos
-                    contactInfoPanel.classList.add('visible'); // Muestra el panel
-                    contactBtn.classList.add('filled'); // Activa el efecto de llenado líquido
+                    mainHeader.classList.remove('scrolled');
+                }
+            });
 
-                    // Generar los brillos al hacer clic
-                    const numParticles = 15; // Número de partículas a generar
-                    const rect = contactBtn.getBoundingClientRect(); // Obtiene la posición y tamaño del botón
+            // Smooth Scroll for Navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Active link highlighting
+                    document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
 
-                    for (let i = 0; i < numParticles; i++) {
-                        const particle = document.createElement('div');
-                        particle.classList.add('particle');
-                        
-                        // Calcula una posición aleatoria para la partícula dentro del botón
-                        const x = (Math.random() - 0.5) * rect.width * 0.8;
-                        const y = (Math.random() - 0.5) * rect.height * 0.8;
-                        const size = Math.random() * 5 + 2; // Tamaño aleatorio para la partícula
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // element is 10% visible
+            };
 
-                        particle.style.width = `${size}px`;
-                        particle.style.height = `${size}px`;
-                        // Posiciona la partícula inicialmente en el centro del botón
-                        particle.style.left = `${rect.left + rect.width / 2}px`;
-                        particle.style.top = `${rect.top + rect.height / 2}px`;
-                        
-                        // Añade la partícula al 'body' para que pueda moverse libremente por la pantalla
-                        document.body.appendChild(particle);
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0) scale(1)';
 
-                        // Establece variables CSS personalizadas para la animación de dispersión de la partícula
-                        particle.style.setProperty('--x', `${x * 2}px`); // La partícula se dispersa el doble
-                        particle.style.setProperty('--y', `${y * 2}px`);
-                        particle.style.animationDuration = `${0.8 + Math.random() * 0.4}s`; // Duración aleatoria de la animación
-                        particle.style.animationDelay = `${Math.random() * 0.2}s`; // Retraso aleatorio antes de que empiece la animación
+                        // Special handling for SVG animations based on ID for projects
+                        if (entry.target.querySelector('#svg-finance')) {
+                            entry.target.querySelector('#svg-finance').classList.add('animated');
+                        }
+                        if (entry.target.querySelector('#svg-cybersecurity')) {
+                            entry.target.querySelector('#svg-cybersecurity').classList.add('animated');
+                        }
+                        if (entry.target.querySelector('#svg-weather')) {
+                            entry.target.querySelector('#svg-weather').classList.add('animated');
+                        }
 
-                        // Elimina la partícula del DOM una vez que su animación ha terminado
-                        particle.addEventListener('animationend', () => {
-                            particle.remove();
-                        });
+                        // Activate avatar glasses draw animation once visible
+                        if (entry.target.id === 'hero' && !document.getElementById('my-avatar').classList.contains('animated-glasses')) {
+                            const glassesPath = document.querySelector('#my-avatar .avatar-glasses');
+                            if (glassesPath) {
+                                glassesPath.style.animation = 'drawGlasses 1.5s ease-out forwards';
+                                document.getElementById('my-avatar').classList.add('animated-glasses'); // Prevent re-animation
+                            }
+                        }
+
+                        observer.unobserve(entry.target); // Stop observing once animated
                     }
-                }
+                });
+            }, observerOptions);
+
+            // Observe all elements that should fade in or have animations
+            document.querySelectorAll('.fade-in, .fade-in-up, .project-card, .service-card, .skill-tag, .certification-card').forEach(element => {
+                observer.observe(element);
             });
 
-            // Cierra el panel de contacto si el usuario hace clic en cualquier lugar fuera del widget
-            document.addEventListener('click', (event) => {
-                // Si el clic no fue dentro del contenedor del widget Y el panel está visible
-                if (!contactWidgetContainer.contains(event.target) && contactInfoPanel.classList.contains('visible')) {
-                    contactInfoPanel.classList.remove('visible'); // Oculta el panel
-                    contactBtn.classList.remove('filled'); // Quita el efecto de llenado del botón
-                }
+            // Listener para el botón de contacto
+            const contactBtn = document.getElementById('contact-btn');
+            contactBtn.addEventListener('click', () => {
+                // Aquí va tu lógica: abrir modal, desplazarte al formulario, etc.
+                alert('Aquí iría tu lógica para abrir el formulario o modal de contacto');
             });
-        });
-    </script>
-</section>
 
             // Avatar blink animation
             const avatarEyes = document.querySelectorAll('#my-avatar .avatar-eye');
