@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Capsule: Recuerdos del Futuro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Fondo animado con estrellas */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .nebula {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%);
+            animation: nebulaDrift 20s infinite linear;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes nebulaDrift {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(-100px) rotate(360deg); }
+        }
+
+        /* Reloj futurista */
+        .futuristic-clock {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); }
+            100% { filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.8)); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Secciones */
+        .section {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px 0;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 255, 255, 0.2);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Formulario */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 15px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .file-input-label:hover {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Lista de recuerdos */
+        .memories-list {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .memory-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.2);
+        }
+
+        .memory-card.locked {
+            opacity: 0.6;
+            position: relative;
+        }
+
+        .memory-card.locked::before {
+            content: "🔒";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            z-index: 5;
+        }
+
+        .memory-card.unlocked {
+            animation: unlockGlow 2s ease-in-out;
+        }
+
+        @keyframes unlockGlow {
+            0% { box-shadow: 0 0 0 rgba(0, 255, 0, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(0, 255, 0, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+        }
+
+        .memory-date {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .memory-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .memory-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .countdown {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.9);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: modalSlideIn 0.5s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #fff;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 20px;
+                margin: 20px 10px;
+            }
+            
+            .futuristic-clock {
+                font-size: 14px;
+                padding: 8px 12px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="nebula"></div>
+    
+    <div class="futuristic-clock" id="futuristicClock"></div>
+    
+    <div class="main-container">
+        <header class="header">
+            <h1 class="title">Time Capsule</h1>
+            <p class="subtitle">Recuerdos del Futuro</p>
+        </header>
+        
+        <section class="section" id="createSection">
+            <h2>✨ Crear Nuevo Recuerdo</h2>
+            <form id="memoryForm">
+                <div class="form-group">
+                    <label for="memoryTitle">Título del Recuerdo</label>
+                    <input type="text" id="memoryTitle" placeholder="Un título especial..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="memoryContent">Tu Mensaje</label>
+                    <textarea id="memoryContent" placeholder="Escribe tu mensaje para el futuro..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="memoryImage">Imagen (opcional)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="memoryImage" accept="image/*">
+                        <label for="memoryImage" class="file-input-label">
+                            📷 Seleccionar imagen
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="unlockDate">Fecha de Desbloqueo</label>
+                    <input type="datetime-local" id="unlockDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="memoryPassword">Contraseña (opcional)</label>
+                    <input type="password" id="memoryPassword" placeholder="Contraseña para proteger tu recuerdo">
+                </div>
+                
+                <button type="submit" class="btn">🚀 Guardar en el Tiempo</button>
+            </form>
+        </section>
+        
+        <section class="section" id="memoriesSection">
+            <h2>🗂️ Mis Recuerdos</h2>
+            <div class="memories-list" id="memoriesList"></div>
+        </section>
+    </div>
+    
+    <!-- Modal para desbloquear recuerdos -->
+    <div id="unlockModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🔓 Recuerdo Desbloqueado</h2>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    
+    <!-- Modal para contraseña -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePasswordModal()">&times;</span>
+            <h2>🔐 Ingresa la Contraseña</h2>
+            <input type="password" id="passwordInput" placeholder="Contraseña">
+            <br><br>
+            <button class="btn" onclick="verifyPassword()">Verificar</button>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let memories = [];
+        let currentMemoryIndex = -1;
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            updateClock();
+            setInterval(updateClock, 1000);
+            loadMemories();
+            displayMemories();
+            setupIntersectionObserver();
+            setMinDateTime();
+        });
+        
+        // Crear estrellas animadas
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(star);
+            }
+        }
+        
+        // Reloj futurista
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleString('es-AR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            document.getElementById('futuristicClock').textContent = timeString;
+        }
+        
+        // Configurar fecha mínima
+        function setMinDateTime() {
+            const now = new Date();
+            const minDateTime = new Date(now.getTime() + 60000); // 1 minuto en el futuro
+            const formattedDateTime = minDateTime.toISOString().slice(0, 16);
+            document.getElementById('unlockDate').min = formattedDateTime;
+        }
+        
+        // Intersection Observer para animaciones
+        function setupIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+        
+        // Guardar recuerdo
+        document.getElementById('memoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('memoryTitle').value;
+            const content = document.getElementById('memoryContent').value;
+            const unlockDate = document.getElementById('unlockDate').value;
+            const password = document.getElementById('memoryPassword').value;
+            const imageFile = document.getElementById('memoryImage').files[0];
+            
+            const memory = {
+                id: Date.now(),
+                title,
+                content,
+                unlockDate: new Date(unlockDate).getTime(),
+                password,
+                createdAt: Date.now(),
+                unlocked: false
+            };
+            
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    memory.image = e.target.result;
+                    saveMemory(memory);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                saveMemory(memory);
+            }
+        });
+        
+        function saveMemory(memory) {
+            memories.push(memory);
+            saveToStorage();
+            displayMemories();
+            
+            // Limpiar formulario
+            document.getElementById('memoryForm').reset();
+            setMinDateTime();
+            
+            // Efecto de éxito
+            showSuccessMessage();
+        }
+        
+        function showSuccessMessage() {
+            const btn = document.querySelector('.btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✅ ¡Guardado en el Tiempo!';
+            btn.style.background = 'linear-gradient(45deg, #00ff00, #00ffff)';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(45deg, #00ffff, #ff00ff)';
+            }, 3000);
+        }
+        
+        // Guardar en almacenamiento local
+        function saveToStorage() {
+            const memoryData = {
+                memories: memories,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('timeCapsuleMemories', JSON.stringify(memoryData));
+        }
+        
+        // Cargar recuerdos
+        function loadMemories() {
+            const stored = localStorage.getItem('timeCapsuleMemories');
+            if (stored) {
+                try {
+                    const data = JSON.parse(stored);
+                    memories = data.memories || [];
+                } catch (e) {
+                    console.error('Error cargando recuerdos:', e);
+                    memories = [];
+                }
+            }
+        }
+        
+        // Mostrar recuerdos
+        function displayMemories() {
+            const container = document.getElementById('memoriesList');
+            container.innerHTML = '';
+            
+            if (memories.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">No hay recuerdos guardados aún.</p>';
+                return;
+            }
+            
+            memories.forEach((memory, index) => {
+                const memoryCard = createMemoryCard(memory, index);
+                container.appendChild(memoryCard);
+            });
+            
+            // Iniciar temporizadores
+            startCountdowns();
+        }
+        
+        function createMemoryCard(memory, index) {
+            const card = document.createElement('div');
+            const now = Date.now();
+            const isUnlocked = now >= memory.unlockDate;
+            
+            card.className = `memory-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+            card.dataset.index = index;
+            
+            if (isUnlocked && !memory.unlocked) {
+                memory.unlocked = true;
+                saveToStorage();
+                playUnlockSound();
+            }
+            
+            const unlockDateObj = new Date(memory.unlockDate);
+            const createdDateObj = new Date(memory.createdAt);
+            
+            card.innerHTML = `
+                <div class="memory-date">
+                    Creado: ${createdDateObj.toLocaleString('es-AR')}
+                </div>
+                <h3>${memory.title}</h3>
+                ${isUnlocked ? `
+                    <div class="memory-content">${memory.content}</div>
+                    ${memory.image ? `<img src="${memory.image}" alt="Imagen del recuerdo" class="memory-image">` : ''}
+                ` : `
+                    <div class="countdown" data-unlock="${memory.unlockDate}">
+                        Se desbloquea: ${unlockDateObj.toLocaleString('es-AR')}
+                    </div>
+                `}
+                <div style="margin-top: 15px;">
+                    <button class="btn" onclick="deleteMemory(${index})" style="background: linear-gradient(45deg, #ff4757, #ff6b6b); font-size: 12px; padding: 8px 16px;">
+                        🗑️ Eliminar
+                    </button>
+                </div>
+            `;
+            
+            if (isUnlocked) {
+                card.addEventListener('click', () => {
+                    if (memory.password) {
+                        currentMemoryIndex = index;
+                        showPasswordModal();
+                    } else {
+                        showMemoryModal(memory);
+                    }
+                });
+                card.style.cursor = 'pointer';
+            }
+            
+            return card;
+        }
+        
+        // Temporizadores
+        function startCountdowns() {
+            const countdowns = document.querySelectorAll('.countdown');
+            
+            const updateCountdowns = () => {
+                const now = Date.now();
+                
+                countdowns.forEach(countdown => {
+                    const unlockTime = parseInt(countdown.dataset.unlock);
+                    const timeLeft = unlockTime - now;
+                    
+                    if (timeLeft <= 0) {
+                        displayMemories(); // Refrescar para mostrar desbloqueado
+                        return;
+                    }
+                    
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    
+                    countdown.innerHTML = `
+                        <div>⏰ Tiempo restante:</div>
+                        <div style="font-size: 1.1em; margin-top: 5px;">
+                            ${days}d ${hours}h ${minutes}m ${seconds}s
+                        </div>
+                    `;
+                });
+            };
+            
+            updateCountdowns();
+            setInterval(updateCountdowns, 1000);
+        }
+        
+        // Sonido de desbloqueo
+        function playUnlockSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(1600, audioContext.currentTime + 0.1);
+            oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.2);
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+        
+        // Modales
+        function showMemoryModal(memory) {
+            const modal = document.getElementById('unlockModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <h3>${memory.title}</h3>
+                <p style="margin: 20px 0; font-size: 1.1em; line-height: 1.6;">${memory.content}</p>
+                ${memory.image ? `<img src="${memory.image}" alt="Imagen del recuerdo" style="max-width: 100%; border-radius: 10px;">` : ''}
+            `;
+            
+            modal.style.display = 'block';
+            playUnlockSound();
+        }
+        
+        function showPasswordModal() {
+            document.getElementById('passwordModal').style.display = 'block';
+            document.getElementById('passwordInput').value = '';
+        }
+        
+        function closeModal() {
+            document.getElementById('unlockModal').style.display = 'none';
+        }
+        
+        function closePasswordModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+        }
+        
+        function verifyPassword() {
+            const inputPassword = document.getElementById('passwordInput').value;
+            const memory = memories[currentMemoryIndex];
+            
+            if (inputPassword === memory.password) {
+                closePasswordModal();
+                showMemoryModal(memory);
+            } else {
+                alert('❌ Contraseña incorrecta');
+            }
+        }
+        
+        // Eliminar recuerdo
+        function deleteMemory(index) {
+            if (confirm('¿Estás seguro de que quieres eliminar este recuerdo?')) {
+                memories.splice(index, 1);
+                saveToStorage();
+                displayMemories();
+            }
+        }
+        
+        // Cerrar modales al hacer clic fuera
+        window.onclick = function(event) {
+            const unlockModal = document.getElementById('unlockModal');
+            const passwordModal = document.getElementById('passwordModal');
+            
+            if (event.target === unlockModal) {
+                closeModal();
+            }
+            if (event.target === passwordModal) {
+                closePasswordModal();
+            }
+        };
+        
+        // Manejar tecla Enter en modal de contraseña
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
+    </script>
+</body>
+</html>
