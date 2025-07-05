@@ -1501,39 +1501,192 @@
                         </div>
                         <a href="https://www.credly.com/badges/your-cisco-cyberops-badge-id/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
                     </div>
+<section class="certifications-section">
+    <style>
+        /* Estilos específicos para esta sección */
+        .certifications-section {
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-                    <div class="certification-card fade-in">
-                        <div class="card-header">
-                            <h3>JavaScript Algorithms and Data Structures</h3>
-                            <p class="issuer">freeCodeCamp</p>
-                        </div>
-                        <div class="card-content">
-                            <p>Dominio de los fundamentos de JavaScript, algoritmos, estructuras de datos, programación orientada a objetos y programación funcional.</p>
-                            <div class="credly-badge-embed">
-                                <img src="https://design-style-guide.freecodecamp.org/downloads/fcc_primary_small.jpg" alt="freeCodeCamp Certification Badge" style="width: 120px; height: 120px; border-radius: 50%; opacity: 0.8;">
-                            </div>
-                        </div>
-                        <a href="https://www.freecodecamp.org/certification/your-username/javascript-algorithms-and-data-structures" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Certificado</a>
-                    </div>
+        .certifications-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #333;
+            font-weight: 700;
+        }
 
-                    <div class="certification-card fade-in">
-                        <div class="card-header">
-                            <h3>Introducción a la Ciberseguridad</h3>
-                            <p class="issuer">Cisco Networking Academy</p>
-                        </div>
-                        <div class="card-content">
-                            <p>Certificación fundamental que explora las bases de la ciberseguridad, incluyendo tipos de amenazas, principios de seguridad y protección de datos.</p>
-                            <div class="credly-badge-embed">
-                                <img src="https://via.placeholder.com/120x120/8000ff/FFFFFF?text=Intro+Cyber" alt="Introducción a la Ciberseguridad Badge" style="width: 120px; height: 120px; border-radius: 50%; opacity: 0.8;">
-                            </div>
-                        </div>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Certificado</a>
-                    </div>
+        .certification-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; /* Espacio entre tarjetas */
+            max-width: 1200px; /* Ancho máximo del contenedor de tarjetas */
+            margin: 0 auto; /* Centrar las tarjetas */
+        }
 
+        /* Estilos de la tarjeta individual */
+        .certification-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* **Clave para el efecto hover** */
+            cursor: pointer; /* Indica que es clickeable */
+            height: 100%; /* Asegura que todas las tarjetas tengan la misma altura */
+        }
+
+        .certification-card:hover {
+            transform: translateY(-10px) scale(1.02); /* **Efecto de levantar y agrandar** */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+        }
+
+        .card-header {
+            /* Degradado azul eléctrico para el encabezado de la tarjeta */
+            background: linear-gradient(135deg, #00BFFF, #007FFF); /* Azul Cielo a Azul Brillante */
+            color: #fff;
+            padding: 20px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+
+        .card-header .issuer {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra el contenido horizontalmente */
+            text-align: center;
+        }
+
+        .card-content p {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para el contenedor de las insignias Credly */
+        .credly-badge-embed {
+            margin-top: auto; /* Empuja la insignia hacia abajo si el contenido de texto es corto */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%; /* Asegura que ocupe el ancho disponible para centrar */
+        }
+
+        /* Asegura que los iframes de Credly se adapten bien */
+        .credly-badge-embed iframe {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; /* Bordes ligeramente redondeados para el iframe */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animación de entrada (fade-in) */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Retraso para la segunda tarjeta para un efecto de aparición escalonado */
+        .certification-cards-grid .certification-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .certification-cards-grid .certification-card:nth-child(3) { /* Si añades más tarjetas */
+            animation-delay: 0.4s;
+        }
+
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .certifications-section h2 {
+                font-size: 2em;
+            }
+
+            .certification-cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certification-card {
+                margin: 0 10px; /* Pequeño margen para móviles */
+            }
+        }
+    </style>
+
+    <div class="container">
+        <h2>Mis Certificaciones</h2> 
+        <div class="certification-cards-grid">
+
+            <div class="certification-card fade-in">
+                <div class="card-header">
+                    <h3>JavaScript Algorithms and Data Structures</h3>
+                    <p class="issuer">freeCodeCamp</p>
                 </div>
+                <div class="card-content">
+                    <p>Dominio de los fundamentos de JavaScript, algoritmos, estructuras de datos, programación orientada a objetos y programación funcional.</p>
+                    <div class="credly-badge-embed">
+                        <img src="https://design-style-guide.freecodecamp.org/downloads/fcc_primary_small.jpg" alt="freeCodeCamp Certification Badge" style="width: 120px; height: 120px; border-radius: 50%; opacity: 0.8;">
+                    </div>
+                </div>
+                <a href="https://www.freecodecamp.org/certification/your-username/javascript-algorithms-and-data-structures" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Certificado</a>
             </div>
-        </section>
 
+            <div class="certification-card fade-in" onclick="window.open('https://www.credly.com/badges/25710900-3e6c-452c-aeb0-8f66f37fc3ab/public_url', '_blank')">
+                <div class="card-header">
+                    <h3>Cisco Certified Network Associate (CCNA)</h3>
+                    <p class="issuer">Cisco Networking Academy</p>
+                </div>
+                <div class="card-content">
+                    <p>Demuestra habilidades fundamentales en redes, incluyendo configuración de routers y switches, conectividad IP, seguridad y automatización.</p>
+                    <div class="credly-badge-embed">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div>
+                    </div>
+                </div>
+                </div>
+
+            <div class="certification-card fade-in" onclick="window.open('https://www.credly.com/badges/d5392503-8d83-4209-8869-7d2a45e6128c/public_url', '_blank')">
+                <div class="card-header">
+                    <h3>CyberOps Associate</h3>
+                    <p class="issuer">Cisco Networking Academy</p>
+                </div>
+                <div class="card-content">
+                    <p>Valida habilidades de seguridad en operaciones, monitoreo de amenazas, análisis de vulnerabilidades y respuesta a incidentes.</p>
+                    <div class="credly-badge-embed">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="d5392503-8d83-4209-8869-7d2a45e6128c" data-share-badge-host="https://www.credly.com"></div>
+                    </div>
+                </div>
+                </div>
+
+        </div>
+    </div>
+    <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+</section>
+                
         <section id="testimonials" class="fade-in">
             <h2 class="holographic-text glitch" data-text="Testimonios">Testimonios</h2>
             <div class="testimonials-carousel-container">
