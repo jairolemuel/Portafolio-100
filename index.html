@@ -1465,182 +1465,237 @@
                 </div>
             </div>
         </section>
-
-        <section class="section-certifications" id="certifications">
-            <div class="certifications-wrapper">
-                <h2 class="holographic-text glitch" data-text="Certificaciones">Certificaciones</h2>
-                <div class="certification-grid">
-                    <div class="certification-card fade-in">
-                        <div class="card-header">
-                            <h3>Cisco Certified CyberOps Associate</h3>
-                            <p class="issuer">Cisco Systems</p>
-                        </div>
-                        <div class="card-content">
-                            <p>Demuestra habilidades para monitorear, detectar y responder a amenazas de ciberseguridad. Incluye análisis de redes, seguridad de endpoints, análisis de vulnerabilidades y criptografía.</p>
-                            <div class="credly-badge-embed">
-                                <a href="https://www.credly.com/badges/your-cisco-cyberops-badge-id" target="_blank" rel="noopener noreferrer">
-                                    <img src="https://images.credly.com/size/340x340/images/e9447333-e578-43f7-9200-a548695024b4/CyberOps_Associate.png" alt="Cisco Certified CyberOps Associate Badge" style="width: 120px; height: 120px; border-radius: 50%;">
-                                </a>
-                            </div>
-                        </div>
-                        <a href="https://www.credly.com/badges/your-cisco-cyberops-badge-id/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
-                    </div>
-<section class="certifications-section">
+<section class="certifications-section" id="certifications">
     <style>
-        /* Estilos específicos para esta sección */
+        /* CSS EMBEBIDO PARA LA SECCIÓN DE CERTIFICACIONES */
         .certifications-section {
-            padding: 60px 20px;
-            background-color: #f9f9f9;
-            text-align: center;
+            padding: 80px 20px;
+            background-color: #1a1a2e; /* Fondo oscuro principal (Azul Oscuro/Púrpura) */
+            text-align: center; /* Centra todo el contenido de la sección */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0e0; /* Color de texto claro para contraste */
+            overflow: hidden; /* Para manejar las animaciones sin desbordamiento */
         }
 
         .certifications-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            color: #333;
+            font-size: 3em;
+            margin-bottom: 50px;
+            color: #00bcd4; /* Azul cian vibrante para el título */
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: textGlow 1.5s infinite alternate; /* Animación de brillo para el título */
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4, 0 0 15px #00bcd4;
+            }
+            to {
+                text-shadow: 0 0 10px #00bcd4, 0 0 20px #00bcd4, 0 0 30px #00bcd4;
+            }
         }
 
         .certification-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; /* Espacio entre tarjetas */
-            max-width: 1200px; /* Ancho máximo del contenedor de tarjetas */
-            margin: 0 auto; /* Centrar las tarjetas */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px; /* Espacio entre tarjetas */
+            max-width: 1200px; /* Ancho máximo para el grid */
+            margin: 0 auto; /* Centra el grid de tarjetas horizontalmente */
+            justify-content: center; /* Centra las tarjetas si hay menos de las que llenan una fila */
+            align-items: stretch; /* Asegura que las tarjetas se estiren para igualar la altura */
         }
 
         /* Estilos de la tarjeta individual */
         .certification-card {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(145deg, #2a2a4a, #1a1a2e); /* Degradado oscuro para las tarjetas */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra más profunda */
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            text-align: left;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* **Clave para el efecto hover** */
-            cursor: pointer; /* Indica que es clickeable */
-            height: 100%; /* Asegura que todas las tarjetas tengan la misma altura */
+            text-align: left; /* Alinea el texto a la izquierda dentro de la tarjeta */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 188, 212, 0.3); /* Borde sutil para destacar */
+            position: relative; /* Necesario para animaciones internas */
+            opacity: 0; /* Inicialmente oculto para la animación de entrada */
+            transform: translateY(30px); /* Posición inicial para la animación de entrada */
+            animation: cardFadeIn 0.8s ease-out forwards; /* Animación de entrada */
         }
 
         .certification-card:hover {
-            transform: translateY(-10px) scale(1.02); /* **Efecto de levantar y agrandar** */
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+            transform: translateY(-15px) scale(1.03); /* Efecto de levantar y agrandar más pronunciado */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Sombra aún más pronunciada */
+            z-index: 10; /* Asegura que la tarjeta en hover esté por encima */
         }
 
-        .card-header {
-            /* Degradado azul eléctrico para el encabezado de la tarjeta */
-            background: linear-gradient(135deg, #00BFFF, #007FFF); /* Azul Cielo a Azul Brillante */
-            color: #fff;
-            padding: 20px;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
+        /* Retraso para las tarjetas para un efecto de aparición escalonado */
+        .certification-cards-grid .certification-card:nth-child(1) {
+            animation-delay: 0.1s;
         }
-
-        .card-header h3 {
-            margin: 0;
-            font-size: 1.6em;
-            font-weight: 600;
-        }
-
-        .card-header .issuer {
-            font-size: 0.9em;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-
-        .card-content {
-            padding: 20px;
-            flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centra el contenido horizontalmente */
-            text-align: center;
-        }
-
-        .card-content p {
-            font-size: 1em;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        /* Estilos para el contenedor de las insignias Credly */
-        .credly-badge-embed {
-            margin-top: auto; /* Empuja la insignia hacia abajo si el contenido de texto es corto */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%; /* Asegura que ocupe el ancho disponible para centrar */
-        }
-
-        /* Asegura que los iframes de Credly se adapten bien */
-        .credly-badge-embed iframe {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px; /* Bordes ligeramente redondeados para el iframe */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Animación de entrada (fade-in) */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        /* Retraso para la segunda tarjeta para un efecto de aparición escalonado */
         .certification-cards-grid .certification-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        .certification-cards-grid .certification-card:nth-child(3) { /* Si añades más tarjetas */
-            animation-delay: 0.4s;
+            animation-delay: 0.3s;
         }
 
-
-        @keyframes fadeIn {
+        @keyframes cardFadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
+        .card-header {
+            background: linear-gradient(135deg, #007bff, #00c7e0); /* Degradado azul vibrante para el encabezado */
+            color: #ffffff;
+            padding: 25px;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+            position: relative;
+            z-index: 2; /* Para asegurar que el header esté sobre cualquier efecto */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .card-header .issuer {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        .card-content {
+            padding: 25px;
+            color: #c0c0c0; /* Color de texto para el contenido */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra el contenido horizontalmente dentro de la tarjeta */
+            text-align: center; /* Centra el texto dentro del card-content */
+            position: relative;
+        }
+
+        .card-content p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .credly-badge-embed {
+            margin-top: auto; /* Empuja la insignia hacia abajo */
+            display: flex;
+            justify-content: center; /* Centra la insignia */
+            align-items: center;
+            width: 100%;
+            min-height: 150px; /* Asegura espacio para el iframe, ajusta si tus iframes son más grandes */
+            margin-bottom: 20px; /* Espacio antes del botón */
+        }
+
+        /* Estilo específico para los iframes de Credly */
+        .credly-badge-embed iframe {
+            width: 150px; /* Ancho fijo para el iframe según tu código */
+            height: 270px; /* Alto fijo para el iframe según tu código */
+            border: 4px solid #00bcd4; /* Borde de color de acento */
+            border-radius: 8px; /* Bordes redondeados para el iframe */
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.5); /* Resplandor alrededor del iframe */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: transparent; /* Asegura que el fondo del iframe sea transparente */
+        }
+
+        .credly-badge-embed iframe:hover {
+            transform: scale(1.08) rotate(2deg); /* Efecto en el iframe al hacer hover */
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.8);
+        }
+
+        .view-credential-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #00bcd4, #007bff); /* Degradado para el botón */
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: auto; /* Asegura que el botón se alinee al final */
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+        }
+
+        .view-credential-btn:hover {
+            background: linear-gradient(90deg, #007bff, #00bcd4); /* Invertir degradado al hover */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 188, 212, 0.6);
+        }
+
+        /* Efecto de partículas sutil al hacer hover en la tarjeta */
+        .certification-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 188, 212, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none; /* Asegura que no interfiera con clics */
+            z-index: 1;
+        }
+
+        .certification-card:hover::before {
+            opacity: 1;
+        }
+
         /* Media Queries para responsividad */
         @media (max-width: 768px) {
             .certifications-section h2 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
-
             .certification-cards-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
-
             .certification-card {
-                margin: 0 10px; /* Pequeño margen para móviles */
+                margin: 0 10px;
+            }
+            .card-header h3 {
+                font-size: 1.5em;
+            }
+            .card-content p {
+                font-size: 0.95em;
             }
         }
     </style>
 
     <div class="container">
-        <h2>Mis Certificaciones</h2> 
+        <h2 class="holographic-text" data-text="Certificaciones">Certificaciones</h2>
         <div class="certification-cards-grid">
 
-            <div class="certification-card fade-in">
+            <div class="certification-card" data-href="https://www.credly.com/badges/d5392503-8d83-4209-8869-7d2a45e6128c/public_url">
                 <div class="card-header">
-                    <h3>JavaScript Algorithms and Data Structures</h3>
-                    <p class="issuer">freeCodeCamp</p>
+                    <h3>Cisco Certified CyberOps Associate</h3>
+                    <p class="issuer">Cisco Networking Academy</p>
                 </div>
                 <div class="card-content">
-                    <p>Dominio de los fundamentos de JavaScript, algoritmos, estructuras de datos, programación orientada a objetos y programación funcional.</p>
+                    <p>Valida habilidades de seguridad en operaciones, monitoreo de amenazas, análisis de vulnerabilidades y respuesta a incidentes.</p>
                     <div class="credly-badge-embed">
-                        <img src="https://design-style-guide.freecodecamp.org/downloads/fcc_primary_small.jpg" alt="freeCodeCamp Certification Badge" style="width: 120px; height: 120px; border-radius: 50%; opacity: 0.8;">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="d5392503-8d83-4209-8869-7d2a45e6128c" data-share-badge-host="https://www.credly.com"></div>
                     </div>
+                    <a href="https://www.credly.com/badges/d5392503-8d83-4209-8869-7d2a45e6128c/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
                 </div>
-                <a href="https://www.freecodecamp.org/certification/your-username/javascript-algorithms-and-data-structures" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Certificado</a>
             </div>
 
-            <div class="certification-card fade-in" onclick="window.open('https://www.credly.com/badges/25710900-3e6c-452c-aeb0-8f66f37fc3ab/public_url', '_blank')">
+            <div class="certification-card" data-href="https://www.credly.com/badges/25710900-3e6c-452c-aeb0-8f66f37fc3ab/public_url">
                 <div class="card-header">
                     <h3>Cisco Certified Network Associate (CCNA)</h3>
                     <p class="issuer">Cisco Networking Academy</p>
@@ -1650,27 +1705,52 @@
                     <div class="credly-badge-embed">
                         <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div>
                     </div>
+                    <a href="https://www.credly.com/badges/25710900-3e6c-452c-aeb0-8f66f37fc3ab/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
                 </div>
-                </div>
-
-            <div class="certification-card fade-in" onclick="window.open('https://www.credly.com/badges/d5392503-8d83-4209-8869-7d2a45e6128c/public_url', '_blank')">
-                <div class="card-header">
-                    <h3>CyberOps Associate</h3>
-                    <p class="issuer">Cisco Networking Academy</p>
-                </div>
-                <div class="card-content">
-                    <p>Valida habilidades de seguridad en operaciones, monitoreo de amenazas, análisis de vulnerabilidades y respuesta a incidentes.</p>
-                    <div class="credly-badge-embed">
-                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="d5392503-8d83-4209-8869-7d2a45e6128c" data-share-badge-host="https://www.credly.com"></div>
-                    </div>
-                </div>
-                </div>
+            </div>
 
         </div>
     </div>
+
     <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const certificationCards = document.querySelectorAll('.certification-card');
+
+            certificationCards.forEach(card => {
+                // Evento de clic en toda la tarjeta para abrir la certificación
+                card.addEventListener('click', (event) => {
+                    // Evita que el evento se propague si se hizo clic en el botón de "Ver Credencial" o directamente en el iframe de Credly
+                    if (!event.target.classList.contains('view-credential-btn') && !event.target.closest('.credly-badge-embed')) {
+                        const url = card.dataset.href;
+                        if (url) {
+                            window.open(url, '_blank');
+                        }
+                    }
+                });
+
+                // Efecto de partículas al hacer hover (sigue el mouse dentro de la tarjeta)
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; // x position within the element.
+                    const y = e.clientY - rect.top;  // y position within the element.
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // Código para el efecto "holographic-text" del título
+            const holographicText = document.querySelector('.holographic-text');
+            if (holographicText) {
+                const dataText = holographicText.getAttribute('data-text');
+                holographicText.innerHTML = Array.from(dataText).map((char, i) =>
+                    `<span style="--i: ${i}">${char}</span>`
+                ).join('');
+            }
+        });
+    </script>
 </section>
-                
+      
         <section id="testimonials" class="fade-in">
             <h2 class="holographic-text glitch" data-text="Testimonios">Testimonios</h2>
             <div class="testimonials-carousel-container">
