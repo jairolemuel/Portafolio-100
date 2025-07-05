@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMart - Tu Tienda Online</title>
+    <style>
+        /* Variables CSS para facilitar personalización */
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #004e92;
+            --accent-color: #00d4ff;
+            --dark-gray: #2c3e50;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset y configuración base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--light-gray);
+        }
+
+        /* Encabezado */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "🛒";
+            margin-right: 8px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 50px 12px 16px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-color);
+            border: none;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background: #0099cc;
+        }
+
+        .cart-icon {
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .cart-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger-color);
+            color: var(--white);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* Navegación */
+        .nav {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-item {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Banner promocional */
+        .banner {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contenido principal */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--dark-gray);
+        }
+
+        /* Filtros */
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Grilla de productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Añadido border-color a la transición */
+            cursor: pointer;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out; /* Animación de entrada */
+            display: flex; /* Para organizar los botones en la parte inferior */
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative; /* Necesario para el posicionamiento absoluto del SVG */
+            z-index: 1; /* Asegura que el contenido esté por encima del SVG */
+            border: 2px solid transparent; /* Borde transparente por defecto */
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada */
+            border-color: var(--primary-color); /* Color de borde al pasar el ratón */
+        }
+
+        /* Contenedor y SVG para la animación */
+        .product-card-svg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Permite que los clics pasen a los elementos debajo */
+            z-index: -1; /* Coloca el SVG detrás del contenido de la tarjeta */
+            opacity: 0; /* Oculto por defecto */
+            transition: opacity 0.3s ease; /* Transición suave para la aparición */
+            border-radius: var(--border-radius); /* Asegura que el SVG respete el border-radius de la tarjeta */
+            overflow: hidden; /* Oculta partes del SVG que se salgan del contenedor */
+        }
+
+        .product-card:hover .product-card-svg-container {
+            opacity: 1; /* Muestra el SVG al pasar el ratón */
+        }
+
+        .product-card-svg {
+            width: 100%;
+            height: 100%;
+            transform: scale(1.0); /* Tamaño inicial */
+            /* Animación continua al pasar el ratón */
+            animation: svgPulse 2s ease-in-out infinite alternate; 
+        }
+
+        @keyframes svgPulse {
+            0% {
+                transform: scale(1.0);
+                opacity: 0.1;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0.3;
+            }
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: auto; /* Empuja los botones hacia abajo */
+        }
+
+        .add-to-cart, .generate-description-btn {
+            width: 100%;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .add-to-cart:active {
+            transform: translateY(0);
+        }
+
+        .generate-description-btn {
+            background: var(--secondary-color);
+        }
+
+        .generate-description-btn:hover {
+            background: #003a70;
+            transform: translateY(-2px);
+        }
+
+        .generate-description-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Modal del carrito */
+        .cart-modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: flex; /* Usar flexbox para centrar */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--box-shadow);
+            position: relative; /* Para el botón de cerrar */
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            color: var(--danger-color);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none; /* No border for the last item */
+        }
+
+        .cart-item button {
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-item button:hover {
+            background: #c82333;
+        }
+
+        .cart-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            text-align: right;
+            color: var(--primary-color);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--success-color);
+            color: var(--white);
+            border: none;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: #218838;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #495057;
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .search-container {
+                width: 100%;
+                max-width: none; /* Allow it to take full width */
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .banner h1 {
+                font-size: 2rem;
+            }
+
+            .banner p {
+                font-size: 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Notificaciones */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success-color);
+            color: var(--white);
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 3000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Custom Modal for Alerts (replacing alert()) */
+        .custom-modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 3000; /* Higher than cart modal */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-modal-content {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .custom-modal-content h4 {
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+            font-size: 1.3rem;
+        }
+
+        .custom-modal-content button {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .custom-modal-content button:hover {
+            background: #e55a2b;
+        }
+
+        /* Modal de Descripción de Producto */
+        .description-modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2500; /* Entre carrito y alertas */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .description-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        .description-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .description-header h3 {
+            color: var(--secondary-color);
+        }
+
+        .close-description-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: var(--transition);
+        }
+
+        .close-description-modal:hover {
+            color: var(--danger-color);
+        }
+
+        .description-text {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: var(--dark-gray);
+            white-space: pre-wrap; /* Para respetar saltos de línea del LLM */
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none; /* Oculto por defecto */
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">TechMart</a>
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Buscar productos...">
+                <button class="search-btn" onclick="searchProducts()">🔍</button>
+            </div>
+            <button class="cart-icon" onclick="toggleCart()">
+                🛒
+                <span class="cart-count" id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="#" class="nav-item active" data-category="all" onclick="filterProducts(event, 'all')">Todos</a>
+                <a href="#" class="nav-item" data-category="tecnologia" onclick="filterProducts(event, 'tecnologia')">Tecnología</a>
+                <a href="#" class="nav-item" data-category="limpieza" onclick="filterProducts(event, 'limpieza')">Limpieza</a>
+                <a href="#" class="nav-item" data-category="moda" onclick="filterProducts(event, 'moda')">Moda</a>
+                <a href="#" class="nav-item" data-category="alimentos" onclick="filterProducts(event, 'alimentos')">Alimentos</a>
+                <a href="#" class="nav-item" data-category="juguetes" onclick="filterProducts(event, 'juguetes')">Juguetería</a>
+                <a href="#" class="nav-item" data-category="hogar" onclick="filterProducts(event, 'hogar')">Hogar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner promocional -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>¡Ofertas Imperdibles!</h1>
+            <p>Encuentra los mejores productos al mejor precio</p>
+            <a href="#productos" class="cta-button">Ver Productos</a>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <section id="productos">
+            <h2 class="section-title">Nuestros Productos</h2>
+            
+            <!-- Filtros -->
+            <div class="filters">
+                <button class="filter-btn active" data-category="all" onclick="filterProducts(event, 'all')">Todos</button>
+                <button class="filter-btn" data-category="tecnologia" onclick="filterProducts(event, 'tecnologia')">Tecnología</button>
+                <button class="filter-btn" data-category="limpieza" onclick="filterProducts(event, 'limpieza')">Limpieza</button>
+                <button class="filter-btn" data-category="moda" onclick="filterProducts(event, 'moda')">Moda</button>
+                <button class="filter-btn" data-category="alimentos" onclick="filterProducts(event, 'alimentos')">Alimentos</button>
+                <button class="filter-btn" data-category="juguetes" onclick="filterProducts(event, 'juguetes')">Juguetería</button>
+                <button class="filter-btn" data-category="hogar" onclick="filterProducts(event, 'hogar')">Hogar</button>
+            </div>
+
+            <!-- Grilla de productos -->
+            <div class="products-grid" id="products-grid">
+                <!-- Los productos se generarán dinámicamente con JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal del carrito -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Carrito de Compras</h3>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div id="cart-items">
+                <!-- Los items del carrito se generarán dinámicamente -->
+            </div>
+            <div class="cart-total" id="cart-total">
+                Total: $0
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Descripción de Producto -->
+    <div class="description-modal" id="description-modal">
+        <div class="description-content">
+            <div class="description-header">
+                <h3 id="description-product-name"></h3>
+                <button class="close-description-modal" onclick="closeDescriptionModal()">×</button>
+            </div>
+            <div class="loading-spinner" id="description-loading-spinner"></div>
+            <p class="description-text" id="product-description-text"></p>
+        </div>
+    </div>
+
+    <!-- Custom Modal for Alerts -->
+    <div class="custom-modal-overlay" id="custom-alert-modal">
+        <div class="custom-modal-content">
+            <h4 id="custom-alert-message"></h4>
+            <button onclick="closeCustomAlert()">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Empresa</h3>
+                <a href="#">Sobre Nosotros</a>
+                <a href="#">Contacto</a>
+                <a href="#">Trabaja con Nosotros</a>
+                <a href="#">Prensa</a>
+            </div>
+            <div class="footer-section">
+                <h3>Ayuda</h3>
+                <a href="#">Centro de Ayuda</a>
+                <a href="#">Cómo Comprar</a>
+                <a href="#">Envíos</a>
+                <a href="#">Devoluciones</a>
+            </div>
+            <div class="footer-section">
+                <h3>Legales</h3>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Políticas de Privacidad</a>
+                <a href="#">Políticas de Cookies</a>
+                <a href="#">Resolución de Disputas</a>
+            </div>
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 TechMart. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Base de datos de productos
+        const products = [
+            // Tecnología
+            { id: 1, name: "iPhone 15 Pro", price: 999, category: "tecnologia", emoji: "📱" },
+            { id: 2, name: "MacBook Air M2", price: 1299, category: "tecnologia", emoji: "💻" },
+            { id: 3, name: "AirPods Pro", price: 249, category: "tecnologia", emoji: "🎧" },
+            { id: 4, name: "Samsung Galaxy S24", price: 899, category: "tecnologia", emoji: "📱" },
+            { id: 5, name: "iPad Pro", price: 799, category: "tecnologia", emoji: "📱" },
+            { id: 6, name: "PlayStation 5", price: 499, category: "tecnologia", emoji: "🎮" },
+            
+            // Limpieza
+            { id: 7, name: "Detergente Líquido", price: 15, category: "limpieza", emoji: "🧽" },
+            { id: 8, name: "Aspiradora Robot", price: 299, category: "limpieza", emoji: "🤖" },
+            { id: 9, name: "Papel Higiénico x12", price: 25, category: "limpieza", emoji: "🧻" },
+            { id: 10, name: "Desinfectante", price: 8, category: "limpieza", emoji: "🧴" },
+            { id: 11, name: "Jabón Antibacterial", price: 12, category: "limpieza", emoji: "🧼" },
+            { id: 12, name: "Toallas de Papel", price: 18, category: "limpieza", emoji: "📄" },
+            
+            // Moda
+            { id: 13, name: "Jeans Clásicos", price: 79, category: "moda", emoji: "👖" },
+            { id: 14, name: "Camiseta Premium", price: 35, category: "moda", emoji: "👕" },
+            { id: 15, name: "Zapatillas Running", price: 120, category: "moda", emoji: "👟" },
+            { id: 16, name: "Vestido Elegante", price: 89, category: "moda", emoji: "👗" },
+            { id: 17, name: "Chaqueta de Cuero", price: 199, category: "moda", emoji: "🧥" },
+            { id: 18, name: "Reloj Inteligente", price: 299, category: "moda", emoji: "⌚" },
+            
+            // Alimentos
+            { id: 19, name: "Café Premium", price: 24, category: "alimentos", emoji: "☕" },
+            { id: 20, name: "Aceite de Oliva", price: 18, category: "alimentos", emoji: "🫒" },
+            { id: 21, name: "Pasta Italiana", price: 8, category: "alimentos", emoji: "🍝" },
+            { id: 22, name: "Miel Orgánica", price: 15, category: "alimentos", emoji: "🍯" },
+            { id: 23, name: "Quinoa Premium", price: 22, category: "alimentos", emoji: "🌾" },
+            { id: 24, name: "Chocolate Artesanal", price: 12, category: "alimentos", emoji: "🍫" },
+            
+            // Juguetes
+            { id: 25, name: "LEGO Creator", price: 79, category: "juguetes", emoji: "🧱" },
+            { id: 26, name: "Muñeca Barbie", price: 35, category: "juguetes", emoji: "👸" },
+            { id: 27, name: "Auto a Control", price: 89, category: "juguetes", emoji: "🚗" },
+            { id: 28, name: "Peluche Gigante", price: 45, category: "juguetes", emoji: "🧸" },
+            { id: 29, name: "Puzzle 1000 Piezas", price: 25, category: "juguetes", emoji: "🧩" },
+            { id: 30, name: "Drone para Niños", price: 159, category: "juguetes", emoji: "🚁" },
+            
+            // Hogar
+            { id: 31, name: "Lámpara LED", price: 65, category: "hogar", emoji: "💡" },
+            { id: 32, name: "Cojín Decorativo", price: 28, category: "hogar", emoji: "🛏️" },
+            { id: 33, name: "Espejo Moderno", price: 89, category: "hogar", emoji: "🪞" },
+            { id: 34, name: "Planta Artificial", price: 35, category: "hogar", emoji: "🌿" },
+            { id: 35, name: "Marco de Fotos", price: 18, category: "hogar", emoji: "🖼️" },
+            { id: 36, name: "Vela Aromática", price: 22, category: "hogar", emoji: "🕯️" }
+        ];
+
+        // Carrito de compras (almacenado en memoria)
+        let cart = [];
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+
+        // Función para renderizar productos en la cuadrícula
+        function renderProducts(productsToRender = products) {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = ''; // Limpia la cuadrícula actual
+
+            // Filtra por término de búsqueda si existe
+            let filteredBySearch = productsToRender;
+            if (currentSearchTerm) {
+                const searchTermLower = currentSearchTerm.toLowerCase();
+                filteredBySearch = productsToRender.filter(product =>
+                    product.name.toLowerCase().includes(searchTermLower)
+                );
+            }
+
+            // Si no hay productos después de filtrar, muestra un mensaje
+            if (filteredBySearch.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: var(--dark-gray);">No se encontraron productos para esta categoría o búsqueda.</p>';
+                return;
+            }
+
+            // Crea y añade las tarjetas de producto
+            filteredBySearch.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-card-svg-container">
+                        <svg class="product-card-svg" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="50" fill="var(--accent-color)" opacity="0.1"></circle>
+                        </svg>
+                    </div>
+                    <div class="product-image">${product.emoji}</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">$${product.price.toFixed(2)}</div>
+                    <div class="product-card-actions">
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">
+                            Agregar al Carrito
+                        </button>
+                        <button class="generate-description-btn" onclick="generateProductDescription(${product.id})">
+                            Generar Descripción ✨
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(productCard);
+            });
+        }
+
+        // Función para filtrar productos por categoría y desplazar la vista
+        function filterProducts(event, category) {
+            currentFilter = category;
+            
+            // Actualizar botones activos de filtros (sección principal)
+            document.querySelectorAll('.filters .filter-btn').forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Actualizar botones activos de navegación
+            document.querySelectorAll('.nav-menu .nav-item').forEach(item => {
+                if (item.dataset.category === category) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Filtra los productos según la categoría seleccionada
+            const productsToDisplay = category === 'all'
+                ? products
+                : products.filter(product => product.category === category);
+            
+            renderProducts(productsToDisplay); // Renderiza los productos filtrados
+
+            // Desplazamiento suave a la sección de productos
+            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Función para agregar un producto al carrito
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return; // Si el producto no existe, no hacer nada
+
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1; // Incrementa la cantidad si ya está en el carrito
+            } else {
+                cart.push({ ...product, quantity: 1 }); // Añade el producto con cantidad 1
+            }
+            
+            updateCartUI(); // Actualiza la interfaz del carrito
+            showNotification(`"${product.name}" agregado al carrito`); // Muestra notificación
+        }
+
+        // Función para actualizar la interfaz del carrito (contador, lista de items, total)
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            
+            // Calcula el número total de ítems en el carrito
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Limpia la lista de ítems del carrito antes de volver a renderizar
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            
+            // Recorre el carrito y crea los elementos HTML para cada ítem
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--dark-gray);">El carrito está vacío.</p>';
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            $${item.price.toFixed(2)} x ${item.quantity}
+                        </div>
+                        <div>
+                            <button onclick="removeFromCart(${item.id})">
+                                Eliminar
+                            </button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                    total += item.price * item.quantity; // Suma al total
+                });
+            }
+            
+            // Actualiza el total del carrito
+            cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        // Función para eliminar un producto del carrito
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId); // Filtra para eliminar el producto
+            updateCartUI(); // Actualiza la interfaz
+            showNotification('Producto eliminado del carrito'); // Muestra notificación
+        }
+
+        // Función para mostrar/ocultar el modal del carrito
+        function toggleCart() {
+            const cartModal = document.getElementById('cart-modal');
+            cartModal.style.display = cartModal.style.display === 'flex' ? 'none' : 'flex'; // Usa 'flex' para centrar
+            if (cartModal.style.display === 'flex') {
+                updateCartUI(); // Asegura que el carrito esté actualizado al abrirlo
+            }
+        }
+
+        // Función para finalizar la compra (simulada)
+        function checkout() {
+            if (cart.length === 0) {
+                showCustomAlert('El carrito está vacío. Agrega productos antes de finalizar la compra.');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            showCustomAlert(`Compra realizada por $${total.toFixed(2)}. ¡Gracias por tu compra!`);
+            
+            // Limpiar carrito después de la compra
+            cart = [];
+            updateCartUI();
+            toggleCart(); // Cierra el modal del carrito
+        }
+
+        // Función para mostrar notificaciones temporales
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Elimina la notificación después de 3 segundos
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Función de búsqueda de productos
+        function searchProducts() {
+            const searchInput = document.getElementById('search-input');
+            currentSearchTerm = searchInput.value.toLowerCase(); // Obtiene el término de búsqueda
+
+            // Filtra los productos basados en el término de búsqueda y la categoría actual
+            const productsToSearch = currentFilter === 'all'
+                ? products
+                : products.filter(product => product.category === currentFilter);
+
+            const filteredBySearch = productsToSearch.filter(product =>
+                product.name.toLowerCase().includes(currentSearchTerm)
+            );
+            
+            renderProducts(filteredBySearch); // Renderiza los productos encontrados
+        }
+
+        // Listener para la tecla Enter en el input de búsqueda
+        document.getElementById('search-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchProducts();
+            }
+        });
+
+        // Custom Alert Modal Functions (replacing window.alert)
+        function showCustomAlert(message) {
+            document.getElementById('custom-alert-message').textContent = message;
+            document.getElementById('custom-alert-modal').style.display = 'flex';
+        }
+
+        function closeCustomAlert() {
+            document.getElementById('custom-alert-modal').style.display = 'none';
+        }
+
+        // --- Funcionalidad de Generación de Descripción con Gemini API ---
+
+        // Función para generar la descripción de un producto usando Gemini API
+        async function generateProductDescription(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                showCustomAlert('Producto no encontrado para generar descripción.');
+                return;
+            }
+
+            const descriptionModal = document.getElementById('description-modal');
+            const descriptionProductName = document.getElementById('description-product-name');
+            const productDescriptionText = document.getElementById('product-description-text');
+            const loadingSpinner = document.getElementById('description-loading-spinner');
+
+            // Muestra el modal y el spinner de carga
+            descriptionProductName.textContent = `Descripción para ${product.name}`;
+            productDescriptionText.textContent = ''; // Limpia cualquier descripción anterior
+            loadingSpinner.style.display = 'block';
+            descriptionModal.style.display = 'flex';
+
+            // Construye el prompt para el LLM
+            const prompt = `Genera una descripción de marketing atractiva y concisa para el siguiente producto de e-commerce. Incluye sus características clave y beneficios. El producto es: ${product.name}, Categoría: ${product.category}, Precio: $${product.price}.`;
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // La clave API se proporciona en tiempo de ejecución por Canvas
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    productDescriptionText.textContent = text; // Muestra la descripción generada
+                } else {
+                    productDescriptionText.textContent = 'No se pudo generar una descripción. Inténtalo de nuevo.';
+                    console.error('Error en la estructura de la respuesta de Gemini API:', result);
+                }
+            } catch (error) {
+                productDescriptionText.textContent = 'Error al conectar con el servicio de generación de descripciones.';
+                console.error('Error al llamar a Gemini API:', error);
+            } finally {
+                loadingSpinner.style.display = 'none'; // Oculta el spinner de carga
+            }
+        }
+
+        // Función para cerrar el modal de descripción
+        function closeDescriptionModal() {
+            document.getElementById('description-modal').style.display = 'none';
+        }
+
+        // Inicialización: Renderiza todos los productos al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI(); // Asegura que el contador del carrito se inicialice
+        });
+    </script>
+</body>
+</html>
