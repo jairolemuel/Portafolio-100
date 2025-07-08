@@ -1315,18 +1315,15 @@
             <p class="fade-in-up delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
             <p class="fade-in-up delay-2">Creando soluciones robustas y seguras con código y estrategia.</p>
         </section>
-<div class="projects-container">
-    <div class="project-card">Proyecto 1</div>
-    <div class="project-card">Proyecto 2</div>
-    <div class="project-card">Proyecto 3</div>
-    div class="project-card">Proyecto 4</div>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechMart - Futuristic E-commerce</title>
+    <title>My Projects Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* Base styles for the entire page */
         * {
             margin: 0;
             padding: 0;
@@ -1334,56 +1331,123 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a;
+            font-family: 'Inter', sans-serif; /* Using Inter font as per guidelines */
+            background: #0a0a0a; /* Dark background */
+            color: #e2e8f0; /* Light text color for contrast */
+            line-height: 1.6;
+            padding: 20px; /* Padding around the content */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            flex-direction: column; /* Stack content vertically */
+            align-items: center; /* Center content horizontally */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+        }
+
+        /* Section styling for the projects block */
+        .projects-section {
+            width: 100%;
+            max-width: 1200px; /* Max width for the entire section */
+            margin: 40px auto; /* Center the section with some vertical margin */
             padding: 20px;
         }
 
+        .section-title {
+            font-size: 3.5rem; /* Larger title for impact */
+            font-weight: 900;
+            color: #00d4ff; /* Neon blue color */
+            text-align: center;
+            margin-bottom: 50px; /* Space below the title */
+            text-shadow: 0 0 25px rgba(0, 212, 255, 0.6); /* Stronger glow */
+            letter-spacing: 3px;
+            animation: titleGlow 4s ease-in-out infinite alternate; /* Slower glow animation */
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.3); }
+            100% { text-shadow: 0 0 35px rgba(0, 212, 255, 0.8), 0 0 50px rgba(0, 212, 255, 0.5); }
+        }
+
+        /* Container for project cards - handles responsive layout */
+        .projects-grid {
+            display: grid;
+            /* Default: Single column for mobile */
+            grid-template-columns: 1fr;
+            gap: 40px; /* Space between cards */
+            justify-items: center; /* Center cards within their grid area */
+        }
+
+        /* Project Card Styling */
         .project-card {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            border: 2px solid #00d4ff;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* Gradient background */
+            border: 2px solid #00d4ff; /* Neon border */
+            border-radius: 20px; /* Rounded corners */
             padding: 30px;
             width: 100%;
-            max-width: 400px;
+            max-width: 400px; /* Max width for individual cards */
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+            transition: all 0.4s ease-in-out; /* Smooth transitions for hover and scroll */
+            text-decoration: none; /* Remove underline from link */
+            color: inherit; /* Inherit text color */
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1); /* Subtle shadow */
+            display: flex;
+            flex-direction: column; /* Stack content inside card */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+
+            /* Initial state for scroll animation */
+            opacity: 0;
+            transform: translateY(30px);
+
+            /* Continuous subtle animation */
+            animation: cardSubtlePulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes cardSubtlePulse {
+            0%, 100% {
+                transform: translateY(0);
+                box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+            }
+            50% {
+                transform: translateY(-3px);
+                box-shadow: 0 25px 45px rgba(0, 212, 255, 0.15);
+            }
+        }
+
+        /* Class added by JavaScript when card is visible */
+        .project-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.2);
-            border-color: #00f0ff;
+            transform: translateY(-15px) rotateZ(1deg); /* Lift and slight tilt on hover */
+            box-shadow: 0 35px 70px rgba(0, 212, 255, 0.35), 0 0 40px rgba(0, 212, 255, 0.5); /* Enhanced shadow and glow on hover */
+            border-color: #00f0ff; /* Brighter border on hover */
+            animation: none; /* Stop subtle pulse on hover */
         }
 
+        /* Hover effect for light shimmer */
         .project-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: -100%; /* Start off-screen to the left */
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.15), transparent);
+            transition: left 0.6s ease; /* Slower transition for shimmer */
         }
 
         .project-card:hover::before {
-            left: 100%;
+            left: 100%; /* Move across the card on hover */
         }
 
+        /* Demo Badge Styling */
         .demo-badge {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: linear-gradient(45deg, #ff6b35, #ff8e53);
+            background: linear-gradient(45deg, #ff6b35, #ff8e53); /* Warm gradient */
             color: white;
             padding: 8px 16px;
             border-radius: 50px;
@@ -1392,7 +1456,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-            animation: pulse 2s ease-in-out infinite;
+            animation: pulse 2s ease-in-out infinite; /* Pulsing animation */
         }
 
         @keyframes pulse {
@@ -1400,33 +1464,30 @@
             50% { transform: scale(1.05); }
         }
 
-        .supermarket-container {
+        /* SVG Container Styling */
+        .project-svg-container {
             width: 100%;
-            height: 180px;
+            height: 180px; /* Fixed height for SVG container */
             margin: 20px 0;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .supermarket-svg {
+        .project-svg-container svg {
             width: 100%;
             height: 100%;
-            max-width: 280px;
+            max-width: 280px; /* Max width for the SVG itself */
+            transition: transform 0.3s ease-in-out; /* Smooth transition for SVG on hover */
         }
 
-        .building {
-            fill: #1e293b;
-            stroke: #00d4ff;
-            stroke-width: 2;
+        .project-card:hover .project-svg-container svg {
+            transform: scale(1.05); /* Slightly enlarge SVG on card hover */
         }
 
-        .sign-bg {
-            fill: #000;
-            stroke: #00d4ff;
-            stroke-width: 1;
-        }
-
+        /* SVG Specific Styles (from your original code) */
+        .building { fill: #1e293b; stroke: #00d4ff; stroke-width: 2; }
+        .sign-bg { fill: #000; stroke: #00d4ff; stroke-width: 1; }
         .neon-text {
             fill: #00d4ff;
             font-family: 'Courier New', monospace;
@@ -1436,54 +1497,46 @@
             filter: drop-shadow(0 0 10px #00d4ff);
             animation: neonGlow 2s ease-in-out infinite alternate;
         }
-
         @keyframes neonGlow {
             0% { filter: drop-shadow(0 0 5px #00d4ff) drop-shadow(0 0 10px #00d4ff); }
             100% { filter: drop-shadow(0 0 15px #00d4ff) drop-shadow(0 0 25px #00d4ff); }
         }
-
-        .window {
-            fill: #0ea5e9;
-            opacity: 0.6;
-            animation: windowFlicker 3s ease-in-out infinite;
-        }
-
+        .window { fill: #0ea5e9; opacity: 0.6; animation: windowFlicker 3s ease-in-out infinite; }
         @keyframes windowFlicker {
             0%, 100% { opacity: 0.6; }
             50% { opacity: 0.9; }
         }
+        .door { fill: #374151; stroke: #00d4ff; stroke-width: 1; }
 
-        .door {
-            fill: #374151;
-            stroke: #00d4ff;
-            stroke-width: 1;
+        /* New: TechMart SVG animation */
+        .supermarket-svg {
+            animation: svgBreathe 4s ease-in-out infinite alternate;
+        }
+        @keyframes svgBreathe {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
-        .project-title {
-            font-size: 2.5rem;
+
+        /* Project Content (Title & Description) */
+        .project-title-card { /* Renamed to avoid conflict with section title */
+            font-size: 2.2rem;
             font-weight: 900;
             color: #00d4ff;
-            text-align: center;
             margin: 20px 0 15px 0;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-            letter-spacing: 2px;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
-            100% { text-shadow: 0 0 30px rgba(0, 212, 255, 0.8); }
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            letter-spacing: 1.5px;
         }
 
         .project-description {
             color: #cbd5e1;
             font-size: 1rem;
             line-height: 1.6;
-            text-align: center;
             margin-bottom: 30px;
             opacity: 0.9;
         }
 
+        /* Call to Action Button */
         .cta-button {
             display: block;
             width: 100%;
@@ -1495,12 +1548,12 @@
             font-size: 1.1rem;
             font-weight: bold;
             text-align: center;
-            text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer; /* Indicate it's clickable */
         }
 
         .cta-button::before {
@@ -1525,25 +1578,101 @@
             left: 100%;
         }
 
+        /* Specific SVG styles for Financiator and Nexus AI */
+        #svg-finance .bar { transition: all 0.5s ease-in-out; }
+        #svg-finance .bar-1 { animation: barGrow1 2s ease-in-out infinite alternate; }
+        #svg-finance .bar-2 { animation: barGrow2 2s ease-in-out infinite alternate 0.2s; }
+        #svg-finance .bar-3 { animation: barGrow3 2s ease-in-out infinite alternate 0.4s; }
+        @keyframes barGrow1 { 0%, 100% { height: 20px; y: 70px; } 50% { height: 30px; y: 60px; } }
+        @keyframes barGrow2 { 0%, 100% { height: 30px; y: 60px; } 50% { height: 40px; y: 50px; } }
+        @keyframes barGrow3 { 0%, 100% { height: 40px; y: 50px; } 50% { height: 50px; y: 40px; } }
+        #svg-finance .line-chart { stroke-dasharray: 200; stroke-dashoffset: 200; animation: drawLine 3s ease-out forwards; }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        /* New: Financiator Euro circle pulse */
+        #svg-finance circle { animation: euroPulse 1.5s ease-in-out infinite alternate; }
+        @keyframes euroPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        #svg-cybersecurity .shield-path { transition: all 0.5s ease-in-out; }
+        #svg-cybersecurity .lock-fill { transition: all 0.5s ease-in-out; }
+        #svg-cybersecurity:hover .shield-path { fill: #00e5ff; stroke: #8000ff; }
+        #svg-cybersecurity:hover .lock-fill { fill: #00e5ff; }
+        /* New: Nexus AI scanline effect */
+        #svg-cybersecurity {
+            position: relative;
+            overflow: hidden;
+        }
+        #svg-cybersecurity::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,229,255,0) 0%, rgba(0,229,255,0.2) 50%, rgba(0,229,255,0) 100%);
+            transform: translateY(-100%);
+            animation: scanline 3s linear infinite;
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+
+        #svg-weather .sun-ray { animation: sunRayPulse 2s infinite alternate; }
+        @keyframes sunRayPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        #svg-weather .cloud { animation: cloudMove 10s linear infinite alternate; }
+        @keyframes cloudMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(10px); }
+        }
+        /* New: Time Capsule Sun pulse */
+        #svg-weather circle[fill="#FFD700"] { animation: sunPulse 2.5s ease-in-out infinite alternate; }
+        @keyframes sunPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .project-card {
-                padding: 20px;
-                max-width: 350px;
+        /* For screens wider than 768px (tablets and desktops) */
+        @media (min-width: 769px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr); /* Two columns */
             }
-            
-            .project-title {
+        }
+
+        /* For screens wider than 1024px (larger desktops) */
+        @media (min-width: 1025px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr); /* Three columns */
+            }
+        }
+
+        /* Adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.8rem;
+                margin-bottom: 40px;
+            }
+            .project-card {
+                padding: 25px;
+                max-width: 380px;
+            }
+            .project-title-card {
                 font-size: 2rem;
             }
-            
             .project-description {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
-            
-            .supermarket-container {
-                height: 150px;
+            .project-svg-container {
+                height: 160px;
             }
-            
             .demo-badge {
                 font-size: 12px;
                 padding: 6px 12px;
@@ -1551,143 +1680,175 @@
         }
 
         @media (max-width: 480px) {
-            .project-card {
+            body {
                 padding: 15px;
+            }
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 30px;
+            }
+            .project-card {
+                padding: 20px;
                 max-width: 320px;
             }
-            
-            .project-title {
+            .project-title-card {
                 font-size: 1.8rem;
             }
-            
-            .supermarket-container {
-                height: 130px;
+            .project-description {
+                font-size: 0.9rem;
             }
-            
+            .project-svg-container {
+                height: 140px;
+            }
             .neon-text {
-                font-size: 12px;
+                font-size: 11px;
             }
         }
     </style>
 </head>
 <body>
-    <a href="techmart/index.html" class="project-card">
-        <div class="demo-badge">Demo</div>
-        
-        <div class="supermarket-container">
-            <svg class="supermarket-svg" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
-                <!-- Building base -->
-                <rect class="building" x="50" y="80" width="200" height="80" rx="5"/>
-                
-                <!-- Roof -->
-                <polygon class="building" points="45,80 155,40 255,80" />
-                
-                <!-- Sign background -->
-                <rect class="sign-bg" x="80" y="50" width="140" height="25" rx="5"/>
-                
-                <!-- Neon sign text -->
-                <text class="neon-text" x="150" y="67">SUPERMARKET</text>
-                
-                <!-- Windows -->
-                <rect class="window" x="70" y="90" width="25" height="20" rx="2"/>
-                <rect class="window" x="105" y="90" width="25" height="20" rx="2"/>
-                <rect class="window" x="140" y="90" width="25" height="20" rx="2"/>
-                <rect class="window" x="175" y="90" width="25" height="20" rx="2"/>
-                <rect class="window" x="210" y="90" width="25" height="20" rx="2"/>
-                
-                <!-- Door -->
-                <rect class="door" x="130" y="120" width="40" height="40" rx="2"/>
-                <circle fill="#00d4ff" cx="160" cy="140" r="2"/>
-                
-                <!-- Ground line -->
-                <line x1="30" y1="160" x2="270" y2="160" stroke="#00d4ff" stroke-width="2" opacity="0.5"/>
-                
-                <!-- Sci-fi elements -->
-                <circle fill="#00d4ff" cx="60" cy="50" r="3" opacity="0.8">
-                    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
-                </circle>
-                <circle fill="#00d4ff" cx="240" cy="50" r="3" opacity="0.8">
-                    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
-        </div>
-        
-        <h1 class="project-title">TechMart</h1>
-        
-        <p class="project-description">
-            Futuristic e-commerce application that combines animated design and modern user experience for fast and intuitive product shopping.
-        </p>
-        
-        <div class="cta-button">View More</div>
-    </a>
+    <section class="projects-section">
+        <h2 class="section-title">Mis Proyectos</h2>
 
+        <div class="projects-grid">
+            <!-- Project Card 1: TechMart -->
+            <a href="techmart/index.html" class="project-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="demo-badge">Demo</div>
 
-                <div class="project-card">
-                    <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-                        <div class="project-svg-container">
-                            <svg id="svg-finance" viewBox="0 0 100 100">
-                                <rect x="15" y="70" width="15" height="20" fill="#00e5ff" class="bar bar-1"/>
-                                <rect x="40" y="60" width="15" height="30" fill="#00e5ff" class="bar bar-2"/>
-                                <rect x="65" y="50" width="15" height="40" fill="#00e5ff" class="bar bar-3"/>
-                                <polyline points="10,40 30,30 50,20 70,25 90,15" fill="none" stroke="#8000ff" stroke-width="3" class="line-chart"/>
-                                <circle cx="50" cy="85" r="5" fill="#fff"/>
-                                <text x="50" y="85" text-anchor="middle" font-size="10" fill="#000">€</text>
-                            </svg>
-                        </div>
-                        <div class="project-content">
-                            <h3>Financiator</h3>
-                            <p>Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
-                        </div>
-                        <div class="project-button-wrapper">
-                            <span class="project-button">Ver Proyecto</span>
-                        </div>
-                    </a>
+                <div class="project-svg-container">
+                    <svg class="supermarket-svg" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Building base -->
+                        <rect class="building" x="50" y="80" width="200" height="80" rx="5"/>
+
+                        <!-- Roof -->
+                        <polygon class="building" points="45,80 155,40 255,80" />
+
+                        <!-- Sign background -->
+                        <rect class="sign-bg" x="80" y="50" width="140" height="25" rx="5"/>
+
+                        <!-- Neon sign text -->
+                        <text class="neon-text" x="150" y="67">TECHMART</text>
+
+                        <!-- Windows -->
+                        <rect class="window" x="70" y="90" width="25" height="20" rx="2"/>
+                        <rect class="window" x="105" y="90" width="25" height="20" rx="2"/>
+                        <rect class="window" x="140" y="90" width="25" height="20" rx="2"/>
+                        <rect class="window" x="175" y="90" width="25" height="20" rx="2"/>
+                        <rect class="window" x="210" y="90" width="25" height="20" rx="2"/>
+
+                        <!-- Door -->
+                        <rect class="door" x="130" y="120" width="40" height="40" rx="2"/>
+                        <circle fill="#00d4ff" cx="160" cy="140" r="2"/>
+
+                        <!-- Ground line -->
+                        <line x1="30" y1="160" x2="270" y2="160" stroke="#00d4ff" stroke-width="2" opacity="0.5"/>
+
+                        <!-- Sci-fi elements -->
+                        <circle fill="#00d4ff" cx="60" cy="50" r="3" opacity="0.8">
+                            <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle fill="#00d4ff" cx="240" cy="50" r="3" opacity="0.8">
+                            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                    </svg>
                 </div>
 
-<div class="project-card">
-    <a href="nexusaisecurityagent.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-        <div class="project-svg-container">
-            <svg id="svg-cybersecurity" viewBox="0 0 100 100">
-                <path d="M50 10 L10 40 L10 80 L50 90 L90 80 L90 40 Z" fill="#1a2a3a" stroke="#00e5ff" stroke-width="3" class="shield-path"/>
-                <circle cx="50" cy="55" r="15" fill="#8000ff" class="lock-fill"/>
-                <rect x="45" y="45" width="10" height="15" fill="#000" rx="2" ry="2"/>
-                <path d="M55 40 C55 35 50 30 45 35 V45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
-            </svg>
-        </div>
-        <div class="project-content">
-            <h3>Nexus AI Security Agent</h3>
-            <p>Asistente de seguridad inteligente con simulación de amenazas en tiempo real.</p>
-            <div class="project-button-wrapper">
-                <span class="project-button">Ver Proyecto</span>
-            </div>
-        </div>
-    </a>
-</div>
+                <h3 class="project-title-card">TechMart</h3>
 
-<div class="project-card">
-    <a href="chronomemoria.html" target="_blank" rel="noopener noreferrer" class="project-card-link">
-        <div class="project-svg-container">
-            <svg id="svg-weather" viewBox="0 0 100 100">
-                <circle cx="70" cy="30" r="15" fill="#FFD700"/>
-                <line x1="70" y1="15" x2="70" y2="25" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
-                <line x1="80.6" y1="20.4" x2="73.6" y2="27.4" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
-                <line x1="85" y1="30" x2="75" y2="30" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
-                <line x1="80.6" y1="39.6" x2="73.6" y2="32.6" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
-                <line x1="70" y1="45" x2="70" y2="35" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
-                <path d="M20 50 Q 10 30 40 30 T 70 50 Q 80 70 50 70 T 20 50 Z" fill="#E0E0E0" class="cloud"/>
-                <path d="M40 70 Q 30 90 60 90 T 90 70 Q 100 50 70 50 T 40 70 Z" fill="#C0C0C0" class="cloud"/>
-            </svg>
+                <p class="project-description">
+                    Aplicación de e-commerce futurista que combina diseño animado y experiencia de usuario moderna para compras de productos rápidas e intuitivas.
+                </p>
+
+                <div class="cta-button">Ver Más</div>
+            </a>
+
+            <!-- Project Card 2: Financiator -->
+            <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-svg-container">
+                    <svg id="svg-finance" viewBox="0 0 100 100">
+                        <rect x="15" y="70" width="15" height="20" fill="#00e5ff" class="bar bar-1"/>
+                        <rect x="40" y="60" width="15" height="30" fill="#00e5ff" class="bar bar-2"/>
+                        <rect x="65" y="50" width="15" height="40" fill="#00e5ff" class="bar bar-3"/>
+                        <polyline points="10,40 30,30 50,20 70,25 90,15" fill="none" stroke="#8000ff" stroke-width="3" class="line-chart"/>
+                        <circle cx="50" cy="85" r="5" fill="#fff"/>
+                        <text x="50" y="85" text-anchor="middle" font-size="10" fill="#000">€</text>
+                    </svg>
+                </div>
+                <h3 class="project-title-card">Financiator</h3>
+                <p class="project-description">Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
+                <div class="cta-button">Ver Proyecto</div>
+            </a>
+
+            <!-- Project Card 3: Nexus AI Security Agent -->
+            <a href="nexusaisecurityagent.html" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="project-svg-container">
+                    <svg id="svg-cybersecurity" viewBox="0 0 100 100">
+                        <path d="M50 10 L10 40 L10 80 L50 90 L90 80 L90 40 Z" fill="#1a2a3a" stroke="#00e5ff" stroke-width="3" class="shield-path"/>
+                        <circle cx="50" cy="55" r="15" fill="#8000ff" class="lock-fill"/>
+                        <rect x="45" y="45" width="10" height="15" fill="#000" rx="2" ry="2"/>
+                        <path d="M55 40 C55 35 50 30 45 35 V45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="project-title-card">Nexus AI Security Agent</h3>
+                <p class="project-description">Asistente de seguridad inteligente con simulación de amenazas en tiempo real.</p>
+                <div class="cta-button">Ver Proyecto</div>
+            </a>
+
+            <!-- Project Card 4: Time Capsule (ChronoMemoria) -->
+            <a href="chronomemoria.html" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="project-svg-container">
+                    <svg id="svg-weather" viewBox="0 0 100 100">
+                        <circle cx="70" cy="30" r="15" fill="#FFD700"/>
+                        <line x1="70" y1="15" x2="70" y2="25" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                        <line x1="80.6" y1="20.4" x2="73.6" y2="27.4" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                        <line x1="85" y1="30" x2="75" y2="30" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                        <line x1="80.6" y1="39.6" x2="73.6" y2="32.6" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                        <line x1="70" y1="45" x2="70" y2="35" stroke="#FFD700" stroke-width="2" class="sun-ray"/>
+                        <path d="M20 50 Q 10 30 40 30 T 70 50 Q 80 70 50 70 T 20 50 Z" fill="#E0E0E0" class="cloud"/>
+                        <path d="M40 70 Q 30 90 60 90 T 90 70 Q 100 50 70 50 T 40 70 Z" fill="#C0C0C0" class="cloud"/>
+                    </svg>
+                </div>
+                <h3 class="project-title-card">Time Capsule</h3>
+                <p class="project-description">Esta aplicación web te permite guardar mensajes, fotos o recuerdos para ser abiertos en el futuro.</p>
+                <div class="cta-button">Ver Proyecto</div>
+            </a>
         </div>
-        <div class="project-content">
-            <h3>Time Capdule</h3>
-            <p>App web is an app that save messages, photos, or memories to be opened in the future.</p>
-            <div class="project-button-wrapper">
-                <span class="project-button">Ver Proyecto</span>
-            </div>
-        </div>
-    </a>
-</div>                       
-        </section>
+    </section>
+
+    <script>
+        // JavaScript for scroll-based appearance effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectCards = document.querySelectorAll('.project-card');
+
+            const observerOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the item is visible
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add the 'is-visible' class to trigger the animation
+                        entry.target.classList.add('is-visible');
+
+                        // Get the delay from data-aos-delay attribute
+                        const delay = parseInt(entry.target.dataset.aosDelay || '0');
+                        entry.target.style.transitionDelay = `${delay}ms`;
+
+                        // Stop observing once the element is visible
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            projectCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 
         <section class="section-services" id="services">
             <h2 class="holographic-text glitch" data-text="Servicios">Servicios</h2>
