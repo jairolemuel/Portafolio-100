@@ -358,13 +358,14 @@
             color: transparent;
         }
 
-        .projects-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-        }
-
+         .projects-container {
+             display: flex;
+            flex-wrap: nowrap;
+             justify-content: center;
+             gap: 2.5rem;
+            overflow-x: auto; 
+         }
+        
         .project-card {
             position: relative;
             width: 340px;
