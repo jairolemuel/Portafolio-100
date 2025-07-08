@@ -1317,802 +1317,205 @@
 
         <section class="section-projects" id="projects">
             <h2 class="holographic-text glitch" data-text="Proyectos">Proyectos</h2>
-            <div class="projects-container">
-                <!-- Estilos CSS para la tarjeta TechMart Demo -->
-<style>
-    /* Variables para tema e-commerce moderno y futurista */
+  <title>TechMart Futurista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
     :root {
-        --primary-orange: #ff6b35;
-        --primary-blue: #1e40af;
-        --accent-cyan: #06b6d4;
-        --success-green: #10b981;
-        --warning-yellow: #f59e0b;
-        --dark-navy: #0f172a;
-        --light-gray: #f8fafc;
-        --white: #ffffff;
-        --text-dark: #1e293b;
-        --text-light: #64748b;
-        --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #f59e0b 100%);
-        --gradient-secondary: linear-gradient(135deg, #1e40af 0%, #06b6d4 100%);
-        --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        --border-radius: 16px;
-
-        /* Colores específicos para la tarjeta futurista */
-        --futuristic-blue-dark: #002a50; /* Azul oscuro */
-        --futuristic-blue-electric: #00d4ff; /* Azul eléctrico */
-        --text-glow-color: #00d4ff; /* Azul eléctrico para el brillo del texto */
-        --button-glow-color: #ff6b35; /* Naranja para el brillo del botón */
+      --futuristic-dark: #0a192f;
+      --futuristic-blue: #00d4ff;
+      --electric-blue: #3b82f6;
+      --deep-blue: #1e40af;
+      --white: #ffffff;
+      --glow-shadow: 0 0 12px var(--futuristic-blue), 0 0 24px var(--futuristic-blue);
+      --border-radius: 16px;
+      --card-padding: 30px;
     }
 
-    /* Fuentes (simulado, en un entorno real se importarían) */
-    /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'); */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    /* NOTA: En un archivo HTML principal, estos estilos se aplicarían a todo el body.
-             Si solo quieres que afecten a la tarjeta, considera envolverlos
-             en un selector más específico o usar un shadow DOM.
-             Para esta incrustación, se asume que el body principal ya tiene estilos base. */
     body {
-        /* Estos estilos son para el DEMO de la tarjeta, en tu página principal
-           probablemente ya tengas un body definido. Puedes omitir o ajustar. */
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        position: relative;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #0a192f, #000814);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--white);
+      padding: 20px;
     }
 
-    /* Fondo decorativo (ajusta si ya tienes un fondo global) */
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background:
-            radial-gradient(circle at 20% 30%, rgba(255, 107, 53, 0.1) 0%, transparent 40%),
-            radial-gradient(circle at 80% 70%, rgba(30, 64, 175, 0.1) 0%, transparent 40%);
-        pointer-events: none;
-        z-index: -1;
-    }
-
-    /* Contenedor de la tarjeta reutilizable */
     .project-card-wrapper {
-        margin: 20px; /* Espacio entre tarjetas si hay varias */
-        perspective: 1000px; /* Para el efecto 3D en hover */
+      max-width: 500px;
+      width: 100%;
+      background: linear-gradient(145deg, #0e2a45, #00253c);
+      border: 2px solid var(--futuristic-blue);
+      border-radius: var(--border-radius);
+      box-shadow: var(--glow-shadow);
+      overflow: hidden;
+      position: relative;
+      animation: pulseGlow 3s infinite alternate;
     }
 
-    /* Tarjeta principal */
-    .ecommerce-card {
-        max-width: 480px;
-        width: 100%;
-        background: linear-gradient(160deg, var(--futuristic-blue-dark) 0%, var(--futuristic-blue-electric) 100%);
-        border-radius: var(--border-radius);
-        box-shadow: var(--card-shadow);
-        overflow: hidden;
-        position: relative;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid rgba(0, 212, 255, 0.3); /* Borde sutil para el azul eléctrico */
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 8px var(--electric-blue);
+      }
+      100% {
+        box-shadow: 0 0 24px var(--electric-blue);
+      }
     }
 
-    .ecommerce-card:hover {
-        transform: translateY(-8px) rotateX(2deg) rotateY(-2deg); /* Efecto 3D sutil */
-        box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.3);
-        border: 1px solid var(--primary-orange); /* Borde vibrante al hover */
-    }
-
-    /* Badge de "Demo" */
     .demo-badge {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: var(--gradient-primary);
-        color: var(--white);
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        z-index: 10;
-        box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--futuristic-blue);
+      color: var(--deep-blue);
+      font-weight: bold;
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      box-shadow: 0 0 10px var(--futuristic-blue);
     }
 
-    /* Encabezado */
     .card-header {
-        padding: 30px 30px 20px;
-        text-align: center;
-        position: relative;
-        background: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente oscuro */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: var(--card-padding);
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
     .project-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--white); /* Texto blanco para el título */
-        text-shadow: 0 0 10px var(--text-glow-color), 0 0 20px var(--text-glow-color), 0 0 30px var(--text-glow-color); /* Brillo neón azul */
-        margin-bottom: 8px;
-        letter-spacing: -0.5px;
-        transition: text-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .ecommerce-card:hover .project-title {
-        text-shadow: 0 0 15px var(--primary-orange), 0 0 25px var(--primary-orange), 0 0 40px var(--primary-orange); /* Brillo naranja al hover */
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--futuristic-blue);
+      text-shadow: var(--glow-shadow);
     }
 
     .project-subtitle {
-        font-size: 1rem;
-        color: rgba(255, 255, 255, 0.7);
-        font-weight: 500;
-        margin-bottom: 15px;
+      font-size: 1rem;
+      margin-top: 8px;
+      color: #cbd5e1;
     }
 
-    /* Métricas del proyecto */
     .project-metrics {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 24px;
     }
 
     .metric {
-        text-align: center;
+      text-align: center;
     }
 
     .metric-value {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--accent-cyan); /* Color de métricas */
-        display: block;
-        text-shadow: 0 0 5px rgba(6, 182, 212, 0.5);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--electric-blue);
+      text-shadow: 0 0 8px var(--electric-blue);
     }
 
     .metric-label {
-        font-size: 0.75rem;
-        color: rgba(255, 255, 255, 0.6);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 4px;
     }
 
-    /* Contenedor de animación Three.js */
-    .animation-container {
-        height: 280px;
-        position: relative;
-        background: radial-gradient(circle at center, #0d1b2a 0%, #0f172a 100%); /* Fondo oscuro para el canvas */
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        overflow: hidden;
+    .btn-container {
+      text-align: center;
+      margin-top: 30px;
+      padding-bottom: 30px;
     }
 
-    #threejs-canvas {
-        width: 100%;
-        height: 100%;
-        display: block;
-        opacity: 0.9; /* Ligeramente transparente para el fondo */
+    .blue-btn {
+      background: transparent;
+      border: 2px solid var(--futuristic-blue);
+      color: var(--futuristic-blue);
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease-in-out;
+      overflow: hidden;
+      text-shadow: 0 0 6px var(--futuristic-blue);
     }
 
-    /* Overlay para efectos */
-    .animation-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg,
-            rgba(255, 107, 53, 0.05) 0%,
-            transparent 30%,
-            transparent 70%,
-            rgba(30, 64, 175, 0.05) 100%);
-        pointer-events: none;
-        z-index: 1; /* Encima del canvas, debajo de elementos principales si los hubiera */
+    .blue-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, var(--futuristic-blue), transparent);
+      transition: left 0.5s;
     }
 
-    /* Descripción */
-    .project-description {
-        padding: 25px 30px;
-        color: rgba(255, 255, 255, 0.8);
-        line-height: 1.6;
-        font-size: 1rem;
-        text-align: center;
-        background: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente oscuro */
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        text-shadow: 0 0 5px rgba(0, 212, 255, 0.3); /* Brillo sutil */
+    .blue-btn:hover::before {
+      left: 100%;
     }
 
-    /* Características destacadas */
-    .features {
-        padding: 0 30px 25px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        background: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente oscuro */
+    .blue-btn:hover {
+      background-color: var(--futuristic-blue);
+      color: var(--deep-blue);
+      box-shadow: 0 0 20px var(--futuristic-blue);
     }
-
-    .feature {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px;
-        background: rgba(0, 212, 255, 0.1); /* Fondo de característica con azul eléctrico */
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(0, 212, 255, 0.2);
-    }
-
-    .feature:hover {
-        background: rgba(0, 212, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3);
-    }
-
-    .feature-icon {
-        font-size: 1.2rem;
-        width: 28px;
-        height: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--gradient-secondary); /* Icono con gradiente azul/cian */
-        border-radius: 6px;
-        color: var(--white);
-        flex-shrink: 0;
-        box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
-    }
-
-    .feature-text {
-        font-size: 0.875rem;
-        color: var(--white);
-        font-weight: 500;
-        text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
-    }
-
-    /* Botón de acción */
-    .action-section {
-        padding: 25px 30px 30px;
-        background: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente oscuro */
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        border-bottom-left-radius: var(--border-radius);
-        border-bottom-right-radius: var(--border-radius);
-    }
-
-    .action-button {
-        display: block;
-        width: 100%;
-        padding: 16px 24px;
-        background: var(--gradient-primary);
-        color: var(--white);
-        text-decoration: none;
-        border: none;
-        border-radius: 12px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-    }
-
-    .action-button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.6s ease;
-        z-index: -1;
-    }
-
-    .action-button:hover::before {
-        left: 100%;
-    }
-
-    .action-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
-        background: linear-gradient(90deg, #ff8c4a, var(--primary-orange)); /* Ligeramente diferente al hover */
-    }
-
-    .action-button:active {
-        transform: translateY(0);
-    }
-
-    /* Indicadores de tecnología */
-    .tech-stack {
-        padding: 0 30px 20px;
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        background: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente oscuro */
-    }
-
-    .tech-badge {
-        background: rgba(16, 185, 129, 0.15);
-        color: var(--success-green);
-        padding: 4px 10px;
-        border-radius: 16px;
-        font-size: 0.75rem;
-        font-weight: 500;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        text-shadow: 0 0 3px rgba(16, 185, 129, 0.5);
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-        .ecommerce-card {
-            max-width: 380px;
-        }
-        
-        .project-title {
-            font-size: 2rem;
-        }
-        
-        .animation-container {
-            height: 240px;
-        }
-        
-        .features {
-            grid-template-columns: 1fr;
-        }
-        
-        .project-metrics {
-            gap: 16px;
-        }
-    }
-</style>
-
-<!-- Sección de la Tarjeta TechMart Demo (copia y pega esto en tu HTML) -->
-<div class="project-card-wrapper">
-    <div class="ecommerce-card">
-        <!-- Badge Demo -->
-        <div class="demo-badge">Demo</div>
-        
-        <!-- Encabezado -->
-        <div class="card-header">
-            <h1 class="project-title">TechMart</h1>
-            <p class="project-subtitle">E-Commerce Platform Demo</p>
-            
-            <!-- Métricas del proyecto -->
-            <div class="project-metrics">
-                <div class="metric">
-                    <span class="metric-value">36+</span>
-                    <span class="metric-label">Productos</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-value">6</span>
-                    <span class="metric-label">Categorías</span>
-                </div>
-                <!-- Se eliminó la métrica de Responsive -->
-            </div>
+  </style>
+</head>
+<body>
+  <div class="project-card-wrapper">
+    <div class="demo-badge">Demo</div>
+    <div class="card-header">
+      <h1 class="project-title">TechMart</h1>
+      <p class="project-subtitle">e-Commerce Animado Futurista</p>
+      <div class="project-metrics">
+        <div class="metric">
+          <div class="metric-value" data-target="250">0</div>
+          <div class="metric-label">Productos</div>
         </div>
-        
-        <!-- Contenedor de animación Three.js -->
-        <div class="animation-container">
-            <canvas id="threejs-canvas"></canvas>
-            <div class="animation-overlay"></div>
+        <div class="metric">
+          <div class="metric-value" data-target="98">0</div>
+          <div class="metric-label">Satisfacción</div>
         </div>
-        
-        <!-- Descripción -->
-        <div class="project-description">
-            Una aplicación de e-commerce moderna con funcionalidades reales y secciones organizadas por categorías. Experimenta la simulación de un carrito de compras dinámico.
+        <div class="metric">
+          <div class="metric-value" data-target="24">0</div>
+          <div class="metric-label">Soporte</div>
         </div>
-        
-        <!-- Stack tecnológico -->
-        <div class="tech-stack">
-            <span class="tech-badge">HTML5</span>
-            <span class="tech-badge">CSS3</span>
-            <span class="tech-badge">JavaScript</span>
-            <span class="tech-badge">Three.js</span>
-            <span class="tech-badge">Cannon.js</span>
-        </div>
-        
-        <!-- Botón de acción -->
-        <div class="action-section">
-            <a href="techmart/index.html" target="_blank" class="action-button">
-                Ver Proyecto en Vivo
-            </a>
-        </div>
+      </div>
+      <div class="btn-container">
+        <button class="blue-btn">Explorar Proyecto</button>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Scripts para Three.js y Cannon.js (coloca esto al final de tu body o en un archivo JS externo) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
-<script>
-    // Array global para mantener las instancias de Three.js de cada tarjeta
-    const threeJsCardInstances = [];
-
-    // Función para inicializar una única tarjeta de e-commerce con su animación Three.js
-    function initializeEcommerceCard(cardElement) {
-        const canvas = cardElement.querySelector('#threejs-canvas');
-        if (!canvas) {
-            console.warn("Elemento canvas no encontrado en la tarjeta:", cardElement);
-            return;
-        }
-
-        let scene, camera, renderer;
-        let world, groundBody, cartBody; // Cannon.js world and bodies
-        let productMeshes = [];
-        let productBodies = []; // Cannon.js bodies for products
-        let animationId = null; // ID del frame de animación para esta instancia
-        let lastProductSpawnTime = 0;
-        const productSpawnInterval = 300; // ms entre productos que caen
-        const gravity = -9.82; // Gravedad
-
-        // Colores de los productos 3D (tomados de las variables CSS)
-        const productColors = [
-            0xff6b35, // primary-orange
-            0x1e40af, // primary-blue
-            0x10b981, // success-green
-            0xf59e0b, // warning-yellow
-            0x06b6d4, // accent-cyan
-        ];
-
-        // Inicializa la escena, cámara y renderizador de Three.js para este canvas
-        function initThreeJS() {
-            const containerRect = canvas.getBoundingClientRect();
-
-            // Crear escena
-            scene = new THREE.Scene();
-            // El fondo del canvas se define por CSS para un gradiente radial sutil
-
-            // Configurar cámara
-            camera = new THREE.PerspectiveCamera(
-                75, // Campo de visión
-                containerRect.width / containerRect.height, // Aspect ratio
-                0.1, // Near clipping plane
-                100 // Far clipping plane
-            );
-            camera.position.set(0, 8, 15); // Posición de la cámara
-            camera.lookAt(0, 0, 0); // Apuntar al centro de la escena
-
-            // Configurar renderer
-            renderer = new THREE.WebGLRenderer({
-                canvas: canvas,
-                antialias: true, // Suavizado de bordes
-                alpha: true // Permite que el fondo CSS se vea a través del canvas
-            });
-            renderer.setSize(containerRect.width, containerRect.height);
-            renderer.setPixelRatio(window.devicePixelRatio); // Para un rendering más nítido en pantallas de alta densidad
-            renderer.shadowMap.enabled = true; // Habilitar mapas de sombras
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Tipo de sombra suave
-
-            // Iluminación
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7); // Luz ambiental suave
-            scene.add(ambientLight);
-
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9); // Luz direccional principal
-            directionalLight.position.set(10, 15, 10);
-            directionalLight.castShadow = true; // La luz proyecta sombras
-            directionalLight.shadow.mapSize.width = 2048; // Resolución del mapa de sombras
-            directionalLight.shadow.mapSize.height = 2048;
-            directionalLight.shadow.camera.near = 0.5;
-            directionalLight.shadow.camera.far = 50;
-            directionalLight.shadow.camera.left = -20;
-            directionalLight.shadow.camera.right = 20;
-            directionalLight.shadow.camera.top = 20;
-            directionalLight.shadow.camera.bottom = -20;
-            scene.add(directionalLight);
-
-            // Inicializar Cannon.js
-            world = new CANNON.World();
-            world.gravity.set(0, gravity, 0); // Establecer gravedad
-
-            // Crear material de contacto para rebote
-            const groundMaterial = new CANNON.Material("groundMaterial");
-            const productMaterial = new CANNON.Material("productMaterial");
-            const groundProductCM = new CANNON.ContactMaterial(groundMaterial, productMaterial, {
-                friction: 0.4,
-                restitution: 0.7 // Rebote
-            });
-            world.addContactMaterial(groundProductCM);
-
-            // Crear suelo para Cannon.js
-            const groundShape = new CANNON.Plane();
-            groundBody = new CANNON.Body({ mass: 0, material: groundMaterial }); // Masa 0 para que sea estático
-            groundBody.addShape(groundShape);
-            groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2); // Rotar para que sea horizontal
-            world.addBody(groundBody);
-
-            createShoppingCart3D(); // Crear el modelo 3D del carrito
-            
-            // Almacenar los objetos de Three.js específicos de esta instancia
-            threeJsCardInstances.push({
-                scene,
-                camera,
-                renderer,
-                world,
-                productMeshes,
-                productBodies,
-                cartBody,
-                animationId,
-                canvas,
-                cardElement,
-                lastProductSpawnTime
-            });
-        }
-
-        // Crea el modelo 3D del carrito de compras
-        function createShoppingCart3D() {
-            const cartGroup = new THREE.Group();
-            const cartMaterial = new THREE.MeshPhongMaterial({ color: 0x004e92, shininess: 150 }); // Azul oscuro
-
-            // Cuerpo del carrito (caja inclinada)
-            const bodyGeometry = new THREE.BoxGeometry(7, 4, 5);
-            const bodyMesh = new THREE.Mesh(bodyGeometry, cartMaterial);
-            bodyMesh.position.y = 2;
-            bodyMesh.position.z = -1;
-            bodyMesh.rotation.x = Math.PI / 10; // Ligeramente inclinado
-            bodyMesh.castShadow = true;
-            bodyMesh.receiveShadow = true;
-            cartGroup.add(bodyMesh);
-
-            // Asa del carrito (tubo)
-            const handlePath = new THREE.CurvePath();
-            handlePath.add(new THREE.LineCurve3(new THREE.Vector3(-3.5, 3, 2.5), new THREE.Vector3(-3.5, 6, 2.5)));
-            handlePath.add(new THREE.QuadraticBezierCurve3(
-                new THREE.Vector3(-3.5, 6, 2.5),
-                new THREE.Vector3(0, 7, 2.5),
-                new THREE.Vector3(3.5, 6, 2.5)
-            ));
-            handlePath.add(new THREE.LineCurve3(new THREE.Vector3(3.5, 6, 2.5), new THREE.Vector3(3.5, 3, 2.5)));
-
-            const handleGeometry = new THREE.TubeGeometry(handlePath, 20, 0.4, 8, false);
-            const handleMesh = new THREE.Mesh(handleGeometry, cartMaterial);
-            handleMesh.castShadow = true;
-            cartGroup.add(handleMesh);
-
-            // Ruedas (cilindros)
-            const wheelGeometry = new THREE.CylinderGeometry(1.2, 1.2, 0.8, 16);
-            const wheelMaterial = new THREE.MeshPhongMaterial({ color: 0x333333, shininess: 50 });
-
-            const wheel1 = new THREE.Mesh(wheelGeometry, wheelMaterial);
-            wheel1.rotation.z = Math.PI / 2;
-            wheel1.position.set(-3.8, 0.8, 2.8);
-            wheel1.castShadow = true;
-            cartGroup.add(wheel1);
-
-            const wheel2 = new THREE.Mesh(wheelGeometry, wheelMaterial);
-            wheel2.rotation.z = Math.PI / 2;
-            wheel2.position.set(3.8, 0.8, 2.8);
-            wheel2.castShadow = true;
-            cartGroup.add(wheel2);
-
-            cartGroup.position.y = 0; // Posicionar el grupo del carrito
-            scene.add(cartGroup);
-
-            // Crear cuerpo de Cannon.js para el carrito (estático)
-            const cartShape = new CANNON.Box(new CANNON.Vec3(3.5, 2, 2.5)); // Dimensiones aproximadas del cuerpo
-            cartBody = new CANNON.Body({ mass: 0 }); // Masa 0 para que sea estático
-            cartBody.addShape(cartShape);
-            cartBody.position.copy(cartGroup.position);
-            cartBody.quaternion.copy(cartGroup.quaternion); // Sincronizar rotación
-            world.addBody(cartBody);
-        }
-
-        // Función para crear y añadir un producto que cae
-        function spawnProduct() {
-            const size = Math.random() * 0.8 + 0.4; // Tamaño entre 0.4 y 1.2
-            const color = productColors[Math.floor(Math.random() * productColors.length)];
-            let geometry;
-            let shape;
-            const shapeType = Math.random();
-
-            if (shapeType < 0.33) {
-                geometry = new THREE.BoxGeometry(size, size, size);
-                shape = new CANNON.Box(new CANNON.Vec3(size / 2, size / 2, size / 2));
-            } else if (shapeType < 0.66) {
-                geometry = new THREE.SphereGeometry(size / 2, 16, 16);
-                shape = new CANNON.Sphere(size / 2);
-            } else {
-                geometry = new THREE.CylinderGeometry(size / 2, size / 2, size, 16);
-                shape = new CANNON.Cylinder(size / 2, size / 2, size, 16);
-            }
-
-            const material = new THREE.MeshPhongMaterial({ color: color, shininess: 100 });
-            const productMesh = new THREE.Mesh(geometry, material);
-
-            // Posición inicial aleatoria por encima del carrito
-            productMesh.position.x = (Math.random() - 0.5) * 5;
-            productMesh.position.y = 10 + Math.random() * 5; // Empieza más alto
-            productMesh.position.z = (Math.random() - 0.5) * 5;
-
-            productMesh.castShadow = true;
-            productMesh.receiveShadow = true;
-            scene.add(productMesh);
-            productMeshes.push(productMesh);
-
-            // Crear cuerpo de Cannon.js para el producto
-            const productBody = new CANNON.Body({ mass: 1, material: new CANNON.Material("productMaterial") });
-            productBody.addShape(shape);
-            productBody.position.copy(productMesh.position);
-            productBody.quaternion.copy(productMesh.quaternion);
-            world.addBody(productBody);
-            productBodies.push(productBody);
-        }
-
-        // Bucle principal de animación para esta instancia
-        function animateInstance(instanceIndex) {
-            const instance = threeJsCardInstances[instanceIndex];
-            if (!instance || !instance.renderer) return; // Asegurarse de que la instancia es válida
-
-            const currentTime = performance.now(); // Tiempo actual para animaciones basadas en tiempo
-            
-            // Generar nuevos productos
-            if (currentTime - instance.lastProductSpawnTime > productSpawnInterval) {
-                spawnProduct();
-                instance.lastProductSpawnTime = currentTime;
-            }
-
-            // Actualizar mundo de Cannon.js
-            world.step(1 / 60); // Paso de tiempo fijo para la simulación de físicas
-
-            // Sincronizar mallas de Three.js con cuerpos de Cannon.js
-            for (let i = instance.productMeshes.length - 1; i >= 0; i--) {
-                const mesh = instance.productMeshes[i];
-                const body = instance.productBodies[i];
-
-                mesh.position.copy(body.position);
-                mesh.quaternion.copy(body.quaternion);
-
-                // Eliminar producto si cae demasiado lejos
-                if (mesh.position.y < -5 || mesh.position.y > 20) { // Limite inferior y superior para eliminar
-                    scene.remove(mesh);
-                    world.removeBody(body);
-                    mesh.geometry.dispose();
-                    mesh.material.dispose();
-                    instance.productMeshes.splice(i, 1);
-                    instance.productBodies.splice(i, 1);
-                }
-            }
-
-            // Rotación sutil de la cámara para un efecto dinámico
-            const orbitSpeed = 0.0005;
-            const radius = 15;
-            instance.camera.position.x = Math.sin(currentTime * orbitSpeed) * radius;
-            instance.camera.position.z = Math.cos(currentTime * orbitSpeed) * radius;
-            instance.camera.lookAt(0, 2, 0); // Mirar ligeramente por encima del suelo
-
-            instance.renderer.render(instance.scene, instance.camera);
-            instance.animationId = requestAnimationFrame(() => animateInstance(instanceIndex));
-        }
-
-        // Manejar redimensionamiento del canvas de esta tarjeta
-        function handleResize() {
-            const container = cardElement.querySelector('#threejs-canvas');
-            const containerRect = container.getBoundingClientRect();
-            if (camera && renderer) {
-                camera.aspect = containerRect.width / containerRect.height;
-                camera.updateProjectionMatrix();
-                renderer.setSize(containerRect.width, containerRect.height);
-            }
-        }
-
-        // Animar métricas al cargar (específico para esta tarjeta)
-        function animateMetrics() {
-            const metrics = cardElement.querySelectorAll('.metric-value');
-            metrics.forEach((metric) => {
-                const finalValue = metric.textContent;
-                const numericValue = parseFloat(finalValue);
-                if (isNaN(numericValue)) return;
-
-                let currentValue = 0;
-                const increment = numericValue / 50; // 50 pasos para la animación
-
-                const timer = setInterval(() => {
-                    currentValue += increment;
-                    if (currentValue >= numericValue) {
-                        currentValue = numericValue;
-                        clearInterval(timer);
-                    }
-                    // Mantener el sufijo si existe (+ o %)
-                    metric.textContent = Math.floor(currentValue) + (finalValue.includes('%') ? '%' : finalValue.includes('+') ? '+' : '');
-                }, 50); // Cada 50ms
-            });
-        }
-
-        // Inicializar Three.js y otros efectos para esta tarjeta
-        initThreeJS();
-        animateMetrics(); // Animar las métricas al iniciar la tarjeta
-
-        // Event listeners para esta tarjeta específica
-        // Controlar la animación 3D al pasar el ratón
-        cardElement.addEventListener('mouseenter', () => {
-            const instance = threeJsCardInstances.find(inst => inst.cardElement === cardElement);
-            if (instance && !instance.animationId) { // Solo iniciar si no está ya en marcha
-                instance.animationId = requestAnimationFrame(() => animateInstance(threeJsCardInstances.indexOf(instance)));
-            }
-        });
-        cardElement.addEventListener('mouseleave', () => {
-            const instance = threeJsCardInstances.find(inst => inst.cardElement === cardElement);
-            if (instance && instance.animationId) {
-                cancelAnimationFrame(instance.animationId);
-                instance.animationId = null; // Resetear ID para indicar que está pausada
-            }
-        });
-    }
-
-    // Inicialización global: Encontrar todas las tarjetas y inicializarlas
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Cargar Three.js y Cannon.js si no están ya cargados
-        const loadScript = (url, callback) => {
-            const script = document.createElement('script');
-            script.src = url;
-            script.onload = callback;
-            document.head.appendChild(script);
+      const counters = document.querySelectorAll('.metric-value');
+
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = +counter.getAttribute('data-target');
+          let count = 0;
+          const step = target < 100 ? 1 : Math.ceil(target / 50);
+          
+          const tick = () => {
+            count += step;
+            if (count >= target) count = target;
+            counter.textContent = target === 98 ? count + '%' : (target === 24 ? count + '/7' : count);
+            if (count < target) requestAnimationFrame(tick);
+          };
+          
+          tick();
         };
-
-        let threeJsLoaded = false;
-        let cannonJsLoaded = false;
-
-        const checkAndInit = () => {
-            if (threeJsLoaded && cannonJsLoaded) {
-                const ecommerceCards = document.querySelectorAll('.ecommerce-card');
-                ecommerceCards.forEach(card => {
-                    initializeEcommerceCard(card);
-                });
-            }
-        };
-
-        // Cargar Three.js
-        if (typeof THREE === 'undefined') {
-            loadScript("https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js", () => {
-                threeJsLoaded = true;
-                checkAndInit();
-            });
-        } else {
-            threeJsLoaded = true;
-        }
-
-        // Cargar Cannon.js
-        if (typeof CANNON === 'undefined') {
-            loadScript("https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js", () => {
-                cannonJsLoaded = true;
-                checkAndInit();
-            });
-        } else {
-            cannonJsLoaded = true;
-        }
-        checkAndInit(); // En caso de que ya estén cargados
+        updateCount();
+      });
     });
-
-    // Limpieza global al salir de la página
-    window.addEventListener('beforeunload', () => {
-        threeJsCardInstances.forEach(instance => {
-            if (instance.animationId) {
-                cancelAnimationFrame(instance.animationId);
-            }
-            if (instance.renderer) {
-                instance.renderer.dispose();
-            }
-            if (instance.scene) {
-                instance.scene.traverse(object => {
-                    if (object.isMesh) {
-                        object.geometry.dispose();
-                        object.material.dispose();
-                    }
-                });
-                instance.scene.dispose();
-            }
-            if (instance.world) {
-                // No hay un método dispose directo para CANNON.World, pero se pueden limpiar sus cuerpos
-                while(instance.world.bodies.length > 0){
-                    instance.world.removeBody(instance.world.bodies[0]);
-                }
-            }
-        });
-        threeJsCardInstances.length = 0; // Vaciar el array
-    });
-</script>
+  </script>
 
 
                 <div class="project-card">
