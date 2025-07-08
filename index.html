@@ -6,7 +6,7 @@
     <title>Jairo Lemuel Barrientos - Full Stack Web Developer & Cybersecurity Associate</title>
     <meta name="description" content="Jairo Lemuel Barrientos's professional portfolio showcasing expertise in Full Stack Web Development (React, Node.js, PHP) and cybersecurity, including a Cisco Certified CyberOps Associate certification. Located in Santa Elena, Entre Ríos, Argentina.">
     <meta name="keywords" content="Jairo Lemuel Barrientos, Full Stack Developer, Web Development, Cybersecurity, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, Cisco Certified CyberOps Associate, Santa Elena, Entre Ríos, Argentina, UI/UX, SEO">
-    <meta name="author" content="Jairo Barrientos">
+    <meta name="author" content="Jairo Lemuel Barrientos">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.yourportfolio.com/">
@@ -1315,6 +1315,43 @@
             <p class="fade-in-up delay-1">Full Stack Web Developer & Cybersecurity Associate</p>
             <p class="fade-in-up delay-2">Creando soluciones robustas y seguras con código y estrategia.</p>
         </section>
+
+    <script>
+        // JavaScript for scroll-based appearance effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectCards = document.querySelectorAll('.project-card');
+
+            const observerOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the item is visible
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add the 'is-visible' class to trigger the animation
+                        entry.target.classList.add('is-visible');
+
+                        // Get the delay from data-aos-delay attribute
+                        const delay = parseInt(entry.target.dataset.aosDelay || '0');
+                        entry.target.style.transitionDelay = `${delay}ms`;
+
+                        // Stop observing once the element is visible
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            projectCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+    </body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1328,6 +1365,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* Ensure HTML and BODY take 100% height and have the dark background */
+        html, body {
+            height: 100%; /* Ensures they take full viewport height */
+            background-color: #0a0a0a; /* Dark background for the entire document */
         }
 
         body {
@@ -1708,7 +1751,7 @@
 </head>
 <body>
     <section class="projects-section">
-        <h2 class="section-title">Mis Proyectos</h2>
+        <h2 class="section-title">My Projects</h2>
 
         <div class="projects-grid">
             <!-- Project Card 1: TechMart -->
@@ -1756,10 +1799,10 @@
                 <h3 class="project-title-card">TechMart</h3>
 
                 <p class="project-description">
-                    Aplicación de e-commerce futurista que combina diseño animado y experiencia de usuario moderna para compras de productos rápidas e intuitivas.
+                    Futuristic e-commerce application that combines animated design and modern user experience for fast and intuitive product shopping.
                 </p>
 
-                <div class="cta-button">Ver Más</div>
+                <div class="cta-button">View More</div>
             </a>
 
             <!-- Project Card 2: Financiator -->
@@ -1775,8 +1818,8 @@
                     </svg>
                 </div>
                 <h3 class="project-title-card">Financiator</h3>
-                <p class="project-description">Una calculadora financiera interactiva diseñada para ayudarte a gestionar tus inversiones y préstamos de manera eficiente.</p>
-                <div class="cta-button">Ver Proyecto</div>
+                <p class="project-description">An interactive financial calculator designed to help you manage your investments and loans efficiently.</p>
+                <div class="cta-button">View Project</div>
             </a>
 
             <!-- Project Card 3: Nexus AI Security Agent -->
@@ -1790,8 +1833,8 @@
                     </svg>
                 </div>
                 <h3 class="project-title-card">Nexus AI Security Agent</h3>
-                <p class="project-description">Asistente de seguridad inteligente con simulación de amenazas en tiempo real.</p>
-                <div class="cta-button">Ver Proyecto</div>
+                <p class="project-description">Intelligent security assistant with real-time threat simulation.</p>
+                <div class="cta-button">View Project</div>
             </a>
 
             <!-- Project Card 4: Time Capsule (ChronoMemoria) -->
@@ -1809,8 +1852,8 @@
                     </svg>
                 </div>
                 <h3 class="project-title-card">Time Capsule</h3>
-                <p class="project-description">Esta aplicación web te permite guardar mensajes, fotos o recuerdos para ser abiertos en el futuro.</p>
-                <div class="cta-button">Ver Proyecto</div>
+                <p class="project-description">This web application allows you to save messages, photos, or memories to be opened in the future.</p>
+                <div class="cta-button">View Project</div>
             </a>
         </div>
     </section>
@@ -1849,9 +1892,8 @@
             });
         });
     </script>
-    </body>
+</body>
 </html>
-
         <section class="section-services" id="services">
             <h2 class="holographic-text glitch" data-text="Servicios">Servicios</h2>
             <div class="services-container">
