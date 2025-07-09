@@ -6,11 +6,11 @@
     <title>Jairo Lemuel Barrientos - Full Stack Web Developer & Cybersecurity Associate</title>
     <meta name="description" content="Jairo Lemuel Barrientos's professional portfolio showcasing expertise in Full Stack Web Development (React, Node.js, PHP) and cybersecurity, including a Cisco Certified CyberOps Associate certification. Located in Santa Elena, Entre Ríos, Argentina.">
     <meta name="keywords" content="Jairo Lemuel Barrientos, Full Stack Developer, Web Development, Cybersecurity, HTML, CSS, JavaScript, React, Node.js, PHP, MySQL, Cisco Certified CyberOps Associate, Santa Elena, Entre Ríos, Argentina, UI/UX, SEO">
-    <meta name="author" content="Jairo Barrientos">
+    <meta name="author" content="Jairo Lemuel Barrientos">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.yourportfolio.com/">
-    <meta property="og:title" content="Jairo Barrientos - Full Stack Web Developer & Cybersecurity Associate">
+    <meta property="og:title" content="Jairo Lemuel Barrientos - Full Stack Web Developer & Cybersecurity Associate">
     <meta property="og:description" content="Explore Jairo Barrientos's professional portfolio, featuring web development projects and a Cisco Certified CyberOps Associate certification.">
     <meta property="og:image" content="https://www.yourportfolio.com/images/og-image.jpg">
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -1316,7 +1316,7 @@
             <p class="fade-in-up delay-2">Creando soluciones robustas y seguras con código y estrategia.</p>
         </section>
 
-    <title>My Projects Portfolio</title>
+   <title>My Projects Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         /* Base styles for the entire page */
@@ -1328,7 +1328,7 @@
 
         body {
             font-family: 'Inter', sans-serif; /* Using Inter font as per guidelines */
-            background: #0a0a0a; /* Dark background */
+            background: #0a0a0a; /* Dark background - this will be effectively covered by the animation */
             color: #e2e8f0; /* Light text color for contrast */
             line-height: 1.6;
             padding: 20px; /* Padding around the content */
@@ -1336,6 +1336,46 @@
             flex-direction: column; /* Stack content vertically */
             align-items: center; /* Center content horizontally */
             min-height: 100vh; /* Ensure body takes full viewport height */
+            position: relative; /* Needed for pseudo-elements */
+            overflow-x: hidden; /* Prevent horizontal scroll from animation */
+            /* Add backdrop filter for subtle frosted glass effect over content */
+            backdrop-filter: blur(0px); /* Initial state */
+            -webkit-backdrop-filter: blur(0px); /* For Safari */
+        }
+
+        /* --- Spiderweb Background Animation --- */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed; /* Fixed to viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow interaction with content below */
+            z-index: -1; /* Place behind content */
+        }
+
+        body::before {
+            background: radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+            animation: moveGradient1 30s linear infinite alternate;
+        }
+
+        body::after {
+            background: linear-gradient(45deg, rgba(0, 212, 255, 0.03) 10%, transparent 50%, rgba(0, 212, 255, 0.03) 90%),
+                        linear-gradient(-45deg, rgba(0, 212, 255, 0.03) 10%, transparent 50%, rgba(0, 212, 255, 0.03) 90%);
+            animation: moveLines 40s linear infinite;
+        }
+
+        @keyframes moveGradient1 {
+            0% { background-position: 0% 0%, 100% 100%; }
+            100% { background-position: 100% 100%, 0% 0%; }
+        }
+
+        @keyframes moveLines {
+            0% { background-position: 0% 0%, 0% 0%; }
+            100% { background-position: 100% 100%, 100% 100%; }
         }
 
         /* Section styling for the projects block */
@@ -1700,6 +1740,194 @@
                 font-size: 11px;
             }
         }
+
+        /* Styles for the Services section (already provided) */
+        .section-services {
+            width: 100%;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .holographic-text {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #00d4ff;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            text-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+            letter-spacing: 3px;
+            animation: titleGlow 4s ease-in-out infinite alternate;
+        }
+
+        /* Glitch effect for Services title */
+        .holographic-text.glitch {
+            animation: glitch 1.5s infinite alternate-reverse;
+        }
+
+        .holographic-text.glitch::before,
+        .holographic-text.glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .holographic-text.glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 2s infinite alternate-reverse;
+        }
+
+        .holographic-text.glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00faff;
+            clip: rect(85px, 450px, 100px, 0);
+            animation: glitch-anim-2 3s infinite alternate-reverse;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(27px, 9999px, 33px, 0); }
+            10% { clip: rect(61px, 9999px, 86px, 0); }
+            20% { clip: rect(10px, 9999px, 66px, 0); }
+            30% { clip: rect(68px, 9999px, 73px, 0); }
+            40% { clip: rect(32px, 9999px, 58px, 0); }
+            50% { clip: rect(61px, 9999px, 63px, 0); }
+            60% { clip: rect(10px, 9999px, 27px, 0); }
+            70% { clip: rect(56px, 9999px, 94px, 0); }
+            80% { clip: rect(74px, 9999px, 91px, 0); }
+            90% { clip: rect(81px, 9999px, 86px, 0); }
+            100% { clip: rect(81px, 9999px, 93px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(75px, 9999px, 93px, 0); }
+            15% { clip: rect(66px, 9999px, 88px, 0); }
+            30% { clip: rect(18px, 9999px, 34px, 0); }
+            45% { clip: rect(72px, 9999px, 83px, 0); }
+            60% { clip: rect(90px, 9999px, 96px, 0); }
+            75% { clip: rect(10px, 9999px, 29px, 0); }
+            90% { clip: rect(78px, 9999px, 86px, 0); }
+            100% { clip: rect(44px, 9999px, 55px, 0); }
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #00d4ff;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0; /* Initial state for fade-in */
+            transform: translateY(20px); /* Initial state for fade-in */
+        }
+
+        .service-card.fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .service-card.delay-1 { animation-delay: 0.2s; }
+        .service-card.delay-2 { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+            border-color: #00f0ff;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            color: #00d4ff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        /* Responsive adjustments for services section */
+        @media (max-width: 768px) {
+            .holographic-text {
+                font-size: 2.8rem;
+            }
+            .services-container {
+                gap: 25px;
+            }
+            .service-card {
+                padding: 25px;
+            }
+            .service-icon {
+                width: 50px;
+                height: 50px;
+            }
+            .service-card h3 {
+                font-size: 1.6rem;
+            }
+            .service-card p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .holographic-text {
+                font-size: 2.2rem;
+            }
+            .services-container {
+                gap: 20px;
+            }
+            .service-card {
+                padding: 20px;
+            }
+            .service-icon {
+                width: 45px;
+                height: 45px;
+            }
+            .service-card h3 {
+                font-size: 1.4rem;
+            }
+            .service-card p {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1707,39 +1935,30 @@
         <h2 class="section-title">Mis Proyectos</h2>
 
         <div class="projects-grid">
-            <!-- Project Card 1: TechMart -->
             <a href="techmart/index.html" class="project-card" data-aos="fade-up" data-aos-delay="0">
                 <div class="demo-badge">Demo</div>
 
                 <div class="project-svg-container">
                     <svg class="supermarket-svg" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Building base -->
                         <rect class="building" x="50" y="80" width="200" height="80" rx="5"/>
 
-                        <!-- Roof -->
                         <polygon class="building" points="45,80 155,40 255,80" />
 
-                        <!-- Sign background -->
                         <rect class="sign-bg" x="80" y="50" width="140" height="25" rx="5"/>
 
-                        <!-- Neon sign text -->
                         <text class="neon-text" x="150" y="67">TECHMART</text>
 
-                        <!-- Windows -->
                         <rect class="window" x="70" y="90" width="25" height="20" rx="2"/>
                         <rect class="window" x="105" y="90" width="25" height="20" rx="2"/>
                         <rect class="window" x="140" y="90" width="25" height="20" rx="2"/>
                         <rect class="window" x="175" y="90" width="25" height="20" rx="2"/>
                         <rect class="window" x="210" y="90" width="25" height="20" rx="2"/>
 
-                        <!-- Door -->
                         <rect class="door" x="130" y="120" width="40" height="40" rx="2"/>
                         <circle fill="#00d4ff" cx="160" cy="140" r="2"/>
 
-                        <!-- Ground line -->
                         <line x1="30" y1="160" x2="270" y2="160" stroke="#00d4ff" stroke-width="2" opacity="0.5"/>
 
-                        <!-- Sci-fi elements -->
                         <circle fill="#00d4ff" cx="60" cy="50" r="3" opacity="0.8">
                             <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
                         </circle>
@@ -1758,7 +1977,6 @@
                 <div class="cta-button">Ver Más</div>
             </a>
 
-            <!-- Project Card 2: Financiator -->
             <a href="financiator/index.html" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="project-svg-container">
                     <svg id="svg-finance" viewBox="0 0 100 100">
@@ -1775,7 +1993,6 @@
                 <div class="cta-button">Ver Proyecto</div>
             </a>
 
-            <!-- Project Card 3: Nexus AI Security Agent -->
             <a href="nexusaisecurityagent.html" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="400">
                 <div class="project-svg-container">
                     <svg id="svg-cybersecurity" viewBox="0 0 100 100">
@@ -1790,7 +2007,6 @@
                 <div class="cta-button">Ver Proyecto</div>
             </a>
 
-            <!-- Project Card 4: Time Capsule (ChronoMemoria) -->
             <a href="chronomemoria.html" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="600">
                 <div class="project-svg-container">
                     <svg id="svg-weather" viewBox="0 0 100 100">
@@ -1872,7 +2088,6 @@
                 </div>
                 </div>
         </section>
-
         <section class="section-skills" id="skills">
             <div id="skills-bg"></div>
             <div class="skills-wrapper">
