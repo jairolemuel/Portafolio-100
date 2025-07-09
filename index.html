@@ -14,6 +14,7 @@
     <meta property="og:description" content="Explore Jairo Barrientos's professional portfolio, featuring web development projects and a Cisco Certified CyberOps Associate certification.">
     <meta property="og:image" content="https://www.yourportfolio.com/images/og-image.jpg">
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -338,223 +339,465 @@
             to { stroke-dashoffset: 0; }
         }
 
-        /* --- Projects Section --- */
-        .section-projects {
-            background: var(--color-bg-dark);
-            color: var(--color-text-light);
-            padding: 80px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+       /* --- Projects Section --- */
+.section-projects {
+    background: #0d1a2b; /* Fondo azul oscuro predominante para la sección */
+    color: #e0e6f0; /* Color de texto claro para contraste */
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1; /* Necesario para que ::before y ::after con z-index -1 queden detrás */
+    /* Nuevo efecto: Degradado sutil animado en el fondo de la sección */
+    background: linear-gradient(135deg, #0d1a2b 0%, #172a3a 100%);
+    animation: backgroundShift 20s ease-in-out infinite alternate;
+}
 
-        .section-projects h2 {
-            font-size: 3.5rem;
-            margin-bottom: 2.5rem;
-            color: #fff;
-            text-shadow: 0 0 15px var(--glow-light-alpha);
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            -webkit-background-clip: text;
-            color: transparent;
-        }
+/* Keyframes para el nuevo efecto de fondo de la sección */
+@keyframes backgroundShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
 
-         .projects-container {
-             display: flex;
-            flex-wrap: nowrap;
-             justify-content: center;
-             gap: 2.5rem;
-            overflow-x: auto; 
-         }
-        
-        .project-card {
-            position: relative;
-            width: 340px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(0, 192, 255, 0.2);
-            transform: translateY(50px) scale(0.95);
-            opacity: 0;
-            transition: transform 0.5s var(--bezier-smooth), box-shadow 0.4s ease, opacity 0.5s ease;
-            will-change: transform, opacity;
-            border: 1px solid var(--card-border);
-            display: flex;
-            flex-direction: column;
-        }
+/* Animación de fondo "spiderweb" */
+.section-projects::before,
+.section-projects::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    border-radius: inherit;
+}
 
-        .project-card:hover {
-            box-shadow: 0 12px 35px var(--glow-light-alpha), inset 0 0 15px rgba(0, 192, 255, 0.4);
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(25, 40, 60, 0.95);
-        }
+.section-projects::before {
+    background: radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.04) 0%, transparent 50%);
+    animation: moveGradient1 35s linear infinite alternate;
+}
 
-        .project-card-link {
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            justify-content: space-between;
-        }
+.section-projects::after {
+    background: linear-gradient(45deg, rgba(0, 212, 255, 0.02) 10%, transparent 50%, rgba(0, 212, 255, 0.02) 90%),
+                linear-gradient(-45deg, rgba(0, 212, 255, 0.02) 10%, transparent 50%, rgba(0, 212, 255, 0.02) 90%);
+    background-size: 100% 100%;
+    animation: moveLines 45s linear infinite;
+}
 
-        .project-content {
-            padding: 1.5rem;
-            background: rgba(0,0,0,0.7);
-            position: relative;
-            z-index: 2;
-            flex-grow: 1;
-        }
+@keyframes moveGradient1 {
+    0% { background-position: 0% 0%, 100% 100%; }
+    100% { background-position: 100% 100%, 0% 0%; }
+}
 
-        .project-content h3 {
-            margin: 0 0 0.7rem;
-            font-size: 1.5rem;
-            color: var(--color-primary-dark);
-            text-shadow: none;
-        }
+@keyframes moveLines {
+    0% { background-position: 0% 0%, 0% 0%; }
+    100% { background-position: 100% 100%, 100% 100%; }
+}
 
-        .project-content p {
-            margin: 0;
-            font-size: 1rem;
-            color: var(--color-text-dark);
-        }
+.section-projects h2 {
+    font-size: 3.5rem;
+    margin-bottom: 2.5rem;
+    color: #00e5ff; /* Color principal para el título */
+    text-shadow: 0 0 25px rgba(0, 212, 255, 0.7); /* Sombra de brillo azul */
+    background: linear-gradient(90deg, #00d4ff, #00f0ff); /* Degradado brillante para el texto */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: titleGlow 4s ease-in-out infinite alternate;
+}
 
-        .project-svg-container {
-            width: 100%;
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            position: relative;
-            border-radius: 0;
-        }
+@keyframes titleGlow {
+    0% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.4); }
+    100% { text-shadow: 0 0 35px rgba(0, 212, 255, 0.9), 0 0 50px rgba(0, 212, 255, 0.6); }
+}
 
-        .project-svg-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 192, 255, 0.1) 0%, transparent 60%);
-            animation: pulseLight 5s infinite ease-in-out;
-            pointer-events: none;
-        }
+.projects-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 2.5rem;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #00d4ff transparent; /* Scrollbar azul brillante */
+}
 
-        @keyframes pulseLight {
-            0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 0.5; }
-        }
+/* Estilos para la barra de scroll en Webkit */
+.projects-container::-webkit-scrollbar {
+    height: 8px;
+}
 
-        .project-svg-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
+.projects-container::-webkit-scrollbar-track {
+    background: #172a3a; /* Fondo de la pista del scrollbar */
+}
 
-        .project-button-wrapper {
-            padding: 0 1.5rem 1.5rem;
-            text-align: center;
-        }
+.projects-container::-webkit-scrollbar-thumb {
+    background-color: #00d4ff; /* Color del "pulgar" del scrollbar */
+    border-radius: 10px;
+    border: 2px solid #0d1a2b; /* Borde para separarlo del fondo */
+}
 
-        .project-button {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.8rem 1.8rem;
-            background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
-            color: var(--color-text-light);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            letter-spacing: 0.05em;
-            transition: transform 0.3s var(--bezier-smooth), box-shadow 0.4s ease, background 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        }
+.project-card {
+    position: relative;
+    width: 340px;
+    min-width: 300px;
+    background: linear-gradient(135deg, #101d2d 0%, #1f2e41 100%); /* Fondo degradado oscuro para la tarjeta */
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 192, 255, 0.3); /* Sombra más intensa */
+    transform: translateY(50px) scale(0.95);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.4s ease, opacity 0.5s ease; /* Usando tu bezier-smooth */
+    will-change: transform, opacity;
+    border: 2px solid transparent; /* Borde inicialmente transparente para la animación */
+    display: flex;
+    flex-direction: column;
 
-        .project-card-link:hover .project-button {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px var(--glow-light-alpha), inset 0 0 10px rgba(0, 192, 255, 0.4);
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
-        }
+    /* Nuevo efecto: Borde brillante animado */
+    animation: borderPulse 4s infinite ease-in-out alternate;
+}
 
-        .project-svg-container svg {
-            width: 85%;
-            height: 85%;
-            filter: drop-shadow(0 0 5px var(--glow-light-alpha));
-        }
-        /* Project SVG Animations */
-        #svg-finance .bar {
-            transform-origin: bottom;
-            transform: scaleY(0);
-            opacity: 0;
-        }
-        #svg-finance.animated .bar {
-            animation: barRise 1.5s var(--bezier-bounce) forwards;
-            opacity: 1;
-        }
-        #svg-finance.animated .bar-1 { animation-delay: 0.2s; }
-        #svg-finance.animated .bar-2 { animation-delay: 0.4s; }
-        #svg-finance.animated .bar-3 { animation-delay: 0.6s; }
-        @keyframes barRise {
-            from { transform: scaleY(0); opacity: 0; }
-            to { transform: scaleY(1); opacity: 1; }
-        }
-        #svg-finance .line-chart {
-            stroke-dasharray: 200;
-            stroke-dashoffset: 200;
-        }
-        #svg-finance.animated .line-chart {
-            animation: drawLine 2s ease-out forwards 0.8s;
-        }
-        @keyframes drawLine {
-            to { stroke-dashoffset: 0; }
-        }
+/* Keyframes para el nuevo efecto de borde de la tarjeta */
+@keyframes borderPulse {
+    0% { border-color: rgba(0, 212, 255, 0.3); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 192, 255, 0.3); }
+    50% { border-color: rgba(0, 240, 255, 0.7); box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 192, 255, 0.5); }
+    100% { border-color: rgba(0, 212, 255, 0.3); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 192, 255, 0.3); }
+}
 
-        #svg-cybersecurity .shield-path {
-            stroke-dasharray: 100;
-            stroke-dashoffset: 100;
-            animation: drawShield 2s ease-out forwards;
-        }
-        @keyframes drawShield {
-            to { stroke-dashoffset: 0; }
-        }
-        #svg-cybersecurity .lock-fill {
-            transform-origin: center;
-            transform: scale(0);
-            animation: lockAppear 1s var(--bezier-bounce) forwards 0.5s;
-        }
-        @keyframes lockAppear {
-            to { transform: scale(1); }
-        }
+/* AOS specific class for visibility */
+.project-card.aos-animate {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
 
-        #svg-weather .cloud {
-            transform-origin: center center;
-            opacity: 0;
-            animation: cloudAppear 1.5s ease-out forwards;
-        }
-        #svg-weather .sun-ray {
-            transform-origin: center center;
-            transform: scale(0);
-            opacity: 0;
-            animation: raySpin 2s ease-in-out infinite alternate;
-        }
-        #svg-weather.animated .cloud {
-            animation: cloudAppear 1.5s ease-out forwards;
-        }
-        #svg-weather.animated .sun-ray {
-            animation: raySpin 2s ease-in-out infinite alternate;
-        }
-        @keyframes cloudAppear {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes raySpin {
-            0% { transform: scale(0.5) rotate(0deg); opacity: 0.5; }
-            100% { transform: scale(1) rotate(360deg); opacity: 1; }
-        }
+.project-card:hover {
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9), inset 0 0 25px rgba(0, 192, 255, 0.6); /* Sombra más pronunciada al hover */
+    transform: translateY(-8px) scale(1.03); /* Ligeramente más grande y elevado */
+    background: linear-gradient(135deg, #1f2e41 0%, #101d2d 100%); /* Invertir degradado o un color más oscuro al hover */
+    border-color: #00f0ff; /* Borde azul brillante al hover */
+    animation: none; /* Detiene la animación de pulso al hacer hover */
+}
+
+/* Efecto de brillo de izquierda a derecha al hacer hover */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent); /* Brillo más intenso */
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.project-card:hover::before {
+    left: 100%;
+}
+
+.project-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.project-content {
+    padding: 1.5rem;
+    background: rgba(0,0,0,0.8); /* Fondo del contenido más oscuro */
+    position: relative;
+    z-index: 2;
+    flex-grow: 1;
+}
+
+.project-content h3 {
+    margin: 0 0 0.7rem;
+    font-size: 1.5rem;
+    color: #00e5ff; /* Título de la tarjeta en azul brillante */
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); /* Sombra para el título de la tarjeta */
+}
+
+.project-content p {
+    margin: 0;
+    font-size: 1rem;
+    color: #a0aec0; /* Texto de la descripción en gris azulado */
+}
+
+.project-svg-container {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6); /* Fondo del contenedor SVG más oscuro */
+    overflow: hidden;
+    position: relative;
+    border-radius: 0;
+    z-index: 1;
+}
+
+.project-svg-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 192, 255, 0.15) 0%, transparent 60%); /* Brillo más sutil */
+    animation: pulseLight 5s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes pulseLight {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.5; }
+}
+
+.project-svg-container svg {
+    width: 85%;
+    height: 85%;
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6)); /* Sombra de brillo más pronunciada para SVG */
+    transition: transform 0.3s ease-in-out;
+}
+
+.project-card:hover .project-svg-container svg {
+    transform: scale(1.05);
+}
+
+.project-button-wrapper {
+    padding: 0 1.5rem 1.5rem;
+    text-align: center;
+    z-index: 2;
+}
+
+.project-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(90deg, #00d4ff, #00f0ff); /* Degradado del botón más vibrante */
+    color: #0d1a2b; /* Texto oscuro para contraste en botón claro */
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.4s ease, background 0.4s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7); /* Sombra más fuerte para el botón */
+}
+
+.project-card-link:hover .project-button {
+    transform: translateY(-8px); /* Más elevación al hover */
+    box-shadow: 0 12px 35px rgba(0, 212, 255, 0.5), inset 0 0 15px rgba(0, 192, 255, 0.6); /* Sombra más intensa al hover */
+    background: linear-gradient(90deg, #00f0ff, #00d4ff); /* Invertir degradado o un color diferente */
+}
+
+/* --- Project SVG Animations --- */
+
+/* TechMart SVG Styles */
+.building { fill: #1e293b; stroke: #00d4ff; stroke-width: 2; }
+.sign-bg { fill: #000; stroke: #00d4ff; stroke-width: 1; }
+.neon-text {
+    fill: #00d4ff;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-anchor: middle;
+    filter: drop-shadow(0 0 10px #00d4ff);
+    animation: neonGlow 2s ease-in-out infinite alternate;
+}
+@keyframes neonGlow {
+    0% { filter: drop-shadow(0 0 5px #00d4ff) drop-shadow(0 0 10px #00d4ff); }
+    100% { filter: drop-shadow(0 0 15px #00d4ff) drop-shadow(0 0 25px #00d4ff); }
+}
+.window { fill: #0ea5e9; opacity: 0.6; animation: windowFlicker 3s ease-in-out infinite; }
+@keyframes windowFlicker {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.9; }
+}
+.door { fill: #374151; stroke: #00d4ff; stroke-width: 1; }
+.supermarket-svg {
+    animation: svgBreathe 4s ease-in-out infinite alternate;
+}
+@keyframes svgBreathe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Financiator SVG Animations */
+#svg-finance .bar {
+    transform-origin: bottom;
+    transform: scaleY(0);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+#svg-finance.animated .bar {
+    animation: barRise 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    opacity: 1;
+}
+#svg-finance.animated .bar-1 { animation-delay: 0.2s; }
+#svg-finance.animated .bar-2 { animation-delay: 0.4s; }
+#svg-finance.animated .bar-3 { animation-delay: 0.6s; }
+@keyframes barRise {
+    from { transform: scaleY(0); opacity: 0; }
+    to { transform: scaleY(1); opacity: 1; }
+}
+#svg-finance .line-chart {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    transition: stroke-dashoffset 2s ease-out;
+}
+#svg-finance.animated .line-chart {
+    animation: drawLine 2s ease-out forwards 0.8s;
+}
+@keyframes drawLine {
+    to { stroke-dashoffset: 0; }
+}
+#svg-finance circle { animation: euroPulse 1.5s ease-in-out infinite alternate; }
+@keyframes euroPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
 
 
+/* Cybersecurity SVG Animations */
+#svg-cybersecurity .shield-path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawShield 2s ease-out forwards;
+}
+@keyframes drawShield {
+    to { stroke-dashoffset: 0; }
+}
+#svg-cybersecurity .lock-fill {
+    transform-origin: center;
+    transform: scale(0);
+    animation: lockAppear 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards 0.5s;
+}
+@keyframes lockAppear {
+    to { transform: scale(1); }
+}
+/* Efecto de escaneo para ciberseguridad */
+#svg-cybersecurity {
+    position: relative;
+    overflow: hidden;
+}
+#svg-cybersecurity::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,229,255,0) 0%, rgba(0,229,255,0.25) 50%, rgba(0,229,255,0) 100%); /* Escaneo más visible */
+    transform: translateY(-100%);
+    animation: scanline 3s linear infinite;
+    pointer-events: none;
+}
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+
+/* Weather/Time Capsule SVG Animations */
+#svg-weather .cloud {
+    transform-origin: center center;
+    opacity: 0;
+    animation: cloudAppear 1.5s ease-out forwards;
+}
+#svg-weather .sun-ray {
+    transform-origin: center center;
+    transform: scale(0);
+    opacity: 0;
+    animation: raySpin 2s ease-in-out infinite alternate;
+}
+#svg-weather.animated .cloud {
+    animation: cloudAppear 1.5s ease-out forwards;
+}
+#svg-weather.animated .sun-ray {
+    animation: raySpin 2s ease-in-out infinite alternate;
+}
+@keyframes cloudAppear {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+@keyframes raySpin {
+    0% { transform: scale(0.5) rotate(0deg); opacity: 0.5; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+#svg-weather circle[fill="#FFD700"] { animation: sunPulse 2.5s ease-in-out infinite alternate; }
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+/* --- Responsive Design for Projects Section --- */
+@media (min-width: 769px) {
+    .projects-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .project-card {
+        width: 32%;
+        max-width: 380px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .project-card {
+        width: 30%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-projects h2 {
+        font-size: 2.8rem;
+        margin-bottom: 40px;
+    }
+    .projects-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+    .project-card {
+        min-width: 280px;
+        width: 90%;
+        margin-right: 20px;
+    }
+    .project-svg-container {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-projects h2 {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    .project-card {
+        min-width: 260px;
+        padding: 1rem;
+    }
+    .project-content h3 {
+        font-size: 1.3rem;
+    }
+    .project-content p {
+        font-size: 0.9rem;
+    }
+    .project-svg-container {
+        height: 150px;
+    }
+    .neon-text {
+        font-size: 12px;
+    }
+}
         /* --- Services Section --- */
         .section-services {
             padding: 80px 20px;
