@@ -864,235 +864,235 @@
         </div>
     </footer>
 
-    <script>
-        // Base de datos de productos
-       const products = [
-    // Tecnología
-    { id: 1, name: "iPhone 15 Pro", price: 999, category: "tecnologia", image: "https://images.pexels.com/photos/17702844/pexels-photo-17702844/free-photo-of-iphone-15-pro-max.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 2, name: "MacBook Air M2", price: 1299, category: "tecnologia", image: "https://images.pexels.com/photos/17799510/pexels-photo-17799510/free-photo-of-macbook-air-m2-notebook.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 3, name: "AirPods Pro", price: 249, category: "tecnologia", image: "https://images.pexels.com/photos/3571212/pexels-photo-3571212.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 4, name: "Samsung Galaxy S24", price: 899, category: "tecnologia", image: "https://images.pexels.com/photos/19664402/pexels-photo-19664402/free-photo-of-samsung-galaxy-s24-ultra.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 5, name: "iPad Pro", price: 799, category: "tecnologia", image: "https://images.pexels.com/photos/18579495/pexels-photo-18579495/free-photo-of-ipad-pro-and-accessories.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 6, name: "PlayStation 5", price: 499, category: "tecnologia", image: "https://images.pexels.com/photos/7025841/pexels-photo-7025841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 37, name: "Smart TV 4K 55\"", price: 599, category: "tecnologia", image: "https://images.pexels.com/photos/1571471/pexels-photo-1571471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 38, name: "Cámara DSLR Canon", price: 699, category: "tecnologia", image: "https://images.pexels.com/photos/1983036/pexels-photo-1983036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+   // Base de datos de productos
+    const products = [
+        // Tecnología
+        { id: 1, name: "iPhone 15 Pro", price: 999, category: "tecnologia", image: "https://images.pexels.com/photos/17702844/pexels-photo-17702844/free-photo-of-iphone-15-pro-max.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 2, name: "MacBook Air M2", price: 1299, category: "tecnologia", image: "https://images.pexels.com/photos/17799510/pexels-photo-17799510/free-photo-of-macbook-air-m2-notebook.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 3, name: "AirPods Pro", price: 249, category: "tecnologia", image: "https://images.pexels.com/photos/3571212/pexels-photo-3571212.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 4, name: "Samsung Galaxy S24", price: 899, category: "tecnologia", image: "https://images.pexels.com/photos/19664402/pexels-photo-19664402/free-photo-of-samsung-galaxy-s24-ultra.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 5, name: "iPad Pro", price: 799, category: "tecnologia", image: "https://images.pexels.com/photos/18579495/pexels-photo-18579495/free-photo-of-ipad-pro-and-accessories.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 6, name: "PlayStation 5", price: 499, category: "tecnologia", image: "https://images.pexels.com/photos/7025841/pexels-photo-7025841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 37, name: "Smart TV 4K 55\"", price: 599, category: "tecnologia", image: "https://images.pexels.com/photos/1571471/pexels-photo-1571471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 38, name: "Cámara DSLR Canon", price: 699, category: "tecnologia", image: "https://images.pexels.com/photos/1983036/pexels-photo-1983036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
-    // Limpieza
-    { id: 7, name: "Detergente Líquido", price: 15, category: "limpieza", image: "https://images.pexels.com/photos/6287019/pexels-photo-6287019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 8, name: "Aspiradora Robot", price: 299, category: "limpieza", image: "https://images.pexels.com/photos/3927237/pexels-photo-3927237.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 9, name: "Papel Higiénico x12", price: 25, category: "limpieza", image: "https://images.pexels.com/photos/4327042/pexels-photo-4327042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 10, name: "Desinfectante", price: 8, category: "limpieza", image: "https://images.pexels.com/photos/4017684/pexels-photo-4017684.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 11, name: "Jabón Antibacterial", price: 12, category: "limpieza", image: "https://images.pexels.com/photos/4465126/pexels-photo-4465126.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 12, name: "Toallas de Papel", price: 18, category: "limpieza", image: "https://images.pexels.com/photos/7450379/pexels-photo-7450379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 39, name: "Limpiador Multiusos", price: 10, category: "limpieza", image: "https://images.pexels.com/photos/4239088/pexels-photo-4239088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 40, name: "Guantes de Limpieza", price: 7, category: "limpieza", image: "https://images.pexels.com/photos/4109780/pexels-photo-4109780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        // Limpieza
+        { id: 7, name: "Detergente Líquido", price: 15, category: "limpieza", image: "https://images.pexels.com/photos/6287019/pexels-photo-6287019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 8, name: "Aspiradora Robot", price: 299, category: "limpieza", image: "https://images.pexels.com/photos/3927237/pexels-photo-3927237.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 9, name: "Papel Higiénico x12", price: 25, category: "limpieza", image: "https://images.pexels.com/photos/4327042/pexels-photo-4327042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 10, name: "Desinfectante", price: 8, category: "limpieza", image: "https://images.pexels.com/photos/4017684/pexels-photo-4017684.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 11, name: "Jabón Antibacterial", price: 12, category: "limpieza", image: "https://images.pexels.com/photos/4465126/pexels-photo-4465126.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 12, name: "Toallas de Papel", price: 18, category: "limpieza", image: "https://images.pexels.com/photos/7450379/pexels-photo-7450379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 39, name: "Limpiador Multiusos", price: 10, category: "limpieza", image: "https://images.pexels.com/photos/4239088/pexels-photo-4239088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 40, name: "Guantes de Limpieza", price: 7, category: "limpieza", image: "https://images.pexels.com/photos/4109780/pexels-photo-4109780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
-    // Moda
-    { id: 13, name: "Jeans Clásicos", price: 79, category: "moda", image: "https://images.pexels.com/photos/2085375/pexels-photo-2085375.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 14, name: "Camiseta Premium", price: 35, category: "moda", image: "https://images.pexels.com/photos/1018900/pexels-photo-1018900.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 15, name: "Zapatillas Running", price: 120, category: "moda", image: "https://images.pexels.com/photos/1474932/pexels-photo-1474932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 16, name: "Vestido Elegante", price: 89, category: "moda", image: "https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 17, name: "Chaqueta de Cuero", price: 199, category: "moda", image: "https://images.pexels.com/photos/1617013/pexels-photo-1617013.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 18, name: "Reloj Inteligente", price: 299, category: "moda", image: "https://images.pexels.com/photos/437038/pexels-photo-437038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 41, name: "Gafas de Sol", price: 55, category: "moda", image: "https://images.pexels.com/photos/1879796/pexels-photo-1879796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 42, name: "Bufanda de Lana", price: 40, category: "moda", image: "https://images.pexels.com/photos/2584109/pexels-photo-2584109.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        // Moda
+        { id: 13, name: "Jeans Clásicos", price: 79, category: "moda", image: "https://images.pexels.com/photos/2085375/pexels-photo-2085375.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 14, name: "Camiseta Premium", price: 35, category: "moda", image: "https://images.pexels.com/photos/1018900/pexels-photo-1018900.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 15, name: "Zapatillas Running", price: 120, category: "moda", image: "https://images.pexels.com/photos/1474932/pexels-photo-1474932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 16, name: "Vestido Elegante", price: 89, category: "moda", image: "https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 17, name: "Chaqueta de Cuero", price: 199, category: "moda", image: "https://images.pexels.com/photos/1617013/pexels-photo-1617013.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 18, name: "Reloj Inteligente", price: 299, category: "moda", image: "https://images.pexels.com/photos/437038/pexels-photo-437038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 41, name: "Gafas de Sol", price: 55, category: "moda", image: "https://images.pexels.com/photos/1879796/pexels-photo-1879796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 42, name: "Bufanda de Lana", price: 40, category: "moda", image: "https://images.pexels.com/photos/2584109/pexels-photo-2584109.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
-    // Alimentos
-    { id: 19, name: "Café Premium", price: 24, category: "alimentos", image: "https://images.pexels.com/photos/302897/pexels-photo-302897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 20, name: "Aceite de Oliva", price: 18, category: "alimentos", image: "https://images.pexels.com/photos/5502604/pexels-photo-5502604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 21, name: "Pasta Italiana", price: 8, category: "alimentos", image: "https://images.pexels.com/photos/1484638/pexels-photo-1484638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 22, name: "Miel Orgánica", price: 15, category: "alimentos", image: "https://images.pexels.com/photos/1043813/pexels-photo-1043813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 23, name: "Quinoa Premium", price: 22, category: "alimentos", image: "https://images.pexels.com/photos/1630588/pexels-photo-1630588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 24, name: "Chocolate Artesanal", price: 12, category: "alimentos", image: "https://images.pexels.com/photos/1107770/pexels-photo-1107770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 43, name: "Vino Tinto Malbec", price: 30, category: "bebidas", image: "https://images.pexels.com/photos/97334/pexels-photo-97334.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 44, name: "Queso Parmesano", price: 20, category: "alimentos", image: "https://images.pexels.com/photos/3622410/pexels-photo-3622410.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        // Alimentos
+        { id: 19, name: "Café Premium", price: 24, category: "alimentos", image: "https://images.pexels.com/photos/302897/pexels-photo-302897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 20, name: "Aceite de Oliva", price: 18, category: "alimentos", image: "https://images.pexels.com/photos/5502604/pexels-photo-5502604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 21, name: "Pasta Italiana", price: 8, category: "alimentos", image: "https://images.pexels.com/photos/1484638/pexels-photo-1484638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 22, name: "Miel Orgánica", price: 15, category: "alimentos", image: "https://images.pexels.com/photos/1043813/pexels-photo-1043813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 23, name: "Quinoa Premium", price: 22, category: "alimentos", image: "https://images.pexels.com/photos/1630588/pexels-photo-1630588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 24, name: "Chocolate Artesanal", price: 12, category: "alimentos", image: "https://images.pexels.com/photos/1107770/pexels-photo-1107770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 43, name: "Vino Tinto Malbec", price: 30, category: "bebidas", image: "https://images.pexels.com/photos/97334/pexels-photo-97334.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 44, name: "Queso Parmesano", price: 20, category: "alimentos", image: "https://images.pexels.com/photos/3622410/pexels-photo-3622410.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
-    // Juguetes
-    { id: 25, name: "LEGO Creator", price: 79, category: "juguetes", image: "https://images.pexels.com/photos/207048/pexels-photo-207048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 26, name: "Muñeca Barbie", price: 35, category: "juguetes", image: "https://images.pexels.com/photos/1478142/pexels-photo-1478142.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 27, name: "Auto a Control", price: 89, category: "juguetes", image: "https://images.pexels.com/photos/103685/pexels-photo-103685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 28, name: "Peluche Gigante", price: 45, category: "juguetes", image: "https://images.pexels.com/photos/3618386/pexels-photo-3618386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 29, name: "Puzzle 1000 Piezas", price: 25, category: "juguetes", image: "https://images.pexels.com/photos/3371909/pexels-photo-3371909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 30, name: "Drone para Niños", price: 159, category: "juguetes", image: "https://images.pexels.com/photos/1105439/pexels-photo-1105439.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 45, name: "Set de Bloques de Construcción", price: 60, category: "juguetes", image: "https://images.pexels.com/photos/2583808/pexels-photo-2583808.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 46, name: "Juego de Mesa Familiar", price: 38, category: "juguetes", image: "https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        // Juguetes
+        { id: 25, name: "LEGO Creator", price: 79, category: "juguetes", image: "https://images.pexels.com/photos/207048/pexels-photo-207048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 26, name: "Muñeca Barbie", price: 35, category: "juguetes", image: "https://images.pexels.com/photos/1478142/pexels-photo-1478142.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 27, name: "Auto a Control", price: 89, category: "juguetes", image: "https://images.pexels.com/photos/103685/pexels-photo-103685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 28, name: "Peluche Gigante", price: 45, category: "juguetes", image: "https://images.pexels.com/photos/3618386/pexels-photo-3618386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 29, name: "Puzzle 1000 Piezas", price: 25, category: "juguetes", image: "https://images.pexels.com/photos/3371909/pexels-photo-3371909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 30, name: "Drone para Niños", price: 159, category: "juguetes", image: "https://images.pexels.com/photos/1105439/pexels-photo-1105439.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 45, name: "Set de Bloques de Construcción", price: 60, category: "juguetes", image: "https://images.pexels.com/photos/2583808/pexels-photo-2583808.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 46, name: "Juego de Mesa Familiar", price: 38, category: "juguetes", image: "https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
-    // Hogar
-    { id: 31, name: "Lámpara LED", price: 65, category: "hogar", image: "https://images.pexels.com/photos/1572093/pexels-photo-1572093.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 32, name: "Cojín Decorativo", price: 28, category: "hogar", image: "https://images.pexels.com/photos/1350730/pexels-photo-1350730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 33, name: "Espejo Moderno", price: 89, category: "hogar", image: "https://images.pexels.com/photos/5998129/pexels-photo-5998129.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 34, name: "Planta Artificial", price: 35, category: "hogar", image: "https://images.pexels.com/photos/1089851/pexels-photo-1089851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 35, name: "Marco de Fotos", price: 18, category: "hogar", image: "https://images.pexels.com/photos/1031301/pexels-photo-1031301.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 36, name: "Vela Aromática", price: 22, category: "hogar", image: "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 47, name: "Juego de Sábanas Algodón", price: 70, category: "hogar", image: "https://images.pexels.com/photos/1643309/pexels-photo-1643309.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 48, name: "Cafetera Eléctrica", price: 95, category: "hogar", image: "https://images.pexels.com/photos/3240283/pexels-photo-3240283.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        // Hogar
+        { id: 31, name: "Lámpara LED", price: 65, category: "hogar", image: "https://images.pexels.com/photos/1572093/pexels-photo-1572093.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 32, name: "Cojín Decorativo", price: 28, category: "hogar", image: "https://images.pexels.com/photos/1350730/pexels-photo-1350730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 33, name: "Espejo Moderno", price: 89, category: "hogar", image: "https://images.pexels.com/photos/5998129/pexels-photo-5998129.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 34, name: "Planta Artificial", price: 35, category: "hogar", image: "https://images.pexels.com/photos/1089851/pexels-photo-1089851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 35, name: "Marco de Fotos", price: 18, category: "hogar", image: "https://images.pexels.com/photos/1031301/pexels-photo-1031301.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 36, name: "Vela Aromática", price: 22, category: "hogar", image: "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 47, name: "Juego de Sábanas Algodón", price: 70, category: "hogar", image: "https://images.pexels.com/photos/1643309/pexels-photo-1643309.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 48, name: "Cafetera Eléctrica", price: 95, category: "hogar", image: "https://images.pexels.com/photos/3240283/pexels-photo-3240283.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
-    // Deportes
-    { id: 49, name: "Pelota de Fútbol Profesional", price: 40, category: "deportes", image: "https://images.pexels.com/photos/46798/pexels-photo-46798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 50, name: "Mancuernas Ajustables (par)", price: 120, category: "deportes", image: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 51, name: "Colchoneta de Yoga", price: 25, category: "deportes", image: "https://images.pexels.com/photos/3823055/pexels-photo-3823055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 52, name: "Botella de Agua Deportiva", price: 15, category: "deportes", image: "https://images.pexels.com/photos/1118617/pexels-photo-1118617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        // Deportes
+        { id: 49, name: "Pelota de Fútbol Profesional", price: 40, category: "deportes", image: "https://images.pexels.com/photos/46798/pexels-photo-46798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 50, name: "Mancuernas Ajustables (par)", price: 120, category: "deportes", image: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 51, name: "Colchoneta de Yoga", price: 25, category: "deportes", image: "https://images.pexels.com/photos/3823055/pexels-photo-3823055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 52, name: "Botella de Agua Deportiva", price: 15, category: "deportes", image: "https://images.pexels.com/photos/1118617/pexels-photo-1118617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
-    // Libros y Papelería
-    { id: 53, name: "Novela Bestseller", price: 20, category: "libros", image: "https://images.pexels.com/photos/159711/books-book-pages-read-159711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 54, name: "Cuaderno de Tapa Dura", price: 10, category: "papeleria", image: "https://images.pexels.com/photos/207665/pexels-photo-207665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 55, name: "Set de Bolígrafos de Gel", price: 12, category: "papeleria", image: "https://images.pexels.com/photos/179909/pexels-photo-179909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        // Libros y Papelería
+        { id: 53, name: "Novela Bestseller", price: 20, category: "libros", image: "https://images.pexels.com/photos/159711/books-book-pages-read-159711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 54, name: "Cuaderno de Tapa Dura", price: 10, category: "papeleria", image: "https://images.pexels.com/photos/207665/pexels-photo-207665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 55, name: "Set de Bolígrafos de Gel", price: 12, category: "papeleria", image: "https://images.pexels.com/photos/179909/pexels-photo-179909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
-    // Cuidado Personal
-    { id: 56, name: "Crema Hidratante Facial", price: 30, category: "cuidado_personal", image: "https://images.pexels.com/photos/5697334/pexels-photo-5697334.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 57, name: "Set de Maquillaje", price: 60, category: "cuidado_personal", image: "https://images.pexels.com/photos/3373722/pexels-photo-3373722.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 58, name: "Perfume para Hombre", price: 85, category: "cuidado_personal", image: "https://images.pexels.com/photos/1018320/pexels-photo-1018320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" }
-];
+        // Cuidado Personal
+        { id: 56, name: "Crema Hidratante Facial", price: 30, category: "cuidado_personal", image: "https://images.pexels.com/photos/5697334/pexels-photo-5697334.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 57, name: "Set de Maquillaje", price: 60, category: "cuidado_personal", image: "https://images.pexels.com/photos/3373722/pexels-photo-3373722.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { id: 58, name: "Perfume para Hombre", price: 85, category: "cuidado_personal", image: "https://images.pexels.com/photos/1018320/pexels-photo-1018320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" }
+    ];
 
-        // Carrito de compras (almacenado en memoria)
-        let cart = [];
-        let currentFilter = 'all';
-        let currentSearchTerm = '';
+    // Carrito de compras (almacenado en memoria)
+    let cart = [];
+    let currentFilter = 'all';
+    let currentSearchTerm = '';
 
-        // Función para renderizar productos en la cuadrícula
-        function renderProducts(productsToRender = products) {
-            const grid = document.getElementById('products-grid');
-            grid.innerHTML = ''; // Limpia la cuadrícula actual
+    // Función para renderizar productos en la cuadrícula
+    function renderProducts(productsToRender = products) {
+        const grid = document.getElementById('products-grid');
+        grid.innerHTML = ''; // Limpia la cuadrícula actual
 
-            // Filtra por término de búsqueda si existe
-            let filteredBySearch = productsToRender;
-            if (currentSearchTerm) {
-                const searchTermLower = currentSearchTerm.toLowerCase();
-                filteredBySearch = productsToRender.filter(product =>
-                    product.name.toLowerCase().includes(searchTermLower)
-                );
+        // Filtra por término de búsqueda si existe
+        let filteredBySearch = productsToRender;
+        if (currentSearchTerm) {
+            const searchTermLower = currentSearchTerm.toLowerCase();
+            filteredBySearch = productsToRender.filter(product =>
+                product.name.toLowerCase().includes(searchTermLower)
+            );
+        }
+
+        // Si no hay productos después de filtrar, muestra un mensaje
+        if (filteredBySearch.length === 0) {
+            grid.innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: var(--dark-gray);">No se encontraron productos para esta categoría o búsqueda.</p>';
+            return;
+        }
+
+        // Crea y añade las tarjetas de producto
+        filteredBySearch.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            productCard.innerHTML = `
+                <div class="product-card-svg-container">
+                    <svg class="product-card-svg" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="50" fill="var(--accent-color)" opacity="0.1"></circle>
+                    </svg>
+                </div>
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" style="width: 100%; height: auto; max-width: 150px; display: block; margin: 0 auto;">
+                </div>
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">$${product.price.toFixed(2)}</div>
+                <div class="product-card-actions">
+                    <button class="add-to-cart" onclick="addToCart(${product.id})">
+                        Agregar al Carrito
+                    </button>
+                    <button class="generate-description-btn" onclick="generateProductDescription(${product.id})">
+                        Generar Descripción ✨
+                    </button>
+                </div>
+            `;
+            grid.appendChild(productCard);
+        });
+    }
+
+    // Función para filtrar productos por categoría y desplazar la vista
+    function filterProducts(event, category) {
+        currentFilter = category;
+        
+        // Actualizar botones activos de filtros (sección principal)
+        document.querySelectorAll('.filters .filter-btn').forEach(btn => {
+            if (btn.dataset.category === category) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
             }
+        });
 
-            // Si no hay productos después de filtrar, muestra un mensaje
-            if (filteredBySearch.length === 0) {
-                grid.innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: var(--dark-gray);">No se encontraron productos para esta categoría o búsqueda.</p>';
-                return;
+        // Actualizar botones activos de navegación
+        document.querySelectorAll('.nav-menu .nav-item').forEach(item => {
+            if (item.dataset.category === category) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
             }
+        });
+        
+        // Filtra los productos según la categoría seleccionada
+        const productsToDisplay = category === 'all'
+            ? products
+            : products.filter(product => product.category === category);
+        
+        renderProducts(productsToDisplay); // Renderiza los productos filtrados
 
-            // Crea y añade las tarjetas de producto
-            filteredBySearch.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-card-svg-container">
-                        <svg class="product-card-svg" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="50" fill="var(--accent-color)" opacity="0.1"></circle>
-                        </svg>
+        // Desplazamiento suave a la sección de productos
+        document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Función para agregar un producto al carrito
+    function addToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return; // Si el producto no existe, no hacer nada
+
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += 1; // Incrementa la cantidad si ya está en el carrito
+        } else {
+            cart.push({ ...product, quantity: 1 }); // Añade el producto con cantidad 1
+        }
+        
+        updateCartUI(); // Actualiza la interfaz del carrito
+        showNotification(`"${product.name}" agregado al carrito`); // Muestra notificación
+    }
+
+    // Función para actualizar la interfaz del carrito (contador, lista de items, total)
+    function updateCartUI() {
+        const cartCount = document.getElementById('cart-count');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalElement = document.getElementById('cart-total');
+        
+        // Calcula el número total de ítems en el carrito
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+        
+        // Limpia la lista de ítems del carrito antes de volver a renderizar
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+        
+        // Recorre el carrito y crea los elementos HTML para cada ítem
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--dark-gray);">El carrito está vacío.</p>';
+        } else {
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        $${item.price.toFixed(2)} x ${item.quantity}
                     </div>
-                    <div class="product-image">${product.emoji}</div>
-                    <div class="product-name">${product.name}</div>
-                    <div class="product-price">$${product.price.toFixed(2)}</div>
-                    <div class="product-card-actions">
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">
-                            Agregar al Carrito
-                        </button>
-                        <button class="generate-description-btn" onclick="generateProductDescription(${product.id})">
-                            Generar Descripción ✨
+                    <div>
+                        <button onclick="removeFromCart(${item.id})">
+                            Eliminar
                         </button>
                     </div>
                 `;
-                grid.appendChild(productCard);
+                cartItemsContainer.appendChild(cartItem);
+                total += item.price * item.quantity; // Suma al total
             });
         }
+        
+        // Actualiza el total del carrito
+        cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+    }
 
-        // Función para filtrar productos por categoría y desplazar la vista
-        function filterProducts(event, category) {
-            currentFilter = category;
-            
-            // Actualizar botones activos de filtros (sección principal)
-            document.querySelectorAll('.filters .filter-btn').forEach(btn => {
-                if (btn.dataset.category === category) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-
-            // Actualizar botones activos de navegación
-            document.querySelectorAll('.nav-menu .nav-item').forEach(item => {
-                if (item.dataset.category === category) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            
-            // Filtra los productos según la categoría seleccionada
-            const productsToDisplay = category === 'all'
-                ? products
-                : products.filter(product => product.category === category);
-            
-            renderProducts(productsToDisplay); // Renderiza los productos filtrados
-
-            // Desplazamiento suave a la sección de productos
-            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Función para agregar un producto al carrito
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return; // Si el producto no existe, no hacer nada
-
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1; // Incrementa la cantidad si ya está en el carrito
-            } else {
-                cart.push({ ...product, quantity: 1 }); // Añade el producto con cantidad 1
-            }
-            
-            updateCartUI(); // Actualiza la interfaz del carrito
-            showNotification(`"${product.name}" agregado al carrito`); // Muestra notificación
-        }
-
-        // Función para actualizar la interfaz del carrito (contador, lista de items, total)
-        function updateCartUI() {
-            const cartCount = document.getElementById('cart-count');
-            const cartItemsContainer = document.getElementById('cart-items');
-            const cartTotalElement = document.getElementById('cart-total');
-            
-            // Calcula el número total de ítems en el carrito
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
-            
-            // Limpia la lista de ítems del carrito antes de volver a renderizar
-            cartItemsContainer.innerHTML = '';
-            let total = 0;
-            
-            // Recorre el carrito y crea los elementos HTML para cada ítem
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--dark-gray);">El carrito está vacío.</p>';
-            } else {
-                cart.forEach(item => {
-                    const cartItem = document.createElement('div');
-                    cartItem.className = 'cart-item';
-                    cartItem.innerHTML = `
-                        <div>
-                            <strong>${item.name}</strong><br>
-                            $${item.price.toFixed(2)} x ${item.quantity}
-                        </div>
-                        <div>
-                            <button onclick="removeFromCart(${item.id})">
-                                Eliminar
-                            </button>
-                        </div>
-                    `;
-                    cartItemsContainer.appendChild(cartItem);
-                    total += item.price * item.quantity; // Suma al total
-                });
-            }
-            
-            // Actualiza el total del carrito
-            cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
-        }
-
-        // Función para eliminar un producto del carrito
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId); // Filtra para eliminar el producto
-            updateCartUI(); // Actualiza la interfaz
-            showNotification('Producto eliminado del carrito'); // Muestra notificación
-        }
-
+    // Función para eliminar un producto del carrito
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId); // Filtra para eliminar el producto
+        updateCartUI(); // Actualiza la interfaz
+        showNotification('Producto eliminado del carrito'); // Muestra notificación
+    }
         // Función para mostrar/ocultar el modal del carrito
         function toggleCart() {
             const cartModal = document.getElementById('cart-modal');
