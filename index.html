@@ -58,7 +58,7 @@
     --card-border: rgba(0, 192, 255, .3);
     --transition-speed: .4s;
     --bezier-bounce: cubic-bezier(.68, -.55, .27, 1.55);
-    --bezier-smooth: cubic-bezier(.25, .46, .45, .94);
+    --bezier-smooth: cubic-bezier(.25, .46,.45,.94);
     --border-radius: 15px;
     --card-shadow: 0 8px 25px rgba(0, 0, 0, .7);
 }
@@ -69,16 +69,14 @@ body {
     background-color: var(--color-bg-dark);
     color: var(--color-text-light);
     line-height: 1.6;
-    overflow-x: hidden; /* Esto ya lo tienes, es correcto */
+    overflow-x: hidden; /* EVITAR SCROLL HORIZONTAL NO DESEADO */
     scroll-behavior: smooth;
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="rgba(0, 192, 255, 0.8)" stroke="rgba(0, 192, 255, 0.2)" stroke-width="2"/></svg>') 12 12, auto;
     background-image: radial-gradient(circle, rgba(0, 192, 255, .03) 1px, transparent 1px);
     background-size: 30px 30px;
 }
 
-/* BOX SIZING UNIVERSAL - ¡MUY IMPORTANTE PARA RESPONSIVE! */
-/* Esto asegura que padding y border se incluyan en el ancho/alto del elemento,
-   evitando que se sumen y causen desbordamientos inesperados. */
+/* BOX SIZING UNIVERSAL - ¡CRÍTICO PARA RESPONSIVE Y EVITAR BORDES! */
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -201,14 +199,14 @@ a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
 }
 
-/* MODIFICACIÓN CLAVE PARA PSEUDO-ELEMENTOS HERO SECTION */
 .section-hero::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 50%; /* Centrar horizontalmente */
+    left: 50%;
     width: 100%;
     height: 100%;
     background-image: linear-gradient(to right, rgba(0, 255, 255, .05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 255, 255, .05) 1px, transparent 1px);
@@ -216,24 +214,21 @@ a:hover {
     animation: gridFlow 60s linear infinite;
     opacity: .3;
     z-index: 0;
-    transform: translateX(-50%) translateZ(-100px) scale(2); /* Ajustar transform para centrar */
-    /* Añadir max-width para asegurar que no exceda el viewport si el transform es demasiado agresivo */
+    transform: translateX(-50%) translateZ(-100px) scale(2);
     max-width: 100vw;
 }
 
-/* MODIFICACIÓN CLAVE PARA PSEUDO-ELEMENTO HERO SECTION */
 .section-hero::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 50%; /* Centrar horizontalmente */
+    left: 50%;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at 70% 30%, rgba(0, 192, 255, .08), transparent 70%);
     animation: radialPulse 20s infinite ease-in-out;
     z-index: 1;
-    transform: translateX(-50%) scale(1); /* Ajustar transform para centrar, scale(1) aquí es el original */
-    /* Añadir max-width para asegurar que no exceda el viewport si el transform es demasiado agresivo */
+    transform: translateX(-50%) scale(1);
     max-width: 100vw;
 }
 
@@ -387,9 +382,10 @@ a:hover {
     padding: 80px 20px;
     text-align: center;
     position: relative;
-    overflow: hidden; /* Asegurarse de que el overflow de la sección padre recorta */
+    overflow: hidden;
     color: var(--color-text-light);
     background: linear-gradient(to bottom, var(--color-bg-dark) 0%, rgba(5, 10, 17, .8) 100%);
+    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
 }
 
 .section-projects h2 {
@@ -404,19 +400,18 @@ a:hover {
 
 .projects-container {
     display: flex;
-    flex-wrap: nowrap; /* Lo mantienes en nowrap según tu CSS original. Si esto causa desbordamiento, podemos cambiarlo a wrap. */
+    flex-wrap: nowrap;
     justify-content: center;
     gap: 2.5rem;
-    overflow-x: auto; /* Esto crea un scroll horizontal interno si el contenido es demasiado ancho */
-    /* Añadir estas líneas podría ayudar si el overflow:auto no es suficiente */
-    max-width: 100%; /* Asegura que el contenedor no sea más grande que su padre */
-    box-sizing: border-box; /* Ya lo pusimos globalmente, pero no está de más recalcarlo */
-    padding-bottom: 20px; /* Para asegurar espacio para la barra de scroll si aparece */
+    overflow-x: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 20px;
 }
 
 .project-card {
     position: relative;
-    width: 340px; /* Ancho fijo para las tarjetas */
+    width: 340px;
     background: var(--card-bg);
     border-radius: 15px;
     overflow: hidden;
@@ -667,6 +662,7 @@ a:hover {
     overflow: hidden;
     color: var(--color-text-light);
     background: linear-gradient(to top, var(--color-bg-dark) 0%, rgba(5, 10, 17, .8) 100%);
+    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
 }
 
 .section-services h2 {
@@ -737,31 +733,30 @@ a:hover {
     overflow: hidden;
     color: #fff;
     background: var(--color-bg-dark);
+    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
 }
 
-/* MODIFICACIÓN CLAVE PARA SKILLS-BG */
 .skills-bg {
     position: absolute;
     top: 0;
-    left: 50%; /* Centrar horizontalmente */
+    left: 50%;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, .08), transparent);
     animation: moveBg 15s linear infinite alternate;
     z-index: 0;
-    transform: translateX(-50%) translateZ(-100px) scale(2); /* Ajustar transform para centrar */
-    /* Añadir max-width para asegurar que no exceda el viewport si el transform es demasiado agresivo */
+    transform: translateX(-50%) translateZ(-100px) scale(2);
     max-width: 100vw;
 }
 
 @keyframes moveBg {
     0% {
         background-position: 0 50%;
-        transform: translateX(-50%) scale(2); /* Ajustar transform aquí también */
+        transform: translateX(-50%) scale(2);
     }
     100% {
         background-position: 100% 50%;
-        transform: translateX(-50%) scale(2.1); /* Ajustar transform aquí también */
+        transform: translateX(-50%) scale(2.1);
     }
 }
 
@@ -828,35 +823,34 @@ a:hover {
     overflow: hidden;
     color: var(--color-text-light);
     background: linear-gradient(to bottom, var(--color-bg-dark) 0%, rgba(5, 10, 17, .8) 100%);
+    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
 }
 
-/* MODIFICACIÓN CLAVE PARA PSEUDO-ELEMENTO CERTIFICATIONS */
 .section-certifications::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 50%; /* Centrar horizontalmente */
+    left: 50%;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at 80% 20%, rgba(0, 192, 255, .08), transparent 70%), radial-gradient(circle at 20% 80%, rgba(128, 0, 255, .08), transparent 70%);
     animation: backgroundPulse 20s infinite ease-in-out;
     z-index: 0;
-    transform: translateX(-50%) translateZ(-100px) scale(2); /* Ajustar transform para centrar */
-    /* Añadir max-width para asegurar que no exceda el viewport si el transform es demasiado agresivo */
+    transform: translateX(-50%) translateZ(-100px) scale(2);
     max-width: 100vw;
 }
 
 @keyframes backgroundPulse {
     0% {
-        transform: translateX(-50%) scale(2); /* Ajustar transform aquí también */
+        transform: translateX(-50%) scale(2);
         opacity: .5
     }
     50% {
-        transform: translateX(-50%) scale(2.05); /* Ajustar transform aquí también */
+        transform: translateX(-50%) scale(2.05);
         opacity: .7
     }
     100% {
-        transform: translateX(-50%) scale(2); /* Ajustar transform aquí también */
+        transform: translateX(-50%) scale(2);
         opacity: .5
     }
 }
@@ -961,12 +955,14 @@ a:hover {
     text-decoration: none;
 }
 
+/* --- SECCIÓN TESTIMONIOS (CORREGIDA) --- */
 #testimonials {
     padding: 80px 20px;
     text-align: center;
     position: relative;
     overflow: hidden;
     background: linear-gradient(to top, var(--color-bg-dark) 0%, rgba(5, 10, 17, .8) 100%);
+    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
 }
 
 #testimonials h2 {
@@ -978,12 +974,24 @@ a:hover {
     text-shadow: 0 0 18px rgba(0, 229, 255, .7);
 }
 
+.testimonials-container {
+    display: flex;
+    flex-wrap: wrap; /* ¡CRÍTICO! Permite que las tarjetas se envuelvan a la siguiente línea */
+    justify-content: center;
+    gap: 2.5rem; /* Espacio entre tarjetas */
+    max-width: 1200px; /* Limitar el ancho del contenedor principal */
+    margin: 0 auto; /* Centrar el contenedor principal */
+    padding: 0 10px; /* Pequeño padding para evitar que las tarjetas se peguen a los bordes en anchos intermedios */
+}
+
 .testimonial-card-wrapper {
-    min-width: 380px;
-    max-width: 45%;
-    box-sizing: border-box;
-    padding: 0;
-    flex-grow: 1;
+    min-width: 320px; /* Ancho mínimo razonable para la tarjeta */
+    width: calc(50% - 1.25rem); /* Ocupa casi la mitad del espacio, permitiendo 2 por fila con el gap */
+    max-width: 500px; /* Limitar el ancho máximo de una sola tarjeta */
+    box-sizing: border-box; /* Incluir padding y border en el width */
+    padding: 0; /* Asegurarse de que no haya padding extra aquí */
+    flex-grow: 1; /* Permite que las tarjetas crezcan para llenar el espacio, si es necesario */
+    flex-shrink: 1; /* Permite que las tarjetas se reduzcan si el espacio es limitado */
 }
 
 .testimonial-card {
@@ -994,7 +1002,7 @@ a:hover {
     border: 1px solid var(--card-border);
     padding: 25px;
     text-align: left;
-    height: 100%;
+    height: 100%; /* Asegurar que todas las tarjetas tengan la misma altura si están en la misma fila */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1018,7 +1026,7 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-top: auto;
+    margin-top: auto; /* Empuja el autor al final de la tarjeta */
 }
 
 .testimonial-author-img {
@@ -1041,14 +1049,16 @@ a:hover {
     color: var(--color-text-medium);
 }
 
+/* --- SECCIÓN CONTACTO (CORREGIDA) --- */
 .section-contact {
-    padding: 80px 20px;
+    padding: 80px 20px; /* Padding interior para el contenido */
     text-align: center;
     position: relative;
     overflow: hidden;
     color: var(--color-text-light);
-    background: var(--color-bg-dark);
     background: linear-gradient(to bottom, var(--color-bg-dark) 0%, rgba(5, 10, 17, .8) 100%);
+    width: 100vw; /* ¡CRÍTICO! Asegura que la sección ocupe el 100% del ancho del viewport */
+    margin: 0; /* Eliminar cualquier margen externo que pudiera causar bordes */
 }
 
 .section-contact h2 {
@@ -1061,8 +1071,8 @@ a:hover {
 }
 
 .contact-container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 800px; /* Mantener el contenido del formulario centrado */
+    margin: 0 auto; /* Centrar el contenedor del formulario */
     padding: 40px;
     background: var(--card-bg);
     border-radius: 15px;
@@ -1075,7 +1085,39 @@ a:hover {
     opacity: 0;
     transform: translateY(50px);
     transition: transform .5s var(--bezier-smooth), opacity .5s ease;
+    /* Ajuste para que el texto "Coming soon..." y el botón se vean bien */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
+
+.contact-container p {
+    font-size: 1.2rem;
+    color: var(--color-text-medium);
+    margin-bottom: 20px;
+}
+
+.contact-button { /* Asumo que tu botón es un 'a' con esta clase o un 'button' */
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .5);
+    text-decoration: none; /* Para enlaces */
+}
+
+.contact-button:hover {
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-primary-light));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--glow-light-alpha);
+}
+
 
 .contact-container label {
     display: block;
@@ -1172,9 +1214,19 @@ a:hover {
 
 /* MEDIA QUERIES */
 @media (max-width: 1200px) {
+    /* Ajuste para que las tarjetas de testimonios puedan estar una al lado de la otra si caben */
     .testimonial-card-wrapper {
-        min-width: 100%;
-        max-width: 100%; /* Asegurarse de que no exceda 100% */
+        min-width: 340px; /* Ligeramente más grande que en móvil */
+        width: calc(50% - 1.25rem); /* Permitir dos tarjetas por fila con gap */
+        flex-grow: 1; /* Permite que crezcan para llenar el espacio */
+    }
+
+    /* Asegurar que el contenedor principal de testimonios sea un flexbox para que estas reglas funcionen */
+    #testimonials .testimonials-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5rem;
     }
 }
 
@@ -1205,16 +1257,21 @@ a:hover {
     .skills-wrapper h2 {
         font-size: 2.5rem;
     }
-    /* Añadir max-width a 100% para estas tarjetas y contenedores */
     .certification-card,
-    .contact-container,
     .project-card,
     .service-card {
         width: 100%;
-        max-width: 380px; /* Mantener tu max-width para que no sean demasiado grandes en viewports pequeños pero amplios */
+        max-width: 380px;
     }
 
-    /* Asegurar que las secciones tengan padding adecuado y no desborden */
+    /* Forzar que las tarjetas de testimonios se apilen en una sola columna en pantallas pequeñas */
+    .testimonial-card-wrapper {
+        min-width: unset; /* Reiniciar el mínimo */
+        width: 100%; /* Asegurarse de que ocupe todo el ancho disponible */
+        max-width: 380px; /* O tu ancho máximo preferido para móvil, por ejemplo, para centrarlo */
+    }
+
+    /* Asegurar padding en secciones para móviles sin crear bordes blancos */
     .section-hero,
     .section-projects,
     .section-services,
@@ -1224,7 +1281,12 @@ a:hover {
     .section-contact {
         padding-left: 15px;
         padding-right: 15px;
-        /* box-sizing: border-box; ya está globalmente */
+        width: 100vw; /* Asegurar que la sección se extiende a lo largo de todo el viewport */
+        box-sizing: border-box; /* Crucial para que el padding no cause desbordamiento */
+    }
+
+    .contact-container {
+        padding: 30px; /* Reducir padding en móviles para el formulario */
     }
 }
 
