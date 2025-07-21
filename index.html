@@ -1014,56 +1014,7 @@ a:hover {
         flex-grow: 1; /* Permite que crezcan para llenar el espacio */
     }
 
-    /* Asegurar que el contenedor principal de testimonios sea un flexbox para que estas reglas funcionen */
-    #testimonials .testimonials-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-header {
-        flex-direction: column;
-        padding: 10px 20px;
-    }
-    .nav-menu {
-        margin-top: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .nav-menu li {
-        margin: 5px 15px;
-    }
-    .section-hero h1 {
-        font-size: 3rem;
-    }
-    .section-hero p {
-        font-size: 1.2rem;
-    }
-    #testimonials h2,
-    .certifications-wrapper h2,
-    .section-contact h2,
-    .section-projects h2,
-    .section-services h2,
-    .skills-wrapper h2 {
-        font-size: 2.5rem;
-    }
-    .certification-card,
-    .project-card,
-    .service-card {
-        width: 100%;
-        max-width: 380px;
-    }
-
-    /* Forzar que las tarjetas de testimonios se apilen en una sola columna en pantallas pequeñas */
-    .testimonial-card-wrapper {
-        min-width: unset; /* Reiniciar el mínimo */
-        width: 100%; /* Asegurarse de que ocupe todo el ancho disponible */
-        max-width: 380px; /* O tu ancho máximo preferido para móvil, por ejemplo, para centrarlo */
-    }
-
+  
     /* Asegurar padding en secciones para móviles sin crear bordes blancos */
     .section-hero,
     .section-projects,
@@ -1367,6 +1318,8 @@ Metodologías Ágiles
 <script async src=//cdn.credly.com/assets/utilities/embed.js></script>
 <script>document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".certification-card").forEach((e=>{e.addEventListener("click",(t=>{if(!t.target.classList.contains("view-credential-btn")&&!t.target.closest(".credly-badge-embed")){const t=e.dataset.href;t&&window.open(t,"_blank")}})),e.addEventListener("mousemove",(t=>{const n=e.getBoundingClientRect(),o=t.clientX-n.left,r=t.clientY-n.top;e.style.setProperty("--mouse-x",`${o}px`),e.style.setProperty("--mouse-y",`${r}px`)}))}));const e=document.querySelector(".holographic-text");if(e){const t=e.getAttribute("data-text");e.innerHTML=Array.from(t).map(((e,t)=>`<span style="--i: ${t}">${e}</span>`)).join("")}}))</script>
 </section>
+       <style>
+        :root {
              --color-primary-light: #00e5ff;
             --color-secondary: #ff4081;
             --color-bg-dark: #0a0f1c;
