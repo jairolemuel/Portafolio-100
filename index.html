@@ -955,7 +955,7 @@ a:hover {
     text-decoration: none;
 }
 
-/* --- SECCIÓN TESTIMONIOS (CORREGIDA) --- */
+/* --- SECCIÓN TESTIMONIOS --- */
 #testimonials {
     padding: 80px 20px;
     text-align: center;
@@ -975,32 +975,34 @@ a:hover {
     text-shadow: 0 0 18px rgba(0, 229, 255, .7);
 }
 
+/* Contenedor de los testimonios (grid) */
 .testimonials-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
+    grid-template-columns: repeat(2, 1fr); /* Two columns by default */
+    gap: 2.5rem; /* Spacing between cards */
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* El wrapper de la tarjeta es importante si quieres aplicar estilos específicos o asegurar un 100% de ancho dentro de la celda de la grid */
 .testimonial-card-wrapper {
     width: 100%;
-    height: 100%;
+    height: 100%; /* Asegura que el wrapper ocupa toda la altura de la celda */
 }
 
 .testimonial-card {
     background: rgba(20, 35, 50, 0.9);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .8), 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .8),
                 inset 0 1px 0 rgba(255, 255, 255, .1),
                 0 0 20px rgba(0, 192, 255, .1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 192, 255, .3);
     padding: 30px;
     text-align: left;
-    height: auto;
-    min-height: 320px;
+    height: 100%; /* Las tarjetas llenarán la altura de su contenedor (testimonial-card-wrapper) */
+    min-height: 320px; /* Altura mínima para asegurar consistencia */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1009,6 +1011,7 @@ a:hover {
     overflow: hidden;
 }
 
+/* Línea superior decorativa */
 .testimonial-card::before {
     content: '';
     position: absolute;
@@ -1021,7 +1024,7 @@ a:hover {
 }
 
 .testimonial-card:hover {
-    box-shadow: 0 15px 40px rgba(0, 192, 255, .3), 
+    box-shadow: 0 15px 40px rgba(0, 192, 255, .3),
                 inset 0 1px 0 rgba(255, 255, 255, .2),
                 0 0 30px rgba(0, 192, 255, .2);
     transform: translateY(-8px) scale(1.02);
@@ -1040,6 +1043,7 @@ a:hover {
     padding-left: 15px;
 }
 
+/* Comilla decorativa */
 .testimonial-text::before {
     content: '"';
     position: absolute;
@@ -1095,7 +1099,7 @@ a:hover {
 /* Responsive Design */
 @media (max-width: 900px) {
     .testimonials-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Single column on smaller screens */
         gap: 2rem;
         padding: 0 15px;
     }
@@ -1105,17 +1109,17 @@ a:hover {
     #testimonials {
         padding: 60px 15px;
     }
-    
+
     #testimonials h2 {
         font-size: 2.8rem;
         margin-bottom: 2.5rem;
     }
-    
+
     .testimonial-card {
         padding: 25px;
         min-height: 280px;
     }
-    
+
     .testimonial-text {
         font-size: 1.05rem;
     }
@@ -1125,22 +1129,21 @@ a:hover {
     #testimonials h2 {
         font-size: 2.2rem;
     }
-    
+
     .testimonials-container {
         gap: 1.5rem;
         padding: 0 10px;
     }
-    
+
     .testimonial-card {
         padding: 20px;
     }
-    
+
     .testimonial-text {
         font-size: 1rem;
         padding-left: 10px;
     }
 }
-
 /* --- SECCIÓN CONTACTO (CORREGIDA) --- */
 .section-contact {
     padding: 80px 20px; /* Padding interior para el contenido */
