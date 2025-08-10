@@ -1223,242 +1223,26 @@ Metodologías Ágiles
 <div class=credly-badge-embed>
 <div data-iframe-width=150 data-iframe-height=270 data-share-badge-id=d5392503-8d83-4209-8869-7d2a45e6128c data-share-badge-host=https://www.credly.com></div>
 </div>
-      <section class="certifications-section" id="certifications">
-  <style>
-    /* Estilos generales (sin cambios importantes, solo adiciones para el efecto) */
-    .certifications-section {
-      padding: 80px 20px;
-      background-color: #1a1a2e;
-      text-align: center;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #e0e0e0;
-      overflow: hidden;
-    }
-    .certifications-section h2 {
-      font-size: 3em;
-      margin-bottom: 50px;
-      color: #00bcd4;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      position: relative;
-      display: inline-block;
-      animation: textGlow 1.5s infinite alternate;
-    }
-    @keyframes textGlow {
-      from {text-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4, 0 0 15px #00bcd4;}
-      to {text-shadow: 0 0 10px #00bcd4, 0 0 20px #00bcd4, 0 0 30px #00bcd4;}
-    }
-    .certification-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      justify-content: center;
-      align-items: stretch;
-      /* Añadido para el efecto 3D */
-      perspective: 1000px; 
-    }
-    .certification-card-container {
-        /* Contenedor que permite el efecto de volteo */
-        position: relative;
-        height: 100%;
-        min-height: 400px; /* Ajusta la altura si es necesario */
-    }
-
-    /* Estilos para el efecto de volteo */
-    .certification-card {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 1px solid rgba(0, 188, 212, 0.3);
-      border-radius: 15px;
-    }
-    .certification-card:hover {
-      transform: rotateY(180deg);
-    }
-
-    /* Estilos de las caras de la tarjeta */
-    .card-front, .card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden; /* Esto es clave para ocultar la cara opuesta */
-      border-radius: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .card-front {
-      background: linear-gradient(145deg, #2a2a4a, #1a1a2e);
-      color: #e0e0e0;
-      padding-bottom: 25px; /* Ajuste para el contenido */
-    }
-    .card-back {
-      background: linear-gradient(145deg, #1a1a2e, #2a2a4a);
-      color: silver;
-      transform: rotateY(180deg); /* La parte de atrás está girada inicialmente */
-      padding: 25px;
-      box-sizing: border-box;
-      justify-content: center;
-      text-align: center;
-    }
-
-    /* Estilos para el contenido dentro de las caras */
-    .card-header {
-      background: linear-gradient(135deg, #007bff, #00c7e0);
-      color: #fff;
-      padding: 25px;
-      border-top-left-radius: 14px;
-      border-top-right-radius: 14px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .card-header h3 {margin: 0; font-size: 1.8em; font-weight: 600;}
-    .card-header .issuer {font-size: 1em; opacity: 0.9; margin-top: 8px;}
-    .card-description {
-      padding: 25px;
-      font-size: 1.1em;
-      line-height: 1.7;
-    }
-    .credly-badge-embed {
-      margin-top: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 150px;
-      margin-bottom: 20px;
-    }
-    .credly-badge-embed iframe {
-      width: 150px;
-      height: 270px;
-      border: 4px solid #00bcd4;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
-      background-color: transparent;
-    }
-    .view-credential-btn {
-      display: inline-block;
-      background: linear-gradient(90deg, #00bcd4, #007bff);
-      color: #fff;
-      padding: 12px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1em;
-      margin-top: auto;
-      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
-    }
-    .view-credential-btn:hover {
-      background: linear-gradient(90deg, #007bff, #00bcd4);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0, 188, 212, 0.6);
-    }
-    @media (max-width: 768px) {
-      .certifications-section h2 {font-size: 2.2em;}
-      .certification-cards-grid {grid-template-columns: 1fr; gap: 30px;}
-      .certification-card-container {margin: 0 10px;}
-      .card-header h3 {font-size: 1.5em;}
-      .card-description {font-size: .95em;}
-    }
-  </style>
-
-  <div class="container">
-    <h2 class="holographic-text" data-text="certifications">certifications</h2>
-    <div class="certification-cards-grid">
-
-      <div class="certification-card-container">
-        <div class="certification-card">
-          <div class="card-front">
-            <div class="card-header">
-              <h3>Cisco Certified CyberOps Associate</h3>
-              <p class="issuer">Cisco Networking Academy</p>
-            </div>
-            <div class="credly-badge-embed">
-              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="d5392503-8d83-4209-8869-7d2a45e6128c" data-share-badge-host="https://www.credly.com"></div>
-            </div>
-          </div>
-          <div class="card-back">
-            <p>Valida las habilidades en operaciones de seguridad, monitoreo de amenazas, análisis de vulnerabilidades y respuesta a incidentes.</p>
-            <a href="https://www.credly.com/badges/d5392503-8d83-4209-8869-7d2a45e6128c/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="certification-card-container">
-        <div class="certification-card">
-          <div class="card-front">
-            <div class="card-header">
-              <h3>Cisco Certified Network Associate (CCNA)</h3>
-              <p class="issuer">Cisco Networking Academy</p>
-            </div>
-            <div class="credly-badge-embed">
-              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="25710900-3e6c-452c-aeb0-8f66f37fc3ab" data-share-badge-host="https://www.credly.com"></div>
-            </div>
-          </div>
-          <div class="card-back">
-            <p>Demuestra habilidades fundamentales en redes, incluyendo configuración de routers y switches, conectividad IP, seguridad y automatización.</p>
-            <a href="https://www.credly.com/badges/25710900-3e6c-452c-aeb0-8f66f37fc3ab/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="certification-card-container">
-        <div class="certification-card">
-          <div class="card-front">
-            <div class="card-header">
-              <h3>Data Analytics Essentials</h3>
-              <p class="issuer">Cisco Networking Academy</p>
-            </div>
-            <div class="credly-badge-embed">
-              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="278b3357-f2e6-4636-879e-0ccd31a67ce6" data-share-badge-host="https://www.credly.com"></div>
-            </div>
-          </div>
-          <div class="card-back">
-            <p>Demuestra una comprensión fundamental del proceso de análisis de datos, desde la recolección hasta la visualización y las técnicas estadísticas básicas.</p>
-            <a href="https://www.credly.com/badges/278b3357-f2e6-4636-879e-0ccd31a67ce6/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="certification-card-container">
-        <div class="certification-card">
-          <div class="card-front">
-            <div class="card-header">
-              <h3>Introduction to Data Science</h3>
-              <p class="issuer">Cisco Networking Academy</p>
-            </div>
-            <div class="credly-badge-embed">
-              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="0ac256c3-1a4f-46b0-aee1-493c2d453969" data-share-badge-host="https://www.credly.com"></div>
-            </div>
-          </div>
-          <div class="card-back">
-            <p>Proporciona una visión general de los conceptos clave en ciencia de datos, incluyendo la relación entre el aprendizaje automático, la inteligencia artificial y el análisis de datos.</p>
-            <a href="https://www.credly.com/badges/0ac256c3-1a4f-46b0-aee1-493c2d453969/public_url" target="_blank" rel="noopener noreferrer" class="view-credential-btn">Ver Credencial</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const holographicText = document.querySelector(".holographic-text");
-      if (holographicText) {
-        const text = holographicText.getAttribute("data-text");
-        holographicText.innerHTML = Array.from(text).map((char, i) => `<span style="--i: ${i}">${char}</span>`).join("");
-      }
-    });
-  </script>
+<div class=certification-card data-href=https://www.credly.com/badges/d5392503-8d83-4209-8869-7d2a45e6128c/public_url>
+</div>
+</div>
+<div class=certification-card data-href=https://www.credly.com/badges/25710900-3e6c-452c-aeb0-8f66f37fc3ab/public_url>
+<div class=card-header>
+<h3>Cisco Certified Network Associate (CCNA)</h3>
+<p class=issuer>Cisco Networking Academy</p>
+</div>
+<div class=card-content>
+<p>Demonstrates fundamental networking skills, including router and switch configuration, IP connectivity, security, and automation.</p>
+<div class=credly-badge-embed>
+<div data-iframe-width=150 data-iframe-height=270 data-share-badge-id=25710900-3e6c-452c-aeb0-8f66f37fc3ab data-share-badge-host=https://www.credly.com></div>
+</div>
+<a href=https://www.credly.com/badges/25710900-3e6c-452c-aeb0-8f66f37fc3ab/public_url target=_blank rel="noopener noreferrer" class=view-credential-btn>Ver Credencial</a>
+</div>
+</div>
+</div>
+</div>
+<script async src=//cdn.credly.com/assets/utilities/embed.js></script>
+<script>document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".certification-card").forEach((e=>{e.addEventListener("click",(t=>{if(!t.target.classList.contains("view-credential-btn")&&!t.target.closest(".credly-badge-embed")){const t=e.dataset.href;t&&window.open(t,"_blank")}})),e.addEventListener("mousemove",(t=>{const n=e.getBoundingClientRect(),o=t.clientX-n.left,r=t.clientY-n.top;e.style.setProperty("--mouse-x",`${o}px`),e.style.setProperty("--mouse-y",`${r}px`)}))}));const e=document.querySelector(".holographic-text");if(e){const t=e.getAttribute("data-text");e.innerHTML=Array.from(t).map(((e,t)=>`<span style="--i: ${t}">${e}</span>`)).join("")}}))</script>
 </section>
        <style>
         :root {
