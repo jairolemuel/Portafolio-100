@@ -1098,7 +1098,7 @@ Futuristic e-commerce application that combines animated design and a modern use
 </a>
 <a href="https://github.com/jairolemuel/SistemaInventario-backend.git" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="800">
     <div class="project-img-container">
-        <img src="https://wallpapercave.com/wp/wp7250032.png" alt="Logo de Java" style="width: 200px; height: auto; transform: rotate(0deg); transition: transform 0.3s ease-in-out; cursor: pointer;" onmouseover="this.style.transform='rotate(5deg)'" onmouseout="this.style.transform='rotate(0deg)'">
+        <img src="https://wallpapercave.com/wp/wp7250032.png" alt="Logo de Java" style="width: 220px; height: auto; transform: scale(1) rotate(0deg); transition: transform 0.3s ease-in-out; cursor: pointer;" onmouseover="this.style.transform='scale(1.05) rotate(5deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'">
     </div>
     <h3 class="project-title-card">Business Inventory Backend (Java)</h3>
     <p class="project-description">A robust backend system developed with Java and Spring Boot to manage inventory data and business logic.</p>
@@ -1546,9 +1546,7 @@ Metodologías Ágiles
     <script async src="//cdn.credly.com/assets/utilities/embed.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Funcionalidad para las tarjetas de certificación
             document.querySelectorAll(".certification-card").forEach(function(card) {
-                // Click en tarjeta (excepto botones)
                 card.addEventListener("click", function(event) {
                     if (!event.target.classList.contains("view-credential-btn") && 
                         !event.target.closest(".credly-badge-embed") &&
@@ -1560,7 +1558,7 @@ Metodologías Ágiles
                     }
                 });
 
-                // Efecto de mouse para el hover radial
+                
                 card.addEventListener("mousemove", function(event) {
                     const rect = card.getBoundingClientRect();
                     const x = event.clientX - rect.left;
@@ -1569,14 +1567,14 @@ Metodologías Ágiles
                     card.style.setProperty("--mouse-y", y + "px");
                 });
 
-                // Reset del efecto al salir del mouse
+                
                 card.addEventListener("mouseleave", function() {
                     card.style.setProperty("--mouse-x", "50%");
                     card.style.setProperty("--mouse-y", "50%");
                 });
             });
 
-            // Efecto holográfico en el título
+            
             const holographicText = document.querySelector(".holographic-text");
             if (holographicText) {
                 const text = holographicText.getAttribute("data-text");
@@ -1585,7 +1583,7 @@ Metodologías Ágiles
                 }).join("");
             }
 
-            // Intersection Observer para animaciones al hacer scroll
+            
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: "0px 0px -50px 0px"
@@ -1599,13 +1597,12 @@ Metodologías Ágiles
                 });
             }, observerOptions);
 
-            // Observar las tarjetas
+            
             document.querySelectorAll(".certification-card").forEach(function(card) {
                 observer.observe(card);
             });
         });
 
-        // Preloader para badges de Credly
         window.addEventListener("load", function() {
             setTimeout(function() {
                 const badges = document.querySelectorAll('.credly-badge-embed iframe');
@@ -1641,7 +1638,7 @@ Metodologías Ágiles
             line-height: 1.6;
         }
 
-        /* Estilos holográficos para el título */
+        
         .holographic-text {
             background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
             -webkit-background-clip: text;
