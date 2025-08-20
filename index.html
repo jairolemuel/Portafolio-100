@@ -588,7 +588,7 @@ a:hover {
     overflow: hidden;
     color: var(--color-text-light);
     background: linear-gradient(to top, var(--color-bg-dark) 0%, rgba(5, 10, 17, .8) 100%);
-    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
+    width: 100vw; 
 }
 
 .section-services h2 {
@@ -659,7 +659,7 @@ a:hover {
     overflow: hidden;
     color: #fff;
     background: var(--color-bg-dark);
-    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
+    width: 100vw; 
 }
 
 .skills-bg {
@@ -749,7 +749,7 @@ a:hover {
     overflow: hidden;
     color: var(--color-text-light);
     background: linear-gradient(to bottom, var(--color-bg-dark) 0%, rgba(5, 10, 17, .8) 100%);
-    width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
+    width: 100vw; 
 }
 
 .section-certifications::before {
@@ -885,7 +885,7 @@ a:hover {
 /* Responsive Design */
 @media (max-width: 900px) {
     .testimonials-container {
-        grid-template-columns: 1fr; /* Single column on smaller screens */
+        grid-template-columns: 1fr; 
         gap: 2rem;
         padding: 0 15px;
     }
@@ -933,7 +933,6 @@ a:hover {
 
 /* MEDIA QUERIES */
 @media (max-width: 1200px) {
-    /* Ajuste para que las tarjetas de testimonios puedan estar una al lado de la otra si caben */
     .testimonial-card-wrapper {
         min-width: 340px; 
         width: calc(50% - 1.25rem); 
@@ -1097,44 +1096,9 @@ Futuristic e-commerce application that combines animated design and a modern use
 <p class=project-description>What if programming could transform your sales strategy?<br>Outcome: Sales optimization, and saving time, money, and resources.</p>
 <div class=cta-button>View project</div>
 </a>
-<a href="https://github.com/jairolemuel/SistemaInventario-backend.git" target="_blank" rel="noopener noreferrer" class="project-card data-aos=fade-up data-aos-delay=800">
-    <div class="project-svg-container">
-        <svg id="svg-java" viewBox="0 0 100 100" style="background: none;">
-            <style>
-                .steam {
-                    animation: steam-rise 2s ease-in-out infinite;
-                }
-                .steam-1 {
-                    animation-delay: 0s;
-                }
-                .steam-2 {
-                    animation-delay: 0.5s;
-                }
-                .steam-3 {
-                    animation-delay: 1s;
-                }
-                @keyframes steam-rise {
-                    0% {
-                        transform: translateY(0);
-                        opacity: 0;
-                    }
-                    50% {
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(-20px);
-                        opacity: 0;
-                    }
-                }
-            </style>
-            <path d="M 50 65 L 70 65 Q 80 65 80 75 L 80 85 Q 80 95 70 95 L 30 95 Q 20 95 20 85 L 20 75 Q 20 65 30 65 L 50 65 Z" fill="#904C29" />
-            <path d="M 50 50 L 70 50 Q 80 50 80 60 L 80 70 Q 80 80 70 80 L 30 80 Q 20 80 20 70 L 20 60 Q 20 50 30 50 Z" fill="#6B4125" />
-            <path d="M 30 50 L 70 50 Q 75 50 75 55 L 75 60 Q 75 65 70 65 L 30 65 Q 25 65 25 60 L 25 55 Q 25 50 30 50 Z" fill="#F0F0F0" />
-            <path d="M 75 60 A 10 10 0 0 1 85 70 L 85 80 A 10 10 0 0 1 75 90 Z" fill="#904C29" />
-            <path class="steam steam-1" d="M 40 40 Q 35 30 45 30 Q 55 30 50 40 Z" fill="#FFFFFF" />
-            <path class="steam steam-2" d="M 50 40 Q 45 30 55 30 Q 65 30 60 40 Z" fill="#FFFFFF" />
-            <path class="steam steam-3" d="M 60 40 Q 55 30 65 30 Q 75 30 70 40 Z" fill="#FFFFFF" />
-        </svg>
+<a href="https://github.com/jairolemuel/SistemaInventario-backend.git" target="_blank" rel="noopener noreferrer" class="project-card" data-aos="fade-up" data-aos-delay="800">
+    <div class="project-img-container">
+        <img src="https://wallpapercave.com/wp/wp7250032.png" alt="Logo de Java" style="width: 80px; height: auto; transform: rotate(0deg); transition: transform 0.3s ease-in-out; cursor: pointer;" onmouseover="this.style.transform='rotate(5deg)'" onmouseout="this.style.transform='rotate(0deg)'">
     </div>
     <h3 class="project-title-card">Business Inventory Backend (Java)</h3>
     <p class="project-description">A robust backend system developed with Java and Spring Boot to manage inventory data and business logic.</p>
